@@ -1,0 +1,8 @@
+name=Microsoft Sans Serif
+size=8
+bold=1
+italic=0
+charset=1
+aa_level=0
+range_start=32
+range_end=127

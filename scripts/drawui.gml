@@ -1,0 +1,110 @@
+fmx=floorto(mouse_x,gridx)
+fmy=floorto(mouse_y,gridy)
+
+d3d_transform_add_translation(-0.5,-0.5,0)
+texture_set_interpolation(1)
+
+draw_set_blend_mode_ext(10,1)
+draw_primitive_begin(pr_linelist)
+    if (grid) {
+        x1=min(fmx,0)
+        x2=max(roomwidth,fmx+gridx)
+        y1=min(fmy,0)
+        y2=max(roomheight,fmy+gridy)
+        vc=0
+        for (i=x1;i<=x2;i+=gridx) {draw_vertex(i,y1) draw_vertex(i,y2) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
+        for (i=y1;i<=y2;i+=gridy) {draw_vertex(x1,i) draw_vertex(x2,i) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
+    }
+    if (crosshair) {
+        if (keyboard_check(vk_alt)) {
+            draw_vertex(mouse_x,min(0,mouse_y)) draw_vertex(mouse_x,max(roomheight,mouse_y))
+            draw_vertex(min(0,mouse_x),mouse_y) draw_vertex(max(roomwidth,mouse_x),mouse_y)
+        } else {
+            if (!grid) {
+                draw_vertex(fmx,fmy+gridy) draw_vertex(fmx+gridx,fmy+gridy)
+                draw_vertex(fmx+gridx,fmy) draw_vertex(fmx+gridx,fmy+gridy)
+                draw_vertex(fmx,min(0,fmy)) draw_vertex(fmx,max(roomheight,fmy))
+                draw_vertex(min(0,fmx),fmy) draw_vertex(max(roomwidth,fmx),fmy)
+            }
+        }
+    }
+draw_primitive_end()
+draw_set_blend_mode(0)
+
+d3d_transform_set_identity()
+
+with (Controller.select) {
+    event_user(0)
+}
+
+focus=noone
+
+if (keyboard_check(ord("C"))) with (instance) if (code!="") {
+    rect(x-sprox,y-sproy,sprw,sprh,$ff,0.5)
+}
+
+d3d_set_projection_ortho(0,0,width,height,0)
+
+with (instance_position(mouse_x,mouse_y,instance)) {
+    other.focus=id
+    if (code!="") {
+        drawtooltip(code)
+    }
+}
+
+actionx=160
+actiony=0
+actionw=width-320
+actionh=32
+
+statusx=160
+statusy=height-32
+statusw=width-320
+statush=32
+
+rect(0,0,160,height,global.col_main,1)
+rect(160,0,width-320,32,global.col_main,1)
+rect(width-160,0,160,height,global.col_main,1)
+rect(160,height-32,width-320,32,global.col_main,1)
+
+rect(160,32,4,height-64,global.col_low,1)
+rect(160,32,width-320,4,global.col_low,1)
+
+rect(width-160-4,32+4,4,height-64-4,global.col_high,1)
+rect(160+4,height-32-4,width-320-4,4,global.col_high,1)
+
+draw_triangle_color(160+4,height-32-4,160,height-32,160+4,height-32,global.col_high,global.col_high,global.col_high,0)
+draw_triangle_color(width-160-4,32+4,width-160,32,width-160,32+4,global.col_high,global.col_high,global.col_high,0)
+
+draw_set_font(fntCode)
+
+//draw action bar
+with (Button) event_user(0)
+
+//draw statusbar
+buttoncol=global.col_main
+draw_button(statusx,height-32,144,32,0)
+draw_button(statusx+144,height-32,168,32,0)
+draw_button(statusx+312,height-32,width-320-312,32,0)
+if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(mouse_x)+","+string(mouse_y))
+else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(mouse_y,gridx)))
+draw_text(statusx+152,statusy+6,string(instance_number(instance))+" instances")
+if (focus) draw_text(statusx+320,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y))
+
+//draw palette
+posx=0
+posy=0
+l=ds_list_size(objects)
+draw_set_halign(1)
+for (i=0;i<l;i+=1) if (objloaded[i]) {
+    dx=40+40*posx
+    dy=136+40*posy
+    draw_sprite_stretched(objspr[i],0,dx-16,dy-16,32,32)
+    //draw_text(dx,dy+40,ds_list_find_value(objects,i))
+    if (posx=0) posx=1
+    else if (posx=1) posx=2
+    else {posx=0 posy+=1}
+}
+draw_set_halign(0)
+
+with (Button) if (focus) drawtooltip(alt)

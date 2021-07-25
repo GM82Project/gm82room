@@ -1,0 +1,8 @@
+name=JetBrains Mono
+size=12
+bold=0
+italic=0
+charset=1
+aa_level=3
+range_start=0
+range_end=255
