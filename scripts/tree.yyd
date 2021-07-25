@@ -19,3 +19,7 @@
 |drawui
 |drawtooltip
 |gameend
+|textfield_set
+|clear_inspector
+|update_inspector
+|textfield_actions

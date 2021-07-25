@@ -47,10 +47,12 @@ if (mouse_check_button_pressed(mb_left)) {
             }
         }
         if (!instance_exists(select) || !yes) {
+            clear_inspector()
             select=noone
             with (instance) {
                 if (position_meeting(mouse_x,mouse_y,id)) {
                     other.select=id
+                    update_inspector()
                     if (keyboard_check(vk_control)) {
                         grab=1
                         offx=mouse_x-x

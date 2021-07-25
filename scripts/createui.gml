@@ -132,18 +132,21 @@ i=instance_create(width-160+8,64,TextField)
 i.action="inst x"
 i.alt="X coordinate"
 i.anchor=1
+i.dynamic=1
 i.w=72
 
 i=instance_create(width-80,64,TextField)
 i.action="inst y"
 i.alt="Y coordinate"
 i.anchor=1
+i.dynamic=1
 i.w=72
 
 i=instance_create(width-64,100,Button)
 i.action="inst snap"
 i.text="Snap"
 i.anchor=1
+i.dynamic=1
 i.w=56
 i.h=24
 
@@ -151,12 +154,14 @@ i.h=24
 i=instance_create(width-160+8,164,TextField)
 i.action="inst xs"
 i.alt="X scale"
+i.dynamic=1
 i.anchor=1
 i.w=72
 
 i=instance_create(width-80,164,TextField)
 i.action="inst ys"
 i.alt="Y scale"
+i.dynamic=1
 i.anchor=1
 i.w=72
 
@@ -165,6 +170,7 @@ i.action="inst flip xs"
 i.text="Flip"
 i.alt="Flip horizontally"
 i.anchor=1
+i.dynamic=1
 i.w=56
 i.h=24
 
@@ -173,6 +179,7 @@ i.action="inst flip ys"
 i.text="Flip"
 i.alt="Flip vertically"
 i.anchor=1
+i.dynamic=1
 i.w=56
 i.h=24
 
@@ -181,6 +188,7 @@ i=instance_create(width-160+8,264,TextField)
 i.action="inst ang"
 i.alt="Angle"
 i.anchor=1
+i.dynamic=1
 i.w=72
 
 i=instance_create(width-80+4,260+4,Button)
@@ -188,24 +196,31 @@ i.action="inst rot left"
 i.alt="Rotate left"
 i.spr=14
 i.anchor=1
+i.dynamic=1
 
 i=instance_create(width-80+8+32,260+4,Button)
-i.action="inst rot left"
+i.action="inst rot right"
 i.alt="Rotate right"
 i.spr=15
 i.anchor=1
+i.dynamic=1
 
 //blend
 i=instance_create(width-160+8,336,TextField)
 i.action="inst col"
 i.alt="Color"
 i.anchor=1
+i.dynamic=1
+i.type=1
+i.text=string($c0c0c0)
 i.w=72
 
 i=instance_create(width-160+8+72,336,TextField)
 i.action="inst alpha"
 i.alt="Alpha"
 i.anchor=1
+i.dynamic=1
+i.maxval=255
 i.w=72
 
 //creation code
@@ -213,6 +228,7 @@ i=instance_create(width-160,376,Button)
 i.action="inst code"
 i.text="Creation code"
 i.anchor=1
+i.dynamic=1
 i.w=160
 
 with (Button) event_user(1)

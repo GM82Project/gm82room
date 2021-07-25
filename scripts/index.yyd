@@ -22,3 +22,7 @@ button_actions
 createui
 drawtooltip
 gameend
+textfield_set
+update_inspector
+clear_inspector
+textfield_actions

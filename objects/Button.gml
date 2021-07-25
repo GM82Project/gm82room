@@ -10,6 +10,7 @@ h=32
 text=""
 spr=noone
 focus=0
+dynamic=0
 alt=""
 anchor=0
 #define Step_0
@@ -24,7 +25,7 @@ if (down!=0) {
     if (!focus) down=-1
     else down=abs(down)
     if (!mouse_check_button(mb_left)) {
-        if (down) button_actions(action)
+        if (down && (Controller.select || !dynamic)) button_actions(action)
         down=0
     }
 }

@@ -5,7 +5,7 @@ action_id=603
 applies_to=self
 */
 image_speed=0
-sel=1
+sel=0
 grab=0
 rotato=0
 draggatto=0
@@ -31,23 +31,25 @@ if (sel) {
             image_angle=roundto(image_angle,15)
         }
         if (!mouse_check_direct(mb_left)) {rotato=0 event_user(1)}
+        update_inspector()
     }
     if (grab) {
         x=mouse_x-offx
         y=mouse_y-offy
         if (!keyboard_check(vk_alt)) {
-            x=roundto(x,32)
-            y=roundto(y,32)
+            x=roundto(x,gridx)
+            y=roundto(y,gridy)
         }
         if (!mouse_check_direct(mb_left)) grab=0
+        update_inspector()
     }
     if (draggatto) {
         dx=mouse_x
         dy=mouse_y
 
         if (!keyboard_check(vk_alt)) {
-            dx=roundto(dx,32)
-            dy=roundto(dy,32)
+            dx=roundto(dx,gridx)
+            dy=roundto(dy,gridy)
         }
 
         dir=point_direction(x,y,dx,dy)
@@ -59,6 +61,7 @@ if (sel) {
         if (abs(image_xscale*sprw)<1) image_xscale=1/sprw
         if (abs(image_yscale*sprh)<1) image_yscale=1/sprh
         if (!mouse_check_direct(mb_left)) {draggatto=0 event_user(1)}
+        update_inspector()
     }
 }
 #define Other_10
