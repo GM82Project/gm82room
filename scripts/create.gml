@@ -13,6 +13,7 @@ xgo=0
 ygo=0
 zooming=0
 zoom=1
+zoomcenter=0
 resizecount=0
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"

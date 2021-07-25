@@ -7,6 +7,7 @@ with (Controller) switch (argument0) {
         xgo=roomwidth/2
         ygo=roomheight/2
         zoomgo=1
+        zoomcenter=1
     }break
     case "zoom in": {
         zoomgo/=1.2

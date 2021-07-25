@@ -84,22 +84,29 @@ if (zooming) {
     ygo+=graby-mouse_y
 }
 
-if (mouse_wheel_down()) zoomgo*=1.2
-if (mouse_wheel_up()) zoomgo/=1.2
+if (!zoomcenter) {
+    if (mouse_wheel_down()) zoomgo*=1.2
+    if (mouse_wheel_up()) zoomgo/=1.2
+}
 
 zoomold=zoom
 
 if (abs(zoom-1)<0.1) {
-    if (zoomgo>1 && zoom<1) || (zoomgo<1 && zoom>1) {
+    if ((zoomgo>1 && zoom<1) || (zoomgo<1 && zoom>1) || (zoom==1 && zoomgo==1)) {
         zoomgo=1
         zoom=1
+        zoomcenter=0
     }
 }
 
 zoomgo=median(1/8,zoomgo,32)
 zoom=inch((zoom*9+zoomgo)/10,zoomgo,0.02)
-xgo-=(mouse_wx-width*0.5)*(zoom-zoomold)
-ygo-=(mouse_wy-height*0.5)*(zoom-zoomold)
+
+if (!zoomcenter) {
+    xgo-=(mouse_wx-width*0.5)*(zoom-zoomold)
+    ygo-=(mouse_wy-height*0.5)*(zoom-zoomold)
+}
+
 texture_set_interpolation(zoom>1)
 
 view_xview[0]=floor(xgo-width*0.5*zoom)
