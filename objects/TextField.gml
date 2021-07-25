@@ -59,7 +59,10 @@ applies_to=self
 if (type==1) buttoncol=real(text)
 else {
     if (active) buttoncol=$ffffff
-    else buttoncol=$c0c0c0
+    else {
+        if (dynamic && !Controller.select) buttoncol=global.col_main
+        else buttoncol=$c0c0c0
+    }
 }
 
 draw_button(x,y,w,h,0)

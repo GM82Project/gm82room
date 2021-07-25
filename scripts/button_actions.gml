@@ -67,4 +67,10 @@ with (Controller) switch (argument0) {
             update_inspector()
         }
     }break
+
+    case "inst code": {
+        with (instance) if (sel) {
+            code=get_string("Creation code:",code)
+        }
+    }break
 }

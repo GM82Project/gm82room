@@ -51,6 +51,8 @@ if (action=="toggle grid") {
     up=!down
 }
 
+if (dynamic && !Controller.select) up=0
+
 buttoncol=global.col_main
 draw_button(x,y,w,h,up)
 

@@ -126,6 +126,7 @@ i.spr=13
 i.action="copy object"
 i.alt="Copy object name"
 i.anchor=1
+i.dynamic=1
 
 //position
 i=instance_create(width-160+8,64,TextField)
@@ -212,7 +213,7 @@ i.alt="Color"
 i.anchor=1
 i.dynamic=1
 i.type=1
-i.text=string($c0c0c0)
+i.text=string(global.col_main)
 i.w=72
 
 i=instance_create(width-160+8+72,336,TextField)
