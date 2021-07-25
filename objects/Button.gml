@@ -11,6 +11,7 @@ text=""
 spr=noone
 focus=0
 alt=""
+anchor=0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -68,7 +69,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if (text!="") w=string_width(text)+8
+//if (text!="") w=string_width(text)+8
 
 image_xscale=w
 image_yscale=h

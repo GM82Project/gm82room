@@ -2,6 +2,7 @@ var yes;
 
 if (resizecount<5) {
     if (window_get_width()!=width || window_get_height()!=height) {
+        with (Button) if (anchor==1) offx=width-x
         width=max(880,window_get_width())
         height=max(704,window_get_height())
         window_set_size(width,height)
@@ -9,6 +10,7 @@ if (resizecount<5) {
         window_resize_buffer(width,height)
         view_wport[0]=width
         view_hport[0]=height
+        with (Button) if (anchor==1) x=width-offx
         resizecount+=1
         if (resizecount>=5) show_message("Resizing the window failed multiple times. Do you have some sort of weird DPI settings? Either way, I'm disabling resizing for now.")
     } else resizecount=0

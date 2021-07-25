@@ -15,6 +15,7 @@ active=0
 k=0
 maxlen=256
 type=0
+anchor=0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

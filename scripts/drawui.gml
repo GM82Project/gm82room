@@ -78,9 +78,6 @@ draw_triangle_color(width-160-4,32+4,width-160,32,width-160,32+4,global.col_high
 
 draw_set_font(fntCode)
 
-//draw action bar
-with (Button) event_user(0)
-
 //draw statusbar
 buttoncol=global.col_main
 draw_button(statusx,height-32,144,32,0)
@@ -107,4 +104,21 @@ for (i=0;i<l;i+=1) if (objloaded[i]) {
 }
 draw_set_halign(0)
 
-with (Button) if (focus) drawtooltip(alt)
+//draw inspector
+dx=width-160
+draw_button(dx,0,128,32,0)
+
+draw_button(dx,32,160,100,0)
+draw_button(dx,128+4,160,100,0)
+draw_button(dx,228+4,160,72,0)
+draw_button(dx,304,160,72,0)
+
+
+draw_text(dx+8,32+8,"Position")
+draw_text(dx+8,128+12,"Scale")
+draw_text(dx+8,228+12,"Rotation")
+draw_text(dx+8,304+8,"Blend")
+
+
+with (Button) event_user(0)
+with (Button) if (focus && alt!="") drawtooltip(alt)
