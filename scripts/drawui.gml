@@ -1,5 +1,6 @@
 fmx=floorto(mouse_x,gridx)
 fmy=floorto(mouse_y,gridy)
+tty=0
 
 d3d_transform_add_translation(-0.5,-0.5,0)
 texture_set_interpolation(1)
@@ -65,7 +66,7 @@ if (selecting) {
 
 d3d_set_projection_ortho(0,0,width,height,0)
 
-with (instance_position(mouse_x,mouse_y,instance)) {
+with (instance) if (instance_position(mouse_x,mouse_y,id)) {
     other.focus=id
     if (code!="") {
         drawtooltip(code)
@@ -108,30 +109,23 @@ else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(mouse_y,gridx)
 draw_text(statusx+152,statusy+6,string(instance_number(instance))+" instances")
 if (focus) draw_text(statusx+320,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y))
 
-//draw palette
-posx=0
-posy=0
-l=ds_list_size(objects)
-for (i=0;i<l;i+=1) if (objloaded[i]) {
-    dx=40+40*posx
-    dy=136+40*posy
-    draw_button(dx-20,dy-20,40,40,objpal!=i)
-    draw_sprite_stretched(objspr[i],0,dx-16,dy-16,32,32)
-    if (posx=0) posx=1
-    else if (posx=1) posx=2
-    else {posx=0 posy+=1}
-}
-posx=0
-posy=0
-for (i=0;i<l;i+=1) if (objloaded[i]) {
-    dx=40+40*posx
-    dy=136+40*posy
-    if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
-        drawtooltip(ds_list_find_value(objects,i))
+//draw object tab
+if (mode=0) {
+    //draw palette
+    posx=0
+    posy=0
+    l=ds_list_size(objects)
+    for (i=0;i<l;i+=1) if (objloaded[i]) {
+        dx=40+40*posx
+        dy=136+40*posy+palettescroll
+        draw_button(dx-20,dy-20,40,40,objpal!=i)
+        draw_sprite_stretched(objspr[i],0,dx-16,dy-16,32,32)
+        if (posx=0) posx=1
+        else if (posx=1) posx=2
+        else {posx=0 posy+=1}
     }
-    if (posx=0) posx=1
-    else if (posx=1) posx=2
-    else {posx=0 posy+=1}
+    //bottom panel
+    draw_button(0,height-160,160,160,0)
 }
 
 //draw inspector
@@ -149,3 +143,19 @@ draw_text(dx+8,304+8,"Blend")
 
 with (Button) event_user(0)
 with (Button) if (focus && alt!="") drawtooltip(alt)
+
+if (mode==0) {
+    //object tab tooltips
+    posx=0
+    posy=0
+    if (mouse_wy>96 && mouse_wy<height-160)for (i=0;i<l;i+=1) if (objloaded[i]) {
+        dx=40+40*posx
+        dy=136+40*posy+palettescroll
+        if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            drawtooltip(ds_list_find_value(objects,i))
+        }
+        if (posx=0) posx=1
+        else if (posx=1) posx=2
+        else {posx=0 posy+=1}
+    }
+}

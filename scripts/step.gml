@@ -131,15 +131,17 @@ if (zooming) {
 
 //zooming
 if (!zoomcenter) {
-    if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
-        zoomgo*=1.2
-        keyboard_clear(vk_subtract)
-        keyboard_clear(vk_minus)
-    }
-    if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check(vk_shift) && keyboard_check_pressed(vk_equals))) {
-        zoomgo/=1.2
-        keyboard_clear(vk_add)
-        keyboard_clear(vk_equals)
+    if (mousein) {
+        if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
+            zoomgo*=1.2
+            keyboard_clear(vk_subtract)
+            keyboard_clear(vk_minus)
+        }
+        if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check(vk_shift) && keyboard_check_pressed(vk_equals))) {
+            zoomgo/=1.2
+            keyboard_clear(vk_add)
+            keyboard_clear(vk_equals)
+        }
     }
     if (!keyboard_check(vk_shift) && keyboard_check_pressed(vk_equals)) {
         xgo=roomwidth/2
