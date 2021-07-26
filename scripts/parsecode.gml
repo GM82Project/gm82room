@@ -4,6 +4,7 @@ var str,p;
 with (argument0) {
     str=code
     code=""
+    delstop=0
     do {
         p=string_pos("image_",str)
         if (p) {
