@@ -107,14 +107,14 @@ if (mouse_check_direct(mb_right)) {
 
 
 //panning
-if (mouse_check_button_pressed(mb_middle)) {
+if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
     //yeah i know i called pan zooming but ok just think like youre zooming around im sorry
     zooming=1
     grabx=mouse_x
     graby=mouse_y
 }
 
-if (!mouse_check_direct(mb_middle)) {
+if (!mouse_check_direct(mb_middle) && !keyboard_check(vk_space)) {
     zooming=0
 }
 
@@ -126,8 +126,22 @@ if (zooming) {
 
 //zooming
 if (!zoomcenter) {
-    if (mouse_wheel_down()) zoomgo*=1.2
-    if (mouse_wheel_up()) zoomgo/=1.2
+    if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
+        zoomgo*=1.2
+        keyboard_clear(vk_subtract)
+        keyboard_clear(vk_minus)
+    }
+    if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check(vk_shift) && keyboard_check_pressed(vk_equals))) {
+        zoomgo/=1.2
+        keyboard_clear(vk_add)
+        keyboard_clear(vk_equals)
+    }
+    if (!keyboard_check(vk_shift) && keyboard_check_pressed(vk_equals)) {
+        xgo=roomwidth/2
+        ygo=roomheight/2
+        zoomgo=1
+        zoomcenter=1
+    }
 }
 
 zoomold=zoom
