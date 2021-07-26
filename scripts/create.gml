@@ -28,6 +28,7 @@ crosshair=registry_read_dword(dir+"RoomCrosshair",1)
 interpolation=registry_read_dword(dir+"RoomSmooth",1)
 codeeditor=registry_read_string_ext(dir,"CodeEditor")
 if (!file_exists(codeeditor)) codeeditor="notepad"
+if (!registry_read_dword(dir+"NewRoomEditorSeen",0)) show_info()
 
 view[0]=1
 view[1]=1
