@@ -7,10 +7,17 @@ texture_set_interpolation(1)
 draw_set_blend_mode_ext(10,1)
 draw_primitive_begin(pr_linelist)
     if (grid) {
-        x1=min(fmx,0)
-        x2=max(roomwidth,fmx+gridx)
-        y1=min(fmy,0)
-        y2=max(roomheight,fmy+gridy)
+        if (mousein) {
+            x1=min(fmx,0)
+            x2=max(roomwidth,fmx+gridx)
+            y1=min(fmy,0)
+            y2=max(roomheight,fmy+gridy)
+        } else {
+            x1=0
+            y1=0
+            x2=roomwidth
+            y2=roomheight
+        }
         vc=0
         for (i=x1;i<=x2;i+=gridx) {draw_vertex(i,y1) draw_vertex(i,y2) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
         for (i=y1;i<=y2;i+=gridy) {draw_vertex(x1,i) draw_vertex(x2,i) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
@@ -108,6 +115,7 @@ l=ds_list_size(objects)
 for (i=0;i<l;i+=1) if (objloaded[i]) {
     dx=40+40*posx
     dy=136+40*posy
+    draw_button(dx-20,dy-20,40,40,objpal!=i)
     draw_sprite_stretched(objspr[i],0,dx-16,dy-16,32,32)
     if (posx=0) posx=1
     else if (posx=1) posx=2

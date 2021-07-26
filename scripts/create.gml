@@ -1,4 +1,4 @@
-globalvar width,height,gridx,gridy,interpolation,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
+globalvar width,height,gridx,gridy,interpolation,objpal,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 
 width=display_get_width()-80-64
 height=display_get_height()-80-64
@@ -16,6 +16,7 @@ zooming=0
 zoom=1
 zoomcenter=0
 resizecount=0
+objpal=noone
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
 grid=registry_read_dword(dir+"RoomGridOnOffDefault",0)

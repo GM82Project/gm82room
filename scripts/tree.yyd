@@ -12,6 +12,7 @@
 	|draw_button
 	|num_selected
 |create
+|gameend
 |step
 |load_room
 |save_room
@@ -20,7 +21,6 @@
 |createui
 |drawui
 |drawtooltip
-|gameend
 |textfield_set
 |clear_inspector
 |update_inspector

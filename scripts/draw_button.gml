@@ -1,3 +1,4 @@
+///draw_button(x,y,w,h,up)
 var dx,dy,w,h,up,col1,col2,col3;
 
 dx=argument0
