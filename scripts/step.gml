@@ -3,7 +3,7 @@ var yes;
 if (resizecount<5) {
     if (window_get_width()!=width || window_get_height()!=height) {
         with (Button) if (anchor==1) offx=width-x
-        width=max(880,window_get_width())
+        width=max(912,window_get_width())
         height=max(704,window_get_height())
         window_set_size(width,height)
         window_set_region_size(width,height,0)
@@ -15,6 +15,8 @@ if (resizecount<5) {
         if (resizecount>=5) show_message("Resizing the window failed multiple times. Do you have some sort of weird DPI settings? Either way, I'm disabling resizing for now.")
     } else resizecount=0
 }
+
+if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) with (instance) sel=1
 
 mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
@@ -32,6 +34,7 @@ if (mouse_check_button_pressed(mb_left)) {
     } else {
         //click on workspace
         yes=0
+        //if something's already selected, operate on it
         with (select) {
             if (position_meeting(mouse_x,mouse_y,id) && keyboard_check(vk_control)) {
                 grab=1
@@ -48,23 +51,32 @@ if (mouse_check_button_pressed(mb_left)) {
         }
         if (!instance_exists(select) || !yes) {
             clear_inspector()
+            if (!keyboard_check(vk_shift)) with (instance) sel=0
             select=noone
             with (instance) {
                 if (position_meeting(mouse_x,mouse_y,id)) {
                     sel=1
                     update_inspector()
+                    //ctrl+left = move
                     if (keyboard_check(vk_control)) {
                         grab=1
                         offx=mouse_x-x
                         offy=mouse_y-y
+                        //group operation
+                        with (instance) if (sel) {
+                            grab=1
+                            offx=mouse_x-x
+                            offy=mouse_y-y
+                        }
                     } else with (other.select) sel=0
                     other.select=id
                 }
             }
             if (!select) {
-                with (instance) sel=0
+                //if not holding control, reset selection
+                if (!keyboard_check(vk_control)) with (instance) sel=0
                 if (keyboard_check(vk_shift)) {
-                    //select
+                    //selection rectangle
                     selecting=1
                     selx=mouse_x
                     sely=mouse_y
@@ -79,16 +91,18 @@ if (mouse_check_button_pressed(mb_left)) {
 
 if (selecting) {
     with (instance) {
-        if (!keyboard_check(vk_control)) sel=0
         if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
     }
     if (!mouse_check_direct(mb_left)) selecting=0
 }
 
 
-//delete instances
-if (mouse_check_button(mb_right) && keyboard_check(vk_shift)) {
-    instance_destroy_id(instance_position(mouse_x,mouse_y,instance))
+if (mouse_check_direct(mb_right)) {
+    if (selecting) selecting=0
+    //delete instances
+    if (!mouse_check_direct(mb_left)) {
+        instance_destroy_id(instance_position(mouse_x,mouse_y,instance))
+    }
 }
 
 
@@ -136,7 +150,7 @@ if (!zoomcenter) {
 
 
 //update view
-texture_set_interpolation(zoom>1)
+texture_set_interpolation(interpolation)
 
 view_xview[0]=floor(xgo-width*0.5*zoom)
 view_yview[0]=floor(ygo-height*0.5*zoom)

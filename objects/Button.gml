@@ -39,6 +39,8 @@ if (action=="toggle grid") {
     up=(!grid && !down)
 } else if (action=="toggle crosshair") {
     up=(!crosshair && !down)
+} else if (action=="interp") {
+    up=(!interpolation && !down)
 } else if (action=="object mode") {
     up=(mode!=0 && !down)
 } else if (action=="tile mode") {
@@ -47,6 +49,20 @@ if (action=="toggle grid") {
     up=(mode!=2 && !down)
 } else if (action=="view mode") {
     up=(mode!=3 && !down)
+} else if (action=="view objects") {
+    up=(!view[0] && !down)
+} else if (action=="view tiles") {
+    up=(!view[1] && !down)
+} else if (action=="view bgs") {
+    up=(!view[2] && !down)
+} else if (action=="view fgs") {
+    up=(!view[3] && !down)
+} else if (action=="view views") {
+    up=(!view[4] && !down)
+} else if (action=="view invis") {
+    up=(!view[5] && !down)
+} else if (action=="view nospr") {
+    up=(!view[6] && !down)
 } else {
     up=!down
 }

@@ -8,6 +8,7 @@ maxfps=display_get_frequency()
 room_speed=maxfps
 
 draw_set_font(fntCode)
+draw_set_circle_precision(8)
 
 xgo=0
 ygo=0
@@ -24,8 +25,17 @@ fillcolor=registry_read_dword(dir+"RoomBackgroundFullColourDefault",$400040)
 remember=registry_read_dword(dir+"RememberRoomSettings",0)
 minimap=registry_read_dword(dir+"RoomMinimap",1)
 crosshair=registry_read_dword(dir+"RoomCrosshair",1)
+interpolation=registry_read_dword(dir+"RoomSmooth",1)
 codeeditor=registry_read_string_ext(dir,"CodeEditor")
 if (!file_exists(codeeditor)) codeeditor="notepad"
+
+view[0]=1
+view[1]=1
+view[2]=1
+view[3]=1
+view[4]=1
+view[5]=1
+view[6]=1
 
 state="load"
 crc_init()

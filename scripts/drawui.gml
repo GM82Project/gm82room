@@ -105,27 +105,33 @@ if (focus) draw_text(statusx+320,statusy+6,focus.objname+" "+string(focus.x)+","
 posx=0
 posy=0
 l=ds_list_size(objects)
-draw_set_halign(1)
 for (i=0;i<l;i+=1) if (objloaded[i]) {
     dx=40+40*posx
     dy=136+40*posy
     draw_sprite_stretched(objspr[i],0,dx-16,dy-16,32,32)
-    //draw_text(dx,dy+40,ds_list_find_value(objects,i))
     if (posx=0) posx=1
     else if (posx=1) posx=2
     else {posx=0 posy+=1}
 }
-draw_set_halign(0)
+posx=0
+posy=0
+for (i=0;i<l;i+=1) if (objloaded[i]) {
+    dx=40+40*posx
+    dy=136+40*posy
+    if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+        drawtooltip(ds_list_find_value(objects,i))
+    }
+    if (posx=0) posx=1
+    else if (posx=1) posx=2
+    else {posx=0 posy+=1}
+}
 
 //draw inspector
 dx=width-160
-draw_button(dx,0,128,32,0)
-
 draw_button(dx,32,160,100,0)
 draw_button(dx,128+4,160,100,0)
 draw_button(dx,228+4,160,72,0)
 draw_button(dx,304,160,72,0)
-
 
 draw_text(dx+8,32+8,"Position")
 draw_text(dx+8,128+12,"Scale")

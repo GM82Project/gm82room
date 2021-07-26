@@ -119,8 +119,20 @@ i.spr=12
 i.action="zoom out"
 i.alt="Zoom out"
 
+i=instance_create(160+544,0,Button)
+i.spr=16
+i.action="interp"
+i.alt="Smoothing"
+
 
 //inspector
+i=instance_create(width-160,0,TextField)
+i.action="object name"
+i.type=2
+i.anchor=1
+i.dynamic=1
+i.w=128
+
 i=instance_create(width-32,0,Button)
 i.spr=13
 i.action="copy object"

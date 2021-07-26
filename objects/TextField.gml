@@ -36,6 +36,9 @@ if (down!=0 && focus && !active && (Controller.select || !dynamic)) {
         text=string(get_color(real(text)))
         textfield_actions()
     }
+    if (type=2) {
+        active=0
+    }
 }
 
 if (active) {
@@ -67,7 +70,7 @@ else {
 
 draw_button(x,y,w,h,0)
 
-if (type==0) {
+if (type!=1) {
     draw_set_color(0)
     draw_set_valign(1)
     if (active) draw_text(x+8,y+h/2,text+cursor)

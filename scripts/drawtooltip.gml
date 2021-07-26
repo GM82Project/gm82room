@@ -1,3 +1,4 @@
+///drawtooltip(str)
 var w,h;
 
 w=string_width(argument0)+8

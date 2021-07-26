@@ -1,8 +1,24 @@
 with (Controller) switch (argument0) {
+    //top panel
     case "save and quit": {
         //save_room()
         game_end()
     }break
+
+    case "object mode": {
+        mode=0
+    }break
+    case "tile mode": {
+        mode=1
+    }break
+    case "bg mode": {
+        mode=2
+    }break
+    case "view mode": {
+        mode=3
+    }break
+
+    //zoom
     case "reset view": {
         xgo=roomwidth/2
         ygo=roomheight/2
@@ -15,23 +31,42 @@ with (Controller) switch (argument0) {
     case "zoom out": {
         zoomgo*=1.2
     }break
+    case "interp": {
+        interpolation=!interpolation
+    }break
     case "toggle grid": {
         grid=!grid
     }break
     case "toggle crosshair": {
         crosshair=!crosshair
     }break
-    case "object mode": {
-        mode=0
+
+    //view
+    case "view objects": {
+        view[0]=!view[0]
     }break
-    case "tile mode": {
-        mode=1
+    case "view tiles": {
+        view[1]=!view[1]
     }break
-    case "bg mode": {
-        mode=2
+    case "view bgs": {
+        view[2]=!view[2]
     }break
-    case "view mode": {
-        mode=3
+    case "view fgs": {
+        view[3]=!view[3]
+    }break
+    case "view views": {
+        view[4]=!view[4]
+    }break
+    case "view invis": {
+        view[5]=!view[5]
+    }break
+    case "view nospr": {
+        view[6]=!view[6]
+    }break
+
+    //inspector
+    case "copy object": {
+        clipboard_set_text(select.objname)
     }break
 
     case "inst snap": {

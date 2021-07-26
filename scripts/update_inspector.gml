@@ -1,3 +1,5 @@
+textfield_set("object name",objname)
+
 textfield_set("inst x",x)
 textfield_set("inst y",y)
 textfield_set("inst xs",image_xscale)

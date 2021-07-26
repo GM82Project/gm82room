@@ -1,3 +1,5 @@
+textfield_set("object name","")
+
 textfield_set("inst x","")
 textfield_set("inst y","")
 textfield_set("inst xs","")
