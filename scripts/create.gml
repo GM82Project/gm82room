@@ -1,5 +1,9 @@
 globalvar tty,width,height,gridx,gridy,interpolation,objpal,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 
+global.col_low=$203020
+global.col_main=$404040
+global.col_high=$607060
+
 width=display_get_width()-80-64
 height=display_get_height()-80-64
 room_caption="Game Maker 8.2 Room Editor"
@@ -45,8 +49,6 @@ state="load"
 crc_init()
 
 load_room()
-
-window_set_showborder(1)
 
 with (instance) visible=1
 depth=abs(depth)

@@ -97,8 +97,6 @@ rect(160+4,height-32-4,width-320-4,4,global.col_high,1)
 draw_triangle_color(160+4,height-32-4,160,height-32,160+4,height-32,global.col_high,global.col_high,global.col_high,0)
 draw_triangle_color(width-160-4,32+4,width-160,32,width-160,32+4,global.col_high,global.col_high,global.col_high,0)
 
-draw_set_font(fntCode)
-
 //draw statusbar
 buttoncol=global.col_main
 draw_button(statusx,height-32,144,32,0)

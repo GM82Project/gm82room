@@ -33,16 +33,14 @@ action_id=603
 applies_to=self
 */
 if (state="load") {
-    draw_background(bgLoader,0,0)
-    draw_set_font(fntSans)
-    draw_text(4,4,loadtext)
-
-    u=276*progress
+    draw_clear(global.col_main)
+    draw_text(32,8,loadtext)
+    buttoncol=global.col_main
+    draw_button(32,32,256,32,0)
+    u=(256-8)*progress
 
     if (u) {
-        draw_set_color(rgb_to_bgr($0a246a))
-        draw_rectangle(13,37,13+u,37+12,0)
-        draw_set_color($ffffff)
+        draw_rectangle(36,36,36+u-1,36+32-8-1,0)
     }
 } else {
     d3d_set_projection_ortho(0.5,0.5,width,height,0)

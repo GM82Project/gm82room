@@ -1,10 +1,4 @@
-global.col_low=$203020
-global.col_main=$404040
-global.col_high=$607060
-
 buttoncol=global.col_main
-
-draw_set_font(fntCode)
 
 //ok
 i=instance_create(0,0,Button)
@@ -199,7 +193,6 @@ i.h=24
 //rotation
 i=instance_create(width-160+8,264,TextField)
 i.action="inst ang"
-i.alt="Angle"
 i.anchor=1
 i.dynamic=1
 i.w=72
