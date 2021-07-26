@@ -56,6 +56,7 @@ view_wport[0]=width
 view_hport[0]=height
 
 select=noone
+selecting=0
 instance_create(0,0,Interface)
 
 bgtex=background_get_texture(bgBlack)

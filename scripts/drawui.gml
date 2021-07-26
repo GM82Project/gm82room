@@ -33,6 +33,10 @@ draw_set_blend_mode(0)
 
 d3d_transform_set_identity()
 
+with (instance) if (sel) {
+    event_user(2)
+}
+
 with (Controller.select) {
     event_user(0)
 }
@@ -41,6 +45,15 @@ focus=noone
 
 if (keyboard_check(ord("C"))) with (instance) if (code!="") {
     rect(x-sprox,y-sproy,sprw,sprh,$ff,0.5)
+}
+
+if (selecting) {
+    draw_set_color($ff8000)
+    draw_set_alpha(0.5)
+    draw_rectangle(selx,sely,mouse_x,mouse_y,0)
+    draw_set_alpha(0.5)
+    draw_rectangle(selx,sely,mouse_x,mouse_y,1)
+    draw_set_color($ffffff)
 }
 
 d3d_set_projection_ortho(0,0,width,height,0)

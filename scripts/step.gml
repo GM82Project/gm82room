@@ -48,32 +48,51 @@ if (mouse_check_button_pressed(mb_left)) {
         }
         if (!instance_exists(select) || !yes) {
             clear_inspector()
-            with (select) sel=0
             select=noone
             with (instance) {
                 if (position_meeting(mouse_x,mouse_y,id)) {
-                    other.select=id
                     sel=1
                     update_inspector()
                     if (keyboard_check(vk_control)) {
                         grab=1
                         offx=mouse_x-x
                         offy=mouse_y-y
-                    }
+                    } else with (other.select) sel=0
+                    other.select=id
                 }
             }
             if (!select) {
-                //paint
-                //i=instance_create(mouse_x,mouse_y,instance)
+                with (instance) sel=0
+                if (keyboard_check(vk_shift)) {
+                    //select
+                    selecting=1
+                    selx=mouse_x
+                    sely=mouse_y
+                } else {
+                    //paint
+                    //i=instance_create(mouse_x,mouse_y,instance)
+                }
             }
         }
     }
 }
 
+if (selecting) {
+    with (instance) {
+        if (!keyboard_check(vk_control)) sel=0
+        if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
+    }
+    if (!mouse_check_direct(mb_left)) selecting=0
+}
+
+
+//delete instances
 if (mouse_check_button(mb_right) && keyboard_check(vk_shift)) {
     instance_destroy_id(instance_position(mouse_x,mouse_y,instance))
 }
 
+
+//panning
 if (mouse_check_button_pressed(mb_middle)) {
     //yeah i know i called pan zooming but ok just think like youre zooming around im sorry
     zooming=1
@@ -90,6 +109,8 @@ if (zooming) {
     ygo+=graby-mouse_y
 }
 
+
+//zooming
 if (!zoomcenter) {
     if (mouse_wheel_down()) zoomgo*=1.2
     if (mouse_wheel_up()) zoomgo/=1.2
@@ -113,6 +134,8 @@ if (!zoomcenter) {
     ygo-=(mouse_wy-height*0.5)*(zoom-zoomold)
 }
 
+
+//update view
 texture_set_interpolation(zoom>1)
 
 view_xview[0]=floor(xgo-width*0.5*zoom)

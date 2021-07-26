@@ -127,3 +127,26 @@ if (sign(image_xscale)==-1 && sign(image_yscale)==-1) {
     image_yscale=abs(image_yscale)
     image_angle=(image_angle+180) mod 360
 }
+#define Other_12
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///draw group selection
+
+d3d_set_fog(1,$ff8000,0,0)
+draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,0.5+0.25*sin(current_time/200))
+d3d_set_fog(0,0,0,0)
+
+d3d_transform_add_translation(-0.5,-0.5,0)
+draw_set_color(merge_color($ff0000,$ffffff,0.5+0.5*sin(current_time/200)))
+
+draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
+draw_circle(x,y,4,1)
+draw_line(x,y-4,x,y+4)
+draw_line(x-4,y,x+4,y)
+
+draw_set_color($ffffff)
+draw_set_alpha(1)
+d3d_transform_set_identity()
