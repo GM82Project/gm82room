@@ -96,6 +96,11 @@ if (selecting) {
     if (!mouse_check_direct(mb_left)) selecting=0
 }
 
+if (keyboard_check_pressed(vk_delete)) {
+    select=noone
+    with (instance) if (sel) instance_destroy()
+}
+
 
 if (mouse_check_direct(mb_right)) {
     if (selecting) selecting=0
