@@ -1,4 +1,4 @@
-globalvar tty,width,height,gridx,gridy,interpolation,objpal,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
+globalvar tty,width,height,gridx,gridy,interpolation,objpal,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 
 width=display_get_width()-80-64
 height=display_get_height()-80-64
@@ -14,6 +14,7 @@ xgo=0
 ygo=0
 zooming=0
 zoom=1
+mousein=0
 zoomcenter=0
 resizecount=0
 objpal=noone
