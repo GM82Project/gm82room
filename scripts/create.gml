@@ -51,7 +51,6 @@ crc_init()
 load_room()
 
 with (instance) visible=1
-depth=abs(depth)
 
 state="run"
 
@@ -70,11 +69,10 @@ window_resize_buffer(width,height)
 window_set_region_size(width,height,0)
 window_center()
 
-view_wport[0]=width
-view_hport[0]=height
-
 select=noone
 selecting=0
 instance_create(0,0,Interface)
 
 bgtex=background_get_texture(bgBlack)
+
+update_view()

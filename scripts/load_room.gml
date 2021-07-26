@@ -6,7 +6,7 @@ roomheight=608
 
 loadtext="Loading project..."
 progress=0
-screen_redraw()
+draw_loader()
 
 //find room
 if (parameter_count()) {
@@ -51,13 +51,13 @@ gridy=real(ds_map_find_value(settings,"snap_y"))
 
 loadtext="Loading tiles..."
 progress=0.25
-screen_redraw()
+draw_loader()
 
 time=current_time
 
 //load tiles
 layers=file_text_read_list(dir+"layers.txt")
-l=ds_list_size(layers) for (i=0;i<l;i+=1) {
+l=ds_list_size(layers) if (l) for (i=0;i<l;i+=1) {
     layer=real(ds_list_find_value(layers,i))
     f=file_text_open_read(dir+string(layer)+".txt") do {str=file_text_read_string(f) file_text_readln(f)
         p=string_pos(",",str) tileb=string_copy(str,1,p-1) str=string_delete(str,1,p)
@@ -73,7 +73,7 @@ l=ds_list_size(layers) for (i=0;i<l;i+=1) {
         if (current_time>time) {
             time=current_time
             progress=(progress*9+0.25+0.5*i/l)/10
-            screen_redraw()
+            draw_loader()
         }
     } until (file_text_eof(f)) file_text_close(f)
 }
@@ -105,7 +105,7 @@ f=file_text_open_read(dir+"code.gml") do {str=file_text_read_string(f) file_text
             if (current_time>time) {
                 time=current_time
                 progress=(progress*9+0.75)/10
-                screen_redraw()
+                draw_loader()
             }
         }
     } else roomcode+=str+chr(10)
@@ -116,21 +116,23 @@ loadtext="Loading instances..."
 
 //load instances
 f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file_text_readln(f)
-    o=instance_create(0,0,instance)
-    p=string_pos(",",str) o.objname=string_copy(str,1,p-1) str=string_delete(str,1,p)
-    p=string_pos(",",str) o.x=real(string_copy(str,1,p-1)) str=string_delete(str,1,p)
-    p=string_pos(",",str) o.y=real(string_copy(str,1,p-1)) str=string_delete(str,1,p)
-    p=string_pos(",",str) o.code=string_copy(str,1,p-1)
-    if (o.code!="") {o.code=string_replace_all(file_text_read_all(dir+o.code+".gml"),chr(13),"") parsecode(o)}
-    o.obj=get_object(o.objname)
-    o.sprite_index=objspr[o.obj]
-    o.sprw=sprite_get_width(o.sprite_index)
-    o.sprh=sprite_get_height(o.sprite_index)
-    o.sprox=sprite_get_xoffset(o.sprite_index)
-    o.sproy=sprite_get_yoffset(o.sprite_index)
-    if (current_time>time) {
-        time=current_time
-        progress=(progress*9+1)/10
-        screen_redraw()
+    if (str!="") {
+        o=instance_create(0,0,instance)
+        p=string_pos(",",str) o.objname=string_copy(str,1,p-1) str=string_delete(str,1,p)
+        p=string_pos(",",str) o.x=real(string_copy(str,1,p-1)) str=string_delete(str,1,p)
+        p=string_pos(",",str) o.y=real(string_copy(str,1,p-1)) str=string_delete(str,1,p)
+        p=string_pos(",",str) o.code=string_copy(str,1,p-1)
+        if (o.code!="") {o.code=string_replace_all(file_text_read_all(dir+o.code+".gml"),chr(13),"") parsecode(o)}
+        o.obj=get_object(o.objname)
+        o.sprite_index=objspr[o.obj]
+        o.sprw=sprite_get_width(o.sprite_index)
+        o.sprh=sprite_get_height(o.sprite_index)
+        o.sprox=sprite_get_xoffset(o.sprite_index)
+        o.sproy=sprite_get_yoffset(o.sprite_index)
+        if (current_time>time) {
+            time=current_time
+            progress=(progress*9+1)/10
+            draw_loader()
+        }
     }
 } until (file_text_eof(f)) file_text_close(f)

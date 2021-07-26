@@ -28,3 +28,5 @@ clear_inspector
 textfield_actions
 num_selected
 edit_creation_code
+update_view
+draw_loader

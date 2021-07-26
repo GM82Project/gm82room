@@ -2,6 +2,6 @@ sprite=sprController
 visible=1
 solid=0
 persistent=0
-depth=-99999999
+depth=1215752191
 parent=
 mask=

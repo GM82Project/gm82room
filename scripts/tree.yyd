@@ -25,3 +25,5 @@
 |clear_inspector
 |update_inspector
 |edit_creation_code
+|update_view
+|draw_loader
