@@ -54,8 +54,8 @@ state="run"
 
 mode=0
 
-width=min(width,roomwidth+64+160*2)
-height=min(height,roomheight+64+64)
+width=max(912,min(width,roomwidth+64+160*2))
+height=max(704,min(height,roomheight+64+64))
 
 xgo=roomwidth/2 ygo=roomheight/2
 
