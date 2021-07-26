@@ -28,6 +28,7 @@ applies_to=self
 focus=position_meeting(mouse_wx,mouse_wy,id)
 
 if (down!=0 && focus && !active && (Controller.select || !dynamic)) {
+    with (TextField) textfield_actions()
     active=1
     if (type=0) {
         keyboard_string=text
