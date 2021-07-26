@@ -26,3 +26,5 @@ textfield_set
 update_inspector
 clear_inspector
 textfield_actions
+num_selected
+edit_creation_code

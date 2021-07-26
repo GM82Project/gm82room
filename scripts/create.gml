@@ -1,4 +1,4 @@
-globalvar width,height,gridx,gridy,roomwidth,roomheight,mouse_wx,mouse_wy,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
+globalvar width,height,gridx,gridy,interpolation,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 
 width=display_get_width()-80-64
 height=display_get_height()-80-64
@@ -24,6 +24,8 @@ fillcolor=registry_read_dword(dir+"RoomBackgroundFullColourDefault",$400040)
 remember=registry_read_dword(dir+"RememberRoomSettings",0)
 minimap=registry_read_dword(dir+"RoomMinimap",1)
 crosshair=registry_read_dword(dir+"RoomCrosshair",1)
+codeeditor=registry_read_string_ext(dir,"CodeEditor")
+if (!file_exists(codeeditor)) codeeditor="notepad"
 
 state="load"
 crc_init()

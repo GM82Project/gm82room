@@ -10,11 +10,13 @@
 	|crc_init
 	|crc32
 	|draw_button
+	|num_selected
 |create
 |step
 |load_room
 |save_room
 |button_actions
+|textfield_actions
 |createui
 |drawui
 |drawtooltip
@@ -22,4 +24,4 @@
 |textfield_set
 |clear_inspector
 |update_inspector
-|textfield_actions
+|edit_creation_code

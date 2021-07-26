@@ -121,7 +121,7 @@ f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file
     p=string_pos(",",str) o.x=real(string_copy(str,1,p-1)) str=string_delete(str,1,p)
     p=string_pos(",",str) o.y=real(string_copy(str,1,p-1)) str=string_delete(str,1,p)
     p=string_pos(",",str) o.code=string_copy(str,1,p-1)
-    if (o.code!="") {o.code=file_text_read_all(dir+o.code+".gml") parsecode(o)}
+    if (o.code!="") {o.code=string_replace_all(file_text_read_all(dir+o.code+".gml"),chr(13),"") parsecode(o)}
     o.obj=get_object(o.objname)
     o.sprite_index=objspr[o.obj]
     o.sprw=sprite_get_width(o.sprite_index)

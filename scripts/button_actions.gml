@@ -69,8 +69,6 @@ with (Controller) switch (argument0) {
     }break
 
     case "inst code": {
-        with (instance) if (sel) {
-            code=get_string("Creation code:",code)
-        }
+        edit_creation_code()
     }break
 }
