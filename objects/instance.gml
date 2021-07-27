@@ -9,15 +9,13 @@ sel=0
 grab=0
 rotato=0
 draggatto=0
-if (!keyboard_check(vk_alt)) {
-    x=roundto(x,32)
-    y=roundto(y,32)
-}
 
 rothandx=-9999999
 rothandy=-9999999
 draghandx=-9999999
 draghandy=-9999999
+
+code=""
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

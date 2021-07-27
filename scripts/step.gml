@@ -82,11 +82,41 @@ if (mouse_check_button_pressed(mb_left)) {
                     sely=mouse_y
                 } else {
                     //paint
-                    //i=instance_create(mouse_x,mouse_y,instance)
+                    paint=2
+                    paintx=0
+                    painty=0
                 }
             }
         }
     }
+}
+
+if (paint) {
+    if (keyboard_check(vk_alt)) {
+        dx=mouse_x
+        dy=mouse_y
+    } else {
+        dx=floorto(mouse_x,gridx)
+        dy=floorto(mouse_y,gridy)
+    }
+    if (dx!=paintx || dy!=painty || paint=2) {
+        paint=1
+        paintx=dx
+        painty=dy
+        yes=1
+        if (overlap_check) with (instance) if (obj=objpal) if (position_meeting(other.paintx,other.painty,id)) yes=0
+        if (yes) {
+            o=instance_create(dx,dy,instance)
+            o.obj=objpal
+            o.objname=ds_list_find_value(objects,o.obj)
+            o.sprite_index=objspr[o.obj]
+            o.sprw=sprite_get_width(o.sprite_index)
+            o.sprh=sprite_get_height(o.sprite_index)
+            o.sprox=sprite_get_xoffset(o.sprite_index)
+            o.sproy=sprite_get_yoffset(o.sprite_index)
+        }
+    }
+    if (!mouse_check_direct(mb_left)) paint=0
 }
 
 if (selecting) {

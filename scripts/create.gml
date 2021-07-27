@@ -1,5 +1,7 @@
 globalvar tty,width,height,gridx,gridy,interpolation,objpal,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 
+globalvar overlap_check;
+
 global.col_low=$203020
 global.col_main=$404040
 global.col_high=$607060
@@ -25,6 +27,8 @@ objpal=noone
 palettescroll=0
 palettescrollgo=0
 palettesize=0
+paint=0
+overlap_check=1
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
 grid=registry_read_dword(dir+"RoomGridOnOffDefault",0)
@@ -51,8 +55,6 @@ state="load"
 crc_init()
 
 load_room()
-
-with (instance) visible=1
 
 state="run"
 
