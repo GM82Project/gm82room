@@ -119,6 +119,14 @@ i.action="interp"
 i.alt="Smoothing"
 
 
+//object mode
+i=instance_create(8,height-160+8,Button)
+i.type=1
+i.action="overlap check"
+i.text="No overlap"
+i.alt="Avoid placing instances that overlap existing#instances of the same object type"
+
+
 //inspector
 i=instance_create(width-160,0,TextField)
 i.action="object name"

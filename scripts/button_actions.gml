@@ -106,4 +106,8 @@ with (Controller) switch (argument0) {
     case "inst code": {
         edit_creation_code()
     }break
+
+    case "overlap check": {
+        overlap_check=!overlap_check
+    }break
 }

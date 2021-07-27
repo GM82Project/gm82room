@@ -13,6 +13,7 @@ focus=0
 dynamic=0
 alt=""
 anchor=0
+type=0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -35,35 +36,28 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if (action=="toggle grid") {
-    up=(!grid && !down)
-} else if (action=="toggle crosshair") {
-    up=(!crosshair && !down)
-} else if (action=="interp") {
-    up=(!interpolation && !down)
-} else if (action=="object mode") {
-    up=(mode!=0 && !down)
-} else if (action=="tile mode") {
-    up=(mode!=1 && !down)
-} else if (action=="bg mode") {
-    up=(mode!=2 && !down)
-} else if (action=="view mode") {
-    up=(mode!=3 && !down)
-} else if (action=="view objects") {
-    up=(!view[0] && !down)
-} else if (action=="view tiles") {
-    up=(!view[1] && !down)
-} else if (action=="view bgs") {
-    up=(!view[2] && !down)
-} else if (action=="view fgs") {
-    up=(!view[3] && !down)
-} else if (action=="view views") {
-    up=(!view[4] && !down)
-} else if (action=="view invis") {
-    up=(!view[5] && !down)
-} else if (action=="view nospr") {
-    up=(!view[6] && !down)
-} else {
+///draw
+if (type==0) switch (action) {
+    case "toggle grid":      {up=(!grid && !down)         }break
+    case "toggle crosshair": {up=(!crosshair && !down)    }break
+    case "interp":           {up=(!interpolation && !down)}break
+    case "object mode":      {up=(mode!=0 && !down)       }break
+    case "tile mode":        {up=(mode!=1 && !down)       }break
+    case "bg mode":          {up=(mode!=2 && !down)       }break
+    case "view mode":        {up=(mode!=3 && !down)       }break
+    case "view objects":     {up=(!view[0] && !down)      }break
+    case "view tiles":       {up=(!view[1] && !down)      }break
+    case "view bgs":         {up=(!view[2] && !down)      }break
+    case "view fgs":         {up=(!view[3] && !down)      }break
+    case "view views":       {up=(!view[4] && !down)      }break
+    case "view invis":       {up=(!view[5] && !down)      }break
+    case "view nospr":       {up=(!view[6] && !down)      }break
+    default:                 {up=!down                    }
+}
+
+checked=0
+if (type==1) {
+    if (action=="overlap check") checked=overlap_check
     up=!down
 }
 
@@ -73,14 +67,24 @@ buttoncol=global.col_main
 draw_button(x,y,w,h,up)
 
 if (text!="") {
-    draw_set_halign(1)
-    draw_set_valign(1)
-    draw_text(x+w/2,y+h/2,text)
-    draw_set_halign(0)
-    draw_set_valign(0)
+    if (type==0) {
+        draw_set_halign(1)
+        draw_set_valign(1)
+        draw_text(x+w/2,y+h/2,text)
+        draw_set_halign(0)
+        draw_set_valign(0)
+    }
+    if (type==1) {
+        draw_set_valign(1)
+        draw_text(x+w+8,y+h/2,text)
+        draw_set_valign(0)
+    }
 }
 if (spr!=noone) {
     draw_sprite(sprMenuButtons,spr,x+w/2,y+h/2)
+}
+if (checked) {
+    draw_sprite(sprMenuButtons,17,x+w/2,y+h/2)
 }
 #define Other_11
 /*"/*'/**//* YYD ACTION
@@ -88,7 +92,11 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-//if (text!="") w=string_width(text)+8
+///startup
+if (type==1) {
+    w=24
+    h=24
+}
 
 image_xscale=w
 image_yscale=h

@@ -91,6 +91,7 @@ if (mouse_check_button_pressed(mb_left)) {
     }
 }
 
+//painting!  :3
 if (paint) {
     if (keyboard_check(vk_alt)) {
         dx=mouse_x
@@ -104,7 +105,14 @@ if (paint) {
         paintx=dx
         painty=dy
         yes=1
-        if (overlap_check) with (instance) if (obj=objpal) if (position_meeting(other.paintx,other.painty,id)) yes=0
+        if (overlap_check) {
+            sprite_index=objspr[objpal]
+            x=paintx
+            y=painty
+            with (instance) if (obj=objpal) if (place_meeting(x,y,Controller)) {
+                yes=0
+            }
+        }
         if (yes) {
             o=instance_create(dx,dy,instance)
             o.obj=objpal
