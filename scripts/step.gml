@@ -2,7 +2,10 @@ var yes;
 
 if (resizecount<5) {
     if (window_get_width()!=width || window_get_height()!=height) {
-        with (Button) if (anchor==1) offx=width-x
+        with (Button) {
+            if (anchor==1) offx=width-x
+            if (anchor==2) offy=height-y
+        }
         width=max(912,window_get_width())
         height=max(704,window_get_height())
         window_set_size(width,height)
@@ -10,7 +13,10 @@ if (resizecount<5) {
         window_resize_buffer(width,height)
         view_wport[0]=width
         view_hport[0]=height
-        with (Button) if (anchor==1) x=width-offx
+        with (Button) {
+            if (anchor==1) x=width-offx
+            if (anchor==2) y=height-offy
+        }
         resizecount+=1
         if (resizecount>=5) show_message("Resizing the window failed multiple times. Do you have some sort of weird DPI settings? Either way, I'm disabling resizing for now.")
     } else resizecount=0
@@ -122,6 +128,7 @@ if (paint) {
             o.sprh=sprite_get_height(o.sprite_index)
             o.sprox=sprite_get_xoffset(o.sprite_index)
             o.sproy=sprite_get_yoffset(o.sprite_index)
+            select=o
         }
     }
     if (!mouse_check_direct(mb_left)) paint=0
@@ -169,7 +176,7 @@ if (zooming) {
 
 //palette controls
 if (mode==0) {
-    if (mouse_wx<160 && mouse_wy>96 && mouse_wy<height-160) {
+    if (mouse_wx<160 && mouse_wy>96 && mouse_wy<height-76) {
         if (mouse_check_button_pressed(mb_left)) {
             posx=0
             posy=0
@@ -178,6 +185,7 @@ if (mode==0) {
                 dy=136+40*posy+palettescroll
                 if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                     objpal=i
+                    textfield_set("palette name",ds_list_find_value(objects,objpal))
                 }
                 if (posx=0) posx=1
                 else if (posx=1) posx=2
@@ -186,8 +194,8 @@ if (mode==0) {
         }
         h=mouse_wheel_down()-mouse_wheel_up()
         palettescrollgo-=h*80
-        palettescrollgo=median(-(palettesize div 3+2)*40+(height-96-160),palettescrollgo,0)
     }
+    palettescrollgo=clamp(palettescrollgo,-(palettesize div 3+2)*40+(height-96-76),0)
     palettescroll=inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2)
 }
 

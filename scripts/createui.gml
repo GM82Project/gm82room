@@ -120,8 +120,18 @@ i.alt="Smoothing"
 
 
 //object mode
-i=instance_create(8,height-160+8,Button)
+i=instance_create(8,height-76+8,TextField)
+i.action="palette name"
+i.type=3
+i.anchor=2
+i.dynamic=1
+i.maxlen=13
+i.w=160-16
+textfield_set("palette name",ds_list_find_value(objects,objpal))
+
+i=instance_create(8,height-76+12+32,Button)
 i.type=1
+i.anchor=2
 i.action="overlap check"
 i.text="No overlap"
 i.alt="Avoid placing instances that overlap existing#instances of the same object type"
@@ -133,6 +143,7 @@ i.action="object name"
 i.type=2
 i.anchor=1
 i.dynamic=1
+i.maxlen=11
 i.w=128
 
 i=instance_create(width-32,0,Button)

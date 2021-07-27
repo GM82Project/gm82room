@@ -64,11 +64,11 @@ if (type==1) buttoncol=real(text)
 else {
     if (active) buttoncol=$ffffff
     else {
-        if (type==0) {
+        if (type==0 || type==2) {
             if (dynamic && !Controller.select) buttoncol=global.col_main
             else buttoncol=$c0c0c0
         }
-        if (type==2) {
+        if (type==3) {
             buttoncol=$c0c0c0
         }
     }

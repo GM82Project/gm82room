@@ -122,16 +122,18 @@ if (mode=0) {
         else {posx=0 posy+=1}
     }
     //bottom panel
-    draw_button(0,height-160,160,160,0)
-
+    draw_button(0,height-76,160,76,1)
+    //draw_button(8,height-160+68,160-16,160-68-8,0)
+    //spr=objspr[objpal]
+    //draw_sprite_part(spr,0,0,0,min(sprite_get_width(spr),160-16),min(sprite_get_height(spr),160-68-8-8),12,height-160+72)
 }
 
 //draw inspector
 dx=width-160
-draw_button(dx,32,160,100,0)
-draw_button(dx,128+4,160,100,0)
-draw_button(dx,228+4,160,72,0)
-draw_button(dx,304,160,72,0)
+draw_button(dx,32,160,100,1)
+draw_button(dx,128+4,160,100,1)
+draw_button(dx,228+4,160,72,1)
+draw_button(dx,304,160,72,1)
 
 draw_text(dx+8,32+8,"Position")
 draw_text(dx+8,128+12,"Scale")
