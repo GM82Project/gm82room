@@ -31,10 +31,13 @@ set_application_title(roomname+" - Room Editor")
 sprites=file_text_read_list(root+"sprites\index.yyd")
 backgrounds=file_text_read_list(root+"backgrounds\index.yyd")
 objects=file_text_read_list(root+"objects\index.yyd")
+sprites_length=ds_list_size(sprites)
+backgrounds_length=ds_list_size(backgrounds)
+objects_length=ds_list_size(objects)
 
-sprloaded[ds_list_size(sprites)]=0
-bgloaded[ds_list_size(backgrounds)]=0
-objloaded[ds_list_size(objects)]=0
+sprloaded[sprites_length]=0
+bgloaded[backgrounds_length]=0
+objloaded[objects_length]=0
 
 //init room properties
 roomcode=""

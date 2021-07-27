@@ -112,8 +112,7 @@ if (mode=0) {
     //draw palette
     posx=0
     posy=0
-    l=ds_list_size(objects)
-    for (i=0;i<l;i+=1) if (objloaded[i]) {
+    for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         dx=40+40*posx
         dy=136+40*posy+palettescroll
         draw_button(dx-20,dy-20,40,40,objpal!=i)
@@ -124,6 +123,7 @@ if (mode=0) {
     }
     //bottom panel
     draw_button(0,height-160,160,160,0)
+
 }
 
 //draw inspector
@@ -146,7 +146,7 @@ if (mode==0) {
     //object tab tooltips
     posx=0
     posy=0
-    if (mouse_wy>96 && mouse_wy<height-160)for (i=0;i<l;i+=1) if (objloaded[i]) {
+    if (mouse_wy>96 && mouse_wy<height-160) for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         dx=40+40*posx
         dy=136+40*posy+palettescroll
         if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
