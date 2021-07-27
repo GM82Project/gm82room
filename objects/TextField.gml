@@ -30,20 +30,20 @@ focus=position_meeting(mouse_wx,mouse_wy,id)
 if (down!=0 && focus && !active && (Controller.select || !dynamic)) {
     with (TextField) textfield_actions()
     active=1
-    if (type=0) {
+    if (type==0) {
         keyboard_string=text
     }
-    if (type=1) {
+    if (type==1) {
         text=string(get_color(real(text)))
         textfield_actions()
     }
-    if (type=2) {
+    if (type==2 || type==3) {
         active=0
     }
 }
 
 if (active) {
-    if (type=0) text=string_digits(keyboard_string)
+    if (type=0) text=string_number(keyboard_string)
     if (maxval>0) text=string(min(maxval,real(text)))
     if (minval<maxval) text=string(max(minval,real(text)))
     text=string_copy(text,1,maxlen)
@@ -64,8 +64,13 @@ if (type==1) buttoncol=real(text)
 else {
     if (active) buttoncol=$ffffff
     else {
-        if (dynamic && !Controller.select) buttoncol=global.col_main
-        else buttoncol=$c0c0c0
+        if (type==0) {
+            if (dynamic && !Controller.select) buttoncol=global.col_main
+            else buttoncol=$c0c0c0
+        }
+        if (type==2) {
+            buttoncol=$c0c0c0
+        }
     }
 }
 
