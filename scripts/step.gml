@@ -127,6 +127,7 @@ if (selecting) {
 }
 
 if (keyboard_check_pressed(vk_delete)) {
+    if (select) clear_inspector()
     select=noone
     with (instance) if (sel) instance_destroy()
 }
