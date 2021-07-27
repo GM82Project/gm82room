@@ -7,6 +7,7 @@ var i;
         objspr[i]=get_sprite(ds_map_find_value(object[i],"sprite"))
         objloaded[i]=1
         objpal=i
+        palettesize+=1
     }
     return i
 //}

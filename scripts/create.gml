@@ -23,6 +23,8 @@ zoomcenter=0
 resizecount=0
 objpal=noone
 palettescroll=0
+palettescrollgo=0
+palettesize=0
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
 grid=registry_read_dword(dir+"RoomGridOnOffDefault",0)

@@ -128,6 +128,30 @@ if (zooming) {
     ygo+=graby-mouse_y
 }
 
+//palette controls
+if (mode==0) {
+    if (mouse_wx<160 && mouse_wy>96 && mouse_wy<height-160) {
+        if (mouse_check_button_pressed(mb_left)) {
+            posx=0
+            posy=0
+            for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
+                dx=40+40*posx
+                dy=136+40*posy+palettescroll
+                if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                    objpal=i
+                }
+                if (posx=0) posx=1
+                else if (posx=1) posx=2
+                else {posx=0 posy+=1}
+            }
+        }
+        h=mouse_wheel_down()-mouse_wheel_up()
+        palettescrollgo-=h*80
+        palettescrollgo=median(-(palettesize div 3+2)*40+(height-96-160),palettescrollgo,0)
+    }
+    palettescroll=inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2)
+}
+
 
 //zooming
 if (!zoomcenter) {
