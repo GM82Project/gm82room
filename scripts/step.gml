@@ -1,4 +1,4 @@
-var yes;
+var yes,cur,minselx,maxselx,minsely,maxsely,dx,dy;
 
 if (resizecount<5) {
     if (window_get_width()!=width || window_get_height()!=height) {
@@ -23,6 +23,66 @@ if (resizecount<5) {
 }
 
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) with (instance) sel=1
+if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C"))) {
+    cur=0
+    minselx=99999999
+    minsely=99999999
+    maxselx=-minselx
+    maxsely=-minsely
+    with (instance) if (sel) {
+        minselx=min(minselx,bbox_left)
+        minsely=min(minsely,bbox_top)
+        maxselx=max(maxselx,bbox_right+1)
+        maxsely=max(maxsely,bbox_bottom+1)
+        cur+=1
+        copyvec[cur,0]=objname
+        copyvec[cur,1]=obj
+        copyvec[cur,2]=x
+        copyvec[cur,3]=y
+        copyvec[cur,4]=image_xscale
+        copyvec[cur,5]=image_yscale
+        copyvec[cur,6]=image_angle
+        copyvec[cur,7]=image_blend
+        copyvec[cur,8]=image_alpha
+        copyvec[cur,9]=code
+    }
+    copyvec[0,0]=cur
+    copyvec[0,1]=minselx
+    copyvec[0,2]=minsely
+    copyvec[0,3]=maxselx
+    copyvec[0,4]=maxsely
+}
+if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
+    with (instance) sel=0
+    if (keyboard_check(vk_alt)) {
+        dx=mouse_x-copyvec[0,1]
+        dy=mouse_y-copyvec[0,2]
+    } else {
+        dx=floorto(mouse_x-copyvec[0,1],gridx)
+        dy=floorto(mouse_y-copyvec[0,2],gridy)
+    }
+
+    cur=1
+    repeat (copyvec[0,0]) {
+        o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance)
+        o.obj=copyvec[cur,1]
+        o.objname=copyvec[cur,0]
+        o.sprite_index=objspr[o.obj]
+        o.sprw=sprite_get_width(o.sprite_index)
+        o.sprh=sprite_get_height(o.sprite_index)
+        o.sprox=sprite_get_xoffset(o.sprite_index)
+        o.sproy=sprite_get_yoffset(o.sprite_index)
+        o.image_xscale=copyvec[cur,4]
+        o.image_yscale=copyvec[cur,5]
+        o.image_angle=copyvec[cur,6]
+        o.image_blend=copyvec[cur,7]
+        o.image_alpha=copyvec[cur,8]
+        o.code=copyvec[cur,9]
+        o.sel=1
+        select=o
+        cur+=1
+    }
+}
 
 mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
@@ -41,7 +101,7 @@ if (mouse_check_button_pressed(mb_left)) {
         //click on workspace
         yes=0
         //if something's already selected, operate on it
-        with (select) {
+        if (!keyboard_check(vk_shift)) with (select) {
             if (position_meeting(mouse_x,mouse_y,id) && keyboard_check(vk_control)) {
                 grab=1
                 offx=mouse_x-x
@@ -55,6 +115,7 @@ if (mouse_check_button_pressed(mb_left)) {
                 yes=1
             }
         }
+        if (yes) {with (instance) sel=0 select.sel=1}
         if (!instance_exists(select) || !yes) {
             clear_inspector()
             if (!keyboard_check(vk_shift)) with (instance) sel=0
@@ -80,7 +141,7 @@ if (mouse_check_button_pressed(mb_left)) {
             }
             if (!select) {
                 //if not holding control, reset selection
-                if (!keyboard_check(vk_control)) with (instance) sel=0
+                if (!keyboard_check(vk_control)) {with (instance) sel=0 with (select) sel=1}
                 if (keyboard_check(vk_shift)) {
                     //selection rectangle
                     selecting=1
@@ -129,6 +190,7 @@ if (paint) {
             o.sprox=sprite_get_xoffset(o.sprite_index)
             o.sproy=sprite_get_yoffset(o.sprite_index)
             select=o
+            o.sel=1
         }
     }
     if (!mouse_check_direct(mb_left)) paint=0
@@ -139,6 +201,12 @@ if (selecting) {
         if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
     }
     if (!mouse_check_direct(mb_left)) selecting=0
+}
+
+if (keyboard_check_pressed(vk_escape)) {
+    if (select) clear_inspector()
+    select=noone
+    with (instance) sel=0
 }
 
 if (keyboard_check_pressed(vk_delete)) {

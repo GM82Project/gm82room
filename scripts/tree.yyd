@@ -1,5 +1,4 @@
 +util
-	|file_text_read_list
 	|rect
 	|get_sprite
 	|get_background
@@ -11,19 +10,22 @@
 	|crc32
 	|draw_button
 	|num_selected
++file
+	|file_text_read_list
+	|load_room
+	|save_room
+	|edit_creation_code
 |create
-|gameend
+|createui
 |step
-|load_room
-|save_room
+|update_inspector
+|clear_inspector
 |button_actions
 |textfield_actions
-|createui
-|drawui
-|drawtooltip
 |textfield_set
-|clear_inspector
-|update_inspector
-|edit_creation_code
-|update_view
-|draw_loader
+|gameend
++drawing
+	|drawui
+	|draw_loader
+	|update_view
+	|drawtooltip

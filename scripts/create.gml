@@ -1,4 +1,4 @@
-globalvar tty,width,height,gridx,gridy,interpolation,objpal,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
+globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 
 globalvar overlap_check;
 
@@ -29,6 +29,7 @@ palettescrollgo=0
 palettesize=0
 paint=0
 overlap_check=1
+copyvec[0,0]=0
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
 grid=registry_read_dword(dir+"RoomGridOnOffDefault",0)

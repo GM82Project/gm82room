@@ -1,3 +1,7 @@
+if (keyboard_check(vk_control)) window_set_cursor(cr_size_all)
+else if (keyboard_check(vk_shift)) window_set_cursor(cr_cross)
+else window_set_cursor(cr_default)
+
 fmx=floorto(mouse_x,gridx)
 fmy=floorto(mouse_y,gridy)
 tty=0
@@ -41,9 +45,11 @@ draw_set_blend_mode(0)
 
 d3d_transform_set_identity()
 
+texture_set_interpolation(interpolation)
 with (instance) if (sel) {
     event_user(2)
 }
+texture_set_interpolation(1)
 
 with (Controller.select) {
     event_user(0)
@@ -52,15 +58,36 @@ with (Controller.select) {
 focus=noone
 
 if (keyboard_check(ord("C"))) with (instance) if (code!="") {
-    rect(x-sprox,y-sproy,sprw,sprh,$ff,0.5)
+    d3d_set_fog(1,$ff,0,0)
+    draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
+    draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)
+    d3d_set_fog(0,0,0,0)
 }
 
+if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
+    texture_set_interpolation(interpolation)
+    if (keyboard_check(vk_alt)) draw_sprite_ext(objspr[objpal],0,mouse_x,mouse_y,1,1,0,$ffffff,0.25)
+    else draw_sprite_ext(objspr[objpal],0,fmx,fmy,1,1,0,$ffffff,0.25)
+    texture_set_interpolation(1)
+}
+
+//selection rectangle
 if (selecting) {
     draw_set_color($ff8000)
     draw_set_alpha(0.5)
     draw_rectangle(selx,sely,mouse_x,mouse_y,0)
-    draw_set_alpha(0.5)
     draw_rectangle(selx,sely,mouse_x,mouse_y,1)
+    draw_set_alpha(1)
+    draw_set_color($ffffff)
+}
+
+//draw clipboard dimensions
+if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && copyvec[0,0]) {
+    draw_set_color($ff8000)
+    draw_set_alpha(0.5)
+    if (keyboard_check(vk_alt)) draw_rectangle(mouse_x,mouse_y,mouse_x+copyvec[0,3]-copyvec[0,1],mouse_y+copyvec[0,4]-copyvec[0,2],1)
+    else draw_rectangle(fmx,fmy,fmx+copyvec[0,3]-copyvec[0,1],fmy+copyvec[0,4]-copyvec[0,2],1)
+    draw_set_alpha(1)
     draw_set_color($ffffff)
 }
 
