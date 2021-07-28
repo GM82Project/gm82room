@@ -15,6 +15,7 @@
 	|load_room
 	|save_room
 	|edit_creation_code
+	|load_resource_tree
 |create
 |createui
 |step

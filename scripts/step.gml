@@ -259,6 +259,15 @@ if (mode==0) {
                 else if (posx=1) posx=2
                 else {posx=0 posy+=1}
             }
+            dx=40+40*posx
+            dy=136+40*posy+palettescroll
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                //clicked on add object button
+                paladdbuttondown=1
+                screen_redraw()
+                paladdbuttondown=0
+                N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
+            }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
         palettescrollgo-=h*80
@@ -267,6 +276,11 @@ if (mode==0) {
     palettescroll=inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2)
 }
 
+click=N_Menu_CheckMenus()
+if (click) {
+    get_object(ds_map_find_value(objmenuitems,click))
+    textfield_set("palette name",ds_list_find_value(objects,objpal))
+}
 
 //zooming
 if (!zoomcenter) {

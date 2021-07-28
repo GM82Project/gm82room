@@ -31,6 +31,8 @@ set_application_title(roomname+" - Room Editor")
 sprites=file_text_read_list(root+"sprites\index.yyd")
 backgrounds=file_text_read_list(root+"backgrounds\index.yyd")
 objects=file_text_read_list(root+"objects\index.yyd")
+load_resource_tree(root+"objects\tree.yyd")
+
 sprites_length=ds_list_size(sprites)
 backgrounds_length=ds_list_size(backgrounds)
 objects_length=ds_list_size(objects)

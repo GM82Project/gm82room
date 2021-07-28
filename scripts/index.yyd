@@ -30,3 +30,4 @@ num_selected
 edit_creation_code
 update_view
 draw_loader
+load_resource_tree

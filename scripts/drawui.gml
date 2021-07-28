@@ -132,13 +132,14 @@ draw_button(statusx+312,height-32,width-320-312,32,0)
 if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(mouse_x)+","+string(mouse_y))
 else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(mouse_y,gridx)))
 draw_text(statusx+152,statusy+6,string(instance_number(instance))+" instances")
-if (focus) draw_text(statusx+320,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y))
+if (focus) draw_text(statusx+320,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
 
 //draw object tab
 if (mode=0) {
     //draw palette
     posx=0
     posy=0
+    paltooltip=0
     for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         dx=40+40*posx
         dy=136+40*posy+palettescroll
@@ -148,11 +149,18 @@ if (mode=0) {
         else if (posx=1) posx=2
         else {posx=0 posy+=1}
     }
+    dx=40+40*posx
+    dy=136+40*posy+palettescroll
+    draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
+    draw_sprite(sprMenuButtons,18,dx,dy)
+    if (mouse_wx<160 && mouse_wy>96 && mouse_wy<height-76) {
+        if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            paltooltip=1
+        }
+    }
+
     //bottom panel
     draw_button(0,height-76,160,76,1)
-    //draw_button(8,height-160+68,160-16,160-68-8,0)
-    //spr=objspr[objpal]
-    //draw_sprite_part(spr,0,0,0,min(sprite_get_width(spr),160-16),min(sprite_get_height(spr),160-68-8-8),12,height-160+72)
 }
 
 //draw inspector
@@ -175,7 +183,7 @@ if (mode==0) {
     //object tab tooltips
     posx=0
     posy=0
-    if (mouse_wy>96 && mouse_wy<height-160) for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
+    if (mouse_wy>96 && mouse_wy<height-76) for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         dx=40+40*posx
         dy=136+40*posy+palettescroll
         if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
@@ -185,4 +193,6 @@ if (mode==0) {
         else if (posx=1) posx=2
         else {posx=0 posy+=1}
     }
+
+    if (paltooltip) drawtooltip("Add more...")
 }

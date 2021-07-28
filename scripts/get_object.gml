@@ -6,8 +6,8 @@ var i;
         object[i]=ds_map_create() ds_map_read_ini(object[i],root+"objects\"+argument0+".txt")
         objspr[i]=get_sprite(ds_map_find_value(object[i],"sprite"))
         objloaded[i]=1
-        objpal=i
         palettesize+=1
     }
+    objpal=i
     return i
 //}
