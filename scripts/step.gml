@@ -23,12 +23,13 @@ if (resizecount<5) {
 }
 
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) with (instance) sel=1
-if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C"))) {
+if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_check_pressed(ord("X"))) {
     cur=0
     minselx=99999999
     minsely=99999999
     maxselx=-minselx
     maxsely=-minsely
+    yes=(keyboard_check_pressed(ord("X")))
     with (instance) if (sel) {
         minselx=min(minselx,bbox_left)
         minsely=min(minsely,bbox_top)
@@ -45,6 +46,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C"))) {
         copyvec[cur,7]=image_blend
         copyvec[cur,8]=image_alpha
         copyvec[cur,9]=code
+        if (yes) instance_destroy()
     }
     copyvec[0,0]=cur
     copyvec[0,1]=minselx
