@@ -60,7 +60,7 @@ load_room()
 
 state="run"
 
-mode=0
+mode=4
 
 width=max(912,min(width,roomwidth+64+160*2))
 height=max(704,min(height,roomheight+64+64))

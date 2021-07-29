@@ -18,6 +18,10 @@
 	|load_resource_tree
 |create
 |createui
++createui
+	|createui_main
+	|createui_object
+	|createui_settings
 |step
 |update_inspector
 |clear_inspector

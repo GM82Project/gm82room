@@ -47,6 +47,7 @@ if (tagmode==mode || tagmode==-1) {
         case "tile mode":        {up=(mode!=1 && !down)       }break
         case "bg mode":          {up=(mode!=2 && !down)       }break
         case "view mode":        {up=(mode!=3 && !down)       }break
+        case "settings mode":    {up=(mode!=4 && !down)       }break
         case "view objects":     {up=(!view[0] && !down)      }break
         case "view tiles":       {up=(!view[1] && !down)      }break
         case "view bgs":         {up=(!view[2] && !down)      }break

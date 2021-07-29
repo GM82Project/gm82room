@@ -17,6 +17,9 @@ with (Controller) switch (argument0) {
     case "view mode": {
         mode=3
     }break
+    case "settings mode": {
+        mode=4
+    }break
 
     case "palscroldown": {
         palettescrollgo-=200

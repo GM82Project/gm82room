@@ -16,6 +16,16 @@ draghandx=-9999999
 draghandy=-9999999
 
 code=""
+#define Destroy_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+if (Controller.select==id) {
+    clear_inspector()
+    Controller.select=noone
+}
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

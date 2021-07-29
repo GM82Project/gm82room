@@ -31,3 +31,6 @@ edit_creation_code
 update_view
 draw_loader
 load_resource_tree
+createui_main
+createui_object
+createui_settings

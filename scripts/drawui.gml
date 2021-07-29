@@ -1,74 +1,76 @@
-if (keyboard_check(vk_control)) window_set_cursor(cr_size_all)
-else if (keyboard_check(vk_shift)) window_set_cursor(cr_cross)
-else window_set_cursor(cr_default)
-
 fmx=floorto(mouse_x,gridx)
 fmy=floorto(mouse_y,gridy)
 tty=0
 
-d3d_transform_add_translation(-0.5,-0.5,0)
-texture_set_interpolation(1)
+if (mode==0 || mode==1) {
+    if (keyboard_check(vk_control)) window_set_cursor(cr_size_all)
+    else if (keyboard_check(vk_shift)) window_set_cursor(cr_cross)
+    else window_set_cursor(cr_default)
 
-draw_set_blend_mode_ext(10,1)
-draw_primitive_begin(pr_linelist)
-    if (grid) {
-        if (mousein) {
-            x1=min(fmx,0)
-            x2=max(roomwidth,fmx+gridx)
-            y1=min(fmy,0)
-            y2=max(roomheight,fmy+gridy)
-        } else {
-            x1=0
-            y1=0
-            x2=roomwidth
-            y2=roomheight
+    d3d_transform_add_translation(-0.5,-0.5,0)
+    texture_set_interpolation(1)
+
+    draw_set_blend_mode_ext(10,1)
+    draw_primitive_begin(pr_linelist)
+        if (grid) {
+            if (mousein) {
+                x1=min(fmx,0)
+                x2=max(roomwidth,fmx+gridx)
+                y1=min(fmy,0)
+                y2=max(roomheight,fmy+gridy)
+            } else {
+                x1=0
+                y1=0
+                x2=roomwidth
+                y2=roomheight
+            }
+            vc=0
+            for (i=x1;i<=x2;i+=gridx) {draw_vertex(i,y1) draw_vertex(i,y2) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
+            for (i=y1;i<=y2;i+=gridy) {draw_vertex(x1,i) draw_vertex(x2,i) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
         }
-        vc=0
-        for (i=x1;i<=x2;i+=gridx) {draw_vertex(i,y1) draw_vertex(i,y2) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
-        for (i=y1;i<=y2;i+=gridy) {draw_vertex(x1,i) draw_vertex(x2,i) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
-    }
-    if (crosshair) {
-        if (keyboard_check(vk_alt)) {
-            draw_vertex(mouse_x,min(0,mouse_y)) draw_vertex(mouse_x,max(roomheight,mouse_y))
-            draw_vertex(min(0,mouse_x),mouse_y) draw_vertex(max(roomwidth,mouse_x),mouse_y)
-        } else {
-            if (!grid) {
-                draw_vertex(fmx,fmy+gridy) draw_vertex(fmx+gridx,fmy+gridy)
-                draw_vertex(fmx+gridx,fmy) draw_vertex(fmx+gridx,fmy+gridy)
-                draw_vertex(fmx,min(0,fmy)) draw_vertex(fmx,max(roomheight,fmy))
-                draw_vertex(min(0,fmx),fmy) draw_vertex(max(roomwidth,fmx),fmy)
+        if (crosshair) {
+            if (keyboard_check(vk_alt)) {
+                draw_vertex(mouse_x,min(0,mouse_y)) draw_vertex(mouse_x,max(roomheight,mouse_y))
+                draw_vertex(min(0,mouse_x),mouse_y) draw_vertex(max(roomwidth,mouse_x),mouse_y)
+            } else {
+                if (!grid) {
+                    draw_vertex(fmx,fmy+gridy) draw_vertex(fmx+gridx,fmy+gridy)
+                    draw_vertex(fmx+gridx,fmy) draw_vertex(fmx+gridx,fmy+gridy)
+                    draw_vertex(fmx,min(0,fmy)) draw_vertex(fmx,max(roomheight,fmy))
+                    draw_vertex(min(0,fmx),fmy) draw_vertex(max(roomwidth,fmx),fmy)
+                }
             }
         }
-    }
-draw_primitive_end()
-draw_set_blend_mode(0)
+    draw_primitive_end()
+    draw_set_blend_mode(0)
 
-d3d_transform_set_identity()
+    d3d_transform_set_identity()
+} else window_set_cursor(cr_default)
 
-texture_set_interpolation(interpolation)
-with (instance) if (sel) {
-    event_user(2)
-}
-texture_set_interpolation(1)
-
-with (Controller.select) {
-    event_user(0)
-}
-
-focus=noone
-
-if (keyboard_check(ord("C"))) with (instance) if (code!="") {
-    d3d_set_fog(1,$ff,0,0)
-    draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
-    draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)
-    d3d_set_fog(0,0,0,0)
-}
-
-if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
+if (mode==0) {
     texture_set_interpolation(interpolation)
-    if (keyboard_check(vk_alt)) draw_sprite_ext(objspr[objpal],0,mouse_x,mouse_y,1,1,0,$ffffff,0.25)
-    else draw_sprite_ext(objspr[objpal],0,fmx,fmy,1,1,0,$ffffff,0.25)
+    with (instance) if (sel) {
+        event_user(2)
+    }
     texture_set_interpolation(1)
+
+    with (Controller.select) {
+        event_user(0)
+    }
+
+    if (keyboard_check(ord("C"))) with (instance) if (code!="") {
+        d3d_set_fog(1,$ff,0,0)
+        draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
+        draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)
+        d3d_set_fog(0,0,0,0)
+    }
+
+    if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
+        texture_set_interpolation(interpolation)
+        if (keyboard_check(vk_alt)) draw_sprite_ext(objspr[objpal],0,mouse_x,mouse_y,1,1,0,$ffffff,0.25)
+        else draw_sprite_ext(objspr[objpal],0,fmx,fmy,1,1,0,$ffffff,0.25)
+        texture_set_interpolation(1)
+    }
 }
 
 //selection rectangle
@@ -93,7 +95,8 @@ if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && copyvec[0,0]) {
 
 d3d_set_projection_ortho(0,0,width,height,0)
 
-with (instance) if (instance_position(mouse_x,mouse_y,id)) {
+focus=noone
+if (mode==0) with (instance) if (instance_position(mouse_x,mouse_y,id)) {
     other.focus=id
     if (code!="") {
         drawtooltip(code)
@@ -131,8 +134,10 @@ draw_button(statusx+144,height-32,168,32,0)
 draw_button(statusx+312,height-32,width-320-312,32,0)
 if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(mouse_x)+","+string(mouse_y))
 else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(mouse_y,gridx)))
-draw_text(statusx+152,statusy+6,string(instance_number(instance))+" instances")
-if (focus) draw_text(statusx+320,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
+if (mode==0) {
+    draw_text(statusx+152,statusy+6,string(instance_number(instance))+" instances")
+    if (focus) draw_text(statusx+320,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
+}
 
 //draw object tab
 if (mode=0) {
@@ -161,23 +166,31 @@ if (mode=0) {
 
     //bottom panel
     draw_button(0,height-76,160,76,1)
+
+    //draw inspector
+    dx=width-160
+    draw_button(dx,32,160,100,1)
+    draw_button(dx,128+4,160,100,1)
+    draw_button(dx,228+4,160,72,1)
+    draw_button(dx,304,160,72,1)
+
+    draw_text(dx+8,32+8,"Position")
+    draw_text(dx+8,128+12,"Scale")
+    draw_text(dx+8,228+12,"Rotation")
+    draw_text(dx+8,304+8,"Blend")
 }
 
-//draw inspector
-dx=width-160
-draw_button(dx,32,160,100,1)
-draw_button(dx,128+4,160,100,1)
-draw_button(dx,228+4,160,72,1)
-draw_button(dx,304,160,72,1)
-
-draw_text(dx+8,32+8,"Position")
-draw_text(dx+8,128+12,"Scale")
-draw_text(dx+8,228+12,"Rotation")
-draw_text(dx+8,304+8,"Blend")
-
+if (mode==4) {
+    draw_button(0,96,160,72,1)
+    draw_button(0,168,160,136,1)
+    //draw_button(0,240,160,108,1)
+    draw_text(8,104,"Caption")
+    draw_text(8,176,"Size")
+    draw_text(8,241,"Speed")
+}
 
 with (Button) event_user(0)
-with (Button) if (focus && alt!="") drawtooltip(alt)
+with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
 
 if (mode==0) {
     //object tab tooltips

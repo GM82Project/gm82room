@@ -92,6 +92,7 @@ mouse_wy=window_mouse_get_y()
 mousein=(point_in_rectangle(mouse_wx,mouse_wy,160,32,width-160,height-32))
 
 if (mouse_check_button_pressed(mb_left)) {
+    with (TextField) textfield_actions()
     if (!mousein) {
         //click on menus
         with (instance_position(mouse_wx,mouse_wy,Button)) {
@@ -101,57 +102,59 @@ if (mouse_check_button_pressed(mb_left)) {
         //click on workspace
         yes=0
         //if something's already selected, operate on it
-        if (!keyboard_check(vk_shift)) with (select) {
-            if (position_meeting(mouse_x,mouse_y,id) && keyboard_check(vk_control)) {
-                grab=1
-                offx=mouse_x-x
-                offy=mouse_y-y
-                yes=1
-            } else if (point_distance(rothandx,rothandy,mouse_x,mouse_y)<10) {
-                rotato=1
-                yes=1
-            } else if (abs(mouse_x-draghandx)<8 && abs(mouse_y-draghandy)<8) {
-                draggatto=1
-                yes=1
+        if (mode==0) {
+            if (!keyboard_check(vk_shift)) with (select) {
+                if (position_meeting(mouse_x,mouse_y,id) && keyboard_check(vk_control)) {
+                    grab=1
+                    offx=mouse_x-x
+                    offy=mouse_y-y
+                    yes=1
+                } else if (point_distance(rothandx,rothandy,mouse_x,mouse_y)<10) {
+                    rotato=1
+                    yes=1
+                } else if (abs(mouse_x-draghandx)<8 && abs(mouse_y-draghandy)<8) {
+                    draggatto=1
+                    yes=1
+                }
             }
-        }
-        if (yes) {with (instance) sel=0 select.sel=1}
-        if (!instance_exists(select) || !yes) {
-            clear_inspector()
-            if (!keyboard_check(vk_shift)) with (instance) sel=0
-            select=noone
-            with (instance) {
-                if (position_meeting(mouse_x,mouse_y,id)) {
-                    sel=1
-                    update_inspector()
-                    //ctrl+left = move
-                    if (keyboard_check(vk_control)) {
-                        grab=1
-                        offx=mouse_x-x
-                        offy=mouse_y-y
-                        //group operation
-                        with (instance) if (sel) {
+            if (yes) {with (instance) sel=0 select.sel=1}
+            if (!instance_exists(select) || !yes) {
+                clear_inspector()
+                if (!keyboard_check(vk_shift)) with (instance) sel=0
+                select=noone
+                with (instance) {
+                    if (position_meeting(mouse_x,mouse_y,id)) {
+                        sel=1
+                        update_inspector()
+                        //ctrl+left = move
+                        if (keyboard_check(vk_control)) {
                             grab=1
                             offx=mouse_x-x
                             offy=mouse_y-y
-                        }
-                    } else with (other.select) sel=0
-                    other.select=id
+                            //group operation
+                            with (instance) if (sel) {
+                                grab=1
+                                offx=mouse_x-x
+                                offy=mouse_y-y
+                            }
+                        } else with (other.select) sel=0
+                        other.select=id
+                    }
                 }
-            }
-            if (!select) {
-                //if not holding control, reset selection
-                if (!keyboard_check(vk_control)) {with (instance) sel=0 with (select) sel=1}
-                if (keyboard_check(vk_shift)) {
-                    //selection rectangle
-                    selecting=1
-                    selx=mouse_x
-                    sely=mouse_y
-                } else {
-                    //paint
-                    paint=2
-                    paintx=0
-                    painty=0
+                if (!select) {
+                    //if not holding control, reset selection
+                    if (!keyboard_check(vk_control)) {with (instance) sel=0 with (select) sel=1}
+                    if (keyboard_check(vk_shift)) {
+                        //selection rectangle
+                        selecting=1
+                        selx=mouse_x
+                        sely=mouse_y
+                    } else {
+                        //paint
+                        paint=2
+                        paintx=0
+                        painty=0
+                    }
                 }
             }
         }
@@ -172,47 +175,52 @@ if (paint) {
         paintx=dx
         painty=dy
         yes=1
-        if (overlap_check) {
-            sprite_index=objspr[objpal]
-            x=paintx
-            y=painty
-            with (instance) if (obj=objpal) if (place_meeting(x,y,Controller)) {
-                yes=0
+        if (mode==0) {
+            if (overlap_check) {
+                sprite_index=objspr[objpal]
+                x=paintx
+                y=painty
+                with (instance) if (obj=objpal) if (place_meeting(x,y,Controller)) {
+                    yes=0
+                }
             }
-        }
-        if (yes) {
-            o=instance_create(dx,dy,instance)
-            o.obj=objpal
-            o.objname=ds_list_find_value(objects,o.obj)
-            o.sprite_index=objspr[o.obj]
-            o.sprw=sprite_get_width(o.sprite_index)
-            o.sprh=sprite_get_height(o.sprite_index)
-            o.sprox=sprite_get_xoffset(o.sprite_index)
-            o.sproy=sprite_get_yoffset(o.sprite_index)
-            select=o
-            o.sel=1
+            if (yes) {
+                o=instance_create(dx,dy,instance)
+                o.obj=objpal
+                o.objname=ds_list_find_value(objects,o.obj)
+                o.sprite_index=objspr[o.obj]
+                o.sprw=sprite_get_width(o.sprite_index)
+                o.sprh=sprite_get_height(o.sprite_index)
+                o.sprox=sprite_get_xoffset(o.sprite_index)
+                o.sproy=sprite_get_yoffset(o.sprite_index)
+                select=o
+                o.sel=1
+            }
         }
     }
     if (!mouse_check_direct(mb_left)) paint=0
 }
 
 if (selecting) {
-    with (instance) {
-        if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
+    if (mode==0) {
+        with (instance) {
+            if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
+        }
     }
     if (!mouse_check_direct(mb_left)) selecting=0
 }
 
 if (keyboard_check_pressed(vk_escape)) {
+    with (TextField) textfield_actions()
     if (select) clear_inspector()
     select=noone
-    with (instance) sel=0
+    if (mode==0) with (instance) sel=0
 }
 
 if (keyboard_check_pressed(vk_delete)) {
     if (select) clear_inspector()
     select=noone
-    with (instance) if (sel) instance_destroy()
+    if (mode==0) with (instance) if (sel) instance_destroy()
 }
 
 
@@ -220,7 +228,7 @@ if (mouse_check_direct(mb_right)) {
     if (selecting) selecting=0
     //delete instances
     if (!mouse_check_direct(mb_left)) {
-        instance_destroy_id(instance_position(mouse_x,mouse_y,instance))
+        if (mode==0) instance_destroy_id(instance_position(mouse_x,mouse_y,instance))
     }
 }
 

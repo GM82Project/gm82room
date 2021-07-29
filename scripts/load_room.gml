@@ -1,4 +1,4 @@
-globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,roomcode,settings,gridx,gridy;
+globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,roomcode,roomspeed,settings,gridx,gridy;
 var f,p,i,inst,layer;
 
 roomwidth=800
@@ -51,8 +51,10 @@ background_color=real(ds_map_find_value(settings,"bg_color"))
 backvisible=real(ds_map_find_value(settings,"clear_screen"))
 roomwidth=real(ds_map_find_value(settings,"width"))
 roomheight=real(ds_map_find_value(settings,"height"))
+roomspeed=real(ds_map_find_value(settings,"roomspeed"))
 gridx=real(ds_map_find_value(settings,"snap_x"))
 gridy=real(ds_map_find_value(settings,"snap_y"))
+roomcaption=ds_map_find_value(settings,"caption")
 
 loadtext="Loading tiles..."
 progress=0.25
