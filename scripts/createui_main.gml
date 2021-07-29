@@ -48,15 +48,15 @@ i=instance_create(160+48,0,TextField)
 i.action="grid x"
 i.w=56
 i.alt="Grid X"
-i.text=string(gridx)
 i.maxlen=4
+textfield_set("grid x",gridx)
 
 i=instance_create(160+104,0,TextField)
 i.action="grid y"
 i.w=56
 i.alt="Grid Y"
-i.text=string(gridy)
 i.maxlen=4
+textfield_set("grid y",gridy)
 
 i=instance_create(160+160,0,Button)
 i.spr=9

@@ -34,3 +34,4 @@ load_resource_tree
 createui_main
 createui_object
 createui_settings
+external_code_editor

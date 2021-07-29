@@ -8,13 +8,16 @@ down=0
 w=32
 h=32
 text=""
+dtext=""
+alt=""
+
 spr=noone
 focus=0
-alt=""
 active=0
 k=0
 dynamic=0
 maxlen=256
+displen=256
 minval=0
 maxval=0
 type=0
@@ -56,7 +59,9 @@ if (active) {
     if (k mod 40-20) cursor="_"
     else cursor=""
     if (keyboard_check_pressed(vk_enter)) textfield_actions()
-}
+
+    event_user(4)
+} else k=20
 #define Other_10
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -83,8 +88,11 @@ if (tagmode==mode || tagmode==-1) {
     if (type!=1) {
         draw_set_color(0)
         draw_set_valign(1)
-        if (active) draw_text(x+8,y+h/2,text+cursor)
-        else draw_text(x+8,y+h/2,text)
+        if (active) {
+            draw_text(x+8,y+h/2,dtext+cursor)
+        } else {
+            draw_text(x+8,y+h/2,dtext)
+        }
         draw_set_valign(0)
         draw_set_color($ffffff)
     }
@@ -106,3 +114,20 @@ applies_to=self
 */
 ///click
 down=(tagmode==mode || tagmode==-1)
+#define Other_14
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+var l;
+
+if (type==4) {
+    l=string_length(text)
+    dtext=text
+    if (l>=displen) {
+        dtext=string_copy(dtext,l-displen+1+active,displen-active)
+        alt=string_replace_all(text,"#","\#")
+    } else alt=""
+    dtext=string_replace_all(dtext,"#","\#")
+} else dtext=text

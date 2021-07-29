@@ -1,4 +1,4 @@
-globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,roomcode,roomspeed,settings,gridx,gridy;
+globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,roomcode,roomspeed,roompersistent,settings,gridx,gridy;
 var f,p,i,inst,layer;
 
 roomwidth=800
@@ -12,8 +12,8 @@ draw_loader()
 if (parameter_count()) {
     dir=parameter_string(1)
 } else {
-    //dir=get_open_filename("GM8.2 Room|room.txt","room.txt")
-    dir="C:\Stuff\github\renex-engine\rooms\rmDemo3\room.txt"
+    dir=get_open_filename("GM8.2 Room|room.txt","room.txt")
+    //dir="C:\Stuff\github\renex-engine\rooms\rmDemo3\room.txt"
     dir=filename_dir(dir)
 }
 roomname=filename_name(dir)
@@ -52,6 +52,7 @@ backvisible=real(ds_map_find_value(settings,"clear_screen"))
 roomwidth=real(ds_map_find_value(settings,"width"))
 roomheight=real(ds_map_find_value(settings,"height"))
 roomspeed=real(ds_map_find_value(settings,"roomspeed"))
+roompersistent=real(ds_map_find_value(settings,"roompersistent"))
 gridx=real(ds_map_find_value(settings,"snap_x"))
 gridy=real(ds_map_find_value(settings,"snap_y"))
 roomcaption=ds_map_find_value(settings,"caption")
@@ -118,6 +119,9 @@ f=file_text_open_read(dir+"code.gml") do {str=file_text_read_string(f) file_text
     } else roomcode+=str+chr(10)
 } until (file_text_eof(f)) file_text_close(f)
 */
+
+roomcode=file_text_read_all(dir+"code.gml")
+
 time=current_time
 loadtext="Loading instances..."
 

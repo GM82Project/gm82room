@@ -21,6 +21,11 @@ with (Controller) switch (argument0) {
         mode=4
     }break
 
+    case "room code": {
+        roomcode=external_code_editor(roomcode)
+        other.alt=roomcode
+    }break
+
     case "palscroldown": {
         palettescrollgo-=200
     }break
@@ -49,6 +54,9 @@ with (Controller) switch (argument0) {
     }break
     case "toggle crosshair": {
         crosshair=!crosshair
+    }break
+    case "room persist": {
+        roompersistent=!roompersistent
     }break
 
     //view

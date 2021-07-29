@@ -15,6 +15,7 @@
 	|load_room
 	|save_room
 	|edit_creation_code
+	|external_code_editor
 	|load_resource_tree
 |create
 |createui
