@@ -18,6 +18,13 @@ with (Controller) switch (argument0) {
         mode=3
     }break
 
+    case "palscroldown": {
+        palettescrollgo-=200
+    }break
+    case "palscrolup": {
+        palettescrollgo+=200
+    }break
+
     //zoom
     case "reset view": {
         xgo=roomwidth/2

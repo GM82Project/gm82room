@@ -120,6 +120,19 @@ i.alt="Smoothing"
 
 
 //object mode
+i=instance_create(0,96,Button)
+i.spr=19
+i.action="palscrolup"
+i.w=160
+i.h=24
+
+i=instance_create(0,height-100,Button)
+i.spr=20
+i.action="palscroldown"
+i.w=160
+i.h=24
+i.anchor=2
+
 i=instance_create(8,height-76+8,TextField)
 i.action="palette name"
 i.type=3
@@ -160,7 +173,7 @@ i.tagmode=0
 //position
 i=instance_create(width-160+8,64,TextField)
 i.action="inst x"
-i.alt="X coordinate"
+i.alt="x"
 i.anchor=1
 i.dynamic=1
 i.w=72
@@ -168,7 +181,7 @@ i.tagmode=0
 
 i=instance_create(width-80,64,TextField)
 i.action="inst y"
-i.alt="Y coordinate"
+i.alt="y"
 i.anchor=1
 i.dynamic=1
 i.w=72
@@ -186,7 +199,7 @@ i.tagmode=0
 //scale
 i=instance_create(width-160+8,164,TextField)
 i.action="inst xs"
-i.alt="X scale"
+i.alt="xscale"
 i.dynamic=1
 i.anchor=1
 i.w=72
@@ -194,7 +207,7 @@ i.tagmode=0
 
 i=instance_create(width-80,164,TextField)
 i.action="inst ys"
-i.alt="Y scale"
+i.alt="yscale"
 i.dynamic=1
 i.anchor=1
 i.w=72

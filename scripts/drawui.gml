@@ -142,7 +142,7 @@ if (mode=0) {
     paltooltip=0
     for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         dx=40+40*posx
-        dy=136+40*posy+palettescroll
+        dy=160+40*posy+palettescroll
         draw_button(dx-20,dy-20,40,40,objpal!=i)
         draw_sprite_stretched(objspr[i],0,dx-16,dy-16,32,32)
         if (posx=0) posx=1
@@ -150,10 +150,10 @@ if (mode=0) {
         else {posx=0 posy+=1}
     }
     dx=40+40*posx
-    dy=136+40*posy+palettescroll
+    dy=160+40*posy+palettescroll
     draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
     draw_sprite(sprMenuButtons,18,dx,dy)
-    if (mouse_wx<160 && mouse_wy>96 && mouse_wy<height-76) {
+    if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
         if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
             paltooltip=1
         }
@@ -183,9 +183,9 @@ if (mode==0) {
     //object tab tooltips
     posx=0
     posy=0
-    if (mouse_wy>96 && mouse_wy<height-76) for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
+    if (mouse_wy>120 && mouse_wy<height-100) for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         dx=40+40*posx
-        dy=136+40*posy+palettescroll
+        dy=160+40*posy+palettescroll
         if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
             drawtooltip(ds_list_find_value(objects,i))
         }

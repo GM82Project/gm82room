@@ -244,13 +244,13 @@ if (zooming) {
 
 //palette controls
 if (mode==0) {
-    if (mouse_wx<160 && mouse_wy>96 && mouse_wy<height-76) {
+    if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
         if (mouse_check_button_pressed(mb_left)) {
             posx=0
             posy=0
             for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
                 dx=40+40*posx
-                dy=136+40*posy+palettescroll
+                dy=160+40*posy+palettescroll
                 if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                     objpal=i
                     textfield_set("palette name",ds_list_find_value(objects,objpal))
@@ -260,7 +260,7 @@ if (mode==0) {
                 else {posx=0 posy+=1}
             }
             dx=40+40*posx
-            dy=136+40*posy+palettescroll
+            dy=160+40*posy+palettescroll
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                 //clicked on add object button
                 paladdbuttondown=1
@@ -272,7 +272,7 @@ if (mode==0) {
         h=mouse_wheel_down()-mouse_wheel_up()
         palettescrollgo-=h*80
     }
-    palettescrollgo=clamp(palettescrollgo,-(palettesize div 3+2)*40+(height-96-76),0)
+    palettescrollgo=clamp(palettescrollgo,-(palettesize div 3+2)*40+(height-120-100),0)
     palettescroll=inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2)
 }
 
