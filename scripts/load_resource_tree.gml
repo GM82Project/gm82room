@@ -6,6 +6,8 @@ tab=chr(9)
 
 objmenuitems=ds_map_create()
 objmenu=N_Menu_CreatePopupMenu()
+folder=N_Menu_LoadBitmap("folder.bmp")
+object=N_Menu_LoadBitmap("object.bmp")
 
 path[0]=objmenu
 curindent=0
@@ -23,12 +25,14 @@ if (file_exists(argument0)) {
             if (string_char_at(str,1)=="+") {
                 //group
                 submenu=N_Menu_CreatePopupMenu()
-                N_Menu_AddMenu(path[curindent],submenu,resname)
+                N_Menu_ItemSetBitmap(path[curindent],N_Menu_AddMenu(path[curindent],submenu,resname),folder)
                 curindent+=1
                 path[curindent]=submenu
             } else {
                 //resource
-                ds_map_add(objmenuitems,N_Menu_AddItem(path[curindent],resname,""),resname)
+                item=N_Menu_AddItem(path[curindent],resname,"")
+                N_Menu_ItemSetBitmap(path[curindent],item,object)
+                ds_map_add(objmenuitems,item,resname)
             }
         }
     } until (file_text_eof(f)) file_text_close(f)

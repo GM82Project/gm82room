@@ -194,5 +194,5 @@ if (mode==0) {
         else {posx=0 posy+=1}
     }
 
-    if (paltooltip) drawtooltip("Add more...")
+    if (paltooltip && !paladdbuttondown) drawtooltip("Add more...")
 }
