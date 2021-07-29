@@ -19,6 +19,7 @@ minval=0
 maxval=0
 type=0
 anchor=0
+tagmode=-1
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -60,29 +61,31 @@ action_id=603
 applies_to=self
 */
 ///draw
-if (type==1) buttoncol=real(text)
-else {
-    if (active) buttoncol=$ffffff
+if (tagmode==mode || tagmode==-1) {
+    if (type==1) buttoncol=real(text)
     else {
-        if (type==0 || type==2) {
-            if (dynamic && !Controller.select) buttoncol=global.col_main
-            else buttoncol=$c0c0c0
-        }
-        if (type==3) {
-            buttoncol=$c0c0c0
+        if (active) buttoncol=$ffffff
+        else {
+            if (type==0 || type==2) {
+                if (dynamic && !Controller.select) buttoncol=global.col_main
+                else buttoncol=$c0c0c0
+            }
+            if (type==3) {
+                buttoncol=$c0c0c0
+            }
         }
     }
-}
 
-draw_button(x,y,w,h,0)
+    draw_button(x,y,w,h,0)
 
-if (type!=1) {
-    draw_set_color(0)
-    draw_set_valign(1)
-    if (active) draw_text(x+8,y+h/2,text+cursor)
-    else draw_text(x+8,y+h/2,text)
-    draw_set_valign(0)
-    draw_set_color($ffffff)
+    if (type!=1) {
+        draw_set_color(0)
+        draw_set_valign(1)
+        if (active) draw_text(x+8,y+h/2,text+cursor)
+        else draw_text(x+8,y+h/2,text)
+        draw_set_valign(0)
+        draw_set_color($ffffff)
+    }
 }
 #define Other_11
 /*"/*'/**//* YYD ACTION
@@ -93,3 +96,11 @@ applies_to=self
 ///init
 image_xscale=w
 image_yscale=h
+#define Other_12
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///click
+down=(tagmode==mode || tagmode==-1)

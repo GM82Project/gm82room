@@ -92,12 +92,10 @@ mouse_wy=window_mouse_get_y()
 mousein=(point_in_rectangle(mouse_wx,mouse_wy,160,32,width-160,height-32))
 
 if (mouse_check_button_pressed(mb_left)) {
-    with (Button) event_user(2)
-
     if (!mousein) {
         //click on menus
         with (instance_position(mouse_wx,mouse_wy,Button)) {
-            down=1
+            event_user(2)
         }
     } else {
         //click on workspace
