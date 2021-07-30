@@ -1,5 +1,14 @@
 var str,tf,f;
 
+rect(0,0,width,height,0,0.5)
+draw_button(width/2-170,height/2-50,340,100,1)
+draw_set_halign(1)
+draw_set_valign(1)
+draw_text(width/2,height/2,"External code editor open##close the editor to continue")
+draw_set_halign(0)
+draw_set_valign(0)
+screen_refresh()
+
 str=argument0
 
 tf=temp_directory+"\code.txt"

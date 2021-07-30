@@ -1,4 +1,4 @@
-globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,roomcode,roomspeed,roompersistent,settings,gridx,gridy;
+globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,roomname,roomcode,roomspeed,roompersistent,settings,gridx,gridy;
 var f,p,i,inst,layer;
 
 roomwidth=800

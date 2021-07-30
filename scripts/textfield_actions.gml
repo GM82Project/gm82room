@@ -56,4 +56,5 @@ if (active) {
             with (instance) if (sel) image_alpha=val
         }
     }
+    event_user(4)
 }

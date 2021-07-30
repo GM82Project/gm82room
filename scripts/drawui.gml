@@ -181,12 +181,12 @@ if (mode=0) {
 }
 
 if (mode==4) {
-    draw_button(0,96,160,72,1)
-    draw_button(0,168,160,136,1)
+    draw_button(0,128,160,72,1)
+    draw_button(0,200,160,136,1)
     //draw_button(0,240,160,108,1)
-    draw_text(8,104,"Caption")
-    draw_text(8,176,"Size")
-    draw_text(8,241,"Speed")
+    draw_text(8,136,"Caption")
+    draw_text(8,208,"Size")
+    draw_text(8,273,"Speed")
 }
 
 with (Button) event_user(0)

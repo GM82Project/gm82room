@@ -59,7 +59,6 @@ if (active) {
     if (k mod 40-20) cursor="_"
     else cursor=""
     if (keyboard_check_pressed(vk_enter)) textfield_actions()
-
     event_user(4)
 } else k=20
 #define Other_10
