@@ -63,8 +63,8 @@ load_room()
 state="run"
 
 //adjust window to fit room
-width=max(912,min(width,roomwidth+64+160*2))
-height=max(704,min(height,roomheight+64+64))
+width=max(960,min(width,roomwidth+64+160*2))
+height=max(540,min(height,roomheight+64+64))
 xgo=roomwidth/2 ygo=roomheight/2
 zoom=max(1,(roomwidth)/(width-320),(roomheight+64)/(height-64))
 zoomgo=zoom

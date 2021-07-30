@@ -6,8 +6,8 @@ if (resizecount<5) {
             if (anchor==1) offx=width-x
             if (anchor==2) offy=height-y
         }
-        width=max(912,window_get_width())
-        height=max(704,window_get_height())
+        width=max(960,window_get_width())
+        height=max(540,window_get_height())
         window_set_size(width,height)
         window_set_region_size(width,height,0)
         window_resize_buffer(width,height)

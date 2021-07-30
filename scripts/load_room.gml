@@ -12,8 +12,8 @@ draw_loader()
 if (parameter_count()) {
     dir=parameter_string(1)
 } else {
-    dir=get_open_filename("GM8.2 Room|room.txt","room.txt")
-    //dir="C:\Stuff\github\renex-engine\rooms\rmDemo3\room.txt"
+    //dir=get_open_filename("GM8.2 Room|room.txt","room.txt")
+    dir="C:\Stuff\github\renex-engine\rooms\rmDemo3\room.txt"
     dir=filename_dir(dir)
 }
 roomname=filename_name(dir)

@@ -5,6 +5,10 @@ with (Controller) switch (argument0) {
         game_end()
     }break
 
+    case "help": {
+        show_info()
+    }break
+
     case "object mode": {
         mode=0
     }break

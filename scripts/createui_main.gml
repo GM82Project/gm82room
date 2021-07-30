@@ -121,3 +121,9 @@ i=instance_create(160+544,0,Button)
 i.spr=16
 i.action="interp"
 i.alt="Smoothing"
+
+//halp
+i=instance_create(160+592,0,Button)
+i.spr=22
+i.action="help"
+i.alt="Quick guide"
