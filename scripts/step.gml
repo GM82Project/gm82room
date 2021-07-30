@@ -55,34 +55,38 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_c
     copyvec[0,4]=maxsely
 }
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
-    with (instance) sel=0
-    if (keyboard_check(vk_alt)) {
-        dx=mouse_x-copyvec[0,1]
-        dy=mouse_y-copyvec[0,2]
-    } else {
-        dx=floorto(mouse_x-copyvec[0,1],gridx)
-        dy=floorto(mouse_y-copyvec[0,2],gridy)
-    }
+    yes=1
+    with (TextField) if (active) yes=0
+    if (yes && copyvec[0,0]) {
+        with (instance) sel=0
+        if (keyboard_check(vk_alt)) {
+            dx=mouse_x-copyvec[0,1]
+            dy=mouse_y-copyvec[0,2]
+        } else {
+            dx=floorto(mouse_x-copyvec[0,1],gridx)
+            dy=floorto(mouse_y-copyvec[0,2],gridy)
+        }
 
-    cur=1
-    repeat (copyvec[0,0]) {
-        o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance)
-        o.obj=copyvec[cur,1]
-        o.objname=copyvec[cur,0]
-        o.sprite_index=objspr[o.obj]
-        o.sprw=sprite_get_width(o.sprite_index)
-        o.sprh=sprite_get_height(o.sprite_index)
-        o.sprox=sprite_get_xoffset(o.sprite_index)
-        o.sproy=sprite_get_yoffset(o.sprite_index)
-        o.image_xscale=copyvec[cur,4]
-        o.image_yscale=copyvec[cur,5]
-        o.image_angle=copyvec[cur,6]
-        o.image_blend=copyvec[cur,7]
-        o.image_alpha=copyvec[cur,8]
-        o.code=copyvec[cur,9]
-        o.sel=1
-        select=o
-        cur+=1
+        cur=1
+        repeat (copyvec[0,0]) {
+            o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance)
+            o.obj=copyvec[cur,1]
+            o.objname=copyvec[cur,0]
+            o.sprite_index=objspr[o.obj]
+            o.sprw=sprite_get_width(o.sprite_index)
+            o.sprh=sprite_get_height(o.sprite_index)
+            o.sprox=sprite_get_xoffset(o.sprite_index)
+            o.sproy=sprite_get_yoffset(o.sprite_index)
+            o.image_xscale=copyvec[cur,4]
+            o.image_yscale=copyvec[cur,5]
+            o.image_angle=copyvec[cur,6]
+            o.image_blend=copyvec[cur,7]
+            o.image_alpha=copyvec[cur,8]
+            o.code=copyvec[cur,9]
+            o.sel=1
+            select=o
+            cur+=1
+        }
     }
 }
 

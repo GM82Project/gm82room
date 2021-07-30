@@ -47,6 +47,14 @@ if (down!=0 && focus && !active && (Controller.select || !dynamic)) {
 }
 
 if (active) {
+    if (keyboard_check(vk_control)) {
+        if (keyboard_check_pressed(ord("C"))) {
+            clipboard_set_text(text)
+        }
+        if (keyboard_check_pressed(ord("V"))) {
+            keyboard_string=clipboard_get_text()
+        }
+    }
     if (type=4) text=string_copy(keyboard_string,1,maxlen)
     else {
         if (type=0) text=string_number(keyboard_string)
