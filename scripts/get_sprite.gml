@@ -1,6 +1,6 @@
 var i,map;
 
-if (argument0="") return sprController
+if (argument0="") return sprDefault
 
 i=ds_list_find_index(sprites,argument0)
 if (!sprloaded[i]) {
