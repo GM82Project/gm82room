@@ -8,6 +8,8 @@ bgmenuitems=ds_map_create()
 bgmenu=N_Menu_CreatePopupMenu()
 background=N_Menu_LoadBitmap("background.bmp")
 
+ds_map_add(bgmenuitems,N_Menu_AddItem(bgmenu,"(no background)",""),"<undefined>")
+
 path[0]=bgmenu
 curindent=0
 

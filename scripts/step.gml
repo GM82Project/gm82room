@@ -297,9 +297,15 @@ if (click) {
     }
     if (menutype=="background") {
         str=ds_map_find_value(bgmenuitems,click)
-        bg_tex[bg_current]=get_background(str)
-        bg_source[bg_current]=str
-        bg_visible[bg_current]=1
+        if (str=="<undefined>") {
+            bg_tex[bg_current]=bgDefault
+            bg_source[bg_current]=""
+            bg_visible[bg_current]=0
+        } else {
+            bg_tex[bg_current]=get_background(str)
+            bg_source[bg_current]=str
+            bg_visible[bg_current]=1
+        }
         update_backgroundpanel()
     }
 }
