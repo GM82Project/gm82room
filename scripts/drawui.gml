@@ -1,3 +1,5 @@
+draw_backgrounds(1)
+
 fmx=floorto(mouse_x,gridx)
 fmy=floorto(mouse_y,gridy)
 tty=0
@@ -180,10 +182,18 @@ if (mode=0) {
     draw_text(dx+8,304+8,"Blend")
 }
 
+if (mode==2) {
+    //backgrounds
+    draw_button(0,96,160,48,1)
+    draw_button(0,208,160,332,1)
+    draw_text(8,404,"Position")
+    draw_text(8,472,"Speed")
+}
+
 if (mode==4) {
+    //room settings
     draw_button(0,128,160,72,1)
     draw_button(0,200,160,136,1)
-    //draw_button(0,240,160,108,1)
     draw_text(8,136,"Caption")
     draw_text(8,208,"Size")
     draw_text(8,273,"Speed")

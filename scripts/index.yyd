@@ -30,8 +30,14 @@ num_selected
 edit_creation_code
 update_view
 draw_loader
-load_resource_tree
+load_object_tree
 createui_main
 createui_object
 createui_settings
 external_code_editor
+createui_background
+update_backgroundpanel
+button_draw
+draw_backgrounds
+load_background_tree
+

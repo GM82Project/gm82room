@@ -33,7 +33,7 @@ copyvec[0,0]=0
 paladdbuttondown=0
 select=noone
 selecting=0
-mode=4
+mode=2
 
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"

@@ -99,7 +99,7 @@ if (mouse_check_button_pressed(mb_left)) {
     with (TextField) textfield_actions()
     if (!mousein) {
         //click on menus
-        with (instance_position(mouse_wx,mouse_wy,Button)) {
+        with (Button) if (instance_position(mouse_wx,mouse_wy,id)) {
             event_user(2)
         }
     } else {
@@ -279,6 +279,7 @@ if (mode==0) {
                 screen_redraw()
                 paladdbuttondown=0
                 N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
+                menutype="object"
             }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
@@ -290,8 +291,17 @@ if (mode==0) {
 
 click=N_Menu_CheckMenus()
 if (click) {
-    get_object(ds_map_find_value(objmenuitems,click))
-    textfield_set("palette name",ds_list_find_value(objects,objpal))
+    if (menutype=="object") {
+        get_object(ds_map_find_value(objmenuitems,click))
+        textfield_set("palette name",ds_list_find_value(objects,objpal))
+    }
+    if (menutype=="background") {
+        str=ds_map_find_value(bgmenuitems,click)
+        bg_tex[bg_current]=get_background(str)
+        bg_source[bg_current]=str
+        bg_visible[bg_current]=1
+        update_backgroundpanel()
+    }
 }
 
 //zooming

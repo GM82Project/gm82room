@@ -1,0 +1,5 @@
+textfield_set("bg name",bg_source[bg_current])
+textfield_set("bg xpos",bg_xoffset[bg_current])
+textfield_set("bg ypos",bg_yoffset[bg_current])
+textfield_set("bg hsp",bg_hspeed[bg_current])
+textfield_set("bg vsp",bg_vspeed[bg_current])

@@ -56,5 +56,36 @@ if (active) {
             with (instance) if (sel) image_alpha=val
         }
     }
+
+    if (action=="bgcol") {
+        if (text!="") {
+            val=round(real(text))
+            background_color=val
+        }
+    }
+    if (action=="bg xpos") {
+        if (text!="") {
+            val=round(real(text))
+            bg_xoffset[bg_current]=val
+        }
+    }
+    if (action=="bg ypos") {
+        if (text!="") {
+            val=round(real(text))
+            bg_yoffset[bg_current]=val
+        }
+    }
+    if (action=="bg hsp") {
+        if (text!="") {
+            val=round(real(text))
+            bg_hspeed[bg_current]=val
+        }
+    }
+    if (action=="bg vsp") {
+        if (text!="") {
+            val=round(real(text))
+            bg_vspeed[bg_current]=val
+        }
+    }
     event_user(4)
 }

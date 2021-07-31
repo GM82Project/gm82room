@@ -132,4 +132,29 @@ with (Controller) switch (argument0) {
     case "overlap check": {
         overlap_check=!overlap_check
     }break
+
+    case "clear bg": {
+        clearscreen=!clearscreen
+    }break
+
+    case "bgselect": {
+        bg_current=other.actionid
+        update_backgroundpanel()
+    }break
+
+    case "bg visible": {
+        bg_visible[bg_current]=!bg_visible[bg_current]
+    }break
+    case "bg fore": {
+        bg_is_foreground[bg_current]=!bg_is_foreground[bg_current]
+    }break
+    case "bg tileh": {
+        bg_tile_h[bg_current]=!bg_tile_h[bg_current]
+    }break
+    case "bg tilev": {
+        bg_tile_v[bg_current]=!bg_tile_v[bg_current]
+    }break
+     case "bg stretch": {
+        bg_stretch[bg_current]=!bg_stretch[bg_current]
+    }break
 }

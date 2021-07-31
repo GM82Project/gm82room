@@ -44,6 +44,10 @@ if (down!=0 && focus && !active && (Controller.select || !dynamic)) {
     if (type==2 || type==3) {
         active=0
     }
+    if (action=="bg name") {
+        N_Menu_ShowPopupMenu(window_handle(),bgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
+        Controller.menutype="background"
+    }
 }
 
 if (active) {

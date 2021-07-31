@@ -1,4 +1,7 @@
-globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,roomname,roomcode,roomspeed,roompersistent,settings,gridx,gridy;
+globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,roomname,roomcode,roomspeed,roompersistent,clearscreen,settings,gridx,gridy;
+globalvar bg_current,vw_current;
+globalvar bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch;
+
 var f,p,i,inst,layer;
 
 roomwidth=800
@@ -31,7 +34,9 @@ set_application_title(roomname+" - Room Editor")
 sprites=file_text_read_list(root+"sprites\index.yyd")
 backgrounds=file_text_read_list(root+"backgrounds\index.yyd")
 objects=file_text_read_list(root+"objects\index.yyd")
-load_resource_tree(root+"objects\tree.yyd")
+
+load_object_tree(root+"objects\tree.yyd")
+load_background_tree(root+"backgrounds\tree.yyd")
 
 sprites_length=ds_list_size(sprites)
 backgrounds_length=ds_list_size(backgrounds)
@@ -48,7 +53,7 @@ ds_map_read_ini(settings,dir+"room.txt")
 
 //load room properties
 background_color=real(ds_map_find_value(settings,"bg_color"))
-backvisible=real(ds_map_find_value(settings,"clear_screen"))
+clearscreen=real(ds_map_find_value(settings,"clear_screen"))
 roomwidth=real(ds_map_find_value(settings,"width"))
 roomheight=real(ds_map_find_value(settings,"height"))
 roomspeed=real(ds_map_find_value(settings,"roomspeed"))
@@ -56,6 +61,39 @@ roompersistent=real(ds_map_find_value(settings,"roompersistent"))
 gridx=real(ds_map_find_value(settings,"snap_x"))
 gridy=real(ds_map_find_value(settings,"snap_y"))
 roomcaption=ds_map_find_value(settings,"caption")
+
+for (i=0;i<8;i+=1) {
+    k=string(i)
+    bg_visible[i]=real(ds_map_find_value(settings,"bg_visible"+k))
+    bg_is_foreground[i]=real(ds_map_find_value(settings,"bg_is_foreground"+k))
+    bg_source[i]=ds_map_find_value(settings,"bg_source"+k)
+    bg_tex[i]=get_background(bg_source[i])
+    bg_xoffset[i]=real(ds_map_find_value(settings,"bg_xoffset"+k))
+    bg_yoffset[i]=real(ds_map_find_value(settings,"bg_yoffset"+k))
+    bg_tile_h[i]=real(ds_map_find_value(settings,"bg_tile_h"+k))
+    bg_tile_v[i]=real(ds_map_find_value(settings,"bg_tile_v"+k))
+    bg_hspeed[i]=real(ds_map_find_value(settings,"bg_hspeed"+k))
+    bg_vspeed[i]=real(ds_map_find_value(settings,"bg_vspeed"+k))
+    bg_stretch[i]=real(ds_map_find_value(settings,"bg_stretch"+k))
+
+    vw_visible[i]=ds_map_find_value(settings,"bg_visible"+k)
+    vw_xview[i]=ds_map_find_value(settings,"vw_xview"+k)
+    vw_yview[i]=ds_map_find_value(settings,"vw_yview"+k)
+    vw_wview[i]=ds_map_find_value(settings,"vw_wview"+k)
+    vw_hview[i]=ds_map_find_value(settings,"vw_hview"+k)
+    vw_xport[i]=ds_map_find_value(settings,"vw_xport"+k)
+    vw_yport[i]=ds_map_find_value(settings,"vw_yport"+k)
+    vw_wport[i]=ds_map_find_value(settings,"vw_wport"+k)
+    vw_hport[i]=ds_map_find_value(settings,"vw_hport"+k)
+    vw_fol_hbord[i]=ds_map_find_value(settings,"vw_fol_hbord"+k)
+    vw_fol_vbord[i]=ds_map_find_value(settings,"vw_fol_vbord"+k)
+    vw_fol_hspeed[i]=ds_map_find_value(settings,"vw_fol_hspeed"+k)
+    vw_fol_vspeed[i]=ds_map_find_value(settings,"vw_fol_vspeed"+k)
+    vw_fol_target[i]=ds_map_find_value(settings,"vw_fol_target"+k)
+}
+
+bg_current=0
+vw_current=0
 
 loadtext="Loading tiles..."
 progress=0.25

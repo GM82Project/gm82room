@@ -35,5 +35,4 @@ applies_to=self
 d3d_set_projection_ortho(0.5,0.5,width,height,0)
 d3d_draw_floor(0,0,0,width,height,0,bgtex,width/200,height/200)
 d3d_reset_projection()
-if (backvisible) rect(0,0,roomwidth,roomheight,background_color,1)
-else rect(0,0,roomwidth,roomheight,fillcolor,1)
+draw_backgrounds(0)
