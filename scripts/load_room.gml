@@ -1,4 +1,4 @@
-globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,roomname,roomcode,roomspeed,roompersistent,clearscreen,settings,gridx,gridy;
+globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,objvis,objdepth,roomname,roomcode,roomspeed,roompersistent,clearscreen,settings,gridx,gridy;
 globalvar bg_current,vw_current;
 globalvar bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch;
 
@@ -173,6 +173,7 @@ f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file
         p=string_pos(",",str) o.code=string_copy(str,1,p-1)
         if (o.code!="") {o.code=string_replace_all(file_text_read_all(dir+o.code+".gml"),chr(13),"") parsecode(o)}
         o.obj=get_object(o.objname)
+        o.depth=objdepth[o.obj]
         o.sprite_index=objspr[o.obj]
         o.sprw=sprite_get_width(o.sprite_index)
         o.sprh=sprite_get_height(o.sprite_index)

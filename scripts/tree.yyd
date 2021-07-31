@@ -40,3 +40,4 @@
 	|update_view
 	|drawtooltip
 	|draw_backgrounds
+|update_visibility

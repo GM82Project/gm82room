@@ -41,3 +41,4 @@ button_draw
 draw_backgrounds
 load_background_tree
 
+update_visibility

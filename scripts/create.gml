@@ -49,18 +49,19 @@ codeeditor=registry_read_string_ext(dir,"CodeEditor")
 if (!file_exists(codeeditor)) codeeditor="notepad"
 if (!registry_read_dword(dir+"NewRoomEditorSeen",0)) show_info()
 
-view[0]=1
-view[1]=1
-view[2]=1
-view[3]=1
-view[4]=1
-view[5]=1
-view[6]=1
-
 state="load"
 crc_init()
 load_room()
 state="run"
+
+view[0]=1
+view[1]=1
+view[2]=1
+view[3]=1
+view[4]=0
+view[5]=0
+view[6]=0
+update_visibility()
 
 //adjust window to fit room
 width=max(960,min(width,roomwidth+64+160*2))

@@ -4,7 +4,7 @@ if (!argument0) {
     else rect(0,0,roomwidth,roomheight,fillcolor,1)
 }
 
-for (i=0;i<8;i+=1) if (bg_source[i]!="" && bg_visible[i] && bg_is_foreground[i]==argument0) {
+if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg_source[i]!="" && bg_visible[i] && bg_is_foreground[i]==argument0) {
     bg=bg_tex[i]
     w=background_get_width(bg)
     h=background_get_height(bg)
