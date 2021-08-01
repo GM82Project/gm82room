@@ -31,7 +31,7 @@ copyvec[0,0]=0
 paladdbuttondown=0
 select=noone
 selecting=0
-mode=3
+mode=4
 grabview=0
 sizeview=0
 

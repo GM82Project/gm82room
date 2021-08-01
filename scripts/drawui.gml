@@ -7,8 +7,8 @@ fmy=floorto(mouse_y,gridy)
 tty=0
 
 if (mode==0 || mode==1) {
-    if (keyboard_check(vk_control)) window_set_cursor(cr_size_all)
-    else if (keyboard_check(vk_shift)) window_set_cursor(cr_cross)
+    if (keyboard_check_direct(vk_control)) window_set_cursor(cr_size_all)
+    else if (keyboard_check_direct(vk_shift)) window_set_cursor(cr_cross)
     else window_set_cursor(cr_default)
 
     d3d_transform_add_translation(-0.5,-0.5,0)
@@ -226,7 +226,8 @@ if (mode==3) {
     draw_text(12,236,"Room")
     draw_text(12,328,"Window")
     draw_text(12,420,"Following")
-    draw_button(width-160,0,160,188,1)
+
+    draw_button(width-160,0,160,216,1)
     draw_text(width-160+12,8,"Window")
     buttoncol=0
     draw_button(width-160+4,32,160-8,160-8,0)
@@ -274,6 +275,7 @@ if (mode==3) {
                 draw_set_color(0)
                 draw_rectangle(x1,y1,x2,y2,1)
                 draw_text(mean(x1,x2),mean(y1,y2),i)
+                draw_set_color($ffffff)
             }
         } else {
             draw_text(width-80,32+76,"Whole Room")
@@ -283,6 +285,7 @@ if (mode==3) {
     }
     draw_set_halign(0)
     draw_set_valign(0)
+    if (yes) draw_text(width-160+12,188,string(w)+" x "+string(h))
 }
 
 //draw settings tab
