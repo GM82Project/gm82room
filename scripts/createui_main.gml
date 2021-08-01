@@ -10,31 +10,26 @@ i.w=80
 i=instance_create(80,0,Button)
 i.spr=21
 i.action="settings mode"
-i.alt="Settings"
 i.w=80
 
 i=instance_create(0,32,Button)
 i.spr=2
 i.action="object mode"
-i.alt="Instances"
 i.w=80
 
 i=instance_create(80,32,Button)
 i.spr=3
 i.action="tile mode"
-i.alt="Tiles"
 i.w=80
 
 i=instance_create(0,64,Button)
 i.spr=4
 i.action="bg mode"
-i.alt="Backgrounds"
 i.w=80
 
 i=instance_create(80,64,Button)
 i.spr=6
 i.action="view mode"
-i.alt="Views"
 i.w=80
 
 

@@ -1,0 +1,3 @@
+min_width=960
+min_height=548
+max_int=4294967296

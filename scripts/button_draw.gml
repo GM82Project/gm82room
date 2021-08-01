@@ -17,6 +17,7 @@ if (tagmode==mode || tagmode==-1) {
         case "view invis":       {up=(!view[5] && !down)            }break
         case "view nospr":       {up=(!view[6] && !down)            }break
         case "bgselect":         {up=(!down && bg_current!=actionid)}break
+        case "vwselect":         {up=(!down && vw_current!=actionid)}break
         default:                 {up=!down                          }
     }
 
@@ -25,12 +26,16 @@ if (tagmode==mode || tagmode==-1) {
         switch (action) {
             case "overlap check": {checked=overlap_check}break
             case "room persist": {checked=roompersistent}break
+
             case "clear bg": {checked=clearscreen}break
             case "bg visible": {checked=bg_visible[bg_current]}break
             case "bg fore": {checked=bg_is_foreground[bg_current]}break
             case "bg tileh": {checked=bg_tile_h[bg_current]}break
             case "bg tilev": {checked=bg_tile_v[bg_current]}break
             case "bg stretch": {checked=bg_stretch[bg_current]}break
+
+            case "enable views": {checked=vw_enabled}break
+            case "view visible": {checked=vw_visible[vw_current]}break
         }
         up=!down
     }
@@ -39,6 +44,7 @@ if (tagmode==mode || tagmode==-1) {
 
     buttoncol=global.col_main
     if (action=="bgselect") buttoncol=pick(bg_visible[actionid] && bg_source[actionid]!="",buttoncol,$808080)
+    if (action=="vwselect") buttoncol=pick(vw_visible[actionid],buttoncol,$808080)
     draw_button(x,y,w,h,up)
 
     if (text!="") {

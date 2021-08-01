@@ -42,3 +42,6 @@ draw_backgrounds
 load_background_tree
 
 update_visibility
+createui_views
+update_viewpanel
+draw_set_color_sel

@@ -10,6 +10,7 @@
 	|crc32
 	|draw_button
 	|num_selected
+	|draw_set_color_sel
 +file
 	|file_text_read_list
 	|load_room
@@ -24,11 +25,14 @@
 	|createui_main
 	|createui_object
 	|createui_background
+	|createui_views
 	|createui_settings
 |step
 |update_inspector
 |clear_inspector
 |update_backgroundpanel
+|update_viewpanel
+|update_visibility
 |button_actions
 |button_draw
 |textfield_actions
@@ -40,4 +44,3 @@
 	|update_view
 	|drawtooltip
 	|draw_backgrounds
-|update_visibility

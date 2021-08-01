@@ -6,8 +6,8 @@ if (resizecount<5) {
             if (anchor==1) offx=width-x
             if (anchor==2) offy=height-y
         }
-        width=max(960,window_get_width())
-        height=max(540,window_get_height())
+        width=max(min_width,window_get_width())
+        height=max(min_height,window_get_height())
         window_set_size(width,height)
         window_set_region_size(width,height,0)
         window_resize_buffer(width,height)
@@ -105,8 +105,8 @@ if (mouse_check_button_pressed(mb_left)) {
     } else {
         //click on workspace
         yes=0
-        //if something's already selected, operate on it
         if (mode==0) {
+            //if something's already selected, operate on it
             if (!keyboard_check(vk_shift)) with (select) {
                 if (position_meeting(mouse_x,mouse_y,id) && keyboard_check(vk_control)) {
                     grab=1
@@ -162,7 +162,46 @@ if (mouse_check_button_pressed(mb_left)) {
                 }
             }
         }
+        if (mode==3) {
+            if (abs(mouse_x-(vw_x[vw_current]+vw_w[vw_current]))<8 && abs(mouse_y-(vw_y[vw_current]+vw_h[vw_current]))<8) {
+                sizeview=1
+            } else if (point_in_rectangle(mouse_x,mouse_y,vw_x[vw_current],vw_y[vw_current],vw_x[vw_current]+vw_w[vw_current],vw_y[vw_current]+vw_h[vw_current])) {
+                grabview=1
+                offx=mouse_x-vw_x[vw_current]
+                offy=mouse_y-vw_y[vw_current]
+            } else {
+                for (i=0;i<8;i+=1) if (vw_visible[i]) if (point_in_rectangle(mouse_x,mouse_y,vw_x[i],vw_y[i],vw_x[i]+vw_w[i],vw_y[i]+vw_h[i])) {
+                    vw_current=i
+                }
+            }
+        }
     }
+}
+
+//grabbed a view
+if (grabview) {
+    if (keyboard_check(vk_alt)) {
+        vw_x[vw_current]=mouse_x-offx
+        vw_y[vw_current]=mouse_y-offy
+    } else {
+        vw_x[vw_current]=floorto(mouse_x-offx,gridx)
+        vw_y[vw_current]=floorto(mouse_y-offy,gridy)
+    }
+    update_viewpanel()
+    if (!mouse_check_direct(mb_left)) grabview=0
+}
+
+//resized a view
+if (sizeview) {
+    if (keyboard_check(vk_alt)) {
+        vw_w[vw_current]=max(1,mouse_x-vw_x[vw_current])
+        vw_h[vw_current]=max(1,mouse_y-vw_y[vw_current])
+    } else {
+        vw_w[vw_current]=max(gridx,roundto(mouse_x,gridx)-vw_x[vw_current])
+        vw_h[vw_current]=max(gridy,roundto(mouse_y,gridy)-vw_y[vw_current])
+    }
+    update_viewpanel()
+    if (!mouse_check_direct(mb_left)) sizeview=0
 }
 
 //painting!  :3
@@ -289,11 +328,18 @@ if (mode==0) {
     palettescroll=inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2)
 }
 
+//menu checks
 click=N_Menu_CheckMenus()
 if (click) {
     if (menutype=="object") {
-        get_object(ds_map_find_value(objmenuitems,click))
-        textfield_set("palette name",ds_list_find_value(objects,objpal))
+        if (mode==0) {
+            get_object(ds_map_find_value(objmenuitems,click))
+            textfield_set("palette name",ds_list_find_value(objects,objpal))
+        }
+        if (mode==3) {
+            vw_follow[vw_current]=ds_map_find_value(objmenuitems,click)
+            textfield_set("view follow",vw_follow[vw_current])
+        }
     }
     if (menutype=="background") {
         str=ds_map_find_value(bgmenuitems,click)

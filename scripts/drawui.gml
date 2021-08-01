@@ -1,3 +1,5 @@
+var yes;
+
 draw_backgrounds(1)
 
 fmx=floorto(mouse_x,gridx)
@@ -95,6 +97,34 @@ if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && copyvec[0,0]) {
     draw_set_color($ffffff)
 }
 
+//draw views
+if (view[4] || mode==3) {
+    if (mode==3) rect(0,0,roomwidth,roomheight,0,0.5)
+    d3d_transform_add_translation(-0.5,-0.5,0)
+    for (i=0;i<8;i+=1) {
+        if (vw_visible[i] || (vw_current==i && mode==3)) {
+            dx=vw_x[i]+vw_w[i]
+            dy=vw_y[i]+vw_h[i]
+            if (vw_current==i && vw_visible[i] && mode==3) {
+                draw_set_color($ff8000)
+                draw_set_alpha(0.5)
+                draw_roundrect(vw_x[i],vw_y[i],dx,dy,0)
+                draw_set_alpha(1)
+                draw_set_color_sel()
+            }
+            draw_roundrect(vw_x[i],vw_y[i],dx,dy,1)
+            if (vw_current==i && mode==3) {
+                draw_rectangle(dx-8,dy-8,dx+8,dy+8,1)
+                draw_rectangle(dx-4,dy-4,dx+4,dy+4,1)
+            }
+            draw_set_color($ffffff)
+            draw_text(vw_x[i]+8.5,vw_y[i]+8.5,"View "+string(i))
+        }
+    }
+    d3d_transform_set_identity()
+}
+
+//this is where the room space ends and the hud space starts================================================
 d3d_set_projection_ortho(0,0,width,height,0)
 
 focus=noone
@@ -143,7 +173,7 @@ if (mode==0) {
 
 //draw object tab
 if (mode=0) {
-    //draw palette
+    //palette
     posx=0
     posy=0
     paltooltip=0
@@ -175,28 +205,93 @@ if (mode=0) {
     draw_button(dx,128+4,160,100,1)
     draw_button(dx,228+4,160,72,1)
     draw_button(dx,304,160,72,1)
-
-    draw_text(dx+8,32+8,"Position")
-    draw_text(dx+8,128+12,"Scale")
-    draw_text(dx+8,228+12,"Rotation")
-    draw_text(dx+8,304+8,"Blend")
+    draw_text(dx+12,32+8,"Position")
+    draw_text(dx+12,128+12,"Scale")
+    draw_text(dx+12,228+12,"Rotation")
+    draw_text(dx+12,304+8,"Blend")
 }
 
+//draw backgrounds tab
 if (mode==2) {
-    //backgrounds
-    draw_button(0,96,160,48,1)
-    draw_button(0,208,160,332,1)
-    draw_text(8,404,"Position")
-    draw_text(8,472,"Speed")
+    draw_button(0,96,160,40,1)
+    draw_button(0,200,160,308,1)
+    draw_text(12,384,"Position")
+    draw_text(12,444,"Speed")
 }
 
+//draw views tab
+if (mode==3) {
+    draw_button(0,96,160,40,1)
+    draw_button(0,200,160,348,1)
+    draw_text(12,236,"Room")
+    draw_text(12,328,"Window")
+    draw_text(12,420,"Following")
+    draw_button(width-160,0,160,188,1)
+    draw_text(width-160+12,8,"Window")
+    buttoncol=0
+    draw_button(width-160+4,32,160-8,160-8,0)
+
+    yes=0
+    if (vw_enabled) {
+        //first we calculate the total view bounding box
+        l=max_int
+        t=max_int
+        r=0
+        b=0
+        for (i=0;i<8;i+=1) if (vw_visible[i]) {
+            yes=1
+            l=min(l,vw_xp[i])
+            t=min(t,vw_yp[i])
+            r=max(r,vw_xp[i]+vw_wp[i])
+            b=max(b,vw_yp[i]+vw_hp[i])
+        }
+        w=r-l
+        h=b-t
+    } else {
+        w=roomwidth
+        h=roomheight
+        yes=1
+    }
+
+    //viewport preview box
+    draw_set_halign(1)
+    draw_set_valign(1)
+    if (yes) {
+        if (w>h) {dh=h*144/w dw=144}
+        else {dw=w*144/h dh=144}
+        dx=width-80-dw/2
+        dy=32+76-dh/2
+        rect(dx,dy,dw,dh,$808080,1)
+        if (vw_enabled) {
+            //draw each view
+            for (i=0;i<8;i+=1) if (vw_visible[i]) {
+                draw_set_color(pick(vw_current==i,$ffffff,$ff8000))
+                x1=dx+(vw_xp[i]-l)/w*dw
+                y1=dy+(vw_yp[i]-t)/h*dh
+                x2=dx+(vw_xp[i]+vw_wp[i]-l)/w*dw
+                y2=dy+(vw_yp[i]+vw_hp[i]-t)/h*dh
+                draw_rectangle(x1,y1,x2,y2,0)
+                draw_set_color(0)
+                draw_rectangle(x1,y1,x2,y2,1)
+                draw_text(mean(x1,x2),mean(y1,y2),i)
+            }
+        } else {
+            draw_text(width-80,32+76,"Whole Room")
+        }
+    } else {
+        draw_text(width-80,32+76,"No views are#visible.##Game will#not display#correctly.")
+    }
+    draw_set_halign(0)
+    draw_set_valign(0)
+}
+
+//draw settings tab
 if (mode==4) {
-    //room settings
     draw_button(0,128,160,72,1)
-    draw_button(0,200,160,136,1)
-    draw_text(8,136,"Caption")
-    draw_text(8,208,"Size")
-    draw_text(8,273,"Speed")
+    draw_button(0,200,160,164,1)
+    draw_text(12,136,"Caption")
+    draw_text(12,208,"Size")
+    draw_text(12,273,"Speed")
 }
 
 with (Button) event_user(0)

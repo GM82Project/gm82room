@@ -12,9 +12,7 @@ width=display_get_width()-80-64
 height=display_get_height()-80-64
 maxfps=display_get_frequency()
 
-room_caption="Game Maker 8.2 Room Editor"
 room_speed=maxfps
-
 
 xgo=0
 ygo=0
@@ -33,8 +31,9 @@ copyvec[0,0]=0
 paladdbuttondown=0
 select=noone
 selecting=0
-mode=2
-
+mode=3
+grabview=0
+sizeview=0
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
 grid=registry_read_dword(dir+"RoomGridOnOffDefault",0)
@@ -64,8 +63,8 @@ view[6]=0
 update_visibility()
 
 //adjust window to fit room
-width=max(960,min(width,roomwidth+64+160*2))
-height=max(540,min(height,roomheight+64+64))
+width=max(min_width,min(width,roomwidth+64+160*2))
+height=max(min_height,min(height,roomheight+64+64))
 xgo=roomwidth/2 ygo=roomheight/2
 zoom=max(1,(roomwidth)/(width-320),(roomheight+64)/(height-64))
 zoomgo=zoom

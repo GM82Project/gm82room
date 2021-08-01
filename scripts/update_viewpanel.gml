@@ -1,0 +1,16 @@
+textfield_set("view visible",vw_visible[vw_current])
+textfield_set("view x",vw_x[vw_current])
+textfield_set("view y",vw_y[vw_current])
+textfield_set("view w",vw_w[vw_current])
+textfield_set("view h",vw_h[vw_current])
+
+textfield_set("view xp",vw_xp[vw_current])
+textfield_set("view yp",vw_yp[vw_current])
+textfield_set("view wp",vw_wp[vw_current])
+textfield_set("view hp",vw_hp[vw_current])
+
+textfield_set("view follow",vw_follow[vw_current])
+textfield_set("view hbor",vw_hbor[vw_current])
+textfield_set("view vbor",vw_vbor[vw_current])
+textfield_set("view hspeed",vw_hspeed[vw_current])
+textfield_set("view vspeed",vw_vspeed[vw_current])

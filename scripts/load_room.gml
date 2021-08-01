@@ -1,6 +1,7 @@
 globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,objvis,objdepth,roomname,roomcode,roomspeed,roompersistent,clearscreen,settings,gridx,gridy;
 globalvar bg_current,vw_current;
 globalvar bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch;
+globalvar vw_enabled,vw_visible,vw_x,vw_y,vw_w,vw_h,vw_xp,vw_yp,vw_wp,vw_hp,vw_follow,vw_hspeed,vw_vspeed,vw_hbor,vw_vbor;
 
 var f,p,i,inst,layer;
 
@@ -13,8 +14,10 @@ draw_loader()
 
 //find room
 if (parameter_count()) {
+    room_caption="Game Maker 8.2 Room Editor"
     dir=parameter_string(1)
 } else {
+    room_caption="OpenGMK IDE Room Editor"
     //dir=get_open_filename("GM8.2 Room|room.txt","room.txt")
     dir="C:\Stuff\github\renex-engine\rooms\rmDemo3\room.txt"
     dir=filename_dir(dir)
@@ -62,6 +65,8 @@ gridx=real(ds_map_find_value(settings,"snap_x"))
 gridy=real(ds_map_find_value(settings,"snap_y"))
 roomcaption=ds_map_find_value(settings,"caption")
 
+vw_enabled=real(ds_map_find_value(settings,"views_enabled"))
+
 for (i=0;i<8;i+=1) {
     k=string(i)
     bg_visible[i]=real(ds_map_find_value(settings,"bg_visible"+k))
@@ -76,20 +81,20 @@ for (i=0;i<8;i+=1) {
     bg_vspeed[i]=real(ds_map_find_value(settings,"bg_vspeed"+k))
     bg_stretch[i]=real(ds_map_find_value(settings,"bg_stretch"+k))
 
-    vw_visible[i]=ds_map_find_value(settings,"bg_visible"+k)
-    vw_xview[i]=ds_map_find_value(settings,"vw_xview"+k)
-    vw_yview[i]=ds_map_find_value(settings,"vw_yview"+k)
-    vw_wview[i]=ds_map_find_value(settings,"vw_wview"+k)
-    vw_hview[i]=ds_map_find_value(settings,"vw_hview"+k)
-    vw_xport[i]=ds_map_find_value(settings,"vw_xport"+k)
-    vw_yport[i]=ds_map_find_value(settings,"vw_yport"+k)
-    vw_wport[i]=ds_map_find_value(settings,"vw_wport"+k)
-    vw_hport[i]=ds_map_find_value(settings,"vw_hport"+k)
-    vw_fol_hbord[i]=ds_map_find_value(settings,"vw_fol_hbord"+k)
-    vw_fol_vbord[i]=ds_map_find_value(settings,"vw_fol_vbord"+k)
-    vw_fol_hspeed[i]=ds_map_find_value(settings,"vw_fol_hspeed"+k)
-    vw_fol_vspeed[i]=ds_map_find_value(settings,"vw_fol_vspeed"+k)
-    vw_fol_target[i]=ds_map_find_value(settings,"vw_fol_target"+k)
+    vw_visible[i]=real(ds_map_find_value(settings,"view_visible"+k))
+    vw_x[i]=real(ds_map_find_value(settings,"view_xview"+k))
+    vw_y[i]=real(ds_map_find_value(settings,"view_yview"+k))
+    vw_w[i]=real(ds_map_find_value(settings,"view_wview"+k))
+    vw_h[i]=real(ds_map_find_value(settings,"view_hview"+k))
+    vw_xp[i]=real(ds_map_find_value(settings,"view_xport"+k))
+    vw_yp[i]=real(ds_map_find_value(settings,"view_yport"+k))
+    vw_wp[i]=real(ds_map_find_value(settings,"view_wport"+k))
+    vw_hp[i]=real(ds_map_find_value(settings,"view_hport"+k))
+    vw_follow[i]=ds_map_find_value(settings,"view_fol_target"+k)
+    vw_hbor[i]=real(ds_map_find_value(settings,"view_fol_hbord"+k))
+    vw_vbor[i]=real(ds_map_find_value(settings,"view_fol_vbord"+k))
+    vw_hspeed[i]=real(ds_map_find_value(settings,"view_fol_hspeed"+k))-max_int
+    vw_vspeed[i]=real(ds_map_find_value(settings,"view_fol_vspeed"+k))-max_int
 }
 
 bg_current=0
@@ -158,7 +163,8 @@ f=file_text_open_read(dir+"code.gml") do {str=file_text_read_string(f) file_text
 } until (file_text_eof(f)) file_text_close(f)
 */
 
-roomcode=file_text_read_all(dir+"code.gml")
+roomcode=string_replace_all(file_text_read_all(dir+"code.gml"),chr(13),"")
+if (string_replace_all(string_replace_all(string_replace_all(roomcode,chr(9),""),chr(10),"")," ","")="") roomcode=""
 
 time=current_time
 loadtext="Loading instances..."

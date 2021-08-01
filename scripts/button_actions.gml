@@ -149,6 +149,11 @@ with (Controller) switch (argument0) {
         update_backgroundpanel()
     }break
 
+    case "vwselect": {
+        vw_current=other.actionid
+        update_viewpanel()
+    }break
+
     case "bg visible": {
         bg_visible[bg_current]=!bg_visible[bg_current]
     }break
@@ -163,5 +168,13 @@ with (Controller) switch (argument0) {
     }break
      case "bg stretch": {
         bg_stretch[bg_current]=!bg_stretch[bg_current]
+    }break
+
+    case "enable views": {
+        vw_enabled=!vw_enabled
+    }break
+
+    case "view visible": {
+        vw_visible[vw_current]=!vw_visible[vw_current]
     }break
 }

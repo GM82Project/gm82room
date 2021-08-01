@@ -81,7 +81,7 @@ applies_to=self
 ///draw selection handles
 
 d3d_transform_add_translation(-0.5,-0.5,0)
-draw_set_color(merge_color($ff0000,$ffffff,0.5+0.5*sin(current_time/200)))
+draw_set_color_sel()
 
 draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
 draw_circle(x,y,4,1)
@@ -144,7 +144,7 @@ draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,0.5+0
 d3d_set_fog(0,0,0,0)
 
 d3d_transform_add_translation(-0.5,-0.5,0)
-draw_set_color(merge_color($ff0000,$ffffff,0.5+0.5*sin(current_time/200)))
+draw_set_color_sel()
 
 draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
 draw_circle(x,y,4,1)
