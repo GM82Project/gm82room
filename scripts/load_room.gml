@@ -17,7 +17,7 @@ if (parameter_count()) {
     room_caption="Game Maker 8.2 Room Editor"
     dir=parameter_string(1)
 } else {
-    //room_caption="OpenGMK IDE Room Editor"
+    room_caption="OpenGMK IDE Room Editor"
     //dir=get_open_filename("GM8.2 Room|room.txt","room.txt")
     dir="C:\Stuff\github\renex-engine\rooms\rmDemo3\room.txt"
     dir=filename_dir(dir)
@@ -54,7 +54,7 @@ project=ds_map_create()
 ds_map_read_ini(settings,dir+"..\..\"+file_find_first(dir+"..\..\*.gm82",0))
 file_find_close()
 //look for the view speed bug
-if (string(ds_map_find_value(project,"gm82_version"))=="0") viewspeedcorrection=max_int
+if (string(ds_map_find_value(project,"gm82_version"))=="0") viewspeedcorrection=max_uint
 else viewspeedcorrection=0
 ds_map_destroy(project)
 

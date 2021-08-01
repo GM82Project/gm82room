@@ -30,7 +30,6 @@ i.type=3
 i.maxlen=13
 i.w=160-16
 i.tagmode=2
-//textfield_set("bgname",bg_name[bg_current])
 
 i=instance_create(8,244,Button)
 i.type=1

@@ -11,6 +11,7 @@ with (Controller) switch (argument0) {
 
     case "object mode": {
         mode=0
+        update_visibility(0)
     }break
     case "tile mode": {
         mode=1

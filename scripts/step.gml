@@ -3,8 +3,8 @@ var yes,cur,minselx,maxselx,minsely,maxsely,dx,dy;
 if (resizecount<5) {
     if (window_get_width()!=width || window_get_height()!=height) {
         with (Button) {
-            if (anchor==1) offx=width-x
-            if (anchor==2) offy=height-y
+            if (anchor==1 || anchor==3) offx=width-x
+            if (anchor==2 || anchor==3) offy=height-y
         }
         width=max(min_width,window_get_width())
         height=max(min_height,window_get_height())
@@ -14,8 +14,8 @@ if (resizecount<5) {
         view_wport[0]=width
         view_hport[0]=height
         with (Button) {
-            if (anchor==1) x=width-offx
-            if (anchor==2) y=height-offy
+            if (anchor==1 || anchor==3) x=width-offx
+            if (anchor==2 || anchor==3) y=height-offy
         }
         resizecount+=1
         if (resizecount>=5) show_message("Resizing the window failed multiple times. Do you have some sort of weird DPI settings? Either way, I'm disabling resizing for now.")
@@ -301,18 +301,16 @@ if (mode==0) {
             posx=0
             posy=0
             for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
-                dx=40+40*posx
-                dy=160+40*posy+palettescroll
+                dx=20+40*posx
+                dy=140+40*posy+palettescroll
                 if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                     objpal=i
                     textfield_set("palette name",ds_list_find_value(objects,objpal))
                 }
-                if (posx=0) posx=1
-                else if (posx=1) posx=2
-                else {posx=0 posy+=1}
+                posx+=1 if (posx=4) {posx=0 posy+=1}
             }
-            dx=40+40*posx
-            dy=160+40*posy+palettescroll
+            dx=20+40*posx
+            dy=140+40*posy+palettescroll
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                 //clicked on add object button
                 paladdbuttondown=1
@@ -325,8 +323,8 @@ if (mode==0) {
         h=mouse_wheel_down()-mouse_wheel_up()
         palettescrollgo-=h*80
     }
-    palettescrollgo=clamp(palettescrollgo,-(palettesize div 3+2)*40+(height-120-100),0)
-    palettescroll=inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2)
+    palettescrollgo=clamp(palettescrollgo,-(palettesize div 4+1)*40+(height-120-100),0)
+    palettescroll=clamp(inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2),-(palettesize div 4+1)*40+(height-120-100),0)
 }
 
 //menu checks

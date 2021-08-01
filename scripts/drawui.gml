@@ -118,7 +118,7 @@ if (view[4] || mode==3) {
                 draw_rectangle(dx-4,dy-4,dx+4,dy+4,1)
             }
             draw_set_color($ffffff)
-            draw_text(vw_x[i]+8.5,vw_y[i]+8.5,"View "+string(i))
+            draw_text_transformed(vw_x[i]+8+0.5*zoom,vw_y[i]+8+0.5*zoom,"View "+string(i),zoom,zoom,0)
         }
     }
     d3d_transform_set_identity()
@@ -183,16 +183,14 @@ if (mode=0) {
     posy=0
     paltooltip=0
     for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
-        dx=40+40*posx
-        dy=160+40*posy+palettescroll
+        dx=20+40*posx
+        dy=140+40*posy+palettescroll
         draw_button(dx-20,dy-20,40,40,objpal!=i)
         draw_sprite_stretched(objspr[i],0,dx-16,dy-16,32,32)
-        if (posx=0) posx=1
-        else if (posx=1) posx=2
-        else {posx=0 posy+=1}
+        posx+=1 if (posx=4) {posx=0 posy+=1}
     }
-    dx=40+40*posx
-    dy=160+40*posy+palettescroll
+    dx=20+40*posx
+    dy=140+40*posy+palettescroll
     draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
     draw_sprite(sprMenuButtons,18,dx,dy)
     if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
@@ -240,8 +238,8 @@ if (mode==3) {
     yes=0
     if (vw_enabled) {
         //first we calculate the total view bounding box
-        l=max_int
-        t=max_int
+        l=max_uint
+        t=max_uint
         r=0
         b=0
         for (i=0;i<8;i+=1) if (vw_visible[i]) {
@@ -310,14 +308,12 @@ if (mode==0) {
     posx=0
     posy=0
     if (mouse_wy>120 && mouse_wy<height-100) for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
-        dx=40+40*posx
-        dy=160+40*posy+palettescroll
+        dx=20+40*posx
+        dy=140+40*posy+palettescroll
         if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
             drawtooltip(ds_list_find_value(objects,i))
         }
-        if (posx=0) posx=1
-        else if (posx=1) posx=2
-        else {posx=0 posy+=1}
+        posx+=1 if (posx=4) {posx=0 posy+=1}
     }
 
     if (paltooltip && !paladdbuttondown) drawtooltip("Add more...")
