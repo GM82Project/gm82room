@@ -3,7 +3,7 @@ globalvar bg_current,vw_current;
 globalvar bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch;
 globalvar vw_enabled,vw_visible,vw_x,vw_y,vw_w,vw_h,vw_xp,vw_yp,vw_wp,vw_hp,vw_follow,vw_hspeed,vw_vspeed,vw_hbor,vw_vbor;
 
-var f,p,i,inst,layer;
+var f,p,i,inst,layer,viewspeedcorrection;
 
 roomwidth=800
 roomheight=608
@@ -49,6 +49,15 @@ sprloaded[sprites_length]=0
 bgloaded[backgrounds_length]=0
 objloaded[objects_length]=0
 
+//load main project file
+project=ds_map_create()
+ds_map_read_ini(settings,dir+"..\..\"+file_find_first(dir+"..\..\*.gm82",0))
+file_find_close()
+//look for the view speed bug
+if (string(ds_map_find_value(project,"gm82_version"))=="0") viewspeedcorrection=max_int
+else viewspeedcorrection=0
+ds_map_destroy(project)
+
 //init room properties
 roomcode=""
 settings=ds_map_create()
@@ -93,8 +102,8 @@ for (i=0;i<8;i+=1) {
     vw_follow[i]=ds_map_find_value(settings,"view_fol_target"+k)
     vw_hbor[i]=real(ds_map_find_value(settings,"view_fol_hbord"+k))
     vw_vbor[i]=real(ds_map_find_value(settings,"view_fol_vbord"+k))
-    vw_hspeed[i]=real(ds_map_find_value(settings,"view_fol_hspeed"+k))-max_int
-    vw_vspeed[i]=real(ds_map_find_value(settings,"view_fol_vspeed"+k))-max_int
+    vw_hspeed[i]=real(ds_map_find_value(settings,"view_fol_hspeed"+k))-viewspeedcorrection
+    vw_vspeed[i]=real(ds_map_find_value(settings,"view_fol_vspeed"+k))-viewspeedcorrection
 }
 
 bg_current=0
