@@ -17,7 +17,7 @@ if (parameter_count()) {
     room_caption="Game Maker 8.2 Room Editor"
     dir=parameter_string(1)
 } else {
-    room_caption="OpenGMK IDE Room Editor"
+    //room_caption="OpenGMK IDE Room Editor"
     //dir=get_open_filename("GM8.2 Room|room.txt","room.txt")
     dir="C:\Stuff\github\renex-engine\rooms\rmDemo3\room.txt"
     dir=filename_dir(dir)

@@ -147,7 +147,6 @@ statush=32
 
 rect(0,0,160,height,global.col_main,1)
 rect(160,0,width-320,32,global.col_main,1)
-rect(width-160,0,160,height,global.col_main,1)
 rect(160,height-32,width-320,32,global.col_main,1)
 
 rect(160,32,4,height-64,global.col_low,1)
@@ -303,7 +302,7 @@ if (mode==4) {
     draw_text(12,273,"Speed")
 }
 
-with (Button) event_user(0)
+with (Button) button_draw()
 with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
 
 if (mode==0) {

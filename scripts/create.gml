@@ -1,4 +1,4 @@
-globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
+globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecount,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 globalvar overlap_check,paladdbuttondown;
 
 draw_set_font(fntCode)
@@ -60,7 +60,7 @@ view[3]=1
 view[4]=0
 view[5]=0
 view[6]=0
-update_visibility()
+alarm[0]=1
 
 //adjust window to fit room
 width=max(min_width,min(width,roomwidth+64+160*2))

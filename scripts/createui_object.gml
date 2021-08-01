@@ -1,4 +1,5 @@
 //object mode
+
 i=instance_create(0,96,Button)
 i.spr=19
 i.action="palscrolup"

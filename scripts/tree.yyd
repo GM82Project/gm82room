@@ -11,6 +11,8 @@
 	|draw_button
 	|num_selected
 	|draw_set_color_sel
+	|draw_loader
+	|drawtooltip
 +file
 	|file_text_read_list
 	|load_room
@@ -24,12 +26,16 @@
 +createui
 	|createui_main
 	|createui_object
+	|createui_tiles
 	|createui_background
 	|createui_views
 	|createui_settings
+|drawui
+|draw_backgrounds
 |step
 |update_inspector
 |clear_inspector
+|update_view
 |update_backgroundpanel
 |update_viewpanel
 |update_visibility
@@ -38,9 +44,3 @@
 |textfield_actions
 |textfield_set
 |gameend
-+drawing
-	|drawui
-	|draw_loader
-	|update_view
-	|drawtooltip
-	|draw_backgrounds

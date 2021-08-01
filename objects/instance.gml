@@ -137,6 +137,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+///sanitize scale
+
 if (sign(image_xscale)==-1 && sign(image_yscale)==-1) {
     image_xscale=abs(image_xscale)
     image_yscale=abs(image_yscale)
@@ -154,14 +156,12 @@ d3d_set_fog(1,$ff8000,0,0)
 draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,0.5+0.25*sin(current_time/200))
 d3d_set_fog(0,0,0,0)
 
-d3d_transform_add_translation(-0.5,-0.5,0)
 draw_set_color_sel()
 
-draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
-draw_circle(x,y,4,1)
-draw_line(x,y-4,x,y+4)
-draw_line(x-4,y,x+4,y)
+draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+1-0.5,bbox_bottom+1-0.5,1)
+draw_circle(x-0.5,y-0.5,4,1)
+draw_line(x-0.5,y-0.5-4,x-0.5,y-0.5+4)
+draw_line(x-0.5-4,y-0.5,x-0.5+4,y-0.5)
 
 draw_set_color($ffffff)
 draw_set_alpha(1)
-d3d_transform_set_identity()

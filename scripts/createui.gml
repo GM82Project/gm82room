@@ -1,9 +1,20 @@
 buttoncol=global.col_main
 
 createui_main()
-createui_object()
-createui_background()
-createui_views()
-createui_settings()
 
-with (Button) event_user(1)
+createui_object()     //mode 0
+createui_tiles()      //mode 1
+createui_background() //mode 2
+createui_views()      //mode 3
+createui_settings()   //mode 4
+
+with (Button) {
+    if (object_index==Button && type==1) {
+        //checkbox
+        w=24
+        h=24
+    }
+
+    image_xscale=w
+    image_yscale=h
+}

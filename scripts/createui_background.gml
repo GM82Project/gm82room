@@ -1,4 +1,5 @@
 //background mode
+
 i=instance_create(8,104,Button)
 i.type=1
 i.action="clear bg"

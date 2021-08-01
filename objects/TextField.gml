@@ -32,6 +32,7 @@ applies_to=self
 focus=position_meeting(mouse_wx,mouse_wy,id)
 
 if (down!=0 && focus && !active && (Controller.select || !dynamic)) {
+    //activate textfield
     with (TextField) textfield_actions()
     active=1
     if (type==0 || type=4) {
@@ -77,64 +78,13 @@ if (active) {
     if (keyboard_check_pressed(vk_enter)) textfield_actions()
     event_user(4)
 } else k=20
-#define Other_10
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-///draw
-if (tagmode==mode || tagmode==-1) {
-    if (type==1) buttoncol=real(text)
-    else {
-        if (active) buttoncol=$ffffff
-        else {
-            if (type==0 || type==2) {
-                if (dynamic && !Controller.select) buttoncol=global.col_main
-                else buttoncol=$c0c0c0
-            } else {
-                buttoncol=$c0c0c0
-            }
-        }
-    }
-
-    draw_button(x,y,w,h,0)
-
-    if (type!=1) {
-        draw_set_color(0)
-        draw_set_valign(1)
-        if (active) {
-            draw_text(x+8,y+h/2,dtext+cursor)
-        } else {
-            draw_text(x+8,y+h/2,dtext)
-        }
-        draw_set_valign(0)
-        draw_set_color($ffffff)
-    }
-}
-#define Other_11
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-///init
-image_xscale=w
-image_yscale=h
-#define Other_12
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-///click
-down=(tagmode==mode || tagmode==-1)
 #define Other_14
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
+///preprocess text
 var l;
 
 if (type==4) {
