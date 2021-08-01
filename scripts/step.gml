@@ -69,6 +69,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
 
         cur=1
         repeat (copyvec[0,0]) {
+            //note: if you have instances copied that would be invisible in the current view, they'l be visible by default
             o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance)
             o.obj=copyvec[cur,1]
             o.objname=copyvec[cur,0]

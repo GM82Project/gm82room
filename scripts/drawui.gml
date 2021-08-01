@@ -162,14 +162,20 @@ draw_triangle_color(width-160-4,32+4,width-160,32,width-160,32+4,global.col_high
 //draw statusbar
 buttoncol=global.col_main
 draw_button(statusx,height-32,144,32,0)
-draw_button(statusx+144,height-32,168,32,0)
-draw_button(statusx+312,height-32,width-320-312,32,0)
+draw_button(statusx+144,height-32,296,32,0)
+draw_button(statusx+440,height-32,width-320-440,32,0)
 if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(mouse_x)+","+string(mouse_y))
 else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(mouse_y,gridx)))
 if (mode==0) {
-    draw_text(statusx+152,statusy+6,string(instance_number(instance))+" instances")
-    if (focus) draw_text(statusx+320,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
+    num=instance_number(instance)
+    if (num<instancecount) draw_text(statusx+152,statusy+6,string(num)+" instances ("+string(instancecount-num)+" hidden)")
+    else draw_text(statusx+152,statusy+6,string(instancecount)+" instances")
+    if (focus) draw_text(statusx+448,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
 }
+
+//draw inspector rectangle after statusbar to catch leaking text
+rect(width-160,0,160,height,global.col_main,1)
+
 
 //draw object tab
 if (mode=0) {

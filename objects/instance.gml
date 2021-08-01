@@ -16,6 +16,8 @@ draghandx=-9999999
 draghandy=-9999999
 
 code=""
+
+instancecount+=1
 #define Destroy_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -26,6 +28,15 @@ if (Controller.select==id) {
     clear_inspector()
     Controller.select=noone
 }
+
+instancecount-=1
+#define Alarm_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+instance_deactivate_object(id)
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

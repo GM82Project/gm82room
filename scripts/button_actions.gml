@@ -66,31 +66,28 @@ with (Controller) switch (argument0) {
     //view
     case "view objects": {
         view[0]=!view[0]
-        update_visibility()
+        update_visibility(0)
     }break
     case "view tiles": {
         view[1]=!view[1]
-        update_visibility()
+        update_visibility(1)
     }break
     case "view bgs": {
         view[2]=!view[2]
-        update_visibility()
     }break
     case "view fgs": {
         view[3]=!view[3]
-        update_visibility()
     }break
     case "view views": {
         view[4]=!view[4]
-        update_visibility()
     }break
     case "view invis": {
         view[5]=!view[5]
-        update_visibility()
+        update_visibility(0)
     }break
     case "view nospr": {
         view[6]=!view[6]
-        update_visibility()
+        update_visibility(0)
     }break
 
     //inspector
