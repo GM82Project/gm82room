@@ -186,7 +186,10 @@ if (mode=0) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
         draw_button(dx-20,dy-20,40,40,objpal!=i)
-        draw_sprite_stretched(objspr[i],0,dx-16,dy-16,32,32)
+        w=sprite_get_width(objspr[i])
+        h=sprite_get_height(objspr[i])
+        if (w>h) {h=h/w*16 w=16} else {w=w/h*16 h=16}
+        draw_sprite_stretched(objspr[i],0,dx-w,dy-h,w*2,h*2)
         posx+=1 if (posx=4) {posx=0 posy+=1}
     }
     dx=20+40*posx
