@@ -37,19 +37,6 @@ with (instance) {
 }
 file_text_close(f)
 
-//save dynamic tiles
-/*
-savecode="/"+"*gm82tile*"+"/"+chr(10)
-with (tileholder) if (scalex!=1 || scaley!=1 || blend!=$ffffffff) {
-    savecode+="tile_add("+bgname+","+string(tileu)+","+string(tilev)+","+string(tilew)+","+string(tileh)+","+string(x)+","+string(y)+","+string(round(depth))+")"+chr(10)
-}
-savecode+="/"+"*end gm82tile*"+"/"+chr(10)
-
-f=file_text_open_write(dir+"code.gml")
-file_text_write_string(f,roomcode+savecode)
-file_text_close(f)
-*/
-
 //save settings
 f=file_text_open_write(dir+"room.txt")
 str="caption="+string(ds_map_find_value(settings,"caption"))+chr(10)

@@ -41,8 +41,9 @@ button_draw
 draw_backgrounds
 load_background_tree
 
-update_visibility
+change_mode
 createui_views
 update_viewpanel
 draw_set_color_sel
 createui_tiles
+

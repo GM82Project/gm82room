@@ -4,7 +4,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-update_visibility(0)
+change_mode(mode)
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

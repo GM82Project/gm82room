@@ -305,7 +305,7 @@ if (mode==0) {
                 dy=140+40*posy+palettescroll
                 if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                     objpal=i
-                    update_visibility(0)
+                    change_mode(mode)
                     textfield_set("palette name",ds_list_find_value(objects,objpal))
                 }
                 posx+=1 if (posx=4) {posx=0 posy+=1}

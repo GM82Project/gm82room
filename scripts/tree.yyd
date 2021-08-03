@@ -38,7 +38,7 @@
 |update_view
 |update_backgroundpanel
 |update_viewpanel
-|update_visibility
+|change_mode
 |button_actions
 |button_draw
 |textfield_actions

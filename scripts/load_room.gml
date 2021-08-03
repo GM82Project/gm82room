@@ -120,6 +120,7 @@ time=current_time
 layers=file_text_read_list(dir+"layers.txt")
 l=ds_list_size(layers) if (l) for (i=0;i<l;i+=1) {
     layer=real(ds_list_find_value(layers,i))
+    ds_list_replace(layers,i,layer)
     f=file_text_open_read(dir+string(layer)+".txt") do {str=file_text_read_string(f) file_text_readln(f)
         o=instance_create(0,0,tileholder)
 

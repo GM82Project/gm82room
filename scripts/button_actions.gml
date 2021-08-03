@@ -10,24 +10,19 @@ with (Controller) switch (argument0) {
     }break
 
     case "object mode": {
-        mode=0
-        update_visibility(0)
+        change_mode(0)
     }break
     case "tile mode": {
-        mode=1
-        instance_activate_object(tileholder)
+        change_mode(1)
     }break
     case "bg mode": {
-        mode=2
-        instance_deactivate_object(tileholder)
+        change_mode(2)
     }break
     case "view mode": {
-        mode=3
-        instance_deactivate_object(tileholder)
+        change_mode(3)
     }break
     case "settings mode": {
-        mode=4
-        instance_deactivate_object(tileholder)
+        change_mode(4)
     }break
 
     case "room code": {
@@ -71,11 +66,11 @@ with (Controller) switch (argument0) {
     //view
     case "view objects": {
         view[0]=!view[0]
-        update_visibility(0)
+        change_mode(mode)
     }break
     case "view tiles": {
         view[1]=!view[1]
-        update_visibility(1)
+        change_mode(mode)
     }break
     case "view bgs": {
         view[2]=!view[2]
@@ -88,11 +83,11 @@ with (Controller) switch (argument0) {
     }break
     case "view invis": {
         view[5]=!view[5]
-        update_visibility(0)
+        change_mode(mode)
     }break
     case "view nospr": {
         view[6]=!view[6]
-        update_visibility(0)
+        change_mode(mode)
     }break
 
     //inspector
