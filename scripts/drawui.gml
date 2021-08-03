@@ -6,6 +6,8 @@ fmx=floorto(mouse_x,gridx)
 fmy=floorto(mouse_y,gridy)
 tty=0
 
+
+//grid and crosshair for object and tile mode
 if (mode==0 || mode==1) {
     if (keyboard_check_direct(vk_control)) window_set_cursor(cr_size_all)
     else if (keyboard_check_direct(vk_shift)) window_set_cursor(cr_cross)
@@ -51,6 +53,8 @@ if (mode==0 || mode==1) {
     d3d_transform_set_identity()
 } else window_set_cursor(cr_default)
 
+
+//object mode
 if (mode==0) {
     texture_set_interpolation(interpolation)
     with (instance) if (sel) {
@@ -77,6 +81,7 @@ if (mode==0) {
     }
 }
 
+
 //selection rectangle
 if (selecting) {
     draw_set_color($ff8000)
@@ -87,6 +92,7 @@ if (selecting) {
     draw_set_color($ffffff)
 }
 
+
 //draw clipboard dimensions
 if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && copyvec[0,0]) {
     draw_set_color($ff8000)
@@ -96,6 +102,7 @@ if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && copyvec[0,0]) {
     draw_set_alpha(1)
     draw_set_color($ffffff)
 }
+
 
 //draw views
 if (view[4] || mode==3) {
@@ -124,8 +131,10 @@ if (view[4] || mode==3) {
     d3d_transform_set_identity()
 }
 
+
 //this is where the room space ends and the hud space starts================================================
 d3d_set_projection_ortho(0,0,width,height,0)
+
 
 focus=noone
 if (mode==0) with (instance) if (instance_position(mouse_x,mouse_y,id)) {
@@ -177,7 +186,8 @@ if (mode==1) {
     //if (focus) draw_text(statusx+448,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
 }
 
-//draw inspector rectangle after statusbar to catch leaking text
+//draw inspector rectangle after statusbar to hide any leaking text
+//usually i'd put care into cropping the string but this is literally faster
 rect(width-160,0,160,height,global.col_main,1)
 
 
@@ -212,7 +222,7 @@ if (mode=0) {
     //bottom panel
     draw_button(0,height-76,160,76,1)
 
-    //draw inspector
+    //inspector
     dx=width-160
     draw_button(dx,32,160,100,1)
     draw_button(dx,128+4,160,100,1)
@@ -230,13 +240,13 @@ if (mode==1) {
     draw_button(4,height-160-28,152,152,0)
 
     dx=width-160
-
     //inspector
     draw_button(dx,0,160,32,1)
     draw_text(dx+12,6,"Layers")
     draw_button(dx,height-76,160,76,1)
     draw_text(dx+12,height-64,"Depth")
 }
+
 
 //draw backgrounds tab
 if (mode==2) {
@@ -245,6 +255,7 @@ if (mode==2) {
     draw_text(12,384,"Position")
     draw_text(12,444,"Speed")
 }
+
 
 //draw views tab
 if (mode==3) {
@@ -314,6 +325,7 @@ if (mode==3) {
     draw_set_valign(0)
     if (yes) draw_text(width-160+12,188,string(w)+" x "+string(h))
 }
+
 
 //draw settings tab
 if (mode==4) {
