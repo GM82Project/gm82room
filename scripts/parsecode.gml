@@ -1,8 +1,8 @@
-///parsecode(inst)
+///parsecode(inst,code)
 var str,p;
 
 with (argument0) {
-    str=code
+    str=string_replace_all(argument1,chr(13),"")
     code=""
     delstop=0
     do {

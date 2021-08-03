@@ -171,6 +171,11 @@ if (mode==0) {
     else draw_text(statusx+152,statusy+6,string(instancecount)+" instances")
     if (focus) draw_text(statusx+448,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
 }
+if (mode==1) {
+    num=instance_number(tileholder)
+    draw_text(statusx+152,statusy+6,string(num)+" tiles")
+    //if (focus) draw_text(statusx+448,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
+}
 
 //draw inspector rectangle after statusbar to catch leaking text
 rect(width-160,0,160,height,global.col_main,1)
@@ -186,10 +191,12 @@ if (mode=0) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
         draw_button(dx-20,dy-20,40,40,objpal!=i)
-        w=sprite_get_width(objspr[i])
-        h=sprite_get_height(objspr[i])
-        if (w>h) {h=h/w*16 w=16} else {w=w/h*16 h=16}
-        draw_sprite_stretched(objspr[i],0,dx-w,dy-h,w*2,h*2)
+        if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            w=sprite_get_width(objspr[i])
+            h=sprite_get_height(objspr[i])
+            if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
+            draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
+        }
         posx+=1 if (posx=4) {posx=0 posy+=1}
     }
     dx=20+40*posx
@@ -215,6 +222,20 @@ if (mode=0) {
     draw_text(dx+12,128+12,"Scale")
     draw_text(dx+12,228+12,"Rotation")
     draw_text(dx+12,304+8,"Blend")
+}
+
+//draw tiles tab
+if (mode==1) {
+    draw_button(0,height-192,160,192,1)
+    draw_button(4,height-160-28,152,152,0)
+
+    dx=width-160
+
+    //inspector
+    draw_button(dx,0,160,32,1)
+    draw_text(dx+12,6,"Layers")
+    draw_button(dx,height-76,160,76,1)
+    draw_text(dx+12,height-64,"Depth")
 }
 
 //draw backgrounds tab
@@ -314,6 +335,12 @@ if (mode==0) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
         if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            w=sprite_get_width(objspr[i])
+            h=sprite_get_height(objspr[i])
+            if (w>32 || h>32) {
+                draw_sprite_stretched_ext(objspr[i],0,dx-w/2+4,dy-h/2+4,w,h,0,0.5)
+            }
+            draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
             drawtooltip(ds_list_find_value(objects,i))
         }
         posx+=1 if (posx=4) {posx=0 posy+=1}

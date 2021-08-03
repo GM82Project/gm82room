@@ -15,15 +15,19 @@ with (Controller) switch (argument0) {
     }break
     case "tile mode": {
         mode=1
+        instance_activate_object(tileholder)
     }break
     case "bg mode": {
         mode=2
+        instance_deactivate_object(tileholder)
     }break
     case "view mode": {
         mode=3
+        instance_deactivate_object(tileholder)
     }break
     case "settings mode": {
         mode=4
+        instance_deactivate_object(tileholder)
     }break
 
     case "room code": {

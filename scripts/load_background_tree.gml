@@ -1,12 +1,16 @@
 var f,str,tab,resname,path,curindent;
 
-globalvar bgmenu,bgmenuitems;
+globalvar bgmenu,tilebgmenu,bgmenuitems;
 
 tab=chr(9)
 
 bgmenuitems=ds_map_create()
 bgmenu=N_Menu_CreatePopupMenu()
-background=N_Menu_LoadBitmap("background.bmp")
+tilebgmenu=N_Menu_CreatePopupMenu()
+N_Menu_AddMenu(tilebgmenu,bgmenu,"Backgrounds")
+N_Menu_AddSeparator(tilebgmenu)
+
+background_menuicon=N_Menu_LoadBitmap("background.bmp")
 
 ds_map_add(bgmenuitems,N_Menu_AddItem(bgmenu,"(no background)",""),"<undefined>")
 
@@ -26,13 +30,13 @@ if (file_exists(argument0)) {
             if (string_char_at(str,1)=="+") {
                 //group
                 submenu=N_Menu_CreatePopupMenu()
-                N_Menu_ItemSetBitmap(path[curindent],N_Menu_AddMenu(path[curindent],submenu,resname),folder)
+                N_Menu_ItemSetBitmap(path[curindent],N_Menu_AddMenu(path[curindent],submenu,resname),folder_menuicon)
                 curindent+=1
                 path[curindent]=submenu
             } else {
                 //resource
                 item=N_Menu_AddItem(path[curindent],resname,"")
-                N_Menu_ItemSetBitmap(path[curindent],item,background)
+                N_Menu_ItemSetBitmap(path[curindent],item,background_menuicon)
                 ds_map_add(bgmenuitems,item,resname)
             }
         }

@@ -9,7 +9,10 @@ if (argument0==0) {
         visible=((view[0] && (view[5] || objvis[obj]) && (view[6] || objspr[obj]!=sprDefault)) || (mode==0 && objpal==obj))
         if (!visible) {
             sel=0
-            if (Controller.select==id) Controller.select=noone
+            if (Controller.select==id) {
+                Controller.select=noone
+                clear_inspector()
+            }
             alarm[0]=1
         }
     }

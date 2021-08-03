@@ -49,6 +49,10 @@ if (down!=0 && focus && !active && (Controller.select || !dynamic)) {
         N_Menu_ShowPopupMenu(window_handle(),bgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
         Controller.menutype="background"
     }
+    if (action=="tile bg name") {
+        N_Menu_ShowPopupMenu(window_handle(),tilebgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
+        Controller.menutype="tilebg"
+    }
     if (action=="view follow") {
         N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
         Controller.menutype="object"

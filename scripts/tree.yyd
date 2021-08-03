@@ -15,12 +15,12 @@
 	|drawtooltip
 +file
 	|file_text_read_list
-	|load_room
-	|save_room
 	|edit_creation_code
 	|external_code_editor
 	|load_object_tree
 	|load_background_tree
+|load_room
+|save_room
 |create
 |createui
 +createui

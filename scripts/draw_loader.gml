@@ -1,5 +1,7 @@
+progress=argument1
+
 draw_clear(global.col_main)
-draw_text(32,8,loadtext)
+draw_text(32,8,argument0)
 buttoncol=global.col_main
 draw_button(32,32,256,32,0)
 u=(256-8)*progress

@@ -7,6 +7,8 @@ if (!bgloaded[i]) {
     bg_background[i]=background_add(root+"backgrounds\"+argument0+".png",0,0)
     if (bg_background[i]==-1) bg_background[i]=bgDefault
     bgloaded[i]=1
+    item=N_Menu_AddItem(tilebgmenu,argument0,"")
+    N_Menu_ItemSetBitmap(tilebgmenu,item,background_menuicon)
 }
 
 return bg_background[i]
