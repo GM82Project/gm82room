@@ -135,9 +135,10 @@ l=ds_list_size(layers) if (l) for (i=0;i<l;i+=1) {
         o.depth=layer-0.01
 
         if (extended_instancedata) {
+            str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
             str=string_delete(str,1,p) p=string_pos(",",str)  tilesx=real(string_copy(str,1,p-1))
             str=string_delete(str,1,p) p=string_pos(",",str)  tilesy=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(string_copy(str,1,p-1))
+            str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(str)
 
             o.image_xscale*=tilesx
             o.image_yscale*=tilesy
@@ -178,10 +179,11 @@ f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file
         o.sproy=sprite_get_yoffset(o.sprite_index)
 
         if (extended_instancedata) {
+            str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
             str=string_delete(str,1,p) p=string_pos(",",str)  o.image_xscale=real(string_copy(str,1,p-1))
             str=string_delete(str,1,p) p=string_pos(",",str)  o.image_yscale=real(string_copy(str,1,p-1))
             str=string_delete(str,1,p) p=string_pos(",",str)  o.image_blend=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_angle=real(string_copy(str,1,p-1))
+            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_angle=real(str)
 
             o.image_alpha=(o.image_blend>>24)/$ff
             o.image_blend=o.image_blend&$ffffff
