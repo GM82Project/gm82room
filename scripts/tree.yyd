@@ -13,6 +13,7 @@
 	|draw_set_color_sel
 	|draw_loader
 	|drawtooltip
+	|change_tile_layer
 +file
 	|file_text_read_list
 	|edit_creation_code

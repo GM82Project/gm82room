@@ -1,5 +1,7 @@
 var f,f2,i,l,layer,dir,savecode,str,crc;
 
+exit
+
 dir=self.dir
 
 //save tiles

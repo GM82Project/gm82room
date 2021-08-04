@@ -239,6 +239,7 @@ if (paint) {
                 o.sproy=sprite_get_yoffset(o.sprite_index)
                 select=o
                 o.sel=1
+                with (o) update_inspector()
             }
         }
     }
@@ -296,7 +297,7 @@ if (zooming) {
 
 //palette controls
 if (mode==0) {
-    if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
+    if (mouse_wx<160 && mouse_wy>=120 && mouse_wy<height-100) {
         if (mouse_check_button_pressed(mb_left)) {
             posx=0
             posy=0
@@ -326,6 +327,63 @@ if (mode==0) {
     }
     palettescrollgo=clamp(palettescrollgo,-(palettesize div 4+1)*40+(height-120-100),0)
     palettescroll=clamp(inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2),-(palettesize div 4+1)*40+(height-120-100),0)
+}
+
+if (mode==1) {
+    if (mouse_wx<160 && mouse_wy>=152 && mouse_wy<height-216) {
+        if (mouse_check_button_pressed(mb_left)) {
+            //click on tile palette
+            /*posx=0
+            posy=0
+            for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
+                dx=20+40*posx
+                dy=140+40*posy+palettescroll
+                if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                    objpal=i
+                    change_mode(mode)
+                    textfield_set("palette name",ds_list_find_value(objects,objpal))
+                }
+                posx+=1 if (posx=4) {posx=0 posy+=1}
+            }
+            dx=20+40*posx
+            dy=140+40*posy+palettescroll
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                //clicked on add object button
+                paladdbuttondown=1
+                screen_redraw()
+                paladdbuttondown=0
+                N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
+                menutype="object"
+            }   */
+        }
+        h=mouse_wheel_down()-mouse_wheel_up()
+        tpalscrollgo-=h*80
+    }
+    tpalscrollgo=clamp(tpalscrollgo,-(tpalsize+1)*32+(height-152-216),0)
+    tpalscroll=clamp(inch((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(tpalsize+1)*32+(height-152-216),0)
+
+    if (mouse_wx>=width-160 && mouse_wy>=56 && mouse_wy<height-100) {
+        if (mouse_check_button_pressed(mb_left)) {
+            //click on layer bar
+            mem=ly_current
+            ly_current=median(0,floor((mouse_wy-56-layerscroll)/32),layersize+1)
+            if (ly_current==layersize+1) ly_current=mem //clicked ahead of the list
+            else {
+                if (ly_current==layersize) {
+                    //add layer
+                    newlayer=ds_list_find_value(layers,layersize-1)-100
+                    while (ds_list_find_index(layers,newlayer)!=-1) newlayer-=100
+                    ds_list_add(layers,newlayer)
+                    layersize+=1
+                }
+                change_mode(mode)
+            }
+        }
+        h=mouse_wheel_down()-mouse_wheel_up()
+        layerscrollgo-=h*80
+    }
+    layerscrollgo=clamp(layerscrollgo,-(layersize+1)*32+(height-56-100),0)
+    layerscroll=clamp(inch((layerscroll*4+layerscrollgo)/5,layerscrollgo,2),-(layersize+1)*32+(height-56-100),0)
 }
 
 //menu checks

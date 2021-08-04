@@ -73,7 +73,7 @@ if (mode==0) {
         d3d_set_fog(0,0,0,0)
     }
 
-    if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
+    if (crosshair) if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
         texture_set_interpolation(interpolation)
         if (keyboard_check(vk_alt)) draw_sprite_ext(objspr[objpal],0,mouse_x,mouse_y,1,1,0,$ffffff,0.25)
         else draw_sprite_ext(objspr[objpal],0,fmx,fmy,1,1,0,$ffffff,0.25)
@@ -182,7 +182,8 @@ if (mode==0) {
 }
 if (mode==1) {
     num=instance_number(tileholder)
-    draw_text(statusx+152,statusy+6,string(num)+" tiles")
+    if (num<tilecount) draw_text(statusx+152,statusy+6,string(num)+" tiles ("+string(tilecount-num)+" hidden)")
+    else draw_text(statusx+152,statusy+6,string(num)+" tiles")
     //if (focus) draw_text(statusx+448,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
 }
 
@@ -239,8 +240,15 @@ if (mode==1) {
     draw_button(0,height-192,160,192,1)
     draw_button(4,height-160-28,152,152,0)
 
-    dx=width-160
     //inspector
+    dx=width-160
+    for (i=0;i<layersize;i+=1) {
+        draw_button(dx,56+i*32+layerscroll,160,32,ly_current!=i)
+        draw_text(dx+12,56+i*32+6+layerscroll,ds_list_find_value(layers,i))
+    }
+    draw_button(dx,56+i*32+layerscroll,160,32,ly_current!=i)
+    draw_sprite(sprMenuButtons,23,dx+80,56+i*32+layerscroll+16)
+
     draw_button(dx,0,160,32,1)
     draw_text(dx+12,6,"Layers")
     draw_button(dx,height-76,160,76,1)

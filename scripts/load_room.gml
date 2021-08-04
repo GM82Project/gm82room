@@ -22,7 +22,7 @@ if (parameter_count()) {
     //clicked on
     room_caption="OpenGMK IDE Room Editor"
     //dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
-    dir="C:\Stuff\github\renex-engine\rooms\rmDemo3"
+    dir="C:\Stuff\github\renex-engine\rooms\rmDemo2"
 }
 roomname=filename_name(dir)
 if (roomname="") {
@@ -118,7 +118,8 @@ for (i=0;i<8;i+=1) {
 progress=0.25
 time=current_time
 layers=file_text_read_list(dir+"layers.txt")
-l=ds_list_size(layers) if (l) for (i=0;i<l;i+=1) {
+layersize=ds_list_size(layers)
+if (layersize) for (i=0;i<layersize;i+=1) {
     layer=real(ds_list_find_value(layers,i))
     ds_list_replace(layers,i,layer)
     f=file_text_open_read(dir+string(layer)+".txt") do {str=file_text_read_string(f) file_text_readln(f)
@@ -134,6 +135,7 @@ l=ds_list_size(layers) if (l) for (i=0;i<l;i+=1) {
 
         o.tile=tile_add(get_background(o.bgname),tileu,tilev,o.image_xscale,o.image_yscale,o.x,o.y,layer)
         o.depth=layer-0.01
+        o.tlayer=layer
 
         if (extended_instancedata) {
             str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
@@ -150,7 +152,7 @@ l=ds_list_size(layers) if (l) for (i=0;i<l;i+=1) {
 
         if (current_time>time) {
             time=current_time
-            progress=(progress*9+0.25+0.5*i/l)/10
+            progress=(progress*9+0.25+0.5*i/layersize)/10
             draw_loader("Loading tiles...",progress)
         }
     } until (file_text_eof(f)) file_text_close(f)

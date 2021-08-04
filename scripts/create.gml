@@ -1,4 +1,4 @@
-globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecount,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
+globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecount,tilecount,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 globalvar overlap_check,paladdbuttondown,bg_current,vw_current,ly_current;
 
 draw_set_font(fntCode)
@@ -25,6 +25,12 @@ objpal=noone
 palettescroll=0
 palettescrollgo=0
 palettesize=0
+layerscroll=0
+layerscrollgo=0
+layersize=0
+tpalscrollgo=0
+tpalscroll=0
+tpalsize=0
 paint=0
 overlap_check=1
 copyvec[0,0]=0
