@@ -80,6 +80,8 @@ with (Controller) switch (argument0) {
     case "layerscroldown": {layerscrollgo-=200}break
     case "layerscrolup"  : {layerscrollgo+=200}break
     case "layer dupe"    : {dupe_tile_layer()}break
+    case "layer delete"  : {del_tile_layer()}break
+
 
     //backgrounds
     case "clear bg"  : {clearscreen=!clearscreen}break

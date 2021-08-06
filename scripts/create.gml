@@ -44,6 +44,7 @@ tile_overlap_check=1
 copyvec[0,0]=0
 paladdbuttondown=0
 select=noone
+selectt=noone
 selecting=0
 mode=1//4
 grabview=0

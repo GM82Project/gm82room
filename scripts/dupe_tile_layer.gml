@@ -6,7 +6,8 @@ add_tile_layer()
 
 newlayer=ds_list_find_value(layers,layersize-1)
 
-//todo: unselect
+selectt=noone
+with (tileholder) sel=0
 
 with (tileholder) if (tlayer==layer) {
     o=instance_copy(0)
