@@ -10,7 +10,7 @@ tilebgmenu=N_Menu_CreatePopupMenu()
 N_Menu_AddMenu(tilebgmenu,bgmenu,"Backgrounds")
 N_Menu_AddSeparator(tilebgmenu)
 
-background_menuicon=N_Menu_LoadBitmap("background.bmp")
+background_menuicon=N_Menu_LoadBitmap("gm82room_data\background.bmp")
 
 ds_map_add(bgmenuitems,N_Menu_AddItem(bgmenu,"(no background)",""),"<undefined>")
 
