@@ -13,7 +13,6 @@
 	|draw_set_color_sel
 	|draw_loader
 	|drawtooltip
-	|change_tile_layer
 +file
 	|file_text_read_list
 	|edit_creation_code
@@ -31,6 +30,10 @@
 	|createui_background
 	|createui_views
 	|createui_settings
++tiles
+	|add_tile_layer
+	|dupe_tile_layer
+	|change_tile_layer
 |drawui
 |draw_backgrounds
 |step

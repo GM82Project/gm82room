@@ -22,6 +22,12 @@ if (resizecount<5) {
     } else resizecount=0
 }
 
+mouse_wx=window_mouse_get_x()
+mouse_wy=window_mouse_get_y()
+mousein=(point_in_rectangle(mouse_wx,mouse_wy,160,32,width-160,height-32))
+
+
+//clipboard!
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) with (instance) sel=1
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_check_pressed(ord("X"))) {
     cur=0
@@ -55,9 +61,9 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_c
     copyvec[0,4]=maxsely
 }
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
-    yes=1
+    yes=copyvec[0,0]
     with (TextField) if (active) yes=0
-    if (yes && copyvec[0,0]) {
+    if (yes) {
         with (instance) sel=0
         if (keyboard_check(vk_alt)) {
             dx=mouse_x-copyvec[0,1]
@@ -69,7 +75,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
 
         cur=1
         repeat (copyvec[0,0]) {
-            //note: if you have instances copied that would be invisible in the current view, they'l be visible by default
+            //note: if you have instances copied that would be invisible in the current view, they'l be visible anyway
             o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance)
             o.obj=copyvec[cur,1]
             o.objname=copyvec[cur,0]
@@ -91,10 +97,6 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
     }
 }
 
-mouse_wx=window_mouse_get_x()
-mouse_wy=window_mouse_get_y()
-
-mousein=(point_in_rectangle(mouse_wx,mouse_wy,160,32,width-160,height-32))
 
 if (mouse_check_button_pressed(mb_left)) {
     with (TextField) textfield_actions()
@@ -178,32 +180,15 @@ if (mouse_check_button_pressed(mb_left)) {
         }
     }
 }
-
-//grabbed a view
-if (grabview) {
-    if (keyboard_check(vk_alt)) {
-        vw_x[vw_current]=mouse_x-offx
-        vw_y[vw_current]=mouse_y-offy
-    } else {
-        vw_x[vw_current]=floorto(mouse_x-offx,gridx)
-        vw_y[vw_current]=floorto(mouse_y-offy,gridy)
+if (selecting) {
+    if (mode==0) {
+        with (instance) {
+            if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
+        }
     }
-    update_viewpanel()
-    if (!mouse_check_direct(mb_left)) grabview=0
+    if (!mouse_check_direct(mb_left)) selecting=0
 }
 
-//resized a view
-if (sizeview) {
-    if (keyboard_check(vk_alt)) {
-        vw_w[vw_current]=max(1,mouse_x-vw_x[vw_current])
-        vw_h[vw_current]=max(1,mouse_y-vw_y[vw_current])
-    } else {
-        vw_w[vw_current]=max(gridx,roundto(mouse_x,gridx)-vw_x[vw_current])
-        vw_h[vw_current]=max(gridy,roundto(mouse_y,gridy)-vw_y[vw_current])
-    }
-    update_viewpanel()
-    if (!mouse_check_direct(mb_left)) sizeview=0
-}
 
 //painting!  :3
 if (paint) {
@@ -246,31 +231,28 @@ if (paint) {
     if (!mouse_check_direct(mb_left)) paint=0
 }
 
-if (selecting) {
-    if (mode==0) {
-        with (instance) {
-            if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
-        }
-    }
-    if (!mouse_check_direct(mb_left)) selecting=0
-}
 
 if (keyboard_check_pressed(vk_escape)) {
     with (TextField) textfield_actions()
-    if (select) clear_inspector()
+    clear_inspector()
     select=noone
     if (mode==0) with (instance) sel=0
 }
 
 if (keyboard_check_pressed(vk_delete)) {
-    if (select) clear_inspector()
+    clear_inspector()
     select=noone
     if (mode==0) with (instance) if (sel) instance_destroy()
 }
 
 
 if (mouse_check_direct(mb_right)) {
+    //cancel selection
     if (selecting) selecting=0
+    clear_inspector()
+    select=noone
+    if (mode==0) with (instance) sel=0
+
     //delete instances
     if (!mouse_check_direct(mb_left)) {
         if (mode==0) instance_destroy_id(instance_position(mouse_x,mouse_y,instance))
@@ -278,25 +260,9 @@ if (mouse_check_direct(mb_right)) {
 }
 
 
-//panning
-if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
-    //yeah i know i called pan zooming but ok just think like youre zooming around im sorry
-    zooming=1
-    grabx=mouse_x
-    graby=mouse_y
-}
-
-if (!mouse_check_direct(mb_middle) && !keyboard_check(vk_space)) {
-    zooming=0
-}
-
-if (zooming) {
-    xgo+=grabx-mouse_x
-    ygo+=graby-mouse_y
-}
-
-//palette controls
+//object mode
 if (mode==0) {
+    //palette controls
     if (mouse_wx<160 && mouse_wy>=120 && mouse_wy<height-100) {
         if (mouse_check_button_pressed(mb_left)) {
             posx=0
@@ -329,7 +295,10 @@ if (mode==0) {
     palettescroll=clamp(inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2),-(palettesize div 4+1)*40+(height-120-100),0)
 }
 
+
+//tile mode
 if (mode==1) {
+    //tile palette
     if (mouse_wx<160 && mouse_wy>=152 && mouse_wy<height-216) {
         if (mouse_check_button_pressed(mb_left)) {
             //click on tile palette
@@ -337,23 +306,19 @@ if (mode==1) {
             posy=0
             for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
                 dx=20+40*posx
-                dy=140+40*posy+palettescroll
+                dy=140+40*posy+tpalscroll
                 if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
-                    objpal=i
+                    tilepal=i
                     change_mode(mode)
                     textfield_set("palette name",ds_list_find_value(objects,objpal))
                 }
                 posx+=1 if (posx=4) {posx=0 posy+=1}
             }
             dx=20+40*posx
-            dy=140+40*posy+palettescroll
+            dy=140+40*posy+tpalscroll
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
-                //clicked on add object button
-                paladdbuttondown=1
-                screen_redraw()
-                paladdbuttondown=0
-                N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-                menutype="object"
+                //clicked on add tile button
+
             }   */
         }
         h=mouse_wheel_down()-mouse_wheel_up()
@@ -362,19 +327,18 @@ if (mode==1) {
     tpalscrollgo=clamp(tpalscrollgo,-(tpalsize+1)*32+(height-152-216),0)
     tpalscroll=clamp(inch((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(tpalsize+1)*32+(height-152-216),0)
 
+    //layer inspector
     if (mouse_wx>=width-160 && mouse_wy>=56 && mouse_wy<height-100) {
         if (mouse_check_button_pressed(mb_left)) {
             //click on layer bar
             mem=ly_current
             ly_current=median(0,floor((mouse_wy-56-layerscroll)/32),layersize+1)
-            if (ly_current==layersize+1) ly_current=mem //clicked ahead of the list
-            else {
+            if (ly_current==layersize+1) {
+                //clicked ahead of the list
+                ly_current=mem
+            } else {
                 if (ly_current==layersize) {
-                    //add layer
-                    newlayer=ds_list_find_value(layers,layersize-1)-100
-                    while (ds_list_find_index(layers,newlayer)!=-1) newlayer-=100
-                    ds_list_add(layers,newlayer)
-                    layersize+=1
+                    add_tile_layer()
                 }
                 change_mode(mode)
             }
@@ -386,7 +350,38 @@ if (mode==1) {
     layerscroll=clamp(inch((layerscroll*4+layerscrollgo)/5,layerscrollgo,2),-(layersize+1)*32+(height-56-100),0)
 }
 
-//menu checks
+
+//view mode
+if (mode==3) {
+    //grabbed a view
+    if (grabview) {
+        if (keyboard_check(vk_alt)) {
+            vw_x[vw_current]=mouse_x-offx
+            vw_y[vw_current]=mouse_y-offy
+        } else {
+            vw_x[vw_current]=floorto(mouse_x-offx,gridx)
+            vw_y[vw_current]=floorto(mouse_y-offy,gridy)
+        }
+        update_viewpanel()
+        if (!mouse_check_direct(mb_left)) grabview=0
+    }
+
+    //resized a view
+    if (sizeview) {
+        if (keyboard_check(vk_alt)) {
+            vw_w[vw_current]=max(1,mouse_x-vw_x[vw_current])
+            vw_h[vw_current]=max(1,mouse_y-vw_y[vw_current])
+        } else {
+            vw_w[vw_current]=max(gridx,roundto(mouse_x,gridx)-vw_x[vw_current])
+            vw_h[vw_current]=max(gridy,roundto(mouse_y,gridy)-vw_y[vw_current])
+        }
+        update_viewpanel()
+        if (!mouse_check_direct(mb_left)) sizeview=0
+    }
+}
+
+
+//context menu processing
 click=N_Menu_CheckMenus()
 if (click) {
     if (menutype=="object") {
@@ -414,6 +409,23 @@ if (click) {
     }
 }
 
+
+//panning
+if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
+    //yeah i know i called pan zooming but ok just think like youre zooming around im sorry
+    zooming=1
+    grabx=mouse_x
+    graby=mouse_y
+}
+if (!mouse_check_direct(mb_middle) && !keyboard_check(vk_space)) {
+    zooming=0
+}
+if (zooming) {
+    xgo+=grabx-mouse_x
+    ygo+=graby-mouse_y
+}
+
+
 //zooming
 if (!zoomcenter) {
     if (mousein) {
@@ -437,7 +449,6 @@ if (!zoomcenter) {
 }
 
 zoomold=zoom
-
 if (abs(zoom-1)<0.1) {
     if ((zoomgo>1 && zoom<1) || (zoomgo<1 && zoom>1) || (zoom==1 && zoomgo==1)) {
         zoomgo=1

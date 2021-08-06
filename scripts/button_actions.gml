@@ -1,3 +1,5 @@
+var cx,cy;
+
 with (Controller) switch (argument0) {
     //top panel
     case "save and quit": {save_room() game_end()}break
@@ -36,41 +38,32 @@ with (Controller) switch (argument0) {
     //instance inspector
     case "copy object"   : {clipboard_set_text(select.objname)}break
     case "inst code"     : {edit_creation_code()}break
-    case "inst snap"     : {with (instance) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy)     update_inspector()}}break
+    case "inst snap"     : {with (instance) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) update_inspector()}}break
     case "inst flip xs"  : {with (instance) if (sel) {
-        cx=round((bbox_right+bbox_left+1)/2)
-        cy=round((bbox_bottom+bbox_top+1)/2)
-        image_xscale*=-1
-        event_user(1)
-        x=round(x-((bbox_right+bbox_left+1)/2-cx))
-        y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
+        cx=round((bbox_right+bbox_left+1)/2) cy=round((bbox_bottom+bbox_top+1)/2)
+        image_xscale*=-1 event_user(1)
+        x=round(x-((bbox_right+bbox_left+1)/2-cx)) y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
         update_inspector()
     }}break
     case "inst flip ys"  : {with (instance) if (sel) {
-        cx=round((bbox_right+bbox_left+1)/2)
-        cy=round((bbox_bottom+bbox_top+1)/2)
-        image_yscale*=-1
-        event_user(1)
-        x=round(x-((bbox_right+bbox_left+1)/2-cx))
-        y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
+        cx=round((bbox_right+bbox_left+1)/2) cy=round((bbox_bottom+bbox_top+1)/2)
+        image_yscale*=-1 event_user(1)
+        x=round(x-((bbox_right+bbox_left+1)/2-cx)) y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
         update_inspector()
     }}break
     case "inst rot left" : {with (instance) if (sel) {
-        cx=round((bbox_right+bbox_left+1)/2)
-        cy=round((bbox_bottom+bbox_top+1)/2)
+        cx=round((bbox_right+bbox_left+1)/2) cy=round((bbox_bottom+bbox_top+1)/2)
         image_angle=modwrap(image_angle+90,0,360)
-        x=round(x-((bbox_right+bbox_left+1)/2-cx))
-        y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
+        x=round(x-((bbox_right+bbox_left+1)/2-cx)) y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
         update_inspector()
     }}break
     case "inst rot right": {with (instance) if (sel) {
-        cx=round((bbox_right+bbox_left+1)/2)
-        cy=round((bbox_bottom+bbox_top+1)/2)
+        cx=round((bbox_right+bbox_left+1)/2) cy=round((bbox_bottom+bbox_top+1)/2)
         image_angle=modwrap(image_angle-90,0,360)
-        x=round(x-((bbox_right+bbox_left+1)/2-cx))
-        y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
+        x=round(x-((bbox_right+bbox_left+1)/2-cx)) y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
         update_inspector()
     }}break
+
 
     //instances
     case "palscroldown" : {palettescrollgo-=200}break
@@ -86,7 +79,7 @@ with (Controller) switch (argument0) {
     //tile inspector
     case "layerscroldown": {layerscrollgo-=200}break
     case "layerscrolup"  : {layerscrollgo+=200}break
-
+    case "layer dupe"    : {}
 
     //backgrounds
     case "clear bg"  : {clearscreen=!clearscreen}break

@@ -4,6 +4,13 @@ globalvar overlap_check,paladdbuttondown,bg_current,vw_current,ly_current;
 draw_set_font(fntCode)
 draw_set_circle_precision(8)
 
+message_caption(1,"Message")
+message_background(bgMessage)
+message_button(sprMessageButton)
+message_text_font("Courier New",12,$ffffff,1)
+message_button_font("Courier New",12,$ffffff,1)
+message_size(350,150)
+
 global.col_low=$203020
 global.col_main=$404040
 global.col_high=$607060
