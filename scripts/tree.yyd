@@ -42,6 +42,7 @@
 |clear_inspector
 |update_view
 |update_backgroundpanel
+|update_tilepanel
 |update_viewpanel
 |change_mode
 |button_actions

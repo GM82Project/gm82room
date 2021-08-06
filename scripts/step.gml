@@ -415,6 +415,14 @@ if (click) {
         }
         update_backgroundpanel()
     }
+    if (menutype=="tilebg") {
+        str=ds_map_find_value(bgmenuitems,click)
+        if (str!="<undefined>") {
+            get_background(str)
+            tilebgpal=micro_optimization_bgid
+            update_tilepanel()
+        }
+    }
 }
 
 

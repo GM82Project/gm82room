@@ -29,6 +29,7 @@ mousein=0
 zoomcenter=0
 resizecount=0
 objpal=noone
+tilebgpal=noone
 palettescroll=0
 palettescrollgo=0
 palettesize=0

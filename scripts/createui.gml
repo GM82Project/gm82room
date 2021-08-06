@@ -8,6 +8,8 @@ createui_background() //mode 2
 createui_views()      //mode 3
 createui_settings()   //mode 4
 
+update_tilepanel()
+
 with (Button) {
     if (object_index==Button && type==1) {
         //checkbox

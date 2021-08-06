@@ -237,6 +237,48 @@ if (mode=0) {
 
 //draw tiles tab
 if (mode==1) {
+    //palette
+    posx=0
+    posy=0
+    paltooltip=0
+    if (tilebgpal!=noone) {
+        tex=bg_background[tilebgpal]
+        map=bg_tilemap[tilebgpal]
+        len=ds_map_size(map)
+
+        key=ds_map_find_first(map)
+        for (i=0;i<len;i+=1) {
+            tile=ds_map_find_value(map,key)
+            key=ds_map_find_next(map,key)
+
+            u=ds_list_find_value(tile,0)
+            v=ds_list_find_value(tile,1)
+            w=ds_list_find_value(tile,2)
+            h=ds_list_find_value(tile,3)
+
+            dx=20+40*posx
+            dy=172+40*posy+tpalscroll
+            draw_button(dx-20,dy-20,40,40,objpal!=i)
+            //if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            //    w=sprite_get_width(objspr[i])
+            //    h=sprite_get_height(objspr[i])
+            //    if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
+                draw_background_part(tex,u,v,w,h,dx-16,dy-16)
+            //    draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
+            //}
+            posx+=1 if (posx=4) {posx=0 posy+=1}
+        }
+        dx=20+40*posx
+        dy=172+40*posy+tpalscroll
+        draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
+        draw_sprite(sprMenuButtons,24,dx,dy)
+        if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                paltooltip=1
+            }
+        }
+    }
+
     draw_button(0,height-192,160,192,1)
     draw_button(4,height-160-28,152,152,0)
 

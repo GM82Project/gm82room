@@ -53,3 +53,5 @@ dupe_tile_layer
 add_tile_layer
 button_held
 del_tile_layer
+
+update_tilepanel

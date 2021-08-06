@@ -8,7 +8,7 @@ globalvar layers;
 
 globalvar extended_instancedata,viewspeedcorrection;
 
-var f,p,i,inst,layer;
+var f,p,i,inst,layer,map,tileid;
 
 
 draw_loader("Loading project...",0)
@@ -137,6 +137,18 @@ if (layersize) for (i=0;i<layersize;i+=1) {
         o.tile=tile_add(get_background(o.bgname),tileu,tilev,o.image_xscale,o.image_yscale,o.x,o.y,layer)
         o.depth=layer-0.01
         o.tlayer=layer
+
+        map=bg_tilemap[micro_optimization_bgid]
+        tileid=string(tileu)+","+string(tilev)+","+string(o.image_xscale)+","+string(o.image_yscale)
+        if (!ds_map_exists(map,tileid)) {
+            //add this tile to this backgrounds's unique tiles map
+            list=ds_list_create()
+            ds_list_add(list,tileu)
+            ds_list_add(list,tilev)
+            ds_list_add(list,o.image_xscale)
+            ds_list_add(list,o.image_yscale)
+            ds_map_add(map,tileid,list)
+        }
 
         if (extended_instancedata) {
             str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
