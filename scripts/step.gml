@@ -385,13 +385,21 @@ if (mode==3) {
 click=N_Menu_CheckMenus()
 if (click) {
     if (menutype=="object") {
+        str=ds_map_find_value(objmenuitems,click)
         if (mode==0) {
-            get_object(ds_map_find_value(objmenuitems,click))
-            textfield_set("palette name",ds_list_find_value(objects,objpal))
+            if (str!="<undefined>") {
+                get_object(str)
+                textfield_set("palette name",ds_list_find_value(objects,objpal))
+            }
         }
         if (mode==3) {
-            vw_follow[vw_current]=ds_map_find_value(objmenuitems,click)
-            textfield_set("view follow",vw_follow[vw_current])
+            if (str=="<undefined>") {
+                vw_follow[vw_current]=noone
+                textfield_set("view follow","")
+            } else {
+                vw_follow[vw_current]=ds_map_find_value(objmenuitems,click)
+                textfield_set("view follow",vw_follow[vw_current])
+            }
         }
     }
     if (menutype=="background") {

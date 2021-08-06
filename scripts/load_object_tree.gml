@@ -9,6 +9,8 @@ objmenu=N_Menu_CreatePopupMenu()
 folder_menuicon=N_Menu_LoadBitmap("folder.bmp")
 object_menuicon=N_Menu_LoadBitmap("object.bmp")
 
+ds_map_add(objmenuitems,N_Menu_AddItem(objmenu,"(no object)",""),"<undefined>")
+
 path[0]=objmenu
 curindent=0
 
