@@ -44,6 +44,7 @@
 |update_viewpanel
 |change_mode
 |button_actions
+|button_held
 |button_draw
 |textfield_actions
 |textfield_set

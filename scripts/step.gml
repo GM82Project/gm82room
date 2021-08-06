@@ -427,33 +427,34 @@ if (zooming) {
 
 
 //zooming
-if (!zoomcenter) {
-    if (mousein) {
-        if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
-            zoomgo*=1.2
-            keyboard_clear(vk_subtract)
-            keyboard_clear(vk_minus)
-        }
-        if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check(vk_shift) && keyboard_check_pressed(vk_equals))) {
-            zoomgo/=1.2
-            keyboard_clear(vk_add)
-            keyboard_clear(vk_equals)
-        }
+
+if (mousein) {
+    if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
+        zoomgo*=1.2
+        keyboard_clear(vk_subtract)
+        keyboard_clear(vk_minus)
+        zoomcenter=0
     }
-    if (!keyboard_check(vk_shift) && keyboard_check_pressed(vk_equals)) {
-        xgo=roomwidth/2
-        ygo=roomheight/2
-        zoomgo=1
-        zoomcenter=1
+    if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check_pressed(vk_equals))) {
+        zoomgo/=1.2
+        keyboard_clear(vk_add)
+        keyboard_clear(vk_equals)
+        zoomcenter=0
     }
 }
+if (keyboard_check_pressed(ord("0"))) {
+    xgo=roomwidth/2
+    ygo=roomheight/2
+    zoomgo=1
+    zoomcenter=1
+}
+
 
 zoomold=zoom
 if (abs(zoom-1)<0.1) {
     if ((zoomgo>1 && zoom<1) || (zoomgo<1 && zoom>1) || (zoom==1 && zoomgo==1)) {
         zoomgo=1
         zoom=1
-        zoomcenter=0
     }
 }
 

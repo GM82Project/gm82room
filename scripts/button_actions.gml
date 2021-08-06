@@ -28,8 +28,8 @@ with (Controller) switch (argument0) {
 
     //zoom
     case "reset view"      : {xgo=roomwidth/2 ygo=roomheight/2 zoomgo=1 zoomcenter=1}break
-    case "zoom in"         : {zoomgo/=1.2}break
-    case "zoom out"        : {zoomgo*=1.2}break
+    case "zoom in"         : {zoomgo/=1.2 zoomcenter=1}break
+    case "zoom out"        : {zoomgo*=1.2 zoomcenter=1}break
     case "interp"          : {interpolation=!interpolation}break
     case "toggle grid"     : {grid=!grid}break
     case "toggle crosshair": {crosshair=!crosshair}break
