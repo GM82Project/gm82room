@@ -358,6 +358,8 @@ if (mode==0) {
             w=sprite_get_width(objspr[i])
             h=sprite_get_height(objspr[i])
             if (w>32 || h>32) {
+                dx=max(0,dx-w/2)+w/2
+                dy=max(0,dy-h/2)+h/2
                 draw_sprite_stretched_ext(objspr[i],0,dx-w/2+4,dy-h/2+4,w,h,0,0.5)
             }
             draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)

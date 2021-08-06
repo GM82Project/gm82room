@@ -74,12 +74,12 @@ with (Controller) switch (argument0) {
     //tiles
     case "tile palscroldown" : {tpalscrollgo-=200}break
     case "tile palscrolup"   : {tpalscrollgo+=200}break
-
+    case "tile overlap check": {tile_overlap_check=!tile_overlap_check}break
 
     //tile inspector
     case "layerscroldown": {layerscrollgo-=200}break
     case "layerscrolup"  : {layerscrollgo+=200}break
-    case "layer dupe"    : {}
+    case "layer dupe"    : {dupe_tile_layer()}break
 
     //backgrounds
     case "clear bg"  : {clearscreen=!clearscreen}break

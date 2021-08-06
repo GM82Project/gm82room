@@ -25,6 +25,7 @@ if (object_index==Button) {
         if (type==1) {
             switch (action) {
                 case "overlap check": {checked=overlap_check}break
+                case "tile overlap check": {checked=tile_overlap_check}break
                 case "room persist": {checked=roompersistent}break
 
                 case "clear bg": {checked=clearscreen}break

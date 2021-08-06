@@ -6,4 +6,6 @@ newlayer=ds_list_find_value(layers,layersize-1)-100
 while (ds_list_find_index(layers,newlayer)!=-1) newlayer-=100
 
 ds_list_add(layers,newlayer)
+ly_current=layersize
+
 layersize+=1
