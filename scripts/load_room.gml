@@ -120,57 +120,59 @@ progress=0.25
 time=current_time
 layers=file_text_read_list(dir+"layers.txt")
 layersize=ds_list_size(layers)
-if (layersize) for (i=0;i<layersize;i+=1) {
-    layer=real(ds_list_find_value(layers,i))
-    ds_list_replace(layers,i,layer)
-    f=file_text_open_read(dir+string(layer)+".txt") do {str=file_text_read_string(f) file_text_readln(f)
-        o=instance_create(0,0,tileholder)
+if (layersize) {
+    for (i=0;i<layersize;i+=1) {
+        layer=real(ds_list_find_value(layers,i))
+        ds_list_replace(layers,i,layer)
+        f=file_text_open_read(dir+string(layer)+".txt") do {str=file_text_read_string(f) file_text_readln(f)
+            o=instance_create(0,0,tileholder)
 
-                                   p=string_pos(",",str)  o.bgname=string_copy(str,1,p-1)
-        str=string_delete(str,1,p) p=string_pos(",",str)  o.x=real(string_copy(str,1,p-1))
-        str=string_delete(str,1,p) p=string_pos(",",str)  o.y=real(string_copy(str,1,p-1))
-        str=string_delete(str,1,p) p=string_pos(",",str)  tileu=real(string_copy(str,1,p-1))
-        str=string_delete(str,1,p) p=string_pos(",",str)  tilev=real(string_copy(str,1,p-1))
-        str=string_delete(str,1,p) p=string_pos(",",str)  o.image_xscale=real(string_copy(str,1,p-1))
-        str=string_delete(str,1,p) p=string_pos(",",str)  o.image_yscale=real(string_copy(str,1,p-1))
+                                       p=string_pos(",",str)  o.bgname=string_copy(str,1,p-1)
+            str=string_delete(str,1,p) p=string_pos(",",str)  o.x=real(string_copy(str,1,p-1))
+            str=string_delete(str,1,p) p=string_pos(",",str)  o.y=real(string_copy(str,1,p-1))
+            str=string_delete(str,1,p) p=string_pos(",",str)  tileu=real(string_copy(str,1,p-1))
+            str=string_delete(str,1,p) p=string_pos(",",str)  tilev=real(string_copy(str,1,p-1))
+            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_xscale=real(string_copy(str,1,p-1))
+            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_yscale=real(string_copy(str,1,p-1))
 
-        o.tile=tile_add(get_background(o.bgname),tileu,tilev,o.image_xscale,o.image_yscale,o.x,o.y,layer)
-        o.depth=layer-0.01
-        o.tlayer=layer
+            o.tile=tile_add(get_background(o.bgname),tileu,tilev,o.image_xscale,o.image_yscale,o.x,o.y,layer)
+            o.depth=layer-0.01
+            o.tlayer=layer
 
-        //add tiles to unique tile hashmap
-        map=bg_tilemap[micro_optimization_bgid]
-        tileid=string(tileu)+","+string(tilev)+","+string(o.image_xscale)+","+string(o.image_yscale)
-        if (!ds_map_exists(map,tileid)) {
-            //add this tile
-            list=ds_list_create()
-            ds_list_add(list,tileu)
-            ds_list_add(list,tilev)
-            ds_list_add(list,o.image_xscale)
-            ds_list_add(list,o.image_yscale)
-            ds_map_add(map,tileid,list)
-        }
+            //add tiles to unique tile hashmap
+            map=bg_tilemap[micro_optimization_bgid]
+            tileid=string(tileu)+","+string(tilev)+","+string(o.image_xscale)+","+string(o.image_yscale)
+            if (!ds_map_exists(map,tileid)) {
+                //add this tile
+                list=ds_list_create()
+                ds_list_add(list,tileu)
+                ds_list_add(list,tilev)
+                ds_list_add(list,o.image_xscale)
+                ds_list_add(list,o.image_yscale)
+                ds_map_add(map,tileid,list)
+            }
 
-        if (extended_instancedata) {
-            str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
-            str=string_delete(str,1,p) p=string_pos(",",str)  tilesx=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  tilesy=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(str)
+            if (extended_instancedata) {
+                str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
+                str=string_delete(str,1,p) p=string_pos(",",str)  tilesx=real(string_copy(str,1,p-1))
+                str=string_delete(str,1,p) p=string_pos(",",str)  tilesy=real(string_copy(str,1,p-1))
+                str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(str)
 
-            o.image_xscale*=tilesx
-            o.image_yscale*=tilesy
-            tile_set_scale(o.tile,tilesx,tilesy)
-            tile_set_alpha(o.tile,(tileblend>>24)/$ff)
-            tile_set_blend(o.tile,tileblend&$ffffff)
-        }
+                o.image_xscale*=tilesx
+                o.image_yscale*=tilesy
+                tile_set_scale(o.tile,tilesx,tilesy)
+                tile_set_alpha(o.tile,(tileblend>>24)/$ff)
+                tile_set_blend(o.tile,tileblend&$ffffff)
+            }
 
-        if (current_time>time) {
-            time=current_time
-            progress=(progress*9+0.25+0.5*i/layersize)/10
-            draw_loader("Loading tiles...",progress)
-        }
-    } until (file_text_eof(f)) file_text_close(f)
-}
+            if (current_time>time) {
+                time=current_time
+                progress=(progress*9+0.25+0.5*i/layersize)/10
+                draw_loader("Loading tiles...",progress)
+            }
+        } until (file_text_eof(f)) file_text_close(f)
+    }
+} else add_tile_layer()
 
 
 //load instances

@@ -16,4 +16,6 @@ with (tileholder) if (tlayer==layer) {
     instance_destroy()
 }
 
+if (layersize==0) add_tile_layer()
+
 change_mode(mode)
