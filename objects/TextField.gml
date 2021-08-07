@@ -91,11 +91,12 @@ applies_to=self
 ///preprocess text
 var l;
 
-if (type==4) {
+if (type==4 || type==0) {
     l=string_length(text)
     dtext=text
     if (l>=displen) {
-        dtext=string_copy(dtext,l-displen+1+active,displen-active)
+        if (type==4 || active) dtext=string_copy(dtext,l-displen+1+active,displen-active)
+        else dtext=string_copy(dtext,1,displen)
         alt=string_replace_all(text,"#","\#")
     } else alt=""
     dtext=string_replace_all(dtext,"#","\#")

@@ -138,10 +138,11 @@ if (layersize) for (i=0;i<layersize;i+=1) {
         o.depth=layer-0.01
         o.tlayer=layer
 
+        //add tiles to unique tile hashmap
         map=bg_tilemap[micro_optimization_bgid]
         tileid=string(tileu)+","+string(tilev)+","+string(o.image_xscale)+","+string(o.image_yscale)
         if (!ds_map_exists(map,tileid)) {
-            //add this tile to this backgrounds's unique tiles map
+            //add this tile
             list=ds_list_create()
             ds_list_add(list,tileu)
             ds_list_add(list,tilev)

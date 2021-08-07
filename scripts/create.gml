@@ -79,7 +79,7 @@ view[3]=1
 view[4]=0
 view[5]=0
 view[6]=0
-alarm[0]=1
+//alarm[0]=1
 
 //adjust window to fit room
 width=max(min_width,min(width,roomwidth+64+160*2))
@@ -97,3 +97,4 @@ instance_create(0,0,Interface)
 bgtex=background_get_texture(bgBlack)
 
 update_view()
+change_mode(mode)

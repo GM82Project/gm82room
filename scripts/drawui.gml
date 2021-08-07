@@ -68,7 +68,7 @@ if (mode==0) {
 
     if (keyboard_check(ord("C"))) with (instance) if (code!="") {
         d3d_set_fog(1,$ff,0,0)
-        draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
+        draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
         draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)
         d3d_set_fog(0,0,0,0)
     }
@@ -272,7 +272,7 @@ if (mode==1) {
         dy=172+40*posy+tpalscroll
         draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
         draw_sprite(sprMenuButtons,24,dx,dy)
-        if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
+        if (mouse_wx<160 && mouse_wy>=152 && mouse_wy<height-216) {
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                 paltooltip=1
             }

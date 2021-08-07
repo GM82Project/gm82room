@@ -1,11 +1,5 @@
 +util
 	|rect
-	|get_sprite
-	|get_background
-	|get_object
-	|gensavecode
-	|parsecode
-	|parsereal
 	|crc_init
 	|crc32
 	|draw_button
@@ -14,6 +8,12 @@
 	|draw_loader
 	|drawtooltip
 +file
+	|gensavecode
+	|parsecode
+	|parsereal
+	|get_sprite
+	|get_background
+	|get_object
 	|file_text_read_list
 	|edit_creation_code
 	|external_code_editor

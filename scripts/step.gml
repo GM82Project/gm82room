@@ -1,6 +1,6 @@
 var yes,cur,minselx,maxselx,minsely,maxsely,dx,dy;
 
-if (resizecount<5) {
+if (resizecount<10) {
     if (window_get_width()!=width || window_get_height()!=height) {
         with (Button) {
             if (anchor==1 || anchor==3) offx=width-x
@@ -18,7 +18,7 @@ if (resizecount<5) {
             if (anchor==2 || anchor==3) y=height-offy
         }
         resizecount+=1
-        if (resizecount>=5) show_message("Resizing the window failed multiple times. Do you have some sort of weird DPI settings? Either way, I'm disabling resizing for now.")
+        if (resizecount>=10) show_message("Resizing the window failed multiple times. Do you have some sort of weird DPI settings? Either way, I'm disabling resizing for now.")
     } else resizecount=0
 }
 
