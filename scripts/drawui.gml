@@ -446,14 +446,13 @@ if (mode==1) {
         for (i=0;i<len;i+=1) {
             tile=ds_map_find_value(map,key)
             key=ds_map_find_next(map,key)
+            dx=20+40*posx
+            dy=172+40*posy+tpalscroll
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                 u=ds_list_find_value(tile,0)
                 v=ds_list_find_value(tile,1)
                 tw=ds_list_find_value(tile,2)
                 th=ds_list_find_value(tile,3)
-
-                dx=20+40*posx
-                dy=172+40*posy+tpalscroll
                 w=tw
                 h=th
                 if (w>32 || h>32) {
