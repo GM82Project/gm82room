@@ -154,13 +154,13 @@ if (layersize) {
 
             if (extended_instancedata) {
                 str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
-                str=string_delete(str,1,p) p=string_pos(",",str)  tilesx=real(string_copy(str,1,p-1))
-                str=string_delete(str,1,p) p=string_pos(",",str)  tilesy=real(string_copy(str,1,p-1))
+                str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesx=real(string_copy(str,1,p-1))
+                str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesy=real(string_copy(str,1,p-1))
                 str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(str)
 
-                o.image_xscale*=tilesx
-                o.image_yscale*=tilesy
-                tile_set_scale(o.tile,tilesx,tilesy)
+                o.image_xscale*=o.tilesx
+                o.image_yscale*=o.tilesy
+                tile_set_scale(o.tile,o.tilesx,o.tilesy)
                 tile_set_alpha(o.tile,(tileblend>>24)/$ff)
                 tile_set_blend(o.tile,tileblend&$ffffff)
             }
