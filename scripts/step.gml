@@ -179,6 +179,7 @@ if (mouse_check_button_pressed(mb_left)) {
                     if (keyboard_check(vk_shift)) {
                         //selection rectangle
                         selecting=1
+                        with (instance) memsel=sel
                         selx=mouse_x
                         sely=mouse_y
                     } else {
@@ -209,6 +210,7 @@ if (selecting) {
     if (mode==0) {
         with (instance) {
             if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
+            else sel=memsel
         }
     }
     if (!mouse_check_direct(mb_left)) selecting=0
