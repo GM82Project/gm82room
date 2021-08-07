@@ -12,6 +12,8 @@ if (up) {col1=global.col_high col2=global.col_low}
 else {col1=global.col_low col2=global.col_high}
 col3=buttoncol
 
+buttoncol=global.col_main
+
 draw_primitive_begin(pr_trianglelist)
     //bg
     draw_vertex_color(dx,dy,col2,1)

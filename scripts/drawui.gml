@@ -182,7 +182,8 @@ if (mode==0) {
 }
 if (mode==1) {
     num=instance_number(tileholder)
-    if (num<tilecount) draw_text(statusx+152,statusy+6,string(num)+" tiles ("+string(tilecount-num)+" hidden)")
+    if (view[1]) draw_text(statusx+152,statusy+6,string(tilecount)+" tiles")
+    else if (num<tilecount) draw_text(statusx+152,statusy+6,string(num)+" tiles ("+string(tilecount-num)+" hidden)")
     else draw_text(statusx+152,statusy+6,string(num)+" tiles")
     //if (focus) draw_text(statusx+448,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
 }
@@ -202,6 +203,7 @@ if (mode=0) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
         if (dy>100 && dy<height-80) {
+            if (objpal==i) buttoncol=$c0c0c0
             draw_button(dx-20,dy-20,40,40,objpal!=i)
             if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                 w=sprite_get_width(objspr[i])
@@ -259,6 +261,7 @@ if (mode==1) {
                 v=ds_list_find_value(tile,1)
                 tw=ds_list_find_value(tile,2)
                 th=ds_list_find_value(tile,3)
+                if (tilepal==i) buttoncol=$c0c0c0
                 draw_button(dx-20,dy-20,40,40,tilepal!=i)
                 if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                     w=tw
@@ -306,8 +309,11 @@ if (mode==1) {
     //inspector
     dx=width-160
     for (i=0;i<layersize;i+=1) {
-        draw_button(dx,56+i*32+layerscroll,160,32,ly_current!=i)
-        draw_text(dx+12,56+i*32+6+layerscroll,ds_list_find_value(layers,i))
+        dy=56+i*32+layerscroll
+        if (dy>56-32 && dy<height-100+32) {
+            draw_button(dx,dy,160,32,ly_current!=i)
+            draw_text(dx+12,dy+6,ds_list_find_value(layers,i))
+        }
     }
     draw_button(dx,56+i*32+layerscroll,160,32,ly_current!=i)
     draw_sprite(sprMenuButtons,23,dx+80,56+i*32+layerscroll+16)
@@ -423,7 +429,12 @@ if (mode==0) {
             if (w>32 || h>32) {
                 dx=max(0,dx-w/2)+w/2
                 dy=max(0,dy-h/2)+h/2
-                draw_sprite_stretched_ext(objspr[i],0,dx-w/2+4,dy-h/2+4,w,h,0,0.5)
+                draw_set_color_sel() d3d_set_fog(1,draw_get_color(),0,0) draw_set_color($ffffff)
+                draw_sprite_stretched_ext(objspr[i],0,dx-w/2+1,dy-h/2+1,w,h,0,1)
+                draw_sprite_stretched_ext(objspr[i],0,dx-w/2+1,dy-h/2-1,w,h,0,1)
+                draw_sprite_stretched_ext(objspr[i],0,dx-w/2-1,dy-h/2+1,w,h,0,1)
+                draw_sprite_stretched_ext(objspr[i],0,dx-w/2-1,dy-h/2-1,w,h,0,1)
+                d3d_set_fog(0,0,0,0)
             }
             draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
             drawtooltip(ds_list_find_value(objects,i))
@@ -458,7 +469,12 @@ if (mode==1) {
                 if (w>32 || h>32) {
                     dx=max(0,dx-w/2)+w/2
                     dy=max(0,dy-h/2)+h/2
-                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2+4,dy-h/2+4,w/tw,h/th,0,0.5)
+                    draw_set_color_sel() d3d_set_fog(1,draw_get_color(),0,0) draw_set_color($ffffff)
+                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2+1,dy-h/2+1,w/tw,h/th,0,1)
+                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2+1,dy-h/2-1,w/tw,h/th,0,1)
+                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2-1,dy-h/2+1,w/tw,h/th,0,1)
+                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2-1,dy-h/2-1,w/tw,h/th,0,1)
+                    d3d_set_fog(0,0,0,0)
                 }
                 draw_background_part_ext(tex,u,v,tw,th,dx-w/2,dy-h/2,w/tw,h/th,$ffffff,1)
             }
@@ -466,5 +482,12 @@ if (mode==1) {
         }
 
         if (paltooltip && !paladdbuttondown) drawtooltip("Add more...")
+    }
+
+    if (mouse_wx>=width-160 && mouse_wy>=56 && mouse_wy<height-100) {
+        mem=ly_current
+        if (median(0,floor((mouse_wy-56-layerscroll)/32),layersize+1)==layersize) {
+            drawtooltip("Add layer...")
+        }
     }
 }

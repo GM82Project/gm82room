@@ -24,10 +24,17 @@ if (argument0==1) {
 } else {
     instance_deactivate_object(tileholder)
 }
+
 tilecount=instance_number(tileholder)
+
 if (view[1]) {
     for (i=0;i<ds_list_size(layers);i+=1) {
-        tile_layer_show(ds_list_find_value(layers,i))
+        layer=ds_list_find_value(layers,i)
+        tile_layer_show(layer)
+        if (ly_current!=i && argument0==1) {
+            with (tileholder) if (tlayer==layer) alarm[0]=1
+        }
+
     }
 } else {
     for (i=0;i<ds_list_size(layers);i+=1) {
