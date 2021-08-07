@@ -120,9 +120,14 @@ draw_rectangle(draghandx-8,draghandy-8,draghandx+8,draghandy+8,1)
 draw_rectangle(draghandx-4,draghandy-4,draghandx+4,draghandy+4,1)
 
 if (rotato) w=point_distance(x,y,mouse_x,mouse_y)*sign(image_xscale)
-else w=sprw*image_xscale*0.5
+else w=sprw*image_xscale
 rothandx=x+lengthdir_x(w,image_angle)
 rothandy=y+lengthdir_y(w,image_angle)
+if (point_distance(rothandx,rothandy,draghandx,draghandy)<20) {
+    w=point_distance(x,y,draghandx,draghandy)+20
+    rothandx=x+lengthdir_x(w,image_angle)
+    rothandy=y+lengthdir_y(w,image_angle)
+}
 
 if (rotato) draw_line(x,y,rothandx,rothandy)
 draw_circle(rothandx,rothandy,10,1)

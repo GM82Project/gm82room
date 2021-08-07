@@ -10,7 +10,6 @@ blend=$ffffffff
 
 sel=0
 grab=0
-rotato=0
 draggatto=0
 #define Alarm_0
 /*"/*'/**//* YYD ACTION
