@@ -302,24 +302,27 @@ if (mode==1) {
     if (mouse_wx<160 && mouse_wy>=152 && mouse_wy<height-216) {
         if (mouse_check_button_pressed(mb_left)) {
             //click on tile palette
-            /*posx=0
+            map=bg_tilemap[tilebgpal]
+            len=ds_map_size(map)
+            posx=0
             posy=0
-            for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
+            for (i=0;i<len;i+=1) {
                 dx=20+40*posx
-                dy=140+40*posy+tpalscroll
+                dy=172+40*posy+tpalscroll
                 if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                     tilepal=i
-                    change_mode(mode)
-                    textfield_set("palette name",ds_list_find_value(objects,objpal))
+                    key=ds_map_find_first(map)
+                    repeat (tilepal) key=ds_map_find_next(map,key)
+                    curtile=ds_map_find_value(map,key)
                 }
                 posx+=1 if (posx=4) {posx=0 posy+=1}
             }
             dx=20+40*posx
-            dy=140+40*posy+tpalscroll
+            dy=172+40*posy+tpalscroll
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
                 //clicked on add tile button
-
-            }   */
+                show_message("add tile")
+            }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
         tpalscrollgo-=h*80

@@ -201,12 +201,14 @@ if (mode=0) {
     for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
-        draw_button(dx-20,dy-20,40,40,objpal!=i)
-        if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
-            w=sprite_get_width(objspr[i])
-            h=sprite_get_height(objspr[i])
-            if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
-            draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
+        if (dy>100 && dy<height-80) {
+            draw_button(dx-20,dy-20,40,40,objpal!=i)
+            if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                w=sprite_get_width(objspr[i])
+                h=sprite_get_height(objspr[i])
+                if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
+                draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
+            }
         }
         posx+=1 if (posx=4) {posx=0 posy+=1}
     }
@@ -248,24 +250,23 @@ if (mode==1) {
 
         key=ds_map_find_first(map)
         for (i=0;i<len;i+=1) {
-            tile=ds_map_find_value(map,key)
-            key=ds_map_find_next(map,key)
-
-            u=ds_list_find_value(tile,0)
-            v=ds_list_find_value(tile,1)
-            w=ds_list_find_value(tile,2)
-            h=ds_list_find_value(tile,3)
-
             dx=20+40*posx
             dy=172+40*posy+tpalscroll
-            draw_button(dx-20,dy-20,40,40,objpal!=i)
-            //if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
-            //    w=sprite_get_width(objspr[i])
-            //    h=sprite_get_height(objspr[i])
-            //    if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
-                draw_background_part(tex,u,v,w,h,dx-16,dy-16)
-            //    draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
-            //}
+            if (dy>132 && dy<height-196) {
+                tile=ds_map_find_value(map,key)
+                key=ds_map_find_next(map,key)
+                u=ds_list_find_value(tile,0)
+                v=ds_list_find_value(tile,1)
+                tw=ds_list_find_value(tile,2)
+                th=ds_list_find_value(tile,3)
+                draw_button(dx-20,dy-20,40,40,tilepal!=i)
+                if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                    w=tw
+                    h=th
+                    if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
+                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2,dy-h/2,w/tw,h/th,$ffffff,1)
+                }
+            }
             posx+=1 if (posx=4) {posx=0 posy+=1}
         }
         dx=20+40*posx
@@ -281,6 +282,26 @@ if (mode==1) {
 
     draw_button(0,height-192,160,192,1)
     draw_button(4,height-160-28,152,152,0)
+
+    u=ds_list_find_value(curtile,0)
+    v=ds_list_find_value(curtile,1)
+    tw=ds_list_find_value(curtile,2)
+    th=ds_list_find_value(curtile,3)
+
+    //cut up a preview rectangle around the selected tile
+    bw=background_get_width(tex)
+    bh=background_get_height(tex)
+    left=max(0,min(u+tw/2-72,bw-144))
+    top=max(0,min(v+th/2-72,bh-144))
+    lewidth=min(144,bw-left)
+    leheight=min(144,bh-top)
+
+    dx=8+72-lewidth/2
+    dy=height-184+72-leheight/2
+    draw_background_part(tex,left,top,lewidth,leheight,dx,dy)
+    draw_set_color_sel()
+    draw_rectangle(dx+(u-left),dy+(v-top),dx+(u-left)+tw,dy+(v-top)+th,1)
+    draw_set_color($ffffff)
 
     //inspector
     dx=width-160
@@ -411,4 +432,40 @@ if (mode==0) {
     }
 
     if (paltooltip && !paladdbuttondown) drawtooltip("Add more...")
+}
+
+if (mode==1) {
+    //tile tab tooltips
+    posx=0
+    posy=0
+    if (mouse_wy>=152 && mouse_wy<height-216) {
+        tex=bg_background[tilebgpal]
+        map=bg_tilemap[tilebgpal]
+        len=ds_map_size(map)
+        key=ds_map_find_first(map)
+        for (i=0;i<len;i+=1) {
+            tile=ds_map_find_value(map,key)
+            key=ds_map_find_next(map,key)
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                u=ds_list_find_value(tile,0)
+                v=ds_list_find_value(tile,1)
+                tw=ds_list_find_value(tile,2)
+                th=ds_list_find_value(tile,3)
+
+                dx=20+40*posx
+                dy=172+40*posy+tpalscroll
+                w=tw
+                h=th
+                if (w>32 || h>32) {
+                    dx=max(0,dx-w/2)+w/2
+                    dy=max(0,dy-h/2)+h/2
+                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2+4,dy-h/2+4,w/tw,h/th,0,0.5)
+                }
+                draw_background_part_ext(tex,u,v,tw,th,dx-w/2,dy-h/2,w/tw,h/th,$ffffff,1)
+            }
+            posx+=1 if (posx=4) {posx=0 posy+=1}
+        }
+
+        if (paltooltip && !paladdbuttondown) drawtooltip("Add more...")
+    }
 }

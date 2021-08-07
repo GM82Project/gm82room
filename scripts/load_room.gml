@@ -22,7 +22,7 @@ if (parameter_count()) {
     //clicked on
     room_caption="OpenGMK IDE Room Editor"
     //dev
-    if (environment_get_variable("USERNAME")=="hex") dir="C:\Stuff\github\renex-engine\rooms\rmDemo3"
+    if (environment_get_variable("USERNAME")=="hex") dir="C:\Stuff\github\renex-engine\rooms\rmDemo1"
     else dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
 }
 roomname=filename_name(dir)
