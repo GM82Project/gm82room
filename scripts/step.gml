@@ -63,6 +63,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_c
         maxselx=max(maxselx,bbox_right+1)
         maxsely=max(maxsely,bbox_bottom+1)
         cur+=1
+        copyvec[cur,0]=bgname
         copyvec[cur,1]=bg
         copyvec[cur,2]=x
         copyvec[cur,3]=y
@@ -126,6 +127,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,tileholder)
                 o.tilew=copyvec[cur,10]
                 o.tileh=copyvec[cur,11]
+                o.bgname=copyvec[cur,0]
                 o.bg=copyvec[cur,1]
                 o.tilesx=copyvec[cur,4]
                 o.tilesy=copyvec[cur,5]
@@ -189,6 +191,8 @@ if (mouse_check_button_pressed(mb_left)) {
                             grab=1
                             offx=mouse_x-x
                             offy=mouse_y-y
+                            objpal=obj
+                            focus_palette()
                             //group operation
                             with (instance) if (sel) {
                                 grab=1
@@ -355,12 +359,14 @@ if (paint) {
             }
             if (yes) {
                 o=instance_create(dx,dy,tileholder)
+                o.bgname=tilebgname
                 o.bg=tex
                 o.tilew=ds_list_find_value(curtile,2)
                 o.tileh=ds_list_find_value(curtile,3)
                 o.image_xscale=o.tilew
                 o.image_yscale=o.tileh
                 o.tile=tile_add(tex,ds_list_find_value(curtile,0),ds_list_find_value(curtile,1),o.tilew,o.tileh,paintx,painty,ly_depth)
+                o.tlayer=ly_depth
                 selectt=o
                 o.sel=1
                 with (o) update_inspector()
@@ -477,11 +483,11 @@ if (mode==1) {
     tpalscroll=clamp(inch((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(tpalsize+1)*32+(height-152-216),0)
 
     //layer inspector
-    if (mouse_wx>=width-160 && mouse_wy>=56 && mouse_wy<height-100) {
+    if (mouse_wx>=width-160 && mouse_wy>=360 && mouse_wy<height-100) {
         if (mouse_check_button_pressed(mb_left)) {
             //click on layer bar
             mem=ly_current
-            ly_current=median(0,floor((mouse_wy-56-layerscroll)/32),layersize+1)
+            ly_current=median(0,floor((mouse_wy-360-layerscroll)/32),layersize+1)
             if (ly_current==layersize+1) {
                 //clicked ahead of the list
                 ly_current=mem
@@ -490,6 +496,7 @@ if (mode==1) {
                     add_tile_layer()
                 }
                 change_mode(mode)
+                update_inspector()
             }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
@@ -569,6 +576,7 @@ if (click) {
         if (str!="<undefined>") {
             get_background(str)
             tilebgpal=micro_optimization_bgid
+            tilebgname=str
             update_tilepanel()
         }
     }

@@ -150,10 +150,15 @@ d3d_set_projection_ortho(0,0,width,height,0)
 
 
 focus=noone
-if (mode==0) with (instance) if (instance_position(mouse_x,mouse_y,id)) {
-    other.focus=id
-    if (code!="") {
-        drawtooltip(code)
+if (mousein) {
+    if (mode==0) with (instance) if (instance_position(mouse_x,mouse_y,id)) {
+        other.focus=id
+        if (code!="") {
+            drawtooltip(code)
+        }
+    }
+    if (mode==1) with (tileholder) if (instance_position(mouse_x,mouse_y,id)) {
+        other.focus=id
     }
 }
 
@@ -198,7 +203,7 @@ if (mode==1) {
     if (view[1]) draw_text(statusx+152,statusy+6,string(tilecount)+" tiles")
     else if (num<tilecount) draw_text(statusx+152,statusy+6,string(num)+" tiles ("+string(tilecount-num)+" hidden)")
     else draw_text(statusx+152,statusy+6,string(num)+" tiles")
-    //if (focus) draw_text(statusx+448,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
+    if (focus) draw_text(statusx+448,statusy+6,string(focus.bgname)+" "+string(focus.x)+","+string(focus.y))
 }
 
 //draw inspector rectangle after statusbar to hide any leaking text
@@ -320,19 +325,29 @@ if (mode==1) {
     draw_set_color($ffffff)
 
     //inspector
+
     dx=width-160
+
+    draw_button(dx,32,160,100,1)
+    draw_button(dx,128+4,160,100,1)
+    draw_button(dx,228+4,160,72,1)
+    draw_text(dx+12,32+8,"Position")
+    draw_text(dx+12,128+12,"Scale")
+    draw_text(dx+12,228+12,"Blend")
+
     for (i=0;i<layersize;i+=1) {
-        dy=56+i*32+layerscroll
-        if (dy>56-32 && dy<height-100+32) {
+        dy=360+i*32+layerscroll
+        if (dy>360-32 && dy<height-100+32) {
             draw_button(dx,dy,160,32,ly_current!=i)
             draw_text(dx+12,dy+6,ds_list_find_value(layers,i))
         }
     }
-    draw_button(dx,56+i*32+layerscroll,160,32,ly_current!=i)
-    draw_sprite(sprMenuButtons,23,dx+80,56+i*32+layerscroll+16)
+    draw_button(dx,360+i*32+layerscroll,160,32,ly_current!=i)
+    draw_sprite(sprMenuButtons,23,dx+80,360+i*32+layerscroll+16)
 
-    draw_button(dx,0,160,32,1)
-    draw_text(dx+12,6,"Layers")
+    draw_button(dx,304,160,32,1)
+    draw_text(dx+12,310,"Layers")
+
     draw_button(dx,height-76,160,76,1)
     draw_text(dx+12,height-64,"Depth")
 }
@@ -497,9 +512,9 @@ if (mode==1) {
         if (paltooltip && !paladdbuttondown) drawtooltip("Add more...")
     }
 
-    if (mouse_wx>=width-160 && mouse_wy>=56 && mouse_wy<height-100) {
+    if (mouse_wx>=width-160 && mouse_wy>=360 && mouse_wy<height-100) {
         mem=ly_current
-        if (median(0,floor((mouse_wy-56-layerscroll)/32),layersize+1)==layersize) {
+        if (median(0,floor((mouse_wy-360-layerscroll)/32),layersize+1)==layersize) {
             drawtooltip("Add layer...")
         }
     }

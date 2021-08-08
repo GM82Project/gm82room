@@ -15,7 +15,7 @@ spr=noone
 focus=0
 active=0
 k=0
-dynamic=0
+dynamic=-1
 maxlen=256
 displen=256
 minval=0
@@ -31,7 +31,7 @@ applies_to=self
 */
 focus=position_meeting(mouse_wx,mouse_wy,id)
 
-if (down!=0 && focus && !active && (Controller.select || !dynamic)) {
+if (down!=0 && focus && !active && ((Controller.select || dynamic!=0) || (Controller.selectt || dynamic!=1))) {
     //activate textfield
     with (TextField) textfield_actions()
     active=1

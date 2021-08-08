@@ -12,5 +12,13 @@ if (mode==0) {
 }
 
 if (mode==1) {
-    textfield_set("layer depth",ds_list_find_value(layers,ly_current))
+    textfield_set("current tile bg name",bgname)
+
+    textfield_set("tile x",x)
+    textfield_set("tile y",y)
+    textfield_set("tile xs",tilesx)
+    textfield_set("tile ys",tilesy)
+
+    textfield_set("tile col",image_blend)
+    textfield_set("tile alpha",round(image_alpha*255))
 }

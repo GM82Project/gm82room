@@ -4,8 +4,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-scalex=1
-scaley=1
+tilesx=1
+tilesy=1
 blend=$ffffffff
 
 sel=0
@@ -71,8 +71,8 @@ if (sel) {
         image_xscale=lengthdir_x(len,dir)
         image_yscale=lengthdir_y(len,dir)
 
-        if (abs(image_xscale*tilew)<1) image_xscale=1/tilew
-        if (abs(image_yscale*tileh)<1) image_yscale=1/tileh
+        if (abs(image_xscale*tilew)<1) image_xscale=1
+        if (abs(image_yscale*tileh)<1) image_yscale=1
 
         tilesx=image_xscale/tilew
         tilesy=image_yscale/tileh
@@ -126,9 +126,6 @@ draw_set_alpha(1)
 draw_set_color_sel()
 
 draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+1-0.5,bbox_bottom+1-0.5,1)
-draw_circle(x-0.5,y-0.5,4,1)
-draw_line(x-0.5,y-0.5-4,x-0.5,y-0.5+4)
-draw_line(x-0.5-4,y-0.5,x-0.5+4,y-0.5)
 
 draw_set_color($ffffff)
 draw_set_alpha(1)

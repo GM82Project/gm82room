@@ -164,9 +164,6 @@ d3d_set_fog(0,0,0,0)
 draw_set_color_sel()
 
 draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+1-0.5,bbox_bottom+1-0.5,1)
-draw_circle(x-0.5,y-0.5,4,1)
-draw_line(x-0.5,y-0.5-4,x-0.5,y-0.5+4)
-draw_line(x-0.5-4,y-0.5,x-0.5+4,y-0.5)
 
 draw_set_color($ffffff)
 draw_set_alpha(1)

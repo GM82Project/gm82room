@@ -30,6 +30,7 @@ zoomcenter=0
 resizecount=0
 objpal=noone
 tilebgpal=noone
+tilebgname=""
 curtile=noone
 tilepal=0
 palettescroll=0

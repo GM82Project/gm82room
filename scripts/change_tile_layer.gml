@@ -11,3 +11,5 @@ ds_list_replace(layers,ly_current,argument0)
 ds_list_sort(layers,1)
 
 ly_current=ds_list_find_index(layers,argument0)
+
+update_inspector()

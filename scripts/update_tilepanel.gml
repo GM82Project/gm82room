@@ -1,4 +1,5 @@
 textfield_set("tile bg name",ds_list_find_value(backgrounds,tilebgpal))
+textfield_set("layer depth",ds_list_find_value(layers,ly_current))
 
 with (Controller) {
     map=bg_tilemap[tilebgpal]

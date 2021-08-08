@@ -12,11 +12,11 @@ with (tileholder) sel=0
 with (tileholder) if (tlayer==layer) {
     o=instance_copy(0)
     o.tlayer=newlayer
-    o.tile=tile_add(bg,tile_get_left(tile),tile_get_top(tile),o.tilew,o.tileh,x,y,newlayer)
-
-    tile_set_blend(o.tile,tile_get_blend(tile))
-    tile_set_alpha(o.tile,tile_get_alpha(tile))
-    tile_set_scale(o.tile,tile_get_xscale(tile),tile_get_yscale(tile))
+    o.tile=tile_add(bg,tile_get_left(tile),tile_get_top(tile),tilew,tileh,x,y,newlayer)
+    tile_set_blend(o.tile,image_blend)
+    tile_set_alpha(o.tile,image_alpha)
+    tile_set_scale(o.tile,tilesx,tilesy)
 }
 
 change_mode(mode)
+update_inspector()

@@ -10,7 +10,7 @@ h=32
 text=""
 spr=noone
 focus=0
-dynamic=0
+dynamic=-1
 alt=""
 anchor=0
 type=0
@@ -31,7 +31,7 @@ if (down!=0) {
     downcount+=1
     if (downcount>room_speed/3) button_held(action)
     if (!mouse_check_button(mb_left)) {
-        if (down && (Controller.select || !dynamic)) button_actions(action)
+        if (down && ((Controller.select || dynamic!=0) || (Controller.selectt || dynamic!=1))) button_actions(action)
         down=0
     }
 } else downcount=0

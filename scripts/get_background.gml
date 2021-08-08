@@ -8,6 +8,7 @@ if (!bgloaded[i]) {
     if (bg_background[i]==-1) bg_background[i]=bgDefault
     bg_tilemap[i]=ds_map_create()
     tilebgpal=i
+    tilebgname=argument0
     bgloaded[i]=1
     item=N_Menu_AddItem(tilebgmenu,argument0,"")
     icon=background_menuicon
