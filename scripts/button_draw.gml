@@ -41,7 +41,7 @@ if (object_index==Button) {
             up=!down
         }
 
-        if ((!Controller.select || dynamic!=0) && (!Controller.selectt || dynamic!=1)) up=0
+        if ((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1)) up=0
 
         buttoncol=global.col_main
         if (action=="bgselect") buttoncol=pick(bg_visible[actionid] && bg_source[actionid]!="",buttoncol,$808080)
@@ -78,7 +78,7 @@ if (object_index==TextField) {
             if (active) buttoncol=$ffffff
             else {
                 if (type==0 || type==2) {
-                    if ((!Controller.select || dynamic!=0) && (!Controller.selectt || dynamic!=1)) buttoncol=global.col_main
+                    if ((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1)) buttoncol=global.col_main
                     else buttoncol=$c0c0c0
                 } else {
                     buttoncol=$c0c0c0
