@@ -34,8 +34,8 @@ if (view[1]) {
         if (ly_current!=i && argument0==1) {
             with (tileholder) if (tlayer==layer) alarm[0]=1
         }
-
     }
+    ly_depth=ds_list_find_value(layers,ly_current)
 } else {
     for (i=0;i<ds_list_size(layers);i+=1) {
         layer=ds_list_find_value(layers,i)

@@ -68,8 +68,12 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_c
         copyvec[cur,3]=y
         copyvec[cur,4]=tilesx
         copyvec[cur,5]=tilesy
+        copyvec[cur,6]=tile_get_left(tile)
         copyvec[cur,7]=image_blend
         copyvec[cur,8]=image_alpha
+        copyvec[cur,9]=tile_get_top(tile)
+        copyvec[cur,10]=tile_get_width(tile)
+        copyvec[cur,11]=tile_get_height(tile)
         if (yes) {tile_delete(tile) instance_destroy()}
     }
     if (cur>0) {
@@ -98,7 +102,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
             }
 
             cur=1
-            repeat (copyvec[0,0]) {
+            if (mode==0) repeat (copyvec[0,0]) {
                 //note: if you have instances copied that would be invisible in the current view, they'l be visible anyway
                 o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance)
                 o.obj=copyvec[cur,1]
@@ -114,6 +118,24 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 o.image_blend=copyvec[cur,7]
                 o.image_alpha=copyvec[cur,8]
                 o.code=copyvec[cur,9]
+                o.sel=1
+                select=o
+                cur+=1
+            }
+            if (mode==1) repeat (copyvec[0,0]) {
+                o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,tileholder)
+                o.sprite_index=objspr[o.obj]
+                o.image_xscale=copyvec[cur,4]*copyvec[cur,10]
+                o.image_yscale=copyvec[cur,5]*copyvec[cur,11]
+                o.image_blend=copyvec[cur,7]
+                o.image_alpha=copyvec[cur,8]
+
+                o.tile=tile_add(copyvec[cur,1],copyvec[cur,6],copyvec[cur,9],copyvec[cur,10],copyvec[cur,11],x,y,ly_depth)
+                tile_set_scale(o.tile,copyvec[cur,4],copyvec[cur,5])
+                tile_set_blend(o.tile,image_blend)
+                tile_set_alpha(o.tile,image_alpha)
+                o.depth=ly_depth-0.01
+
                 o.sel=1
                 select=o
                 cur+=1
@@ -180,6 +202,61 @@ if (mouse_check_button_pressed(mb_left)) {
                         //selection rectangle
                         selecting=1
                         with (instance) memsel=sel
+                        selx=mouse_x
+                        sely=mouse_y
+                    } else {
+                        //paint
+                        paint=2
+                        paintx=0
+                        painty=0
+                    }
+                }
+            }
+        }
+        if (mode==1) {
+            //if something's already selected, operate on it
+            if (!keyboard_check(vk_shift)) with (select) {
+                if (position_meeting(mouse_x,mouse_y,id) && keyboard_check(vk_control)) {
+                    grab=1
+                    offx=mouse_x-x
+                    offy=mouse_y-y
+                    yes=1
+                } else if (abs(mouse_x-draghandx)<8 && abs(mouse_y-draghandy)<8) {
+                    draggatto=1
+                    yes=1
+                }
+            }
+            if (yes) {with (tileholder) sel=0 selectt.sel=1}
+            if (!instance_exists(select) || !yes) {
+                clear_inspector()
+                if (!keyboard_check(vk_shift)) with (tileholder) sel=0
+                select=noone
+                with (tileholder) {
+                    if (position_meeting(mouse_x,mouse_y,id)) {
+                        sel=1
+                        update_inspector()
+                        //ctrl+left = move
+                        if (keyboard_check(vk_control)) {
+                            grab=1
+                            offx=mouse_x-x
+                            offy=mouse_y-y
+                            //group operation
+                            with (tileholder) if (sel) {
+                                grab=1
+                                offx=mouse_x-x
+                                offy=mouse_y-y
+                            }
+                        } else with (other.selectt) sel=0
+                        other.selectt=id
+                    }
+                }
+                if (!select) {
+                    //if not holding control, reset selection
+                    if (!keyboard_check(vk_control)) {with (tileholder) sel=0 with (select) sel=1}
+                    if (keyboard_check(vk_shift)) {
+                        //selection rectangle
+                        selecting=1
+                        with (tileholder) memsel=sel
                         selx=mouse_x
                         sely=mouse_y
                     } else {

@@ -160,9 +160,12 @@ if (layersize) {
 
                 o.image_xscale*=o.tilesx
                 o.image_yscale*=o.tilesy
+                o.image_alpha=(tileblend>>24)/$ff
+                o.image_blend=tileblend&$ffffff
+
                 tile_set_scale(o.tile,o.tilesx,o.tilesy)
-                tile_set_alpha(o.tile,(tileblend>>24)/$ff)
-                tile_set_blend(o.tile,tileblend&$ffffff)
+                tile_set_alpha(o.tile,o.image_alpha)
+                tile_set_blend(o.tile,o.image_blend)
             }
 
             if (current_time>time) {
