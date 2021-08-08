@@ -1,4 +1,4 @@
-var f,str,tab,resname,path,curindent;
+var f,f2,str,tab,resname,path,curindent;
 
 globalvar objmenu,objmenuitems;
 
@@ -33,7 +33,15 @@ if (file_exists(argument0)) {
             } else {
                 //resource
                 item=N_Menu_AddItem(path[curindent],resname,"")
-                N_Menu_ItemSetBitmap(path[curindent],item,object_menuicon)
+                f2=file_text_open_read(root+"objects\"+resname+".txt")
+                sprname=string_delete(file_text_read_string(f2),1,7) //we do a little cheating for speed
+                file_text_close(f2)
+                icon=object_menuicon
+                if (sprname!="") {
+                    fn=root+"cache\sprites\"+sprname+".bmp"
+                    if (file_exists(fn)) icon=N_Menu_LoadBitmap(fn)
+                }
+                N_Menu_ItemSetBitmap(path[curindent],item,icon)
                 ds_map_add(objmenuitems,item,resname)
             }
         }

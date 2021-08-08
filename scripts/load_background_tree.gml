@@ -6,6 +6,7 @@ tab=chr(9)
 
 bgmenuitems=ds_map_create()
 bgmenu=N_Menu_CreatePopupMenu()
+bgmenuicons=ds_map_create()
 tilebgmenu=N_Menu_CreatePopupMenu()
 N_Menu_AddMenu(tilebgmenu,bgmenu,"Backgrounds")
 N_Menu_AddSeparator(tilebgmenu)
@@ -36,7 +37,10 @@ if (file_exists(argument0)) {
             } else {
                 //resource
                 item=N_Menu_AddItem(path[curindent],resname,"")
-                N_Menu_ItemSetBitmap(path[curindent],item,background_menuicon)
+                icon=background_menuicon
+                fn=root+"cache\backgrounds\"+resname+".bmp"
+                if (file_exists(fn)) {icon=N_Menu_LoadBitmap(fn) ds_map_add(bgmenuicons,resname,icon)}
+                N_Menu_ItemSetBitmap(path[curindent],item,icon)
                 ds_map_add(bgmenuitems,item,resname)
             }
         }

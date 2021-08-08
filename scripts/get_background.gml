@@ -10,7 +10,10 @@ if (!bgloaded[i]) {
     tilebgpal=i
     bgloaded[i]=1
     item=N_Menu_AddItem(tilebgmenu,argument0,"")
-    N_Menu_ItemSetBitmap(tilebgmenu,item,background_menuicon)
+    icon=background_menuicon
+    if (ds_map_exists(bgmenuicons,argument0))
+        icon=ds_map_find_value(bgmenuicons,argument0)
+    N_Menu_ItemSetBitmap(tilebgmenu,item,icon)
     ds_map_add(bgmenuitems,item,argument0)
 }
 
