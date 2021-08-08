@@ -1,4 +1,4 @@
-var yes,cur,minselx,maxselx,minsely,maxsely,dx,dy;
+var yes,cur,minselx,maxselx,minsely,maxsely,dx,dy,tex;
 
 if (resizecount<10) {
     if (window_get_width()!=width || window_get_height()!=height) {
@@ -63,7 +63,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_c
         maxselx=max(maxselx,bbox_right+1)
         maxsely=max(maxsely,bbox_bottom+1)
         cur+=1
-        copyvec[cur,1]=tile_get_background(tile)
+        copyvec[cur,1]=bg
         copyvec[cur,2]=x
         copyvec[cur,3]=y
         copyvec[cur,4]=tilesx
@@ -74,7 +74,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_c
         copyvec[cur,9]=tile_get_top(tile)
         copyvec[cur,10]=tile_get_width(tile)
         copyvec[cur,11]=tile_get_height(tile)
-        if (yes) {tile_delete(tile) instance_destroy()}
+        if (yes) instance_destroy()
     }
     if (cur>0) {
         copymode=mode
@@ -124,20 +124,24 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
             }
             if (mode==1) repeat (copyvec[0,0]) {
                 o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,tileholder)
-                o.sprite_index=objspr[o.obj]
-                o.image_xscale=copyvec[cur,4]*copyvec[cur,10]
-                o.image_yscale=copyvec[cur,5]*copyvec[cur,11]
+                o.tilew=copyvec[cur,10]
+                o.tileh=copyvec[cur,11]
+                o.bg=copyvec[cur,1]
+                o.tilesx=copyvec[cur,4]
+                o.tilesy=copyvec[cur,5]
+                o.image_xscale=o.tilesx*o.tilew
+                o.image_yscale=o.tilesy*o.tileh
                 o.image_blend=copyvec[cur,7]
                 o.image_alpha=copyvec[cur,8]
 
-                o.tile=tile_add(copyvec[cur,1],copyvec[cur,6],copyvec[cur,9],copyvec[cur,10],copyvec[cur,11],x,y,ly_depth)
+                o.tlayer=ly_depth
+                o.tile=tile_add(o.bg,copyvec[cur,6],copyvec[cur,9],o.tilew,o.tileh,o.x,o.y,ly_depth)
                 tile_set_scale(o.tile,copyvec[cur,4],copyvec[cur,5])
                 tile_set_blend(o.tile,image_blend)
                 tile_set_alpha(o.tile,image_alpha)
-                o.depth=ly_depth-0.01
 
                 o.sel=1
-                select=o
+                selectt=o
                 cur+=1
             }
         }
@@ -215,7 +219,7 @@ if (mouse_check_button_pressed(mb_left)) {
         }
         if (mode==1) {
             //if something's already selected, operate on it
-            if (!keyboard_check(vk_shift)) with (select) {
+            if (!keyboard_check(vk_shift)) with (selectt) {
                 if (position_meeting(mouse_x,mouse_y,id) && keyboard_check(vk_control)) {
                     grab=1
                     offx=mouse_x-x
@@ -227,10 +231,10 @@ if (mouse_check_button_pressed(mb_left)) {
                 }
             }
             if (yes) {with (tileholder) sel=0 selectt.sel=1}
-            if (!instance_exists(select) || !yes) {
+            if (!instance_exists(selectt) || !yes) {
                 clear_inspector()
                 if (!keyboard_check(vk_shift)) with (tileholder) sel=0
-                select=noone
+                selectt=noone
                 with (tileholder) {
                     if (position_meeting(mouse_x,mouse_y,id)) {
                         sel=1
@@ -250,9 +254,9 @@ if (mouse_check_button_pressed(mb_left)) {
                         other.selectt=id
                     }
                 }
-                if (!select) {
+                if (!selectt) {
                     //if not holding control, reset selection
-                    if (!keyboard_check(vk_control)) {with (tileholder) sel=0 with (select) sel=1}
+                    if (!keyboard_check(vk_control)) {with (tileholder) sel=0 with (selectt) sel=1}
                     if (keyboard_check(vk_shift)) {
                         //selection rectangle
                         selecting=1
@@ -286,6 +290,12 @@ if (mouse_check_button_pressed(mb_left)) {
 if (selecting) {
     if (mode==0) {
         with (instance) {
+            if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
+            else sel=memsel
+        }
+    }
+    if (mode==1) {
+        with (tileholder) {
             if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
             else sel=memsel
         }
@@ -331,6 +341,31 @@ if (paint) {
                 with (o) update_inspector()
             }
         }
+        if (mode==1) {
+            tex=bg_background[tilebgpal]
+            if (overlap_check) {
+                sprite_index=spr1x1
+                image_xscale=ds_list_find_value(curtile,2)
+                image_yscale=ds_list_find_value(curtile,3)
+                x=paintx
+                y=painty
+                with (tileholder) if (bg=tex) if (place_meeting(x,y,Controller)) {
+                    yes=0
+                }
+            }
+            if (yes) {
+                o=instance_create(dx,dy,tileholder)
+                o.bg=tex
+                o.tilew=ds_list_find_value(curtile,2)
+                o.tileh=ds_list_find_value(curtile,3)
+                o.image_xscale=o.tilew
+                o.image_yscale=o.tileh
+                o.tile=tile_add(tex,ds_list_find_value(curtile,0),ds_list_find_value(curtile,1),o.tilew,o.tileh,paintx,painty,ly_depth)
+                selectt=o
+                o.sel=1
+                with (o) update_inspector()
+            }
+        }
     }
     if (!mouse_check_direct(mb_left)) paint=0
 }
@@ -340,13 +375,17 @@ if (keyboard_check_pressed(vk_escape)) {
     with (TextField) textfield_actions()
     clear_inspector()
     select=noone
+    selectt=noone
     if (mode==0) with (instance) sel=0
+    if (mode==1) with (tileholder) sel=0
 }
 
 if (keyboard_check_pressed(vk_delete)) {
     clear_inspector()
     select=noone
+    selectt=noone
     if (mode==0) with (instance) if (sel) instance_destroy()
+    if (mode==1) with (tileholder) if (sel) instance_destroy()
 }
 
 
@@ -355,11 +394,14 @@ if (mouse_check_direct(mb_right)) {
     if (selecting) selecting=0
     clear_inspector()
     select=noone
+    selectt=noone
     if (mode==0) with (instance) sel=0
+    if (mode==1) with (tileholder) sel=0
 
     //delete instances
     if (!mouse_check_direct(mb_left)) {
         if (mode==0) instance_destroy_id(instance_position(mouse_x,mouse_y,instance))
+        if (mode==1) instance_destroy_id(instance_position(mouse_x,mouse_y,tileholder))
     }
 }
 

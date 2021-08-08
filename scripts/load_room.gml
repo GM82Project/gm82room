@@ -132,25 +132,28 @@ if (layersize) {
             str=string_delete(str,1,p) p=string_pos(",",str)  o.y=real(string_copy(str,1,p-1))
             str=string_delete(str,1,p) p=string_pos(",",str)  tileu=real(string_copy(str,1,p-1))
             str=string_delete(str,1,p) p=string_pos(",",str)  tilev=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_xscale=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_yscale=real(string_copy(str,1,p-1))
+            str=string_delete(str,1,p) p=string_pos(",",str)  o.tilew=real(string_copy(str,1,p-1))
+            str=string_delete(str,1,p) p=string_pos(",",str)  o.tileh=real(string_copy(str,1,p-1))
 
-            o.tile=tile_add(get_background(o.bgname),tileu,tilev,o.image_xscale,o.image_yscale,o.x,o.y,layer)
-            o.depth=layer-0.01
+            o.bg=get_background(o.bgname)
+            o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
             o.tlayer=layer
 
             //add tiles to unique tile hashmap
             map=bg_tilemap[micro_optimization_bgid]
-            tileid=string(tileu)+","+string(tilev)+","+string(o.image_xscale)+","+string(o.image_yscale)
+            tileid=string(tileu)+","+string(tilev)+","+string(o.tilew)+","+string(o.tileh)
             if (!ds_map_exists(map,tileid)) {
                 //add this tile
                 list=ds_list_create()
                 ds_list_add(list,tileu)
                 ds_list_add(list,tilev)
-                ds_list_add(list,o.image_xscale)
-                ds_list_add(list,o.image_yscale)
+                ds_list_add(list,o.tilew)
+                ds_list_add(list,o.tileh)
                 ds_map_add(map,tileid,list)
             }
+
+            o.image_xscale=o.tilew
+            o.image_yscale=o.tileh
 
             if (extended_instancedata) {
                 str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag

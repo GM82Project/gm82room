@@ -12,9 +12,8 @@ with (tileholder) sel=0
 with (tileholder) if (tlayer==layer) {
     o=instance_copy(0)
     o.tlayer=newlayer
-    o.depth=o.tlayer-0.01
+    o.tile=tile_add(bg,tile_get_left(tile),tile_get_top(tile),o.tilew,o.tileh,x,y,newlayer)
 
-    o.tile=tile_add(tile_get_background(tile),tile_get_left(tile),tile_get_top(tile),tile_get_width(tile),tile_get_height(tile),x,y,newlayer)
     tile_set_blend(o.tile,tile_get_blend(tile))
     tile_set_alpha(o.tile,tile_get_alpha(tile))
     tile_set_scale(o.tile,tile_get_xscale(tile),tile_get_yscale(tile))

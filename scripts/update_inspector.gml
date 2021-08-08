@@ -13,5 +13,4 @@ if (mode==0) {
 
 if (mode==1) {
     textfield_set("layer depth",ds_list_find_value(layers,ly_current))
-    curtile=ds_map_find_value(bg_tilemap[tilebgpal],ds_map_find_first(bg_tilemap[tilebgpal]))
 }

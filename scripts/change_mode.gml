@@ -20,7 +20,7 @@ with (instance) {
 //tiles
 if (argument0==1) {
     instance_activate_object(tileholder)
-    update_inspector()
+    update_tilepanel()
 } else {
     instance_deactivate_object(tileholder)
 }

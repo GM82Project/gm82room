@@ -81,6 +81,19 @@ if (mode==0) {
     }
 }
 
+//tile mode
+if (mode==1) {
+    texture_set_interpolation(interpolation)
+    with (tileholder) if (sel) {
+        event_user(2)
+    }
+    texture_set_interpolation(1)
+
+    with (Controller.selectt) {
+        event_user(0)
+    }
+}
+
 
 //selection rectangle
 if (selecting) {
