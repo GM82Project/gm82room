@@ -18,4 +18,4 @@ ly_current=min(ly_current,layersize-1)
 if (layersize==0) add_tile_layer()
 
 change_mode(mode)
-update_inspector()
+update_tilepanel()

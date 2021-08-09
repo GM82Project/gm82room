@@ -472,8 +472,7 @@ if (mode==1) {
             dx=20+40*posx
             dy=172+40*posy+tpalscroll
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
-                //clicked on add tile button
-                show_message("add tile")
+                add_tile()
             }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
@@ -496,7 +495,7 @@ if (mode==1) {
                     add_tile_layer()
                 }
                 change_mode(mode)
-                update_inspector()
+                update_tilepanel()
             }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
@@ -616,10 +615,14 @@ if (mousein) {
     }
 }
 if (keyboard_check_pressed(ord("0"))) {
-    xgo=roomwidth/2
-    ygo=roomheight/2
-    zoomgo=1
-    zoomcenter=1
+    yes=1
+    with (TextField) if (active) yes=0
+    if (yes) {
+        xgo=roomwidth/2
+        ygo=roomheight/2
+        zoomgo=1
+        zoomcenter=1
+    }
 }
 
 

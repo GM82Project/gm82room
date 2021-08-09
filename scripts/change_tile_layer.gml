@@ -12,4 +12,4 @@ ds_list_sort(layers,1)
 
 ly_current=ds_list_find_index(layers,argument0)
 
-update_inspector()
+update_tilepanel()

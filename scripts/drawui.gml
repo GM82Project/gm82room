@@ -292,7 +292,7 @@ if (mode==1) {
         }
         dx=20+40*posx
         dy=172+40*posy+tpalscroll
-        draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
+        draw_button(dx-20,dy-20,40,40,1)
         draw_sprite(sprMenuButtons,24,dx,dy)
         if (mouse_wx<160 && mouse_wy>=152 && mouse_wy<height-216) {
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {

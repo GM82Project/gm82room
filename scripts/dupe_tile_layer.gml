@@ -19,4 +19,4 @@ with (tileholder) if (tlayer==layer) {
 }
 
 change_mode(mode)
-update_inspector()
+update_tilepanel()

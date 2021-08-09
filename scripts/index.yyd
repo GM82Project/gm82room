@@ -56,3 +56,4 @@ del_tile_layer
 
 update_tilepanel
 focus_palette
+add_tile

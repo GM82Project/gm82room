@@ -31,6 +31,7 @@
 	|createui_views
 	|createui_settings
 +tiles
+	|add_tile
 	|add_tile_layer
 	|dupe_tile_layer
 	|del_tile_layer
