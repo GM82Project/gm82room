@@ -304,25 +304,29 @@ if (mode==1) {
     draw_button(0,height-192,160,192,1)
     draw_button(4,height-160-28,152,152,0)
 
-    u=ds_list_find_value(curtile,0)
-    v=ds_list_find_value(curtile,1)
-    tw=ds_list_find_value(curtile,2)
-    th=ds_list_find_value(curtile,3)
+    if (tilebgpal!=noone) {
+        u=ds_list_find_value(curtile,0)
+        v=ds_list_find_value(curtile,1)
+        tw=ds_list_find_value(curtile,2)
+        th=ds_list_find_value(curtile,3)
 
-    //cut up a preview rectangle around the selected tile
-    bw=background_get_width(tex)
-    bh=background_get_height(tex)
-    left=max(0,min(u+tw/2-72,bw-144))
-    top=max(0,min(v+th/2-72,bh-144))
-    lewidth=min(144,bw-left)
-    leheight=min(144,bh-top)
+        //cut up a preview rectangle around the selected tile
+        bw=background_get_width(tex)
+        bh=background_get_height(tex)
+        left=max(0,min(u+tw/2-72,bw-144))
+        top=max(0,min(v+th/2-72,bh-144))
+        lewidth=min(144,bw-left)
+        leheight=min(144,bh-top)
 
-    dx=8+72-lewidth/2
-    dy=height-184+72-leheight/2
-    draw_background_part(tex,left,top,lewidth,leheight,dx,dy)
-    draw_set_color_sel()
-    draw_rectangle(dx+(u-left),dy+(v-top),dx+(u-left)+tw,dy+(v-top)+th,1)
-    draw_set_color($ffffff)
+        dx=8+72-lewidth/2
+        dy=height-184+72-leheight/2
+        draw_background_part(tex,left,top,lewidth,leheight,dx,dy)
+        draw_set_color_sel()
+        draw_rectangle(dx+(u-left),dy+(v-top),dx+(u-left)+tw,dy+(v-top)+th,1)
+        draw_set_color($ffffff)
+    } else {
+        draw_text(8+8,height-184+8,"Project#contains no#backgrounds.")
+    }
 
     //inspector
 
@@ -335,15 +339,17 @@ if (mode==1) {
     draw_text(dx+12,128+12,"Scale")
     draw_text(dx+12,228+12,"Blend")
 
-    for (i=0;i<layersize;i+=1) {
-        dy=360+i*32+layerscroll
-        if (dy>360-32 && dy<height-100+32) {
-            draw_button(dx,dy,160,32,ly_current!=i)
-            draw_text(dx+12,dy+6,ds_list_find_value(layers,i))
+    if (tilebgpal!=noone) {
+        for (i=0;i<layersize;i+=1) {
+            dy=360+i*32+layerscroll
+            if (dy>360-32 && dy<height-100+32) {
+                draw_button(dx,dy,160,32,ly_current!=i)
+                draw_text(dx+12,dy+6,ds_list_find_value(layers,i))
+            }
         }
+        draw_button(dx,360+i*32+layerscroll,160,32,ly_current!=i)
+        draw_sprite(sprMenuButtons,23,dx+80,360+i*32+layerscroll+16)
     }
-    draw_button(dx,360+i*32+layerscroll,160,32,ly_current!=i)
-    draw_sprite(sprMenuButtons,23,dx+80,360+i*32+layerscroll+16)
 
     draw_button(dx,304,160,32,1)
     draw_text(dx+12,310,"Layers")
@@ -473,11 +479,11 @@ if (mode==0) {
     if (paltooltip && !paladdbuttondown) drawtooltip("Add more...")
 }
 
-if (mode==1) {
+if (mode==1 && tilebgpal!=noone) {
     //tile tab tooltips
     posx=0
     posy=0
-    if (mouse_wy>=152 && mouse_wy<height-216) {
+    if (mouse_wy>=152 && mouse_wy<height-216 && tilebgpal!=noone) {
         tex=bg_background[tilebgpal]
         map=bg_tilemap[tilebgpal]
         len=ds_map_size(map)

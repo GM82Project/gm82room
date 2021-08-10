@@ -346,30 +346,32 @@ if (paint) {
             }
         }
         if (mode==1) {
-            tex=bg_background[tilebgpal]
-            if (overlap_check) {
-                sprite_index=spr1x1
-                image_xscale=ds_list_find_value(curtile,2)
-                image_yscale=ds_list_find_value(curtile,3)
-                x=paintx
-                y=painty
-                with (tileholder) if (bg=tex) if (place_meeting(x,y,Controller)) {
-                    yes=0
+            if (tilebgpal!=noone) {
+                tex=bg_background[tilebgpal]
+                if (overlap_check) {
+                    sprite_index=spr1x1
+                    image_xscale=ds_list_find_value(curtile,2)
+                    image_yscale=ds_list_find_value(curtile,3)
+                    x=paintx
+                    y=painty
+                    with (tileholder) if (bg=tex) if (place_meeting(x,y,Controller)) {
+                        yes=0
+                    }
                 }
-            }
-            if (yes) {
-                o=instance_create(dx,dy,tileholder)
-                o.bgname=tilebgname
-                o.bg=tex
-                o.tilew=ds_list_find_value(curtile,2)
-                o.tileh=ds_list_find_value(curtile,3)
-                o.image_xscale=o.tilew
-                o.image_yscale=o.tileh
-                o.tile=tile_add(tex,ds_list_find_value(curtile,0),ds_list_find_value(curtile,1),o.tilew,o.tileh,paintx,painty,ly_depth)
-                o.tlayer=ly_depth
-                selectt=o
-                o.sel=1
-                with (o) update_inspector()
+                if (yes) {
+                    o=instance_create(dx,dy,tileholder)
+                    o.bgname=tilebgname
+                    o.bg=tex
+                    o.tilew=ds_list_find_value(curtile,2)
+                    o.tileh=ds_list_find_value(curtile,3)
+                    o.image_xscale=o.tilew
+                    o.image_yscale=o.tileh
+                    o.tile=tile_add(tex,ds_list_find_value(curtile,0),ds_list_find_value(curtile,1),o.tilew,o.tileh,paintx,painty,ly_depth)
+                    o.tlayer=ly_depth
+                    selectt=o
+                    o.sel=1
+                    with (o) update_inspector()
+                }
             }
         }
     }
@@ -449,7 +451,7 @@ if (mode==0) {
 
 
 //tile mode
-if (mode==1) {
+if (mode==1 && tilebgpal!=noone) {
     //tile palette
     if (mouse_wx<160 && mouse_wy>=152 && mouse_wy<height-216) {
         if (mouse_check_button_pressed(mb_left)) {

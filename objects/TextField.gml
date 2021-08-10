@@ -32,7 +32,7 @@ applies_to=self
 */
 focus=position_meeting(mouse_wx,mouse_wy,id)
 
-if (down!=0 && focus && !active && (!extended || extended_instancedata) && ((Controller.select || dynamic!=0) || (Controller.selectt || dynamic!=1))) {
+if (down!=0 && focus && !active && (!extended || extended_instancedata) && !((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1))) {
     //activate textfield
     with (TextField) textfield_actions()
     active=1
