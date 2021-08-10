@@ -11,6 +11,7 @@ if (active) {
         case "room width" : {val=clamp(round(real(text)),1,999999) roomwidth=val }break
         case "room height": {val=clamp(round(real(text)),1,999999) roomheight=val}break
         case "room speed" : {val=clamp(round(real(text)),1,9999  ) roomspeed=val }break
+        case "room caption": {roomcaption=text}break
 
         case "inst x"    : {val=round(real(text)) with (instance) if (sel)            x=val}break
         case "inst y"    : {val=round(real(text)) with (instance) if (sel)            y=val}break

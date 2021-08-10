@@ -1,6 +1,6 @@
 globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,objvis,objdepth;
 
-globalvar roomname,roomcode,roomspeed,roompersistent,clearscreen,settings,gridx,gridy;
+globalvar roomname,roomcode,roomspeed,roomcaption,roompersistent,clearscreen,clearview,settings,gridx,gridy;
 
 globalvar bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch;
 globalvar vw_enabled,vw_visible,vw_x,vw_y,vw_w,vw_h,vw_xp,vw_yp,vw_wp,vw_hp,vw_follow,vw_hspeed,vw_vspeed,vw_hbor,vw_vbor;
@@ -72,6 +72,7 @@ ds_map_read_ini(settings,dir+"room.txt")
 
 background_color=real(ds_map_find_value(settings,"bg_color"))
 clearscreen=real(ds_map_find_value(settings,"clear_screen"))
+clearview=real(ds_map_find_value(settings,"clear_view"))
 roomwidth=real(ds_map_find_value(settings,"width"))
 roomheight=real(ds_map_find_value(settings,"height"))
 roomspeed=real(ds_map_find_value(settings,"roomspeed"))
@@ -107,11 +108,11 @@ for (i=0;i<8;i+=1) {
     vw_yp[i]=real(ds_map_find_value(settings,"view_yport"+k))
     vw_wp[i]=real(ds_map_find_value(settings,"view_wport"+k))
     vw_hp[i]=real(ds_map_find_value(settings,"view_hport"+k))
-    vw_follow[i]=ds_map_find_value(settings,"view_fol_target"+k)
     vw_hbor[i]=real(ds_map_find_value(settings,"view_fol_hbord"+k))
     vw_vbor[i]=real(ds_map_find_value(settings,"view_fol_vbord"+k))
     vw_hspeed[i]=real(ds_map_find_value(settings,"view_fol_hspeed"+k))-viewspeedcorrection
     vw_vspeed[i]=real(ds_map_find_value(settings,"view_fol_vspeed"+k))-viewspeedcorrection
+    vw_follow[i]=ds_map_find_value(settings,"view_fol_target"+k)
 }
 
 

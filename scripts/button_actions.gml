@@ -14,6 +14,7 @@ with (Controller) switch (argument0) {
     //settings
     case "room code"   : {roomcode=external_code_editor(roomcode) other.alt=roomcode}break
     case "room persist": {roompersistent=!roompersistent}break
+    case "room clear"  : {clearview=!clearview}break
 
 
     //visibility

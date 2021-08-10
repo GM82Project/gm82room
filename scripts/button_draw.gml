@@ -27,6 +27,7 @@ if (object_index==Button) {
                 case "overlap check": {checked=overlap_check}break
                 case "tile overlap check": {checked=tile_overlap_check}break
                 case "room persist": {checked=roompersistent}break
+                case "room clear": {checked=clearview}break
 
                 case "clear bg": {checked=clearscreen}break
                 case "bg visible": {checked=bg_visible[bg_current]}break

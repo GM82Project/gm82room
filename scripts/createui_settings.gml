@@ -49,7 +49,7 @@ i.tagmode=4
 
 i=instance_create(8,332,Button)
 i.type=1
-i.action="clear window"
+i.action="room clear"
 i.text="Clear"
 i.alt="Clear window before drawing"
 i.tagmode=4
