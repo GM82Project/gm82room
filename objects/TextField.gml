@@ -40,7 +40,8 @@ if (down!=0 && focus && !active && (!extended || extended_instancedata) && !((!C
         keyboard_string=text
     }
     if (type==1) {
-        text=string(get_color(real(text)))
+        val=get_color(real(text))
+        if (val!=-1) text=string(val)
         textfield_actions()
     }
     if (type==2 || type==3) {
