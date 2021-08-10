@@ -10,7 +10,6 @@ globalvar extended_instancedata,viewspeedcorrection;
 
 var f,p,i,inst,layer,map,tileid;
 
-
 draw_loader("Loading project...",0)
 
 //find room

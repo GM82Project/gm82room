@@ -232,14 +232,19 @@ if (mode=0) {
         }
         posx+=1 if (posx=4) {posx=0 posy+=1}
     }
-    dx=20+40*posx
-    dy=140+40*posy+palettescroll
-    draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
-    draw_sprite(sprMenuButtons,18,dx,dy)
-    if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
-        if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
-            paltooltip=1
+
+    if (objpal!=noone) {
+        dx=20+40*posx
+        dy=140+40*posy+palettescroll
+        draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
+        draw_sprite(sprMenuButtons,18,dx,dy)
+        if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                paltooltip=1
+            }
         }
+    } else {
+        draw_text(8,126,"Project#contains no#objects.")
     }
 
     //bottom panel
@@ -299,6 +304,8 @@ if (mode==1) {
                 paltooltip=1
             }
         }
+    } else {
+        draw_text(8,158,"Project#contains no#backgrounds.")
     }
 
     draw_button(0,height-192,160,192,1)
@@ -324,8 +331,6 @@ if (mode==1) {
         draw_set_color_sel()
         draw_rectangle(dx+(u-left),dy+(v-top),dx+(u-left)+tw,dy+(v-top)+th,1)
         draw_set_color($ffffff)
-    } else {
-        draw_text(8+8,height-184+8,"Project#contains no#backgrounds.")
     }
 
     //inspector

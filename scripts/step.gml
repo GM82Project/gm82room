@@ -415,7 +415,7 @@ if (mouse_check_direct(mb_right)) {
 
 
 //object mode
-if (mode==0) {
+if (mode==0 && objpal!=noone) {
     //palette controls
     if (mouse_wx<160 && mouse_wy>=120 && mouse_wy<height-100) {
         if (mouse_check_button_pressed(mb_left)) {

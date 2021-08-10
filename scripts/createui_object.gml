@@ -23,7 +23,7 @@ i.dynamic=0
 i.maxlen=13
 i.w=160-16
 i.tagmode=0
-textfield_set("palette name",ds_list_find_value(objects,objpal))
+if (objpal!=noone) textfield_set("palette name",ds_list_find_value(objects,objpal))
 
 i=instance_create(8,height-76+12+32,Button)
 i.type=1
