@@ -125,8 +125,8 @@ if (tilebgpal!=noone) {
             while (key!=tileid) {
                 tilepal+=1
                 key=ds_map_find_next(map,key)
-                curtile=ds_map_find_value(map,key)
             }
+            curtile=ds_map_find_value(map,key)
         }
         if (finished) exit
         screen_refresh()
