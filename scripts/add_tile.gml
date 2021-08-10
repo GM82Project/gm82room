@@ -20,7 +20,16 @@ if (tilebgpal!=noone) {
     scrollx=0
     scrolly=0
 
+    startx=ox
+    starty=oy
+    endx=gx
+    endy=gy
+
     finished=0
+
+    while (mouse_check_direct(mb_left)) {
+        sleep(16)
+    }
 
     texture_set_interpolation(0)
     while (1) {
