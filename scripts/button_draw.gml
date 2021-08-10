@@ -44,6 +44,8 @@ if (object_index==Button) {
 
         if ((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1)) up=0
 
+        if (extended && !extended_instancedata) up=0
+
         buttoncol=global.col_main
         if (action=="bgselect") buttoncol=pick(bg_visible[actionid] && bg_source[actionid]!="",buttoncol,$808080)
         if (action=="vwselect") buttoncol=pick(vw_visible[actionid],buttoncol,$808080)
@@ -74,15 +76,18 @@ if (object_index==Button) {
 
 if (object_index==TextField) {
     if (tagmode==mode || tagmode==-1) {
-        if (type==1) buttoncol=real(text)
+        if (extended && !extended_instancedata) buttoncol=global.col_main
         else {
-            if (active) buttoncol=$ffffff
+            if (type==1) buttoncol=real(text)
             else {
-                if (type==0 || type==2) {
-                    if ((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1)) buttoncol=global.col_main
-                    else buttoncol=$c0c0c0
-                } else {
-                    buttoncol=$c0c0c0
+                if (active) buttoncol=$ffffff
+                else {
+                    if (type==0 || type==2) {
+                        if ((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1)) buttoncol=global.col_main
+                        else buttoncol=$c0c0c0
+                    } else {
+                        buttoncol=$c0c0c0
+                    }
                 }
             }
         }

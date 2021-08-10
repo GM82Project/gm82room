@@ -16,22 +16,17 @@ draw_loader("Loading project...",0)
 //find room
 if (parameter_count()) {
     //summoned from gm82
-    room_caption="Game Maker 8.2 Room Editor"
     dir=parameter_string(1)
 } else {
     //clicked on
-    room_caption="OpenGMK IDE Room Editor"
-    //dev
-    if (environment_get_variable("USERNAME")=="hex") dir="C:\Stuff\github\renex-engine\rooms\rmDemo1"
-    else dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
+    dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
 }
 roomname=filename_name(dir)
 if (roomname="") {
-    //shruggeth
+    //shrug
     game_end()
-    exit
+    return 0
 }
-
 
 dir+="\"
 root=dir+"..\..\"
@@ -83,7 +78,7 @@ roomcaption=ds_map_find_value(settings,"caption")
 vw_enabled=real(ds_map_find_value(settings,"views_enabled"))
 
 roomcode=string_replace_all(file_text_read_all(dir+"code.gml"),chr(13),"")
-if (string_replace_all(string_replace_all(string_replace_all(roomcode,chr(9),""),chr(10),"")," ","")="") roomcode=""
+if (string_replace_all(string_replace_all(string_replace_all(roomcode,chr(9),""),lf,"")," ","")="") roomcode=""
 
 for (i=0;i<8;i+=1) {
     k=string(i)
@@ -222,3 +217,5 @@ f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file
         }
     }
 } until (file_text_eof(f)) file_text_close(f)
+
+return 1

@@ -21,5 +21,5 @@ with (argument0) {
         } else code+=str
     } until !p
 
-    if (string_replace_all(string_replace_all(string_replace_all(code,";",""),chr(10),"")," ","")=="") code=""
+    if (string_replace_all(string_replace_all(string_replace_all(code,";",""),lf,"")," ","")=="") code=""
 }

@@ -16,6 +16,7 @@ focus=0
 active=0
 k=0
 dynamic=-1
+extended=0
 maxlen=256
 displen=256
 minval=0
@@ -31,7 +32,7 @@ applies_to=self
 */
 focus=position_meeting(mouse_wx,mouse_wy,id)
 
-if (down!=0 && focus && !active && ((Controller.select || dynamic!=0) || (Controller.selectt || dynamic!=1))) {
+if (down!=0 && focus && !active && (!extended || extended_instancedata) && ((Controller.select || dynamic!=0) || (Controller.selectt || dynamic!=1))) {
     //activate textfield
     with (TextField) textfield_actions()
     active=1
@@ -100,4 +101,5 @@ if (type==4 || type==0) {
         alt=string_replace_all(text,"#","\#")
     } else alt=""
     dtext=string_replace_all(dtext,"#","\#")
+    if (extended && !extended_instancedata) alt="Please update gm82save!"
 } else dtext=text

@@ -15,7 +15,7 @@ repeat (string_length(argument0)) {
         else if (string_pos(c,"0123456789.")) {
             mode=2
             out+=c
-        } else if (c!=" " && c!=chr(13) && c!=chr(10) && c!=chr(9)) break
+        } else if (c!=" " && c!=chr(13) && c!=lf && c!=chr(9)) break
     } else if (mode==2) {
         if (string_pos(c,"0123456789.")) {
             out+=c

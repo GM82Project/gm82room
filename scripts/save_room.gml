@@ -1,7 +1,5 @@
 var f,f2,i,l,cl,dir,savecode,str,crc,pr;
 
-var lf; lf=chr(10)
-
 dir=self.dir
 
 instance_activate_all()

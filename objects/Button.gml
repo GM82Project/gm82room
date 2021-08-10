@@ -11,6 +11,7 @@ text=""
 spr=noone
 focus=0
 dynamic=-1
+extended=0
 alt=""
 anchor=0
 type=0
@@ -24,7 +25,7 @@ applies_to=self
 */
 focus=position_meeting(mouse_wx,mouse_wy,id)
 
-if (down!=0) {
+if (down!=0 && (!extended || extended_instancedata)) {
     //click button
     if (!focus) down=-1
     else down=abs(down)

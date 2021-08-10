@@ -20,6 +20,7 @@ height=display_get_height()-80-64
 maxfps=display_get_frequency()
 
 room_speed=maxfps
+room_caption="Game Maker 8.2 Room Editor"
 
 xgo=0
 ygo=0
@@ -51,7 +52,7 @@ paladdbuttondown=0
 select=noone
 selectt=noone
 selecting=0
-mode=1//4
+mode=4
 grabview=0
 sizeview=0
 bg_current=0
@@ -73,7 +74,7 @@ if (!registry_read_dword(dir+"NewRoomEditorSeen",0)) show_info()
 
 state="load"
 crc_init()
-load_room()
+if (!load_room()) exit
 state="run"
 
 view[0]=1

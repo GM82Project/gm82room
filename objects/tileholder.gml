@@ -99,12 +99,14 @@ draw_circle(x,y,4,1)
 draw_line(x,y-4,x,y+4)
 draw_line(x-4,y,x+4,y)
 
-draghandx=x+image_xscale
-draghandy=y+image_yscale
+if (extended_instancedata) {
+    draghandx=x+image_xscale
+    draghandy=y+image_yscale
 
-if (draggatto) draw_line(x,y,draghandx,draghandy)
-draw_rectangle(draghandx-8,draghandy-8,draghandx+8,draghandy+8,1)
-draw_rectangle(draghandx-4,draghandy-4,draghandx+4,draghandy+4,1)
+    if (draggatto) draw_line(x,y,draghandx,draghandy)
+    draw_rectangle(draghandx-8,draghandy-8,draghandx+8,draghandy+8,1)
+    draw_rectangle(draghandx-4,draghandy-4,draghandx+4,draghandy+4,1)
+}
 
 draw_set_color($ffffff)
 draw_set_alpha(1)
