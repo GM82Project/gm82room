@@ -311,7 +311,7 @@ if (mode==1) {
     draw_button(0,height-192,160,192,1)
     draw_button(4,height-160-28,152,152,0)
 
-    if (tilebgpal!=noone) {
+    if (tilebgpal!=noone && curtile!=noone) {
         u=ds_list_find_value(curtile,0)
         v=ds_list_find_value(curtile,1)
         tw=ds_list_find_value(curtile,2)

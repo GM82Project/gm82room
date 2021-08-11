@@ -1,5 +1,7 @@
 var i,map;
 
+micro_optimization_bgid=noone
+
 if (argument0=="") return bgDefault
 
 i=ds_list_find_index(backgrounds,argument0)
