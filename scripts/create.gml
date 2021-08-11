@@ -52,7 +52,7 @@ paladdbuttondown=0
 select=noone
 selectt=noone
 selecting=0
-mode=4
+mode=0
 grabview=0
 sizeview=0
 bg_current=0
@@ -82,9 +82,8 @@ view[1]=1
 view[2]=1
 view[3]=1
 view[4]=0
-view[5]=0
-view[6]=0
-//alarm[0]=1
+view[5]=1
+view[6]=1
 
 //adjust window to fit room
 width=max(min_width,min(width,roomwidth+64+160*2))
