@@ -4,6 +4,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+tile=noone
 tilesx=1
 tilesy=1
 blend=$ffffffff
@@ -29,8 +30,10 @@ if (Controller.selectt==id) {
     Controller.selectt=noone
 }
 
-tilecount-=1
-tile_delete(tile)
+if (tile!=noone) {
+    tilecount-=1
+    tile_delete(tile)
+}
 #define Alarm_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
