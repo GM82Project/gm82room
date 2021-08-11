@@ -36,8 +36,10 @@ if (file_exists(argument0)) {
                 //resource
                 item=N_Menu_AddItem(path[curindent],resname,"")
                 icon=background_menuicon
-                fn=root+"cache\backgrounds\"+resname+".bmp"
-                if (file_exists(fn)) {icon=N_Menu_LoadBitmap(fn) ds_map_add(bgmenuicons,resname,icon)}
+                if (icon_mode) {
+                    fn=root+"cache\backgrounds\"+resname+".bmp"
+                    if (file_exists(fn)) {icon=N_Menu_LoadBitmap(fn) ds_map_add(bgmenuicons,resname,icon)}
+                }
                 N_Menu_ItemSetBitmap(path[curindent],item,icon)
                 ds_map_add(bgmenuitems,item,resname)
             }

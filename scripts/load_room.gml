@@ -32,6 +32,11 @@ root=dir+"..\..\"
 room_caption+=" - "+roomname
 set_application_title(roomname+" - Room Editor")
 
+//set up thumbnails
+directory_create(root+"cache")
+if (directory_exists(root+"cache\backgrounds") && directory_exists(root+"cache\sprites")) {
+    icon_mode=1
+}
 fn=root+"cache\background.bmp" export_include_file_location("background.bmp",fn) background_menuicon=N_Menu_LoadBitmap(fn)
 fn=root+"cache\folder.bmp" export_include_file_location("folder.bmp",fn) folder_menuicon=N_Menu_LoadBitmap(fn)
 fn=root+"cache\object.bmp" export_include_file_location("object.bmp",fn) object_menuicon=N_Menu_LoadBitmap(fn)

@@ -58,6 +58,7 @@ sizeview=0
 bg_current=0
 vw_current=0
 ly_current=0
+icon_mode=0
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
 grid=registry_read_dword(dir+"RoomGridOnOffDefault",0)
