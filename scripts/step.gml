@@ -453,14 +453,14 @@ if (mode==0 && objpal!=noone) {
 //tile mode
 if (mode==1 && tilebgpal!=noone) {
     //tile palette
+    map=bg_tilemap[tilebgpal]
+    tpalsize=ds_map_size(map)
     if (mouse_wx<160 && mouse_wy>=152 && mouse_wy<height-216) {
         if (mouse_check_button_pressed(mb_left)) {
             //click on tile palette
-            map=bg_tilemap[tilebgpal]
-            len=ds_map_size(map)
             posx=0
             posy=0
-            for (i=0;i<len;i+=1) {
+            for (i=0;i<tpalsize;i+=1) {
                 dx=20+40*posx
                 dy=172+40*posy+tpalscroll
                 if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {

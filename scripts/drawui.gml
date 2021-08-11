@@ -92,6 +92,22 @@ if (mode==1) {
     with (Controller.selectt) {
         event_user(0)
     }
+
+    if (crosshair) if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
+        if (tilebgpal!=noone) {
+            texture_set_interpolation(interpolation)
+            tex=bg_background[tilebgpal]
+            u=ds_list_find_value(curtile,0)
+            v=ds_list_find_value(curtile,1)
+            tw=ds_list_find_value(curtile,2)
+            th=ds_list_find_value(curtile,3)
+
+            if (keyboard_check(vk_alt)) draw_background_part_ext(tex,u,v,tw,th,mouse_x,mouse_y,1,1,$ffffff,0.25)
+            else draw_background_part_ext(tex,u,v,tw,th,fmx,fmy,1,1,$ffffff,0.25)
+            texture_set_interpolation(1)
+        }
+    }
+
 }
 
 
@@ -275,11 +291,11 @@ if (mode==1) {
 
         key=ds_map_find_first(map)
         for (i=0;i<len;i+=1) {
+            tile=ds_map_find_value(map,key)
+            key=ds_map_find_next(map,key)
             dx=20+40*posx
             dy=172+40*posy+tpalscroll
             if (dy>132 && dy<height-196) {
-                tile=ds_map_find_value(map,key)
-                key=ds_map_find_next(map,key)
                 u=ds_list_find_value(tile,0)
                 v=ds_list_find_value(tile,1)
                 tw=ds_list_find_value(tile,2)
@@ -320,16 +336,22 @@ if (mode==1) {
         //cut up a preview rectangle around the selected tile
         bw=background_get_width(tex)
         bh=background_get_height(tex)
-        left=max(0,min(u+tw/2-72,bw-144))
-        top=max(0,min(v+th/2-72,bh-144))
-        lewidth=min(144,bw-left)
-        leheight=min(144,bh-top)
 
-        dx=8+72-lewidth/2
-        dy=height-184+72-leheight/2
-        draw_background_part(tex,left,top,lewidth,leheight,dx,dy)
+        nw=max(min(bw,144),tw)
+        nh=max(min(bh,144),th)
+
+        left=max(0,min(u+tw/2-nw/2,bw-nw))
+        top=max(0,min(v+th/2-nh/2,bh-nh))
+        lewidth=min(nw,bw-left)
+        leheight=min(nh,bh-top)
+
+        scale=min(1,144/max(lewidth,leheight))
+
+        dx=8+72-lewidth/2*scale
+        dy=height-184+72-leheight/2*scale
+        draw_background_part_ext(tex,left,top,lewidth,leheight,dx,dy,scale,scale,$ffffff,1)
         draw_set_color_sel()
-        draw_rectangle(dx+(u-left),dy+(v-top),dx+(u-left)+tw,dy+(v-top)+th,1)
+        draw_rectangle(dx+(u-left),dy+(v-top),dx+(u-left)+tw*scale,dy+(v-top)+th*scale,1)
         draw_set_color($ffffff)
     }
 
@@ -466,8 +488,8 @@ if (mode==0) {
             w=sprite_get_width(objspr[i])
             h=sprite_get_height(objspr[i])
             if (w>32 || h>32) {
-                dx=max(0,dx-w/2)+w/2
-                dy=max(0,dy-h/2)+h/2
+                dx=max(1,dx-w/2)+w/2
+                dy=max(1,dy-h/2)+h/2
                 draw_set_color_sel() d3d_set_fog(1,draw_get_color(),0,0) draw_set_color($ffffff)
                 draw_sprite_stretched_ext(objspr[i],0,dx-w/2+1,dy-h/2+1,w,h,0,1)
                 draw_sprite_stretched_ext(objspr[i],0,dx-w/2+1,dy-h/2-1,w,h,0,1)
@@ -506,16 +528,16 @@ if (mode==1 && tilebgpal!=noone) {
                 w=tw
                 h=th
                 if (w>32 || h>32) {
-                    dx=max(0,dx-w/2)+w/2
-                    dy=max(0,dy-h/2)+h/2
+                    dx=max(1,dx-tw/2)+tw/2
+                    dy=max(1,dy-th/2)+th/2
                     draw_set_color_sel() d3d_set_fog(1,draw_get_color(),0,0) draw_set_color($ffffff)
-                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2+1,dy-h/2+1,w/tw,h/th,0,1)
-                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2+1,dy-h/2-1,w/tw,h/th,0,1)
-                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2-1,dy-h/2+1,w/tw,h/th,0,1)
-                    draw_background_part_ext(tex,u,v,tw,th,dx-w/2-1,dy-h/2-1,w/tw,h/th,0,1)
+                    draw_background_part(tex,u,v,tw,th,dx-tw/2+1,dy-th/2+1)
+                    draw_background_part(tex,u,v,tw,th,dx-tw/2+1,dy-th/2-1)
+                    draw_background_part(tex,u,v,tw,th,dx-tw/2-1,dy-th/2+1)
+                    draw_background_part(tex,u,v,tw,th,dx-tw/2-1,dy-th/2-1)
                     d3d_set_fog(0,0,0,0)
                 }
-                draw_background_part_ext(tex,u,v,tw,th,dx-w/2,dy-h/2,w/tw,h/th,$ffffff,1)
+                draw_background_part(tex,u,v,tw,th,dx-tw/2,dy-th/2)
             }
             posx+=1 if (posx=4) {posx=0 posy+=1}
         }
