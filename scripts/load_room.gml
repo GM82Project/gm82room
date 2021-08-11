@@ -32,6 +32,9 @@ root=dir+"..\..\"
 room_caption+=" - "+roomname
 set_application_title(roomname+" - Room Editor")
 
+fn=root+"cache\background.bmp" export_include_file_location("background.bmp",fn) background_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\folder.bmp" export_include_file_location("folder.bmp",fn) folder_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\object.bmp" export_include_file_location("object.bmp",fn) object_menuicon=N_Menu_LoadBitmap(fn)
 
 //load assets
 sprites=file_text_read_list(root+"sprites\index.yyd")

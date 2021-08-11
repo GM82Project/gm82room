@@ -6,8 +6,6 @@ tab=chr(9)
 
 objmenuitems=ds_map_create()
 objmenu=N_Menu_CreatePopupMenu()
-fn=root+"cache\#gm82room_folder.bmp" export_include_file_location("folder.bmp",fn) folder_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\#gm82room_object.bmp" export_include_file_location("object.bmp",fn) object_menuicon=N_Menu_LoadBitmap(fn)
 
 ds_map_add(objmenuitems,N_Menu_AddItem(objmenu,"(no object)",""),"<undefined>")
 
