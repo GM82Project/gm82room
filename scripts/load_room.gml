@@ -131,40 +131,41 @@ if (layersize) {
             str=string_delete(str,1,p) p=string_pos(",",str)  o.tileh=real(string_copy(str,1,p-1))
 
             o.bg=get_background(o.bgname)
-            o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
-            o.tlayer=layer
+            if (micro_optimization_bgid!=noone) {
+                o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
+                o.tlayer=layer
 
-            //add tiles to unique tile hashmap
-            map=bg_tilemap[micro_optimization_bgid]
-            tileid=string(tileu)+","+string(tilev)+","+string(o.tilew)+","+string(o.tileh)
-            if (!ds_map_exists(map,tileid)) {
-                //add this tile
-                list=ds_list_create()
-                ds_list_add(list,tileu)
-                ds_list_add(list,tilev)
-                ds_list_add(list,o.tilew)
-                ds_list_add(list,o.tileh)
-                ds_map_add(map,tileid,list)
-            }
+                //add tiles to unique tile hashmap
+                map=bg_tilemap[micro_optimization_bgid]
+                tileid=string(tileu)+","+string(tilev)+","+string(o.tilew)+","+string(o.tileh)
+                if (!ds_map_exists(map,tileid)) {
+                    //add this tile
+                    list=ds_list_create()
+                    ds_list_add(list,tileu)
+                    ds_list_add(list,tilev)
+                    ds_list_add(list,o.tilew)
+                    ds_list_add(list,o.tileh)
+                    ds_map_add(map,tileid,list)
+                }
+                o.image_xscale=o.tilew
+                o.image_yscale=o.tileh
 
-            o.image_xscale=o.tilew
-            o.image_yscale=o.tileh
+                if (extended_instancedata) {
+                    str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
+                    str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesx=real(string_copy(str,1,p-1))
+                    str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesy=real(string_copy(str,1,p-1))
+                    str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(str)
 
-            if (extended_instancedata) {
-                str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
-                str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesx=real(string_copy(str,1,p-1))
-                str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesy=real(string_copy(str,1,p-1))
-                str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(str)
+                    o.image_xscale*=o.tilesx
+                    o.image_yscale*=o.tilesy
+                    o.image_alpha=floor(tileblend/$1000000)/$ff
+                    o.image_blend=tileblend&$ffffff
 
-                o.image_xscale*=o.tilesx
-                o.image_yscale*=o.tilesy
-                o.image_alpha=(tileblend>>24)/$ff
-                o.image_blend=tileblend&$ffffff
-
-                tile_set_scale(o.tile,o.tilesx,o.tilesy)
-                tile_set_alpha(o.tile,o.image_alpha)
-                tile_set_blend(o.tile,o.image_blend)
-            }
+                    tile_set_scale(o.tile,o.tilesx,o.tilesy)
+                    tile_set_alpha(o.tile,o.image_alpha)
+                    tile_set_blend(o.tile,o.image_blend)
+                }
+            } else with (o) instance_destroy()
 
             if (current_time>time) {
                 time=current_time
@@ -187,7 +188,6 @@ f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file
         str=string_delete(str,1,p) p=string_pos(",",str)  o.y=real(string_copy(str,1,p-1))
         str=string_delete(str,1,p) p=string_pos(",",str)  o.code=string_copy(str,1,p-1)
 
-        if (o.code!="") parsecode(o,file_text_read_all(dir+o.code+".gml"))
         o.obj=get_object(o.objname)
 
         o.depth=objdepth[o.obj]
@@ -205,9 +205,11 @@ f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file
             str=string_delete(str,1,p) p=string_pos(",",str)  o.image_blend=real(string_copy(str,1,p-1))
             str=string_delete(str,1,p) p=string_pos(",",str)  o.image_angle=real(str)
 
-            o.image_alpha=(o.image_blend>>24)/$ff
+            o.image_alpha=floor(o.image_blend/$1000000)/$ff
             o.image_blend=o.image_blend&$ffffff
         }
+
+        if (o.code!="") parsecode(o,file_text_read_all(dir+o.code+".gml"))
 
         if (current_time>time) {
             time=current_time
