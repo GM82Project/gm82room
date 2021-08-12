@@ -211,7 +211,7 @@ if (mouse_check_button_pressed(mb_left)) {
                         with (instance) memsel=sel
                         selx=mouse_x
                         sely=mouse_y
-                    } else {
+                    } else if (!keyboard_check(vk_control)) {
                         //paint
                         paint=2
                         paintx=0
@@ -267,7 +267,7 @@ if (mouse_check_button_pressed(mb_left)) {
                         with (tileholder) memsel=sel
                         selx=mouse_x
                         sely=mouse_y
-                    } else {
+                    } else if (!keyboard_check(vk_control)) {
                         //paint
                         paint=2
                         paintx=0
@@ -397,7 +397,7 @@ if (keyboard_check_pressed(vk_delete)) {
 }
 
 
-if (mouse_check_direct(mb_right)) {
+if (mouse_check_direct(mb_right) && !keyboard_check(vk_control)) {
     //cancel selection
     if (selecting) selecting=0
     clear_inspector()
