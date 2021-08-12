@@ -357,6 +357,8 @@ if (paint) {
                     with (tileholder) if (bg=tex) if (place_meeting(x,y,Controller)) {
                         yes=0
                     }
+                    image_xscale=1
+                    image_yscale=1
                 }
                 if (yes) {
                     o=instance_create(dx,dy,tileholder)
