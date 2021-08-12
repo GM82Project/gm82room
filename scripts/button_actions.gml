@@ -126,8 +126,8 @@ with (Controller) switch (argument0) {
     case "tile overlap check": {tile_overlap_check=!tile_overlap_check}break
 
     //tile inspector
-    case "tile snap"     : {with (tileholder) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) tile_set_position(tile,x,y) update_inspector()}}break
-    case "tile flip xs"  : {
+    case "tile snap": {with (tileholder) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) tile_set_position(tile,x,y) update_inspector()}}break
+    case "tile flip xs": {
         with (tileholder) if (sel) {
             cl=min(cl,bbox_left)
             ct=min(ct,bbox_top)
@@ -147,7 +147,7 @@ with (Controller) switch (argument0) {
             update_inspector()
         }
     }break
-    case "tile flip ys"  : {
+    case "tile flip ys": {
         with (tileholder) if (sel) {
             cl=min(cl,bbox_left)
             ct=min(ct,bbox_top)

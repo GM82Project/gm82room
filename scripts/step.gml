@@ -305,7 +305,10 @@ if (selecting) {
             else sel=memsel
         }
     }
-    if (!mouse_check_direct(mb_left)) selecting=0
+    if (!mouse_check_direct(mb_left)) {
+        selecting=0
+        update_inspector()
+    }
 }
 
 

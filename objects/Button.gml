@@ -17,6 +17,7 @@ anchor=0
 type=0
 tagmode=-1
 downcount=0
+gray=0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -32,7 +33,7 @@ if (down!=0 && (!extended || extended_instancedata)) {
     downcount+=1
     if (downcount>room_speed/3) button_held(action)
     if (!mouse_check_button(mb_left)) {
-        if (down && !((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1))) button_actions(action)
+        if (down && !gray) button_actions(action)
         down=0
     }
 } else downcount=0

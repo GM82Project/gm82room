@@ -19,6 +19,8 @@ with (Button) {
 
     if (extended && !extended_instancedata) alt="Please update gm82save!"
 
+    if (dynamic!=-1) gray=1
+
     image_xscale=w
     image_yscale=h
 }

@@ -104,3 +104,4 @@ bgtex=background_get_texture(bgBlack)
 
 update_view()
 change_mode(mode)
+focus_object(objpal)

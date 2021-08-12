@@ -24,6 +24,7 @@ maxval=0
 type=0
 anchor=0
 tagmode=-1
+gray=0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -32,7 +33,7 @@ applies_to=self
 */
 focus=position_meeting(mouse_wx,mouse_wy,id)
 
-if (down!=0 && focus && !active && (!extended || extended_instancedata) && !((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1))) {
+if (down!=0 && focus && !active && (!extended || extended_instancedata) && !(gray)) {
     //activate textfield
     with (TextField) textfield_actions()
     active=1

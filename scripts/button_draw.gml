@@ -42,7 +42,7 @@ if (object_index==Button) {
             up=!down
         }
 
-        if ((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1)) up=0
+        if (gray) up=0
 
         if (extended && !extended_instancedata) up=0
 
@@ -83,7 +83,7 @@ if (object_index==TextField) {
                 if (active) buttoncol=$ffffff
                 else {
                     if (type==0 || type==2) {
-                        if ((!Controller.select && dynamic==0) || (!Controller.selectt && dynamic==1)) buttoncol=global.col_main
+                        if (gray) buttoncol=global.col_main
                         else buttoncol=$c0c0c0
                     } else {
                         buttoncol=$c0c0c0
