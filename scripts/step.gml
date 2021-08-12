@@ -151,6 +151,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
 }
 
 
+//left click actions
 if (mouse_check_button_pressed(mb_left)) {
     with (TextField) textfield_actions()
     if (!mousein) {
@@ -399,6 +400,7 @@ if (keyboard_check_pressed(vk_delete)) {
 }
 
 
+//right click actions
 if (mouse_check_direct(mb_right) && !keyboard_check(vk_control)) {
     //cancel selection
     if (selecting) selecting=0
@@ -607,7 +609,6 @@ if (zooming) {
 
 
 //zooming
-
 if (mousein) {
     if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
         zoomgo*=1.2
@@ -632,7 +633,6 @@ if (keyboard_check_pressed(ord("0"))) {
         zoomcenter=1
     }
 }
-
 
 zoomold=zoom
 if (abs(zoom-1)<0.1) {

@@ -21,6 +21,7 @@
 	|load_background_tree
 |load_room
 |save_room
+|gameend
 |create
 |createui
 +createui
@@ -51,7 +52,6 @@
 |button_draw
 |textfield_actions
 |textfield_set
-|gameend
 |focus_object
 |focus_tile
 |cement_instances
