@@ -589,6 +589,10 @@ if (click) {
 //panning
 if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
     //yeah i know i called pan zooming but ok just think like youre zooming around im sorry
+    if (keyboard_check(vk_control)) {
+        if (mode==0) with (focus) focus_object(obj)
+        if (mode==1) with (focus) focus_tile(tile)
+    }
     zooming=1
     grabx=mouse_x
     graby=mouse_y
