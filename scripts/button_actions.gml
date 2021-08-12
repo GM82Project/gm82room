@@ -70,6 +70,7 @@ with (Controller) switch (argument0) {
     case "palscroldown" : {palettescrollgo-=200}break
     case "palscrolup"   : {palettescrollgo+=200}break
     case "overlap check": {overlap_check=!overlap_check}break
+    case "cement"       : {cement_instances()}break
 
 
     //tiles

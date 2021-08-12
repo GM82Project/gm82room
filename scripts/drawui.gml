@@ -264,7 +264,8 @@ if (mode=0) {
     }
 
     //bottom panel
-    draw_button(0,height-76,160,76,1)
+    draw_button(0,height-112,160,112,1)
+    draw_text(8,height-32,"Tools")
 
     //inspector
     dx=width-160

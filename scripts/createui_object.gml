@@ -7,7 +7,7 @@ i.w=160
 i.h=24
 i.tagmode=0
 
-i=instance_create(0,height-100,Button)
+i=instance_create(0,height-136,Button)
 i.spr=20
 i.action="palscroldown"
 i.w=160
@@ -15,7 +15,7 @@ i.h=24
 i.anchor=2
 i.tagmode=0
 
-i=instance_create(8,height-76+8,TextField)
+i=instance_create(8,height-104,TextField)
 i.action="palette name"
 i.type=3
 i.anchor=2
@@ -25,7 +25,7 @@ i.w=160-16
 i.tagmode=0
 if (objpal!=noone) textfield_set("palette name",ds_list_find_value(objects,objpal))
 
-i=instance_create(8,height-76+12+32,Button)
+i=instance_create(8,height-100+32,Button)
 i.type=1
 i.anchor=2
 i.action="overlap check"
@@ -33,6 +33,12 @@ i.text="No overlap"
 i.alt="Avoid placing instances that overlap existing#instances of the same object type"
 i.tagmode=0
 
+i=instance_create(120,height-100+60,Button)
+i.action="cement"
+i.alt="Glue adjacent instances of this object to reduce instance count"
+i.spr=26
+i.tagmode=0
+i.anchor=2
 
 //inspector
 i=instance_create(width-160,0,TextField)
