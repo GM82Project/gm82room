@@ -38,13 +38,13 @@ if (active) {
 
         case "view x": {val=round(real(text)) vw_x[vw_current]=val}break
         case "view y": {val=round(real(text)) vw_y[vw_current]=val}break
-        case "view w": {val=round(real(text)) vw_w[vw_current]=val}break
-        case "view h": {val=round(real(text)) vw_h[vw_current]=val}break
+        case "view w": {val=round(real(text)) if (val=0) {val=16 text="16"} vw_w[vw_current]=val}break
+        case "view h": {val=round(real(text)) if (val=0) {val=16 text="16"} vw_h[vw_current]=val}break
 
         case "view xp": {val=round(real(text)) vw_xp[vw_current]=val}break
         case "view yp": {val=round(real(text)) vw_yp[vw_current]=val}break
-        case "view wp": {val=round(real(text)) vw_wp[vw_current]=val}break
-        case "view hp": {val=round(real(text)) vw_hp[vw_current]=val}break
+        case "view wp": {val=round(real(text)) if (val=0) {val=16 text="16"} vw_wp[vw_current]=val}break
+        case "view hp": {val=round(real(text)) if (val=0) {val=16 text="16"} vw_hp[vw_current]=val}break
 
         case "view hbor"  : {val=round(real(text)) vw_hbor  [vw_current]=val}break
         case "view vbor"  : {val=round(real(text)) vw_vbor  [vw_current]=val}break
