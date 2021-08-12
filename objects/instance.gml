@@ -74,8 +74,16 @@ if (sel) {
         dir=point_direction(x,y,dx,dy)
         len=point_distance(x,y,dx,dy)
 
-        image_xscale=lengthdir_x(len,dir-image_angle)/sprw
-        image_yscale=lengthdir_y(len,dir-image_angle)/sprh
+        if (sprox>sprw*0.5) {
+            image_xscale=-lengthdir_x(len,dir-image_angle)/(sprox)
+        } else {
+            image_xscale=lengthdir_x(len,dir-image_angle)/(sprw-sprox)
+        }
+        if (sproy>sprh*0.5) {
+            image_yscale=-lengthdir_y(len,dir-image_angle)/(sproy)
+        } else {
+            image_yscale=lengthdir_y(len,dir-image_angle)/(sprh-sproy)
+        }
 
         if (abs(image_xscale*sprw)<1) image_xscale=1/sprw
         if (abs(image_yscale*sprh)<1) image_yscale=1/sprh
