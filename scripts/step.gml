@@ -482,8 +482,8 @@ if (mode==1 && tilebgpal!=noone) {
         h=mouse_wheel_down()-mouse_wheel_up()
         tpalscrollgo-=h*80
     }
-    tpalscrollgo=clamp(tpalscrollgo,-(tpalsize+1)*32+(height-152-216),0)
-    tpalscroll=clamp(inch((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(tpalsize+1)*32+(height-152-216),0)
+    tpalscrollgo=clamp(tpalscrollgo,-(tpalsize div 4+1)*40+(height-152-216),0)
+    tpalscroll=clamp(inch((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(tpalsize div 4+1)*40+(height-152-216),0)
 
     //layer inspector
     if (mouse_wx>=width-160 && mouse_wy>=360 && mouse_wy<height-100) {
