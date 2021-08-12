@@ -169,10 +169,10 @@ if (mouse_check_button_pressed(mb_left)) {
                     offx=mouse_x-x
                     offy=mouse_y-y
                     yes=1
-                } else if (point_distance(rothandx,rothandy,mouse_x,mouse_y)<10) {
+                } else if (point_distance(rothandx,rothandy,mouse_x,mouse_y)<10*zm) {
                     rotato=1
                     yes=1
-                } else if (abs(mouse_x-draghandx)<8 && abs(mouse_y-draghandy)<8) {
+                } else if (abs(mouse_x-draghandx)<8*zm && abs(mouse_y-draghandy)<8*zm) {
                     draggatto=1
                     yes=1
                 }
@@ -228,7 +228,7 @@ if (mouse_check_button_pressed(mb_left)) {
                     offx=mouse_x-x
                     offy=mouse_y-y
                     yes=1
-                } else if (extended_instancedata) if (abs(mouse_x-draghandx)<8 && abs(mouse_y-draghandy)<8) {
+                } else if (extended_instancedata) if (abs(mouse_x-draghandx)<8*zm && abs(mouse_y-draghandy)<8*zm) {
                     draggatto=1
                     yes=1
                 }

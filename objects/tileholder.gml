@@ -97,18 +97,20 @@ applies_to=self
 d3d_transform_add_translation(-0.5,-0.5,0)
 draw_set_color_sel()
 
+zm=max(0.5,zoom)
+
 draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
-draw_circle(x,y,4,1)
-draw_line(x,y-4,x,y+4)
-draw_line(x-4,y,x+4,y)
+draw_circle(x,y,4*zm,1)
+draw_line(x,y-4*zm,x,y+4*zm)
+draw_line(x-4*zm,y,x+4*zm,y)
 
 if (extended_instancedata) {
     draghandx=x+image_xscale
     draghandy=y+image_yscale
 
     if (draggatto) draw_line(x,y,draghandx,draghandy)
-    draw_rectangle(draghandx-8,draghandy-8,draghandx+8,draghandy+8,1)
-    draw_rectangle(draghandx-4,draghandy-4,draghandx+4,draghandy+4,1)
+    draw_rectangle(draghandx-8*zm,draghandy-8*zm,draghandx+8*zm,draghandy+8*zm,1)
+    draw_rectangle(draghandx-4*zm,draghandy-4*zm,draghandx+4*zm,draghandy+4*zm,1)
 }
 
 draw_set_color($ffffff)

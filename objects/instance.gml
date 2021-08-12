@@ -94,10 +94,12 @@ applies_to=self
 d3d_transform_add_translation(-0.5,-0.5,0)
 draw_set_color_sel()
 
+zm=max(0.5,zoom)
+
 draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
-draw_circle(x,y,4,1)
-draw_line(x,y-4,x,y+4)
-draw_line(x-4,y,x+4,y)
+draw_circle(x,y,4*zm,1)
+draw_line(x,y-4*zm,x,y+4*zm)
+draw_line(x-4*zm,y,x+4*zm,y)
 
 if (sprox>sprw*0.5) {
     draghandx=x+lengthdir_x(-sprox*image_xscale,image_angle)
@@ -116,8 +118,8 @@ if (sproy>sprh*0.5) {
 }
 
 if (draggatto) draw_line(x,y,draghandx,draghandy)
-draw_rectangle(draghandx-8,draghandy-8,draghandx+8,draghandy+8,1)
-draw_rectangle(draghandx-4,draghandy-4,draghandx+4,draghandy+4,1)
+draw_rectangle(draghandx-8*zm,draghandy-8*zm,draghandx+8*zm,draghandy+8*zm,1)
+draw_rectangle(draghandx-4*zm,draghandy-4*zm,draghandx+4*zm,draghandy+4*zm,1)
 
 if (rotato) w=point_distance(x,y,mouse_x,mouse_y)*sign(image_xscale)
 else w=sprw*image_xscale
@@ -130,8 +132,8 @@ if (point_distance(rothandx,rothandy,draghandx,draghandy)<20) {
 }
 
 if (rotato) draw_line(x,y,rothandx,rothandy)
-draw_circle(rothandx,rothandy,10,1)
-draw_circle(rothandx,rothandy,5,1)
+draw_circle(rothandx,rothandy,10*zm,1)
+draw_circle(rothandx,rothandy,5*zm,1)
 
 draw_set_color($ffffff)
 draw_set_alpha(1)
