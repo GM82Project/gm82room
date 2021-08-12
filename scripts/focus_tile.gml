@@ -5,7 +5,7 @@ with (Controller) {
 
     get_background(other.bgname)
     tilebgpal=micro_optimization_bgid
-    tilebgname=str
+    tilebgname=other.bgname
     update_tilepanel()
 
     tileid=string(tile_get_left(tile))+","+string(tile_get_top(tile))+","+string(tile_get_width(tile))+","+string(tile_get_height(tile))
