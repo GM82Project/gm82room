@@ -3,7 +3,7 @@
 i=instance_create(0,96,TextField)
 i.action="tile bg name"
 i.type=3
-i.maxlen=13
+i.maxlen=14
 i.w=160
 i.tagmode=1
 
@@ -38,7 +38,7 @@ i.action="current tile bg name"
 i.type=2
 i.anchor=1
 i.dynamic=1
-i.maxlen=11
+i.maxlen=14
 i.w=160
 i.tagmode=1
 
