@@ -140,39 +140,44 @@ if (layersize) {
 
             o.bg=get_background(o.bgname)
             if (micro_optimization_bgid!=noone) {
-                o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
-                o.tlayer=layer
+                //check that the tile is inside the background
+                bgw=background_get_width(bg_background[micro_optimization_bgid])
+                bgh=background_get_height(bg_background[micro_optimization_bgid])
+                if (tileu<bgw && tilev<bgh) {
+                    o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
+                    o.tlayer=layer
 
-                //add tiles to unique tile hashmap
-                map=bg_tilemap[micro_optimization_bgid]
-                tileid=string(tileu)+","+string(tilev)+","+string(o.tilew)+","+string(o.tileh)
-                if (!ds_map_exists(map,tileid)) {
-                    //add this tile
-                    list=ds_list_create()
-                    ds_list_add(list,tileu)
-                    ds_list_add(list,tilev)
-                    ds_list_add(list,o.tilew)
-                    ds_list_add(list,o.tileh)
-                    ds_map_add(map,tileid,list)
-                }
-                o.image_xscale=o.tilew
-                o.image_yscale=o.tileh
+                    //add tiles to unique tile hashmap
+                    map=bg_tilemap[micro_optimization_bgid]
+                    tileid=string(tileu)+","+string(tilev)+","+string(o.tilew)+","+string(o.tileh)
+                    if (!ds_map_exists(map,tileid)) {
+                        //add this tile
+                        list=ds_list_create()
+                        ds_list_add(list,tileu)
+                        ds_list_add(list,tilev)
+                        ds_list_add(list,o.tilew)
+                        ds_list_add(list,o.tileh)
+                        ds_map_add(map,tileid,list)
+                    }
+                    o.image_xscale=o.tilew
+                    o.image_yscale=o.tileh
 
-                if (extended_instancedata) {
-                    str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
-                    str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesx=real(string_copy(str,1,p-1))
-                    str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesy=real(string_copy(str,1,p-1))
-                    str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(str)
+                    if (extended_instancedata) {
+                        str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
+                        str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesx=real(string_copy(str,1,p-1))
+                        str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesy=real(string_copy(str,1,p-1))
+                        str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(str)
 
-                    o.image_xscale*=o.tilesx
-                    o.image_yscale*=o.tilesy
-                    o.image_alpha=floor(tileblend/$1000000)/$ff
-                    o.image_blend=tileblend&$ffffff
+                        o.image_xscale*=o.tilesx
+                        o.image_yscale*=o.tilesy
+                        o.image_alpha=floor(tileblend/$1000000)/$ff
+                        o.image_blend=tileblend&$ffffff
 
-                    tile_set_scale(o.tile,o.tilesx,o.tilesy)
-                    tile_set_alpha(o.tile,o.image_alpha)
-                    tile_set_blend(o.tile,o.image_blend)
-                }
+                        tile_set_scale(o.tile,o.tilesx,o.tilesy)
+                        tile_set_alpha(o.tile,o.image_alpha)
+                        tile_set_blend(o.tile,o.image_blend)
+                    }
+                } else with (o) instance_destroy()
             } else with (o) instance_destroy()
 
             if (current_time>time) {
