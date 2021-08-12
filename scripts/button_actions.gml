@@ -1,4 +1,11 @@
-var cx,cy;
+var sx,sy,cx,cy,nsel,cl,ct,cr,cb,mycx,mycy;
+
+cl=max_int
+ct=max_int
+cr=-max_int
+cb=-max_int
+
+nsel=num_selected()
 
 with (Controller) switch (argument0) {
     //top panel
@@ -40,30 +47,70 @@ with (Controller) switch (argument0) {
     case "copy object"   : {clipboard_set_text(select.objname)}break
     case "inst code"     : {edit_creation_code()}break
     case "inst snap"     : {with (instance) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) update_inspector()}}break
-    case "inst flip xs"  : {with (instance) if (sel) {
-        cx=round((bbox_right+bbox_left+1)/2) cy=round((bbox_bottom+bbox_top+1)/2)
-        image_xscale*=-1 event_user(1)
-        x=round(x-((bbox_right+bbox_left+1)/2-cx)) y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
-        update_inspector()
-    }}break
-    case "inst flip ys"  : {with (instance) if (sel) {
-        cx=round((bbox_right+bbox_left+1)/2) cy=round((bbox_bottom+bbox_top+1)/2)
-        image_yscale*=-1 event_user(1)
-        x=round(x-((bbox_right+bbox_left+1)/2-cx)) y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
-        update_inspector()
-    }}break
-    case "inst rot left" : {with (instance) if (sel) {
-        cx=round((bbox_right+bbox_left+1)/2) cy=round((bbox_bottom+bbox_top+1)/2)
-        image_angle=modwrap(image_angle+90,0,360)
-        x=round(x-((bbox_right+bbox_left+1)/2-cx)) y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
-        update_inspector()
-    }}break
-    case "inst rot right": {with (instance) if (sel) {
-        cx=round((bbox_right+bbox_left+1)/2) cy=round((bbox_bottom+bbox_top+1)/2)
-        image_angle=modwrap(image_angle-90,0,360)
-        x=round(x-((bbox_right+bbox_left+1)/2-cx)) y=round(y-((bbox_bottom+bbox_top+1)/2-cy))
-        update_inspector()
-    }}break
+    case "inst flip xs": {
+        with (instance) if (sel) {
+            cl=min(cl,bbox_left)
+            ct=min(ct,bbox_top)
+            cr=max(cr,bbox_right+1)
+            cb=max(cb,bbox_bottom+1)
+        }
+        sx=round((cl+cr)/2)
+        sy=round((ct+cb)/2)
+        with (instance) if (sel) {
+            mycx=round((bbox_right+bbox_left+1)/2)
+            image_xscale*=-1 event_user(1)
+            x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
+            update_inspector()
+        }
+    }break
+    case "inst flip ys": {
+        with (instance) if (sel) {
+            cl=min(cl,bbox_left)
+            ct=min(ct,bbox_top)
+            cr=max(cr,bbox_right+1)
+            cb=max(cb,bbox_bottom+1)
+        }
+        sx=round((cl+cr)/2)
+        sy=round((ct+cb)/2)
+        with (instance) if (sel) {
+            mycy=round((bbox_bottom+bbox_top+1)/2)
+            image_yscale*=-1 event_user(1)
+            y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
+            update_inspector()
+        }
+    }break
+    case "inst rot left" : {
+        with (instance) if (sel) {
+            cl=min(cl,bbox_left)
+            ct=min(ct,bbox_top)
+            cr=max(cr,bbox_right+1)
+            cb=max(cb,bbox_bottom+1)
+        }
+        sx=round((cl+cr)/2)
+        sy=round((ct+cb)/2)
+        with (instance) if (sel) {
+            image_angle=modwrap(image_angle+90,0,360)
+            mycx=sx+(y+0.5-sy)-0.5 mycy=sy-(x+0.5-sx)-0.5
+            x=mycx y=mycy
+            update_inspector()
+        }
+    }break
+    case "inst rot right": {
+        with (instance) if (sel) {
+            cl=min(cl,bbox_left)
+            ct=min(ct,bbox_top)
+            cr=max(cr,bbox_right+1)
+            cb=max(cb,bbox_bottom+1)
+        }
+        sx=round((cl+cr)/2)
+        sy=round((ct+cb)/2)
+        with (instance) if (sel) {
+            image_angle=modwrap(image_angle-90,0,360)
+            mycx=sx-(y+0.5-sy)-0.5 mycy=sy+(x+0.5-sx)-0.5
+            x=mycx y=mycy
+            update_inspector()
+        }
+    }break
 
 
     //instances
