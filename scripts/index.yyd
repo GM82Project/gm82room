@@ -55,6 +55,7 @@ button_held
 del_tile_layer
 
 update_tilepanel
-focus_palette
+focus_object
 add_tile
 cement_instances
+focus_tile

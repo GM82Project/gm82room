@@ -52,5 +52,6 @@
 |textfield_actions
 |textfield_set
 |gameend
-|focus_palette
+|focus_object
+|focus_tile
 |cement_instances

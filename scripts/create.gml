@@ -9,7 +9,7 @@ message_background(bgMessage)
 message_button(sprMessageButton)
 message_text_font("Courier New",12,$ffffff,1)
 message_button_font("Courier New",12,$ffffff,1)
-message_size(350,150)
+message_size(500,150)
 
 global.col_low=$203020
 global.col_main=$404040

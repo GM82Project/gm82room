@@ -191,8 +191,7 @@ if (mouse_check_button_pressed(mb_left)) {
                             grab=1
                             offx=mouse_x-x
                             offy=mouse_y-y
-                            objpal=obj
-                            focus_palette()
+                            focus_object(obj)
                             //group operation
                             with (instance) if (sel) {
                                 grab=1
@@ -248,6 +247,7 @@ if (mouse_check_button_pressed(mb_left)) {
                             grab=1
                             offx=mouse_x-x
                             offy=mouse_y-y
+                            focus_tile(tile)
                             //group operation
                             with (tileholder) if (sel) {
                                 grab=1
@@ -417,14 +417,14 @@ if (mouse_check_direct(mb_right)) {
 //object mode
 if (mode==0 && objpal!=noone) {
     //palette controls
-    if (mouse_wx<160 && mouse_wy>=120 && mouse_wy<height-100) {
+    if (mouse_wx<160 && mouse_wy>=120 && mouse_wy<height-136) {
         if (mouse_check_button_pressed(mb_left)) {
             posx=0
             posy=0
             for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
                 dx=20+40*posx
                 dy=140+40*posy+palettescroll
-                if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                     objpal=i
                     change_mode(mode)
                     textfield_set("palette name",ds_list_find_value(objects,objpal))
@@ -433,7 +433,7 @@ if (mode==0 && objpal!=noone) {
             }
             dx=20+40*posx
             dy=140+40*posy+palettescroll
-            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                 //clicked on add object button
                 paladdbuttondown=1
                 screen_redraw()
@@ -445,8 +445,8 @@ if (mode==0 && objpal!=noone) {
         h=mouse_wheel_down()-mouse_wheel_up()
         palettescrollgo-=h*80
     }
-    palettescrollgo=clamp(palettescrollgo,-(palettesize div 4+1)*40+(height-120-100),0)
-    palettescroll=clamp(inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2),-(palettesize div 4+1)*40+(height-120-100),0)
+    palettescrollgo=clamp(palettescrollgo,-(palettesize div 4+1)*40+(height-120-136),0)
+    palettescroll=clamp(inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2),-(palettesize div 4+1)*40+(height-120-136),0)
 }
 
 
@@ -463,7 +463,7 @@ if (mode==1 && tilebgpal!=noone) {
             for (i=0;i<tpalsize;i+=1) {
                 dx=20+40*posx
                 dy=172+40*posy+tpalscroll
-                if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                     tilepal=i
                     key=ds_map_find_first(map)
                     repeat (tilepal) key=ds_map_find_next(map,key)
@@ -473,7 +473,7 @@ if (mode==1 && tilebgpal!=noone) {
             }
             dx=20+40*posx
             dy=172+40*posy+tpalscroll
-            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                 add_tile()
             }
         }

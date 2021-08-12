@@ -239,7 +239,7 @@ if (mode=0) {
         if (dy>100 && dy<height-80) {
             if (objpal==i) buttoncol=$c0c0c0
             draw_button(dx-20,dy-20,40,40,objpal!=i)
-            if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            if (!point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                 w=sprite_get_width(objspr[i])
                 h=sprite_get_height(objspr[i])
                 if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
@@ -255,7 +255,7 @@ if (mode=0) {
         draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
         draw_sprite(sprMenuButtons,18,dx,dy)
         if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
-            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                 paltooltip=1
             }
         }
@@ -303,7 +303,7 @@ if (mode==1) {
                 th=ds_list_find_value(tile,3)
                 if (tilepal==i) buttoncol=$c0c0c0
                 draw_button(dx-20,dy-20,40,40,tilepal!=i)
-                if (!point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+                if (!point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                     w=tw
                     h=th
                     if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
@@ -317,7 +317,7 @@ if (mode==1) {
         draw_button(dx-20,dy-20,40,40,1)
         draw_sprite(sprMenuButtons,24,dx,dy)
         if (mouse_wx<160 && mouse_wy>=152 && mouse_wy<height-216) {
-            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                 paltooltip=1
             }
         }
@@ -352,7 +352,7 @@ if (mode==1) {
         dy=height-184+72-leheight/2*scale
         draw_background_part_ext(tex,left,top,lewidth,leheight,dx,dy,scale,scale,$ffffff,1)
         draw_set_color_sel()
-        draw_rectangle(dx+(u-left),dy+(v-top),dx+(u-left)+tw*scale,dy+(v-top)+th*scale,1)
+        draw_rectangle(dx+(u-left),dy+(v-top),dx+(u-left)+tw*scale-1,dy+(v-top)+th*scale-1,1)
         draw_set_color($ffffff)
     }
 
@@ -485,7 +485,7 @@ if (mode==0) {
     if (mouse_wy>120 && mouse_wy<height-100) for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
-        if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+        if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
             w=sprite_get_width(objspr[i])
             h=sprite_get_height(objspr[i])
             if (w>32 || h>32) {
@@ -521,7 +521,7 @@ if (mode==1 && tilebgpal!=noone) {
             key=ds_map_find_next(map,key)
             dx=20+40*posx
             dy=172+40*posy+tpalscroll
-            if (point_in_rectangle(mouse_wx,mouse_wy,dx-16,dy-16,dx+16,dy+16)) {
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                 u=ds_list_find_value(tile,0)
                 v=ds_list_find_value(tile,1)
                 tw=ds_list_find_value(tile,2)
