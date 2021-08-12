@@ -62,9 +62,12 @@ if (mode==0) {
     }
     texture_set_interpolation(1)
 
-    with (Controller.select) {
+    with (select) {
         event_user(0)
     }
+    draw_set_color_sel()
+    with (focus) draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
+    draw_set_color($ffffff)
 
     if (keyboard_check(ord("C"))) with (instance) if (code!="") {
         d3d_set_fog(1,$ff,0,0)
@@ -89,9 +92,12 @@ if (mode==1) {
     }
     texture_set_interpolation(1)
 
-    with (Controller.selectt) {
+    with (selectt) {
         event_user(0)
     }
+    draw_set_color_sel()
+    with (focus) draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
+    draw_set_color($ffffff)
 
     if (crosshair) if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
         if (tilebgpal!=noone) {
