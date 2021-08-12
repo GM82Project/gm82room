@@ -15,8 +15,8 @@ if (active) {
 
         case "inst x"    : {val=round(real(text)) with (instance) if (sel)            x=val}break
         case "inst y"    : {val=round(real(text)) with (instance) if (sel)            y=val}break
-        case "inst xs"   : {val=      real(text)  with (instance) if (sel) image_xscale=val}break
-        case "inst ys"   : {val=      real(text)  with (instance) if (sel) image_yscale=val}break
+        case "inst xs"   : {val=      real(text)  with (instance) {if (sel) image_xscale=val if (abs(image_xscale*sprw)<1) image_xscale=1/sprw}}break
+        case "inst ys"   : {val=      real(text)  with (instance) {if (sel) image_yscale=val if (abs(image_yscale*sprw)<1) image_yscale=1/sprw}}break
         case "inst ang"  : {val=      real(text)  with (instance) if (sel) image_angle =val}break
         case "inst col"  : {val=round(real(text)) with (instance) if (sel) image_blend =val}break
         case "inst alpha": {val=real(text)/255    with (instance) if (sel) image_alpha =val}break
