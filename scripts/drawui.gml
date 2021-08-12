@@ -239,6 +239,11 @@ if (mode=0) {
         if (dy>100 && dy<height-80) {
             if (objpal==i) buttoncol=$c0c0c0
             draw_button(dx-20,dy-20,40,40,objpal!=i)
+            if (objpal==i) {
+                draw_set_color_sel()
+                draw_rectangle(dx-20,dy-20,dx+19,dy+19,1)
+                draw_set_color($ffffff)
+            }
             if (!point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                 w=sprite_get_width(objspr[i])
                 h=sprite_get_height(objspr[i])
@@ -303,6 +308,11 @@ if (mode==1) {
                 th=ds_list_find_value(tile,3)
                 if (tilepal==i) buttoncol=$c0c0c0
                 draw_button(dx-20,dy-20,40,40,tilepal!=i)
+                if (tilepal==i) {
+                    draw_set_color_sel()
+                    draw_rectangle(dx-20,dy-20,dx+19,dy+19,1)
+                    draw_set_color($ffffff)
+                }
                 if (!point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                     w=tw
                     h=th
