@@ -505,8 +505,8 @@ if (mode==0) {
             w=sprite_get_width(objspr[i])
             h=sprite_get_height(objspr[i])
             if (w>32 || h>32) {
-                dx=max(1,dx-w/2)+w/2
-                dy=max(1,dy-h/2)+h/2
+                dx=floor(max(1,dx-w/2)+w/2)+frac(w/2)
+                dy=floor(max(1,dy-h/2)+h/2)+frac(h/2)
                 draw_set_color_sel() d3d_set_fog(1,draw_get_color(),0,0) draw_set_color($ffffff)
                 draw_sprite_stretched_ext(objspr[i],0,dx-w/2+1,dy-h/2+1,w,h,0,1)
                 draw_sprite_stretched_ext(objspr[i],0,dx-w/2+1,dy-h/2-1,w,h,0,1)
@@ -542,11 +542,9 @@ if (mode==1 && tilebgpal!=noone) {
                 v=ds_list_find_value(tile,1)
                 tw=ds_list_find_value(tile,2)
                 th=ds_list_find_value(tile,3)
-                w=tw
-                h=th
-                if (w>32 || h>32) {
-                    dx=max(1,dx-tw/2)+tw/2
-                    dy=max(1,dy-th/2)+th/2
+                if (tw>32 || th>32) {
+                    dx=floor(max(1,dx-tw/2)+tw/2)+frac(tw/2)
+                    dy=floor(max(1,dy-th/2)+th/2)+frac(th/2)
                     draw_set_color_sel() d3d_set_fog(1,draw_get_color(),0,0) draw_set_color($ffffff)
                     draw_background_part(tex,u,v,tw,th,dx-tw/2+1,dy-th/2+1)
                     draw_background_part(tex,u,v,tw,th,dx-tw/2+1,dy-th/2-1)
