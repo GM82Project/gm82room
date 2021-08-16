@@ -585,6 +585,7 @@ if (click) {
             get_background(str)
             tilebgpal=micro_optimization_bgid
             tilebgname=str
+            tilepal=0
             update_tilepanel()
         }
     }

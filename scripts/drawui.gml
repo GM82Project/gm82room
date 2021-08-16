@@ -100,7 +100,7 @@ if (mode==1) {
     draw_set_color($ffffff)
 
     if (crosshair) if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
-        if (tilebgpal!=noone) {
+        if (curtile!=noone) {
             texture_set_interpolation(interpolation)
             tex=bg_background[tilebgpal]
             u=ds_list_find_value(curtile,0)
