@@ -1,6 +1,8 @@
 globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecount,tilecount,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 globalvar overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,zoom;
 
+globalvar undostack;
+
 draw_set_font(fntCode)
 draw_set_circle_precision(8)
 
@@ -60,6 +62,8 @@ vw_current=0
 ly_current=0
 icon_mode=0
 focus=noone
+
+undostack=ds_stack_create()
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
 grid=registry_read_dword(dir+"RoomGridOnOffDefault",0)

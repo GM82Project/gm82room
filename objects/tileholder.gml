@@ -12,6 +12,7 @@ blend=$ffffffff
 sel=0
 grab=0
 draggatto=0
+modified=0
 
 rothandx=-9999999
 rothandy=-9999999

@@ -150,6 +150,11 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
     }
 }
 
+//undo
+if (keyboard_check(vk_control) && keyboard_check_pressed(ord("Z"))) {
+    pop_undo()
+}
+
 
 //left click actions
 if (mouse_check_button_pressed(mb_left)) {
@@ -346,6 +351,7 @@ if (paint) {
                 o.sproy=sprite_get_yoffset(o.sprite_index)
                 select=o
                 o.sel=1
+                o.modified=1
                 with (o) update_inspector()
             }
         }
@@ -376,12 +382,23 @@ if (paint) {
                     o.tlayer=ly_depth
                     selectt=o
                     o.sel=1
+                    o.modified=1
                     with (o) update_inspector()
                 }
             }
         }
     }
-    if (!mouse_check_direct(mb_left)) paint=0
+    if (!mouse_check_direct(mb_left)) {
+        paint=0
+        begin_undo(act_destroy)
+        if (mode==0) {
+            with (instance) if (modified) {add_undo(id) modified=0}
+        }
+        if (mode==1) {
+            with (tileholder) if (modified) {add_undo(id) modified=0}
+        }
+        push_undo()
+    }
 }
 
 

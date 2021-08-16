@@ -19,6 +19,11 @@
 	|external_code_editor
 	|load_object_tree
 	|load_background_tree
++undo
+	|begin_undo
+	|add_undo
+	|push_undo
+	|pop_undo
 |load_room
 |save_room
 |gameend

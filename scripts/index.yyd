@@ -59,3 +59,7 @@ focus_object
 add_tile
 cement_instances
 focus_tile
+push_undo
+pop_undo
+begin_undo
+add_undo
