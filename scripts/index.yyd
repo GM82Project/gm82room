@@ -63,3 +63,7 @@ push_undo
 pop_undo
 begin_undo
 add_undo
+
+add_undo_instance
+add_undo_tile
+deselect

@@ -405,35 +405,34 @@ if (paint) {
 if (keyboard_check_pressed(vk_escape)) {
     with (TextField) textfield_actions()
     clear_inspector()
-    select=noone
-    selectt=noone
-    if (mode==0) with (instance) sel=0
-    if (mode==1) with (tileholder) sel=0
+    deselect()
 }
 
 if (keyboard_check_pressed(vk_delete)) {
     clear_inspector()
     select=noone
     selectt=noone
-    if (mode==0) with (instance) if (sel) instance_destroy()
-    if (mode==1) with (tileholder) if (sel) instance_destroy()
+    if (num_selected()) begin_undo()
+    if (mode==0) with (instance) if (sel) {add_undo_instance() instance_destroy()}
+    if (mode==1) with (tileholder) if (sel) {add_undo_tile() instance_destroy()}
+    push_undo()
 }
 
 
 //right click actions
-if (mouse_check_direct(mb_right) && !keyboard_check(vk_control)) {
-    //cancel selection
-    if (selecting) selecting=0
-    clear_inspector()
-    select=noone
-    selectt=noone
-    if (mode==0) with (instance) sel=0
-    if (mode==1) with (tileholder) sel=0
-
-    //delete instances
-    if (!mouse_check_direct(mb_left)) {
-        if (mode==0) instance_destroy_id(instance_position(mouse_x,mouse_y,instance))
-        if (mode==1) instance_destroy_id(instance_position(mouse_x,mouse_y,tileholder))
+if (!keyboard_check(vk_control)) {
+    if (mouse_check_button_pressed(mb_right)) {
+        if (selecting) selecting=0
+        clear_inspector()
+        deselect()
+        begin_undo(act_create)
+    }
+    if (mouse_check_direct(mb_right)) {
+        //delete instances
+        if (mode==0) with (instance_position(mouse_x,mouse_y,instance)) {add_undo_instance() instance_destroy()}
+        if (mode==1) with (instance_position(mouse_x,mouse_y,tileholder)) {add_undo_tile() instance_destroy()}
+    } else {
+        push_undo()
     }
 }
 

@@ -1,0 +1,8 @@
+add_undo(obj)
+add_undo(x)
+add_undo(y)
+add_undo(image_xscale)
+add_undo(image_yscale)
+add_undo(image_angle)
+add_undo(image_blend)
+add_undo(image_alpha)

@@ -1,10 +1,7 @@
 var i,layer;
 
 if (mode!=argument) {
-    select=noone
-    selectt=noone
-    with (instance) sel=0
-    with (tileholder) sel=0
+    deselect()
 }
 
 mode=argument0

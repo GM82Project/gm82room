@@ -1,11 +1,12 @@
-var l,o,i,action,size;
+var l,o,i,action,lmode,size;
 
 if (!ds_stack_empty(undostack)) {
     l=ds_stack_pop(undostack)
 
     action=ds_list_find_value(l,0)
-    size=ds_list_size(l)-1
-    i=1
+    lmode=ds_list_find_value(l,1)
+    size=ds_list_size(l)-2
+    i=2
 
     instance_activate_all()
 

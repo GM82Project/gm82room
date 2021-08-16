@@ -23,6 +23,8 @@
 	|begin_undo
 	|add_undo
 	|push_undo
+	|add_undo_instance
+	|add_undo_tile
 	|pop_undo
 |load_room
 |save_room
@@ -60,3 +62,4 @@
 |focus_object
 |focus_tile
 |cement_instances
+|deselect
