@@ -67,3 +67,12 @@ add_undo
 add_undo_instance
 add_undo_tile
 deselect
+step_clipboard
+step_leftmouse
+step_rightmouse
+step_contextmenu
+step_view
+step_tile
+step_object
+step_hotkeys
+step_windowzoom
