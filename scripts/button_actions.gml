@@ -22,6 +22,9 @@ with (Controller) switch (argument0) {
     case "room code"   : {roomcode=external_code_editor(roomcode) other.alt=roomcode}break
     case "room persist": {roompersistent=!roompersistent}break
     case "room clear"  : {clearview=!clearview}break
+    case "chunk crop"  : {chunkcrop=!chunkcrop}break
+    case "chunk export": {chunk_export()}break
+    case "chunk import": {chunk_import()}break
 
 
     //visibility

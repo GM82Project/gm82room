@@ -1,5 +1,6 @@
 globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecount,tilecount,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 globalvar overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,zoom;
+globalvar chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight;
 
 globalvar undostack,undoing;
 
@@ -11,7 +12,7 @@ message_background(bgMessage)
 message_button(sprMessageButton)
 message_text_font("Courier New",12,$ffffff,1)
 message_button_font("Courier New",12,$ffffff,1)
-message_size(500,150)
+message_size(500,-1)
 
 global.col_low=$203020
 global.col_main=$404040
@@ -91,6 +92,9 @@ view[3]=1
 view[4]=0
 view[5]=1
 view[6]=1
+
+chunkwidth=roomwidth
+chunkheight=roomheight
 
 //adjust window to fit room
 width=max(min_width,min(width,roomwidth+64+160*2))

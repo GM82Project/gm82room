@@ -38,6 +38,8 @@ if (object_index==Button) {
 
                 case "enable views": {checked=vw_enabled}break
                 case "view visible": {checked=vw_visible[vw_current]}break
+
+                case "chunk crop": {checked=chunkcrop}break
             }
             up=!down
         }

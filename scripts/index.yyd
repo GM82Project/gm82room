@@ -59,6 +59,8 @@ focus_object
 add_tile
 cement_instances
 focus_tile
+chunk_export
+chunk_import
 push_undo
 pop_undo
 begin_undo
@@ -76,3 +78,4 @@ step_tile
 step_object
 step_hotkeys
 step_windowzoom
+update_settingspanel

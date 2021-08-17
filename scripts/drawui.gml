@@ -489,6 +489,11 @@ if (mode==4) {
     draw_text(12,136,"Caption")
     draw_text(12,208,"Size")
     draw_text(12,273,"Speed")
+
+    dx=width-160
+    draw_button(dx,0,160,32,1)
+    draw_button(dx,32,160,148,1)
+    draw_text(dx+12,6,"Chunk tools")
 }
 
 with (Button) button_draw()

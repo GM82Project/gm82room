@@ -60,3 +60,64 @@ i.text="Room code"
 i.w=160
 i.tagmode=4
 i.alt=roomcode
+
+
+//chunks
+i=instance_create(width-160+8,40,Button)
+i.type=1
+i.anchor=1
+i.action="chunk crop"
+i.text="Crop"
+i.alt="Export only part of the room"
+i.tagmode=4
+
+i=instance_create(width-160+8,68,TextField)
+i.action="chunk x"
+i.alt="x"
+i.anchor=1
+i.displen=6
+i.w=72
+i.tagmode=4
+
+i=instance_create(width-80,68,TextField)
+i.action="chunk y"
+i.alt="y"
+i.anchor=1
+i.displen=6
+i.w=72
+i.tagmode=4
+
+//scale
+i=instance_create(width-160+8,104,TextField)
+i.action="chunk w"
+i.alt="width"
+i.displen=6
+i.anchor=1
+i.w=72
+i.tagmode=4
+
+i=instance_create(width-80,104,TextField)
+i.action="chunk h"
+i.alt="height"
+i.displen=6
+i.anchor=1
+i.w=72
+i.tagmode=4
+
+i=instance_create(width-160+8,140,Button)
+i.action="chunk export"
+i.text="Export"
+i.alt="Save part of the room to a chunk file"
+i.anchor=1
+i.w=72
+i.tagmode=4
+
+i=instance_create(width-80,140,Button)
+i.action="chunk import"
+i.text="Import"
+i.alt="Load and paste a chunk file"
+i.anchor=1
+i.w=72
+i.tagmode=4
+
+update_settingspanel()

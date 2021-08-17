@@ -19,6 +19,9 @@
 	|external_code_editor
 	|load_object_tree
 	|load_background_tree
++chunks
+	|chunk_export
+	|chunk_import
 +undo
 	|begin_undo
 	|add_undo
@@ -63,6 +66,7 @@
 |update_backgroundpanel
 |update_tilepanel
 |update_viewpanel
+|update_settingspanel
 |change_mode
 |button_actions
 |button_held
