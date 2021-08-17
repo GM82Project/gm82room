@@ -131,13 +131,14 @@ if (layersize) {
         f=file_text_open_read(dir+string(layer)+".txt") do {str=file_text_read_string(f) file_text_readln(f)
             o=instance_create(0,0,tileholder)
 
-                                       p=string_pos(",",str)  o.bgname=string_copy(str,1,p-1)
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.x=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.y=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  tileu=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  tilev=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.tilew=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.tileh=real(string_copy(str,1,p-1))
+            string_token_start(str,",")
+            o.bgname=string_token_next()
+            o.x=real(string_token_next())
+            o.y=real(string_token_next())
+            tileu=real(string_token_next())
+            tilev=real(string_token_next())
+            o.tilew=real(string_token_next())
+            o.tileh=real(string_token_next())
 
             o.bg=get_background(o.bgname)
             if (micro_optimization_bgid!=noone) {
@@ -164,10 +165,10 @@ if (layersize) {
                     o.image_yscale=o.tileh
 
                     if (extended_instancedata) {
-                        str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
-                        str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesx=real(string_copy(str,1,p-1))
-                        str=string_delete(str,1,p) p=string_pos(",",str)  o.tilesy=real(string_copy(str,1,p-1))
-                        str=string_delete(str,1,p) p=string_pos(",",str)  tileblend=real(str)
+                        string_token_next() //skip "locked" flag
+                        o.tilesx=real(string_token_next())
+                        o.tilesy=real(string_token_next())
+                        tileblend=real(string_token_next())
 
                         o.image_xscale*=o.tilesx
                         o.image_yscale*=o.tilesy
@@ -197,10 +198,11 @@ f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file
     if (str!="") {
         o=instance_create(0,0,instance)
 
-                                   p=string_pos(",",str)  o.objname=string_copy(str,1,p-1)
-        str=string_delete(str,1,p) p=string_pos(",",str)  o.x=real(string_copy(str,1,p-1))
-        str=string_delete(str,1,p) p=string_pos(",",str)  o.y=real(string_copy(str,1,p-1))
-        str=string_delete(str,1,p) p=string_pos(",",str)  o.code=string_copy(str,1,p-1)
+        string_token_start(str,",")
+        o.objname=string_token_next()
+        o.x=real(string_token_next())
+        o.y=real(string_token_next())
+        o.code=string_token_next()
 
         o.obj=get_object(o.objname)
 
@@ -213,11 +215,11 @@ f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file
         o.sproy=sprite_get_yoffset(o.sprite_index)
 
         if (extended_instancedata) {
-            str=string_delete(str,1,p) p=string_pos(",",str)  //skip "locked" flag
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_xscale=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_yscale=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_blend=real(string_copy(str,1,p-1))
-            str=string_delete(str,1,p) p=string_pos(",",str)  o.image_angle=real(str)
+            string_token_next() //skip "locked" flag
+            o.image_xscale=real(string_token_next())
+            o.image_yscale=real(string_token_next())
+            o.image_blend=real(string_token_next())
+            o.image_angle=real(string_token_next())
 
             o.image_alpha=floor(o.image_blend/$1000000)/$ff
             o.image_blend=o.image_blend&$ffffff
