@@ -28,8 +28,11 @@ if (argument0==1) {
 } else {
     instance_deactivate_object(tileholder)
 }
-
 tilecount=instance_number(tileholder)
+
+if (argument0==2) update_backgroundpanel()
+if (argument0==3) update_viewpanel()
+if (argument0==4) update_settingspanel()
 
 if (view[1]) {
     for (i=0;i<ds_list_size(layers);i+=1) {

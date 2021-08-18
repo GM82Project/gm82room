@@ -1,0 +1,8 @@
+add_undo(uid)
+add_undo(x)
+add_undo(y)
+add_undo(tlayer)
+add_undo(tilesx)
+add_undo(tilesy)
+add_undo(image_blend)
+add_undo(image_alpha)

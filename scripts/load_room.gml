@@ -129,7 +129,7 @@ if (layersize) {
         layer=real(ds_list_find_value(layers,i))
         ds_list_replace(layers,i,layer)
         f=file_text_open_read(dir+string(layer)+".txt") do {str=file_text_read_string(f) file_text_readln(f)
-            o=instance_create(0,0,tileholder)
+            o=instance_create(0,0,tileholder) get_uid(o)
 
             string_token_start(str,",")
             o.bgname=string_token_next()
@@ -196,7 +196,7 @@ if (layersize) {
 time=current_time
 f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file_text_readln(f)
     if (str!="") {
-        o=instance_create(0,0,instance)
+        o=instance_create(0,0,instance) get_uid(o)
 
         string_token_start(str,",")
         o.objname=string_token_next()

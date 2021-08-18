@@ -18,6 +18,7 @@ if (object_index==Button) {
             case "view nospr":       {up=(!view[6] && !down)            }break
             case "bgselect":         {up=(!down && bg_current!=actionid)}break
             case "vwselect":         {up=(!down && vw_current!=actionid)}break
+            case "undo":             {up=(!down && alt!="Undo (0)")     }break
             default:                 {up=!down                          }
         }
 

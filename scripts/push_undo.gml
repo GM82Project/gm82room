@@ -6,4 +6,5 @@ with (Controller) if (undoing) {
     }
     undolist=noone
     undoing=0
+    with (Button) if (action="undo") alt="Undo ("+string(ds_stack_size(undostack))+")"
 }

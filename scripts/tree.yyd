@@ -25,10 +25,13 @@
 +undo
 	|begin_undo
 	|add_undo
-	|push_undo
 	|add_undo_instance
+	|add_undo_instance_props
 	|add_undo_tile
+	|add_undo_tile_props
+	|push_undo
 	|pop_undo
+	|undo_global
 |load_room
 |save_room
 |gameend
@@ -77,3 +80,5 @@
 |focus_tile
 |cement_instances
 |deselect
+|get_uid
+|set_uid

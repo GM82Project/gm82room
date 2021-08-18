@@ -79,3 +79,8 @@ step_object
 step_hotkeys
 step_windowzoom
 update_settingspanel
+get_uid
+add_undo_instance_props
+add_undo_tile_props
+undo_global
+set_uid

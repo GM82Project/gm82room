@@ -31,6 +31,8 @@ if (Controller.select==id) {
 }
 
 instancecount-=1
+
+ds_map_delete(uidmap,uid)
 #define Alarm_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

@@ -35,6 +35,8 @@ if (tile!=noone) {
     tilecount-=1
     tile_delete(tile)
 }
+
+ds_map_delete(uidmap,uid)
 #define Alarm_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

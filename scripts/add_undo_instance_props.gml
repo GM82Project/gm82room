@@ -1,5 +1,4 @@
 add_undo(uid)
-add_undo(obj)
 add_undo(x)
 add_undo(y)
 add_undo(image_xscale)

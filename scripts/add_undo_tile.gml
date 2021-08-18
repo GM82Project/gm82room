@@ -1,3 +1,4 @@
+add_undo(uid)
 add_undo(bg)
 add_undo(x)
 add_undo(y)

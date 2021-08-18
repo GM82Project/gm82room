@@ -16,12 +16,12 @@ with (Controller) switch (argument0) {
     case "view mode"    : {change_mode(3)}break
     case "settings mode": {change_mode(4)}break
     case "help"         : {show_info()}break
-
+    case "undo"         : {pop_undo()}break
 
     //settings
-    case "room code"   : {roomcode=external_code_editor(roomcode) other.alt=roomcode}break
-    case "room persist": {roompersistent=!roompersistent}break
-    case "room clear"  : {clearview=!clearview}break
+    case "room code"   : {undo_global("roomcode") roomcode=external_code_editor(roomcode) other.alt=roomcode}break
+    case "room persist": {undo_global("roompersistent") roompersistent=!roompersistent}break
+    case "room clear"  : {undo_global("clearview") clearview=!clearview}break
     case "chunk crop"  : {chunkcrop=!chunkcrop}break
     case "chunk export": {chunk_export()}break
     case "chunk import": {chunk_import()}break
@@ -178,7 +178,7 @@ with (Controller) switch (argument0) {
 
 
     //backgrounds
-    case "clear bg"  : {clearscreen=!clearscreen}break
+    case "clear bg"  : {undo_global("clearscreen") clearscreen=!clearscreen}break
     case "bgselect"  : {bg_current=other.actionid update_backgroundpanel()}break
     case "bg visible": {bg_visible[bg_current]=!bg_visible[bg_current]}break
     case "bg fore"   : {bg_is_foreground[bg_current]=!bg_is_foreground[bg_current]}break
@@ -192,6 +192,6 @@ with (Controller) switch (argument0) {
 
 
     //views
-    case "enable views": {vw_enabled=!vw_enabled}break
+    case "enable views": {undo_global("vw_enabled") vw_enabled=!vw_enabled}break
     case "view visible": {vw_visible[vw_current]=!vw_visible[vw_current]}break
 }
