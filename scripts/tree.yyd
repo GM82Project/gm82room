@@ -25,13 +25,15 @@
 +undo
 	|begin_undo
 	|add_undo
+	|undo_global
 	|add_undo_instance
 	|add_undo_instance_props
 	|add_undo_tile
 	|add_undo_tile_props
 	|push_undo
 	|pop_undo
-	|undo_global
+	|update_instance_memory
+	|end_change_undo
 |load_room
 |save_room
 |gameend

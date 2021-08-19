@@ -59,7 +59,7 @@ if (sel) {
             y=roundto(y,gridy)
         }
         tile_set_position(tile,x,y)
-        if (!mouse_check_direct(mb_left)) grab=0
+        if (!mouse_check_direct(mb_left)) {grab=0 end_change_undo()}
         update_inspector()
     }
     if (draggatto) {
@@ -85,7 +85,7 @@ if (sel) {
 
         tile_set_scale(tile,tilesx,tilesy)
 
-        if (!mouse_check_direct(mb_left)) draggatto=0
+        if (!mouse_check_direct(mb_left)) {draggatto=0 end_change_undo()}
         update_inspector()
     }
 }

@@ -184,7 +184,7 @@ if (paint) {
                 }
             }
             if (yes) {
-                o=instance_create(dx,dy,instance)
+                o=instance_create(dx,dy,instance) get_uid(o)
                 o.obj=objpal
                 o.objname=ds_list_find_value(objects,o.obj)
                 o.sprite_index=objspr[o.obj]
@@ -214,7 +214,7 @@ if (paint) {
                     image_yscale=1
                 }
                 if (yes) {
-                    o=instance_create(dx,dy,tileholder)
+                    o=instance_create(dx,dy,tileholder) get_uid(o)
                     o.bgname=tilebgname
                     o.bg=tex
                     o.tilew=ds_list_find_value(curtile,2)
@@ -230,10 +230,11 @@ if (paint) {
                 }
             }
         }
+        update_instance_memory()
     }
     if (!mouse_check_direct(mb_left)) {
         paint=0
-        begin_undo(act_destroy)
+        begin_undo(act_destroy,"drawing "+pick(mode,"instances","tiles"))
         if (mode==0) {
             with (instance) if (modified) {add_undo(id) modified=0}
         }

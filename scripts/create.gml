@@ -86,6 +86,7 @@ if (!registry_read_dword(dir+"NewRoomEditorSeen",0)) show_info()
 state="load"
 crc_init()
 if (!load_room()) exit
+update_instance_memory()
 state="run"
 
 view[0]=1

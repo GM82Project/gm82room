@@ -84,3 +84,6 @@ add_undo_instance_props
 add_undo_tile_props
 undo_global
 set_uid
+
+update_instance_memory
+end_change_undo

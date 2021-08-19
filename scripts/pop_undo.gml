@@ -2,12 +2,15 @@ var l,o,i,uaction,lmode,size,tilew,tileh;
 
 if (!ds_stack_empty(undostack)) {
     l=ds_stack_pop(undostack)
-    with (Button) if (action="undo") alt="Undo ("+string(ds_stack_size(undostack))+")"
+    with (Button) if (action="undo") {
+        if (ds_stack_empty(undostack)) alt="Undo"
+        else alt="Undo "+ds_list_find_value(ds_stack_top(undostack),0)+" ("+string(ds_stack_size(undostack))+")"
+    }
 
-    uaction=ds_list_find_value(l,0)
-    lmode=ds_list_find_value(l,1)
-    size=ds_list_size(l)-2
-    i=2
+    uaction=ds_list_find_value(l,1)
+    lmode=ds_list_find_value(l,2)
+    size=ds_list_size(l)-3
+    i=3
 
     instance_activate_all()
 
@@ -87,7 +90,6 @@ if (!ds_stack_empty(undostack)) {
                 tile_set_alpha(o.tile,o.image_alpha)
                 i+=8
             }
-
         }break
         case act_global: {
             variable_global_set(ds_list_find_value(l,i),ds_list_find_value(l,i+1))
@@ -95,6 +97,8 @@ if (!ds_stack_empty(undostack)) {
     }
 
     ds_list_destroy(l)
+
+    update_instance_memory()
 
     change_mode(mode)
 }

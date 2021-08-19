@@ -69,3 +69,5 @@ if (fn!="") {
 
     buffer_destroy(b)
 }
+
+update_instance_memory()

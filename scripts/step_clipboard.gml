@@ -77,7 +77,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
             cur=1
             if (mode==0) repeat (copyvec[0,0]) {
                 //note: if you have instances copied that would be invisible in the current view, they'l be visible anyway
-                o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance)
+                o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance) get_uid(o)
                 o.obj=copyvec[cur,1]
                 o.objname=copyvec[cur,0]
                 o.sprite_index=objspr[o.obj]
@@ -96,7 +96,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 cur+=1
             }
             if (mode==1) repeat (copyvec[0,0]) {
-                o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,tileholder)
+                o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,tileholder) get_uid(o)
                 o.tilew=copyvec[cur,10]
                 o.tileh=copyvec[cur,11]
                 o.bgname=copyvec[cur,0]
@@ -118,6 +118,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 selectt=o
                 cur+=1
             }
+            update_instance_memory()
         }
     }
 }

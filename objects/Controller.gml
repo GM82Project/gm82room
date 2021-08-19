@@ -5,6 +5,13 @@ action_id=603
 applies_to=self
 */
 change_mode(mode)
+#define Alarm_1
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+end_change_undo()
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
