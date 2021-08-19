@@ -2,8 +2,8 @@ var yes;
 
 draw_backgrounds(1)
 
-fmx=floorto(mouse_x,gridx)
-fmy=floorto(mouse_y,gridy)
+fmx=floorto(global.mousex,gridx)
+fmy=floorto(global.mousey,gridy)
 tty=0
 
 
@@ -36,8 +36,8 @@ if (mode==0 || mode==1) {
         }
         if (crosshair) {
             if (keyboard_check(vk_alt)) {
-                draw_vertex(mouse_x,min(0,mouse_y)) draw_vertex(mouse_x,max(roomheight,mouse_y))
-                draw_vertex(min(0,mouse_x),mouse_y) draw_vertex(max(roomwidth,mouse_x),mouse_y)
+                draw_vertex(global.mousex,min(0,global.mousey)) draw_vertex(global.mousex,max(roomheight,global.mousey))
+                draw_vertex(min(0,global.mousex),global.mousey) draw_vertex(max(roomwidth,global.mousex),global.mousey)
             } else {
                 if (!grid) {
                     draw_vertex(fmx,fmy+gridy) draw_vertex(fmx+gridx,fmy+gridy)
@@ -78,7 +78,7 @@ if (mode==0) {
 
     if (crosshair) if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
         texture_set_interpolation(interpolation)
-        if (keyboard_check(vk_alt)) draw_sprite_ext(objspr[objpal],0,mouse_x,mouse_y,1,1,0,$ffffff,0.25)
+        if (keyboard_check(vk_alt)) draw_sprite_ext(objspr[objpal],0,global.mousex,global.mousey,1,1,0,$ffffff,0.25)
         else draw_sprite_ext(objspr[objpal],0,fmx,fmy,1,1,0,$ffffff,0.25)
         texture_set_interpolation(1)
     }
@@ -108,7 +108,7 @@ if (mode==1) {
             tw=ds_list_find_value(curtile,2)
             th=ds_list_find_value(curtile,3)
 
-            if (keyboard_check(vk_alt)) draw_background_part_ext(tex,u,v,tw,th,mouse_x,mouse_y,1,1,$ffffff,0.25)
+            if (keyboard_check(vk_alt)) draw_background_part_ext(tex,u,v,tw,th,global.mousex,global.mousey,1,1,$ffffff,0.25)
             else draw_background_part_ext(tex,u,v,tw,th,fmx,fmy,1,1,$ffffff,0.25)
             texture_set_interpolation(1)
         }
@@ -121,8 +121,8 @@ if (mode==1) {
 if (selecting) {
     draw_set_color($ff8000)
     draw_set_alpha(0.5)
-    draw_rectangle(selx,sely,mouse_x,mouse_y,0)
-    draw_rectangle(selx,sely,mouse_x,mouse_y,1)
+    draw_rectangle(selx,sely,global.mousex,global.mousey,0)
+    draw_rectangle(selx,sely,global.mousex,global.mousey,1)
     draw_set_alpha(1)
     draw_set_color($ffffff)
 }
@@ -132,7 +132,7 @@ if (selecting) {
 if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && copyvec[0,0]) {
     draw_set_color($ff8000)
     draw_set_alpha(0.5)
-    if (keyboard_check(vk_alt)) draw_rectangle(mouse_x,mouse_y,mouse_x+copyvec[0,3]-copyvec[0,1],mouse_y+copyvec[0,4]-copyvec[0,2],1)
+    if (keyboard_check(vk_alt)) draw_rectangle(global.mousex,global.mousey,global.mousex+copyvec[0,3]-copyvec[0,1],global.mousey+copyvec[0,4]-copyvec[0,2],1)
     else draw_rectangle(fmx,fmy,fmx+copyvec[0,3]-copyvec[0,1],fmy+copyvec[0,4]-copyvec[0,2],1)
     draw_set_alpha(1)
     draw_set_color($ffffff)
@@ -173,13 +173,13 @@ d3d_set_projection_ortho(0,0,width,height,0)
 
 focus=noone
 if (mousein) {
-    if (mode==0) with (instance) if (instance_position(mouse_x,mouse_y,id)) {
+    if (mode==0) with (instance) if (instance_position(global.mousex,global.mousey,id)) {
         other.focus=id
         if (code!="") {
             drawtooltip(code)
         }
     }
-    if (mode==1) with (tileholder) if (instance_position(mouse_x,mouse_y,id)) {
+    if (mode==1) with (tileholder) if (instance_position(global.mousex,global.mousey,id)) {
         other.focus=id
     }
 }
@@ -212,8 +212,8 @@ buttoncol=global.col_main
 draw_button(statusx,height-32,144,32,0)
 draw_button(statusx+144,height-32,296,32,0)
 draw_button(statusx+440,height-32,width-320-440,32,0)
-if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(mouse_x)+","+string(mouse_y))
-else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(mouse_y,gridx)))
+if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(global.mousex)+","+string(global.mousey))
+else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(global.mousey,gridx)))
 if (mode==0) {
     num=instance_number(instance)
     if (num<instancecount) draw_text(statusx+152,statusy+6,string(num)+" instances ("+string(instancecount-num)+" hidden)")

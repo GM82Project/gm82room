@@ -73,11 +73,11 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
             with (instance) sel=0
             with (tileholder) sel=0
             if (keyboard_check(vk_alt)) {
-                dx=mouse_x-copyvec[0,1]
-                dy=mouse_y-copyvec[0,2]
+                dx=global.mousex-copyvec[0,1]
+                dy=global.mousey-copyvec[0,2]
             } else {
-                dx=floorto(mouse_x-copyvec[0,1],gridx)
-                dy=floorto(mouse_y-copyvec[0,2],gridy)
+                dx=floorto(global.mousex-copyvec[0,1],gridx)
+                dy=floorto(global.mousey-copyvec[0,2],gridy)
             }
 
             cur=1

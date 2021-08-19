@@ -44,7 +44,7 @@ action_id=603
 applies_to=self
 */
 instance_deactivate_object(id)
-#define Step_0
+#define Step_2
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
@@ -52,19 +52,13 @@ applies_to=self
 */
 if (sel) {
     if (grab) {
-        x=mouse_x-offx
-        y=mouse_y-offy
-        if (!keyboard_check(vk_alt)) {
-            x=roundto(x,gridx)
-            y=roundto(y,gridy)
-        }
+        do_dragging()
         tile_set_position(tile,x,y)
-        if (!mouse_check_direct(mb_left)) {grab=0 end_change_undo()}
-        update_inspector()
+        if (Controller.selectt==id) update_inspector()
     }
     if (draggatto) {
-        dx=mouse_x
-        dy=mouse_y
+        dx=global.mousex
+        dy=global.mousey
 
         if (!keyboard_check(vk_alt)) {
             dx=roundto(dx,gridx)
@@ -85,7 +79,7 @@ if (sel) {
 
         tile_set_scale(tile,tilesx,tilesy)
 
-        if (!mouse_check_direct(mb_left)) {draggatto=0 end_change_undo()}
+        if (!mouse_check_direct(mb_left)) {draggatto=0 do_change_undo()}
         update_inspector()
     }
 }

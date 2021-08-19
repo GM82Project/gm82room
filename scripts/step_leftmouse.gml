@@ -13,15 +13,13 @@ if (mouse_check_button_pressed(mb_left)) {
         if (mode==0) {
             //if something's already selected, operate on it
             if (!keyboard_check(vk_shift)) with (select) {
-                if (position_meeting(mouse_x,mouse_y,id) && keyboard_check(vk_control)) {
-                    grab=1
-                    offx=mouse_x-x
-                    offy=mouse_y-y
+                if (position_meeting(global.mousex,global.mousey,id) && keyboard_check(vk_control)) {
+                    start_dragging()
                     yes=1
-                } else if (point_distance(rothandx,rothandy,mouse_x,mouse_y)<10*zm) {
+                } else if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {
                     rotato=1
                     yes=1
-                } else if (abs(mouse_x-draghandx)<8*zm && abs(mouse_y-draghandy)<8*zm) {
+                } else if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
                     draggatto=1
                     yes=1
                 }
@@ -32,20 +30,16 @@ if (mouse_check_button_pressed(mb_left)) {
                 if (!keyboard_check(vk_shift)) with (instance) sel=0
                 select=noone
                 with (instance) {
-                    if (position_meeting(mouse_x,mouse_y,id)) {
+                    if (position_meeting(global.mousex,global.mousey,id)) {
                         sel=1
                         update_inspector()
                         //ctrl+left = move
                         if (keyboard_check(vk_control)) {
                             grab=1
-                            offx=mouse_x-x
-                            offy=mouse_y-y
                             focus_object(obj)
                             //group operation
                             with (instance) if (sel) {
-                                grab=1
-                                offx=mouse_x-x
-                                offy=mouse_y-y
+                                start_dragging()
                             }
                         } else with (other.select) sel=0
                         other.select=id
@@ -58,8 +52,8 @@ if (mouse_check_button_pressed(mb_left)) {
                         //selection rectangle
                         selecting=1
                         with (instance) memsel=sel
-                        selx=mouse_x
-                        sely=mouse_y
+                        selx=global.mousex
+                        sely=global.mousey
                     } else if (!keyboard_check(vk_control)) {
                         //paint
                         paint=2
@@ -72,12 +66,10 @@ if (mouse_check_button_pressed(mb_left)) {
         if (mode==1) {
             //if something's already selected, operate on it
             if (!keyboard_check(vk_shift)) with (selectt) {
-                if (position_meeting(mouse_x,mouse_y,id) && keyboard_check(vk_control)) {
-                    grab=1
-                    offx=mouse_x-x
-                    offy=mouse_y-y
+                if (position_meeting(global.mousex,global.mousey,id) && keyboard_check(vk_control)) {
+                    start_dragging()
                     yes=1
-                } else if (extended_instancedata) if (abs(mouse_x-draghandx)<8*zm && abs(mouse_y-draghandy)<8*zm) {
+                } else if (extended_instancedata) if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
                     draggatto=1
                     yes=1
                 }
@@ -88,20 +80,16 @@ if (mouse_check_button_pressed(mb_left)) {
                 if (!keyboard_check(vk_shift)) with (tileholder) sel=0
                 selectt=noone
                 with (tileholder) {
-                    if (position_meeting(mouse_x,mouse_y,id)) {
+                    if (position_meeting(global.mousex,global.mousey,id)) {
                         sel=1
                         update_inspector()
                         //ctrl+left = move
                         if (keyboard_check(vk_control)) {
                             grab=1
-                            offx=mouse_x-x
-                            offy=mouse_y-y
                             focus_tile(tile)
                             //group operation
                             with (tileholder) if (sel) {
-                                grab=1
-                                offx=mouse_x-x
-                                offy=mouse_y-y
+                                start_dragging()
                             }
                         } else with (other.selectt) sel=0
                         other.selectt=id
@@ -114,8 +102,8 @@ if (mouse_check_button_pressed(mb_left)) {
                         //selection rectangle
                         selecting=1
                         with (tileholder) memsel=sel
-                        selx=mouse_x
-                        sely=mouse_y
+                        selx=global.mousex
+                        sely=global.mousey
                     } else if (!keyboard_check(vk_control)) {
                         //paint
                         paint=2
@@ -126,14 +114,14 @@ if (mouse_check_button_pressed(mb_left)) {
             }
         }
         if (mode==3) {
-            if (abs(mouse_x-(vw_x[vw_current]+vw_w[vw_current]))<8 && abs(mouse_y-(vw_y[vw_current]+vw_h[vw_current]))<8) {
+            if (abs(global.mousex-(vw_x[vw_current]+vw_w[vw_current]))<8 && abs(global.mousey-(vw_y[vw_current]+vw_h[vw_current]))<8) {
                 sizeview=1
-            } else if (point_in_rectangle(mouse_x,mouse_y,vw_x[vw_current],vw_y[vw_current],vw_x[vw_current]+vw_w[vw_current],vw_y[vw_current]+vw_h[vw_current])) {
+            } else if (point_in_rectangle(global.mousex,global.mousey,vw_x[vw_current],vw_y[vw_current],vw_x[vw_current]+vw_w[vw_current],vw_y[vw_current]+vw_h[vw_current])) {
                 grabview=1
-                offx=mouse_x-vw_x[vw_current]
-                offy=mouse_y-vw_y[vw_current]
+                offx=global.mousex-vw_x[vw_current]
+                offy=global.mousey-vw_y[vw_current]
             } else {
-                for (i=0;i<8;i+=1) if (vw_visible[i]) if (point_in_rectangle(mouse_x,mouse_y,vw_x[i],vw_y[i],vw_x[i]+vw_w[i],vw_y[i]+vw_h[i])) {
+                for (i=0;i<8;i+=1) if (vw_visible[i]) if (point_in_rectangle(global.mousex,global.mousey,vw_x[i],vw_y[i],vw_x[i]+vw_w[i],vw_y[i]+vw_h[i])) {
                     vw_current=i
                 }
             }
@@ -143,13 +131,13 @@ if (mouse_check_button_pressed(mb_left)) {
 if (selecting) {
     if (mode==0) {
         with (instance) {
-            if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
+            if (collision_rectangle(other.selx,other.sely,global.mousex,global.mousey,id,1,0)) sel=1
             else sel=memsel
         }
     }
     if (mode==1) {
         with (tileholder) {
-            if (collision_rectangle(other.selx,other.sely,mouse_x,mouse_y,id,1,0)) sel=1
+            if (collision_rectangle(other.selx,other.sely,global.mousex,global.mousey,id,1,0)) sel=1
             else sel=memsel
         }
     }
@@ -163,11 +151,11 @@ if (selecting) {
 //painting!  :3
 if (paint) {
     if (keyboard_check(vk_alt)) {
-        dx=mouse_x
-        dy=mouse_y
+        dx=global.mousex
+        dy=global.mousey
     } else {
-        dx=floorto(mouse_x,gridx)
-        dy=floorto(mouse_y,gridy)
+        dx=floorto(global.mousex,gridx)
+        dy=floorto(global.mousey,gridy)
     }
     if (dx!=paintx || dy!=painty || paint=2) {
         paint=1

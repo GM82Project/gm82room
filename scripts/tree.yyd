@@ -84,3 +84,5 @@
 |deselect
 |get_uid
 |set_uid
+|start_dragging
+|do_dragging

@@ -40,7 +40,7 @@ action_id=603
 applies_to=self
 */
 instance_deactivate_object(id)
-#define Step_0
+#define Step_2
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
@@ -48,26 +48,20 @@ applies_to=self
 */
 if (sel) {
     if (rotato) {
-        image_angle=point_direction(x,y,mouse_x,mouse_y)+90-90*sign(image_xscale)
+        image_angle=point_direction(x,y,global.mousex,global.mousey)+90-90*sign(image_xscale)
         if (!keyboard_check(vk_alt)) {
             image_angle=roundto(image_angle,15)
         }
-        if (!mouse_check_direct(mb_left)) {rotato=0 event_user(1) end_change_undo()}
+        if (!mouse_check_direct(mb_left)) {rotato=0 event_user(1) do_change_undo()}
         update_inspector()
     }
     if (grab) {
-        x=mouse_x-offx
-        y=mouse_y-offy
-        if (!keyboard_check(vk_alt)) {
-            x=roundto(x,gridx)
-            y=roundto(y,gridy)
-        }
-        if (!mouse_check_direct(mb_left)) {grab=0 end_change_undo()}
-        update_inspector()
+        do_dragging()
+        if (Controller.select==id) update_inspector()
     }
     if (draggatto) {
-        dx=mouse_x
-        dy=mouse_y
+        dx=global.mousex
+        dy=global.mousey
 
         if (!keyboard_check(vk_alt)) {
             dx=roundto(dx,gridx)
@@ -90,7 +84,7 @@ if (sel) {
 
         if (abs(image_xscale*sprw)<1) image_xscale=1/sprw
         if (abs(image_yscale*sprh)<1) image_yscale=1/sprh
-        if (!mouse_check_direct(mb_left)) {draggatto=0 event_user(1) end_change_undo()}
+        if (!mouse_check_direct(mb_left)) {draggatto=0 event_user(1) do_change_undo()}
         update_inspector()
     }
 }
@@ -132,7 +126,7 @@ if (draggatto) draw_line(x,y,draghandx,draghandy)
 draw_rectangle(draghandx-8*zm,draghandy-8*zm,draghandx+8*zm,draghandy+8*zm,1)
 draw_rectangle(draghandx-4*zm,draghandy-4*zm,draghandx+4*zm,draghandy+4*zm,1)
 
-if (rotato) w=point_distance(x,y,mouse_x,mouse_y)*sign(image_xscale)
+if (rotato) w=point_distance(x,y,global.mousex,global.mousey)*sign(image_xscale)
 else w=sprw*image_xscale
 rothandx=x+lengthdir_x(w,image_angle)
 rothandy=y+lengthdir_y(w,image_angle)

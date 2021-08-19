@@ -76,8 +76,8 @@ if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
         if (mode==1) with (focus) focus_tile(tile)
     }
     zooming=1
-    grabx=mouse_x
-    graby=mouse_y
+    grabx=global.mousex
+    graby=global.mousey
 }
 if (!mouse_check_direct(mb_middle) && !keyboard_check(vk_space)) {
     zooming=0

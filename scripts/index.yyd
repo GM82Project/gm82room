@@ -87,3 +87,5 @@ set_uid
 
 update_instance_memory
 do_change_undo
+start_dragging
+do_dragging
