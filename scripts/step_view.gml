@@ -9,7 +9,10 @@ if (mode==3) {
             vw_y[vw_current]=floorto(global.mousey-offy,gridy)
         }
         update_viewpanel()
-        if (!mouse_check_direct(mb_left)) grabview=0
+        if (!mouse_check_direct(mb_left)) {
+            begin_undo(act_globalvec,"changing view "+string(vw_current)+" position") add_undo("vw_x") add_undo(vw_current) add_undo(storex) add_undo("vw_y") add_undo(vw_current) add_undo(storey) push_undo()
+            grabview=0
+        }
     }
 
     //resized a view
@@ -22,6 +25,9 @@ if (mode==3) {
             vw_h[vw_current]=max(gridy,roundto(global.mousey,gridy)-vw_y[vw_current])
         }
         update_viewpanel()
-        if (!mouse_check_direct(mb_left)) sizeview=0
+        if (!mouse_check_direct(mb_left)) {
+            begin_undo(act_globalvec,"changing view "+string(vw_current)+" size") add_undo("vw_w") add_undo(vw_current) add_undo(storex) add_undo("vw_h") add_undo(vw_current) add_undo(storey) push_undo()
+            sizeview=0
+        }
     }
 }

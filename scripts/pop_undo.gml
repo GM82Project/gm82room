@@ -97,7 +97,10 @@ if (!ds_stack_empty(undostack)) {
             variable_global_set(ds_list_find_value(l,i),ds_list_find_value(l,i+1))
         }break
         case act_globalvec: {
-            variable_global_array_set(ds_list_find_value(l,i),ds_list_find_value(l,i+1),ds_list_find_value(l,i+2))
+            repeat (size/3) {
+                variable_global_array_set(ds_list_find_value(l,i),ds_list_find_value(l,i+1),ds_list_find_value(l,i+2))
+                i+=3
+            }
         }break
     }
 
