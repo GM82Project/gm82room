@@ -85,6 +85,8 @@ if (!ds_stack_empty(undostack)) {
                 o.image_yscale=o.tilesy*tile_get_height(o.tile)
                 o.image_blend=ds_list_find_value(l,i+6)
                 o.image_alpha=ds_list_find_value(l,i+7)
+                tile_set_position(o.tile,o.x,o.y)
+                tile_set_depth(o.tile,o.tlayer)
                 tile_set_scale(o.tile,o.tilesx,o.tilesy)
                 tile_set_blend(o.tile,o.image_blend)
                 tile_set_alpha(o.tile,o.image_alpha)

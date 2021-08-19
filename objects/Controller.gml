@@ -11,7 +11,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-end_change_undo()
+do_change_undo()
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

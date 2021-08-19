@@ -33,7 +33,7 @@
 	|push_undo
 	|pop_undo
 	|update_instance_memory
-	|end_change_undo
+	|do_change_undo
 |load_room
 |save_room
 |gameend
