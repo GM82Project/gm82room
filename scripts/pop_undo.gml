@@ -4,7 +4,7 @@ if (!ds_stack_empty(undostack)) {
     l=ds_stack_pop(undostack)
     with (Button) if (action="undo") {
         if (ds_stack_empty(undostack)) alt="Undo"
-        else alt="Undo "+ds_list_find_value(ds_stack_top(undostack),0)+" ("+string(ds_stack_size(undostack))+")"
+        else alt="Undo "+ds_list_find_value(ds_stack_top(undostack),0)+" ("+string(ds_stack_size(undostack))+" left)"
     }
 
     uaction=ds_list_find_value(l,1)
@@ -95,6 +95,9 @@ if (!ds_stack_empty(undostack)) {
         }break
         case act_global: {
             variable_global_set(ds_list_find_value(l,i),ds_list_find_value(l,i+1))
+        }break
+        case act_globalvec: {
+            variable_global_array_set(ds_list_find_value(l,i),ds_list_find_value(l,i+1),ds_list_find_value(l,i+2))
         }break
     }
 

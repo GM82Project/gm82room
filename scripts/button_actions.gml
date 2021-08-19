@@ -186,11 +186,11 @@ with (Controller) switch (argument0) {
     //backgrounds
     case "clear bg"  : {undo_global("clearscreen") clearscreen=!clearscreen}break
     case "bgselect"  : {bg_current=other.actionid update_backgroundpanel()}break
-    case "bg visible": {bg_visible[bg_current]=!bg_visible[bg_current]}break
-    case "bg fore"   : {bg_is_foreground[bg_current]=!bg_is_foreground[bg_current]}break
-    case "bg tileh"  : {bg_tile_h[bg_current]=!bg_tile_h[bg_current]}break
-    case "bg tilev"  : {bg_tile_v[bg_current]=!bg_tile_v[bg_current]}break
-    case "bg stretch": {bg_stretch[bg_current]=!bg_stretch[bg_current]}break
+    case "bg visible": {undo_globalvec("bg_visible",bg_current) bg_visible[bg_current]=!bg_visible[bg_current]}break
+    case "bg fore"   : {undo_globalvec("bg_is_foreground",bg_current) bg_is_foreground[bg_current]=!bg_is_foreground[bg_current]}break
+    case "bg tileh"  : {undo_globalvec("bg_tile_h",bg_current) bg_tile_h[bg_current]=!bg_tile_h[bg_current]}break
+    case "bg tilev"  : {undo_globalvec("bg_tile_v",bg_current) bg_tile_v[bg_current]=!bg_tile_v[bg_current]}break
+    case "bg stretch": {undo_globalvec("bg_stretch",bg_current) bg_stretch[bg_current]=!bg_stretch[bg_current]}break
 
 
     //views
@@ -199,5 +199,5 @@ with (Controller) switch (argument0) {
 
     //views
     case "enable views": {undo_global("vw_enabled") vw_enabled=!vw_enabled}break
-    case "view visible": {vw_visible[vw_current]=!vw_visible[vw_current]}break
+    case "view visible": {undo_globalvec("vw_visible",vw_current) vw_visible[vw_current]=!vw_visible[vw_current]}break
 }

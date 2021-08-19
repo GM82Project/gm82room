@@ -7,7 +7,7 @@ with (Controller) if (undoing) {
     }
     with (Button) if (action="undo") {
         if (ds_stack_empty(undostack)) alt="Undo"
-        else alt="Undo "+ds_list_find_value(ds_stack_top(undostack),0)+" ("+string(ds_stack_size(undostack))+")"
+        else alt="Undo "+ds_list_find_value(ds_stack_top(undostack),0)+" ("+string(ds_stack_size(undostack))+" left)"
     }
     undolist=noone
     undoing=0

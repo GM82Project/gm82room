@@ -26,6 +26,7 @@
 	|begin_undo
 	|add_undo
 	|undo_global
+	|undo_globalvec
 	|add_undo_instance
 	|add_undo_instance_props
 	|add_undo_tile

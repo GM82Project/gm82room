@@ -7,3 +7,4 @@ act_destroy=0
 act_create=1
 act_change=2
 act_global=3
+act_globalvec=4

@@ -11,7 +11,7 @@ if (active) {
         case "room width" : {val=clamp(round(real(text)),1,999999) undo_global("roomwidth")  roomwidth=val }break
         case "room height": {val=clamp(round(real(text)),1,999999) undo_global("roomheight") roomheight=val}break
         case "room speed" : {val=clamp(round(real(text)),1,9999  ) undo_global("roomspeed")  roomspeed=val }break
-        case "room caption": {roomcaption=text}break
+        case "room caption": {undo_global("roomcaption") roomcaption=text}break
 
         case "inst x"    : {val=round(real(text)) with (instance) if (sel) {x=val do_change_undo()}}break
         case "inst y"    : {val=round(real(text)) with (instance) if (sel) {y=val do_change_undo()}}break
@@ -31,25 +31,25 @@ if (active) {
         case "layer depth": {val=clamp(round(real(text)),-1000000000,1000000000) change_tile_layer(val)}break
 
         case "bgcol"  : {val=round(real(text)) undo_global("background_color") background_color=val}break
-        case "bg xpos": {val=round(real(text)) bg_xoffset[bg_current]=val}break
-        case "bg ypos": {val=round(real(text)) bg_yoffset[bg_current]=val}break
-        case "bg hsp" : {val=round(real(text)) bg_hspeed [bg_current]=val}break
-        case "bg vsp" : {val=round(real(text)) bg_vspeed [bg_current]=val}break
+        case "bg xpos": {val=round(real(text)) undo_globalvec("bg_xoffset",bg_current) bg_xoffset[bg_current]=val}break
+        case "bg ypos": {val=round(real(text)) undo_globalvec("bg_yoffset",bg_current) bg_yoffset[bg_current]=val}break
+        case "bg hsp" : {val=round(real(text)) undo_globalvec("bg_hspeed",bg_current) bg_hspeed [bg_current]=val}break
+        case "bg vsp" : {val=round(real(text)) undo_globalvec("bg_vspeed",bg_current) bg_vspeed [bg_current]=val}break
 
-        case "view x": {val=round(real(text)) vw_x[vw_current]=val}break
-        case "view y": {val=round(real(text)) vw_y[vw_current]=val}break
-        case "view w": {val=round(real(text)) if (val=0) {val=16 text="16"} vw_w[vw_current]=val}break
-        case "view h": {val=round(real(text)) if (val=0) {val=16 text="16"} vw_h[vw_current]=val}break
+        case "view x": {val=round(real(text)) undo_globalvec("vw_x",vw_current) vw_x[vw_current]=val}break
+        case "view y": {val=round(real(text)) undo_globalvec("vw_y",vw_current) vw_y[vw_current]=val}break
+        case "view w": {val=round(real(text)) undo_globalvec("vw_w",vw_current) if (val=0) {val=16 text="16"} vw_w[vw_current]=val}break
+        case "view h": {val=round(real(text)) undo_globalvec("vw_h",vw_current) if (val=0) {val=16 text="16"} vw_h[vw_current]=val}break
 
-        case "view xp": {val=round(real(text)) vw_xp[vw_current]=val}break
-        case "view yp": {val=round(real(text)) vw_yp[vw_current]=val}break
-        case "view wp": {val=round(real(text)) if (val=0) {val=16 text="16"} vw_wp[vw_current]=val}break
-        case "view hp": {val=round(real(text)) if (val=0) {val=16 text="16"} vw_hp[vw_current]=val}break
+        case "view xp": {val=round(real(text)) undo_globalvec("vw_xp",vw_current) vw_xp[vw_current]=val}break
+        case "view yp": {val=round(real(text)) undo_globalvec("vw_yp",vw_current) vw_yp[vw_current]=val}break
+        case "view wp": {val=round(real(text)) undo_globalvec("vw_wp",vw_current) if (val=0) {val=16 text="16"} vw_wp[vw_current]=val}break
+        case "view hp": {val=round(real(text)) undo_globalvec("vw_hp",vw_current) if (val=0) {val=16 text="16"} vw_hp[vw_current]=val}break
 
-        case "view hbor"  : {val=round(real(text)) vw_hbor  [vw_current]=val}break
-        case "view vbor"  : {val=round(real(text)) vw_vbor  [vw_current]=val}break
-        case "view hspeed": {val=round(real(text)) vw_hspeed[vw_current]=val}break
-        case "view vspeed": {val=round(real(text)) vw_vspeed[vw_current]=val}break
+        case "view hbor"  : {val=round(real(text)) undo_globalvec("vw_hbor",vw_current) vw_hbor[vw_current]=val}break
+        case "view vbor"  : {val=round(real(text)) undo_globalvec("vw_vbor",vw_current) vw_vbor[vw_current]=val}break
+        case "view hspeed": {val=round(real(text)) undo_globalvec("vw_hspeed",vw_current) vw_hspeed[vw_current]=val}break
+        case "view vspeed": {val=round(real(text)) undo_globalvec("vw_vspeed",vw_current) vw_vspeed[vw_current]=val}break
     }
     event_user(4)
 }
