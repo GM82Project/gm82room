@@ -19,6 +19,7 @@
 	|external_code_editor
 	|load_object_tree
 	|load_background_tree
+	|load_paths
 +chunks
 	|chunk_export
 	|chunk_import
@@ -54,6 +55,7 @@
 	|del_tile_layer
 	|change_tile_layer
 |drawui
+|draw_paths
 |draw_backgrounds
 |step
 +step

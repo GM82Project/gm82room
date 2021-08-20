@@ -53,6 +53,8 @@ if (mode==0 || mode==1) {
     d3d_transform_set_identity()
 } else window_set_cursor(cr_default)
 
+//paths
+draw_paths()
 
 //object mode
 if (mode==0) {

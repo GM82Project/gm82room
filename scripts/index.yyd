@@ -90,3 +90,5 @@ do_change_undo
 start_dragging
 do_dragging
 undo_globalvec
+load_paths
+draw_paths
