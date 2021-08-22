@@ -11,7 +11,7 @@ i=instance_create(96,100,TextField)
 i.action="bgcol"
 i.alt="Background color"
 i.type=1
-i.text=string(background_color)
+i.text=string(backgroundcolor)
 i.w=60
 i.tagmode=2
 

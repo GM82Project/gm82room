@@ -12,9 +12,11 @@ if (click) {
         }
         if (mode==3) {
             if (str=="<undefined>") {
+                undo_globalvec("vw_follow",vw_current,"view "+string(vw_current)+" options")
                 vw_follow[vw_current]=noone
                 textfield_set("view follow","")
             } else {
+                undo_globalvec("vw_follow",vw_current,"view "+string(vw_current)+" options")
                 vw_follow[vw_current]=ds_map_find_value(objmenuitems,click)
                 textfield_set("view follow",vw_follow[vw_current])
             }
@@ -22,6 +24,9 @@ if (click) {
     }
     if (menutype=="background") {
         str=ds_map_find_value(bgmenuitems,click)
+        begin_undo(act_globalvec,"background "+string(bg_current)+" options",0) add_undo("vw_follow") add_undo(vw_current) add_undo(bg_tex[bg_current]) push_undo()
+        begin_undo(act_globalvec,"",1) add_undo("bg_source") add_undo(vw_current) add_undo(bg_source[bg_current]) push_undo()
+        begin_undo(act_globalvec,"",1) add_undo("bg_visible") add_undo(vw_current) add_undo(bg_visible[bg_current]) push_undo()
         if (str=="<undefined>") {
             bg_tex[bg_current]=bgDefault
             bg_source[bg_current]=""

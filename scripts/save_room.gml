@@ -62,7 +62,7 @@ str="caption="+roomcaption+lf
 +"isometric="+string(ds_map_find_value(settings,"isometric"))+lf
 +"roomspeed="+string(roomspeed)+lf
 +"roompersistent="+string(roompersistent)+lf
-+"bg_color="+string(background_color)+lf
++"bg_color="+string(backgroundcolor)+lf
 +"clear_screen="+string(clearscreen)+lf
 +"clear_view="+string(clearview)+lf
 +lf

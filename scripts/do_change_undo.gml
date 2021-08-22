@@ -1,6 +1,6 @@
 //when called somewhere else, schedule a global save on the Controller
 if (object_index=Controller) {
-    begin_undo(act_change,undotype,0)
+    begin_undo(act_change,undotype,undocombo)
 
     if (mode==0) {
         with (instance) {
@@ -35,5 +35,6 @@ if (object_index=Controller) {
     update_instance_memory()
 } else {
     Controller.undotype=argument[0]
+    Controller.undocombo=argument[1]
     Controller.alarm[1]=2
 }

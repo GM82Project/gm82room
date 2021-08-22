@@ -2,7 +2,7 @@ globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,objvis
 
 globalvar gamename,roomname,roomcode,roomspeed,roomcaption,roompersistent,clearscreen,clearview,settings,gridx,gridy;
 
-globalvar bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch;
+globalvar backgroundcolor,bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch;
 globalvar vw_enabled,vw_visible,vw_x,vw_y,vw_w,vw_h,vw_xp,vw_yp,vw_wp,vw_hp,vw_follow,vw_hspeed,vw_vspeed,vw_hbor,vw_vbor;
 globalvar layers;
 globalvar paths,pathnum;
@@ -78,7 +78,7 @@ load_paths()
 settings=ds_map_create()
 ds_map_read_ini(settings,dir+"room.txt")
 
-background_color=real(ds_map_find_value(settings,"bg_color"))
+backgroundcolor=real(ds_map_find_value(settings,"bg_color"))
 clearscreen=real(ds_map_find_value(settings,"clear_screen"))
 clearview=real(ds_map_find_value(settings,"clear_view"))
 roomwidth=real(ds_map_find_value(settings,"width"))

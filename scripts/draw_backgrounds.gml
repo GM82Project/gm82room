@@ -1,6 +1,6 @@
 ///draw_backgrounds(foregrounds)
 if (!argument0) {
-    if (clearscreen) rect(0,0,roomwidth,roomheight,background_color,1)
+    if (clearscreen) rect(0,0,roomwidth,roomheight,backgroundcolor,1)
     else rect(0,0,roomwidth,roomheight,fillcolor,1)
 }
 

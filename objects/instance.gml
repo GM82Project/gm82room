@@ -52,7 +52,7 @@ if (sel) {
         if (!keyboard_check(vk_alt)) {
             image_angle=roundto(image_angle,15)
         }
-        if (!mouse_check_direct(mb_left)) {rotato=0 event_user(1) do_change_undo("rotation")}
+        if (!mouse_check_direct(mb_left)) {rotato=0 event_user(1) do_change_undo("rotation",0)}
         update_inspector()
     }
     if (grab) {
@@ -84,7 +84,7 @@ if (sel) {
 
         if (abs(image_xscale*sprw)<1) image_xscale=1/sprw
         if (abs(image_yscale*sprh)<1) image_yscale=1/sprh
-        if (!mouse_check_direct(mb_left)) {draggatto=0 event_user(1) do_change_undo("scaling")}
+        if (!mouse_check_direct(mb_left)) {draggatto=0 event_user(1) do_change_undo("scaling",0)}
         update_inspector()
     }
 }

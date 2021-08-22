@@ -12,8 +12,7 @@ with (instance) {
 }
 instance_deactivate_region(max_int-10000,max_int-10000,20000,20000,1,1)
 
-
-begin_undo(act_create,"gluing instances",1)
+begin_undo(act_create,"gluing instances",0)
 repeat (8) {
     with (instance) {
         coll=instance_place(x+1,y,instance)
@@ -36,4 +35,4 @@ change_mode(mode)
 
 with (instance) {x=xprevious y=yprevious}
 
-do_change_undo("")
+do_change_undo("",1)
