@@ -267,7 +267,7 @@ if (mode=0) {
         dy=140+40*posy+palettescroll
         draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
         draw_sprite(sprMenuButtons,18,dx,dy)
-        if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-100) {
+        if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-136) {
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                 paltooltip=1
             }
@@ -275,10 +275,6 @@ if (mode=0) {
     } else {
         draw_text(8,126,"Project#contains no#objects.")
     }
-
-    //bottom panel
-    draw_button(0,height-112,160,112,1)
-    draw_text(8,height-32,"Tools")
 
     //inspector
     dx=width-160
@@ -498,14 +494,13 @@ if (mode==4) {
     draw_text(dx+12,6,"Chunk tools")
 }
 
-with (Button) button_draw()
-with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
+tooltiptext=""
 
 if (mode==0) {
     //object tab tooltips
     posx=0
     posy=0
-    if (mouse_wy>120 && mouse_wy<height-100) for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
+    if (mouse_wy>120 && mouse_wy<height-136) for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
         if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
@@ -522,12 +517,16 @@ if (mode==0) {
                 d3d_set_fog(0,0,0,0)
             }
             draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
-            drawtooltip(ds_list_find_value(objects,i))
+            tooltiptext=ds_list_find_value(objects,i)
         }
         posx+=1 if (posx=4) {posx=0 posy+=1}
     }
 
-    if (paltooltip && !paladdbuttondown) drawtooltip("Add more...")
+    if (paltooltip && !paladdbuttondown) tooltiptext="Add more..."
+
+    //bottom panel
+    draw_button(0,height-112,160,112,1)
+    draw_text(8,height-32,"Tools")
 }
 
 if (mode==1 && tilebgpal!=noone) {
@@ -564,13 +563,18 @@ if (mode==1 && tilebgpal!=noone) {
             posx+=1 if (posx=4) {posx=0 posy+=1}
         }
 
-        if (paltooltip && !paladdbuttondown) drawtooltip("Add more...")
+        if (paltooltip && !paladdbuttondown) tooltiptext="Add more..."
     }
 
     if (mouse_wx>=width-160 && mouse_wy>=360 && mouse_wy<height-100) {
         mem=ly_current
         if (median(0,floor((mouse_wy-360-layerscroll)/32),layersize+1)==layersize) {
-            drawtooltip("Add layer...")
+            tooltiptext="Add layer..."
         }
     }
 }
+
+with (Button) button_draw()
+with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
+
+if (tooltiptext!="") drawtooltip(tooltiptext)
