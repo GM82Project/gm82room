@@ -35,4 +35,6 @@ change_mode(mode)
 
 with (instance) {x=xprevious y=yprevious}
 
-do_change_undo("",1)
+undotype=""
+undocombo=1
+do_change_undo()
