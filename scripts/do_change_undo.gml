@@ -1,6 +1,6 @@
 //when called somewhere else, schedule a global save on the Controller
 if (object_index=Controller) {
-    begin_undo(act_change,"modifying "+pick(mode,"instances","tiles"))
+    begin_undo(act_change,undotype,0)
 
     if (mode==0) {
         with (instance) {
@@ -33,4 +33,7 @@ if (object_index=Controller) {
     push_undo()
 
     update_instance_memory()
-} else Controller.alarm[1]=2
+} else {
+    Controller.undotype=argument[0]
+    Controller.alarm[1]=2
+}

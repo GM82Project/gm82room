@@ -1,23 +1,24 @@
-var l,o,i,uaction,lmode,size,tilew,tileh;
+var l,o,i,uaction,lmode,size,tilew,tileh,combo;
 
 if (!ds_stack_empty(undostack)) {
     l=ds_stack_pop(undostack)
     with (Button) if (action="undo") {
         if (ds_stack_empty(undostack)) alt="Undo"
-        else alt="Undo "+ds_list_find_value(ds_stack_top(undostack),0)+" ("+string(ds_stack_size(undostack))+" left)"
+        else alt="Undo "+ds_list_find_value(ds_stack_top(undostack),1)+" ("+string(ds_stack_size(undostack))+" left)"
     }
 
-    uaction=ds_list_find_value(l,1)
-    lmode=ds_list_find_value(l,2)
-    size=ds_list_size(l)-3
-    i=3
+    uaction=ds_list_find_value(l,0)
+    combo=ds_list_find_value(l,2)
+    lmode=ds_list_find_value(l,3)
+    size=ds_list_size(l)-4
+    i=4
 
     instance_activate_all()
 
     switch (uaction) {
         case act_destroy: {
             repeat (size) {
-                with (ds_list_find_value(l,i)) instance_destroy()
+                with (ds_map_find_value(uidmap,ds_list_find_value(l,i))) instance_destroy()
                 i+=1
             }
         }break
@@ -109,4 +110,5 @@ if (!ds_stack_empty(undostack)) {
     update_instance_memory()
 
     change_mode(mode)
+    if (combo) pop_undo()
 }

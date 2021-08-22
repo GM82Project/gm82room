@@ -3,7 +3,7 @@ if (!keyboard_check(vk_control)) {
         if (selecting) selecting=0
         clear_inspector()
         deselect()
-        begin_undo(act_create,"deleting "+pick(mode,"instances","tiles"))
+        begin_undo(act_create,"erasing "+pick(mode,"instances","tiles"),0)
     }
     if (mouse_check_direct(mb_right)) {
         //delete instances

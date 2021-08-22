@@ -101,30 +101,35 @@ i.spr=6
 i.action="view views"
 i.alt="Show views"
 
+i=instance_create(160+480,0,Button)
+i.spr=28
+i.action="view paths"
+i.alt="Show paths"
+
 
 //view
-i=instance_create(160+496,0,Button)
+i=instance_create(160+528,0,Button)
 i.spr=10
 i.action="reset view"
 i.alt="Reset view"
 
-i=instance_create(160+528,0,Button)
+i=instance_create(160+560,0,Button)
 i.spr=11
 i.action="zoom in"
 i.alt="Zoom in"
 
-i=instance_create(160+560,0,Button)
+i=instance_create(160+592,0,Button)
 i.spr=12
 i.action="zoom out"
 i.alt="Zoom out"
 
-i=instance_create(160+592,0,Button)
+i=instance_create(160+624,0,Button)
 i.spr=16
 i.action="interp"
 i.alt="Smoothing"
 
 //halp
-i=instance_create(160+640,0,Button)
+i=instance_create(160+672,0,Button)
 i.spr=22
 i.action="help"
 i.alt="Quick guide"

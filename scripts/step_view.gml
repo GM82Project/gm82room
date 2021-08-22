@@ -10,7 +10,7 @@ if (mode==3) {
         }
         update_viewpanel()
         if (!mouse_check_direct(mb_left)) {
-            begin_undo(act_globalvec,"changing view "+string(vw_current)+" position") add_undo("vw_x") add_undo(vw_current) add_undo(storex) add_undo("vw_y") add_undo(vw_current) add_undo(storey) push_undo()
+            begin_undo(act_globalvec,"changing view "+string(vw_current)+" position",0) add_undo("vw_x") add_undo(vw_current) add_undo(storex) add_undo("vw_y") add_undo(vw_current) add_undo(storey) push_undo()
             grabview=0
         }
     }
@@ -26,7 +26,7 @@ if (mode==3) {
         }
         update_viewpanel()
         if (!mouse_check_direct(mb_left)) {
-            begin_undo(act_globalvec,"changing view "+string(vw_current)+" size") add_undo("vw_w") add_undo(vw_current) add_undo(storex) add_undo("vw_h") add_undo(vw_current) add_undo(storey) push_undo()
+            begin_undo(act_globalvec,"changing view "+string(vw_current)+" size",0) add_undo("vw_w") add_undo(vw_current) add_undo(storex) add_undo("vw_h") add_undo(vw_current) add_undo(storey) push_undo()
             sizeview=0
         }
     }

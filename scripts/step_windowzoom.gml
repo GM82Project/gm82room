@@ -76,13 +76,15 @@ if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
         if (mode==1) with (focus) focus_tile(tile)
     }
     zooming=1
-    grabx=global.mousex
-    graby=global.mousey
+    grabx=mouse_wx
+    graby=mouse_wy
+    grabxgo=xgo
+    grabygo=ygo
 }
 if (!mouse_check_direct(mb_middle) && !keyboard_check(vk_space)) {
     zooming=0
 }
 if (zooming) {
-    xgo+=grabx-mouse_x
-    ygo+=graby-mouse_y
+    xgo=round(grabxgo+(grabx-mouse_wx)*zoom)
+    ygo=round(grabygo+(graby-mouse_wy)*zoom)
 }

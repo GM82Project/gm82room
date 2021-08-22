@@ -79,7 +79,7 @@ if (sel) {
 
         tile_set_scale(tile,tilesx,tilesy)
 
-        if (!mouse_check_direct(mb_left)) {draggatto=0 do_change_undo()}
+        if (!mouse_check_direct(mb_left)) {draggatto=0 do_change_undo("scaling")}
         update_inspector()
     }
 }

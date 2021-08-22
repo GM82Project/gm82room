@@ -85,12 +85,12 @@ if (fn!="") {
     buffer_destroy(b)
 }
 
-begin_undo(act_destroy,"pasting "+pick(mode,"instances","tiles"))
+begin_undo(act_destroy,"importing a chunk file",0)
 if (mode==0) {
-    with (instance) if (modified) {add_undo(id) modified=0}
+    with (instance) if (modified) {add_undo(uid) modified=0}
 }
 if (mode==1) {
-    with (tileholder) if (modified) {add_undo(id) modified=0}
+    with (tileholder) if (modified) {add_undo(uid) modified=0}
 }
 push_undo()
 update_instance_memory()

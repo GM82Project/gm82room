@@ -19,9 +19,9 @@ with (Controller) switch (argument0) {
     case "undo"         : {pop_undo()}break
 
     //settings
-    case "room code"   : {undo_global("roomcode") roomcode=external_code_editor(roomcode) other.alt=roomcode}break
-    case "room persist": {undo_global("roompersistent") roompersistent=!roompersistent}break
-    case "room clear"  : {undo_global("clearview") clearview=!clearview}break
+    case "room code"   : {undo_global("roomcode","room creation code") roomcode=external_code_editor(roomcode) other.alt=roomcode}break
+    case "room persist": {undo_global("roompersistent","room options") roompersistent=!roompersistent}break
+    case "room clear"  : {undo_global("clearview","room options") clearview=!clearview}break
     case "chunk crop"  : {chunkcrop=!chunkcrop}break
     case "chunk export": {chunk_export()}break
     case "chunk import": {chunk_import()}break
@@ -35,6 +35,7 @@ with (Controller) switch (argument0) {
     case "view views"  : {view[4]=!view[4]}break
     case "view invis"  : {view[5]=!view[5] change_mode(mode)}break
     case "view nospr"  : {view[6]=!view[6] change_mode(mode)}break
+    case "view paths"  : {view[7]=!view[7]}break
 
 
     //zoom
@@ -49,7 +50,7 @@ with (Controller) switch (argument0) {
     //instance inspector
     case "copy object"   : {clipboard_set_text(select.objname)}break
     case "inst code"     : {edit_creation_code()}break
-    case "inst snap"     : {with (instance) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) do_change_undo() if (Controller.select==id) update_inspector()}}break
+    case "inst snap"     : {with (instance) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) do_change_undo("snapping") if (Controller.select==id) update_inspector()}}break
     case "inst flip xs": {
         with (instance) if (sel) {
             cl=min(cl,bbox_left)
@@ -63,7 +64,7 @@ with (Controller) switch (argument0) {
             mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
             image_xscale*=-1 event_user(1)
             x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2 y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
-            do_change_undo()
+            do_change_undo("mirroring")
             if (Controller.select==id) update_inspector()
         }
     }break
@@ -80,7 +81,7 @@ with (Controller) switch (argument0) {
             mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
             image_yscale*=-1 event_user(1)
             x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2 y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
-            do_change_undo()
+            do_change_undo("flipping")
             if (Controller.select==id) update_inspector()
         }
     }break
@@ -97,7 +98,7 @@ with (Controller) switch (argument0) {
             image_angle=modwrap(image_angle+90,0,360)
             mycx=sx+(y+0.5-sy)-0.5 mycy=sy-(x+0.5-sx)-0.5
             x=mycx y=mycy
-            do_change_undo()
+            do_change_undo("rotation")
             if (Controller.select==id) update_inspector()
         }
     }break
@@ -114,7 +115,7 @@ with (Controller) switch (argument0) {
             image_angle=modwrap(image_angle-90,0,360)
             mycx=sx-(y+0.5-sy)-0.5 mycy=sy+(x+0.5-sx)-0.5
             x=mycx y=mycy
-            do_change_undo()
+            do_change_undo("rotation")
             if (Controller.select==id) update_inspector()
         }
     }break
@@ -133,7 +134,7 @@ with (Controller) switch (argument0) {
     case "tile overlap check": {tile_overlap_check=!tile_overlap_check}break
 
     //tile inspector
-    case "tile snap": {with (tileholder) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) tile_set_position(tile,x,y) do_change_undo() if (Controller.selectt==id) update_inspector()}}break
+    case "tile snap": {with (tileholder) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) tile_set_position(tile,x,y) do_change_undo("snapping") if (Controller.selectt==id) update_inspector()}}break
     case "tile flip xs": {
         with (tileholder) if (sel) {
             cl=min(cl,bbox_left)
@@ -151,7 +152,7 @@ with (Controller) switch (argument0) {
             tilesy=image_yscale/tileh
             tile_set_position(tile,x,y)
             tile_set_scale(tile,tilesx,tilesy)
-            do_change_undo()
+            do_change_undo("mirroring")
             if (Controller.selectt==id) update_inspector()
         }
     }break
@@ -172,7 +173,7 @@ with (Controller) switch (argument0) {
             tilesy=image_yscale/tileh
             tile_set_position(tile,x,y)
             tile_set_scale(tile,tilesx,tilesy)
-            do_change_undo()
+            do_change_undo("flipping")
             if (Controller.selectt==id) update_inspector()
         }
     }break
@@ -184,13 +185,13 @@ with (Controller) switch (argument0) {
 
 
     //backgrounds
-    case "clear bg"  : {undo_global("clearscreen") clearscreen=!clearscreen}break
+    case "clear bg"  : {undo_global("clearscreen","room options") clearscreen=!clearscreen}break
     case "bgselect"  : {bg_current=other.actionid update_backgroundpanel()}break
-    case "bg visible": {undo_globalvec("bg_visible",bg_current) bg_visible[bg_current]=!bg_visible[bg_current]}break
-    case "bg fore"   : {undo_globalvec("bg_is_foreground",bg_current) bg_is_foreground[bg_current]=!bg_is_foreground[bg_current]}break
-    case "bg tileh"  : {undo_globalvec("bg_tile_h",bg_current) bg_tile_h[bg_current]=!bg_tile_h[bg_current]}break
-    case "bg tilev"  : {undo_globalvec("bg_tile_v",bg_current) bg_tile_v[bg_current]=!bg_tile_v[bg_current]}break
-    case "bg stretch": {undo_globalvec("bg_stretch",bg_current) bg_stretch[bg_current]=!bg_stretch[bg_current]}break
+    case "bg visible": {undo_globalvec("bg_visible",bg_current,"background "+string(bg_current)+" options") bg_visible[bg_current]=!bg_visible[bg_current]}break
+    case "bg fore"   : {undo_globalvec("bg_is_foreground",bg_current,"background "+string(bg_current)+" options") bg_is_foreground[bg_current]=!bg_is_foreground[bg_current]}break
+    case "bg tileh"  : {undo_globalvec("bg_tile_h",bg_current,"background "+string(bg_current)+" options") bg_tile_h[bg_current]=!bg_tile_h[bg_current]}break
+    case "bg tilev"  : {undo_globalvec("bg_tile_v",bg_current,"background "+string(bg_current)+" options") bg_tile_v[bg_current]=!bg_tile_v[bg_current]}break
+    case "bg stretch": {undo_globalvec("bg_stretch",bg_current,"background "+string(bg_current)+" options") bg_stretch[bg_current]=!bg_stretch[bg_current]}break
 
 
     //views
@@ -198,6 +199,6 @@ with (Controller) switch (argument0) {
 
 
     //views
-    case "enable views": {undo_global("vw_enabled") vw_enabled=!vw_enabled}break
-    case "view visible": {undo_globalvec("vw_visible",vw_current) vw_visible[vw_current]=!vw_visible[vw_current]}break
+    case "enable views": {undo_global("vw_enabled","view options") vw_enabled=!vw_enabled}break
+    case "view visible": {undo_globalvec("vw_visible",vw_current,"view "+string(vw_current)+" options") vw_visible[vw_current]=!vw_visible[vw_current]}break
 }

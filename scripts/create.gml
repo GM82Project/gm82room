@@ -76,18 +76,20 @@ removeoutside=registry_read_dword(dir+"RemoveOutside",0)
 fillwithcolor=registry_read_dword(dir+"FillRoomWithBackground",1)
 fillcolor=registry_read_dword(dir+"RoomBackgroundFullColourDefault",$400040)
 remember=registry_read_dword(dir+"RememberRoomSettings",0)
-minimap=registry_read_dword(dir+"RoomMinimap",1)
+//minimap=registry_read_dword(dir+"RoomMinimap",1)
 crosshair=registry_read_dword(dir+"RoomCrosshair",1)
 interpolation=registry_read_dword(dir+"RoomSmooth",1)
 codeeditor=registry_read_string_ext(dir,"CodeEditor")
 if (!file_exists(codeeditor)) codeeditor="notepad"
-if (!registry_read_dword(dir+"NewRoomEditorSeen",0)) show_info()
+seen=registry_read_dword(dir+"NewRoomEditorSeen",0)
 
 state="load"
 crc_init()
 if (!load_room()) exit
 update_instance_memory()
 state="run"
+
+if (!seen) show_info()
 
 view[0]=1
 view[1]=1
@@ -96,6 +98,7 @@ view[3]=1
 view[4]=0
 view[5]=1
 view[6]=1
+view[7]=1
 
 chunkwidth=roomwidth
 chunkheight=roomheight

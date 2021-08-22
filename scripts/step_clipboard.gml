@@ -13,7 +13,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_c
     yes=(keyboard_check_pressed(ord("X")))
 
     if (yes) {
-        if (num_selected()) begin_undo(act_create,"cutting "+pick(mode,"instances","tiles"))
+        if (num_selected()) begin_undo(act_create,"cutting "+pick(mode,"instances","tiles"),0)
     }
 
     if (mode==0) with (instance) if (sel) {
@@ -82,7 +82,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
 
             cur=1
             if (mode==0) repeat (copyvec[0,0]) {
-                //note: if you have instances copied that would be invisible in the current view, they'l be visible anyway
+                //note: if you have instances copied that would be invisible in the current view, they'l be visible
                 o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance) get_uid(o)
                 o.obj=copyvec[cur,1]
                 o.objname=copyvec[cur,0]
@@ -117,21 +117,21 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
 
                 o.tlayer=ly_depth
                 o.tile=tile_add(o.bg,copyvec[cur,6],copyvec[cur,9],o.tilew,o.tileh,o.x,o.y,ly_depth)
-                tile_set_scale(o.tile,copyvec[cur,4],copyvec[cur,5])
-                tile_set_blend(o.tile,image_blend)
-                tile_set_alpha(o.tile,image_alpha)
+                tile_set_scale(o.tile,o.tilesx,o.tilesy)
+                tile_set_blend(o.tile,o.image_blend)
+                tile_set_alpha(o.tile,o.image_alpha)
 
                 o.sel=1
                 o.modified=1
                 selectt=o
                 cur+=1
             }
-            begin_undo(act_destroy,"pasting "+pick(mode,"instances","tiles"))
+            begin_undo(act_destroy,"pasting "+pick(mode,"instances","tiles"),0)
             if (mode==0) {
-                with (instance) if (modified) {add_undo(id) modified=0}
+                with (instance) if (modified) {add_undo(uid) modified=0}
             }
             if (mode==1) {
-                with (tileholder) if (modified) {add_undo(id) modified=0}
+                with (tileholder) if (modified) {add_undo(uid) modified=0}
             }
             push_undo()
             update_instance_memory()

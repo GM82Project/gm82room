@@ -226,12 +226,12 @@ if (paint) {
     }
     if (!mouse_check_direct(mb_left)) {
         paint=0
-        begin_undo(act_destroy,"drawing "+pick(mode,"instances","tiles"))
+        begin_undo(act_destroy,"drawing "+pick(mode,"instances","tiles"),0)
         if (mode==0) {
-            with (instance) if (modified) {add_undo(id) modified=0}
+            with (instance) if (modified) {add_undo(uid) modified=0}
         }
         if (mode==1) {
-            with (tileholder) if (modified) {add_undo(id) modified=0}
+            with (tileholder) if (modified) {add_undo(uid) modified=0}
         }
         push_undo()
     }
