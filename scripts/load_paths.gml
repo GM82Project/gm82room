@@ -1,7 +1,7 @@
 var f,f2,str,path,closed,precision,smooth;
 var p,i,l,d,px,py,dx,dy,opx,opy,odx,ody;
 
-f=file_text_open_read(root+"paths\index.yyd") do {pathname=file_text_read_string(f) file_text_readln(f)
+f=file_text_open_read(root+"paths\index.yyd") do {pathname=file_text_read_string(f) file_text_readln(f) if (pathname!="") {
     f2=file_text_open_read(root+"paths\"+pathname+"\path.txt")
     smooth=(string_delete(file_text_read_string(f2),1,11)=="1")
     file_text_readln(f2)
@@ -177,5 +177,5 @@ f=file_text_open_read(root+"paths\index.yyd") do {pathname=file_text_read_string
             }
         }
         draw_set_color($ffffff)
-    }
+    }}
 } until (file_text_eof(f)) file_text_close(f)
