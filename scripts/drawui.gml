@@ -1,4 +1,4 @@
-var yes,l,t,r,b;
+var yes,l,t,r,b,zm;
 
 draw_backgrounds(1)
 
@@ -162,8 +162,9 @@ if (view[4] || mode==3) {
             }
             draw_roundrect(vw_x[i],vw_y[i],dx,dy,1)
             if (vw_current==i && mode==3) {
-                draw_rectangle(dx-8,dy-8,dx+8,dy+8,1)
-                draw_rectangle(dx-4,dy-4,dx+4,dy+4,1)
+                zm=max(0.5,zoom)
+                draw_rectangle(dx-8*zm,dy-8*zm,dx+8*zm,dy+8*zm,1)
+                draw_rectangle(dx-4*zm,dy-4*zm,dx+4*zm,dy+4*zm,1)
             }
             draw_set_color($ffffff)
             draw_text_transformed(vw_x[i]+8+0.5*zoom,vw_y[i]+8+0.5*zoom,"View "+string(i),zoom,zoom,0)
