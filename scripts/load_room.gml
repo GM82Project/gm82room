@@ -19,8 +19,8 @@ if (parameter_count()) {
     dir=parameter_string(1)
 } else {
     //clicked on
-    dir="C:\Stuff\github\renex-engine\rooms\rmDemo1"
-    //dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
+    //dir="C:\Stuff\github\renex-engine\rooms\rmDemo1"
+    dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
 }
 roomname=filename_name(dir)
 if (roomname="") {
