@@ -7,6 +7,7 @@
 	|draw_set_color_sel
 	|draw_loader
 	|drawtooltip
+	|file_text_open_read_safe
 +file
 	|gensavecode
 	|parsecode

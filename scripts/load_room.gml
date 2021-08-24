@@ -19,7 +19,8 @@ if (parameter_count()) {
     dir=parameter_string(1)
 } else {
     //clicked on
-    dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
+    dir="C:\Stuff\github\renex-engine\rooms\rmDemo1"
+    //dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
 }
 roomname=filename_name(dir)
 if (roomname="") {
@@ -29,7 +30,7 @@ if (roomname="") {
 }
 
 dir+="\"
-root=dir+"..\..\"
+root=directory_previous(directory_previous(dir))
 gamename=filename_change_ext(file_find_first(root+"*.gm82",0),"") file_find_close()
 room_caption+=" - "+roomname
 set_application_title(roomname+" - Room Editor")
@@ -133,7 +134,7 @@ if (layersize) {
     for (i=0;i<layersize;i+=1) {
         layer=real(ds_list_find_value(layers,i))
         ds_list_replace(layers,i,layer)
-        f=file_text_open_read(dir+string(layer)+".txt") do {str=file_text_read_string(f) file_text_readln(f)
+        f=file_text_open_read_safe(dir+string(layer)+".txt") if (f) do {str=file_text_read_string(f) file_text_readln(f)
             o=instance_create(0,0,tileholder) get_uid(o)
 
             string_token_start(str,",")
@@ -199,7 +200,7 @@ if (layersize) {
 
 //load instances
 time=current_time
-f=file_text_open_read(dir+"instances.txt") do {str=file_text_read_string(f) file_text_readln(f)
+f=file_text_open_read_safe(dir+"instances.txt") if (f) do {str=file_text_read_string(f) file_text_readln(f)
     if (str!="") {
         o=instance_create(0,0,instance) get_uid(o)
 
