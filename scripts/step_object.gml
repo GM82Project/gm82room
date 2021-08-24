@@ -28,7 +28,7 @@ if (mode==0 && objpal!=noone) {
             }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
-        palettescrollgo-=h*80
+        palettescrollgo-=h*120
     }
     palettescrollgo=clamp(palettescrollgo,-(palettesize div 4+1)*40+(height-120-136),0)
     palettescroll=clamp(inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2),-(palettesize div 4+1)*40+(height-120-136),0)

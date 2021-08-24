@@ -27,7 +27,7 @@ if (mode==1 && tilebgpal!=noone) {
             }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
-        tpalscrollgo-=h*80
+        tpalscrollgo-=h*120
     }
     tpalscrollgo=clamp(tpalscrollgo,-(tpalsize div 4+1)*40+(height-152-216),0)
     tpalscroll=clamp(inch((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(tpalsize div 4+1)*40+(height-152-216),0)
@@ -50,7 +50,7 @@ if (mode==1 && tilebgpal!=noone) {
             }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
-        layerscrollgo-=h*80
+        layerscrollgo-=h*120
     }
     layerscrollgo=clamp(layerscrollgo,-(layersize+1)*32+(height-56-100),0)
     layerscroll=clamp(inch((layerscroll*4+layerscrollgo)/5,layerscrollgo,2),-(layersize+1)*32+(height-56-100),0)
