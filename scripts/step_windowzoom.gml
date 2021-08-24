@@ -81,10 +81,10 @@ if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
     grabxgo=xgo
     grabygo=ygo
 }
-if (!mouse_check_direct(mb_middle) && !keyboard_check(vk_space)) {
-    zooming=0
-}
 if (zooming) {
     xgo=round(grabxgo+(grabx-mouse_wx)*zoom)
     ygo=round(grabygo+(graby-mouse_wy)*zoom)
+    if (!mouse_check_direct(mb_middle) && !keyboard_check(vk_space)) {
+        zooming=0
+    }
 }

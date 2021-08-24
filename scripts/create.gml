@@ -47,6 +47,7 @@ tpalscrollgo=0
 tpalscroll=0
 tpalsize=0
 paint=0
+erasing=0
 overlap_check=1
 tile_overlap_check=1
 copymode=-1
