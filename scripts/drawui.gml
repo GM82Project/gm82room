@@ -1,4 +1,4 @@
-var yes;
+var yes,l,t,r,b;
 
 draw_backgrounds(1)
 
@@ -123,8 +123,12 @@ if (mode==1) {
 if (selecting) {
     draw_set_color($ff8000)
     draw_set_alpha(0.5)
-    draw_rectangle(selx,sely,global.mousex,global.mousey,0)
-    draw_rectangle(selx,sely,global.mousex,global.mousey,1)
+    l=min(selx,global.mousex)-0.5
+    t=min(sely,global.mousey)-0.5
+    r=max(selx,global.mousex)+0.5
+    b=max(sely,global.mousey)+0.5
+    draw_rectangle(l,t,r,b,0)
+    draw_rectangle(l,t,r,b,1)
     draw_set_alpha(1)
     draw_set_color($ffffff)
 }

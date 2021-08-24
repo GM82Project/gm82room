@@ -1,4 +1,4 @@
-var yes,dx,dy,tex;
+var yes,dx,dy,tex,l,t,r,b;
 
 if (mouse_check_button_pressed(mb_left)) {
     with (TextField) textfield_actions()
@@ -133,16 +133,31 @@ if (mouse_check_button_pressed(mb_left)) {
     }
 }
 if (selecting) {
+    l=min(selx,global.mousex)
+    t=min(sely,global.mousey)
+    r=max(selx,global.mousex)
+    b=max(sely,global.mousey)
+
     if (mode==0) {
         with (instance) {
-            if (collision_rectangle(other.selx,other.sely,global.mousex,global.mousey,id,1,0)) sel=1
-            else sel=memsel
+            if (collision_rectangle(l,t,r,b,id,1,0)) sel=1
+            else {
+                if (bbox_left==bbox_right || bbox_top==bbox_bottom) {
+                    if (point_in_rectangle(x,y,l,t,r,b)) sel=1
+                    else sel=memsel
+                } else sel=memsel
+            }
         }
     }
     if (mode==1) {
         with (tileholder) {
-            if (collision_rectangle(other.selx,other.sely,global.mousex,global.mousey,id,1,0)) sel=1
-            else sel=memsel
+            if (collision_rectangle(l,t,r,b,id,1,0)) sel=1
+            else {
+                if (bbox_left==bbox_right || bbox_top==bbox_bottom) {
+                    if (point_in_rectangle(x,y,l,t,r,b)) sel=1
+                    else sel=memsel
+                } else sel=memsel
+            }
         }
     }
     if (!mouse_check_direct(mb_left)) {
