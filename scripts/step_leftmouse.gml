@@ -162,7 +162,14 @@ if (selecting) {
     }
     if (!mouse_check_direct(mb_left)) {
         selecting=0
-        update_inspector()
+        if (num_selected()==1) {
+            if (mode==0) {
+                with (instance) if (sel) {Controller.select=id update_inspector()}
+            }
+            if (mode==1) {
+                with (tileholder) if (sel) {Controller.selectt=id update_inspector()}
+            }
+        } else update_inspector()
     }
 }
 
