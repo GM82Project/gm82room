@@ -173,6 +173,28 @@ if (view[4] || mode==3) {
     d3d_transform_set_identity()
 }
 
+if (mode==4) {
+    rect(0,0,roomwidth,roomheight,0,0.5)
+    d3d_transform_add_translation(-0.5,-0.5,0)
+    draw_set_color_sel()
+    draw_rectangle(0,0,roomwidth,roomheight,1)
+    if (chunkcrop) {
+        dx=chunkleft+chunkwidth
+        dy=chunktop+chunkheight
+        draw_set_color($ff8000)
+        draw_set_alpha(0.5)
+        draw_roundrect(chunkleft,chunktop,dx,dy,0)
+        draw_set_alpha(1)
+        draw_set_color_sel()
+        draw_roundrect(chunkleft,chunktop,dx,dy,1)
+        zm=max(0.5,zoom)
+        draw_rectangle(dx-8*zm,dy-8*zm,dx+8*zm,dy+8*zm,1)
+        draw_rectangle(dx-4*zm,dy-4*zm,dx+4*zm,dy+4*zm,1)
+    }
+    draw_set_color($ffffff)
+    d3d_transform_set_identity()
+}
+
 
 //this is where the room space ends and the hud space starts================================================
 d3d_set_projection_ortho(0,0,width,height,0)

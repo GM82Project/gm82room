@@ -8,6 +8,7 @@ step_rightmouse()
 step_object()
 step_tile()
 step_view()
+step_settings()
 
 step_contextmenu()
 

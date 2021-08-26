@@ -131,6 +131,21 @@ if (mouse_check_button_pressed(mb_left)) {
                 }
             }
         }
+        if (mode==4) {
+            if (chunkcrop) {
+                if (abs(global.mousex-(chunkleft+chunkwidth))<8*zm && abs(global.mousey-(chunktop+chunkheight))<8*zm) {
+                    sizechunk=1
+                    storex=chunkwidth
+                    storey=chunkheight
+                } else if (point_in_rectangle(global.mousex,global.mousey,chunkleft,chunktop,chunkleft+chunkwidth,chunktop+chunkheight)) {
+                    grabchunk=1
+                    storex=chunkleft
+                    storey=chunktop
+                    offx=global.mousex-chunkleft
+                    offy=global.mousey-chunktop
+                }
+            }
+        }
     }
 }
 if (selecting) {
