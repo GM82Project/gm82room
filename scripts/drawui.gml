@@ -270,7 +270,7 @@ if (mode=0) {
     if (objpal!=noone) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
-        draw_button(dx-20,dy-20,40,40,!paladdbuttondown)
+        draw_button(dx-20,dy-20,40,40,1)
         draw_sprite(sprMenuButtons,18,dx,dy)
         if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-136) {
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
