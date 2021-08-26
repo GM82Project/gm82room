@@ -85,6 +85,7 @@
 |focus_object
 |focus_tile
 |cement_instances
+|finish_cementing
 |deselect
 |get_uid
 |set_uid
