@@ -126,6 +126,7 @@ with (Controller) switch (argument0) {
     case "palscrolup"   : {palettescrollgo+=200}break
     case "overlap check": {overlap_check=!overlap_check}break
     case "cement"       : {cement_instances()}break
+    case "cleanup"      : {cleanup_instances()}break
 
 
     //tiles

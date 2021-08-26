@@ -40,6 +40,14 @@ i.spr=26
 i.tagmode=0
 i.anchor=2
 
+i=instance_create(88,height-100+60,Button)
+i.action="cleanup"
+i.alt="Remove identical stacked instances"
+i.spr=29
+i.tagmode=0
+i.anchor=2
+
+
 //inspector
 i=instance_create(width-160,0,TextField)
 i.action="object name"
