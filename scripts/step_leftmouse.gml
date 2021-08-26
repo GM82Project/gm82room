@@ -1,6 +1,7 @@
 var yes,dx,dy,tex,l,t,r,b,zm;
 
 if (mouse_check_button_pressed(mb_left)) {
+    zm=max(0.5,zoom)
     with (TextField) textfield_actions()
     if (!mousein) {
         //click on menus
@@ -114,7 +115,6 @@ if (mouse_check_button_pressed(mb_left)) {
             }
         }
         if (mode==3) {
-            zm=max(0.5,zoom)
             if (abs(global.mousex-(vw_x[vw_current]+vw_w[vw_current]))<8*zm && abs(global.mousey-(vw_y[vw_current]+vw_h[vw_current]))<8*zm) {
                 sizeview=1
                 storex=vw_w[vw_current]
