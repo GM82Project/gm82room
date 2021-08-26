@@ -94,5 +94,7 @@ load_paths
 draw_paths
 file_text_open_read_safe
 
+undo_initialize
 finish_cementing
 cleanup_instances
+update_undo_button

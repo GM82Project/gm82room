@@ -25,6 +25,7 @@
 	|chunk_export
 	|chunk_import
 +undo
+	|undo_initialize
 	|begin_undo
 	|add_undo
 	|undo_global
@@ -76,6 +77,7 @@
 |update_tilepanel
 |update_viewpanel
 |update_settingspanel
+|update_undo_button
 |change_mode
 |button_actions
 |button_held

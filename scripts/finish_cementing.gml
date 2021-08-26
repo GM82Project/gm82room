@@ -1,4 +1,4 @@
-begin_undo(act_create,"gluing instances",0)
+begin_undo(act_create,"",0)
 repeat (8) {
     with (instance) {
         coll=instance_place(x+1,y,instance)
@@ -23,6 +23,6 @@ change_mode(mode)
 
 with (instance) {x=xprevious y=yprevious}
 
-undotype=""
+undotype="gluing instances"
 undocombo=1
 do_change_undo()

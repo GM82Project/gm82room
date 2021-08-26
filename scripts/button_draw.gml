@@ -19,7 +19,7 @@ if (object_index==Button) {
             case "view paths":       {up=(!view[7] && !down)            }break
             case "bgselect":         {up=(!down && bg_current!=actionid)}break
             case "vwselect":         {up=(!down && vw_current!=actionid)}break
-            case "undo":             {up=(!down && alt!="Undo")         }break
+            case "undo":             {up=(!down && alt!="Undo (empty)") }break
             default:                 {up=!down                          }
         }
 
@@ -54,6 +54,8 @@ if (object_index==Button) {
         if (action=="bgselect") buttoncol=pick(bg_visible[actionid] && bg_source[actionid]!="",buttoncol,$808080)
         if (action=="vwselect") buttoncol=pick(vw_visible[actionid],buttoncol,$808080)
         draw_button(x,y,w,h,up)
+
+        if (action=="undo") if (total_undo_size>0) draw_healthbar(x+4,y+24,x+27,y+27,min(100,1+(total_undo_size/undospace)*99),0,$ff00,$ff,0,1,0)
 
         if (text!="") {
             if (type==0) {

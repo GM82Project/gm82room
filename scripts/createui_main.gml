@@ -36,7 +36,7 @@ i.w=80
 i=instance_create(160+16,0,Button)
 i.spr=27
 i.action="undo"
-i.alt="Undo"
+i.alt="Undo (empty)"
 
 
 //grid

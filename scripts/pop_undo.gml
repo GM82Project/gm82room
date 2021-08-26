@@ -1,16 +1,14 @@
-var l,o,i,uaction,lmode,size,tilew,tileh,combo;
+var l,o,i,uaction,lmode,size,tilew,tileh,combo,size;
 
-if (!ds_stack_empty(undostack)) {
-    l=ds_stack_pop(undostack)
-    with (Button) if (action="undo") {
-        if (ds_stack_empty(undostack)) alt="Undo"
-        else alt="Undo "+ds_list_find_value(ds_stack_top(undostack),1)+" ("+string(ds_stack_size(undostack))+" left)"
-    }
+size=ds_list_size(undostack)
+if (size) {
+    l=ds_list_find_value(undostack,size-1)
+    ds_list_delete(undostack,size-1)
 
     uaction=ds_list_find_value(l,0)
     combo=ds_list_find_value(l,2)
     lmode=ds_list_find_value(l,3)
-    size=ds_list_size(l)-4
+    size=ds_list_size(l)-5
     i=4
 
     instance_activate_all()
@@ -105,7 +103,11 @@ if (!ds_stack_empty(undostack)) {
         }break
     }
 
+    total_undo_size-=ds_list_find_value(l,ds_list_size(l)-1)
+
     ds_list_destroy(l)
+
+    update_undo_button()
 
     update_instance_memory()
 

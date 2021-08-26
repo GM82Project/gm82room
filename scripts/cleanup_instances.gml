@@ -1,3 +1,4 @@
+begin_undo(act_create,"cleaning duplicate instances",0)
 with (instance) if (obj==objpal) {
     with (instance) if (obj==objpal && id<other.id)
         if (
@@ -10,6 +11,8 @@ with (instance) if (obj==objpal) {
          && image_alpha==other.image_alpha
          && code==other.code
         ) {
+            add_undo_instance()
             instance_destroy()
         }
 }
+push_undo()

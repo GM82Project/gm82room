@@ -7,4 +7,5 @@ with (Controller) {
     ds_list_add(undolist,argument2)
     ds_list_add(undolist,mode)
     undoing=1
+    current_undo_size=24*4
 }
