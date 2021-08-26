@@ -87,8 +87,8 @@
 |focus_object
 |focus_tile
 |cement_instances
-|cleanup_instances
 |finish_cementing
+|cleanup_instances
 |deselect
 |get_uid
 |set_uid
