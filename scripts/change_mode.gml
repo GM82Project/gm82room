@@ -1,4 +1,6 @@
-var i,layer;
+var i,layer,deact,dcur;
+
+dcur=0
 
 if (mode!=argument) {
     deselect()
@@ -17,7 +19,7 @@ with (instance) {
             Controller.select=noone
             clear_inspector()
         }
-        alarm[0]=1
+        deact[dcur]=id dcur+=1
     }
 }
 
@@ -41,7 +43,7 @@ if (view[1]) {
         layer=ds_list_find_value(layers,i)
         tile_layer_show(layer)
         if (ly_current!=i && argument0==1) {
-            with (tileholder) if (tlayer==layer) alarm[0]=1
+            with (tileholder) if (tlayer==layer) {deact[dcur]=id dcur+=1}
         }
     }
 } else {
@@ -50,7 +52,12 @@ if (view[1]) {
         if (ly_current==i && argument0==1) tile_layer_show(layer)
         else {
             tile_layer_hide(layer)
-            with (tileholder) if (tlayer==layer) alarm[0]=1
+            with (tileholder) if (tlayer==layer) {deact[dcur]=id dcur+=1}
         }
     }
+}
+
+repeat (dcur) {
+    dcur-=1
+    instance_deactivate_object(deact[dcur])
 }
