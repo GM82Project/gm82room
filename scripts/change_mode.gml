@@ -34,6 +34,8 @@ if (argument0==2) update_backgroundpanel()
 if (argument0==3) update_viewpanel()
 if (argument0==4) update_settingspanel()
 
+ly_depth=ds_list_find_value(layers,ly_current)
+
 if (view[1]) {
     for (i=0;i<ds_list_size(layers);i+=1) {
         layer=ds_list_find_value(layers,i)
@@ -42,7 +44,6 @@ if (view[1]) {
             with (tileholder) if (tlayer==layer) alarm[0]=1
         }
     }
-    ly_depth=ds_list_find_value(layers,ly_current)
 } else {
     for (i=0;i<ds_list_size(layers);i+=1) {
         layer=ds_list_find_value(layers,i)

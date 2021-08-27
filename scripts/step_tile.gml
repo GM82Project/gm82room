@@ -42,6 +42,7 @@ if (mode==1 && tilebgpal!=noone) {
                 //clicked ahead of the list
                 ly_current=mem
             } else {
+                deselect()
                 if (ly_current==layersize) {
                     add_tile_layer()
                 }

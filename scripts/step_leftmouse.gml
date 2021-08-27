@@ -252,7 +252,7 @@ if (paint) {
                     o.image_xscale=o.tilew
                     o.image_yscale=o.tileh
                     o.tile=tile_add(tex,ds_list_find_value(curtile,0),ds_list_find_value(curtile,1),o.tilew,o.tileh,paintx,painty,ly_depth)
-                    o.tlayer=ly_depth
+                    o.tlayer=ly_depth o.depth=ly_depth-0.01
                     selectt=o
                     o.sel=1
                     o.modified=1
