@@ -1,4 +1,6 @@
-var coll,checksel;
+var coll,checksel,deact,dcur;
+
+dcur=0
 
 checksel=!!num_selected()
 
@@ -12,7 +14,7 @@ with (instance) {
     if (obj==objpal) {
         if (sel!=checksel || code!="") {
             //we don't want to glue unselected instances or instances that have code
-            alarm[0]=1
+            deact[dcur]=id dcur+=1
         } else {
             //remove duplicates first
             with (instance) if (obj==objpal && id<other.id)
@@ -31,9 +33,40 @@ with (instance) {
         }
     } else {
         //deactivate unrelated
-        alarm[0]=1
+        deact[dcur]=id dcur+=1
     }
 }
 
-//schedule it for next frame because deactivation and etc blegh
-alarm[2]=2
+repeat (dcur) {
+    dcur-=1
+    instance_deactivate_object(deact[dcur])
+}
+
+begin_undo(act_create,"",0)
+repeat (8) {
+    with (instance) {
+        coll=instance_place(x+1,y,instance)
+        if (coll) if (bbox_right<coll.bbox_left && sign(image_xscale)=sign(coll.image_xscale) && y=coll.y && image_yscale=coll.image_yscale) {
+            image_xscale+=coll.image_xscale
+            with (coll) {image_xscale=memxsc image_yscale=memysc add_undo_instance() instance_destroy()}
+        }
+    }
+}
+repeat (8) {
+    with (instance) {
+        coll=instance_place(x,y+1,instance)
+        if (coll) if (bbox_bottom<coll.bbox_top && sign(image_yscale)=sign(coll.image_yscale) && x=coll.x && image_xscale=coll.image_xscale) {
+            image_yscale+=coll.image_yscale
+            with (coll) {image_xscale=memxsc image_yscale=memysc add_undo_instance() instance_destroy()}
+        }
+    }
+}
+push_undo()
+
+change_mode(mode)
+
+with (instance) {x=xprevious y=yprevious}
+
+undotype="gluing instances"
+undocombo=1
+do_change_undo()
