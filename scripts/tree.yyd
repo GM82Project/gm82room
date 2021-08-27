@@ -94,3 +94,5 @@
 |set_uid
 |start_dragging
 |do_dragging
+|reduce_collision
+|restore_collision

@@ -88,3 +88,5 @@ undo_initialize
 cleanup_instances
 update_undo_button
 step_settings
+restore_collision
+reduce_collision

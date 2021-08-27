@@ -210,9 +210,11 @@ if (paint) {
                     sprite_index=objspr[objpal]
                     x=paintx
                     y=painty
+                    reduce_collision()
                     with (instance) if (obj=objpal) if (place_meeting(x,y,Controller)) {
                         yes=0
                     }
+                    restore_collision()
                 }
                 if (yes) {
                     o=instance_create(dx,dy,instance) get_uid(o)
@@ -239,11 +241,11 @@ if (paint) {
                     image_yscale=ds_list_find_value(curtile,3)
                     x=paintx
                     y=painty
+                    reduce_collision()
                     with (tileholder) if (bg=tex) if (place_meeting(x,y,Controller)) {
                         yes=0
                     }
-                    image_xscale=1
-                    image_yscale=1
+                    restore_collision()
                 }
                 if (yes) {
                     o=instance_create(dx,dy,tileholder) get_uid(o)
@@ -264,7 +266,7 @@ if (paint) {
         }
         update_instance_memory()
     }
-    if (!mouse_check_direct(mb_left)) {
+    if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
         paint=0
         begin_undo(act_destroy,"drawing "+pick(mode,"instances","tiles"),0)
         if (mode==0) {
