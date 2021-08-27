@@ -1,6 +1,6 @@
 var dx,dy;
 
-if (mode==0 && objpal!=noone) {
+if (mode==0 && objects_length) {
     //palette controls
     if (mouse_wx<160 && mouse_wy>=120 && mouse_wy<height-136) {
         if (mouse_check_button_pressed(mb_left)) {

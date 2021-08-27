@@ -205,27 +205,29 @@ if (paint) {
         painty=dy
         yes=1
         if (mode==0) {
-            if (overlap_check) {
-                sprite_index=objspr[objpal]
-                x=paintx
-                y=painty
-                with (instance) if (obj=objpal) if (place_meeting(x,y,Controller)) {
-                    yes=0
+            if (objpal!=noone) {
+                if (overlap_check) {
+                    sprite_index=objspr[objpal]
+                    x=paintx
+                    y=painty
+                    with (instance) if (obj=objpal) if (place_meeting(x,y,Controller)) {
+                        yes=0
+                    }
                 }
-            }
-            if (yes) {
-                o=instance_create(dx,dy,instance) get_uid(o)
-                o.obj=objpal
-                o.objname=ds_list_find_value(objects,o.obj)
-                o.sprite_index=objspr[o.obj]
-                o.sprw=sprite_get_width(o.sprite_index)
-                o.sprh=sprite_get_height(o.sprite_index)
-                o.sprox=sprite_get_xoffset(o.sprite_index)
-                o.sproy=sprite_get_yoffset(o.sprite_index)
-                select=o
-                o.sel=1
-                o.modified=1
-                with (o) update_inspector()
+                if (yes) {
+                    o=instance_create(dx,dy,instance) get_uid(o)
+                    o.obj=objpal
+                    o.objname=ds_list_find_value(objects,o.obj)
+                    o.sprite_index=objspr[o.obj]
+                    o.sprw=sprite_get_width(o.sprite_index)
+                    o.sprh=sprite_get_height(o.sprite_index)
+                    o.sprox=sprite_get_xoffset(o.sprite_index)
+                    o.sproy=sprite_get_yoffset(o.sprite_index)
+                    select=o
+                    o.sel=1
+                    o.modified=1
+                    with (o) update_inspector()
+                }
             }
         }
         if (mode==1) {

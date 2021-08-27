@@ -289,7 +289,7 @@ if (mode=0) {
         posx+=1 if (posx=4) {posx=0 posy+=1}
     }
 
-    if (objpal!=noone) {
+    if (objects_length) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
         draw_button(dx-20,dy-20,40,40,1)
@@ -353,6 +353,8 @@ if (mode==1) {
             }
             posx+=1 if (posx=4) {posx=0 posy+=1}
         }
+    }
+    if (backgrounds_length) {
         dx=20+40*posx
         dy=172+40*posy+tpalscroll
         draw_button(dx-20,dy-20,40,40,1)

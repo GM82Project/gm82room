@@ -45,5 +45,3 @@ applies_to=self
 */
 ///click
 down=(tagmode==mode || tagmode==-1)
-
-if (tilebgpal==noone && tagmode==1) down=0
