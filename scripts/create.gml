@@ -86,14 +86,14 @@ state="run"
 
 if (!seen) show_info()
 
-view[0]=1
-view[1]=1
-view[2]=1
-view[3]=1
-view[4]=0
-view[5]=1
-view[6]=1
-view[7]=1
+view[0]=1 //objects
+view[1]=1 //tiles
+view[2]=1 //bgs
+view[3]=1 //fgs
+view[4]=0 //views
+view[5]=1 //invisibles
+view[6]=1 //nosprites
+view[7]=1 //paths
 
 chunkwidth=roomwidth
 chunkheight=roomheight

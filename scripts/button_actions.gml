@@ -22,7 +22,7 @@ with (Controller) switch (argument0) {
     case "room code"   : {undo_global("roomcode","room creation code") roomcode=external_code_editor(roomcode) other.alt=roomcode}break
     case "room persist": {undo_global("roompersistent","room options") roompersistent=!roompersistent}break
     case "room clear"  : {undo_global("clearview","room options") clearview=!clearview}break
-    case "chunk crop"  : {chunkcrop=!chunkcrop}break
+    case "chunk crop"  : {chunkcrop=!chunkcrop if (!chunkcrop) chunkleft=0 chunktop=0 chunkwidth=roomwidth chunkheight=roomheight update_settingspanel()}break
     case "chunk export": {chunk_export()}break
     case "chunk import": {chunk_import()}break
 

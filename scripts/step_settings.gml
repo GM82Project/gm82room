@@ -9,7 +9,7 @@ if (mode==4) {
             chunktop=floorto(global.mousey-offy,gridy)
         }
         update_settingspanel()
-        if (!mouse_check_direct(mb_left)) {
+        if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
             grabchunk=0
         }
     }
@@ -24,7 +24,7 @@ if (mode==4) {
             chunkheight=max(gridy,roundto(global.mousey,gridy)-chunktop)
         }
         update_settingspanel()
-        if (!mouse_check_direct(mb_left)) {
+        if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
             sizechunk=0
         }
     }
