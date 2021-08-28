@@ -98,3 +98,4 @@
 |do_selection_resize
 |reduce_collision
 |restore_collision
+|update_selection_bounds

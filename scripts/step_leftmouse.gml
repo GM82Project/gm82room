@@ -50,6 +50,9 @@ if (mouse_check_button_pressed(mb_left)) {
                                 grab=1
                                 focus_object(obj)
                                 //group operation
+                                if (selection) {
+                                    grabselection=1
+                                }
                                 with (instance) if (sel) {
                                     start_dragging()
                                 }
@@ -101,6 +104,9 @@ if (mouse_check_button_pressed(mb_left)) {
                                 grab=1
                                 focus_tile(tile)
                                 //group operation
+                                if (selection) {
+                                    grabselection=1
+                                }
                                 with (tileholder) if (sel) {
                                     start_dragging()
                                 }
@@ -217,20 +223,7 @@ if (selecting) {
         } else update_inspector()
         if (sel>1) {
             selection=1
-            l=max_int
-            t=max_int
-            r=-max_int
-            b=-max_int
-            if (mode==0) {
-                with (instance) if (sel) {l=min(l,bbox_left) t=min(t,bbox_top) r=max(r,bbox_right+1) b=max(b,bbox_bottom+1)}
-            }
-            if (mode==1) {
-                with (tileholder) if (sel) {l=min(l,bbox_left) t=min(t,bbox_top) r=max(r,bbox_right+1) b=max(b,bbox_bottom+1)}
-            }
-            selleft=l
-            seltop=t
-            selwidth=r-l
-            selheight=b-t
+            update_selection_bounds()
         }
     }
 }
@@ -340,5 +333,12 @@ if (selsize) {
 
     if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
         selsize=0
+    }
+}
+
+if (grabselection) {
+    update_selection_bounds()
+    if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
+        grabselection=0
     }
 }

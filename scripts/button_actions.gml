@@ -67,6 +67,7 @@ with (Controller) switch (argument0) {
             do_change_undo("mirroring",0)
             if (Controller.select==id) update_inspector()
         }
+        update_selection_bounds()
     }break
     case "inst flip ys": {
         with (instance) if (sel) {
@@ -84,6 +85,7 @@ with (Controller) switch (argument0) {
             do_change_undo("flipping",0)
             if (Controller.select==id) update_inspector()
         }
+        update_selection_bounds()
     }break
     case "inst rot left" : {
         with (instance) if (sel) {
@@ -101,6 +103,7 @@ with (Controller) switch (argument0) {
             do_change_undo("rotation",0)
             if (Controller.select==id) update_inspector()
         }
+        update_selection_bounds()
     }break
     case "inst rot right": {
         with (instance) if (sel) {
@@ -118,6 +121,7 @@ with (Controller) switch (argument0) {
             do_change_undo("rotation",0)
             if (Controller.select==id) update_inspector()
         }
+        update_selection_bounds()
     }break
 
 
@@ -156,6 +160,7 @@ with (Controller) switch (argument0) {
             do_change_undo("mirroring",0)
             if (Controller.selectt==id) update_inspector()
         }
+        update_selection_bounds()
     }break
     case "tile flip ys": {
         with (tileholder) if (sel) {
@@ -177,6 +182,7 @@ with (Controller) switch (argument0) {
             do_change_undo("flipping",0)
             if (Controller.selectt==id) update_inspector()
         }
+        update_selection_bounds()
     }break
 
     case "layerscroldown": {layerscrollgo-=200}break

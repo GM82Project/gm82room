@@ -1,7 +1,7 @@
 globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecount,tilecount,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
 globalvar overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,zoom;
 globalvar chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname;
-globalvar selection,selleft,seltop,selwidth,selheight,selsize;
+globalvar selection,selleft,seltop,selwidth,selheight,selsize,grabselection;
 
 draw_set_font(fntCode)
 draw_set_circle_precision(8)
