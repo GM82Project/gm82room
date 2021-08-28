@@ -50,8 +50,8 @@ if (size) {
                 o.tile=tile_add(o.bg,ds_list_find_value(l,i+5),ds_list_find_value(l,i+6),o.tilew,o.tileh,o.x,o.y,o.tlayer)
                 o.tilesx=ds_list_find_value(l,i+9)
                 o.tilesy=ds_list_find_value(l,i+10)
-                o.image_xscale=o.tilesx*tilew
-                o.image_yscale=o.tilesy*tileh
+                o.image_xscale=o.tilesx*o.tilew
+                o.image_yscale=o.tilesy*o.tileh
                 o.image_blend=ds_list_find_value(l,i+11)
                 o.image_alpha=ds_list_find_value(l,i+12)
                 tile_set_scale(o.tile,o.tilesx,o.tilesy)

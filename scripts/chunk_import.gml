@@ -61,6 +61,8 @@ if (fn!="") {
             o.tilesy=buffer_read_float(b)*scale
             o.image_alpha=buffer_read_u8(b)/$ff
             o.image_blend=$10000*buffer_read_u8(b)+$100*buffer_read_u8(b)+buffer_read_u8(b)
+            o.image_xscale=o.tilew
+            o.image_yscale=o.tileh
 
             o.tile=tile_add(texture,left,top,o.tilew,o.tileh,o.x,o.y,o.tlayer)
             tile_set_scale(o.tile,o.tilesx,o.tilesy)
