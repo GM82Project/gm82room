@@ -28,9 +28,9 @@ if (mouse_check_button_pressed(mb_left)) {
             if (yes) {with (instance) sel=0 select.sel=1}
             if (!instance_exists(select) || !yes) {
                 clear_inspector()
-                if (!keyboard_check(vk_shift)) with (instance) sel=0
                 select=noone
-                with (instance) {
+                if (!keyboard_check(vk_shift) || keyboard_check(vk_control)) with (instance) {
+                    if (!keyboard_check(vk_control)) sel=0
                     if (position_meeting(global.mousex,global.mousey,id)) {
                         sel=1
                         update_inspector()
@@ -78,9 +78,9 @@ if (mouse_check_button_pressed(mb_left)) {
             if (yes) {with (tileholder) sel=0 selectt.sel=1}
             if (!instance_exists(selectt) || !yes) {
                 clear_inspector()
-                if (!keyboard_check(vk_shift)) with (tileholder) sel=0
                 selectt=noone
-                with (tileholder) {
+                if (!keyboard_check(vk_shift) || keyboard_check(vk_control)) with (tileholder) {
+                    if (!keyboard_check(vk_control)) sel=0
                     if (position_meeting(global.mousex,global.mousey,id)) {
                         sel=1
                         update_inspector()
