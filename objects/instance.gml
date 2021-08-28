@@ -10,6 +10,7 @@ grab=0
 rotato=0
 draggatto=0
 modified=0
+selresize=0
 
 rothandx=-9999999
 rothandy=-9999999
@@ -51,6 +52,9 @@ if (sel) {
     if (grab) {
         do_dragging()
         if (Controller.select==id) update_inspector()
+    }
+    if (selresize) {
+        do_selection_resize()
     }
     if (draggatto) {
         dx=global.mousex

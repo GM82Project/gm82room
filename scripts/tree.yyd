@@ -94,5 +94,7 @@
 |set_uid
 |start_dragging
 |do_dragging
+|start_selection_resize
+|do_selection_resize
 |reduce_collision
 |restore_collision

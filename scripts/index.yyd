@@ -90,3 +90,5 @@ update_undo_button
 step_settings
 restore_collision
 reduce_collision
+start_selection_resize
+do_selection_resize

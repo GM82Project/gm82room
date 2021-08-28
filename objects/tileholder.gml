@@ -13,6 +13,7 @@ sel=0
 grab=0
 draggatto=0
 modified=0
+selresize=0
 
 rothandx=-9999999
 rothandy=-9999999
@@ -74,6 +75,13 @@ if (sel) {
 
         if (!mouse_check_direct(mb_left)) {draggatto=0 do_change_undo("scaling",0)}
         update_inspector()
+    }
+    if (selresize) {
+        do_selection_resize()
+        tilesx=image_xscale/tilew
+        tilesy=image_yscale/tileh
+        tile_set_position(tile,x,y)
+        tile_set_scale(tile,tilesx,tilesy)
     }
 }
 #define Other_10

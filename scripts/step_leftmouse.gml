@@ -137,6 +137,12 @@ if (mouse_check_button_pressed(mb_left)) {
                     sizechunk=1
                     storex=chunkwidth
                     storey=chunkheight
+                    with (instance) if (sel) {
+                        start_selection_resize()
+                    }
+                    with (tileholder) if (sel) {
+                        start_selection_resize()
+                    }
                 } else if (point_in_rectangle(global.mousex,global.mousey,chunkleft,chunktop,chunkleft+chunkwidth,chunktop+chunkheight)) {
                     grabchunk=1
                     storex=chunkleft
