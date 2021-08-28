@@ -190,6 +190,7 @@ if (mode==4) {
         zm=max(0.5,zoom)
         draw_rectangle(dx-8*zm,dy-8*zm,dx+8*zm,dy+8*zm,1)
         draw_rectangle(dx-4*zm,dy-4*zm,dx+4*zm,dy+4*zm,1)
+        if (chunkloaded) draw_text_transformed(chunkleft+8+0.5*zoom,chunktop+8+0.5*zoom,"Chunk loaded:#"+chunkname,zoom,zoom,0)
     }
     draw_set_color($ffffff)
     d3d_transform_set_identity()

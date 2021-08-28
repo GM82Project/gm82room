@@ -44,16 +44,19 @@ fn=root+"cache\folder.bmp" export_include_file_location("folder.bmp",fn) folder_
 fn=root+"cache\object.bmp" export_include_file_location("object.bmp",fn) object_menuicon=N_Menu_LoadBitmap(fn)
 
 //load assets
+objlookup=ds_map_create()
+bglookup=ds_map_create()
+
 sprites=file_text_read_list(root+"sprites\index.yyd")
 sprites_length=ds_list_size(sprites)
 sprloaded[sprites_length]=0
 
-backgrounds=file_text_read_list(root+"backgrounds\index.yyd")
+backgrounds=file_text_read_list(root+"backgrounds\index.yyd",bglookup)
 backgrounds_length=ds_list_size(backgrounds)
 bgloaded[backgrounds_length]=0
 load_background_tree(root+"backgrounds\tree.yyd")
 
-objects=file_text_read_list(root+"objects\index.yyd")
+objects=file_text_read_list(root+"objects\index.yyd",objlookup)
 objects_length=ds_list_size(objects)
 objloaded[objects_length]=0
 load_object_tree(root+"objects\tree.yyd")

@@ -3,15 +3,19 @@ var l,b,count,find,fn,i;
 fn=get_save_filename("Chunk files|*.82c","chunk.82c")
 
 if (fn!="") {
+    fn=filename_change_ext(fn,".82c")
     if (chunkcrop) {
         instance_deactivate_object(instance)
         instance_deactivate_object(tileholder)
-        instance_activate_region(chunkleft,chunktop,chunkwidth,chunkheight,1)
+        instance_activate_region(chunkleft,chunktop,chunkwidth-1,chunkheight-1,1)
     } else instance_activate_all()
 
     b=buffer_create()
-    buffer_write_u8(b,1) //chunk version
+    buffer_write_u8(b,2) //chunk version
     buffer_write_string(b,gamename)
+
+    buffer_write_u32(b,chunkwidth)
+    buffer_write_u32(b,chunkheight)
 
     l=ds_list_create()
 
@@ -28,8 +32,8 @@ if (fn!="") {
             buffer_write_u32(b,tile_get_top(tile))
             buffer_write_u32(b,tilew)
             buffer_write_u32(b,tileh)
-            buffer_write_i32(b,x)
-            buffer_write_i32(b,y)
+            buffer_write_i32(b,x-chunkleft)
+            buffer_write_i32(b,y-chunktop)
             buffer_write_i32(b,tlayer)
             buffer_write_float(b,tilesx)
             buffer_write_float(b,tilesy)
@@ -46,8 +50,8 @@ if (fn!="") {
         count=0 with (instance) {if (objname==find) count+=1}
         buffer_write_u16(b,count)
         with (instance) if (objname==find) {
-            buffer_write_i32(b,x)
-            buffer_write_i32(b,y)
+            buffer_write_i32(b,x-chunkleft)
+            buffer_write_i32(b,y-chunktop)
             buffer_write_float(b,image_xscale)
             buffer_write_float(b,image_yscale)
             buffer_write_float(b,image_angle)

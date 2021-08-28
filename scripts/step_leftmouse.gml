@@ -143,6 +143,14 @@ if (mouse_check_button_pressed(mb_left)) {
                     storey=chunktop
                     offx=global.mousex-chunkleft
                     offy=global.mousey-chunktop
+                    with (instance) if (sel) {
+                        start_dragging()
+                    }
+                    with (tileholder) if (sel) {
+                        start_dragging()
+                    }
+                } else {
+                    deselect()
                 }
             }
         }
