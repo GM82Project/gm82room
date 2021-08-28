@@ -114,6 +114,21 @@ if (extended_instancedata) {
 draw_set_color($ffffff)
 draw_set_alpha(1)
 d3d_transform_set_identity()
+#define Other_11
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///sanitize scale
+
+if (abs(image_xscale*tilew)<1) image_xscale=1
+if (abs(image_yscale*tileh)<1) image_yscale=1
+
+tilesx=image_xscale/tilew
+tilesy=image_yscale/tileh
+
+tile_set_scale(tile,tilesx,tilesy)
 #define Other_12
 /*"/*'/**//* YYD ACTION
 lib_id=1

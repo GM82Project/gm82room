@@ -148,7 +148,10 @@ applies_to=self
 */
 ///sanitize scale
 
-if (sign(image_xscale)==-1 && sign(image_yscale)==-1) {
+if (abs(image_xscale*sprw)<1) image_xscale=1/sprw
+if (abs(image_yscale*sprh)<1) image_yscale=1/sprh
+
+if (sign(image_xscale)==-1 && sign(image_yscale)==-1 && !selsize) {
     image_xscale=abs(image_xscale)
     image_yscale=abs(image_yscale)
     image_angle=(image_angle+180) mod 360

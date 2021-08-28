@@ -145,6 +145,19 @@ if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && copyvec[0,0]) {
 }
 
 
+//draw bounding selection rectangle
+if (selection) {
+    dx=selleft+selwidth-0.5
+    dy=seltop+selheight-0.5
+    draw_set_alpha(1)
+    draw_set_color_sel()
+    draw_roundrect(min(selleft-0.5,dx),min(seltop-0.5,dy),max(selleft-0.5,dx),max(seltop-0.5,dy),1)
+    zm=max(0.5,zoom)
+    draw_rectangle(dx-8*zm,dy-8*zm,dx+8*zm,dy+8*zm,1)
+    draw_rectangle(dx-4*zm,dy-4*zm,dx+4*zm,dy+4*zm,1)
+}
+
+
 //draw views
 if (view[4] || mode==3) {
     if (mode==3) rect(0,0,roomwidth,roomheight,0,0.5)
