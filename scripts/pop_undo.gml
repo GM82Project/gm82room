@@ -45,9 +45,9 @@ if (size) {
                 o.bg=ds_list_find_value(l,i+1)
                 o.bgname=ds_list_find_value(backgrounds,o.bg)
                 o.tlayer=ds_list_find_value(l,i+4) o.depth=o.tlayer-0.01
-                tilew=ds_list_find_value(l,i+7)
-                tileh=ds_list_find_value(l,i+8)
-                o.tile=tile_add(o.bg,ds_list_find_value(l,i+5),ds_list_find_value(l,i+6),tilew,tileh,o.x,o.y,o.tlayer)
+                o.tilew=ds_list_find_value(l,i+7)
+                o.tileh=ds_list_find_value(l,i+8)
+                o.tile=tile_add(o.bg,ds_list_find_value(l,i+5),ds_list_find_value(l,i+6),o.tilew,o.tileh,o.x,o.y,o.tlayer)
                 o.tilesx=ds_list_find_value(l,i+9)
                 o.tilesy=ds_list_find_value(l,i+10)
                 o.image_xscale=o.tilesx*tilew
