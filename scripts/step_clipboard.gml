@@ -54,7 +54,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_c
         copyvec[cur,11]=tile_get_height(tile)
         if (yes) {add_undo_tile() instance_destroy()}
     }
-    if (yes) push_undo()
+    if (yes) {push_undo() deselect()}
     if (cur>0) {
         copymode=mode
         copyvec[0,0]=cur
