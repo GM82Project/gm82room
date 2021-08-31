@@ -1,5 +1,6 @@
 add_undo(uid)
 add_undo(bg)
+add_undo(bgname)
 add_undo(x)
 add_undo(y)
 add_undo(tlayer)

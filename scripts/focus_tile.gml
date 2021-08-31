@@ -3,9 +3,10 @@ var tile,tileid,key,map,dy;
 with (Controller) {
     tile=argument0
 
-    get_background(other.bgname)
-    tilebgpal=micro_optimization_bgid
     tilebgname=other.bgname
+    get_background(tilebgname)
+    tilebgpal=micro_optimization_bgid
+
     update_tilepanel()
 
     tileid=string(tile_get_left(tile))+","+string(tile_get_top(tile))+","+string(tile_get_width(tile))+","+string(tile_get_height(tile))

@@ -39,25 +39,25 @@ if (size) {
                 o.sproy=sprite_get_yoffset(o.sprite_index)
                 i+=10
             }
-            if (lmode==1) repeat (size/13) {
-                o=instance_create(ds_list_find_value(l,i+2),ds_list_find_value(l,i+3),tileholder)
+            if (lmode==1) repeat (size/14) {
+                o=instance_create(ds_list_find_value(l,i+3),ds_list_find_value(l,i+4),tileholder)
                 set_uid(o,ds_list_find_value(l,i))
                 o.bg=ds_list_find_value(l,i+1)
-                o.bgname=ds_list_find_value(backgrounds,o.bg)
-                o.tlayer=ds_list_find_value(l,i+4) o.depth=o.tlayer-0.01
-                o.tilew=ds_list_find_value(l,i+7)
-                o.tileh=ds_list_find_value(l,i+8)
-                o.tile=tile_add(o.bg,ds_list_find_value(l,i+5),ds_list_find_value(l,i+6),o.tilew,o.tileh,o.x,o.y,o.tlayer)
-                o.tilesx=ds_list_find_value(l,i+9)
-                o.tilesy=ds_list_find_value(l,i+10)
+                o.bgname=ds_list_find_value(l,i+2)
+                o.tlayer=ds_list_find_value(l,i+5) o.depth=o.tlayer-0.01
+                o.tilew=ds_list_find_value(l,i+8)
+                o.tileh=ds_list_find_value(l,i+9)
+                o.tile=tile_add(o.bg,ds_list_find_value(l,i+6),ds_list_find_value(l,i+7),o.tilew,o.tileh,o.x,o.y,o.tlayer)
+                o.tilesx=ds_list_find_value(l,i+10)
+                o.tilesy=ds_list_find_value(l,i+11)
                 o.image_xscale=o.tilesx*o.tilew
                 o.image_yscale=o.tilesy*o.tileh
-                o.image_blend=ds_list_find_value(l,i+11)
-                o.image_alpha=ds_list_find_value(l,i+12)
+                o.image_blend=ds_list_find_value(l,i+12)
+                o.image_alpha=ds_list_find_value(l,i+13)
                 tile_set_scale(o.tile,o.tilesx,o.tilesy)
                 tile_set_blend(o.tile,o.image_blend)
                 tile_set_alpha(o.tile,o.image_alpha)
-                i+=13
+                i+=14
             }
         }break
         case act_change: {
