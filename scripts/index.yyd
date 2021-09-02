@@ -93,3 +93,4 @@ reduce_collision
 start_selection_resize
 do_selection_resize
 update_selection_bounds
+get_color
