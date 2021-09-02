@@ -58,6 +58,7 @@ if (object_index==Button) {
         if (action=="undo") if (total_undo_size>0) draw_healthbar(x+4,y+24,x+27,y+27,min(100,1+(total_undo_size/undospace)*99),0,$ff00,$ff,0,1,0)
 
         if (text!="") {
+            draw_set_color(global.col_text)
             if (type==0) {
                 draw_set_halign(1)
                 draw_set_valign(1)
@@ -70,6 +71,7 @@ if (object_index==Button) {
                 draw_text(x+w+8,y+h/2,text)
                 draw_set_valign(0)
             }
+            draw_set_color($ffffff)
         }
         if (spr!=noone) {
             draw_sprite(sprMenuButtons,spr,x+w/2,y+h/2)

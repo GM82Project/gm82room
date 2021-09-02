@@ -255,6 +255,7 @@ buttoncol=global.col_main
 draw_button(statusx,height-32,144,32,0)
 draw_button(statusx+144,height-32,296,32,0)
 draw_button(statusx+440,height-32,width-320-440,32,0)
+draw_set_color(global.col_text)
 if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(global.mousex)+","+string(global.mousey))
 else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(global.mousey,gridx)))
 if (mode==0) {
@@ -270,6 +271,7 @@ if (mode==1) {
     else draw_text(statusx+152,statusy+6,string(num)+" tiles")
     if (focus) draw_text(statusx+448,statusy+6,string(focus.bgname)+" "+string(focus.x)+","+string(focus.y))
 }
+draw_set_color($ffffff)
 
 //draw inspector rectangle after statusbar to hide any leaking text
 //usually i'd put care into cropping the string but this is literally faster
@@ -314,7 +316,9 @@ if (mode=0) {
             }
         }
     } else {
+        draw_set_color(global.col_text)
         draw_text(8,126,"Project#contains no#objects.")
+        draw_set_color($ffffff)
     }
 
     //inspector
@@ -323,10 +327,12 @@ if (mode=0) {
     draw_button(dx,128+4,160,100,1)
     draw_button(dx,228+4,160,72,1)
     draw_button(dx,304,160,72,1)
+    draw_set_color(global.col_text)
     draw_text(dx+12,32+8,"Position")
     draw_text(dx+12,128+12,"Scale")
     draw_text(dx+12,228+12,"Rotation")
     draw_text(dx+12,304+8,"Blend")
+    draw_set_color($ffffff)
 }
 
 //draw tiles tab
@@ -379,7 +385,9 @@ if (mode==1) {
             }
         }
     } else {
+        draw_set_color(global.col_text)
         draw_text(8,158,"Project#contains no#backgrounds.")
+        draw_set_color($ffffff)
     }
 
     draw_button(0,height-192,160,192,1)
@@ -420,16 +428,20 @@ if (mode==1) {
     draw_button(dx,32,160,100,1)
     draw_button(dx,128+4,160,100,1)
     draw_button(dx,228+4,160,72,1)
+    draw_set_color(global.col_text)
     draw_text(dx+12,32+8,"Position")
     draw_text(dx+12,128+12,"Scale")
     draw_text(dx+12,228+12,"Blend")
+    draw_set_color($ffffff)
 
     if (tilebgpal!=noone) {
         for (i=0;i<layersize;i+=1) {
             dy=360+i*32+layerscroll
             if (dy>360-32 && dy<height-100+32) {
                 draw_button(dx,dy,160,32,ly_current!=i)
+                draw_set_color(global.col_text)
                 draw_text(dx+12,dy+6,ds_list_find_value(layers,i))
+                draw_set_color($ffffff)
             }
         }
         draw_button(dx,360+i*32+layerscroll,160,32,ly_current!=i)
@@ -437,10 +449,14 @@ if (mode==1) {
     }
 
     draw_button(dx,304,160,32,1)
+    draw_set_color(global.col_text)
     draw_text(dx+12,310,"Layers")
+    draw_set_color($ffffff)
 
     draw_button(dx,height-76,160,76,1)
+    draw_set_color(global.col_text)
     draw_text(dx+12,height-64,"Depth")
+    draw_set_color($ffffff)
 }
 
 
@@ -448,8 +464,10 @@ if (mode==1) {
 if (mode==2) {
     draw_button(0,96,160,40,1)
     draw_button(0,200,160,308,1)
+    draw_set_color(global.col_text)
     draw_text(12,384,"Position")
     draw_text(12,444,"Speed")
+    draw_set_color($ffffff)
 }
 
 
@@ -457,12 +475,16 @@ if (mode==2) {
 if (mode==3) {
     draw_button(0,96,160,40,1)
     draw_button(0,200,160,348,1)
+    draw_set_color(global.col_text)
     draw_text(12,236,"Room")
     draw_text(12,328,"Window")
     draw_text(12,420,"Following")
+    draw_set_color($ffffff)
 
     draw_button(width-160,0,160,216,1)
+    draw_set_color(global.col_text)
     draw_text(width-160+12,8,"Window")
+    draw_set_color($ffffff)
     buttoncol=0
     draw_button(width-160+4,32,160-8,160-8,0)
 
@@ -519,7 +541,11 @@ if (mode==3) {
     }
     draw_set_halign(0)
     draw_set_valign(0)
-    if (yes) draw_text(width-160+12,188,string(w)+" x "+string(h))
+    if (yes) {
+        draw_set_color(global.col_text)
+        draw_text(width-160+12,188,string(w)+" x "+string(h))
+        draw_set_color($ffffff)
+    }
 }
 
 
@@ -527,14 +553,18 @@ if (mode==3) {
 if (mode==4) {
     draw_button(0,128,160,72,1)
     draw_button(0,200,160,164,1)
+    draw_set_color(global.col_text)
     draw_text(12,136,"Caption")
     draw_text(12,208,"Size")
     draw_text(12,273,"Speed")
+    draw_set_color($ffffff)
 
     dx=width-160
     draw_button(dx,0,160,32,1)
     draw_button(dx,32,160,148,1)
+    draw_set_color(global.col_text)
     draw_text(dx+12,6,"Chunk tools")
+    draw_set_color($ffffff)
 }
 
 tooltiptext=""
@@ -569,7 +599,9 @@ if (mode==0) {
 
     //bottom panel
     draw_button(0,height-112,160,112,1)
+    draw_set_color(global.col_text)
     draw_text(8,height-32,"Tools")
+    draw_set_color($ffffff)
 }
 
 if (mode==1 && tilebgpal!=noone) {

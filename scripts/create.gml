@@ -17,6 +17,8 @@ global.col_low=$203020
 global.col_main=$404040
 global.col_high=$607060
 
+global.col_text=$000000
+
 width=display_get_width()-80-64
 height=display_get_height()-80-64
 maxfps=display_get_frequency()

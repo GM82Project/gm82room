@@ -1,7 +1,9 @@
 progress=argument1
 
 draw_clear(global.col_main)
+draw_set_color(global.col_text)
 draw_text(32,8,argument0)
+draw_set_color($ffffff)
 buttoncol=global.col_main
 draw_button(32,32,256,32,0)
 u=(256-8)*progress

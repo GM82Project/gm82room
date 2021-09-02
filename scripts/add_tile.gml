@@ -99,7 +99,9 @@ if (tilebgpal!=noone) {
         draw_sprite(sprMenuButtons,0,32,16)
         draw_sprite(sprMenuButtons,25,96,16)
         draw_button(128,0,width-128,32,0)
+        draw_set_color(global.col_text)
         draw_text(136,6,"Select tile region:")
+        draw_set_color($ffffff)
 
         if (keyboard_check(vk_enter)) {
             finished=1
