@@ -20,7 +20,7 @@ if (mode==0 && objects_length) {
             dy=140+40*posy+palettescroll
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                 //clicked on add object button
-                draw_button(dx-20,dy-20,40,40,0)
+                draw_button_ext(dx-20,dy-20,40,40,0,global.col_main)
                 draw_sprite(sprMenuButtons,18,dx,dy)
                 screen_refresh()
                 N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)

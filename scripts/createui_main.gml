@@ -133,3 +133,8 @@ i=instance_create(160+672,0,Button)
 i.spr=22
 i.action="help"
 i.alt="Quick guide"
+
+i=instance_create(160+704,0,Button)
+i.spr=21
+i.action="prefs"
+i.alt="Preferences"

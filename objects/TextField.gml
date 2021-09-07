@@ -41,7 +41,7 @@ if (down!=0 && focus && !active && (!extended || extended_instancedata) && !(gra
         keyboard_string=text
     }
     if (type==1) {
-        val=get_color(real(text))
+        val=get_color_ext(real(text),alt)
         if (val!=-1) text=string(val)
         textfield_actions()
     }

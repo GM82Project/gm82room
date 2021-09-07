@@ -239,22 +239,12 @@ statush=32
 
 rect(0,0,160,height,global.col_main,1)
 rect(160,0,width-320,32,global.col_main,1)
-rect(160,height-32,width-320,32,global.col_main,1)
-
-rect(160,32,4,height-64,global.col_low,1)
-rect(160,32,width-320,4,global.col_low,1)
-
-rect(width-160-4,32+4,4,height-64-4,global.col_high,1)
-rect(160+4,height-32-4,width-320-4,4,global.col_high,1)
-
-draw_triangle_color(160+4,height-32-4,160,height-32,160+4,height-32,global.col_high,global.col_high,global.col_high,0)
-draw_triangle_color(width-160-4,32+4,width-160,32,width-160,32+4,global.col_high,global.col_high,global.col_high,0)
+draw_button_ext(160,32,width-320,height-64,0,noone)
 
 //draw statusbar
-buttoncol=global.col_main
-draw_button(statusx,height-32,144,32,0)
-draw_button(statusx+144,height-32,296,32,0)
-draw_button(statusx+440,height-32,width-320-440,32,0)
+draw_button_ext(statusx,height-32,144,32,0,global.col_main)
+draw_button_ext(statusx+144,height-32,296,32,0,global.col_main)
+draw_button_ext(statusx+440,height-32,width-320-440,32,0,global.col_main)
 draw_set_color(global.col_text)
 if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(global.mousex)+","+string(global.mousey))
 else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(global.mousey,gridx)))
@@ -288,8 +278,7 @@ if (mode=0) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
         if (dy>100 && dy<height-80) {
-            if (objpal==i) buttoncol=$c0c0c0
-            draw_button(dx-20,dy-20,40,40,objpal!=i)
+            draw_button_ext(dx-20,dy-20,40,40,objpal!=i,pick(objpal==i,global.col_main,$c0c0c0))
             if (objpal==i) {
                 draw_set_color_sel()
                 draw_rectangle(dx-20,dy-20,dx+19,dy+19,1)
@@ -308,7 +297,7 @@ if (mode=0) {
     if (objects_length) {
         dx=20+40*posx
         dy=140+40*posy+palettescroll
-        draw_button(dx-20,dy-20,40,40,1)
+        draw_button_ext(dx-20,dy-20,40,40,1,global.col_main)
         draw_sprite(sprMenuButtons,18,dx,dy)
         if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-136) {
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
@@ -323,10 +312,10 @@ if (mode=0) {
 
     //inspector
     dx=width-160
-    draw_button(dx,32,160,100,1)
-    draw_button(dx,128+4,160,100,1)
-    draw_button(dx,228+4,160,72,1)
-    draw_button(dx,304,160,72,1)
+    draw_button_ext(dx,32,160,100,1,global.col_main)
+    draw_button_ext(dx,128+4,160,100,1,global.col_main)
+    draw_button_ext(dx,228+4,160,72,1,global.col_main)
+    draw_button_ext(dx,304,160,72,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(dx+12,32+8,"Position")
     draw_text(dx+12,128+12,"Scale")
@@ -357,8 +346,7 @@ if (mode==1) {
                 v=ds_list_find_value(tile,1)
                 tw=ds_list_find_value(tile,2)
                 th=ds_list_find_value(tile,3)
-                if (tilepal==i) buttoncol=$c0c0c0
-                draw_button(dx-20,dy-20,40,40,tilepal!=i)
+                draw_button_ext(dx-20,dy-20,40,40,tilepal!=i,pick(tilepal==i,global.col_main,$c0c0c0))
                 if (tilepal==i) {
                     draw_set_color_sel()
                     draw_rectangle(dx-20,dy-20,dx+19,dy+19,1)
@@ -377,7 +365,7 @@ if (mode==1) {
     if (backgrounds_length) {
         dx=20+40*posx
         dy=172+40*posy+tpalscroll
-        draw_button(dx-20,dy-20,40,40,1)
+        draw_button_ext(dx-20,dy-20,40,40,1,global.col_main)
         draw_sprite(sprMenuButtons,24,dx,dy)
         if (mouse_wx<160 && mouse_wy>=152 && mouse_wy<height-216) {
             if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
@@ -390,8 +378,8 @@ if (mode==1) {
         draw_set_color($ffffff)
     }
 
-    draw_button(0,height-192,160,192,1)
-    draw_button(4,height-160-28,152,152,0)
+    draw_button_ext(0,height-192,160,192,1,global.col_main)
+    draw_button_ext(4,height-160-28,152,152,0,global.col_main)
 
     if (tilebgpal!=noone && curtile!=noone) {
         u=ds_list_find_value(curtile,0)
@@ -425,9 +413,9 @@ if (mode==1) {
 
     dx=width-160
 
-    draw_button(dx,32,160,100,1)
-    draw_button(dx,128+4,160,100,1)
-    draw_button(dx,228+4,160,72,1)
+    draw_button_ext(dx,32,160,100,1,global.col_main)
+    draw_button_ext(dx,128+4,160,100,1,global.col_main)
+    draw_button_ext(dx,228+4,160,72,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(dx+12,32+8,"Position")
     draw_text(dx+12,128+12,"Scale")
@@ -438,22 +426,22 @@ if (mode==1) {
         for (i=0;i<layersize;i+=1) {
             dy=360+i*32+layerscroll
             if (dy>360-32 && dy<height-100+32) {
-                draw_button(dx,dy,160,32,ly_current!=i)
+                draw_button_ext(dx,dy,160,32,ly_current!=i,global.col_main)
                 draw_set_color(global.col_text)
                 draw_text(dx+12,dy+6,ds_list_find_value(layers,i))
                 draw_set_color($ffffff)
             }
         }
-        draw_button(dx,360+i*32+layerscroll,160,32,ly_current!=i)
+        draw_button_ext(dx,360+i*32+layerscroll,160,32,ly_current!=i,global.col_main)
         draw_sprite(sprMenuButtons,23,dx+80,360+i*32+layerscroll+16)
     }
 
-    draw_button(dx,304,160,32,1)
+    draw_button_ext(dx,304,160,32,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(dx+12,310,"Layers")
     draw_set_color($ffffff)
 
-    draw_button(dx,height-76,160,76,1)
+    draw_button_ext(dx,height-76,160,76,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(dx+12,height-64,"Depth")
     draw_set_color($ffffff)
@@ -462,8 +450,8 @@ if (mode==1) {
 
 //draw backgrounds tab
 if (mode==2) {
-    draw_button(0,96,160,40,1)
-    draw_button(0,200,160,308,1)
+    draw_button_ext(0,96,160,40,1,global.col_main)
+    draw_button_ext(0,200,160,308,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(12,384,"Position")
     draw_text(12,444,"Speed")
@@ -473,20 +461,19 @@ if (mode==2) {
 
 //draw views tab
 if (mode==3) {
-    draw_button(0,96,160,40,1)
-    draw_button(0,200,160,348,1)
+    draw_button_ext(0,96,160,40,1,global.col_main)
+    draw_button_ext(0,200,160,348,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(12,236,"Room")
     draw_text(12,328,"Window")
     draw_text(12,420,"Following")
     draw_set_color($ffffff)
 
-    draw_button(width-160,0,160,216,1)
+    draw_button_ext(width-160,0,160,216,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(width-160+12,8,"Window")
     draw_set_color($ffffff)
-    buttoncol=0
-    draw_button(width-160+4,32,160-8,160-8,0)
+    draw_button_ext(width-160+4,32,160-8,160-8,0,0)
 
     yes=0
     if (vw_enabled) {
@@ -551,8 +538,8 @@ if (mode==3) {
 
 //draw settings tab
 if (mode==4) {
-    draw_button(0,128,160,72,1)
-    draw_button(0,200,160,164,1)
+    draw_button_ext(0,128,160,72,1,global.col_main)
+    draw_button_ext(0,200,160,164,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(12,136,"Caption")
     draw_text(12,208,"Size")
@@ -560,8 +547,8 @@ if (mode==4) {
     draw_set_color($ffffff)
 
     dx=width-160
-    draw_button(dx,0,160,32,1)
-    draw_button(dx,32,160,148,1)
+    draw_button_ext(dx,0,160,32,1,global.col_main)
+    draw_button_ext(dx,32,160,148,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(dx+12,6,"Chunk tools")
     draw_set_color($ffffff)
@@ -598,7 +585,7 @@ if (mode==0) {
     if (paltooltip && !paladdbuttondown) tooltiptext="Add more..."
 
     //bottom panel
-    draw_button(0,height-112,160,112,1)
+    draw_button_ext(0,height-112,160,112,1,global.col_main)
     draw_set_color(global.col_text)
     draw_text(8,height-32,"Tools")
     draw_set_color($ffffff)

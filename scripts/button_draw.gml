@@ -1,3 +1,4 @@
+var col;
 if (object_index==Button) {
     if (tagmode==mode || tagmode==-1) {
         if (type==0) switch (action) {
@@ -50,10 +51,10 @@ if (object_index==Button) {
 
         if (extended && !extended_instancedata) up=0
 
-        buttoncol=global.col_main
-        if (action=="bgselect") buttoncol=pick(bg_visible[actionid] && bg_source[actionid]!="",buttoncol,$808080)
-        if (action=="vwselect") buttoncol=pick(vw_visible[actionid],buttoncol,$808080)
-        draw_button(x,y,w,h,up)
+        col=global.col_main
+        if (action=="bgselect") col=pick(bg_visible[actionid] && bg_source[actionid]!="",col,$808080)
+        if (action=="vwselect") col=pick(vw_visible[actionid],col,$808080)
+        draw_button_ext(x,y,w,h,up,col)
 
         if (action=="undo") if (total_undo_size>0) draw_healthbar(x+4,y+24,x+27,y+27,min(100,1+(total_undo_size/undospace)*99),0,$ff00,$ff,0,1,0)
 
@@ -84,23 +85,23 @@ if (object_index==Button) {
 
 if (object_index==TextField) {
     if (tagmode==mode || tagmode==-1) {
-        if (extended && !extended_instancedata) buttoncol=global.col_main
+        if (extended && !extended_instancedata) col=global.col_main
         else {
-            if (type==1) buttoncol=real(text)
+            if (type==1) {if (gray) col=global.col_main else col=real(text)}
             else {
-                if (active) buttoncol=$ffffff
+                if (active) col=$ffffff
                 else {
                     if (type==0 || type==2) {
-                        if (gray) buttoncol=global.col_main
-                        else buttoncol=$c0c0c0
+                        if (gray) col=global.col_main
+                        else col=$c0c0c0
                     } else {
-                        buttoncol=$c0c0c0
+                        col=$c0c0c0
                     }
                 }
             }
         }
 
-        draw_button(x,y,w,h,0)
+        draw_button_ext(x,y,w,h,0,col)
 
         if (type!=1) {
             draw_set_color(0)

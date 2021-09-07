@@ -37,7 +37,10 @@ if (fn!="") {
             buffer_write_i32(b,tlayer)
             buffer_write_float(b,tilesx)
             buffer_write_float(b,tilesy)
-            buffer_write_u32(b,round(image_alpha*255)*$1000000+image_blend)
+            buffer_write_u8(b,round(image_alpha*255))
+            buffer_write_u8(b,round(color_get_blue(image_blend)))
+            buffer_write_u8(b,round(color_get_green(image_blend)))
+            buffer_write_u8(b,round(color_get_red(image_blend)))
         }
     }
     ds_list_clear(l)
@@ -55,7 +58,10 @@ if (fn!="") {
             buffer_write_float(b,image_xscale)
             buffer_write_float(b,image_yscale)
             buffer_write_float(b,image_angle)
-            buffer_write_u32(b,round(image_alpha*255)*$1000000+image_blend)
+            buffer_write_u8(b,round(image_alpha*255))
+            buffer_write_u8(b,round(color_get_blue(image_blend)))
+            buffer_write_u8(b,round(color_get_green(image_blend)))
+            buffer_write_u8(b,round(color_get_red(image_blend)))
             buffer_write_string(b,code)
         }
     }

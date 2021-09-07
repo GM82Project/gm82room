@@ -13,7 +13,7 @@ parsecode
 parsereal
 crc_init
 drawui
-draw_button
+draw_button_ext
 button_actions
 createui
 drawtooltip
@@ -93,4 +93,9 @@ reduce_collision
 start_selection_resize
 do_selection_resize
 update_selection_bounds
-get_color
+get_color_ext
+show_prefs
+
+
+load_theme
+load_palette

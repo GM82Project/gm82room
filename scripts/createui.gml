@@ -1,5 +1,3 @@
-buttoncol=global.col_main
-
 createui_main()
 
 createui_object()     //mode 0
@@ -16,11 +14,10 @@ with (Button) {
         w=24
         h=24
     }
+    image_xscale=w
+    image_yscale=h
 
     if (extended && !extended_instancedata) alt="Please update gm82save!"
 
     if (dynamic!=-1) gray=1
-
-    image_xscale=w
-    image_yscale=h
 }

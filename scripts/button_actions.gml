@@ -16,6 +16,7 @@ with (Controller) switch (argument0) {
     case "view mode"    : {change_mode(3)}break
     case "settings mode": {change_mode(4)}break
     case "help"         : {show_info()}break
+    case "prefs"        : {show_prefs()}break
     case "undo"         : {pop_undo()}break
 
     //settings

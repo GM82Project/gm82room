@@ -1,23 +1,14 @@
-globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecount,tilecount,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,buttoncol;
+globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecount,tilecount,codeeditor,view,roomwidth,roomheight,mouse_wx,mouse_wy,mousein,grid,crosshair,removeoutside,fillwithcolor,fillcolor,remember,minimap,mode;
 globalvar overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,zoom;
 globalvar chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname;
 globalvar selection,selleft,seltop,selwidth,selheight,selsize,grabselection;
+globalvar theme,buttontex,themebutton;
 
 draw_set_font(fntCode)
 draw_set_circle_precision(8)
 
 message_caption(1,"Message")
-message_background(bgMessage)
-message_button(sprMessageButton)
-message_text_font("Courier New",12,$ffffff,1)
-message_button_font("Courier New",12,$ffffff,1)
 message_size(500,-1)
-
-global.col_low=$203020
-global.col_main=$404040
-global.col_high=$607060
-
-global.col_text=$000000
 
 width=display_get_width()-80-64
 height=display_get_height()-80-64
@@ -80,6 +71,17 @@ interpolation=registry_read_dword(dir+"RoomSmooth",1)
 codeeditor=registry_read_string_ext(dir,"CodeEditor")
 if (!file_exists(codeeditor)) codeeditor="notepad"
 seen=registry_read_dword(dir+"NewRoomEditorSeen",0)
+theme=registry_read_dword(dir+"GM82CustomThemeIndex",0)
+if (theme==2) {
+    global.col_low=registry_read_dword(dir+"GM82CustomThemeColorLow",$203020)
+    global.col_main=registry_read_dword(dir+"GM82CustomThemeColorMain",$404040)
+    global.col_high=registry_read_dword(dir+"GM82CustomThemeColorHigh",$607060)
+    global.col_text=registry_read_dword(dir+"GM82CustomThemeColorText",$ffffff)
+    themebutton=registry_read_dword(dir+"GM82CustomThemeButtonType",0)
+}
+
+load_theme()
+load_palette()
 
 state="load"
 crc_init()

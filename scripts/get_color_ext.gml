@@ -1,13 +1,5 @@
-var w,h,dx,dy,hue,offx,offy;
-
-//microsoft palette
-mspal[ 0]=$ff8080 mspal[ 1]=$ffff80 mspal[ 2]=$80ff80 mspal[ 3]=$00ff80 mspal[ 4]=$80ffff mspal[ 5]=$0080ff mspal[ 6]=$ff80c0 mspal[ 7]=$ff80ff
-mspal[ 8]=$ff0000 mspal[ 9]=$ffff00 mspal[10]=$80ff00 mspal[11]=$00ff40 mspal[12]=$00ffff mspal[13]=$0080c0 mspal[14]=$8080c0 mspal[15]=$ff00ff
-mspal[16]=$804040 mspal[17]=$ff8040 mspal[18]=$00ff00 mspal[19]=$008080 mspal[20]=$004080 mspal[21]=$8080ff mspal[22]=$800040 mspal[23]=$ff0080
-mspal[24]=$800000 mspal[25]=$ff8000 mspal[26]=$008000 mspal[27]=$008040 mspal[28]=$0000ff mspal[29]=$0000a0 mspal[30]=$800080 mspal[31]=$8000ff
-mspal[32]=$400000 mspal[33]=$804000 mspal[34]=$004000 mspal[35]=$004040 mspal[36]=$000080 mspal[37]=$000040 mspal[38]=$400040 mspal[39]=$400080
-mspal[40]=$000000 mspal[41]=$808000 mspal[42]=$808040 mspal[43]=$808080 mspal[44]=$408080 mspal[45]=$c0c0c0 mspal[46]=$400040 mspal[47]=$ffffff
-for (i=0;i<48;i+=1) mspal[i]=rgb_to_bgr(mspal[i])
+///get_color_ext(default,caption)
+var w,h,dx,dy,cx,cy,hue,sat,val,red,green,blue,offx,offy,color,oldcolor;
 
 color=argument0
 oldcolor=color
@@ -20,6 +12,7 @@ red=color_get_red(color)
 green=color_get_green(color)
 blue=color_get_blue(color)
 
+screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=488
@@ -33,12 +26,14 @@ act=""
 button=0
 
 offx=(width-w)/2
-offy=(height-h)/2
+offy=(height-h-32)/2
+
+io_clear()
+mouse_check_direct(mb_left)
+sleep(16)
 
 while (1) {
     //input
-    io_handle()
-
     if (keyboard_check(vk_escape)) break
     if (keyboard_check(vk_control)) {
         if (keyboard_check(ord("C"))) {
@@ -204,7 +199,11 @@ while (1) {
 
     //draw
     d3d_transform_add_translation(offx,offy,0)
-    draw_button(0,0,w,h,1)
+    draw_button_ext(0,0,w,h,1,global.col_main)
+    draw_button_ext(0,-32,w,32,1,global.col_main)
+    draw_set_color(global.col_text)
+    draw_text(8,-32+6,argument1)
+    draw_set_color($ffffff)
 
     //color wheel
     d3d_transform_stack_push()
@@ -262,20 +261,18 @@ while (1) {
     draw_set_circle_precision(8)
 
     for (i=0;i<48;i+=1) {
-        buttoncol=mspal[i]
-        draw_button(8+(i mod 8)*33,8+(i div 8)*24,33,24,0)
+        draw_button_ext(8+(i mod 8)*33,8+(i div 8)*24,33,24,0,mspal[i])
     }
 
     for (i=0;i<16;i+=1) {
-        buttoncol=0
-        draw_button(8+(i mod 8)*33,160+(i div 8)*24,33,24,0)
+        draw_button_ext(8+(i mod 8)*33,160+(i div 8)*24,33,24,0,0)
     }
 
 
     dy=216
-    draw_button(8,dy   ,256+8,24,0) buttoncol=$ffffff draw_button(256+20,dy   ,40,24,0) buttoncol=$c0c0c0 draw_button(256+64,dy   ,52,24,0)
-    draw_button(8,dy+24,256+8,24,0) buttoncol=$ffffff draw_button(256+20,dy+24,40,24,0) buttoncol=$c0c0c0 draw_button(256+64,dy+24,52,24,0)
-    draw_button(8,dy+48,256+8,24,0) buttoncol=$ffffff draw_button(256+20,dy+48,40,24,0) buttoncol=$c0c0c0 draw_button(256+64,dy+48,52,24,0)
+    draw_button_ext(8,dy   ,256+8,24,0,global.col_main) draw_button_ext(256+20,dy   ,40,24,0,$ffffff) draw_button_ext(256+64,dy   ,52,24,0,$c0c0c0)
+    draw_button_ext(8,dy+24,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+24,40,24,0,$ffffff) draw_button_ext(256+64,dy+24,52,24,0,$c0c0c0)
+    draw_button_ext(8,dy+48,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+48,40,24,0,$ffffff) draw_button_ext(256+64,dy+48,52,24,0,$c0c0c0)
 
     draw_set_color($0000ff) draw_rectangle(12,dy+4,12+red,dy+4+15,0)
     draw_set_color($00ff00) draw_rectangle(12,dy+4+24,12+green,dy+4+24+15,0)
@@ -283,9 +280,9 @@ while (1) {
     draw_set_color($ffffff)
 
     dy=296
-    draw_button(8,dy   ,256+8,24,0) buttoncol=$ffffff draw_button(256+20,dy   ,40,24,0) buttoncol=$c0c0c0 draw_button(256+64,dy   ,52,24,0)
-    draw_button(8,dy+24,256+8,24,0) buttoncol=$ffffff draw_button(256+20,dy+24,40,24,0) buttoncol=$c0c0c0 draw_button(256+64,dy+24,52,24,0)
-    draw_button(8,dy+48,256+8,24,0) buttoncol=$ffffff draw_button(256+20,dy+48,40,24,0) buttoncol=$c0c0c0 draw_button(256+64,dy+48,52,24,0)
+    draw_button_ext(8,dy   ,256+8,24,0,global.col_main) draw_button_ext(256+20,dy   ,40,24,0,$ffffff) draw_button_ext(256+64,dy   ,52,24,0,$c0c0c0)
+    draw_button_ext(8,dy+24,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+24,40,24,0,$ffffff) draw_button_ext(256+64,dy+24,52,24,0,$c0c0c0)
+    draw_button_ext(8,dy+48,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+48,40,24,0,$ffffff) draw_button_ext(256+64,dy+48,52,24,0,$c0c0c0)
 
     draw_set_color(make_color_hsv(hue,255,255)) draw_rectangle(12,dy+4,12+hue,dy+4+15,0) draw_set_color($ffffff)
     draw_rectangle_color(12,dy+4+24,12+sat,dy+4+24+15,$ffffff,color,color,$ffffff,0)
@@ -293,7 +290,7 @@ while (1) {
 
     dy=376
 
-    buttoncol=$ffffff draw_button(380,296,100,24,0)
+    draw_button_ext(380,296,100,24,0,$ffffff)
 
     col=string_hex(color)
     col="$"+string_repeat("0",6-string_length(col))+col
@@ -321,17 +318,18 @@ while (1) {
     dy=296+2
     draw_text(14,dy+48,"Value"     )
 
-    dx=380 dy=328 draw_button(dx,dy,48,40,act!="grabcancel") draw_sprite(sprMenuButtons,25,dx+24,dy+20)
-    dx=432 dy=328 draw_button(dx,dy,48,40,act!="grabok") draw_sprite(sprMenuButtons,0,dx+24,dy+20)
+    dx=380 dy=328 draw_button_ext(dx,dy,48,40,act!="grabcancel",global.col_main) draw_sprite(sprMenuButtons,25,dx+24,dy+20)
+    dx=432 dy=328 draw_button_ext(dx,dy,48,40,act!="grabok",global.col_main) draw_sprite(sprMenuButtons,0,dx+24,dy+20)
 
-    buttoncol=oldcolor draw_button(380,216,48,72,0)
-    buttoncol=color draw_button(432,216,48,72,0)
-    draw_sprite(sprMenuButtons,30,424,252)
+    draw_button_ext(380,216,48,72,0,oldcolor)
+    draw_button_ext(432,216,48,72,0,color)
+    draw_sprite(sprMenuButtons,30,430,252)
 
     d3d_transform_set_identity()
 
     screen_refresh()
     sleep(16)
+    io_handle()
 }
 
 surface_free(s)

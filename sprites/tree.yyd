@@ -1,4 +1,8 @@
 |sprDefault
 |spr1x1
 |sprMenuButtons
-|sprMessageButton
+|sprButton
+|sprButtonWhitemask
+|sprButtonWhitemaskSmooth
+|sprButton0
+|sprButton1
