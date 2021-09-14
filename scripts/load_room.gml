@@ -239,7 +239,7 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) do {str=file_text_read_st
             o.image_blend=o.image_blend&$ffffff
         }
 
-        if (o.code!="") file_text_read_all(dir+o.code+".gml")
+        if (o.code!="") o.code=file_text_read_all(dir+o.code+".gml")
 
         if (current_time>time) {
             time=current_time
