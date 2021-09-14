@@ -25,6 +25,8 @@ type=0
 anchor=0
 tagmode=-1
 gray=0
+
+selected=0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -37,6 +39,7 @@ if (down!=0 && focus && !active && (!extended || extended_instancedata) && !(gra
     //activate textfield
     with (TextField) textfield_actions()
     active=1
+    selected=1
     if (type==0 || type=4) {
         keyboard_string=text
     }
@@ -63,20 +66,27 @@ if (down!=0 && focus && !active && (!extended || extended_instancedata) && !(gra
 }
 
 if (active) {
+    if (keyboard_check_pressed(vk_left) || keyboard_check_pressed(vk_right)) selected=0
     if (keyboard_check(vk_control)) {
         if (keyboard_check_pressed(ord("C"))) {
             clipboard_set_text(text)
         }
         if (keyboard_check_pressed(ord("V"))) {
             keyboard_string=clipboard_get_text()
+            selected=0
         }
     }
+    otext=text
     if (type=4) text=string_copy(keyboard_string,1,maxlen)
     else {
         if (type=0) text=string_number(keyboard_string)
         if (maxval>0) text=string(min(maxval,real(text)))
         if (minval<maxval) text=string(max(minval,real(text)))
         text=string_copy(text,1,maxlen)
+    }
+    if (text!=otext && selected) {
+        selected=0
+        text=keyboard_lastchar
     }
     keyboard_string=text
     k+=1

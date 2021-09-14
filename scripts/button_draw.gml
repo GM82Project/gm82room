@@ -107,7 +107,13 @@ if (object_index==TextField) {
             draw_set_color(0)
             draw_set_valign(1)
             if (active) {
-                draw_text(x+8,y+h/2,dtext+cursor)
+                if (selected) {
+                    draw_rectangle_color(x+8,y+h/2-10,x+7+string_width(dtext),y+h/2+9,$ff8000,$ff8000,$ff8000,$ff8000,0)
+                    draw_set_color($ffffff)
+                    draw_text(x+8,y+h/2,dtext+cursor)
+                } else {
+                    draw_text(x+8,y+h/2,dtext+cursor)
+                }
             } else {
                 draw_text(x+8,y+h/2,dtext)
             }
