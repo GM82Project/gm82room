@@ -9,4 +9,5 @@ u=(256-8)*progress
 if (u) {
     draw_rectangle(36,36,36+u-1,36+32-8-1,0)
 }
+io_handle()
 screen_refresh()
