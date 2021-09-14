@@ -57,8 +57,8 @@ f=file_text_open_write(dir+"room.txt")
 str="caption="+roomcaption+lf
 +"width="+string(roomwidth)+lf
 +"height="+string(roomheight)+lf
-+"snap_x="+string(ds_map_find_value(settings,"snap_x"))+lf
-+"snap_y="+string(ds_map_find_value(settings,"snap_y"))+lf
++"snap_x="+string(gridx)+lf
++"snap_y="+string(gridy)+lf
 +"isometric="+string(ds_map_find_value(settings,"isometric"))+lf
 +"roomspeed="+string(roomspeed)+lf
 +"roompersistent="+string(roompersistent)+lf
