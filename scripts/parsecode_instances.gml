@@ -1,8 +1,9 @@
-///parsecode(inst,code)
 var str,p;
 
-with (argument0) {
-    str=string_replace_all(argument1,chr(13),"")
+instance_activate_object(instance)
+
+with (instance) {
+    str=string_replace_all(code,chr(13),"")
     code=""
     delstop=0
     do {
@@ -23,3 +24,5 @@ with (argument0) {
 
     if (string_replace_all(string_replace_all(string_replace_all(code,";",""),lf,"")," ","")=="") code=""
 }
+
+change_mode(mode)
