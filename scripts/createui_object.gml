@@ -47,6 +47,14 @@ i.spr=29
 i.tagmode=0
 i.anchor=2
 
+i=instance_create(56,height-100+60,Button)
+i.action="parsecode"
+i.alt="Parse all creation code for scaling and blend values"
+i.spr=31
+i.tagmode=0
+i.anchor=2
+
+
 
 //inspector
 i=instance_create(width-160,0,TextField)

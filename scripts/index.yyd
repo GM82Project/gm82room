@@ -9,7 +9,7 @@ get_sprite
 save_room
 crc32
 gensavecode
-parsecode
+
 parsereal
 crc_init
 drawui
@@ -99,3 +99,4 @@ show_prefs
 
 load_theme
 load_palette
+parsecode_instances

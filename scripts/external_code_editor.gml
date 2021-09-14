@@ -1,7 +1,7 @@
 var str,tf,f;
 
 rect(0,0,width,height,0,0.5)
-draw_button_ext(width/2-170,height/2-50,340,100,1)
+draw_button_ext(width/2-170,height/2-50,340,100,1,global.col_main)
 draw_set_halign(1)
 draw_set_valign(1)
 draw_set_color(global.col_text)

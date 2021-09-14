@@ -132,6 +132,7 @@ with (Controller) switch (argument0) {
     case "overlap check": {overlap_check=!overlap_check}break
     case "cement"       : {cement_instances()}break
     case "cleanup"      : {cleanup_instances()}break
+    case "parsecode"    : {parsecode_instances()}break
 
 
     //tiles

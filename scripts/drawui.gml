@@ -586,9 +586,6 @@ if (mode==0) {
 
     //bottom panel
     draw_button_ext(0,height-112,160,112,1,global.col_main)
-    draw_set_color(global.col_text)
-    draw_text(8,height-32,"Tools")
-    draw_set_color($ffffff)
 }
 
 if (mode==1 && tilebgpal!=noone) {

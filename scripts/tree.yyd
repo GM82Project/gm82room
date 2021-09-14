@@ -11,7 +11,6 @@
 	|get_color_ext
 +file
 	|gensavecode
-	|parsecode
 	|parsereal
 	|get_sprite
 	|get_background
@@ -94,6 +93,7 @@
 |focus_tile
 |cement_instances
 |cleanup_instances
+|parsecode_instances
 |deselect
 |get_uid
 |set_uid
