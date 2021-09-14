@@ -41,5 +41,6 @@ if (h!=0 || v!=0) {
             with (tileholder) if (sel) {x+=h y+=v}
             with (selectt) update_inspector()
         }
+        update_selection_bounds()
     }
 }
