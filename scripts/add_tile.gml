@@ -82,10 +82,22 @@ if (tilebgpal!=noone) {
             endx=floor((mx-dx+scrollx)/2)
             endy=floor((my-dy+scrolly)/2)
             if (!keyboard_check(vk_alt)) {
-                endx=ceilto(endx-ox,gx+sx)+ox
-                endy=ceilto(endy-oy,gy+sy)+oy
+                if (endx<startx) endx=floorto(endx-ox,gx+sx)+ox
+                else endx=ceilto(endx-ox,gx+sx)+ox
+                if (endy<starty) endy=floorto(endy-oy,gy+sy)+oy
+                else endy=ceilto(endy-oy,gy+sy)+oy
+                if (endx==startx) endx=startx-gx
+                if (endy==starty) endy=starty-gy
+            } else {
+                if (endx==startx) endx=startx+1
+                if (endy==starty) endy=starty+1
             }
-            if (!mouse_check_direct(mb_left)) drawing=0
+
+            if (!mouse_check_direct(mb_left)) {
+                drawing=0
+                if (endx<startx) {temp=endx endx=startx startx=temp}
+                if (endy<starty) {temp=endy endy=starty starty=temp}
+            }
         }
 
         draw_set_color($ff8000)
