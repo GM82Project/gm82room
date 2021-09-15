@@ -12,4 +12,6 @@ ds_list_sort(layers,1)
 
 ly_current=ds_list_find_index(layers,argument0)
 
+ly_depth=argument0
+
 update_tilepanel()
