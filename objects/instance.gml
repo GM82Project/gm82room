@@ -44,7 +44,7 @@ if (sel) {
     if (rotato) {
         image_angle=point_direction(x,y,global.mousex,global.mousey)+90-90*sign(image_xscale)
         if (!keyboard_check(vk_alt)) {
-            image_angle=roundto(image_angle,15)
+            image_angle=roundto(image_angle,15) mod 360
         }
         if (!mouse_check_direct(mb_left)) {rotato=0 event_user(1) do_change_undo("rotation",0)}
         update_inspector()
@@ -156,6 +156,8 @@ if (sign(image_xscale)==-1 && sign(image_yscale)==-1 && !selsize) {
     image_yscale=abs(image_yscale)
     image_angle=(image_angle+180) mod 360
 }
+
+image_angle=modwrap(image_angle,0,360)
 #define Other_12
 /*"/*'/**//* YYD ACTION
 lib_id=1
