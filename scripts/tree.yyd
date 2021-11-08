@@ -42,10 +42,10 @@
 	|show_prefs
 	|load_theme
 	|load_palette
+|create
 |load_room
 |save_room
 |gameend
-|create
 |createui
 +createui
 	|createui_main
