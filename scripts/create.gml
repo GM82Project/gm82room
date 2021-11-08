@@ -79,6 +79,7 @@ if (theme==2) {
     global.col_text=registry_read_dword(dir+"GM82CustomThemeColorText",$ffffff)
     themebutton=registry_read_dword(dir+"GM82CustomThemeButtonType",0)
 }
+codeeditortype=registry_read_dword(dir+"GM82CodeEditorType",0)
 
 load_theme()
 load_palette()

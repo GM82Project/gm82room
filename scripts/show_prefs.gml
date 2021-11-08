@@ -2,6 +2,13 @@
 var c;
 
 show_message("Preferences is a work in progress.")
+
+new=show_message_ext("Choose code editor:","External","Builtin","Notepad")-1
+
+if (new!=-1) {
+    codeeditortype=new
+}
+
 new=show_message_ext("Choose theme:","Dark","Light","Custom")-1
 
 if (new!=-1) {
@@ -18,5 +25,6 @@ if (new!=-1) {
         global.col_text=c[3]
     }
     load_theme()
-    show_message("Theme applied.")
 }
+
+show_message("Preferences applied.")
