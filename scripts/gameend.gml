@@ -12,3 +12,5 @@ if (theme==2) {
     registry_write_dword(dir+"GM82CustomThemeColorText",global.col_text)
     registry_write_dword(dir+"GM82CustomThemeButtonType",themebutton)
 }
+
+registry_write_dword(dir+"GM82CodeEditorType",codeeditortype)
