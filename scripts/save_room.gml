@@ -79,7 +79,7 @@ for (i=0;i<8;i+=1) {
     +"bg_stretch"+string(i)+"="+string(bg_stretch[i])+lf
 }
 str+=lf
-+"views_enabled="+string(ds_map_find_value(settings,"vw_enabled"))+lf
++"views_enabled="+string(vw_enabled)+lf
 for (i=0;i<8;i+=1) {
     str+="view_visible"+string(i)+"="+string(vw_visible[i])+lf
     +"view_xview"+string(i)+"="+string(vw_x[i])+lf
