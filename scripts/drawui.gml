@@ -79,10 +79,12 @@ if (mode==0) {
     }
 
     if (crosshair) if (!keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
-        texture_set_interpolation(interpolation)
-        if (keyboard_check(vk_alt)) draw_sprite_ext(objspr[objpal],0,global.mousex,global.mousey,1,1,0,$ffffff,0.25)
-        else draw_sprite_ext(objspr[objpal],0,fmx,fmy,1,1,0,$ffffff,0.25)
-        texture_set_interpolation(1)
+        if (objpal!=noone) {
+            texture_set_interpolation(interpolation)
+            if (keyboard_check(vk_alt)) draw_sprite_ext(objspr[objpal],0,global.mousex,global.mousey,1,1,0,$ffffff,0.25)
+            else draw_sprite_ext(objspr[objpal],0,fmx,fmy,1,1,0,$ffffff,0.25)
+            texture_set_interpolation(1)
+        }
     }
 }
 
