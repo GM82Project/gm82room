@@ -21,3 +21,7 @@ with (Button) {
 
     if (dynamic!=-1) gray=1
 }
+
+with (TextField) {
+    if (displen=256) displen=w/11-1
+}

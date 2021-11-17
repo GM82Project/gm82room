@@ -19,7 +19,7 @@ textfield_set("room caption",roomcaption)
 
 i=instance_create(8,232,TextField)
 i.action="room width"
-i.alt="Width"
+i.basealt="width"
 i.w=72
 i.maxlen=6
 i.tagmode=4
@@ -27,7 +27,7 @@ textfield_set("room width",roomwidth)
 
 i=instance_create(80,232,TextField)
 i.action="room height"
-i.alt="Height"
+i.basealt="height"
 i.w=72
 i.maxlen=6
 i.tagmode=4
@@ -36,6 +36,7 @@ textfield_set("room height",roomheight)
 i=instance_create(80,268,TextField)
 i.action="room speed"
 i.w=72
+i.basealt="speed"
 i.maxlen=4
 i.tagmode=4
 textfield_set("room speed",roomspeed)
@@ -73,7 +74,7 @@ i.tagmode=4
 
 i=instance_create(width-160+8,68,TextField)
 i.action="chunk x"
-i.alt="x"
+i.basealt="x"
 i.anchor=1
 i.displen=6
 i.w=72
@@ -81,7 +82,7 @@ i.tagmode=4
 
 i=instance_create(width-80,68,TextField)
 i.action="chunk y"
-i.alt="y"
+i.basealt="y"
 i.anchor=1
 i.displen=6
 i.w=72
@@ -90,7 +91,7 @@ i.tagmode=4
 //scale
 i=instance_create(width-160+8,104,TextField)
 i.action="chunk w"
-i.alt="width"
+i.basealt="width"
 i.displen=6
 i.anchor=1
 i.w=72
@@ -98,7 +99,7 @@ i.tagmode=4
 
 i=instance_create(width-80,104,TextField)
 i.action="chunk h"
-i.alt="height"
+i.basealt="height"
 i.displen=6
 i.anchor=1
 i.w=72

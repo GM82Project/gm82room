@@ -3,13 +3,13 @@
 i=instance_create(8,104,Button)
 i.type=1
 i.action="clear bg"
-i.text="Color"
-i.alt="Draw background color"
+i.text="Colour"
+i.alt="Draw background colour"
 i.tagmode=2
 
 i=instance_create(96,100,TextField)
 i.action="bgcol"
-i.alt="Background color"
+i.alt="Background colour"
 i.type=1
 i.text=string(backgroundcolor)
 i.w=60
@@ -63,25 +63,25 @@ i.tagmode=2
 
 i=instance_create(8,408,TextField)
 i.action="bg xpos"
-i.alt="x"
+i.basealt="x"
 i.w=72
 i.tagmode=2
 
 i=instance_create(80,408,TextField)
 i.action="bg ypos"
-i.alt="y"
+i.basealt="y"
 i.w=72
 i.tagmode=2
 
 i=instance_create(8,468,TextField)
 i.action="bg hsp"
-i.alt="hspeed"
+i.basealt="hspeed"
 i.w=72
 i.tagmode=2
 
 i=instance_create(80,468,TextField)
 i.action="bg vsp"
-i.alt="vspeed"
+i.basealt="vspeed"
 i.w=72
 i.tagmode=2
 

@@ -24,50 +24,50 @@ i.tagmode=3
 //room
 i=instance_create(8,260,TextField)
 i.action="view x"
-i.alt="x"
+i.basealt="x"
 i.w=72
 i.tagmode=3
 
 i=instance_create(8,292,TextField)
 i.action="view y"
-i.alt="y"
+i.basealt="y"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,260,TextField)
 i.action="view w"
-i.alt="width"
+i.basealt="width"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,292,TextField)
 i.action="view h"
-i.alt="height"
+i.basealt="height"
 i.w=72
 i.tagmode=3
 
 //port
 i=instance_create(8,352,TextField)
 i.action="view xp"
-i.alt="x"
+i.basealt="x"
 i.w=72
 i.tagmode=3
 
 i=instance_create(8,384,TextField)
 i.action="view yp"
-i.alt="y"
+i.basealt="y"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,352,TextField)
 i.action="view wp"
-i.alt="width"
+i.basealt="width"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,384,TextField)
 i.action="view hp"
-i.alt="height"
+i.basealt="height"
 i.w=72
 i.tagmode=3
 
@@ -83,25 +83,25 @@ i.tagmode=3
 
 i=instance_create(8,476,TextField)
 i.action="view hbor"
-i.alt="h border"
+i.basealt="h border"
 i.w=72
 i.tagmode=3
 
 i=instance_create(8,508,TextField)
 i.action="view vbor"
-i.alt="v border"
+i.basealt="v border"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,476,TextField)
 i.action="view hspeed"
-i.alt="hspeed"
+i.basealt="hspeed"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,508,TextField)
 i.action="view vspeed"
-i.alt="vspeed"
+i.basealt="vspeed"
 i.w=72
 i.tagmode=3
 

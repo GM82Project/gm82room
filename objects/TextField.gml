@@ -10,6 +10,7 @@ h=32
 text=""
 dtext=""
 alt=""
+basealt=""
 
 spr=noone
 focus=0
@@ -110,8 +111,9 @@ if (type==4 || type==0) {
     if (l>=displen) {
         if (type==4 || active) dtext=string_copy(dtext,l-displen+1+active,displen-active)
         else dtext=string_copy(dtext,1,displen)
-        alt=string_replace_all(text,"#","\#")
-    } else alt=""
+        if (basealt!="") alt=basealt+" ("+string_replace_all(text,"#","\#")+")"
+        else alt=string_replace_all(text,"#","\#")
+    } else alt=basealt
     dtext=string_replace_all(dtext,"#","\#")
     if (extended && !extended_instancedata) alt="Please update gm82save!"
 } else dtext=text

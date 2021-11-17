@@ -169,7 +169,7 @@ i.tagmode=0
 //blend
 i=instance_create(width-160+8,336,TextField)
 i.action="inst col"
-i.alt="Color"
+i.alt="colour"
 i.anchor=1
 i.dynamic=0
 i.type=1
@@ -179,7 +179,7 @@ i.tagmode=0
 
 i=instance_create(width-160+8+72,336,TextField)
 i.action="inst alpha"
-i.alt="Alpha"
+i.alt="alpha"
 i.anchor=1
 i.dynamic=0
 i.maxval=255
