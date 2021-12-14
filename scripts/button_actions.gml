@@ -133,6 +133,7 @@ with (Controller) switch (argument0) {
     case "cement"       : {cement_instances()}break
     case "cleanup"      : {cleanup_instances()}break
     case "parsecode"    : {parsecode_instances()}break
+    case "loadjmap"     : {load_jmap()}break
 
 
     //tiles

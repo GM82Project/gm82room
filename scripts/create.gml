@@ -3,6 +3,7 @@ globalvar overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_curren
 globalvar chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname;
 globalvar selection,selleft,seltop,selwidth,selheight,selsize,grabselection;
 globalvar theme,buttontex,themebutton;
+globalvar jtool_objs;
 
 draw_set_font(fntCode)
 draw_set_circle_precision(8)
@@ -83,6 +84,7 @@ codeeditortype=registry_read_dword(dir+"GM82CodeEditorType",0)
 
 load_theme()
 load_palette()
+load_jtooldata()
 
 state="load"
 crc_init()

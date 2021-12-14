@@ -100,3 +100,6 @@ show_prefs
 load_theme
 load_palette
 parsecode_instances
+load_jmap
+load_jtooldata
+load_all_jtool_objs

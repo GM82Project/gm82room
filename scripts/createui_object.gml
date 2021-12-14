@@ -54,6 +54,12 @@ i.spr=31
 i.tagmode=0
 i.anchor=2
 
+i=instance_create(24,height-100+60,Button)
+i.action="loadjmap"
+i.alt="Import jtool jmap file into a compatible engine"
+i.spr=32
+i.tagmode=0
+i.anchor=2
 
 
 //inspector

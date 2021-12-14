@@ -21,6 +21,8 @@
 	|load_object_tree
 	|load_background_tree
 	|load_paths
+	|load_jtooldata
+	|load_all_jtool_objs
 +chunks
 	|chunk_export
 	|chunk_import
@@ -91,9 +93,11 @@
 |textfield_set
 |focus_object
 |focus_tile
-|cement_instances
-|cleanup_instances
-|parsecode_instances
++tools
+	|cement_instances
+	|cleanup_instances
+	|parsecode_instances
+	|load_jmap
 |deselect
 |get_uid
 |set_uid
