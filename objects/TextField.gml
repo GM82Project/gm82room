@@ -81,9 +81,11 @@ if (active) {
     if (type=4) text=string_copy(keyboard_string,1,maxlen)
     else {
         if (type=0) text=string_number(keyboard_string)
+        neg=!!string_pos("-",text)
         if (maxval>0) text=string(min(maxval,real(text)))
         if (minval<maxval) text=string(max(minval,real(text)))
         text=string_copy(text,1,maxlen)
+        if (text="0" && neg) text="-0"
     }
     if (text!=otext && selected) {
         selected=0
