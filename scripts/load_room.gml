@@ -39,6 +39,7 @@ root=directory_previous(directory_previous(dir))
 gamename=filename_change_ext(file_find_first(root+"*.gm82",0),"") file_find_close()
 room_caption+=" - "+roomname
 set_application_title(roomname+" - Room Editor")
+global.default_caption=room_caption
 
 //set up thumbnails
 directory_create(root+"cache")
