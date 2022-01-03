@@ -52,6 +52,10 @@ if (down!=0 && focus && !active && (!extended || extended_instancedata) && !(gra
     if (type==2 || type==3) {
         active=0
     }
+    if (action=="palette name") {
+        N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
+        Controller.menutype="object"
+    }
     if (action=="bg name") {
         N_Menu_ShowPopupMenu(window_handle(),bgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
         Controller.menutype="background"

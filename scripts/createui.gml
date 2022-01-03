@@ -24,4 +24,5 @@ with (Button) {
 
 with (TextField) {
     if (displen=256) displen=w/11-1
+    if (action=="palette name") gray=0
 }
