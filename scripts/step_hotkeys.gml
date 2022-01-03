@@ -34,13 +34,18 @@ if (h!=0 || v!=0) {
         keyboard_clear(vk_down)
         if (keyboard_check(vk_shift)) {h*=gridx v*=gridy}
         if (mode==0) {
-            with (instance) if (sel) {x+=h y+=v}
+            begin_undo(act_change,"moving instances",0)
+            with (instance) if (sel) {x+=h y+=v add_undo_instance_props()}
+            push_undo()
             with (select) update_inspector()
         }
         if (mode==1) {
-            with (tileholder) if (sel) {x+=h y+=v}
+            begin_undo(act_change,"moving tiles",0)
+            with (tileholder) if (sel) {x+=h y+=v tile_set_position(tile,x,y) add_undo_tile_props()}
+            push_undo()
             with (selectt) update_inspector()
         }
+        update_instance_memory()
         update_selection_bounds()
     }
 }
