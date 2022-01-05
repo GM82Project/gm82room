@@ -1,6 +1,7 @@
 var yes;
 
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("Z"))) {
+    keyboard_clear(ord("Z"))
     pop_undo()
 }
 if (keyboard_check_pressed(vk_escape)) {
