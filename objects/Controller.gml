@@ -57,6 +57,6 @@ if (theme==1) {
     draw_set_blend_mode(0)
 }
 
-d3d_reset_projection()
+dx8_reset_projection()
 
 draw_backgrounds(0)
