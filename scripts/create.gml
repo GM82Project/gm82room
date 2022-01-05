@@ -84,7 +84,8 @@ codeeditortype=registry_read_dword(dir+"GM82CodeEditorType",0)
 
 load_theme()
 load_palette()
-load_jtooldata()
+
+jtool_objs=ds_map_create()
 
 state="load"
 crc_init()
