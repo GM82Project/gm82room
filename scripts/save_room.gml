@@ -29,11 +29,12 @@ file_text_close(f)
 //save instances
 f=file_text_open_write(dir+"instances.txt")
 pr=ds_priority_create()
+l=0
 with (instance) {
     //yeah i know but whatever works, man
-    ds_priority_add(pr,id,id)
+    ds_priority_add(pr,id,-depth*100000+id/10)
+    l+=1
 }
-l=ds_priority_size(pr)
 repeat (l) with (ds_priority_delete_min(pr)) {
     savecode=gensavecode(code)
     str=objname+","+string(x)+","+string(y)+","

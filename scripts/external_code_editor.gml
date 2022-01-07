@@ -29,6 +29,7 @@ else execute_program(codeeditor,tf,1)
 
 if (file_exists(tf)) {
     str=string_replace_all(file_text_read_all(tf),chr(13),"")
+    str=string_replace_all(str,chr(13)+lf,lf)
     if (string_replace_all(string_replace_all(string_replace_all(str,chr(9),""),lf,"")," ","")="") str=""
     return str
 }
