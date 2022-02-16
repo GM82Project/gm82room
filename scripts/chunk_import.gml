@@ -26,12 +26,14 @@ if (fn!="") {
     //chunk version
     if (buffer_read_u8(b)>2) {
         show_message("Chunk file version is too new. Please download an updated version to load this chunk file.")
+        buffer_destroy(b)
         exit
     }
 
     name=buffer_read_string(b)
     if (gamename!=name) {
         if (!show_question("This chunk file seems to be from a different game:##Current game: '"+gamename+"'#Chunk file: '"+name+"'##Do you still want to load it? It may cause corruption.")) {
+            buffer_destroy(b)
             exit
         }
     }
@@ -42,6 +44,11 @@ if (fn!="") {
 
     repeat (buffer_read_u16(b)) {
         name=buffer_read_string(b)
+        if (!ds_map_exists(bglookup,name)) {
+            show_message('Error importing chunk: background "'+name+'" was not found in the source.')
+            buffer_destroy(b)
+            exit
+        }
         find=ds_map_find_value(bglookup,name)
         texture=bg_background[find]
         repeat (buffer_read_u16(b)) {
@@ -73,6 +80,11 @@ if (fn!="") {
     }
     repeat (buffer_read_u16(b)) {
         name=buffer_read_string(b)
+        if (!ds_map_exists(objlookup,name)) {
+            show_message('Error importing chunk: object "'+name+'" was not found in the source.')
+            buffer_destroy(b)
+            exit
+        }
         find=ds_map_find_value(objlookup,name)
         repeat (buffer_read_u16(b)) {
             o=instance_create(chunkleft,chunktop,instance) get_uid(o)
