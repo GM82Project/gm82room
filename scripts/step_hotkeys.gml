@@ -18,6 +18,7 @@ if (keyboard_check_pressed(vk_delete)) {
     if (mode==0) with (instance) if (sel) {add_undo_instance() instance_destroy()}
     if (mode==1) with (tileholder) if (sel) {add_undo_tile() instance_destroy()}
     push_undo()
+    selection=0
 }
 
 var h,v;
