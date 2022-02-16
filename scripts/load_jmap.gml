@@ -52,6 +52,7 @@ if (file_exists(fn)) {
                 update_inspector()
                 selection=true
                 update_selection_bounds()
+                update_instance_memory()
                 file_text_close(f)
                 return 1
             }
