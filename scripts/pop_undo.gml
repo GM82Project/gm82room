@@ -101,6 +101,25 @@ if (size) {
                 i+=3
             }
         }break
+        case act_alchemy: {
+            var name;name=ds_list_find_value(l,i)
+            var obj;obj=ds_list_find_value(l,i+1)
+            i+=2
+            repeat ((size-2)) {
+                o=ds_map_find_value(uidmap,ds_list_find_value(l,i))
+                o.obj=obj
+                o.objname=name
+
+                o.depth=objdepth[o.obj]
+                o.sprite_index=objspr[o.obj]
+                o.sprw=sprite_get_width(o.sprite_index)
+                o.sprh=sprite_get_height(o.sprite_index)
+                o.sprox=sprite_get_xoffset(o.sprite_index)
+                o.sproy=sprite_get_yoffset(o.sprite_index)
+
+                i+=1
+            }
+        }break
     }
 
     total_undo_size-=ds_list_find_value(l,ds_list_size(l)-1)

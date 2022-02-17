@@ -134,6 +134,7 @@ with (Controller) switch (argument0) {
     case "cleanup"      : {cleanup_instances()}break
     case "parsecode"    : {parsecode_instances()}break
     case "loadjmap"     : {load_jmap()}break
+    case "replaceobj"   : {replace_instances()}break
 
 
     //tiles

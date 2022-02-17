@@ -8,5 +8,6 @@ act_create=1
 act_change=2
 act_global=3
 act_globalvec=4
+act_alchemy=5
 megabyte=1024*1024
 undospace=512*megabyte

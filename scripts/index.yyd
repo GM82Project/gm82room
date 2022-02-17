@@ -103,3 +103,4 @@ parsecode_instances
 load_jmap
 load_jtooldata
 load_all_jtool_objs
+replace_instances

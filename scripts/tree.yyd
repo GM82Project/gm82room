@@ -97,6 +97,7 @@
 	|cement_instances
 	|cleanup_instances
 	|parsecode_instances
+	|replace_instances
 	|load_jmap
 |deselect
 |get_uid

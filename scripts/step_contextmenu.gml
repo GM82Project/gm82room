@@ -2,6 +2,9 @@ var str;
 
 click=N_Menu_CheckMenus()
 if (click) {
+    if (menutype=="replaceobj") {
+        replace_instances(ds_map_get(objmenuitems,click))
+    }
     if (menutype=="object") {
         str=ds_map_find_value(objmenuitems,click)
         if (mode==0) {
