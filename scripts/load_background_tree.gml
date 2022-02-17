@@ -11,7 +11,7 @@ tilebgmenu=N_Menu_CreatePopupMenu()
 N_Menu_AddMenu(tilebgmenu,bgmenu,"Backgrounds")
 N_Menu_AddSeparator(tilebgmenu)
 
-ds_map_add(bgmenuitems,N_Menu_AddItem(bgmenu,"(no background)",""),"<undefined>")
+ds_map_add(bgmenuitems,N_Menu_AddItem(bgmenu,"(no background)",""),undefined)
 
 path[0]=bgmenu
 curindent=0

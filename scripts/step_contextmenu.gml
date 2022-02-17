@@ -6,15 +6,15 @@ if (click) {
         replace_instances(ds_map_get(objmenuitems,click))
     }
     if (menutype=="object") {
-        str=ds_map_find_value(objmenuitems,click)
+        str=ds_map_get(objmenuitems,click)
         if (mode==0) {
-            if (str!="<undefined>") {
+            if (str!=undefined) {
                 get_object(str)
                 textfield_set("palette name",ds_list_find_value(objects,objpal))
             }
         }
         if (mode==3) {
-            if (str=="<undefined>") {
+            if (str==undefined) {
                 undo_globalvec("vw_follow",vw_current,"view "+string(vw_current)+" options")
                 vw_follow[vw_current]=noone
                 textfield_set("view follow","")
@@ -26,11 +26,11 @@ if (click) {
         }
     }
     if (menutype=="background") {
-        str=ds_map_find_value(bgmenuitems,click)
+        str=ds_map_get(bgmenuitems,click)
         begin_undo(act_globalvec,"background "+string(bg_current)+" options",0) add_undo("vw_follow") add_undo(vw_current) add_undo(bg_tex[bg_current]) push_undo()
         begin_undo(act_globalvec,"",1) add_undo("bg_source") add_undo(vw_current) add_undo(bg_source[bg_current]) push_undo()
         begin_undo(act_globalvec,"",1) add_undo("bg_visible") add_undo(vw_current) add_undo(bg_visible[bg_current]) push_undo()
-        if (str=="<undefined>") {
+        if (str==undefined) {
             bg_tex[bg_current]=bgDefault
             bg_source[bg_current]=""
             bg_visible[bg_current]=0
@@ -42,8 +42,8 @@ if (click) {
         update_backgroundpanel()
     }
     if (menutype=="tilebg") {
-        str=ds_map_find_value(bgmenuitems,click)
-        if (str!="<undefined>") {
+        str=ds_map_get(bgmenuitems,click)
+        if (str!=undefined) {
             get_background(str)
             tilebgpal=micro_optimization_bgid
             tilebgname=str

@@ -7,7 +7,7 @@ tab=chr(9)
 objmenuitems=ds_map_create()
 objmenu=N_Menu_CreatePopupMenu()
 
-ds_map_add(objmenuitems,N_Menu_AddItem(objmenu,"(no object)",""),"<undefined>")
+ds_map_add(objmenuitems,N_Menu_AddItem(objmenu,"(no object)",""),undefined)
 
 path[0]=objmenu
 curindent=0
