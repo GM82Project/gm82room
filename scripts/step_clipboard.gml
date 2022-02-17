@@ -4,6 +4,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) {
     if (mode==0) with (instance) sel=1
     if (mode==1) with (tileholder) sel=1
     selection=1
+    update_inspector()
     update_selection_bounds()
 }
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_check_pressed(ord("X"))) {
