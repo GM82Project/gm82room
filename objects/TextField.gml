@@ -91,7 +91,7 @@ if (active) {
         text=string_copy(text,1,maxlen)
         if (text="0" && neg) text="-0"
     }
-    if (text!=otext && selected) {
+    if (keyboard_string!=otext && selected) {
         selected=0
         text=keyboard_lastchar
     }
