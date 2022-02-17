@@ -21,16 +21,19 @@ if (parameter_count()) {
     //clicked on
     dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
     window_default()
-    //dir="C:\Stuff\github\renex-engine\rooms\rmDemo3"
-    //dir="C:\Stuff\github\mkfusion\rooms\rm1_wbArea05"
-    //dir="C:\Stuff\github\mkfusion\rooms\rm9_S1Area3"
 }
+
+if (dir="") {
+    //this is for faster testing on my computer :)
+    if (working_directory!=program_directory) dir="C:\Stuff\github\renex-engine\rooms\rmDemo3"
+    if (!file_exists(dir+"\room.txt")) {
+        //shrug
+        game_end()
+        return 0
+    }
+}
+
 roomname=filename_name(dir)
-if (roomname="") {
-    //shrug
-    game_end()
-    return 0
-}
 
 draw_loader("Loading project...",0.125)
 
