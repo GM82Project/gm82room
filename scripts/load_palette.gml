@@ -8,4 +8,4 @@ mspal[24]=$800000 mspal[25]=$ff8000 mspal[26]=$008000 mspal[27]=$008040 mspal[28
 mspal[32]=$400000 mspal[33]=$804000 mspal[34]=$004000 mspal[35]=$004040 mspal[36]=$000080 mspal[37]=$000040 mspal[38]=$400040 mspal[39]=$400080
 mspal[40]=$000000 mspal[41]=$808000 mspal[42]=$808040 mspal[43]=$808080 mspal[44]=$408080 mspal[45]=$c0c0c0 mspal[46]=$400040 mspal[47]=$ffffff
 
-for (i=0;i<48;i+=1) mspal[i]=rgb_to_bgr(mspal[i])
+for (i=0;i<48;i+=1) mspal[i]=color_reverse(mspal[i])
