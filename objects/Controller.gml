@@ -39,7 +39,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if (global.modified) if (!show_question("Are you sure you want to quit?##There are unsaved changes.")) exit
+if (global.modified) if (show_message_ext("Are you sure you want to quit?##There are unsaved changes.","Quit","","Stay")!=1) exit
 
 game_end()
 #define Draw_0
