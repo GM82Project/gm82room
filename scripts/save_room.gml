@@ -11,7 +11,7 @@ l=ds_list_size(layers) for (i=0;i<l;i+=1) {
     file_text_write_string(f,string(cl)+lf)
     f2=file_text_open_write(dir+string(cl)+".txt")
     with (tileholder) if (tlayer==cl) {
-        str=bgname+","+string(x)+","+string(y)+","
+        str=bgname+","+string(round(x))+","+string(round(y))+","
         +string(tile_get_left(tile))+","
         +string(tile_get_top(tile))+","
         +string(tile_get_width(tile))+","
@@ -37,7 +37,7 @@ with (instance) {
 }
 repeat (l) with (ds_priority_delete_min(pr)) {
     savecode=gensavecode(code)
-    str=objname+","+string(x)+","+string(y)+","
+    str=objname+","+string(round(x))+","+string(round(y))+","
     if (savecode!="") {
         crc=string_upper(string_hex(crc32(savecode)))
         crc=string_repeat("0",8-string_length(crc))+crc
