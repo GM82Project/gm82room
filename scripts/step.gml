@@ -1,5 +1,7 @@
 step_windowzoom()
 
+update_view()
+
 step_hotkeys()
 step_clipboard()
 step_leftmouse()
