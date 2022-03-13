@@ -253,4 +253,7 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) do {str=file_text_read_st
     }
 } until (file_text_eof(f)) file_text_close(f)
 
+//load last object as per gm8 standard
+get_object(ds_list_find_value(objects,objects_length-1))
+
 return 1
