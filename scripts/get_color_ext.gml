@@ -23,7 +23,7 @@ s=-1
 s2=-1
 
 act=""
-button=0
+button=1
 
 offx=(width-w)/2
 offy=(height-h-32)/2
@@ -34,7 +34,7 @@ sleep(16)
 
 while (1) {
     //input
-    if (keyboard_check(vk_escape)) break
+    if (keyboard_check(vk_escape)) return oldcolor
     if (keyboard_check(vk_control)) {
         if (keyboard_check(ord("C"))) {
             col=string_hex(color)
