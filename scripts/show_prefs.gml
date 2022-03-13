@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=488
-h=200
+h=208
 
 act=""
 button=1
@@ -61,37 +61,45 @@ while (1) {
             continue
         }
         if (theme==2) {
-            if (point_in_rectangle(mx,my,240,128,240+32,128+24)) {
-                global.col_main=get_color_ext(global.col_main,"Select Main Color")
-                load_theme()
-                continue
-            }
             if (point_in_rectangle(mx,my,280,128,280+32,128+24)) {
-                global.col_high=get_color_ext(global.col_high,"Select Main Color")
+                global.col_main=get_color_ext(global.col_main,"Select Main Color")
+                screen_redraw()
+                rect(0,0,width,height,0,0.5)
                 load_theme()
                 continue
             }
             if (point_in_rectangle(mx,my,320,128,320+32,128+24)) {
-                global.col_low=get_color_ext(global.col_low,"Select Main Color")
+                global.col_high=get_color_ext(global.col_high,"Select Light Color")
+                screen_redraw()
+                rect(0,0,width,height,0,0.5)
                 load_theme()
                 continue
             }
             if (point_in_rectangle(mx,my,360,128,360+32,128+24)) {
-                global.col_text=get_color_ext(global.col_text,"Select Main Color")
+                global.col_low=get_color_ext(global.col_low,"Select Shadow Color")
+                screen_redraw()
+                rect(0,0,width,height,0,0.5)
                 load_theme()
                 continue
             }
-            if (point_in_rectangle(mx,my,240,160,240+24,160+24)) {
+            if (point_in_rectangle(mx,my,400,128,400+32,128+24)) {
+                global.col_text=get_color_ext(global.col_text,"Select Text Color")
+                screen_redraw()
+                rect(0,0,width,height,0,0.5)
+                load_theme()
+                continue
+            }
+            if (point_in_rectangle(mx,my,344,96,344+24,96+24)) {
                 themebutton=0
                 load_theme()
                 continue
             }
-            if (point_in_rectangle(mx,my,272,160,272+24,160+24)) {
+            if (point_in_rectangle(mx,my,376,96,376+24,96+24)) {
                 themebutton=1
                 load_theme()
                 continue
             }
-            if (point_in_rectangle(mx,my,304,160,304+24,160+24)) {
+            if (point_in_rectangle(mx,my,408,96,408+24,96+24)) {
                 themebutton=2
                 load_theme()
                 continue
@@ -113,7 +121,6 @@ while (1) {
     draw_text(8,-32+6,"Preferences")
     draw_text(8,8,"Code editor")
     draw_text(240,8,"Theme")
-    //draw_text(8,128+8,"Behavior")
 
     dx=432 dy=h-48 draw_button_ext(dx,dy,48,40,act!="grabok",global.col_main) draw_sprite(sprMenuButtons,0,dx+24,dy+20)
     dx=8 dy=32 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"External") if (codeeditortype=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
@@ -122,15 +129,14 @@ while (1) {
     dx=240 dy=32 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Dark") if (theme=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     dx=240 dy=64 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Light") if (theme=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     dx=240 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Custom") if (theme=2) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
-    //dx=8 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Use Studio controls") if (studio) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     if (theme=2) {
-        dx=240 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_main)
-        dx=280 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_high)
-        dx=320 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_low)
-        dx=360 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_text)
-        dx=240 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) if (themebutton=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
-        dx=272 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) if (themebutton=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
-        dx=304 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) if (themebutton=2) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+        dx=280 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_main)
+        dx=320 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_high)
+        dx=360 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_low)
+        dx=400 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_text)
+        dx=344 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) if (themebutton=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+        dx=376 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) if (themebutton=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+        dx=408 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) if (themebutton=2) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     }
     draw_set_color($ffffff)
     d3d_transform_set_identity()

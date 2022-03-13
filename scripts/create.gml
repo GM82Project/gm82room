@@ -2,7 +2,7 @@ globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecoun
 globalvar overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,zoom;
 globalvar chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname;
 globalvar selection,selleft,seltop,selwidth,selheight,selsize,grabselection;
-globalvar theme,buttontex,themebutton,studio;
+globalvar theme,buttontex,themebutton;
 globalvar jtool_objs;
 
 draw_set_font(fntCode)

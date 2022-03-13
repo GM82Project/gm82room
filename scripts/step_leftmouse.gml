@@ -25,7 +25,7 @@ if (mouse_check_button_pressed(mb_left)) {
             if (mode==0) {
                 //if something's already selected, operate on it
                 if (!keyboard_check(vk_shift)) with (select) {
-                    if (position_meeting(global.mousex,global.mousey,id) && keyboard_check(vk_control)) {
+                    if (position_meeting(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
                         start_dragging()
                         yes=1
                     } else if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {
@@ -40,14 +40,12 @@ if (mouse_check_button_pressed(mb_left)) {
                 if (!instance_exists(select) || !yes) {
                     clear_inspector()
                     select=noone
-                    if (!keyboard_check(vk_shift) || keyboard_check(vk_control)) with (instance) {
-                        if (!keyboard_check(vk_control)) sel=0
+                    if (!keyboard_check(vk_shift)) with (instance) {
                         if (position_meeting(global.mousex,global.mousey,id)) {
                             sel=1
                             update_inspector()
                             //ctrl+left = move
                             if (keyboard_check(vk_control)) {
-                                grab=1
                                 focus_object(obj)
                                 //group operation
                                 if (selection) {
@@ -56,8 +54,12 @@ if (mouse_check_button_pressed(mb_left)) {
                                 with (instance) if (sel) {
                                     start_dragging()
                                 }
-                            } else with (other.select) sel=0
-                            other.select=id
+                            } else {
+                                deselect()
+                                sel=1
+                                other.select=id
+                                start_dragging()
+                            }
                         }
                     }
                     if (!select) {
@@ -82,7 +84,7 @@ if (mouse_check_button_pressed(mb_left)) {
             if (mode==1) {
                 //if something's already selected, operate on it
                 if (!keyboard_check(vk_shift)) with (selectt) {
-                    if (position_meeting(global.mousex,global.mousey,id) && keyboard_check(vk_control)) {
+                    if (position_meeting(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
                         start_dragging()
                         yes=1
                     } else if (extended_instancedata) if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
@@ -94,14 +96,13 @@ if (mouse_check_button_pressed(mb_left)) {
                 if (!instance_exists(selectt) || !yes) {
                     clear_inspector()
                     selectt=noone
-                    if (!keyboard_check(vk_shift) || keyboard_check(vk_control)) with (tileholder) {
+                    if (!keyboard_check(vk_shift)) with (tileholder) {
                         if (!keyboard_check(vk_control)) sel=0
                         if (position_meeting(global.mousex,global.mousey,id)) {
                             sel=1
                             update_inspector()
                             //ctrl+left = move
                             if (keyboard_check(vk_control)) {
-                                grab=1
                                 focus_tile(tile)
                                 //group operation
                                 if (selection) {
@@ -110,8 +111,12 @@ if (mouse_check_button_pressed(mb_left)) {
                                 with (tileholder) if (sel) {
                                     start_dragging()
                                 }
-                            } else with (other.selectt) sel=0
-                            other.selectt=id
+                            } else {
+                                deselect()
+                                sel=1
+                                other.selectt=id
+                                start_dragging()
+                            }
                         }
                     }
                     if (!selectt) {
