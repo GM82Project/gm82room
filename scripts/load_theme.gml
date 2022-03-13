@@ -19,19 +19,19 @@ if (theme==1) {
 
 if (theme==2) {
     a=sprButtonWhitemask
-    if (themebutton=2 || themebutton=3) a=sprButtonWhitemaskSmooth
+    if (themebutton=1 || themebutton=2) a=sprButtonWhitemaskSmooth
     s=surface_create(80,25)
     surface_set_target(s)
     draw_clear(global.col_main)
     draw_sprite_ext(a,0,0,0,1,1,0,global.col_high,1)
     draw_sprite_ext(a,1,0,0,1,1,0,global.col_low,1)
-    if (themebutton=3) draw_rectangle_color(0,0,79,24,global.col_text,global.col_text,global.col_text,global.col_text,1)
+    if (themebutton=2) draw_rectangle_color(0,0,79,24,global.col_text,global.col_text,global.col_text,global.col_text,1)
     spr=sprite_create_from_surface(s,0,0,80,25,0,0,0,0)
     sprite_add_from_surface(spr,s,0,0,80,25,0,0)
     draw_clear(global.col_main)
     draw_sprite_ext(a,0,0,0,1,1,0,global.col_low,1)
     draw_sprite_ext(a,1,0,0,1,1,0,global.col_high,1)
-    if (themebutton=3) draw_rectangle_color(0,0,79,24,global.col_text,global.col_text,global.col_text,global.col_text,1)
+    if (themebutton=2) draw_rectangle_color(0,0,79,24,global.col_text,global.col_text,global.col_text,global.col_text,1)
     sprite_add_from_surface(spr,s,0,0,80,25,0,0)
     surface_reset_target()
     surface_free(s)

@@ -2,7 +2,7 @@ globalvar copyvec,tty,width,height,gridx,gridy,interpolation,objpal,instancecoun
 globalvar overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,zoom;
 globalvar chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname;
 globalvar selection,selleft,seltop,selwidth,selheight,selsize,grabselection;
-globalvar theme,buttontex,themebutton;
+globalvar theme,buttontex,themebutton,studio;
 globalvar jtool_objs;
 
 draw_set_font(fntCode)
@@ -78,7 +78,7 @@ if (theme==2) {
     global.col_main=registry_read_dword(dir+"GM82CustomThemeColorMain",$404040)
     global.col_high=registry_read_dword(dir+"GM82CustomThemeColorHigh",$607060)
     global.col_text=registry_read_dword(dir+"GM82CustomThemeColorText",$ffffff)
-    themebutton=registry_read_dword(dir+"GM82CustomThemeButtonType",0)
+    themebutton=median(0,registry_read_dword(dir+"GM82CustomThemeButtonType",1),2)
 }
 codeeditortype=registry_read_dword(dir+"GM82CodeEditorType",0)
 
