@@ -15,6 +15,7 @@ with (Controller) if (undoing) {
     } else {
         ds_list_destroy(undolist)
     }
+    alarm[2]=1
     update_undo_button()
     undolist=noone
     undoing=0

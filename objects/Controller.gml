@@ -12,6 +12,13 @@ action_id=603
 applies_to=self
 */
 do_change_undo()
+#define Alarm_2
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+if (global.livesock!=noone) live_send_room_data()
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

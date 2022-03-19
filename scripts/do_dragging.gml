@@ -7,5 +7,6 @@ if (!keyboard_check(vk_alt)) {
 }
 if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
     grab=0
+    update_inspector()
     do_change_undo("moving "+pick(mode,"instances","tiles","","","chunk"),0)
 }

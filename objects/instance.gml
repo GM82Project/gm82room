@@ -46,7 +46,7 @@ if (sel) {
         if (!keyboard_check(vk_alt)) {
             image_angle=roundto(image_angle,15) mod 360
         }
-        if (!mouse_check_direct(mb_left)) {rotato=0 event_user(1) do_change_undo("rotation",0)}
+        if (!mouse_check_direct(mb_left)) {rotato=0 event_user(1) update_inspector() do_change_undo("rotation",0)}
         update_inspector()
     }
     if (grab) {

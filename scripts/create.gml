@@ -18,6 +18,8 @@ maxfps=display_get_frequency()
 room_speed=maxfps
 room_caption="Game Maker 8.2 Room Editor"
 
+global.livesock=noone
+
 xgo=0
 ygo=0
 zooming=0

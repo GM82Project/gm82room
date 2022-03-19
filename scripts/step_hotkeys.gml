@@ -21,6 +21,10 @@ if (keyboard_check_pressed(vk_delete)) {
     selection=0
 }
 
+if (keyboard_check_pressed(vk_f5)) {
+    live_send_room_data()
+}
+
 var h,v;
 
 h=keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left)
