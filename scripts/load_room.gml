@@ -57,16 +57,16 @@ fn=root+"cache\object.bmp" export_include_file_location("object.bmp",fn) object_
 objlookup=ds_map_create()
 bglookup=ds_map_create()
 
-sprites=file_text_read_list(root+"sprites\index.yyd")
+sprites=file_text_read_list(root+"sprites\index.yyd",noone,true)
 sprites_length=ds_list_size(sprites)
 sprloaded[sprites_length]=0
 
-backgrounds=file_text_read_list(root+"backgrounds\index.yyd",bglookup)
+backgrounds=file_text_read_list(root+"backgrounds\index.yyd",bglookup,true)
 backgrounds_length=ds_list_size(backgrounds)
 bgloaded[backgrounds_length]=0
 load_background_tree(root+"backgrounds\tree.yyd")
 
-objects=file_text_read_list(root+"objects\index.yyd",objlookup)
+objects=file_text_read_list(root+"objects\index.yyd",objlookup,true)
 objects_length=ds_list_size(objects)
 objloaded[objects_length]=0
 load_object_tree(root+"objects\tree.yyd")
@@ -140,7 +140,7 @@ for (i=0;i<8;i+=1) {
 //load tiles
 progress=0.25
 time=current_time
-layers=file_text_read_list(dir+"layers.txt")
+layers=file_text_read_list(dir+"layers.txt",noone,false)
 layersize=ds_list_size(layers)
 if (layersize) {
     for (i=0;i<layersize;i+=1) {
