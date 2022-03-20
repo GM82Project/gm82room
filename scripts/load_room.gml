@@ -159,7 +159,7 @@ if (layersize) {
             o.tileh=real(string_token_next())
 
             o.bg=get_background(o.bgname)
-            if (micro_optimization_bgid!=noone) {
+            if (micro_optimization_bgid!=noone && o.tilew && o.tileh) {
                 //check that the tile is inside the background
                 bgw=background_get_width(bg_background[micro_optimization_bgid])
                 bgh=background_get_height(bg_background[micro_optimization_bgid])
