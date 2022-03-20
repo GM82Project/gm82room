@@ -44,6 +44,8 @@
 	|show_prefs
 	|load_theme
 	|load_palette
++gm82live
+	|live_send_room_data
 |create
 |load_room
 |save_room
@@ -109,5 +111,3 @@
 |reduce_collision
 |restore_collision
 |update_selection_bounds
-+gm8live
-	|live_send_room_data
