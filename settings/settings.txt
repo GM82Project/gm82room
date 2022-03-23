@@ -31,6 +31,6 @@ translucency=0
 scale_progress_bar=1
 show_error_messages=1
 log_errors=1
-always_abort=0
+always_abort=1
 zero_uninitialized_vars=0
 error_on_uninitialized_args=1
