@@ -256,7 +256,7 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) do {str=file_text_read_st
 //load last object as per gm8 standard
 //make sure it's one that exists
 i=objects_length
-do {i-=1 o=ds_list_find_value(objects,objects_length-i)} until (i==0 || o!="")
+do {i-=1 o=ds_list_find_value(objects,i)} until (i==0 || o!="")
 if (i!=0) get_object(o)
 
 return 1
