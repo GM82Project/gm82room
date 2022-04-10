@@ -2,7 +2,7 @@ var f,f2,str,path,closed,precision,smooth;
 var p,i,l,d,px,py,dx,dy,opx,opy,odx,ody;
 
 f=file_text_open_read_safe(root+"paths\index.yyd") if (f) do {pathname=file_text_read_string(f) file_text_readln(f) if (pathname!="") {
-    f2=file_text_open_read_safe(root+"paths\"+pathname+"\path.txt") if (f) {
+    f2=file_text_open_read_safe(root+"paths\"+pathname+"\path.txt") if (f2) {
         smooth=(string_delete(file_text_read_string(f2),1,11)=="1")
         file_text_readln(f2)
         closed=(string_delete(file_text_read_string(f2),1,7)=="1")
