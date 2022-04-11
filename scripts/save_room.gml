@@ -39,11 +39,11 @@ repeat (l) with (ds_priority_delete_min(pr)) {
     savecode=gensavecode(code)
     str=objname+","+string(round(x))+","+string(round(y))+","
     if (savecode!="") {
-        crc=string_upper(string_hex(crc32(savecode)))
+        crc=string_upper(string_hex(crc32(savecode+lf)))
         crc=string_repeat("0",8-string_length(crc))+crc
         str+=crc
         f2=file_text_open_write(dir+crc+".gml")
-        file_text_write_string(f2,savecode)
+        file_text_write_string(f2,savecode+lf)
         file_text_close(f2)
     }
     str+=",0"

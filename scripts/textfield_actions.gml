@@ -21,6 +21,12 @@ if (active) {
         case "inst col"  : {val=round(real(text)) with (instance) if (sel) image_blend=val do_change_undo("instance colour",0)}break
         case "inst alpha": {val=real(text)/255    with (instance) if (sel) image_alpha=val do_change_undo("instance alpha",0)}break
 
+        case "inst code box": {
+            begin_undo(act_change,"modifying instance creation code",0)
+            with (instance) if (sel) {if (code!=other.text) add_undo_instance_props() code=other.text}
+            push_undo()
+        }break
+
         case "tile x"    : {val=round(real(text)) with (tileholder) if (sel) {x=val tile_set_position(tile,x,y) do_change_undo("tile x",0)}}break
         case "tile y"    : {val=round(real(text)) with (tileholder) if (sel) {y=val tile_set_position(tile,x,y) do_change_undo("tile y",0)}}break
         case "tile xs"   : {val=real(text) with (tileholder) if (sel) {image_xscale=val*tilew if (abs(image_xscale)<1) image_xscale=1 tilesx=image_xscale/tilew tile_set_scale(tile,tilesx,tilesy) do_change_undo("tile xscale",0)}}break

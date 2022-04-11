@@ -28,7 +28,7 @@ if (codeeditortype==2) execute_program("notepad",tf,1)
 else execute_program(codeeditor,tf,1)
 
 if (file_exists(tf)) {
-    str=string_replace_all(file_text_read_all(tf),chr(13),"")
+    str=file_text_read_all(tf,lf)
     if (string_replace_all(string_replace_all(string_replace_all(str,chr(9),""),lf,"")," ","")="") str=""
     return str
 }

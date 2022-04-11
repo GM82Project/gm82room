@@ -130,6 +130,9 @@ if (size) {
 
     update_instance_memory()
 
+    if (mode==0) with (select) update_inspector()
+    if (mode==1) with (selectt) update_inspector()
+
     change_mode(mode)
     if (combo) pop_undo()
 }

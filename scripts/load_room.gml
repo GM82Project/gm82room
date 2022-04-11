@@ -9,7 +9,7 @@ globalvar paths,pathnum;
 
 globalvar extended_instancedata,viewspeedcorrection;
 
-var f,p,i,inst,layer,map,tileid;
+var f,p,i,l,inst,layer,map,tileid;
 
 draw_loader("Loading project...",0)
 
@@ -103,7 +103,7 @@ gridy=real(ds_map_find_value(settings,"snap_y"))
 roomcaption=ds_map_find_value(settings,"caption")
 vw_enabled=real(ds_map_find_value(settings,"views_enabled"))
 
-roomcode=string_replace_all(file_text_read_all(dir+"code.gml"),chr(13),"")
+roomcode=file_text_read_all(dir+"code.gml",lf)
 if (string_replace_all(string_replace_all(string_replace_all(roomcode,chr(9),""),lf,"")," ","")="") roomcode=""
 
 for (i=0;i<8;i+=1) {
@@ -243,7 +243,11 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) do {str=file_text_read_st
             o.image_blend=o.image_blend&$ffffff
         }
 
-        if (o.code!="") o.code=file_text_read_all(dir+o.code+".gml")
+        if (o.code!="") {
+            o.code=file_text_read_all(dir+o.code+".gml",lf)
+            l=string_length(o.code)
+            if (string_char_at(o.code,l)==lf) o.code=string_copy(o.code,1,l-1)
+        }
 
         if (current_time>time) {
             time=current_time

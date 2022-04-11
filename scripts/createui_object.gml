@@ -212,3 +212,16 @@ i.anchor=1
 i.dynamic=0
 i.w=160
 i.tagmode=0
+
+i=instance_create(width-160,408,TextField)
+i.action="inst code box"
+i.alt="Quick code editor"
+i.anchor=1
+i.dynamic=0
+i.type=4
+i.multiline=1
+i.maxlen=99999
+i.displen=99999
+i.w=160
+i.h=32
+i.tagmode=0

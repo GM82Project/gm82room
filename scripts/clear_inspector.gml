@@ -18,6 +18,7 @@ textfield_set("inst ang","")
 
 textfield_set("inst col",global.col_main)
 textfield_set("inst alpha","")
+textfield_set("inst code box","")
 
 with (Button) {
     if (dynamic==mode) gray=1

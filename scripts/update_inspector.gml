@@ -13,6 +13,7 @@ if (object_index!=Controller) {
         textfield_set("inst ang",image_angle)
         textfield_set("inst col",image_blend)
         textfield_set("inst alpha",round(image_alpha*255))
+        textfield_set("inst code box",code)
     }
 
     if (mode==1) {

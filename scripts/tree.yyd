@@ -9,6 +9,7 @@
 	|file_text_open_read_safe
 	|draw_button_ext
 	|get_color_ext
+	|string_wrap
 +file
 	|gensavecode
 	|parsereal

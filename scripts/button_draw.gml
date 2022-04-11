@@ -91,7 +91,7 @@ if (object_index==TextField) {
             else {
                 if (active) col=$ffffff
                 else {
-                    if (type==0 || type==2) {
+                    if (type==0 || type==2 || action=="inst code box") {
                         if (gray) col=global.col_main
                         else col=$c0c0c0
                     } else {
@@ -105,17 +105,17 @@ if (object_index==TextField) {
 
         if (type!=1) {
             draw_set_color(0)
-            draw_set_valign(1)
+            draw_set_valign(0)
             if (active) {
                 if (selected) {
-                    draw_rectangle_color(x+8,y+h/2-10,x+7+string_width(dtext),y+h/2+9,$ff8000,$ff8000,$ff8000,$ff8000,0)
+                    draw_rectangle_color(x+8,y+6,x+7+string_width(dtext),y+6+string_height(dtext),$ff8000,$ff8000,$ff8000,$ff8000,0)
                     draw_set_color($ffffff)
-                    draw_text(x+8,y+h/2,dtext+cursor)
+                    draw_text(x+8,y+6,dtext+cursor)
                 } else {
-                    draw_text(x+8,y+h/2,dtext+cursor)
+                    draw_text(x+8,y+6,dtext+cursor)
                 }
             } else {
-                draw_text(x+8,y+h/2,dtext)
+                draw_text(x+8,y+6,dtext)
             }
             draw_set_valign(0)
             draw_set_color($ffffff)

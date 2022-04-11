@@ -26,6 +26,7 @@ type=0
 anchor=0
 tagmode=-1
 gray=0
+multiline=0
 
 selected=0
 #define Step_0
@@ -82,8 +83,9 @@ if (active) {
         }
     }
     otext=text
-    if (type=4) text=string_copy(keyboard_string,1,maxlen)
-    else {
+    if (type=4) {
+        text=string_copy(keyboard_string,1,maxlen)
+    } else {
         if (type=0) text=string_number(keyboard_string)
         neg=!!string_pos("-",text)
         if (maxval>0) text=string(min(maxval,real(text)))
@@ -91,17 +93,28 @@ if (active) {
         text=string_copy(text,1,maxlen)
         if (text="0" && neg) text="-0"
     }
-    if (keyboard_string!=otext && selected) {
-        selected=0
-        text=keyboard_lastchar
+    if (selected) {
+        if (keyboard_lastkey==vk_backspace || keyboard_lastkey==vk_delete || keyboard_lastkey==vk_return)
+            text=""
+        else if (keyboard_string!=otext) {
+            selected=0
+            text=keyboard_lastchar
+        }
     }
-    keyboard_string=text
+
     k+=1
     if (k mod 40-20) cursor="_"
-    else cursor=""
-    if (keyboard_check_pressed(vk_enter)) textfield_actions()
+    else cursor=" "
+    if (keyboard_check_pressed(vk_enter)) {
+        if (multiline) {
+            text+=lf
+        } else {
+            textfield_actions()
+        }
+    }
+    keyboard_string=text
     event_user(4)
-} else k=20
+} else {k=20 cursor=""}
 #define Other_14
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -113,13 +126,19 @@ var l;
 
 if (type==4 || type==0) {
     l=string_length(text)
-    dtext=text
-    if (l>=displen) {
-        if (type==4 || active) dtext=string_copy(dtext,l-displen+1+active,displen-active)
-        else dtext=string_copy(dtext,1,displen)
-        if (basealt!="") alt=basealt+" ("+string_replace_all(text,"#","\#")+")"
-        else alt=string_replace_all(text,"#","\#")
-    } else alt=basealt
+    if (multiline) {
+        dtext=string_replace_all(string_wrap(text,w-16),lf,crlf) //gm can only display crlf properly
+        h=max(32,string_height(dtext+cursor)+12)
+        image_yscale=h
+    } else {
+        dtext=text
+        if (l>=displen) {
+            if (type==4 || active) dtext=string_copy(dtext,l-displen+1+active,displen-active)
+            else dtext=string_copy(dtext,1,displen)
+            if (basealt!="") alt=basealt+" ("+string_replace_all(text,"#","\#")+")"
+            else alt=string_replace_all(text,"#","\#")
+        } else alt=basealt
+    }
     dtext=string_replace_all(dtext,"#","\#")
     if (extended && !extended_instancedata) alt="Please update gm82save!"
 } else dtext=text
