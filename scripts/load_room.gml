@@ -146,7 +146,7 @@ if (layersize) {
     for (i=0;i<layersize;i+=1) {
         layer=real(ds_list_find_value(layers,i))
         ds_list_replace(layers,i,layer)
-        f=file_text_open_read_safe(dir+string(layer)+".txt") if (f) do {str=file_text_read_string(f) file_text_readln(f)
+        f=file_text_open_read_safe(dir+string(layer)+".txt") if (f) {do {str=file_text_read_string(f) file_text_readln(f)
             o=instance_create(0,0,tileholder) get_uid(o)
 
             string_token_start(str,",")
@@ -205,14 +205,14 @@ if (layersize) {
                 progress=(progress*9+0.25+0.5*i/layersize)/10
                 draw_loader("Loading tiles...",progress)
             }
-        } until (file_text_eof(f)) file_text_close(f)
+        } until (file_text_eof(f)) file_text_close(f)}
     }
 } else add_tile_layer()
 
 
 //load instances
 time=current_time
-f=file_text_open_read_safe(dir+"instances.txt") if (f) do {str=file_text_read_string(f) file_text_readln(f)
+f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_string(f) file_text_readln(f)
     if (str!="") {
         o=instance_create(0,0,instance) get_uid(o)
 
@@ -255,7 +255,7 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) do {str=file_text_read_st
             draw_loader("Loading instances...",progress)
         }
     }
-} until (file_text_eof(f)) file_text_close(f)
+} until (file_text_eof(f)) file_text_close(f)}
 
 //load last object as per gm8 standard
 //make sure it's one that exists

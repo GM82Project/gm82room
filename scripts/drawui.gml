@@ -6,7 +6,7 @@ draw_backgrounds(1)
 fmx=floorto(global.mousex,gridx)
 fmy=floorto(global.mousey,gridy)
 tty=0
-
+zm=max(0.5,zoom)
 
 //grid and crosshair for object and tile mode
 if (mode==0 || mode==1) {
@@ -160,7 +160,6 @@ if (selection) {
     draw_set_alpha(1)
     draw_set_color_sel()
     draw_roundrect(min(selleft-0.5,dx),min(seltop-0.5,dy),max(selleft-0.5,dx),max(seltop-0.5,dy),1)
-    zm=max(0.5,zoom)
     draw_rectangle(dx-8*zm,dy-8*zm,dx+8*zm,dy+8*zm,1)
     draw_rectangle(dx-4*zm,dy-4*zm,dx+4*zm,dy+4*zm,1)
 }
