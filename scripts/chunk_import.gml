@@ -105,6 +105,8 @@ if (fn!="") {
             o.image_blend=$10000*buffer_read_u8(b)+$100*buffer_read_u8(b)+buffer_read_u8(b)
             o.code=buffer_read_string(b)
             o.modified=1
+
+            parse_code_into_fields(o)
         }
     }
 

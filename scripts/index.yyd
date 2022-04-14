@@ -106,3 +106,13 @@ load_all_jtool_objs
 replace_instances
 live_send_room_data
 string_wrap
+globalvars
+edit_instance_fields
+string_instance_fields
+parse_code_into_fields
+set_instance_field
+stringify
+destringify
+parse_fields_into_code
+
+get_nth_token

@@ -25,7 +25,10 @@ if (mouse_check_button_pressed(mb_left)) {
             if (mode==0) {
                 //if something's already selected, operate on it
                 if (!keyboard_check(vk_shift)) with (select) {
-                    if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {
+                    if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+                        edit_instance_fields()
+                        yes=1
+                    } else if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {
                         rotato=1
                         yes=1
                     } else if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
@@ -269,6 +272,7 @@ if (paint) {
                     o.sprh=sprite_get_height(o.sprite_index)
                     o.sprox=sprite_get_xoffset(o.sprite_index)
                     o.sproy=sprite_get_yoffset(o.sprite_index)
+                    parse_code_into_fields(o)
                     select=o
                     o.sel=1
                     o.modified=1

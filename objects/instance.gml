@@ -11,11 +11,14 @@ rotato=0
 draggatto=0
 modified=0
 selresize=0
+hasfields=0
 
 rothandx=-9999999
 rothandy=-9999999
 draghandx=-9999999
 draghandy=-9999999
+fieldhandx=-9999999
+fieldhandy=-9999999
 
 code=""
 
@@ -136,6 +139,15 @@ if (point_distance(rothandx,rothandy,draghandx,draghandy)<20) {
 if (rotato) draw_line(x,y,rothandx,rothandy)
 draw_circle(rothandx,rothandy,10*zm,1)
 draw_circle(rothandx,rothandy,5*zm,1)
+
+if (hasfields) {
+    fieldhandx=bbox_left-4
+    fieldhandy=bbox_bottom+4
+    draw_rectangle(fieldhandx-6*zm,fieldhandy-7*zm,fieldhandx+8*zm,fieldhandy+9*zm,1)
+    draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
+    draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
+    draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1,fieldhandy+4*zm,1)
+}
 
 draw_set_color($ffffff)
 draw_set_alpha(1)

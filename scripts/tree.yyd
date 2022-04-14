@@ -47,6 +47,7 @@
 	|load_palette
 +gm82live
 	|live_send_room_data
+|globalvars
 |create
 |load_room
 |save_room
@@ -112,3 +113,12 @@
 |reduce_collision
 |restore_collision
 |update_selection_bounds
++fields
+	|edit_instance_fields
+	|string_instance_fields
+	|parse_code_into_fields
+	|parse_fields_into_code
+	|set_instance_field
+	|stringify
+	|destringify
+	|get_nth_token

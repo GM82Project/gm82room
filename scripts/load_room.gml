@@ -249,6 +249,8 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
             if (string_char_at(o.code,l)==lf) o.code=string_copy(o.code,1,l-1)
         }
 
+        parse_code_into_fields(o)
+
         if (current_time>time) {
             time=current_time
             progress=(progress*9+1)/10

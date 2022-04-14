@@ -100,6 +100,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 o.image_blend=copyvec[cur,7]
                 o.image_alpha=copyvec[cur,8]
                 o.code=copyvec[cur,9]
+                parse_code_into_fields(o)
                 o.sel=1
                 o.modified=1
                 select=o

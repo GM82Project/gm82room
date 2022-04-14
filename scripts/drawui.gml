@@ -643,4 +643,10 @@ if (mode==1 && tilebgpal!=noone) {
 with (Button) button_draw()
 with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
 
+if (mousein && mode==0) {
+    with (select) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+        other.tooltiptext=string_instance_fields()
+    }
+}
+
 if (tooltiptext!="") drawtooltip(tooltiptext)
