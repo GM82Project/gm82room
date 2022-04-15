@@ -9,9 +9,10 @@ for (i=0;i<objfields[argument0.obj];i+=1) {
 
 str=argument0.code
 
+state=0
+
 if (str!="") {
     o.code=""
-    state=0
     string_token_start(str,lf)
     do {
         next=string_token_next()
@@ -48,5 +49,6 @@ if (str!="") {
         }
     } until (next="")
 }
+if (state=0) o.code=str
 
 if (string_replace_all(string_replace_all(string_replace_all(o.code,";",""),lf,"")," ","")=="") o.code=""

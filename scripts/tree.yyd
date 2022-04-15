@@ -115,7 +115,7 @@
 |update_selection_bounds
 +fields
 	|edit_instance_fields
-	|string_instance_fields
+	|draw_instance_fields
 	|parse_code_into_fields
 	|parse_fields_into_code
 	|set_instance_field

@@ -14,7 +14,7 @@ menu=show_menu(str,-1)
 if (menu==-1) exit
 
 switch (objfieldtype[obj,menu]) {
-    case "real": {fields[menu,1]=get_string("Insert new value for "+qt+objfieldname[obj,menu]+qt+":",fields[menu,1]) break}
+    case "value": {fields[menu,1]=get_string("Insert new value for "+qt+objfieldname[obj,menu]+qt+":",fields[menu,1]) break}
     case "string": {fields[menu,1]=stringify(get_string("Insert new text for "+qt+objfieldname[obj,menu]+qt+":",destringify(fields[menu,1]))) break}
     case "color": {fields[menu,1]="$"+string_hex(get_color_ext(real_hex(fields[menu,1]),"Select new color for "+qt+objfieldname[obj,menu]+qt+":")) break}
     case "choice": {

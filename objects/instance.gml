@@ -188,3 +188,28 @@ draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+1-0.5,bbox_bottom+1-0.5,1)
 
 draw_set_color($ffffff)
 draw_set_alpha(1)
+#define Other_14
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///draw field indicator
+
+if (hasfields) {
+    d3d_transform_add_translation(-0.5,-0.5,0)
+    draw_set_color($ff)
+
+    zm=max(0.5,zoom)
+
+    fieldhandx=bbox_left-4
+    fieldhandy=bbox_bottom+4
+    draw_rectangle(fieldhandx-6*zm,fieldhandy-7*zm,fieldhandx+8*zm,fieldhandy+9*zm,1)
+    draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
+    draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
+    draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1,fieldhandy+4*zm,1)
+
+    draw_set_color($ffffff)
+    draw_set_alpha(1)
+    d3d_transform_set_identity()
+}

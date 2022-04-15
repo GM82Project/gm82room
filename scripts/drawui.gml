@@ -72,11 +72,14 @@ if (mode==0) {
     with (focus) draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
     draw_set_color($ffffff)
 
-    if (keyboard_check(ord("C"))) with (instance) if (code!="") {
-        d3d_set_fog(1,$ff,0,0)
-        draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
-        draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)
-        d3d_set_fog(0,0,0,0)
+    if (keyboard_check(ord("C"))) with (instance) {
+        if (code!="") {
+            d3d_set_fog(1,$ff,0,0)
+            draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
+            draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)
+            d3d_set_fog(0,0,0,0)
+        }
+        event_user(4)
     }
 
     if (crosshair) {
@@ -215,7 +218,6 @@ if (mode==4) {
     draw_set_color($ffffff)
     d3d_transform_set_identity()
 }
-
 
 //this is where the room space ends and the hud space starts================================================
 d3d_set_projection_ortho(0,0,width,height,0)
@@ -644,8 +646,12 @@ with (Button) button_draw()
 with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
 
 if (mousein && mode==0) {
-    with (select) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
-        other.tooltiptext=string_instance_fields()
+    if (keyboard_check(ord("C"))) {
+        with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+            draw_instance_fields()
+        }
+    } else with (select) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+        draw_instance_fields()
     }
 }
 
