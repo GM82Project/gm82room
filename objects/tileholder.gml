@@ -129,23 +129,3 @@ tilesx=image_xscale/tilew
 tilesy=image_yscale/tileh
 
 tile_set_scale(tile,tilesx,tilesy)
-#define Other_12
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-///draw group selection
-
-draw_set_color($ff8000)
-draw_set_alpha(0.5+0.25*sin(current_time/200))
-draw_rectangle(x-0.5,y-0.5,x+image_xscale-0.5,y+image_yscale-0.5,0)
-draw_set_color($ffffff)
-draw_set_alpha(1)
-
-draw_set_color_sel()
-
-draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+1-0.5,bbox_bottom+1-0.5,1)
-
-draw_set_color($ffffff)
-draw_set_alpha(1)

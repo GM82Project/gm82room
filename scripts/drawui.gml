@@ -60,9 +60,20 @@ draw_paths()
 //object mode
 if (mode==0) {
     texture_set_interpolation(interpolation)
+
+    d3d_set_fog(1,$ff8000,0,0)
+    var a;a=0.5+0.25*sin(current_time/200)
     with (instance) if (sel) {
-        event_user(2)
+        draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,a)
     }
+    d3d_set_fog(0,0,0,0)
+
+    draw_set_color_sel()
+    with (instance) if (sel) {
+        draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+1-0.5,bbox_bottom+1-0.5,1)
+    }
+    draw_set_color($ffffff)
+
     texture_set_interpolation(1)
 
     with (select) {
@@ -98,14 +109,25 @@ if (mode==0) {
 //tile mode
 if (mode==1) {
     texture_set_interpolation(interpolation)
+
+    draw_set_color($ff8000)
+    draw_set_alpha(0.5+0.25*sin(current_time/200))
     with (tileholder) if (sel) {
-        event_user(2)
+        draw_rectangle(x-0.5,y-0.5,x+image_xscale-0.5,y+image_yscale-0.5,0)
     }
+    draw_set_alpha(1)
+
+    draw_set_color_sel()
+    with (tileholder) if (sel) {
+        draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+1-0.5,bbox_bottom+1-0.5,1)
+    }
+    draw_set_color($ffffff)
     texture_set_interpolation(1)
 
     with (selectt) {
         event_user(0)
     }
+
     draw_set_color_sel()
     with (focus) draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
     draw_set_color($ffffff)
@@ -225,15 +247,13 @@ d3d_set_projection_ortho(0,0,width,height,0)
 
 focus=noone
 if (mousein) {
-    if (mode==0) with (instance) if (instance_position(global.mousex,global.mousey,id)) {
-        other.focus=id
-        if (code!="") {
+    if (mode==0) {
+        focus=instance_position(global.mousex,global.mousey,instance)
+        with (focus) if (code!="") {
             drawtooltip(code)
         }
     }
-    if (mode==1) with (tileholder) if (instance_position(global.mousex,global.mousey,id)) {
-        other.focus=id
-    }
+    if (mode==1) focus=instance_position(global.mousex,global.mousey,tileholder)
 }
 
 actionx=160

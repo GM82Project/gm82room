@@ -25,7 +25,10 @@ if (parameter_count()) {
 
 if (dir="") {
     //this is for faster testing on my computer :)
-    if (working_directory!=program_directory) dir="C:\Stuff\github\renex-engine\rooms\rmDemo3"
+    if (working_directory!=program_directory) {
+        dir="C:\Stuff\github\renex-engine\rooms\rmDemo3"
+        //dir="C:\Stuff\github\mkfusion\rooms\rm9_S1Area3"
+    }
     if (!file_exists(dir+"\room.txt")) {
         //shrug
         game_end()
