@@ -276,7 +276,7 @@ draw_button_ext(statusx+144,height-32,296,32,0,global.col_main)
 draw_button_ext(statusx+440,height-32,width-320-440,32,0,global.col_main)
 draw_set_color(global.col_text)
 if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(global.mousex)+","+string(global.mousey))
-else draw_text(statusx+8,statusy+6,string(fmx)+","+string(floorto(global.mousey,gridx)))
+else draw_text(statusx+8,statusy+6,string(fmx)+","+string(fmy))
 if (mode==0) {
     num=instance_number(instance)
     if (num<instancecount) draw_text(statusx+152,statusy+6,string(num)+" instances ("+string(instancecount-num)+" hidden)")
