@@ -33,7 +33,7 @@ if (str!="") {
                 p=string_pos(" ",str)
                 value=string_copy(str,1,p-1)
                 p=string_pos("=",str)
-                value2=string_delete(next,1,p)
+                value2=string_delete(str,1,p)
 
                 set_instance_field(argument0,name,value,value2)
             } else {

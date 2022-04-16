@@ -1,17 +1,43 @@
-var str,i;
-str=""
+var str,i,dx,dy,menu,menu2;
 
-for (i=0;i<objfields[obj];i+=1) {
-    if (fields[i,0]=0) str+=objfieldname[obj,i]+" (unset)|"
-    else {
-        if (objfieldtype[obj,i]=="string") str+=objfieldname[obj,i]+": "+destringify(fields[i,1])+"|"
-        else str+=objfieldname[obj,i]+": "+fields[i,1]+"|"
-    }
+if (editxy) {
+    fields[editxyid,1]=string(global.mousex)
+    fields[editxyid,2]=string(global.mousey)
+    editxy=0
+    exit
 }
 
-menu=show_menu(str,-1)
+//yeah i know this is the same as the draw script but what can i do
 
-if (menu==-1) exit
+dx=floor((fieldhandx-view_xview)/zoom)
+dy=floor((fieldhandy-view_yview)/zoom+24)
+
+menu=-1
+
+for (i=0;i<objfields[obj];i+=1) {
+    if (!fields[i,0]) {
+        str=objfieldname[obj,i]+" (unset)"
+    } else {
+        if (objfieldtype[obj,i]=="color") {
+            str=objfieldname[obj,i]+": "+fields[i,1]+"      "
+        } else if (objfieldtype[obj,i]=="xy") {
+            str=objfieldname[obj,i]+": ("+fields[i,1]+", "+fields[i,2]+")"
+        } else if (objfieldtype[obj,i]=="string") {
+            str=objfieldname[obj,i]+": "+string_replace_all(destringify(fields[i,1]),"#","\#")
+        } else {
+            str=objfieldname[obj,i]+": "+fields[i,1]
+        }
+    }
+    dw=string_width(str)+32
+    if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+dw,dy+28)) {
+        //edit this field
+        menu=i
+    }
+    dy+=32
+}
+
+//clicked outside of all fields, turn off field display
+if (menu==-1) {fieldactive=0 exit}
 
 switch (objfieldtype[obj,menu]) {
     case "value": {fields[menu,1]=get_string("Insert new value for "+qt+objfieldname[obj,menu]+qt+":",fields[menu,1]) break}
@@ -22,7 +48,7 @@ switch (objfieldtype[obj,menu]) {
         if (menu2==-1) exit
         fields[menu,1]=get_nth_token(objfieldargs[obj,menu],",",menu2)
     break}
-    case "xy": {show_message("nyi") break}
+    case "xy": {editxy=1 editxyid=menu break}
 }
 
 fields[menu,0]=1

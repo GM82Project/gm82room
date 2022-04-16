@@ -11,7 +11,11 @@ rotato=0
 draggatto=0
 modified=0
 selresize=0
+
 hasfields=0
+fieldactive=0
+editxy=0
+editxyid=0
 
 rothandx=-9999999
 rothandy=-9999999

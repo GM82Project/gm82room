@@ -670,7 +670,7 @@ if (mousein && mode==0) {
         with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
             draw_instance_fields()
         }
-    } else with (select) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+    } else with (select) if (fieldactive) {
         draw_instance_fields()
     }
 }

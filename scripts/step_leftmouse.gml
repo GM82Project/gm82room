@@ -25,8 +25,11 @@ if (mouse_check_button_pressed(mb_left)) {
             if (mode==0) {
                 //if something's already selected, operate on it
                 if (!keyboard_check(vk_shift)) with (select) {
-                    if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+                    if (fieldactive) {
                         edit_instance_fields()
+                        yes=1
+                    } else if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+                        fieldactive=1
                         yes=1
                     } else if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {
                         rotato=1
