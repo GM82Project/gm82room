@@ -112,7 +112,7 @@ while (1) {
     }
     if (act=="grabwheel") {
         hue=round(point_direction(278+100,10+100,mx,my)/k)
-        if (point_distance(278+100,10+100,mx,my)<80) hue=floor(roundto(hue,256/12))
+        if (point_distance(278+100,10+100,mx,my)<80) hue=floor(roundto(hue,255/12))
         color=make_color_hsv(hue,sat,val)
         red=color_get_red(color)
         green=color_get_green(color)
