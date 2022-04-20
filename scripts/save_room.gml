@@ -1,4 +1,4 @@
-var f,f2,i,l,cl,dir,savecode,str,crc,pr;
+var f,f2,i,l,cl,dir,savecode,str,crc,pr,yes;
 
 dir=self.dir
 
@@ -8,21 +8,24 @@ instance_activate_all()
 f=file_text_open_write(dir+"layers.txt")
 l=ds_list_size(layers) for (i=0;i<l;i+=1) {
     cl=real(ds_list_find_value(layers,i))
-    file_text_write_string(f,string(cl)+lf)
-    f2=file_text_open_write(dir+string(cl)+".txt")
-    with (tileholder) if (tlayer==cl) {
-        str=bgname+","+string(round(x))+","+string(round(y))+","
-        +string(tile_get_left(tile))+","
-        +string(tile_get_top(tile))+","
-        +string(tile_get_width(tile))+","
-        +string(tile_get_height(tile))+",0"
-        if (extended_instancedata) str+=","
-        +string(tilesx)+","
-        +string(tilesy)+","
-        +string(round(image_alpha*255)*$1000000+image_blend)
-        file_text_write_string(f2,str+lf)
+    yes=0 with (tileholder) if (tlayer==cl) {yes=1 break}
+    if (yes) {
+        file_text_write_string(f,string(cl)+lf)
+        f2=file_text_open_write(dir+string(cl)+".txt")
+        with (tileholder) if (tlayer==cl) {
+            str=bgname+","+string(round(x))+","+string(round(y))+","
+            +string(tile_get_left(tile))+","
+            +string(tile_get_top(tile))+","
+            +string(tile_get_width(tile))+","
+            +string(tile_get_height(tile))+",0"
+            if (extended_instancedata) str+=","
+            +string(tilesx)+","
+            +string(tilesy)+","
+            +string(round(image_alpha*255)*$1000000+image_blend)
+            file_text_write_string(f2,str+lf)
+        }
+        file_text_close(f2)
     }
-    file_text_close(f2)
 }
 file_text_close(f)
 
