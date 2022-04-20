@@ -22,6 +22,9 @@ if (resizecount<10) {
     } else resizecount=0
 }
 
+if (!window_has_focus()) room_speed=5
+else room_speed=maxfps
+
 mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
 mousein=(point_in_rectangle(mouse_wx,mouse_wy,160,32,width-160,height-32))
