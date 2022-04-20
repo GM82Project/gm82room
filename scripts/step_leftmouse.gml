@@ -63,7 +63,7 @@ if (mouse_check_button_pressed(mb_left)) {
                             } else {
                                 deselect()
                                 sel=1
-                                other.select=id
+                                select=id
                                 start_dragging()
                             }
                         }
@@ -120,7 +120,7 @@ if (mouse_check_button_pressed(mb_left)) {
                             } else {
                                 deselect()
                                 sel=1
-                                other.selectt=id
+                                selectt=id
                                 start_dragging()
                             }
                         }
@@ -226,10 +226,10 @@ if (selecting) {
         sel=num_selected()
         if (sel==1) {
             if (mode==0) {
-                with (instance) if (sel) {Controller.select=id update_inspector()}
+                with (instance) if (sel) {select=id update_inspector()}
             }
             if (mode==1) {
-                with (tileholder) if (sel) {Controller.selectt=id update_inspector()}
+                with (tileholder) if (sel) {selectt=id update_inspector()}
             }
         } else update_inspector()
         if (sel>1) {

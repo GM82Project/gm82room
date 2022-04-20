@@ -1,4 +1,5 @@
 globalvar
+    select,selectt
     copyvec,tty,width,height,gridx,gridy,interpolation,
     objpal,instancecount,tilecount,
     codeeditor,view,roomwidth,roomheight,selcol,

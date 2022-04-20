@@ -33,9 +33,9 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if (Controller.select==id) {
+if (select==id) {
     clear_inspector()
-    Controller.select=noone
+    select=noone
 }
 
 instancecount-=1
@@ -58,7 +58,7 @@ if (sel) {
     }
     if (grab) {
         do_dragging()
-        if (Controller.select==id) update_inspector()
+        if (select==id) update_inspector()
     }
     if (selresize) {
         do_selection_resize()

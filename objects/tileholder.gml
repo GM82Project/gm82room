@@ -27,9 +27,9 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if (Controller.selectt==id) {
+if (selectt==id) {
     clear_inspector()
-    Controller.selectt=noone
+    selectt=noone
 }
 
 if (tile!=noone) {
@@ -48,7 +48,7 @@ if (sel) {
     if (grab) {
         do_dragging()
         tile_set_position(tile,x,y)
-        if (Controller.selectt==id) update_inspector()
+        if (selectt==id) update_inspector()
     }
     if (draggatto) {
         dx=global.mousex

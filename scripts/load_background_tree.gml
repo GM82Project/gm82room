@@ -1,8 +1,6 @@
-var f,str,tab,resname,path,curindent;
+var f,str,resname,path,curindent;
 
 globalvar bgmenu,tilebgmenu,bgmenuitems;
-
-tab=chr(9)
 
 bgmenuitems=ds_map_create()
 bgmenu=N_Menu_CreatePopupMenu()
@@ -15,8 +13,6 @@ ds_map_add(bgmenuitems,N_Menu_AddItem(bgmenu,"(no background)",""),undefined)
 
 path[0]=bgmenu
 curindent=0
-
-a=argument0
 
 f=file_text_open_read_safe(argument0) if (f) {do {
     str=file_text_read_string(f)

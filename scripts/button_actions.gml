@@ -51,7 +51,7 @@ with (Controller) switch (argument0) {
     //instance inspector
     case "copy object"   : {clipboard_set_text(select.objname)}break
     case "inst code"     : {edit_creation_code()}break
-    case "inst snap"     : {with (instance) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) do_change_undo("snapping",0) if (Controller.select==id) update_inspector()}}break
+    case "inst snap"     : {with (instance) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) do_change_undo("snapping",0) if (select==id) update_inspector()}}break
     case "inst flip xs": {
         with (instance) if (sel) {
             cl=min(cl,bbox_left)
@@ -66,7 +66,7 @@ with (Controller) switch (argument0) {
             image_xscale*=-1 image_angle*=-1 event_user(1)
             x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
             do_change_undo("mirroring",0)
-            if (Controller.select==id) update_inspector()
+            if (select==id) update_inspector()
         }
         update_selection_bounds()
     }break
@@ -84,7 +84,7 @@ with (Controller) switch (argument0) {
             image_yscale*=-1 image_angle*=-1 event_user(1)
             y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
             do_change_undo("flipping",0)
-            if (Controller.select==id) update_inspector()
+            if (select==id) update_inspector()
         }
         update_selection_bounds()
     }break
@@ -102,7 +102,7 @@ with (Controller) switch (argument0) {
             mycx=sx+(y+0.5-sy)-0.5 mycy=sy-(x+0.5-sx)-0.5
             x=mycx y=mycy
             do_change_undo("rotation",0)
-            if (Controller.select==id) update_inspector()
+            if (select==id) update_inspector()
         }
         update_selection_bounds()
     }break
@@ -120,7 +120,7 @@ with (Controller) switch (argument0) {
             mycx=sx-(y+0.5-sy)-0.5 mycy=sy+(x+0.5-sx)-0.5
             x=mycx y=mycy
             do_change_undo("rotation",0)
-            if (Controller.select==id) update_inspector()
+            if (select==id) update_inspector()
         }
         update_selection_bounds()
     }break
@@ -143,7 +143,14 @@ with (Controller) switch (argument0) {
     case "tile overlap check": {tile_overlap_check=!tile_overlap_check}break
 
     //tile inspector
-    case "tile snap": {with (tileholder) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) tile_set_position(tile,x,y) do_change_undo("snapping",0) if (Controller.selectt==id) update_inspector()}}break
+    case "tile snap": {
+        with (tileholder) if (sel) {
+            x=roundto(x,gridx) y=roundto(y,gridy)
+            tile_set_position(tile,x,y)
+            do_change_undo("snapping",0)
+            if (selectt==id) update_inspector()
+        }
+    }break
     case "tile flip xs": {
         with (tileholder) if (sel) {
             cl=min(cl,bbox_left)
@@ -162,7 +169,7 @@ with (Controller) switch (argument0) {
             tile_set_position(tile,x,y)
             tile_set_scale(tile,tilesx,tilesy)
             do_change_undo("mirroring",0)
-            if (Controller.selectt==id) update_inspector()
+            if (selectt==id) update_inspector()
         }
         update_selection_bounds()
     }break
@@ -184,7 +191,7 @@ with (Controller) switch (argument0) {
             tile_set_position(tile,x,y)
             tile_set_scale(tile,tilesx,tilesy)
             do_change_undo("flipping",0)
-            if (Controller.selectt==id) update_inspector()
+            if (selectt==id) update_inspector()
         }
         update_selection_bounds()
     }break

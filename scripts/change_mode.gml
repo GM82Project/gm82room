@@ -15,8 +15,8 @@ with (instance) {
     visible=((view[0] && (view[5] || objvis[obj]) && (view[6] || objspr[obj]!=sprDefault)) || (argument0==0 && objpal==obj))
     if (!visible) {
         sel=0
-        if (Controller.select==id) {
-            Controller.select=noone
+        if (select==id) {
+            select=noone
             clear_inspector()
         }
         deact[dcur]=id dcur+=1
