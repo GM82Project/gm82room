@@ -91,6 +91,17 @@ if (sel) {
         if (!mouse_check_direct(mb_left)) {draggatto=0 event_user(1) do_change_undo("scaling",0)}
         update_inspector()
     }
+
+    if (editxy) {
+        if (keyboard_check(vk_alt)) {
+            fields[editxyid,1]=string(global.mousex)
+            fields[editxyid,2]=string(global.mousey)
+        } else {
+            fields[editxyid,1]=string(roundto(global.mousex,gridx))
+            fields[editxyid,2]=string(roundto(global.mousey,gridy))
+        }
+        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) editxy=0
+    }
 }
 #define Other_10
 /*"/*'/**//* YYD ACTION
@@ -194,6 +205,20 @@ if (hasfields) {
     draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
     draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
     draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1,fieldhandy+4*zm,1)
+
+    //draw arrows if instance has any "xy" fields
+    if !(abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+        var i,dx,dy;
+        dx=(bbox_left+bbox_right+1)/2
+        dy=(bbox_top+bbox_bottom+1)/2
+        for (i=0;i<objfields[obj];i+=1) {
+            if (fields[i,0]) {
+                if (objfieldtype[obj,i]=="xy") {
+                    draw_arrow(dx,dy,real(fields[i,1]),real(fields[i,2]),10)
+                }
+            }
+        }
+    }
 
     draw_set_color($ffffff)
     draw_set_alpha(1)

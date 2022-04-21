@@ -24,22 +24,33 @@ if (mouse_check_button_pressed(mb_left)) {
         } else {
             if (mode==0) {
                 //if something's already selected, operate on it
-                if (!keyboard_check(vk_shift)) with (select) {
-                    if (fieldactive) {
-                        edit_instance_fields()
-                        yes=1
-                    } else if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
-                        fieldactive=1
-                        yes=1
-                    } else if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {
-                        rotato=1
-                        yes=1
-                    } else if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
-                        draggatto=1
-                        yes=1
-                    } else if (position_meeting(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
-                        start_dragging()
-                        yes=1
+                if (!keyboard_check(vk_shift)) {
+                    if (keyboard_check(ord("C"))) {
+                        with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+                            fieldactive=1
+                            deselect()
+                            sel=1
+                            select=id
+                            update_inspector()
+                        }
+                    }
+                    with (select) {
+                        if (fieldactive) {
+                            edit_instance_fields(0)
+                            yes=1
+                        } else if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+                            fieldactive=1
+                            yes=1
+                        } else if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {
+                            rotato=1
+                            yes=1
+                        } else if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
+                            draggatto=1
+                            yes=1
+                        } else if (position_meeting(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
+                            start_dragging()
+                            yes=1
+                        }
                     }
                 }
                 if (yes) {with (instance) sel=0 select.sel=1}

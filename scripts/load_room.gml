@@ -11,7 +11,7 @@ globalvar extended_instancedata,viewspeedcorrection;
 
 var f,p,i,l,inst,layer,map,tileid;
 
-draw_loader("Loading project...",0)
+draw_loader("Loading project...",0.125,"")
 
 //find room
 if (parameter_count()) {
@@ -38,8 +38,6 @@ if (dir="") {
 
 roomname=filename_name(dir)
 
-draw_loader("Loading project...",0.125)
-
 dir+="\"
 root=directory_previous(directory_previous(dir))
 gamename=filename_change_ext(file_find_first(root+"*.gm82",0),"") file_find_close()
@@ -52,9 +50,20 @@ directory_create(root+"cache")
 if (directory_exists(root+"cache\backgrounds") && directory_exists(root+"cache\sprites")) {
     icon_mode=1
 }
-fn=root+"cache\background.bmp" export_include_file_location("background.bmp",fn) background_menuicon=N_Menu_LoadBitmap(fn)
+
 fn=root+"cache\folder.bmp" export_include_file_location("folder.bmp",fn) folder_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\object.bmp" export_include_file_location("object.bmp",fn) object_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\0.bmp"      export_include_file_location("0.bmp",fn)      sprite_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\1.bmp"      export_include_file_location("1.bmp",fn)      sound_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\2.bmp"      export_include_file_location("2.bmp",fn)      background_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\3.bmp"      export_include_file_location("3.bmp",fn)      path_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\4.bmp"      export_include_file_location("4.bmp",fn)      script_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\5.bmp"      export_include_file_location("5.bmp",fn)      font_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\6.bmp"      export_include_file_location("6.bmp",fn)      timeline_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\7.bmp"      export_include_file_location("7.bmp",fn)      object_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\8.bmp"      export_include_file_location("8.bmp",fn)      room_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\9.bmp"      export_include_file_location("9.bmp",fn)      datafile_menuicon=N_Menu_LoadBitmap(fn)
+fn=root+"cache\10.bmp"     export_include_file_location("10.bmp",fn)     constant_menuicon=N_Menu_LoadBitmap(fn)
+thumbcount=12
 
 //load assets
 objlookup=ds_map_create()
@@ -67,12 +76,42 @@ sprloaded[sprites_length]=0
 backgrounds=file_text_read_list(root+"backgrounds\index.yyd",bglookup,true)
 backgrounds_length=ds_list_size(backgrounds)
 bgloaded[backgrounds_length]=0
-load_background_tree(root+"backgrounds\tree.yyd")
 
 objects=file_text_read_list(root+"objects\index.yyd",objlookup,true)
 objects_length=ds_list_size(objects)
 objloaded[objects_length]=0
+
+//i know this is terrible but i can't make this clean without a million ifs and switches
+draw_loader("Loading resource tree...",0.125,"Sprites")
+load_sprite_tree(root+"sprites\tree.yyd")
+
+draw_loader("Loading resource tree...",0.125,"Sounds")
+load_sound_tree(root+"sounds\tree.yyd")
+
+draw_loader("Loading resource tree...",0.125,"Backgrounds")
+load_background_tree(root+"backgrounds\tree.yyd")
+
+draw_loader("Loading resource tree...",0.125,"Paths")
+load_path_tree(root+"paths\tree.yyd")
+
+draw_loader("Loading resource tree...",0.125,"Scripts")
+load_script_tree(root+"scripts\tree.yyd")
+
+draw_loader("Loading resource tree...",0.125,"Fonts")
+load_font_tree(root+"fonts\tree.yyd")
+
+draw_loader("Loading resource tree...",0.125,"Timelines")
+load_timeline_tree(root+"timelines\tree.yyd")
+
+draw_loader("Loading resource tree...",0.125,"Objects")
 load_object_tree(root+"objects\tree.yyd")
+
+draw_loader("Loading resource tree...",0.125,"Rooms")
+load_room_tree(root+"rooms\tree.yyd")
+
+draw_loader("Loading resource tree...",0.125,"Data")
+load_constants(root+"settings\constants.txt")
+load_datafiles(root+"datafiles\index.yyd")
 
 
 //load main project file
@@ -143,6 +182,7 @@ for (i=0;i<8;i+=1) {
 //load tiles
 progress=0.25
 time=current_time
+c=0
 layers=file_text_read_list(dir+"layers.txt",noone,false)
 layersize=ds_list_size(layers)
 if (layersize) {
@@ -203,10 +243,12 @@ if (layersize) {
                 } else with (o) instance_destroy()
             } else with (o) instance_destroy()
 
+            c+=1
+
             if (current_time>time) {
                 time=current_time
                 progress=(progress*9+0.25+0.5*i/layersize)/10
-                draw_loader("Loading tiles...",progress)
+                draw_loader("Loading tiles...",progress,string(c))
             }
         } until (file_text_eof(f)) file_text_close(f)}
     }
@@ -215,6 +257,7 @@ if (layersize) {
 
 //load instances
 time=current_time
+c=0
 f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_string(f) file_text_readln(f)
     if (str!="") {
         o=instance_create(0,0,instance) get_uid(o)
@@ -254,10 +297,12 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
 
         parse_code_into_fields(o)
 
+        c+=1
+
         if (current_time>time) {
             time=current_time
             progress=(progress*9+1)/10
-            draw_loader("Loading instances...",progress)
+            draw_loader("Loading instances...",progress,string(c))
         }
     }
 } until (file_text_eof(f)) file_text_close(f)}
@@ -267,5 +312,7 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
 i=objects_length
 do {i-=1 o=ds_list_find_value(objects,i)} until (i==0 || o!="")
 if (i!=0) get_object(o)
+
+draw_loader("Finishing up...",progress,"")
 
 return 1

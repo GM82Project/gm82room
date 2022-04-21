@@ -1,11 +1,5 @@
+///edit_instance_fields(delete)
 var str,i,dx,dy,menu,menu2;
-
-if (editxy) {
-    fields[editxyid,1]=string(global.mousex)
-    fields[editxyid,2]=string(global.mousey)
-    editxy=0
-    exit
-}
 
 //yeah i know this is the same as the draw script but what can i do
 
@@ -28,7 +22,7 @@ for (i=0;i<objfields[obj];i+=1) {
             str=objfieldname[obj,i]+": "+fields[i,1]
         }
     }
-    dw=string_width(str)+32
+    dw=string_width(str)+48
     if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+dw,dy+28)) {
         //edit this field
         menu=i
@@ -39,7 +33,26 @@ for (i=0;i<objfields[obj];i+=1) {
 //clicked outside of all fields, turn off field display
 if (menu==-1) {fieldactive=0 exit}
 
+if (argument0) {
+    fields[menu,1]=""
+    fields[menu,2]=""
+    fields[menu,0]=0
+    exit
+}
+
 switch (objfieldtype[obj,menu]) {
+    case "sprite": {show_field_resource_menu(sprmenu,menu) break}
+    case "sound": {show_field_resource_menu(soundmenu,menu) break}
+    case "background": {show_field_resource_menu(bgmenu,menu) break}
+    case "path": {show_field_resource_menu(pathmenu,menu) break}
+    case "script": {show_field_resource_menu(scriptmenu,menu) break}
+    case "font": {show_field_resource_menu(fontmenu,menu) break}
+    case "timeline": {show_field_resource_menu(timelinemenu,menu) break}
+    case "object": {show_field_resource_menu(objmenu,menu) break}
+    case "room": {show_field_resource_menu(roommenu,menu) break}
+    case "datafile": {show_field_resource_menu(datafilemenu,menu) break}
+    case "constant": {show_field_resource_menu(constmenu,menu) break}
+
     case "value": {fields[menu,1]=get_string("Insert new value for "+qt+objfieldname[obj,menu]+qt+":",fields[menu,1]) break}
     case "string": {fields[menu,1]=stringify(get_string("Insert new text for "+qt+objfieldname[obj,menu]+qt+":",destringify(fields[menu,1]))) break}
     case "color": {fields[menu,1]="$"+string_hex(get_color_ext(real_hex(fields[menu,1]),"Select new color for "+qt+objfieldname[obj,menu]+qt+":")) break}

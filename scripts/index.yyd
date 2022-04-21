@@ -116,3 +116,16 @@ destringify
 parse_fields_into_code
 
 get_nth_token
+load_constants
+load_datafiles
+load_sprite_tree
+
+load_room_tree
+load_sound_tree
+load_path_tree
+load_script_tree
+load_font_tree
+load_timeline_tree
+
+loadthumb
+show_field_resource_menu

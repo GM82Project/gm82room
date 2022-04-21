@@ -1,7 +1,62 @@
-var str;
+var str,p;
 
 click=N_Menu_CheckMenus()
 if (click) {
+    if (menutype=="resourcefield") {
+        if (menusub=="sprite") {
+            get=ds_map_get(sprmenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else resfieldid.fields[resfieldi,1]=get
+        }
+        if (menusub=="background") {
+            get=ds_map_get(bgmenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else resfieldid.fields[resfieldi,1]=get
+        }
+        if (menusub=="path") {
+            get=ds_map_get(pathmenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else resfieldid.fields[resfieldi,1]=get
+        }
+        if (menusub=="script") {
+            get=ds_map_get(scriptmenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else resfieldid.fields[resfieldi,1]=get
+        }
+        if (menusub=="font") {
+            get=ds_map_get(fontmenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else resfieldid.fields[resfieldi,1]=get
+        }
+        if (menusub=="timeline") {
+            get=ds_map_get(timelinemenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else resfieldid.fields[resfieldi,1]=get
+        }
+        if (menusub=="object") {
+            get=ds_map_get(objmenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else resfieldid.fields[resfieldi,1]=get
+        }
+        if (menusub=="room") {
+            get=ds_map_get(roommenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else resfieldid.fields[resfieldi,1]=get
+        }
+        if (menusub=="datafile") {
+            get=ds_map_get(datafilemenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else resfieldid.fields[resfieldi,1]=get
+        }
+        if (menusub=="constant") {
+            get=ds_map_get(constmenuitems,click)
+            if (get==undefined) resfieldid.fields[resfieldi,0]=0
+            else {
+                p=string_pos(" (",get)
+                resfieldid.fields[resfieldi,1]=string_copy(get,1,p-1)
+            }
+        }
+    }
     if (menutype=="replaceobj") {
         replace_instances(ds_map_get(objmenuitems,click))
     }

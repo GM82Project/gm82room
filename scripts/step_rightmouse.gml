@@ -1,3 +1,10 @@
+if (mousein && mode==0 && mouse_check_button_pressed(mb_right)) {
+    with (select) if (fieldactive) {
+        edit_instance_fields(1)
+        exit
+    }
+}
+
 if (!keyboard_check(vk_control)) {
     if (mouse_check_button_pressed(mb_right)) {
         if (selecting) selecting=0

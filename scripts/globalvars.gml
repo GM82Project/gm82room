@@ -11,4 +11,5 @@ globalvar
     theme,buttontex,themebutton,
     jtool_objs,
     objfields,objfieldname,objfieldtype,objfieldargs
+    thumbmap,thumbcount,
 ;

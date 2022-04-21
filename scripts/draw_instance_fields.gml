@@ -23,7 +23,7 @@ for (i=0;i<objfields[obj];i+=1) {
             str=objfieldname[obj,i]+": "+fields[i,1]
         }
     }
-    dw=string_width(str)+32
+    dw=string_width(str)+48
     if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+dw,dy+28)) {
         col1=$ffffff
         col2=selcol
@@ -34,26 +34,41 @@ for (i=0;i<objfields[obj];i+=1) {
     draw_rectangle_color(dx+16,dy+4,dx+dw,dy+28,col1,col1,col1,col1,0)
     draw_rectangle_color(dx+16,dy+4,dx+dw,dy+28,col2,col2,col2,col2,1)
     draw_set_color(0)
-    draw_text(dx+16+8,dy+16,str)
+    draw_text(dx+16+28,dy+16,str)
     draw_set_color($ffffff)
+
+    switch (objfieldtype[obj,i]) {
+        case "value": fr=0 break
+        case "string": fr=1 break
+        case "color": fr=2 break
+        case "choice": fr=3 break
+        case "xy": fr=4 break
+        case "sprite": fr=5 break
+        case "sound": fr=6 break
+        case "background": fr=7 break
+        case "path": fr=8 break
+        case "script": fr=9 break
+        case "font": fr=10 break
+        case "timeline": fr=11 break
+        case "object": fr=12 break
+        case "room": fr=13 break
+        case "datafile": fr=14 break
+        case "constant": fr=15 break
+    }
+    draw_sprite(sprFieldIcons,fr,dx+28,dy+16)
 
     if (fields[i,0]) {
         if (objfieldtype[obj,i]=="color") {
             str=objfieldname[obj,i]+": "+fields[i,1]+" "
             l=string_width(str)
             col=real_hex(fields[i,1])
-            draw_roundrect_color(dx+16+8+l,dy+8,dx+16+8+l+48,dy+24,col,col,0)
-            draw_roundrect_color(dx+16+8+l,dy+8,dx+16+8+l+48,dy+24,0,0,1)
+            draw_roundrect_color(dx+16+28+l,dy+8,dx+16+28+l+48,dy+24,col,col,0)
+            draw_roundrect_color(dx+16+28+l,dy+8,dx+16+28+l+48,dy+24,0,0,1)
         }
         if (objfieldtype[obj,i]=="xy") {
             draw_set_color(selcol)
-            if (editxy && editxyid==i) {
-                px=floor((global.mousex-view_xview)/zoom)
-                py=floor((global.mousey-view_yview)/zoom)
-            } else {
-                px=floor((real(fields[i,1])-view_xview)/zoom)
-                py=floor((real(fields[i,2])-view_yview)/zoom)
-            }
+            px=floor((real(fields[i,1])-view_xview)/zoom)
+            py=floor((real(fields[i,2])-view_yview)/zoom)
             draw_line_width(px-10,py-10,px+10,py+10,3)
             draw_line_width(px-10,py+10,px+10,py-10,3)
             draw_line(dx,dy+16,px,py)

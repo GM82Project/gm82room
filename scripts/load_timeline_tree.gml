@@ -1,17 +1,13 @@
 var f,str,resname,path,curindent;
 
-globalvar bgmenu,tilebgmenu,bgmenuitems;
+globalvar timelinemenu,timelinemenuitems;
 
-bgmenuitems=ds_map_create()
-bgmenu=N_Menu_CreatePopupMenu()
-bgmenuicons=ds_map_create()
-tilebgmenu=N_Menu_CreatePopupMenu()
-N_Menu_AddMenu(tilebgmenu,bgmenu,"Backgrounds")
-N_Menu_AddSeparator(tilebgmenu)
+timelinemenuitems=ds_map_create()
+timelinemenu=N_Menu_CreatePopupMenu()
 
-ds_map_add(bgmenuitems,N_Menu_AddItem(bgmenu,"(no background)",""),undefined)
+ds_map_add(timelinemenuitems,N_Menu_AddItem(timelinemenu,"(no timeline)",""),undefined)
 
-path[0]=bgmenu
+path[0]=timelinemenu
 curindent=0
 
 f=file_text_open_read_safe(argument0) if (f) {do {
@@ -30,13 +26,9 @@ f=file_text_open_read_safe(argument0) if (f) {do {
         } else {
             //resource
             item=N_Menu_AddItem(path[curindent],resname,"")
-            icon=background_menuicon
-            if (icon_mode && thumbcount<9999) {
-                fn=root+"cache\backgrounds\"+resname+".bmp"
-                if (file_exists(fn)) {icon=N_Menu_LoadBitmap(fn) thumbcount+=1 ds_map_add(bgmenuicons,resname,icon)}
-            }
+            icon=timeline_menuicon
             N_Menu_ItemSetBitmap(path[curindent],item,icon)
-            ds_map_add(bgmenuitems,item,resname)
+            ds_map_add(timelinemenuitems,item,resname)
         }
     }
 } until (file_text_eof(f)) file_text_close(f)}

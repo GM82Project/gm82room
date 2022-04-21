@@ -1,16 +1,14 @@
-var f,f2,fn,str,resname,path,curindent;
+var f,str,resname,path,curindent;
 
-globalvar objmenu,objmenuitems;
+globalvar sprmenu,sprmenuitems;
 
-objmenuitems=ds_map_create()
-objmenu=N_Menu_CreatePopupMenu()
+sprmenuitems=ds_map_create()
+sprmenu=N_Menu_CreatePopupMenu()
 
-ds_map_add(objmenuitems,N_Menu_AddItem(objmenu,"(no object)",""),undefined)
+ds_map_add(sprmenuitems,N_Menu_AddItem(sprmenu,"(no sprite)",""),undefined)
 
-path[0]=objmenu
+path[0]=sprmenu
 curindent=0
-
-a=argument0
 
 f=file_text_open_read_safe(argument0) if (f) {do {
     str=file_text_read_string(f)
@@ -28,20 +26,13 @@ f=file_text_open_read_safe(argument0) if (f) {do {
         } else {
             //resource
             item=N_Menu_AddItem(path[curindent],resname,"")
-            icon=object_menuicon
+            icon=sprite_menuicon
             if (icon_mode && thumbcount<9999) {
-                f2=file_text_open_read_safe(root+"objects\"+resname+".txt")
-                if (f2) {
-                    sprname=string_delete(file_text_read_string(f2),1,7) //we do a little cheating for speed
-                    file_text_close(f2)
-                    if (sprname!="") {
-                        fn=root+"cache\sprites\"+sprname+".bmp"
-                        if (file_exists(fn)) icon=loadthumb(fn)
-                    }
-                }
+                fn=root+"cache\sprites\"+resname+".bmp"
+                if (file_exists(fn)) icon=loadthumb(fn)
             }
             N_Menu_ItemSetBitmap(path[curindent],item,icon)
-            ds_map_add(objmenuitems,item,resname)
+            ds_map_add(sprmenuitems,item,resname)
         }
     }
 } until (file_text_eof(f)) file_text_close(f)}

@@ -83,6 +83,8 @@ load_theme()
 load_palette()
 
 jtool_objs=ds_map_create()
+thumbmap=ds_map_create()
+thumbcount=0
 
 state="load"
 crc_init()

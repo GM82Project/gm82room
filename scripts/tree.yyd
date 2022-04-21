@@ -19,11 +19,22 @@
 	|file_text_read_list
 	|edit_creation_code
 	|external_code_editor
-	|load_object_tree
-	|load_background_tree
+	+resource tree
+		|load_sprite_tree
+		|load_sound_tree
+		|load_background_tree
+		|load_path_tree
+		|load_script_tree
+		|load_font_tree
+		|load_timeline_tree
+		|load_object_tree
+		|load_room_tree
+		|load_datafiles
+		|load_constants
 	|load_paths
 	|load_jtooldata
 	|load_all_jtool_objs
+	|loadthumb
 +chunks
 	|chunk_export
 	|chunk_import
@@ -122,3 +133,4 @@
 	|stringify
 	|destringify
 	|get_nth_token
+	|show_field_resource_menu
