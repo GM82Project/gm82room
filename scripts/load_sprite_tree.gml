@@ -27,7 +27,7 @@ f=file_text_open_read_safe(argument0) if (f) {do {
             //resource
             item=N_Menu_AddItem(path[curindent],resname,"")
             icon=sprite_menuicon
-            if (icon_mode && thumbcount<9999) {
+            if (icon_mode && thumbcount<max_thumbs) {
                 fn=root+"cache\sprites\"+resname+".bmp"
                 if (file_exists(fn)) icon=loadthumb(fn)
             }

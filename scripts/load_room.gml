@@ -79,7 +79,11 @@ objects=file_text_read_list(root+"objects\index.yyd",objlookup,true)
 objects_length=ds_list_size(objects)
 objloaded[objects_length]=0
 
-//i know this is terrible but i can't make this clean without a million ifs and switches
+//i know this is terrible but i can't make this clean and fast simultaneously
+//also we load objects first to make sure we don't run out of thumbnails on the more important menu
+draw_loader("Loading resource tree...",0.125,"Objects")
+load_object_tree(root+"objects\tree.yyd")
+
 draw_loader("Loading resource tree...",0.125,"Sprites")
 load_sprite_tree(root+"sprites\tree.yyd")
 
@@ -100,9 +104,6 @@ load_font_tree(root+"fonts\tree.yyd")
 
 draw_loader("Loading resource tree...",0.125,"Timelines")
 load_timeline_tree(root+"timelines\tree.yyd")
-
-draw_loader("Loading resource tree...",0.125,"Objects")
-load_object_tree(root+"objects\tree.yyd")
 
 draw_loader("Loading resource tree...",0.125,"Rooms")
 load_room_tree(root+"rooms\tree.yyd")

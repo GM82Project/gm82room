@@ -14,3 +14,4 @@ act_globalvec=4
 act_alchemy=5
 megabyte=1024*1024
 undospace=512*megabyte
+max_thumbs=9001

@@ -29,7 +29,7 @@ f=file_text_open_read_safe(argument0) if (f) {do {
             //resource
             item=N_Menu_AddItem(path[curindent],resname,"")
             icon=object_menuicon
-            if (icon_mode && thumbcount<9999) {
+            if (icon_mode && thumbcount<max_thumbs) {
                 f2=file_text_open_read_safe(root+"objects\"+resname+".txt")
                 if (f2) {
                     sprname=string_delete(file_text_read_string(f2),1,7) //we do a little cheating for speed
