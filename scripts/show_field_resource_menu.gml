@@ -3,4 +3,3 @@ Controller.menutype="resourcefield"
 Controller.menusub=objfieldtype[obj,argument1]
 Controller.resfieldid=id
 Controller.resfieldi=argument1
-fields[argument1,1]=""

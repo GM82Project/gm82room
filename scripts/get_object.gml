@@ -33,8 +33,8 @@ if (!objloaded[i]) {
             if (p) if (string_pos("//field ",str)==1) {
                 objfieldname[i,objfields[i]]=string_copy(str,9,p-9)
                 str=string_delete(str,1,p+1)
-                if (string_pos("choice",str)==1) {
-                    objfieldtype[i,objfields[i]]="choice"
+                if (string_pos("enum",str)==1) {
+                    objfieldtype[i,objfields[i]]="enum"
                     objfieldargs[i,objfields[i]]=string_delete(string_copy(str,1,string_length(str)-1),1,7)
                 } else {
                     objfieldtype[i,objfields[i]]=str

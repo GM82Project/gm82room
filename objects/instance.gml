@@ -93,6 +93,7 @@ if (sel) {
     }
 
     if (editxy) {
+        fields[editxyid,0]=1
         if (keyboard_check(vk_alt)) {
             fields[editxyid,1]=string(global.mousex)
             fields[editxyid,2]=string(global.mousey)

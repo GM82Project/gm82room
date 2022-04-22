@@ -3,6 +3,7 @@ var str,p;
 click=N_Menu_CheckMenus()
 if (click) {
     if (menutype=="resourcefield") {
+        resfieldid.fields[resfieldi,0]=1
         if (menusub=="sprite") {
             get=ds_map_get(sprmenuitems,click)
             if (get==undefined) resfieldid.fields[resfieldi,0]=0

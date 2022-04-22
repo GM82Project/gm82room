@@ -41,7 +41,7 @@ for (i=0;i<objfields[obj];i+=1) {
         case "value": fr=0 break
         case "string": fr=1 break
         case "color": fr=2 break
-        case "choice": fr=3 break
+        case "enum": fr=3 break
         case "xy": fr=4 break
         case "sprite": fr=5 break
         case "sound": fr=6 break
