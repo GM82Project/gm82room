@@ -33,6 +33,10 @@ for (i=0;i<objfields[obj];i+=1) {
 //clicked outside of all fields, turn off field display
 if (menu==-1) {fieldactive=0 exit}
 
+begin_undo(act_change,"edit instance fields",0)
+add_undo_instance_props()
+push_undo()
+
 if (argument0) {
     fields[menu,1]=""
     fields[menu,2]=""

@@ -1,4 +1,4 @@
-var l,o,i,uaction,lmode,size,tilew,tileh,combo,size;
+var l,o,i,j,uaction,lmode,size,tilew,tileh,combo,size;
 
 size=ds_list_size(undostack)
 if (size) {
@@ -21,7 +21,7 @@ if (size) {
             }
         }break
         case act_create: {
-            if (lmode==0) repeat (size/10) {
+            if (lmode==0) do {
                 o=instance_create(ds_list_find_value(l,i+2),ds_list_find_value(l,i+3),instance)
                 set_uid(o,ds_list_find_value(l,i))
                 o.obj=ds_list_find_value(l,i+1)
@@ -37,8 +37,21 @@ if (size) {
                 o.sprh=sprite_get_height(o.sprite_index)
                 o.sprox=sprite_get_xoffset(o.sprite_index)
                 o.sproy=sprite_get_yoffset(o.sprite_index)
+                parse_code_into_fields(o)
                 i+=10
-            }
+
+                //read fields
+                for (j=0;j<objfields[o.obj];j+=1) {
+                    o.fields[j,0]=ds_list_find_value(l,i) i+=1
+                    if (o.fields[j,0]) {//only read fields if they're set
+                        o.fields[j,1]=ds_list_find_value(l,i) i+=1
+                        if (objfieldtype[o.obj,j] == "xy") {//only read second part for coordinate type
+                            o.fields[j,2]=ds_list_find_value(l,i) i+=1
+                        }
+                    }
+                }
+            } until (i>=size)
+
             if (lmode==1) repeat (size/14) {
                 o=instance_create(ds_list_find_value(l,i+3),ds_list_find_value(l,i+4),tileholder)
                 set_uid(o,ds_list_find_value(l,i))
@@ -61,7 +74,7 @@ if (size) {
             }
         }break
         case act_change: {
-            if (lmode==0) repeat (size/9) {
+            if (lmode==0) do {
                 o=ds_map_find_value(uidmap,ds_list_find_value(l,i))
                 o.x=ds_list_find_value(l,i+1)
                 o.y=ds_list_find_value(l,i+2)
@@ -72,7 +85,19 @@ if (size) {
                 o.image_alpha=ds_list_find_value(l,i+7)
                 o.code=ds_list_find_value(l,i+8)
                 i+=9
-            }
+
+                //read fields
+                for (j=0;j<objfields[o.obj];j+=1) {
+                    o.fields[j,0]=ds_list_find_value(l,i) i+=1
+                    if (o.fields[j,0]) {//only read fields if they're set
+                        o.fields[j,1]=ds_list_find_value(l,i) i+=1
+                        if (objfieldtype[o.obj,j] == "xy") {//only read second part for coordinate type
+                            o.fields[j,2]=ds_list_find_value(l,i) i+=1
+                        }
+                    }
+                }
+            } until (i>=size)
+
             if (lmode==1) repeat (size/8) {
                 o=ds_map_find_value(uidmap,ds_list_find_value(l,i))
                 o.x=ds_list_find_value(l,i+1)

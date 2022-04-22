@@ -1,4 +1,4 @@
-var yes,cur,minselx,maxselx,minsely,maxsely,dx,dy;
+var i,yes,cur,minselx,maxselx,minsely,maxsely,dx,dy;
 
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) {
     if (mode==0) with (instance) sel=1
@@ -35,6 +35,13 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_c
         copyvec[cur,7]=image_blend
         copyvec[cur,8]=image_alpha
         copyvec[cur,9]=code
+
+        for (i=0;i<objfields[obj];i+=1) {
+            copyvec[cur,10+i*3]=fields[i,0]
+            copyvec[cur,11+i*3]=fields[i,1]
+            copyvec[cur,12+i*3]=fields[i,2]
+        }
+
         if (yes) {add_undo_instance() instance_destroy()}
     }
     if (mode==1) with (tileholder) if (sel) {
@@ -101,6 +108,13 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 o.image_alpha=copyvec[cur,8]
                 o.code=copyvec[cur,9]
                 parse_code_into_fields(o)
+
+                for (i=0;i<objfields[o.obj];i+=1) {
+                    o.fields[i,0]=copyvec[cur,10+i*3]
+                    o.fields[i,1]=copyvec[cur,11+i*3]
+                    o.fields[i,2]=copyvec[cur,12+i*3]
+                }
+
                 o.sel=1
                 o.modified=1
                 select=o
