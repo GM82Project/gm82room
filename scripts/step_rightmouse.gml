@@ -8,6 +8,7 @@ if (mousein && mode==0 && mouse_check_button_pressed(mb_right)) {
 if (!keyboard_check(vk_control)) {
     if (mouse_check_button_pressed(mb_right)) {
         if (selecting) selecting=0
+        with (TextField) textfield_actions()
         clear_inspector()
         deselect()
         begin_undo(act_create,"erasing "+pick(mode,"instances","tiles"),0)
