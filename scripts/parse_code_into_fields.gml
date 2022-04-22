@@ -12,7 +12,7 @@ str=argument0.code
 state=0
 
 if (str!="") {
-    o.code=""
+    argument0.code=""
     string_token_start(str,lf)
     do {
         next=string_token_next()
@@ -45,10 +45,10 @@ if (str!="") {
         }
         if (state=2) {
             //we're done reading fields, re-add normal instance code
-            o.code+=next+lf
+            argument0.code+=next+lf
         }
     } until (next="")
 }
-if (state=0) o.code=str
+if (state=0) argument0.code=str
 
-if (string_replace_all(string_replace_all(string_replace_all(o.code,";",""),lf,"")," ","")=="") o.code=""
+if (string_replace_all(string_replace_all(string_replace_all(argument0.code,";",""),lf,"")," ","")=="") argument0.code=""
