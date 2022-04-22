@@ -7,8 +7,6 @@ globalvar vw_enabled,vw_visible,vw_x,vw_y,vw_w,vw_h,vw_xp,vw_yp,vw_wp,vw_hp,vw_f
 globalvar layers;
 globalvar paths,pathnum;
 
-globalvar extended_instancedata,viewspeedcorrection;
-
 var f,p,i,l,inst,layer,map,tileid;
 
 draw_loader("Loading project...",0.125,"")
@@ -119,8 +117,6 @@ project=ds_map_create()
 ds_map_read_ini(project,dir+"..\..\"+file_find_first(dir+"..\..\*.gm82",0)) file_find_close()
 
     gm82version=real(ds_map_find_value(project,"gm82_version"))
-    if (gm82version==0) viewspeedcorrection=max_uint else viewspeedcorrection=0
-    extended_instancedata=(gm82version>1)
 
 ds_map_destroy(project)
 
@@ -173,8 +169,8 @@ for (i=0;i<8;i+=1) {
     vw_hp[i]=real(ds_map_find_value(settings,"view_hport"+k))
     vw_hbor[i]=real(ds_map_find_value(settings,"view_fol_hbord"+k))
     vw_vbor[i]=real(ds_map_find_value(settings,"view_fol_vbord"+k))
-    vw_hspeed[i]=real(ds_map_find_value(settings,"view_fol_hspeed"+k))-viewspeedcorrection
-    vw_vspeed[i]=real(ds_map_find_value(settings,"view_fol_vspeed"+k))-viewspeedcorrection
+    vw_hspeed[i]=real(ds_map_find_value(settings,"view_fol_hspeed"+k))
+    vw_vspeed[i]=real(ds_map_find_value(settings,"view_fol_vspeed"+k))
     vw_follow[i]=ds_map_find_value(settings,"view_fol_target"+k)
 }
 
@@ -225,21 +221,19 @@ if (layersize) {
                     o.image_xscale=o.tilew
                     o.image_yscale=o.tileh
 
-                    if (extended_instancedata) {
-                        string_token_next() //skip "locked" flag
-                        o.tilesx=real(string_token_next())
-                        o.tilesy=real(string_token_next())
-                        tileblend=real(string_token_next())
+                    string_token_next() //skip "locked" flag
+                    o.tilesx=real(string_token_next())
+                    o.tilesy=real(string_token_next())
+                    tileblend=real(string_token_next())
 
-                        o.image_xscale*=o.tilesx
-                        o.image_yscale*=o.tilesy
-                        o.image_alpha=floor(tileblend/$1000000)/$ff
-                        o.image_blend=tileblend&$ffffff
+                    o.image_xscale*=o.tilesx
+                    o.image_yscale*=o.tilesy
+                    o.image_alpha=floor(tileblend/$1000000)/$ff
+                    o.image_blend=tileblend&$ffffff
 
-                        tile_set_scale(o.tile,o.tilesx,o.tilesy)
-                        tile_set_alpha(o.tile,o.image_alpha)
-                        tile_set_blend(o.tile,o.image_blend)
-                    }
+                    tile_set_scale(o.tile,o.tilesx,o.tilesy)
+                    tile_set_alpha(o.tile,o.image_alpha)
+                    tile_set_blend(o.tile,o.image_blend)
                 } else with (o) instance_destroy()
             } else with (o) instance_destroy()
 
@@ -278,16 +272,14 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
         o.sprox=sprite_get_xoffset(o.sprite_index)
         o.sproy=sprite_get_yoffset(o.sprite_index)
 
-        if (extended_instancedata) {
-            string_token_next() //skip "locked" flag
-            o.image_xscale=real(string_token_next())
-            o.image_yscale=real(string_token_next())
-            o.image_blend=real(string_token_next())
-            o.image_angle=real(string_token_next())
+        string_token_next() //skip "locked" flag
+        o.image_xscale=real(string_token_next())
+        o.image_yscale=real(string_token_next())
+        o.image_blend=real(string_token_next())
+        o.image_angle=real(string_token_next())
 
-            o.image_alpha=floor(o.image_blend/$1000000)/$ff
-            o.image_blend=o.image_blend&$ffffff
-        }
+        o.image_alpha=floor(o.image_blend/$1000000)/$ff
+        o.image_blend=o.image_blend&$ffffff
 
         if (o.code!="") {
             o.code=file_text_read_all(dir+o.code+".gml",lf)

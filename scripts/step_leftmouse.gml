@@ -101,7 +101,7 @@ if (mouse_check_button_pressed(mb_left)) {
             if (mode==1) {
                 //if something's already selected, operate on it
                 if (!keyboard_check(vk_shift)) with (selectt) {
-                    if (extended_instancedata && abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
+                    if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
                         draggatto=1
                         yes=1
                     } else if (position_meeting(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {

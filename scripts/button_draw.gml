@@ -49,8 +49,6 @@ if (object_index==Button) {
 
         if (gray) up=0
 
-        if (extended && !extended_instancedata) up=0
-
         col=global.col_main
         if (action=="bgselect") col=pick(bg_visible[actionid] && bg_source[actionid]!="",col,$808080)
         if (action=="vwselect") col=pick(vw_visible[actionid],col,$808080)
@@ -85,18 +83,15 @@ if (object_index==Button) {
 
 if (object_index==TextField) {
     if (tagmode==mode || tagmode==-1) {
-        if (extended && !extended_instancedata) col=global.col_main
+        if (type==1) {if (gray) col=global.col_main else col=real(text)}
         else {
-            if (type==1) {if (gray) col=global.col_main else col=real(text)}
+            if (active) col=$ffffff
             else {
-                if (active) col=$ffffff
-                else {
-                    if (type==0 || type==2 || action=="inst code box") {
-                        if (gray) col=global.col_main
-                        else col=$c0c0c0
-                    } else {
-                        col=$c0c0c0
-                    }
+                if (type==0 || type==2 || action=="inst code box") {
+                    if (gray) col=global.col_main
+                    else col=$c0c0c0
+                } else {
+                    col=$c0c0c0
                 }
             }
         }

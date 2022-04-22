@@ -17,7 +17,6 @@ focus=0
 active=0
 k=0
 dynamic=-1
-extended=0
 maxlen=256
 displen=256
 minval=0
@@ -37,7 +36,7 @@ applies_to=self
 */
 focus=position_meeting(mouse_wx,mouse_wy,id)
 
-if (down!=0 && focus && !active && (!extended || extended_instancedata) && !(gray)) {
+if (down!=0 && focus && !active && !(gray)) {
     //activate textfield
     with (TextField) textfield_actions()
     active=1
@@ -140,5 +139,4 @@ if (type==4 || type==0) {
         } else alt=basealt
     }
     dtext=string_replace_all(dtext,"#","\#")
-    if (extended && !extended_instancedata) alt="Please update gm82save!"
 } else dtext=text
