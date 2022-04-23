@@ -15,7 +15,8 @@ selresize=0
 hasfields=0
 fieldactive=0
 editxy=0
-editxyid=0
+editinst=0
+editfid=0
 
 rothandx=-9999999
 rothandy=-9999999
@@ -93,15 +94,24 @@ if (sel) {
     }
 
     if (editxy) {
-        fields[editxyid,0]=1
+        fields[editfid,0]=1
         if (keyboard_check(vk_alt)) {
-            fields[editxyid,1]=string(global.mousex)
-            fields[editxyid,2]=string(global.mousey)
+            fields[editfid,1]=string(global.mousex)
+            fields[editfid,2]=string(global.mousey)
         } else {
-            fields[editxyid,1]=string(roundto(global.mousex,gridx))
-            fields[editxyid,2]=string(roundto(global.mousey,gridy))
+            fields[editfid,1]=string(roundto(global.mousex,gridx))
+            fields[editfid,2]=string(roundto(global.mousey,gridy))
         }
         if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) editxy=0
+    }
+    if (editinst) {
+        fields[editfid,0]=0
+        focus=instance_position(global.mousex,global.mousey,instance)
+        if (focus) {
+            fields[editfid,0]=1
+            fields[editfid,1]=roomname+"_"+focus.uid
+        }
+        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) editinst=0
     }
 }
 #define Other_10
@@ -207,7 +217,7 @@ if (hasfields) {
     draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
     draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1,fieldhandy+4*zm,1)
 
-    //draw arrows if instance has any "xy" fields
+    //draw arrows if instance has any "xy" or "instance" fields
     if !(abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
         var i,dx,dy;
         dx=(bbox_left+bbox_right+1)/2
@@ -216,6 +226,11 @@ if (hasfields) {
             if (fields[i,0]) {
                 if (objfieldtype[obj,i]=="xy") {
                     draw_arrow(dx,dy,real(fields[i,1]),real(fields[i,2]),10)
+                }
+                if (objfieldtype[obj,i]=="instance") {
+                    with (ds_map_get(uidmap,string_replace(fields[i,1],roomname+"_",""))) {
+                        draw_arrow(dx,dy,(bbox_left+bbox_right+1)/2,(bbox_top+bbox_bottom+1)/2,10)
+                    }
                 }
             }
         }

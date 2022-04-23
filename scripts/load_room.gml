@@ -35,13 +35,29 @@ if (dir="") {
 }
 
 roomname=filename_name(dir)
-
-dir+="\"
-root=directory_previous(directory_previous(dir))
-gamename=filename_change_ext(file_find_first(root+"*.gm82",0),"") file_find_close()
 room_caption+=" - "+roomname
 set_application_title(roomname+" - Room Editor")
 global.default_caption=room_caption
+
+dir+="\"
+root=directory_previous(directory_previous(dir))
+pjfile=file_find_first(root+"*.gm82",0) file_find_close()
+gamename=filename_change_ext(pjfile,"")
+
+
+//load main project file
+project=ds_map_create()
+ds_map_read_ini(project,root+pjfile)
+    gm82version=real(ds_map_find_value(project,"gm82_version"))
+ds_map_destroy(project)
+
+if (gm82version!=4) {
+    if (gm82version<4) show_message("Error loading "+gamename+": "+crlf+"Project version ("+string(gm82version)+") is too old."+crlf+"Please update Game Maker 8.2.")
+    else show_message("Error loading "+gamename+": "+crlf+"Project version ("+string(gm82version)+") is too new!"+crlf+"Please update Game Maker 8.2.")
+    game_end()
+    exit
+}
+
 
 //set up thumbnails
 directory_create(root+"cache")
@@ -111,15 +127,6 @@ load_room_tree(root+"rooms\tree.yyd")
 draw_loader("Loading resource tree...",0.125,"Data")
 load_constants(root+"settings\constants.txt")
 load_datafiles(root+"datafiles\index.yyd")
-
-
-//load main project file
-project=ds_map_create()
-ds_map_read_ini(project,dir+"..\..\"+file_find_first(dir+"..\..\*.gm82",0)) file_find_close()
-
-    gm82version=real(ds_map_find_value(project,"gm82_version"))
-
-ds_map_destroy(project)
 
 
 //look for paths
@@ -255,13 +262,14 @@ time=current_time
 c=0
 f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_string(f) file_text_readln(f)
     if (str!="") {
-        o=instance_create(0,0,instance) get_uid(o)
+        o=instance_create(0,0,instance)
 
         string_token_start(str,",")
         o.objname=string_token_next()
         o.x=real(string_token_next())
         o.y=real(string_token_next())
-        o.code=string_token_next()
+
+        set_uid(o,string_token_next())
 
         o.obj=get_object(o.objname)
 
@@ -282,8 +290,8 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
         o.image_alpha=floor(o.image_blend/$1000000)/$ff
         o.image_blend=o.image_blend&$ffffff
 
-        if (o.code!="") {
-            o.code=file_text_read_all(dir+o.code+".gml",lf)
+        if (string_token_next()=="1") {//has code flag
+            o.code=file_text_read_all(dir+o.uid+".gml",lf)
             l=string_length(o.code)
             if (string_char_at(o.code,l)==lf) o.code=string_copy(o.code,1,l-1)
         }

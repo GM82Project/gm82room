@@ -13,14 +13,16 @@ l=ds_list_size(layers) for (i=0;i<l;i+=1) {
         file_text_write_string(f,string(cl)+lf)
         f2=file_text_open_write(dir+string(cl)+".txt")
         with (tileholder) if (tlayer==cl) {
-            str=bgname+","+string(round(x))+","+string(round(y))+","
-            +string(tile_get_left(tile))+","
-            +string(tile_get_top(tile))+","
-            +string(tile_get_width(tile))+","
-            +string(tile_get_height(tile))+",0"+
-            +string(tilesx)+","
-            +string(tilesy)+","
-            +string(round(image_alpha*255)*$1000000+image_blend)
+            str=
+                bgname+","+
+                string(round(x))+","+string(round(y))+","+
+                string(tile_get_left(tile))+","+
+                string(tile_get_top(tile))+","+
+                string(tile_get_width(tile))+","+
+                string(tile_get_height(tile))+",0,"+
+                string(tilesx)+","+
+                string(tilesy)+","+
+                string(round(image_alpha*255)*$1000000+image_blend)
             file_text_write_string(f2,str+lf)
         }
         file_text_close(f2)
@@ -39,17 +41,23 @@ with (instance) {
 }
 repeat (l) with (ds_priority_delete_min(pr)) {
     savecode=gensavecode(code)
-    str=objname+","+string(round(x))+","+string(round(y))+","
+    str=
+        objname+","+
+        string(round(x))+","+
+        string(round(y))+","+
+        uid+",0,"+
+        string(image_xscale)+","+
+        string(image_yscale)+","+
+        string(round(image_alpha*255)*$1000000+image_blend)+","+
+        string(image_angle)+","+
+        string(savecode!="")
+    file_text_write_string(f,str+lf)
+
     if (savecode!="") {
-        crc=string_upper(string_hex(crc32(savecode+lf)))
-        crc=string_repeat("0",8-string_length(crc))+crc
-        str+=crc
-        f2=file_text_open_write(dir+crc+".gml")
-        file_text_write_string(f2,savecode+lf)
+        f2=file_text_open_write(dir+uid+".gml")
+        file_text_write_string(f2,savecode)
         file_text_close(f2)
     }
-    str+=",0,"+string(image_xscale)+","+string(image_yscale)+","+string(round(image_alpha*255)*$1000000+image_blend)+","+string(image_angle)
-    file_text_write_string(f,str+lf)
 }
 file_text_close(f)
 ds_priority_destroy(pr)

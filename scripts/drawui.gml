@@ -281,7 +281,7 @@ if (mode==0) {
     num=instance_number(instance)
     if (num<instancecount) draw_text(statusx+152,statusy+6,string(num)+" instances ("+string(instancecount-num)+" hidden)")
     else draw_text(statusx+152,statusy+6,string(instancecount)+" instances")
-    if (focus) draw_text(statusx+448,statusy+6,focus.objname+" "+string(focus.x)+","+string(focus.y)+pick(focus.code!="",""," Code"))
+    if (focus) draw_text(statusx+448,statusy+6,focus.objname+" ("+focus.uid+") "+string(focus.x)+","+string(focus.y))
 }
 if (mode==1) {
     num=instance_number(tileholder)

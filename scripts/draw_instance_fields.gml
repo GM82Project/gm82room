@@ -1,4 +1,4 @@
-var str,i;
+var str,i,dx,dy;
 str=""
 
 dx=floor((fieldhandx-view_xview)/zoom)
@@ -54,6 +54,7 @@ for (i=0;i<objfields[obj];i+=1) {
         case "room": fr=13 break
         case "datafile": fr=14 break
         case "constant": fr=15 break
+        case "instance": fr=16 break
     }
     draw_sprite(sprFieldIcons,fr,dx+28,dy+16)
 
@@ -72,6 +73,13 @@ for (i=0;i<objfields[obj];i+=1) {
             draw_line_width(px-10,py-10,px+10,py+10,3)
             draw_line_width(px-10,py+10,px+10,py-10,3)
             draw_line(dx,dy+16,px,py)
+        }
+        if (objfieldtype[obj,i]=="instance") {
+            draw_set_color(selcol)
+            with (ds_map_get(uidmap,string_replace(fields[i,1],roomname+"_",""))) {
+                draw_rectangle(floor((bbox_left-view_xview-0.5)/zoom),floor((bbox_top-view_yview-0.5)/zoom),floor((bbox_right+0.5-view_xview)/zoom),floor((bbox_bottom+0.5-view_yview)/zoom),1)
+                draw_arrow(dx,dy+16,floor(((bbox_left+bbox_right+1)/2-view_xview)/zoom),floor(((bbox_top+bbox_bottom+1)/2-view_yview)/zoom),10)
+            }
         }
     }
     dy+=32

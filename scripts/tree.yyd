@@ -10,6 +10,7 @@
 	|draw_button_ext
 	|get_color_ext
 	|string_wrap
+	|string_delete_edge_spaces
 +file
 	|gensavecode
 	|parsereal
@@ -125,6 +126,9 @@
 |restore_collision
 |update_selection_bounds
 +fields
+	|load_object_fields
+	|invalid_variable_name
+	|invalid_field_type
 	|edit_instance_fields
 	|draw_instance_fields
 	|parse_code_into_fields
