@@ -109,7 +109,7 @@ if (sel) {
         focus=instance_position(global.mousex,global.mousey,instance)
         if (focus) {
             fields[editfid,0]=1
-            fields[editfid,1]=roomname+"_"+focus.uid
+            fields[editfid,1]=focus.uid
         }
         if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) editinst=0
     }

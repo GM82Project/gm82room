@@ -3,7 +3,11 @@ str=""
 
 for (i=0;i<objfields[obj];i+=1) {
     if (fields[i,0]) {
-        if (objfieldtype[obj,i]=="xy") {
+        if (objfieldtype[obj,i]=="instance") {
+            if (ds_map_exists(uidmap,fields[i,1])) {
+                str+=objfieldname[obj,i]+"="+roomname+"_"+fields[i,1]+lf
+            }
+        } else if (objfieldtype[obj,i]=="xy") {
             str+=objfieldname[obj,i]+"[0]="+fields[i,1]+" "+objfieldname[obj,i]+"[1]="+fields[i,2]+lf
         } else {
             str+=objfieldname[obj,i]+"="+fields[i,1]+lf

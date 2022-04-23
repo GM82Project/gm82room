@@ -76,9 +76,15 @@ for (i=0;i<objfields[obj];i+=1) {
         }
         if (objfieldtype[obj,i]=="instance") {
             draw_set_color(selcol)
-            with (ds_map_get(uidmap,string_replace(fields[i,1],roomname+"_",""))) {
-                draw_rectangle(floor((bbox_left-view_xview-0.5)/zoom),floor((bbox_top-view_yview-0.5)/zoom),floor((bbox_right+0.5-view_xview)/zoom),floor((bbox_bottom+0.5-view_yview)/zoom),1)
-                draw_arrow(dx,dy+16,floor(((bbox_left+bbox_right+1)/2-view_xview)/zoom),floor(((bbox_top+bbox_bottom+1)/2-view_yview)/zoom),10)
+            if (ds_map_exists(uidmap,fields[i,1])) {
+                with (ds_map_get(uidmap,fields[i,1])) {
+                    draw_rectangle(floor((bbox_left-view_xview-0.5)/zoom),floor((bbox_top-view_yview-0.5)/zoom),floor((bbox_right+0.5-view_xview)/zoom),floor((bbox_bottom+0.5-view_yview)/zoom),1)
+                    draw_arrow(dx,dy+16,floor(((bbox_left+bbox_right+1)/2-view_xview)/zoom),floor(((bbox_top+bbox_bottom+1)/2-view_yview)/zoom),10)
+                }
+            } else {
+                draw_set_color($ff)
+                draw_line_width(dx-8,dy+8,dx+8,dy+24,4)
+                draw_line_width(dx+8,dy+8,dx-8,dy+24,4)
             }
         }
     }
@@ -86,3 +92,4 @@ for (i=0;i<objfields[obj];i+=1) {
 }
 
 draw_set_valign(0)
+draw_set_color($ffffff)
