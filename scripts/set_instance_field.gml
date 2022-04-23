@@ -1,13 +1,13 @@
 ///set_instance_field(instance,name,value1,[value2])
-var i,p;
+var i,l;
 
 for (i=0;i<objfields[argument[0].obj];i+=1) {
     if (objfieldname[argument[0].obj,i]==argument[1]) {
         argument[0].fields[i,0]=1
 
         if (objfieldtype[argument[0].obj,i]=="instance") {
-            p=string_pos("_",argument[2])
-            argument[0].fields[i,1]=string_delete(argument[2],1,p)
+            l=string_length(argument[2])
+            argument[0].fields[i,1]=string_delete(argument[2],1,l-8)
         } else {
             argument[0].fields[i,1]=argument[2]
         }
