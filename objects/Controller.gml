@@ -26,6 +26,13 @@ action_id=603
 applies_to=self
 */
 step()
+#define Other_2
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+dx8_set_vsync(0)
 #define Other_3
 /*"/*'/**//* YYD ACTION
 lib_id=1
