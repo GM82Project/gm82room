@@ -1,6 +1,7 @@
 switch (argument0) {
     case "value":
     case "string":
+    case "bool":
     case "color":
     case "colour":
     case "xy":

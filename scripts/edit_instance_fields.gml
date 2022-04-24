@@ -18,6 +18,8 @@ for (i=0;i<objfields[obj];i+=1) {
             str=objfieldname[obj,i]+": ("+fields[i,1]+", "+fields[i,2]+")"
         } else if (objfieldtype[obj,i]=="string") {
             str=objfieldname[obj,i]+": "+string_replace_all(destringify(fields[i,1]),"#","\#")
+        } else if (objfieldtype[obj,i]=="bool") {
+            str=objfieldname[obj,i]
         } else {
             str=objfieldname[obj,i]+": "+fields[i,1]
         }
@@ -57,15 +59,36 @@ switch (objfieldtype[obj,menu]) {
     case "datafile": {show_field_resource_menu(datafilemenu,menu) break}
     case "constant": {show_field_resource_menu(constmenu,menu) break}
 
-    case "value": {fields[menu,0]=1 fields[menu,1]=get_string("Insert new value for "+qt+objfieldname[obj,menu]+qt+":",fields[menu,1]) break}
-    case "string": {fields[menu,0]=1 fields[menu,1]=stringify(get_string("Insert new text for "+qt+objfieldname[obj,menu]+qt+":",destringify(fields[menu,1]))) break}
-    case "color": case "colour": {fields[menu,1]="$"+string_hex(get_color_ext(real_hex(fields[menu,1]),"Select new "+objfieldtype[obj,menu]+"for "+qt+objfieldname[obj,menu]+qt+":")) fields[menu,0]=1 break}
+    case "bool": {
+        if (fields[menu,0]) {
+            if (fields[menu,1]=="true") fields[menu,1]="false"
+            else fields[menu,1]="true"
+        } else fields[menu,1]="true"
+        fields[menu,0]=1
+    } break
+
+    case "value": {
+        fields[menu,1]=get_string("Insert new value for "+qt+objfieldname[obj,menu]+qt+":",fields[menu,1])
+        fields[menu,0]=1
+    } break
+
+    case "string": {
+        fields[menu,1]=stringify(get_string("Insert new text for "+qt+objfieldname[obj,menu]+qt+":",destringify(fields[menu,1])))
+        fields[menu,0]=1
+    } break
+
+    case "color": case "colour": {
+        fields[menu,1]="$"+string_hex(get_color_ext(real_hex(fields[menu,1]),"Select new "+objfieldtype[obj,menu]+"for "+qt+objfieldname[obj,menu]+qt+":"))
+        fields[menu,0]=1
+    } break
+
     case "enum": {
         menu2=show_menu(string_replace_all(objfieldargs[obj,menu],",","|"),-1)
         if (menu2==-1) exit
-        fields[menu,0]=1
         fields[menu,1]=get_nth_token(objfieldargs[obj,menu],",",menu2)
+        fields[menu,0]=1
     break}
+
     case "xy": {editxy=1 editfid=menu break}
     case "instance": {editinst=1 editfid=menu break}
 }
