@@ -12,7 +12,7 @@ for (i=0;i<objfields[obj];i+=1) {
     if (!fields[i,0]) {
         str=objfieldname[obj,i]+" (unset)"
     } else {
-        if (objfieldtype[obj,i]=="color") {
+        if (objfieldtype[obj,i]=="color" || objfieldtype[obj,i]=="colour") {
             str=objfieldname[obj,i]+": "+fields[i,1]+"      "
         } else if (objfieldtype[obj,i]=="xy") {
             str=objfieldname[obj,i]+": ("+fields[i,1]+", "+fields[i,2]+")"
@@ -59,7 +59,7 @@ switch (objfieldtype[obj,menu]) {
 
     case "value": {fields[menu,0]=1 fields[menu,1]=get_string("Insert new value for "+qt+objfieldname[obj,menu]+qt+":",fields[menu,1]) break}
     case "string": {fields[menu,0]=1 fields[menu,1]=stringify(get_string("Insert new text for "+qt+objfieldname[obj,menu]+qt+":",destringify(fields[menu,1]))) break}
-    case "color": {fields[menu,1]="$"+string_hex(get_color_ext(real_hex(fields[menu,1]),"Select new color for "+qt+objfieldname[obj,menu]+qt+":")) fields[menu,0]=1 break}
+    case "color": case "colour": {fields[menu,1]="$"+string_hex(get_color_ext(real_hex(fields[menu,1]),"Select new "+objfieldtype[obj,menu]+"for "+qt+objfieldname[obj,menu]+qt+":")) fields[menu,0]=1 break}
     case "enum": {
         menu2=show_menu(string_replace_all(objfieldargs[obj,menu],",","|"),-1)
         if (menu2==-1) exit

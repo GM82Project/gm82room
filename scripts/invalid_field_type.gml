@@ -2,6 +2,7 @@ switch (argument0) {
     case "value":
     case "string":
     case "color":
+    case "colour":
     case "xy":
     case "sprite":
     case "sound":

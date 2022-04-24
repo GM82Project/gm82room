@@ -13,7 +13,7 @@ for (i=0;i<objfields[obj];i+=1) {
     if (!fields[i,0]) {
         str=objfieldname[obj,i]+" (unset)"
     } else {
-        if (objfieldtype[obj,i]=="color") {
+        if (objfieldtype[obj,i]=="color" || objfieldtype[obj,i]=="colour") {
             str=objfieldname[obj,i]+": "+fields[i,1]+"      "
         } else if (objfieldtype[obj,i]=="xy") {
             str=objfieldname[obj,i]+": ("+fields[i,1]+", "+fields[i,2]+")"
@@ -40,7 +40,7 @@ for (i=0;i<objfields[obj];i+=1) {
     switch (objfieldtype[obj,i]) {
         case "value": fr=0 break
         case "string": fr=1 break
-        case "color": fr=2 break
+        case "color": case "colour": fr=2 break
         case "enum": fr=3 break
         case "xy": fr=4 break
         case "sprite": fr=5 break
@@ -59,7 +59,7 @@ for (i=0;i<objfields[obj];i+=1) {
     draw_sprite(sprFieldIcons,fr,dx+28,dy+16)
 
     if (fields[i,0]) {
-        if (objfieldtype[obj,i]=="color") {
+        if (objfieldtype[obj,i]=="color" || objfieldtype[obj,i]=="colour") {
             str=objfieldname[obj,i]+": "+fields[i,1]+" "
             l=string_width(str)
             col=real_hex(fields[i,1])
