@@ -668,10 +668,10 @@ with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtoolti
 if (mousein && mode==0) {
     if (keyboard_check(ord("C"))) {
         with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
-            draw_instance_fields()
+            draw_instance_fields(1)
         }
     } else with (select) if (fieldactive) {
-        draw_instance_fields()
+        draw_instance_fields(0)
     }
 }
 

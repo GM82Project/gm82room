@@ -1,3 +1,4 @@
+///draw_instance_fields(preview)
 var str,i,dx,dy;
 str=""
 
@@ -7,12 +8,12 @@ dy=floor((fieldhandy-view_yview)/zoom+24)
 draw_set_valign(1)
 
 for (i=0;i<objfields[obj];i+=1) {
-    draw_set_color_sel()
-    draw_line(dx,dy-16,dx,dy+16)
-    draw_line(dx,dy+16,dx+16,dy+16)
     if (!fields[i,0]) {
-        str=objfieldname[obj,i]+" (unset)"
+        if (argument0) continue
+        str=objfieldname[obj,i]
+        col1=$808080
     } else {
+        col1=$ddffff
         if (objfieldtype[obj,i]=="color" || objfieldtype[obj,i]=="colour") {
             str=objfieldname[obj,i]+": "+fields[i,1]+"      "
         } else if (objfieldtype[obj,i]=="xy") {
@@ -30,9 +31,13 @@ for (i=0;i<objfields[obj];i+=1) {
         col1=$ffffff
         col2=selcol
     } else {
-        col1=$ddffff
         col2=0
     }
+
+    draw_set_color_sel()
+    draw_line(dx,dy-16,dx,dy+16)
+    draw_line(dx,dy+16,dx+16,dy+16)
+
     draw_rectangle_color(dx+16,dy+4,dx+dw,dy+28,col1,col1,col1,col1,0)
     draw_rectangle_color(dx+16,dy+4,dx+dw,dy+28,col2,col2,col2,col2,1)
     draw_set_color(0)
