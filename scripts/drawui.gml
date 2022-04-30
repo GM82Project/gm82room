@@ -80,7 +80,10 @@ if (mode==0) {
         event_user(0)
     }
     draw_set_color_sel()
-    with (focus) draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
+    with (focus) {
+        draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
+        if (select!=id) event_user(5)
+    }
     draw_set_color($ffffff)
 
     if (keyboard_check(ord("C"))) with (instance) {
@@ -666,12 +669,21 @@ with (Button) button_draw()
 with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
 
 if (mousein && mode==0) {
-    if (keyboard_check(ord("C"))) {
-        with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+    with (select) {
+        if (fieldactive) {
+            draw_instance_fields(0)
+        } else if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
             draw_instance_fields(1)
         }
-    } else with (select) if (fieldactive) {
-        draw_instance_fields(0)
+    }
+    if (keyboard_check(ord("C"))) {
+        with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm || other.focus==id && !fieldactive) {
+            draw_instance_fields(1)
+        }
+    } else {
+        with (focus) if (!fieldactive) {
+            draw_instance_fields(1)
+        }
     }
 }
 

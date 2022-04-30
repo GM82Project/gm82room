@@ -166,14 +166,7 @@ if (rotato) draw_line(x,y,rothandx,rothandy)
 draw_circle(rothandx,rothandy,10*zm,1)
 draw_circle(rothandx,rothandy,5*zm,1)
 
-if (hasfields) {
-    fieldhandx=bbox_left-4
-    fieldhandy=bbox_bottom+4
-    draw_rectangle(fieldhandx-6*zm,fieldhandy-7*zm,fieldhandx+8*zm,fieldhandy+9*zm,1)
-    draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
-    draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
-    draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1,fieldhandy+4*zm,1)
-}
+event_user(5)
 
 draw_set_color($ffffff)
 draw_set_alpha(1)
@@ -210,12 +203,7 @@ if (hasfields) {
 
     zm=max(0.5,zoom)
 
-    fieldhandx=bbox_left-4
-    fieldhandy=bbox_bottom+4
-    draw_rectangle(fieldhandx-6*zm,fieldhandy-7*zm,fieldhandx+8*zm,fieldhandy+9*zm,1)
-    draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
-    draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
-    draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1,fieldhandy+4*zm,1)
+    if (Controller.focus!=id) event_user(5)
 
     //draw arrows if instance has any "xy" or "instance" fields
     if !(abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
@@ -239,4 +227,22 @@ if (hasfields) {
     draw_set_color($ffffff)
     draw_set_alpha(1)
     d3d_transform_set_identity()
+}
+#define Other_15
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+
+if (hasfields) {
+    zm=max(0.5,zoom)
+
+    fieldhandx=bbox_left-4
+    fieldhandy=bbox_bottom+4
+    draw_rectangle(fieldhandx-6*zm,fieldhandy-7*zm,fieldhandx+8*zm,fieldhandy+9*zm,1)
+    draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
+    draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
+    if (fieldactive) draw_triangle(fieldhandx-8*zm,fieldhandy+1*zm,fieldhandx+2*zm,fieldhandy+1*zm,fieldhandx-3*zm,fieldhandy+11*zm,0)
+    else draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1*zm,fieldhandy+4*zm,1)
 }

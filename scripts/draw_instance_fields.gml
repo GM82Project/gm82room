@@ -13,7 +13,8 @@ for (i=0;i<objfields[obj];i+=1) {
         str=objfieldname[obj,i]
         col1=$808080
     } else {
-        col1=$ddffff
+        if (argument0) col1=$808080
+        else col1=$ddffff
         if (objfieldtype[obj,i]=="color" || objfieldtype[obj,i]=="colour") {
             str=objfieldname[obj,i]+": "+fields[i,1]+"      "
         } else if (objfieldtype[obj,i]=="xy") {
@@ -34,7 +35,8 @@ for (i=0;i<objfields[obj];i+=1) {
         col2=0
     }
 
-    draw_set_color_sel()
+    if (fieldactive) draw_set_color_sel()
+    else draw_set_color(0)
     draw_line(dx,dy-16,dx,dy+16)
     draw_line(dx,dy+16,dx+16,dy+16)
 
