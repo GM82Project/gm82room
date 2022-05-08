@@ -40,7 +40,7 @@ if (down!=0 && focus && !active && !(gray)) {
     //activate textfield
     with (TextField) textfield_actions()
     active=1
-    selected=1
+    if (text!="") selected=1
     if (type==0 || type=4) {
         keyboard_string=text
     }
