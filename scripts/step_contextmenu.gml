@@ -72,7 +72,7 @@ if (click) {
         if (mode==3) {
             if (str==undefined) {
                 undo_globalvec("vw_follow",vw_current,"view "+string(vw_current)+" options")
-                vw_follow[vw_current]=noone
+                vw_follow[vw_current]=""
                 textfield_set("view follow","")
             } else {
                 undo_globalvec("vw_follow",vw_current,"view "+string(vw_current)+" options")
