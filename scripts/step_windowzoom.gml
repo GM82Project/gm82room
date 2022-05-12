@@ -22,8 +22,8 @@ if (resizecount<10) {
     } else resizecount=0
 }
 
-if (!window_has_focus()) room_speed=5
-else room_speed=maxfps
+if (window_focused && !window_has_focus()) room_speed=5
+else {window_focused=true room_speed=maxfps}
 
 mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()

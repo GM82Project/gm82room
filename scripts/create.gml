@@ -54,6 +54,7 @@ vw_current=0
 ly_current=0
 icon_mode=0
 focus=noone
+window_focused=false
 
 undo_initialize()
 
