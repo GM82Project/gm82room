@@ -25,8 +25,8 @@ l=ds_list_size(layers) for (i=0;i<l;i+=1) {
                 string(tile_get_top(tile))+","+
                 string(tile_get_width(tile))+","+
                 string(tile_get_height(tile))+",0,"+
-                string(tilesx)+","+
-                string(tilesy)+","+
+                string_better(tilesx)+","+
+                string_better(tilesy)+","+
                 string(round(image_alpha*255)*$1000000+image_blend)
             file_text_write_string(f2,str+lf)
         }
@@ -51,10 +51,10 @@ repeat (l) with (ds_priority_delete_min(pr)) {
         string(round(x))+","+
         string(round(y))+","+
         uid+",0,"+
-        string(image_xscale)+","+
-        string(image_yscale)+","+
+        string_better(image_xscale)+","+
+        string_better(image_yscale)+","+
         string(round(image_alpha*255)*$1000000+image_blend)+","+
-        string(image_angle)+","+
+        string_better(image_angle)+","+
         string(savecode!="")
     file_text_write_string(f,str+lf)
 
