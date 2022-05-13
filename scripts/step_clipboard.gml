@@ -7,7 +7,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) {
     update_inspector()
     update_selection_bounds()
 }
-if (keyboard_check(vk_control) && keyboard_check_pressed(ord("C")) || keyboard_check_pressed(ord("X"))) {
+if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_check_pressed(ord("X")))) {
     cur=0
     minselx=99999999
     minsely=99999999
