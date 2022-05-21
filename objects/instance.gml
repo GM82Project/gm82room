@@ -234,12 +234,12 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-
 if (hasfields) {
     zm=max(0.5,zoom)
 
-    fieldhandx=bbox_left-4
-    fieldhandy=bbox_bottom+4
+    fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)
+    fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)
+
     draw_rectangle(fieldhandx-6*zm,fieldhandy-7*zm,fieldhandx+8*zm,fieldhandy+9*zm,1)
     draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
     draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
