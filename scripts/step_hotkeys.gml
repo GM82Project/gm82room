@@ -1,8 +1,10 @@
 var yes;
 
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("Z"))) {
-    keyboard_clear(ord("Z"))
-    pop_undo()
+    yes=1 with (TextField) if (active) {yes=0 text=oldtext textfield_actions() active=0} if (yes) {
+        keyboard_clear(ord("Z"))
+        pop_undo()
+    }
 }
 if (keyboard_check_pressed(vk_escape)) {
     with (TextField) textfield_actions()
@@ -11,14 +13,16 @@ if (keyboard_check_pressed(vk_escape)) {
 }
 
 if (keyboard_check_pressed(vk_delete)) {
-    clear_inspector()
-    select=noone
-    selectt=noone
-    if (num_selected()) begin_undo(act_create,"deleting "+pick(mode,"instances","tiles"),0)
-    if (mode==0) with (instance) if (sel) {add_undo_instance() instance_destroy()}
-    if (mode==1) with (tileholder) if (sel) {add_undo_tile() instance_destroy()}
-    push_undo()
-    selection=0
+    yes=1 with (TextField) if (active) yes=0 if (yes) {
+        clear_inspector()
+        select=noone
+        selectt=noone
+        if (num_selected()) begin_undo(act_create,"deleting "+pick(mode,"instances","tiles"),0)
+        if (mode==0) with (instance) if (sel) {add_undo_instance() instance_destroy()}
+        if (mode==1) with (tileholder) if (sel) {add_undo_tile() instance_destroy()}
+        push_undo()
+        selection=0
+    }
 }
 
 if (keyboard_check_pressed(vk_f5)) {
@@ -31,9 +35,7 @@ h=keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left)
 v=keyboard_check_pressed(vk_down)-keyboard_check_pressed(vk_up)
 
 if (h!=0 || v!=0) {
-    yes=1
-    with (TextField) if (active) yes=0
-    if (yes) {
+    yes=1 with (TextField) if (active) yes=0 if (yes) {
         keyboard_clear(vk_left)
         keyboard_clear(vk_right)
         keyboard_clear(vk_up)

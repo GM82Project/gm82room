@@ -15,6 +15,15 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_
     maxsely=-minsely
     yes=(keyboard_check_pressed(ord("X")))
 
+    with (TextField) if (active) {
+        clipboard_set_text(keyboard_string)
+        if (yes) {
+            text=""
+            keyboard_string=text
+        }
+        yes=0
+    }
+
     if (yes) {
         if (num_selected()) begin_undo(act_create,"cutting "+pick(mode,"instances","tiles"),0)
     }
@@ -75,11 +84,18 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_
     }
 }
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
-    if (copymode!=mode) show_message("Clipboard currently contains "+pick(copymode+1,"no data.","instance data. To paste, please switch to the instance tab.","tile data. To paste, please switch to the tiles tab."))
-    else {
-        yes=copyvec[0,0]
-        with (TextField) if (active) yes=0
-        if (yes) {
+    yes=copyvec[0,0]
+    with (TextField) if (active) {
+        yes=0
+        if (clipboard_has_text()) {
+            text=clipboard_get_text()
+            keyboard_string=text
+            selected=0
+        }
+    }
+    if (yes) {
+        if (copymode!=mode) show_message("Clipboard currently contains "+pick(copymode+1,"no data.","instance data. To paste, please switch to the instance tab.","tile data. To paste, please switch to the tiles tab."))
+        else {
             with (instance) sel=0
             with (tileholder) sel=0
             if (keyboard_check(vk_alt)) {
