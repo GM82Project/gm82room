@@ -2,6 +2,9 @@
 var str,i,dx,dy;
 str=""
 
+fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)
+fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)
+
 dx=floor((fieldhandx-view_xview)/zoom)
 dy=floor((fieldhandy-view_yview)/zoom+24)
 
