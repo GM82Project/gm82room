@@ -73,7 +73,8 @@ if (object_index==Button) {
             draw_set_color($ffffff)
         }
         if (spr!=noone) {
-            draw_sprite(sprMenuButtons,spr,x+w/2,y+h/2)
+            if (text!="") draw_sprite(sprMenuButtons,spr,x+w/2-floor(string_width(text)/2),y+h/2)
+            else draw_sprite(sprMenuButtons,spr,x+w/2,y+h/2)
         }
         if (checked) {
             draw_sprite(sprMenuButtons,17,x+w/2,y+h/2)

@@ -205,15 +205,17 @@ i.w=72
 i.tagmode=0
 
 //creation code
-i=instance_create(width-160,376,Button)
+i=instance_create(width-160+4,376+4,Button)
 i.action="inst code"
-i.text="Creation code"
+i.text="  Creation"
+i.spr=31
 i.anchor=1
 i.dynamic=0
-i.w=160
+i.w=160-8
+i.h=32-4
 i.tagmode=0
 
-i=instance_create(width-160,408,TextField)
+i=instance_create(width-160,408+4,TextField)
 i.action="inst code box"
 i.alt="Quick code editor"
 i.anchor=1
