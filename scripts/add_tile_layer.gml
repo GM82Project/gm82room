@@ -7,7 +7,10 @@ else newlayer=ds_list_find_value(layers,layersize-1)-100
 while (ds_list_find_index(layers,newlayer)!=-1) newlayer-=100
 
 ds_list_add(layers,newlayer)
-ly_current=layersize
-ly_depth=ds_list_find_value(layers,ly_current)
 
-layersize+=1
+ds_list_sort(layers,1)
+layersize=ds_list_size(layers)
+
+ly_current=ds_list_find_index(layers,newlayer)
+
+ly_depth=newlayer

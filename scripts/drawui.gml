@@ -654,7 +654,7 @@ if (mode==1 && tilebgpal!=noone) {
             posx+=1 if (posx=4) {posx=0 posy+=1}
         }
 
-        if (paltooltip && !paladdbuttondown) tooltiptext="Add more..."
+        if (paltooltip && !paladdbuttondown) tooltiptext="Add tiles..."
     }
 
     if (mouse_wx>=width-160 && mouse_wy>=360 && mouse_wy<height-100) {
