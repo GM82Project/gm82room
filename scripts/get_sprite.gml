@@ -1,5 +1,6 @@
 var i,map;
 
+if (is_real(argument0)) return sprDefault
 if (argument0="") return sprDefault
 
 i=ds_list_find_index(sprites,argument0)

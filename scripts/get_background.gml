@@ -2,6 +2,7 @@ var i,map,list,w,h;
 
 micro_optimization_bgid=noone
 
+if (is_real(argument0)) return bgDefault
 if (argument0=="") return bgDefault
 
 i=ds_list_find_index(backgrounds,argument0)
