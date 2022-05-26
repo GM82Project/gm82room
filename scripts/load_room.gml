@@ -308,11 +308,14 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
     }
 } until (file_text_eof(f)) file_text_close(f)}
 
-//load last object as per gm8 standard
-//make sure it's one that exists
+//load last 3 objects added for convenience
 i=objects_length
-do {i-=1 o=ds_list_find_value(objects,i)} until (i==0 || o!="")
-if (i!=0) get_object(o)
+repeat (3) {
+    if (i!=0) {
+        do {i-=1 o=ds_list_find_value(objects,i)} until (i==0 || o!="")
+        if (i!=0) get_object(o)
+    }
+}
 
 draw_loader("Finishing up...",progress,"")
 
