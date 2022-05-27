@@ -310,12 +310,18 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
 
 //load last 3 objects added for convenience
 i=objects_length
+var lastobj;lastobj=noone
 repeat (3) {
     if (i!=0) {
         do {i-=1 o=ds_list_find_value(objects,i)} until (i==0 || o!="")
-        if (i!=0) get_object(o)
+        if (i!=0) {
+            get_object(o)
+            //and then select the last one
+            if (lastobj=noone) lastobj=objpal
+        }
     }
 }
+objpal=lastobj
 
 draw_loader("Finishing up...",progress,"")
 
