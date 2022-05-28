@@ -1,0 +1,176 @@
+
+    Game Maker 8.2 Object Fields feature
+    ====================================
+
+    Initial draft April 11 2022
+    ---------------------------
+    Version 5 - May 28 2022
+    
+    renex & Floogle
+
+--------------------------------------------------------------------------------
+
+0. Initial remarks
+
+    - The builtin GM8 room editor cannot be used for any of this functionality.
+    - Modifying the generated room code by hand can cause the editor's parser to
+      crash, as it has been written to be as fast as possible and as a result
+      doesn't perform any kind of safety checks.
+    - a gm82 project version 4 is required (you can check the version in the
+      main project .gm82 file). The most recent version of gm82save will
+      automatially convert any v3 projects into v4, but the room editor by
+      itself doesn't have the ability to read v2 or v3 anymore.
+
+
+--------------------------------------------------------------------------------
+
+1. What are fields?
+
+    "Fields" are a neat way to declare "templates" for room creation code.
+    Instead of having to remember or look in the object code to figure out what
+    kind of variables you need to put in the creation code, fields instead lay
+    out instructions for the room editor on what options to make available to
+    you, with a visual editor where you can easily change things.
+    
+    Fields can be of type:
+
+    - value (gml expression)
+    - string (treated as text, quotes are escaped)
+    - number (strictly a numerical value, min/max)
+    - colo[u]r ($BBGGRR)
+    - bool (true/false)
+    - instance (another instance from this room)
+    - enum (list of options)
+    - xy (coordinates, uses 2-position array)
+    - angle (0-360)
+    - resource (any of the resource types:)
+        -- sprite
+        -- sound
+        -- background
+        -- path
+        -- script
+        -- font
+        -- timeline
+        -- object
+        -- room
+        -- datafile
+        -- constant
+
+    Additionally, a special description field can be used to display
+    instructions right in the room editor:
+    -----------------------------
+    | /*desc
+    | This object is used to group a selection of Yoku Blocks.
+    | Placing it in a room will activate any blocks inside of it,
+    | when the Player object of the engine enters it.
+    | */
+    -----------------------------
+    
+
+--------------------------------------------------------------------------------
+
+2. Field declarations are placed on Room Start events
+
+    Fields can only be used in room start events, in a format like this:
+    -----------------------------
+    | //field name: type [default]
+    -----------------------------
+    
+    - You can then use the variable named after the field in this event.
+    - The default value is used when not given.
+    
+    If the type is not specified, it's assumed to be 'value':
+    -----------------------------
+    | //field timer
+    -----------------------------
+    
+    More examples:    
+    -----------------------------
+    | //field target: xy
+    | //field trigger: instance
+    | //field tex: background
+    | //field col: color
+    -----------------------------
+    
+    Indentation and whitespace is ignored, except for in "//field".
+    -----------------------------
+    | //field   one:  value
+    | //field three:  value
+    | 
+    | // field broken:  string <-- this doesn't work because of the space
+    -----------------------------
+    
+    Enums require a list of options:
+    -----------------------------
+    | //field option: enum(true,false) [false]
+    | //field halign: enum(fa_left,fa_center,fa_right)
+    | //field type: enum("type 1","type 2")
+    | //field size: enum("global.size","global.size + 5")
+    | 
+    | //field broken: enum <-- this doesn't work because it doesn't have options
+    -----------------------------
+    
+    The xy type creates an array with two positions. Example:
+    -----------------------------
+    | //field target: xy
+    | 
+    | warpX = target[0]
+    | warpY = target[1]
+    -----------------------------
+
+    The number type requires a min and max:
+    -----------------------------
+    | //field count: number(1,3)
+    | //field fric: number(0.1,10.5)
+    | //field range: number(-10,10)
+    |
+    | //field broken: number <-- this doesn't work because it has no range
+    -----------------------------
+    If you don't need a range, use a value type field for simplicity.
+
+--------------------------------------------------------------------------------
+
+3. The new room editor technology
+
+    The 8.2 room editor will parse and detect any issues with field declarations
+    in objects, when they're loaded (f.ex. when placed for the first time).
+    
+    Valid fields are displayed for editing, and will be compiled to specially
+    formatted creation code.
+    
+    - In order to select a position for the xy type, drag with the cursor.
+    - In order to select an instance type, drag the cursor onto an instance.
+    - Holding C will highlight instances that may hold field data.
+    
+    Example compiled TextDraw creation code from renex engine:
+    -----------------------------
+    | //gm82 fields begin
+    | text="RENEX ENGINE"
+    | font=fntFileBig
+    | halign=fa_center
+    | //gm82 fields end
+    -----------------------------
+
+
+--------------------------------------------------------------------------------
+
+4. Instance ids
+
+    In order to make instance ids possible, a new system was developed.
+    
+    - Instances are given unique names composed of the room name, followed by
+      an underscore and a random hex number. Example:
+      
+    rmDemo3_0EEDFADE
+    
+    - These instance names are compiled into GML constants. You can use them
+      anywhere in your code, but remember that they will only point to a valid
+      instance in the room they're stored in.
+    - When editing a room, the first part of the name is omitted, so you'd only
+      see the "0EEDFADE" part. This is normal, as the room name is written down
+      when saving.
+    - The old "copy object name" button will now instead copy the unique
+      instance name for use in code.
+
+
+--------------------------------------------------------------------------------
