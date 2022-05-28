@@ -10,6 +10,7 @@ var i,f,reading,str,p,linec,actionc,line,fp;
 i=argument0
 
 objfields[i]=0
+objdesc[i]=""
 reading=0
 f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
     line=file_text_read_string(f)
@@ -35,8 +36,23 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         }
 
         linec+=1
+        fp=string_pos("/*desc",str)
+        if (fp) {
+            //yoooooooo we found one of those cool new description fields, let's parse it
+            indent=fp
+            while (1) {
+                str=file_text_read_string(f)
+                file_text_readln(f)
+                if (string_pos("*/",str) || file_text_eof(f)) break
+                //delete indentation
+                p=0 repeat (indent) {if (string_char_at(str,p+1)=" ") p+=1}
+                objdesc[i]+=string_delete(str,1,p)+lf
+            }
+            objdesc[i]=string_copy(objdesc[i],1,string_length(objdesc[i])-1)
+        }
         fp=string_pos("//field ",str)
         if (fp) {
+            //all the errors start with this so we cache it now
             error="Error in action "+string(actionc)+" of Room Start event for "+qt+argument1+qt+":"+crlf+crlf+string(linec)+" | "+line+crlf+crlf
             //found a field signature; parse it
             p=string_pos(": ",str)

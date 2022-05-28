@@ -1,5 +1,5 @@
 ///draw_instance_fields(preview)
-var str,i,dx,dy;
+var str,i,dx,dy,h;
 str=""
 
 fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)
@@ -103,6 +103,8 @@ for (i=0;i<objfields[obj];i+=1) {
     }
     dy+=32
 }
+
+if (objfields[obj]) tty+=dy-mouse_wy-24
 
 draw_set_valign(0)
 draw_set_color($ffffff)

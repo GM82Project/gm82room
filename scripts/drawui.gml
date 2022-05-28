@@ -610,6 +610,7 @@ if (mode==0) {
             }
             draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
             tooltiptext=ds_list_find_value(objects,i)
+            if (objdesc[i]!="") tooltiptext=tooltiptext+lf+lf+objdesc[i]
         }
         posx+=1 if (posx=4) {posx=0 posy+=1}
     }
@@ -683,6 +684,7 @@ if (mousein && mode==0) {
     } else {
         with (focus) if (!fieldactive) {
             draw_instance_fields(1)
+            if (objdesc[obj]!="") drawtooltip(objdesc[obj])
         }
     }
 }
