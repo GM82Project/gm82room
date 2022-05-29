@@ -22,8 +22,16 @@ if (resizecount<10) {
     } else resizecount=0
 }
 
-if (window_has_focus()) {window_focused=true room_speed=maxfps}
-else if (window_focused) room_speed=5
+if (window_has_focus()) {
+    window_focused=true
+    room_speed=maxfps
+    powersave=false
+    selcol=merge_color($ff0000,$ffffff,dsin((0.5+0.5*sin(current_time/200))*90))
+} else if (window_focused) {
+    room_speed=5
+    powersave=true
+    selcol=$ff8000
+}
 
 mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
@@ -91,5 +99,3 @@ if (zooming) {
         zooming=0
     }
 }
-
-selcol=merge_color($ff0000,$ffffff,0.5+0.5*sin(current_time/200))

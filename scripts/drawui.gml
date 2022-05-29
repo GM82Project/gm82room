@@ -1,6 +1,8 @@
 var yes,l,t,r,b,zm;
 var nomorefortnite;nomorefortnite=0
 
+var sel_alpha; if (powersave) sel_alpha=0.5 else sel_alpha=0.5+0.25*sin(current_time/200)
+
 draw_backgrounds(1)
 
 fmx=floorto(global.mousex,gridx)
@@ -62,9 +64,8 @@ if (mode==0) {
     texture_set_interpolation(interpolation)
 
     d3d_set_fog(1,$ff8000,0,0)
-    var a;a=0.5+0.25*sin(current_time/200)
     with (instance) if (sel) {
-        draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,a)
+        draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,sel_alpha)
     }
     d3d_set_fog(0,0,0,0)
 
@@ -114,7 +115,7 @@ if (mode==1) {
     texture_set_interpolation(interpolation)
 
     draw_set_color($ff8000)
-    draw_set_alpha(0.5+0.25*sin(current_time/200))
+    draw_set_alpha(sel_alpha)
     with (tileholder) if (sel) {
         draw_rectangle(x-0.5,y-0.5,x+image_xscale-0.5,y+image_yscale-0.5,0)
     }
