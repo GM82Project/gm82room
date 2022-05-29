@@ -131,7 +131,8 @@ if (sel) {
         }
         if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
             if (editangle==1) {
-                fields[editfid,1]=get_string("Insert new angle for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
+                fields[editfid,0]=1
+                fields[editfid,1]=string_better(modwrap(real(get_string("Insert new angle for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])),0,360))
             }
             editangle=0
         }
@@ -148,7 +149,8 @@ if (sel) {
         }
         if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
             if (editrad==1) {
-                fields[editfid,1]=get_string("Insert new radius for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
+                fields[editfid,0]=1
+                fields[editfid,1]=string_better(max(0,real(get_string("Insert new radius for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1]))))
             }
             editrad=0
         }
