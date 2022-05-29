@@ -63,6 +63,12 @@ draw_paths()
 if (mode==0) {
     texture_set_interpolation(interpolation)
 
+    with (instance) if (fieldactive) {
+        //darken the room when there's fields ui up
+        rect(0,0,roomwidth,roomheight,0,0.5)
+        draw_self()
+    }
+
     d3d_set_fog(1,$ff8000,0,0)
     with (instance) if (sel) {
         draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,sel_alpha)
@@ -685,7 +691,6 @@ if (mousein && mode==0) {
     } else {
         with (focus) if (!fieldactive) {
             draw_instance_fields(1)
-            if (objdesc[obj]!="") drawtooltip(objdesc[obj])
         }
     }
 }

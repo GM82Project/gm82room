@@ -138,3 +138,4 @@
 	|destringify
 	|get_nth_token
 	|show_field_resource_menu
+	|draw_sprite_outline

@@ -11,6 +11,6 @@ globalvar
     selection,selleft,seltop,selwidth,selheight,selsize,grabselection,
     theme,buttontex,themebutton,
     jtool_objs,
-    objfields,objfieldname,objfieldtype,objfieldargs,objdesc
+    objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef
     thumbmap,thumbcount
 ;

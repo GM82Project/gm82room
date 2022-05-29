@@ -1,5 +1,5 @@
 ///edit_instance_fields(delete)
-var str,i,dx,dy,menu,menu2;
+var str,i,dx,dy,menu,menu2,left,right;
 
 //yeah i know this is the same as the draw script but what can i do
 
@@ -8,9 +8,21 @@ dy=floor((fieldhandy-view_yview)/zoom+24)
 
 menu=-1
 
+if (objdesc[obj]!="") {
+    //object has a description field
+
+    str=objdesc[obj]
+
+    str=string_replace_all(str,lf,crlf)
+
+    h=string_height_ext(str,-1,width*0.5)+8
+
+    dy+=h+8
+}
+
 for (i=0;i<objfields[obj];i+=1) {
     if (!fields[i,0]) {
-        str=objfieldname[obj,i]+" (unset)"
+        str=objfieldname[obj,i]+objfielddef[obj,i]
     } else {
         if (objfieldtype[obj,i]=="color" || objfieldtype[obj,i]=="colour") {
             str=objfieldname[obj,i]+": "+fields[i,1]+"      "
@@ -28,6 +40,10 @@ for (i=0;i<objfields[obj];i+=1) {
     if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+dw,dy+28)) {
         //edit this field
         menu=i
+        menux=dx+16
+        menuy=dy+4
+        menuw=dx+dw
+        menuh=dy+28
     }
     dy+=32
 }
@@ -89,6 +105,20 @@ switch (objfieldtype[obj,menu]) {
         fields[menu,0]=1
     break}
 
+    case "number": {
+        fields[menu,1]=get_string("Insert new number for "+qt+objfieldname[obj,menu]+qt+":",fields[menu,1])
+        fields[menu,0]=1
+    } break
+    case "number_range": {
+        string_token_start(objfieldargs[obj,menu],",")
+        left=string_token_next()
+        right=string_token_next()
+        fields[menu,1]=string_better(median(real(left),real(right),real(get_string("Insert new number for "+qt+objfieldname[obj,menu]+qt+"#(between "+left+" and "+right+"):",fields[menu,1]))))
+        fields[menu,0]=1
+    } break
+
     case "xy": {editxy=1 editfid=menu break}
     case "instance": {editinst=1 editfid=menu break}
+    case "angle": {editangle=1 editfid=menu break}
+    case "radius": {editrad=1 editfid=menu break}
 }

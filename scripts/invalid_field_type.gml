@@ -1,5 +1,8 @@
 switch (argument0) {
     case "value":
+    case "number":
+    case "angle":
+    case "radius":
     case "string":
     case "bool":
     case "color":

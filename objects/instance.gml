@@ -16,6 +16,8 @@ hasfields=0
 fieldactive=0
 editxy=0
 editinst=0
+editangle=0
+editrad=0
 editfid=0
 
 rothandx=-9999999
@@ -94,22 +96,72 @@ if (sel) {
     }
 
     if (editxy) {
-        fields[editfid,0]=1
-        if (keyboard_check(vk_alt)) {
-            fields[editfid,1]=string(global.mousex)
-            fields[editfid,2]=string(global.mousey)
-        } else {
-            fields[editfid,1]=string(roundto(global.mousex,gridx))
-            fields[editfid,2]=string(roundto(global.mousey,gridy))
+        if (!point_in_rectangle(mouse_wx,mouse_wy,menux,menuy,menuw,menuh)) editxy=2
+        if (editxy==2) {
+            fields[editfid,0]=1
+            if (keyboard_check(vk_alt)) {
+                fields[editfid,1]=string(global.mousex)
+                fields[editfid,2]=string(global.mousey)
+            } else {
+                fields[editfid,1]=string(roundto(global.mousex,gridx))
+                fields[editfid,2]=string(roundto(global.mousey,gridy))
+            }
         }
-        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) editxy=0
+        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
+            if (editxy==1) {
+                str=get_string("Insert new coordinate (x,y) for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1]+","+fields[editfid,2])
+                if (string_pos(",",str)) {
+                    string_token_start(str,",")
+                    fields[editfid,1]=string_delete_edge_spaces(string_token_next())
+                    fields[editfid,2]=string_delete_edge_spaces(string_token_next())
+                }
+            }
+            editxy=0
+        }
+    }
+    if (editangle) {
+        if (!point_in_rectangle(mouse_wx,mouse_wy,menux,menuy,menuw,menuh)) editangle=2
+        if (editangle==2) {
+            fields[editfid,0]=1
+            if (keyboard_check(vk_alt)) {
+                fields[editfid,1]=string(point_direction(x,y,global.mousex,global.mousey))
+            } else {
+                fields[editfid,1]=string(point_direction(x,y,roundto(global.mousex,gridx),roundto(global.mousey,gridy)))
+            }
+        }
+        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
+            if (editangle==1) {
+                fields[editfid,1]=get_string("Insert new angle for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
+            }
+            editangle=0
+        }
+    }
+    if (editrad) {
+        if (!point_in_rectangle(mouse_wx,mouse_wy,menux,menuy,menuw,menuh)) editrad=2
+        if (editrad==2) {
+            fields[editfid,0]=1
+            if (keyboard_check(vk_alt)) {
+                fields[editfid,1]=string(point_distance(x,y,global.mousex,global.mousey))
+            } else {
+                fields[editfid,1]=string(point_distance(x,y,roundto(global.mousex,gridx),roundto(global.mousey,gridy)))
+            }
+        }
+        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
+            if (editrad==1) {
+                fields[editfid,1]=get_string("Insert new radius for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
+            }
+            editrad=0
+        }
     }
     if (editinst) {
-        fields[editfid,0]=0
-        focus=instance_position(global.mousex,global.mousey,instance)
-        if (focus) {
-            fields[editfid,0]=1
-            fields[editfid,1]=focus.uid
+        if (!point_in_rectangle(mouse_wx,mouse_wy,menux,menuy,menuw,menuh)) editinst=2
+        if (editinst==2) {
+            fields[editfid,0]=0
+            focus=instance_position(global.mousex,global.mousey,instance)
+            if (focus) {
+                fields[editfid,0]=1
+                fields[editfid,1]=focus.uid
+            }
         }
         if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) editinst=0
     }
@@ -237,8 +289,14 @@ applies_to=self
 if (hasfields) {
     zm=max(0.5,zoom)
 
-    fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)
-    fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)
+    fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
+    fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_y(-(sprox)*image_xscale,image_angle)
+    if (point_distance(fieldhandx,fieldhandy,draghandx,draghandy)<20) {
+        w=point_distance(x,y,fieldhandx,fieldhandy)+20
+        a=point_direction(x,y,fieldhandx,fieldhandy)
+        fieldhandx=x+lengthdir_x(w,a)
+        fieldhandy=y+lengthdir_y(w,a)
+    }
 
     draw_rectangle(fieldhandx-6*zm,fieldhandy-7*zm,fieldhandx+8*zm,fieldhandy+9*zm,1)
     draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)

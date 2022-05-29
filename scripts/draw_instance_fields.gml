@@ -2,18 +2,49 @@
 var str,i,dx,dy,h;
 str=""
 
-fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)
-fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)
+fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
+fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_y(-(sprox)*image_xscale,image_angle)
+if (point_distance(fieldhandx,fieldhandy,draghandx,draghandy)<20) {
+    w=point_distance(x,y,fieldhandx,fieldhandy)+20
+    a=point_direction(x,y,fieldhandx,fieldhandy)
+    fieldhandx=x+lengthdir_x(w,a)
+    fieldhandy=y+lengthdir_y(w,a)
+}
 
 dx=floor((fieldhandx-view_xview)/zoom)
 dy=floor((fieldhandy-view_yview)/zoom+24)
+
+if (objdesc[obj]!="") {
+    //object has a description field; let's draw it before
+
+    str=objdesc[obj]
+
+    str=string_replace_all(str,lf,crlf)
+
+    w=string_width_ext(str,-1,width*0.5)+8
+    h=string_height_ext(str,-1,width*0.5)+8
+
+    if (fieldactive) draw_set_color_sel()
+    else draw_set_color(0)
+    draw_line(dx,dy-16,dx,dy+h-8)
+    draw_line(dx,dy+h-8,dx+16,dy+h-8)
+
+    x1=dx+16
+    y1=dy+4
+
+    draw_rectangle_color(x1,y1,x1+w,y1+h,$ddffff,$ddffff,$ddffff,$ddffff,0)
+    draw_rectangle_color(x1,y1,x1+w,y1+h,0,0,0,0,1)
+    draw_text_ext_color(x1+4,y1+4,str,-1,width*0.5,0,0,0,0,1)
+
+    dy+=h+8
+}
 
 draw_set_valign(1)
 
 for (i=0;i<objfields[obj];i+=1) {
     if (!fields[i,0]) {
         if (argument0) continue
-        str=objfieldname[obj,i]
+        str=objfieldname[obj,i]+objfielddef[obj,i]
         col1=$808080
     } else {
         if (argument0) col1=$808080
@@ -68,8 +99,16 @@ for (i=0;i<objfields[obj];i+=1) {
         case "constant": fr=15 break
         case "instance": fr=16 break
         case "bool": fr=17 if (fields[i,0]) if (fields[i,1]=="true") fr=18 break
+        case "number": case "number_range": fr=19 break
+        case "radius": fr=20 break
     }
-    draw_sprite(sprFieldIcons,fr,dx+28,dy+16)
+    if (objfieldtype[obj,i]=="angle") {
+        if (fields[i,0]) ang=real(fields[i,1])
+        else ang=0
+        texture_set_interpolation(0)
+        draw_sprite_outline(sprFieldAngle,fr,dx+28,dy+16,0.25,0.25,ang,$ffffff,1)
+        texture_set_interpolation(1)
+    } else draw_sprite(sprFieldIcons,fr,dx+28,dy+16)
 
     if (fields[i,0]) {
         if (objfieldtype[obj,i]=="color" || objfieldtype[obj,i]=="colour") {
@@ -100,11 +139,43 @@ for (i=0;i<objfields[obj];i+=1) {
                 draw_line_width(dx+8,dy+8,dx-8,dy+24,4)
             }
         }
+        if (objfieldtype[obj,i]=="angle") {
+            draw_set_color(selcol)
+
+            px=floor((x-view_xview)/zoom)
+            py=floor((y-view_yview)/zoom)
+
+            a=real(fields[i,1])
+
+            draw_arrow(px,py,px+lengthdir_x(100,a),py+lengthdir_y(100,a),8)
+
+            if (editangle==2 && editfid==i) {
+                if (keyboard_check(vk_alt)) {
+                    px=floor((global.mousex-view_xview)/zoom)
+                    py=floor((global.mousey-view_yview)/zoom)
+                } else {
+                    px=floor((roundto(global.mousex,gridx)-view_xview)/zoom)
+                    py=floor((roundto(global.mousey,gridy)-view_yview)/zoom)
+                }
+
+                draw_line_width(px-10,py-10,px+10,py+10,3)
+                draw_line_width(px-10,py+10,px+10,py-10,3)
+            }
+        }
+        if (objfieldtype[obj,i]=="radius") {
+            draw_set_color(selcol)
+
+            px=floor((x-view_xview)/zoom)
+            py=floor((y-view_yview)/zoom)
+
+            a=real(fields[i,1])/zoom
+            draw_set_circle_precision(64)
+            draw_circle(px,py,a,1)
+            draw_set_circle_precision(8)
+        }
     }
     dy+=32
 }
-
-if (objfields[obj]) tty+=dy-mouse_wy-24
 
 draw_set_valign(0)
 draw_set_color($ffffff)

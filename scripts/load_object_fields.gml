@@ -55,6 +55,15 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
             //all the errors start with this so we cache it now
             error="Error in action "+string(actionc)+" of Room Start event for "+qt+argument1+qt+":"+crlf+crlf+string(linec)+" | "+line+crlf+crlf
             //found a field signature; parse it
+
+            //find annotations
+            objfielddef[i,objfields[i]]=""
+            p=string_pos("-",str)
+            if (p) {
+                objfielddef[i,objfields[i]]=" - "+string_delete_edge_spaces(string_delete(str,1,p))
+                str=string_delete_edge_spaces(string_copy(str,1,p-1))
+            }
+
             p=string_pos(": ",str)
             if (p) {
                 fieldname=string_delete_edge_spaces(string_copy(str,fp+8,p-(fp+8)))
@@ -78,6 +87,30 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                             }
                         } else {
                             show_message(error+"Enum declaration missing list of options in parenthesis.")
+                        }
+                    } else if (string_pos("number",str)) {
+                        //numbers are parsed differently due to range list
+                        if (string_count("(",str)==1 && string_count(")",str)==1 && string_pos("(",str)<string_pos(")",str)) {
+                            objfieldtype[i,objfields[i]]="number_range"
+                            //get the range from within the ()'s
+                            str=string_delete(string_copy(str,1,string_pos(")",str)-1),1,string_pos("(",str))
+                            if (str="") {
+                                show_message(error+"Number declaration has empty range.")
+                            } else {
+                                string_token_start(str,",")
+                                left=string_number(string_token_next())
+                                right=string_number(string_token_next())
+
+                                if (left=="" || right=="") {
+                                    show_message(error+"Number declaration has invalid range:#"+str)
+                                } else {
+                                    objfieldargs[i,objfields[i]]=left+","+right
+                                    objfields[i]+=1
+                                }
+                            }
+                        } else {
+                            objfieldtype[i,objfields[i]]="number"
+                            objfields[i]+=1
                         }
                     } else {
                         if (invalid_field_type(str)) {
