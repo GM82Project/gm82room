@@ -60,7 +60,7 @@ repeat (l) with (ds_priority_delete_min(pr)) {
 
     if (savecode!="") {
         f2=file_text_open_write(dir+uid+".gml")
-        file_text_write_string(f2,savecode)
+        file_text_write_string(f2,savecode+lf)
         file_text_close(f2)
     }
 }
