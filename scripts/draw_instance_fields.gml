@@ -106,7 +106,7 @@ for (i=0;i<objfields[obj];i+=1) {
         if (fields[i,0]) ang=real(fields[i,1])
         else ang=0
         texture_set_interpolation(0)
-        draw_sprite_outline(sprFieldAngle,fr,dx+28,dy+16,0.25,0.25,ang,$ffffff,1)
+        draw_sprite_outline(sprFieldAngle,0,dx+28,dy+16,0.25,0.25,ang,$ffffff,1)
         texture_set_interpolation(1)
     } else draw_sprite(sprFieldIcons,fr,dx+28,dy+16)
 
