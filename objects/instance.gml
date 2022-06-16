@@ -109,9 +109,11 @@ if (sel) {
         }
         if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
             if (editxy==1) {
-                str=get_string("Insert new coordinate (x,y) for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1]+","+fields[editfid,2])
+                if (fields[editfid,0]) str=get_string("Insert new coordinate (x,y) for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1]+","+fields[editfid,2])
+                else str=get_string("Insert new coordinate (x,y) for "+qt+objfieldname[obj,editfid]+qt+":","")
                 if (string_pos(",",str)) {
                     string_token_start(str,",")
+                    fields[editfid,0]=1
                     fields[editfid,1]=string_delete_edge_spaces(string_token_next())
                     fields[editfid,2]=string_delete_edge_spaces(string_token_next())
                 }
@@ -131,8 +133,12 @@ if (sel) {
         }
         if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
             if (editangle==1) {
-                fields[editfid,0]=1
-                fields[editfid,1]=string_better(modwrap(real(get_string("Insert new angle for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])),0,360))
+                if (fields[editfid,0]) str=get_string("Insert new angle for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
+                else str=get_string("Insert new angle for "+qt+objfieldname[obj,editfid]+qt+":","")
+                if (string_number(str)!="") {
+                    fields[editfid,0]=1
+                    fields[editfid,1]=string_better(modwrap(real(str),0,360))
+                }
             }
             editangle=0
         }
@@ -149,8 +155,12 @@ if (sel) {
         }
         if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
             if (editrad==1) {
-                fields[editfid,0]=1
-                fields[editfid,1]=string_better(max(0,real(get_string("Insert new radius for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1]))))
+                if (fields[editfid,0]) str=get_string("Insert new radius for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
+                else str=get_string("Insert new radius for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
+                if (string_number(str)!=""){
+                    fields[editfid,0]=1
+                    fields[editfid,1]=string_better(max(0,real(str)))
+                }
             }
             editrad=0
         }
