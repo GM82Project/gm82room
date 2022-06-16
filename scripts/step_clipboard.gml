@@ -81,6 +81,8 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_
         copyvec[0,2]=minsely
         copyvec[0,3]=maxselx
         copyvec[0,4]=maxsely
+        copyvec[0,5]=minselx-floorto(minselx,gridx)
+        copyvec[0,6]=minsely-floorto(minsely,gridy)
     }
 }
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
@@ -102,8 +104,8 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 dx=global.mousex-copyvec[0,1]
                 dy=global.mousey-copyvec[0,2]
             } else {
-                dx=floorto(global.mousex-copyvec[0,1],gridx)
-                dy=floorto(global.mousey-copyvec[0,2],gridy)
+                dx=floorto(global.mousex-copyvec[0,1]+copyvec[0,5],gridx)
+                dy=floorto(global.mousey-copyvec[0,2]+copyvec[0,6],gridy)
             }
 
             cur=1

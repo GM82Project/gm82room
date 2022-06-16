@@ -181,8 +181,8 @@ if (selecting) {
 if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && copyvec[0,0]) {
     draw_set_color($ff8000)
     draw_set_alpha(0.5)
-    if (keyboard_check(vk_alt)) draw_rectangle(global.mousex,global.mousey,global.mousex+copyvec[0,3]-copyvec[0,1],global.mousey+copyvec[0,4]-copyvec[0,2],1)
-    else draw_rectangle(fmx,fmy,fmx+copyvec[0,3]-copyvec[0,1],fmy+copyvec[0,4]-copyvec[0,2],1)
+    if (keyboard_check(vk_alt)) draw_rectangle(global.mousex-0.5,global.mousey-0.5,global.mousex+copyvec[0,3]-copyvec[0,1]-0.5,global.mousey+copyvec[0,4]-copyvec[0,2]-0.5,1)
+    else draw_rectangle(fmx+copyvec[0,5]-0.5,fmy+copyvec[0,6]-0.5,fmx+copyvec[0,5]+copyvec[0,3]-copyvec[0,1]-0.5,fmy+copyvec[0,6]+copyvec[0,4]-copyvec[0,2]-0.5,1)
     draw_set_alpha(1)
     draw_set_color($ffffff)
 }
