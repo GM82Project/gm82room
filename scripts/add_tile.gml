@@ -62,11 +62,12 @@ if (tilebgpal!=noone) {
         }
 
         if (mouse_check_direct(mb_left)) {
+            finished=0
             if (point_in_rectangle(mx,my,0,0,64,32)) {
-                finished=1
+                finished=-1
             }
             if (point_in_rectangle(mx,my,64,0,128,32)) {
-                finished=2
+                finished=-2
             }
             if (point_in_rectangle(mx,my,dx,dy,width-8,height-8) && !drawing) {
                 drawing=1
@@ -77,6 +78,8 @@ if (tilebgpal!=noone) {
                     starty=floorto(starty-oy,gy+sy)+oy
                 }
             }
+        } else {
+            if (finished<0) finished=-finished
         }
         if (drawing) {
             endx=floor((mx-dx+scrollx)/2)
@@ -106,8 +109,8 @@ if (tilebgpal!=noone) {
         draw_set_color($ffffff)
         draw_set_alpha(1)
 
-        draw_button_ext(0,0,64,32,1,global.col_main)
-        draw_button_ext(64,0,64,32,1,global.col_main)
+        draw_button_ext(0,0,64,32,1-(finished==-1),global.col_main)
+        draw_button_ext(64,0,64,32,1-(finished==-2),global.col_main)
         draw_sprite(sprMenuButtons,0,32,16)
         draw_sprite(sprMenuButtons,25,96,16)
         draw_button_ext(128,0,width-128,32,0,global.col_main)
@@ -145,5 +148,6 @@ if (tilebgpal!=noone) {
         if (finished) exit
         screen_refresh()
         sleep(16)
+        io_clear()
     }
 }
