@@ -98,13 +98,13 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                                 show_message(error+"Number declaration has empty range.")
                             } else {
                                 string_token_start(str,",")
-                                left=string_number(string_token_next())
-                                right=string_number(string_token_next())
+                                __left=string_number(string_token_next())
+                                __right=string_number(string_token_next())
 
-                                if (left=="" || right=="") {
+                                if (__left=="" || __right=="") {
                                     show_message(error+"Number declaration has invalid range:#"+str)
                                 } else {
-                                    objfieldargs[i,objfields[i]]=left+","+right
+                                    objfieldargs[i,objfields[i]]=__left+","+__right
                                     objfields[i]+=1
                                 }
                             }

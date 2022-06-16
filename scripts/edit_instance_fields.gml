@@ -111,9 +111,9 @@ switch (objfieldtype[obj,menu]) {
     } break
     case "number_range": {
         string_token_start(objfieldargs[obj,menu],",")
-        left=string_token_next()
-        right=string_token_next()
-        fields[menu,1]=string_better(median(real(left),real(right),real(get_string("Insert new number for "+qt+objfieldname[obj,menu]+qt+"#(between "+left+" and "+right+"):",fields[menu,1]))))
+        __left=string_token_next()
+        __right=string_token_next()
+        fields[menu,1]=string_better(median(real(__left),real(__right),real(get_string("Insert new number for "+qt+objfieldname[obj,menu]+qt+"#(between "+__left+" and "+__right+"):",fields[menu,1]))))
         fields[menu,0]=1
     } break
 
