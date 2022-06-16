@@ -1,6 +1,6 @@
 var yes;
 
-if (keyboard_check(vk_control) && keyboard_check_pressed(ord("Z"))) {
+if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && keyboard_check_pressed(ord("Z"))) {
     yes=1 with (TextField) if (active) {yes=0 text=oldtext textfield_actions() active=0} if (yes) {
         keyboard_clear(ord("Z"))
         pop_undo()
