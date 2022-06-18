@@ -271,6 +271,9 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
 
         set_uid(o,string_token_next())
 
+        orderlast+=1
+        o.order=orderlast
+
         o.obj=get_object(o.objname)
 
         o.depth=objdepth[o.obj]

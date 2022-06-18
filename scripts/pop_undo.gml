@@ -32,13 +32,15 @@ if (size) {
                 o.image_blend=ds_list_find_value(l,i+7)
                 o.image_alpha=ds_list_find_value(l,i+8)
                 o.code=ds_list_find_value(l,i+9)
+                o.order=ds_list_find_value(l,i+10)
+
                 o.sprite_index=objspr[o.obj]
                 o.sprw=sprite_get_width(o.sprite_index)
                 o.sprh=sprite_get_height(o.sprite_index)
                 o.sprox=sprite_get_xoffset(o.sprite_index)
                 o.sproy=sprite_get_yoffset(o.sprite_index)
                 parse_code_into_fields(o)
-                i+=10
+                i+=11
 
                 //read fields
                 for (j=0;j<objfields[o.obj];j+=1) {
@@ -63,14 +65,17 @@ if (size) {
                 o.tile=tile_add(o.bg,ds_list_find_value(l,i+6),ds_list_find_value(l,i+7),o.tilew,o.tileh,o.x,o.y,o.tlayer)
                 o.tilesx=ds_list_find_value(l,i+10)
                 o.tilesy=ds_list_find_value(l,i+11)
-                o.image_xscale=o.tilesx*o.tilew
-                o.image_yscale=o.tilesy*o.tileh
                 o.image_blend=ds_list_find_value(l,i+12)
                 o.image_alpha=ds_list_find_value(l,i+13)
+                o.order=ds_list_find_value(l,i+14)
+
+                o.image_xscale=o.tilesx*o.tilew
+                o.image_yscale=o.tilesy*o.tileh
+
                 tile_set_scale(o.tile,o.tilesx,o.tilesy)
                 tile_set_blend(o.tile,o.image_blend)
                 tile_set_alpha(o.tile,o.image_alpha)
-                i+=14
+                i+=15
             }
         }break
         case act_change: {

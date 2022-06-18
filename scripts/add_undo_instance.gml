@@ -8,6 +8,7 @@ add_undo(image_angle)
 add_undo(image_blend)
 add_undo(image_alpha)
 add_undo(code)
+add_undo(order)
 
 var i; for (i=0;i<objfields[obj];i+=1) {
     add_undo(fields[i,0])

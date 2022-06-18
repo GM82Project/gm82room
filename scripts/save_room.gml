@@ -9,15 +9,17 @@ for (f=file_find_first(dir+"*.gml",0);f!="";f=file_find_next()) {
 
 instance_activate_all()
 
+pr=ds_priority_create()
+
 //save tiles
 f=file_text_open_write(dir+"layers.txt")
 l=ds_list_size(layers) for (i=0;i<l;i+=1) {
     cl=real(ds_list_find_value(layers,i))
-    yes=0 with (tileholder) if (tlayer==cl) {yes=1 break}
+    yes=0 with (tileholder) if (tlayer==cl) {yes+=1 ds_priority_add(pr,id,order)}
     if (yes) {
         file_text_write_string(f,string(cl)+lf)
         f2=file_text_open_write(dir+string(cl)+".txt")
-        with (tileholder) if (tlayer==cl) {
+        repeat (yes) with (ds_priority_delete_min(pr)) {
             str=
                 bgname+","+
                 string(round(x))+","+string(round(y))+","+
@@ -37,11 +39,11 @@ file_text_close(f)
 
 //save instances
 f=file_text_open_write(dir+"instances.txt")
-pr=ds_priority_create()
 l=0
 with (instance) {
     //yeah i know but whatever works, man
-    ds_priority_add(pr,id,-depth*100000+id/10)
+    //note from future renex:  xD xD xD
+    ds_priority_add(pr,id,order)
     l+=1
 }
 repeat (l) with (ds_priority_delete_min(pr)) {
@@ -60,11 +62,12 @@ repeat (l) with (ds_priority_delete_min(pr)) {
 
     if (savecode!="") {
         f2=file_text_open_write(dir+uid+".gml")
-        file_text_write_string(f2,savecode+lf)
+        file_text_write_string(f2,savecode)
         file_text_close(f2)
     }
 }
 file_text_close(f)
+
 ds_priority_destroy(pr)
 
 //save settings
