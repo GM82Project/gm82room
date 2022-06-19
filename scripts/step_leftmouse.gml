@@ -3,15 +3,15 @@ var yes,dx,dy,tex,l,t,r,b,zm;
 if (mouse_check_button_pressed(mb_left)) {
     zm=max(0.5,zoom)
     with (TextField) textfield_actions()
-    if (!mousein) {
+    if (point_distance(mouse_wx,mouse_wy,width-48-160,height-48-32)<32) {
+        grabknob=1
+        knoffmx=mouse_wx
+        knoffmy=mouse_wy
+        knoffx=knobx
+        knoffy=knoby
+    } else if (!mousein) {
         //click on menus
-        if (point_distance(mouse_wx,mouse_wy,width-48,height-48)<32) {
-            grabknob=1
-            knoffmx=mouse_wx
-            knoffmy=mouse_wy
-            knoffx=knobx
-            knoffy=knoby
-        } else with (Button) if (instance_position(mouse_wx,mouse_wy,id)) {
+        with (Button) if (instance_position(mouse_wx,mouse_wy,id)) {
             event_user(2)
         }
     } else {
