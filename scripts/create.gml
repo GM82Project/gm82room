@@ -56,6 +56,9 @@ icon_mode=0
 focus=noone
 window_focused=false
 
+knobz=0
+knobzgo=1
+
 undo_initialize()
 
 dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
@@ -121,6 +124,7 @@ window_center()
 
 instance_create(0,0,Interface)
 bgtex=background_get_texture(bgBlack)
+knobtex=background_get_texture(bgKnob)
 
 update_view()
 change_mode(mode)

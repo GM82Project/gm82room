@@ -38,7 +38,18 @@ mouse_wy=window_mouse_get_y()
 mousein=(point_in_rectangle(mouse_wx,mouse_wy,160,32,width-160,height-32))
 
 //zooming
-if (mousein) {
+if (grabknob) {
+    if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
+        knobzgo/=1.2
+        keyboard_clear(vk_subtract)
+        keyboard_clear(vk_minus)
+    }
+    if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check_pressed(vk_equals))) {
+        knobzgo*=1.2
+        keyboard_clear(vk_add)
+        keyboard_clear(vk_equals)
+    }
+} else if (mousein) {
     if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
         zoomgo*=1.2
         keyboard_clear(vk_subtract)

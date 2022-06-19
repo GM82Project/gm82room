@@ -134,3 +134,4 @@ invalid_field_type
 string_delete_edge_spaces
 load_object_fields
 draw_sprite_outline
+draw_knob

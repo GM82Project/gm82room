@@ -81,6 +81,7 @@
 |drawui
 |draw_paths
 |draw_backgrounds
+|draw_knob
 |step
 +step
 	|step_windowzoom

@@ -5,12 +5,19 @@ if (mouse_check_button_pressed(mb_left)) {
     with (TextField) textfield_actions()
     if (!mousein) {
         //click on menus
-        with (Button) if (instance_position(mouse_wx,mouse_wy,id)) {
+        if (point_distance(mouse_wx,mouse_wy,width-48,height-48)<32) {
+            grabknob=1
+            knoffmx=mouse_wx
+            knoffmy=mouse_wy
+            knoffx=knobx
+            knoffy=knoby
+        } else with (Button) if (instance_position(mouse_wx,mouse_wy,id)) {
             event_user(2)
         }
     } else {
         //click on workspace
         yes=0
+
         if (selection && abs(global.mousex-(selleft+selwidth))<8*zm && abs(global.mousey-(seltop+selheight))<8*zm) {
             storex=selwidth
             storey=selheight
@@ -365,4 +372,17 @@ if (grabselection) {
     if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
         grabselection=0
     }
+}
+
+if (grabknob) {
+    knoby=knoffy+mouse_wx-knoffmx
+    knobx=knoffx-(mouse_wy-knoffmy)
+    knobz=(knobz*19+knobzgo)/20
+    if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
+        grabknob=0
+    }
+} else {
+    knobx=inch(knobx*0.95,0,0.1)
+    knoby=inch(knoby*0.95,0,0.1)
+    knobz=inch(knobz*0.98,0,0.01)
 }

@@ -73,4 +73,27 @@ if (theme==1) {
 
 dx8_reset_projection()
 
+if (knobz!=0 || knobx!=0 || knoby!=0) {
+    d3d_start()
+    dx8_clear_depth_buffer()
+    var xc,yc;
+
+    xc=view_xview+view_wview/2
+    yc=view_yview+view_hview/2
+
+    d3d_set_projection_ext(
+        xc,yc,-view_hview/2,
+        xc,yc,0,
+        0,-1,0,
+        90,
+        -view_wview/view_hview,
+        1,16777215
+    )
+    d3d_transform_add_scaling(1,1,knobz)
+    d3d_transform_add_translation(-xc,-yc,0)
+    d3d_transform_add_rotation_x(knobx)
+    d3d_transform_add_rotation_y(knoby)
+    d3d_transform_add_translation(xc,yc,0)
+}
+
 draw_backgrounds(0)

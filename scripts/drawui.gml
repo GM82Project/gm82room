@@ -5,6 +5,14 @@ var sel_alpha; if (powersave) sel_alpha=0.5 else sel_alpha=0.5+0.25*sin(current_
 
 draw_backgrounds(1)
 
+//paths
+draw_paths()
+
+d3d_transform_set_identity()
+d3d_end()
+dx8_reset_projection()
+d3d_set_depth(0)
+
 fmx=floorto(global.mousex,gridx)
 fmy=floorto(global.mousey,gridy)
 tty=0
@@ -55,9 +63,6 @@ if (mode==0 || mode==1) {
 
     d3d_transform_set_identity()
 } else window_set_cursor(cr_default)
-
-//paths
-draw_paths()
 
 //object mode
 if (mode==0) {
@@ -672,6 +677,8 @@ if (mode==1 && tilebgpal!=noone) {
         }
     }
 }
+
+draw_knob()
 
 with (Button) button_draw()
 with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
