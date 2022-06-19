@@ -171,6 +171,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
             }
             push_undo()
             update_instance_memory()
+            update_selection_bounds()
         }
     }
 }
