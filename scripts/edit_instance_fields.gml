@@ -30,7 +30,7 @@ for (i=0;i<objfields[obj];i+=1) {
             str=objfieldname[obj,i]+": ("+fields[i,1]+", "+fields[i,2]+")"
         } else if (objfieldtype[obj,i]=="string") {
             str=objfieldname[obj,i]+": "+string_replace_all(destringify(fields[i,1]),"#","\#")
-        } else if (objfieldtype[obj,i]=="bool") {
+        } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean") {
             str=objfieldname[obj,i]
         } else {
             str=objfieldname[obj,i]+": "+fields[i,1]
@@ -75,7 +75,7 @@ switch (objfieldtype[obj,menu]) {
     case "datafile": {show_field_resource_menu(datafilemenu,menu) break}
     case "constant": {show_field_resource_menu(constmenu,menu) break}
 
-    case "bool": {
+    case "bool": case "boolean": {
         if (fields[menu,0]) {
             if (fields[menu,1]=="true") fields[menu,1]="false"
             else fields[menu,1]="true"
