@@ -5,6 +5,7 @@ switch (argument0) {
     case "radius":
     case "string":
     case "bool":
+    case "boolean":
     case "color":
     case "colour":
     case "xy":

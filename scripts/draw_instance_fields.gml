@@ -55,7 +55,7 @@ for (i=0;i<objfields[obj];i+=1) {
             str=objfieldname[obj,i]+": ("+fields[i,1]+", "+fields[i,2]+")"
         } else if (objfieldtype[obj,i]=="string") {
             str=objfieldname[obj,i]+": "+string_replace_all(destringify(fields[i,1]),"#","\#")
-        } else if (objfieldtype[obj,i]=="bool") {
+        } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean") {
             str=objfieldname[obj,i]
         } else {
             str=objfieldname[obj,i]+": "+fields[i,1]
@@ -98,7 +98,7 @@ for (i=0;i<objfields[obj];i+=1) {
         case "datafile": fr=14 break
         case "constant": fr=15 break
         case "instance": fr=16 break
-        case "bool": fr=17 if (fields[i,0]) if (fields[i,1]=="true") fr=18 break
+        case "bool": case "boolean": fr=17 if (fields[i,0]) if (fields[i,1]=="true") fr=18 break
         case "number": case "number_range": fr=19 break
         case "radius": fr=20 break
     }
