@@ -73,7 +73,7 @@ if (sel) {
 
         tile_set_scale(tile,tilesx,tilesy)
 
-        if (!mouse_check_direct(mb_left)) {draggatto=0 do_change_undo("scaling",0)}
+        if (!mouse_check_direct(mb_left)) {draggatto=0 event_user(1) do_change_undo("scaling",0)}
         update_inspector()
     }
     if (selresize) {
@@ -125,5 +125,8 @@ if (abs(image_yscale*tileh)<1) image_yscale=1
 
 tilesx=image_xscale/tilew
 tilesy=image_yscale/tileh
+
+x=floor(x)
+y=floor(y)
 
 tile_set_scale(tile,tilesx,tilesy)

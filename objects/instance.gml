@@ -252,6 +252,9 @@ if (sign(image_xscale)==-1 && sign(image_yscale)==-1 && !selsize) {
     image_angle=(image_angle+180) mod 360
 }
 
+x=floor(x)
+y=floor(y)
+
 image_angle=modwrap(image_angle,0,360)
 #define Other_14
 /*"/*'/**//* YYD ACTION
