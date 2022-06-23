@@ -32,6 +32,7 @@ if (file_exists(fn)) {
                         o=instance_create(sx,sy,instance) get_uid(o)
                         o.obj=objpal
                         o.objname=name
+                        o.depth=objdepth[o.obj]
                         o.sprite_index=objspr[o.obj]
                         o.sprw=sprite_get_width(o.sprite_index)
                         o.sprh=sprite_get_height(o.sprite_index)

@@ -114,6 +114,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance) get_uid(o)
                 o.obj=copyvec[cur,1]
                 o.objname=copyvec[cur,0]
+                o.depth=objdepth[o.obj]
                 o.sprite_index=objspr[o.obj]
                 o.sprw=sprite_get_width(o.sprite_index)
                 o.sprh=sprite_get_height(o.sprite_index)

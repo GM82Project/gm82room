@@ -289,6 +289,7 @@ if (paint) {
                     o=instance_create(dx,dy,instance) get_uid(o)
                     o.obj=objpal
                     o.objname=ds_list_find_value(objects,o.obj)
+                    o.depth=objdepth[o.obj]
                     o.sprite_index=objspr[o.obj]
                     o.sprw=sprite_get_width(o.sprite_index)
                     o.sprh=sprite_get_height(o.sprite_index)
