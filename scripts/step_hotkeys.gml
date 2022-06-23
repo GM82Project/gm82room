@@ -11,6 +11,9 @@ if (keyboard_check_pressed(vk_escape)) {
     clear_inspector()
     deselect()
 }
+if (keyboard_check(vk_control) && keyboard_check_pressed(ord("G"))) {
+    grid=!grid
+}
 
 if (keyboard_check_pressed(vk_delete)) {
     yes=1 with (TextField) if (active) yes=0 if (yes) {
