@@ -138,6 +138,8 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 o.modified=1
                 select=o
                 cur+=1
+
+                if (copyvec[0,0]==1) with (o) update_inspector()
             }
             if (mode==1) repeat (copyvec[0,0]) {
                 o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,tileholder) get_uid(o)
@@ -162,6 +164,8 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 o.modified=1
                 selectt=o
                 cur+=1
+
+                if (copyvec[0,0]==1) with (o) update_inspector()
             }
             begin_undo(act_destroy,"pasting "+pick(mode,"instances","tiles"),0)
             if (mode==0) {
