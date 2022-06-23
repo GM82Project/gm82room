@@ -36,7 +36,7 @@ if (mode==0) {
                     buffer_write_double(b,image_angle)
                     buffer_write_u32(b,image_blend)
                     buffer_write_double(b,image_alpha)
-                    buffer_write_string(b,code)
+                    buffer_write_string(b,parse_fields_into_code()+code)
                 }
             }
         }
