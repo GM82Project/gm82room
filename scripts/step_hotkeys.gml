@@ -30,6 +30,7 @@ if (keyboard_check_pressed(vk_delete)) {
 
 if (keyboard_check_pressed(vk_f5)) {
     live_send_room_data()
+    alarm[3]=room_speed/2
 }
 
 var h,v;
