@@ -57,7 +57,8 @@ if (view[1]) {
     }
 }
 
+i=0
 repeat (dcur) {
-    dcur-=1
-    instance_deactivate_object(deact[dcur])
+    instance_deactivate_object(deact[i])
+    i+=1
 }
