@@ -43,7 +43,7 @@ l=0
 with (instance) {
     //yeah i know but whatever works, man
     //note from future renex:  xD xD xD
-    ds_priority_add(pr,id,order)
+    ds_priority_add(pr,id,-depth+order/orderlast)
     l+=1
 }
 repeat (l) with (ds_priority_delete_min(pr)) {

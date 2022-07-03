@@ -294,7 +294,9 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
         o.image_blend=o.image_blend&$ffffff
 
         if (string_token_next()=="1") {//has code flag
-            o.code=file_text_read_all(dir+o.uid+".gml",lf)
+            fn=dir+o.uid+".gml"
+            if (!file_exists(fn)) {show_error("Error loading instance data:"+crlf+crlf+" Missing "+qt+fn+qt+" file.",1) exit}
+            o.code=file_text_read_all(fn,lf)
             l=string_length(o.code)
             if (string_char_at(o.code,l)==lf) o.code=string_copy(o.code,1,l-1)
         }
