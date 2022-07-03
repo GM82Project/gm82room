@@ -219,6 +219,21 @@ if (mouse_check_button_pressed(mb_left)) {
                 }
             }
         }
+        if (mode==2) {
+            if (bg_visible[bg_current]) {
+                begin_undo(act_globalvec,"background "+string(bg_current)+" options",0)
+                add_undo("bg_xoffset") add_undo(bg_current)
+                add_undo(bg_xoffset[bg_current])
+                push_undo()
+                begin_undo(act_globalvec,"background "+string(bg_current)+" options",1)
+                add_undo("bg_yoffset") add_undo(bg_current)
+                add_undo(bg_yoffset[bg_current])
+                push_undo()
+                grab_background=true
+                grab_bgoffx=bg_xoffset[bg_current]-global.mousex
+                grab_bgoffy=bg_yoffset[bg_current]-global.mousey
+            }
+        }
         if (mode==3) {
             if (abs(global.mousex-(vw_x[vw_current]+vw_w[vw_current]))<8*zm && abs(global.mousey-(vw_y[vw_current]+vw_h[vw_current]))<8*zm) {
                 sizeview=1
@@ -442,4 +457,17 @@ if (grabknob) {
     knobx=inch(knobx*0.95,0,0.1)
     knoby=inch(knoby*0.95,0,0.1)
     knobz=inch(knobz*0.98,0,0.01)
+}
+
+if (grab_background) {
+    if (keyboard_check(vk_alt)) {
+        bg_xoffset[bg_current]=global.mousex+grab_bgoffx
+        bg_yoffset[bg_current]=global.mousey+grab_bgoffy
+    } else {
+        bg_xoffset[bg_current]=roundto(global.mousex+grab_bgoffx,gridx)
+        bg_yoffset[bg_current]=roundto(global.mousey+grab_bgoffy,gridy)
+    }
+    update_backgroundpanel()
+
+    if (!mouse_check_direct(mb_left)) grab_background=false
 }

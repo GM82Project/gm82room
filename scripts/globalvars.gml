@@ -15,5 +15,6 @@ globalvar
     thumbmap,thumbcount,
     orderlast,
     knobx,knoby,grabknob,
-    click_priority
+    click_priority,
+    grab_background,grab_bgoffx,grab_bgoffy
 ;
