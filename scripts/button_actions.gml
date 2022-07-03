@@ -51,7 +51,7 @@ with (Controller) switch (argument0) {
     //instance inspector
     case "copy object"   : {clipboard_set_text(roomname+"_"+select.uid)}break
     case "inst code"     : {edit_creation_code()}break
-    case "inst snap"     : {with (instance) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) do_change_undo("snapping",0) if (select==id) update_inspector()}}break
+    case "inst snap"     : {with (instance) if (sel) {x=roundto(x,gridx) y=roundto(y,gridy) do_change_undo("snapping",0) if (select==id) update_inspector() update_selection_bounds()}}break
     case "inst flip xs": {
         with (instance) if (sel) {
             cl=min(cl,bbox_left)
@@ -153,6 +153,7 @@ with (Controller) switch (argument0) {
             tile_set_position(tile,x,y)
             do_change_undo("snapping",0)
             if (selectt==id) update_inspector()
+            update_selection_bounds()
         }
     }break
     case "tile flip xs": {
