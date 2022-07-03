@@ -34,7 +34,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-focus=position_meeting(mouse_wx,mouse_wy,id)
+focus=instance_position(mouse_wx,mouse_wy,id)
 
 if (down!=0 && focus && !active && !(gray)) {
     //activate textfield

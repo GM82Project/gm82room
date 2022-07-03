@@ -56,6 +56,8 @@ icon_mode=0
 focus=noone
 window_focused=false
 
+click_priority=ds_priority_create()
+
 knobz=0
 knobzgo=1
 

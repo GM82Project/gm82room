@@ -1,6 +1,7 @@
-var yes,dx,dy,tex,l,t,r,b,zm;
+var yes,dx,dy,tex,l,t,r,b,zm,menued;
 
 if (mouse_check_button_pressed(mb_left)) {
+    menued=false
     zm=max(0.5,zoom)
     with (TextField) textfield_actions()
     if (point_distance(mouse_wx,mouse_wy,width-48-160,height-48-32)<32) {
@@ -54,7 +55,7 @@ if (mouse_check_button_pressed(mb_left)) {
                         } else if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
                             draggatto=1
                             yes=1
-                        } else if (position_meeting(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
+                        } else if (instance_position(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
                             start_dragging()
                             yes=1
                         }
@@ -64,29 +65,59 @@ if (mouse_check_button_pressed(mb_left)) {
                 if (!instance_exists(select) || !yes) {
                     clear_inspector()
                     select=noone
-                    if (!keyboard_check(vk_shift)) with (instance) {
-                        if (position_meeting(global.mousex,global.mousey,id)) {
-                            sel=1
-                            update_inspector()
-                            //ctrl+left = move
-                            if (keyboard_check(vk_control)) {
-                                focus_object(obj)
-                                //group operation
-                                if (selection) {
-                                    grabselection=1
-                                }
-                                with (instance) if (sel) {
-                                    start_dragging()
-                                }
-                            } else {
-                                deselect()
-                                sel=1
-                                select=id
-                                start_dragging()
+                    if (!keyboard_check(vk_shift)) {
+                        with (instance) {
+                            if (instance_position(global.mousex,global.mousey,id)) {
+                                //sort by reverse scale
+                                ds_priority_add(click_priority,id,(max_int-depth)/(sprite_width*sprite_height))
                             }
                         }
+                        if (ds_priority_size(click_priority)) {
+                            str="Stacked instances:|-"
+                            i=-1
+                            do {
+                               i+=1
+                               prio=ds_priority_find_priority(click_priority,ds_priority_find_max(click_priority))
+                               inst[i]=ds_priority_delete_max(click_priority)
+                               str+="|"+inst[i].objname+" ("+inst[i].uid+")"
+
+                               //as long as the next instance has the same dimensions, keep going
+                               next=ds_priority_find_max(click_priority)
+                               if (next) if (next.bbox_left==inst[i].bbox_left && next.bbox_top==inst[i].bbox_top && next.bbox_right==inst[i].bbox_right && next.bbox_bottom==inst[i].bbox_bottom) continue
+
+                               //stop when the next instance has a lower priority
+                               if (prio!=ds_priority_find_priority(click_priority,next)) break
+                            } until (!ds_priority_size(click_priority))
+
+                            if (i>0 && !keyboard_check(vk_control)) {menued=true i=show_menu(str,0)-1}
+
+                            if (i!=-1) with (inst[i]) {
+                                sel=1
+                                update_inspector()
+                                //ctrl+left = move
+                                if (keyboard_check(vk_control)) {
+                                    focus_object(obj)
+                                    if (!menued) {
+                                        //group operation
+                                        if (selection) {
+                                            grabselection=1
+                                        }
+                                        with (instance) if (sel) {
+                                            start_dragging()
+                                        }
+                                    }
+                                } else {
+                                    deselect()
+                                    sel=1
+                                    select=id
+                                    if (!menued) start_dragging()
+                                }
+
+                            }
+                            ds_priority_clear(click_priority)
+                        }
                     }
-                    if (!select) {
+                    if (!select && !menued) {
                         //if not holding control, reset selection
                         if (!keyboard_check(vk_control)) {with (instance) sel=0 with (select) sel=1}
                         if (keyboard_check(vk_shift)) {
@@ -111,7 +142,7 @@ if (mouse_check_button_pressed(mb_left)) {
                     if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
                         draggatto=1
                         yes=1
-                    } else if (position_meeting(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
+                    } else if (instance_position(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
                         start_dragging()
                         yes=1
                     }
@@ -120,27 +151,52 @@ if (mouse_check_button_pressed(mb_left)) {
                 if (!instance_exists(selectt) || !yes) {
                     clear_inspector()
                     selectt=noone
-                    if (!keyboard_check(vk_shift)) with (tileholder) {
-                        if (!keyboard_check(vk_control)) sel=0
-                        if (position_meeting(global.mousex,global.mousey,id)) {
-                            sel=1
-                            update_inspector()
-                            //ctrl+left = move
-                            if (keyboard_check(vk_control)) {
-                                focus_tile(tile)
-                                //group operation
-                                if (selection) {
-                                    grabselection=1
-                                }
-                                with (tileholder) if (sel) {
-                                    start_dragging()
-                                }
-                            } else {
-                                deselect()
-                                sel=1
-                                selectt=id
-                                start_dragging()
+                    if (!keyboard_check(vk_shift)) {
+                        with (tileholder) {
+                            if (instance_position(global.mousex,global.mousey,id)) {
+                                //sort by reverse scale
+                                ds_priority_add(click_priority,id,(max_int-depth)/(tilesx*tilew*tilesy*tileh))
                             }
+                        }
+                        if (ds_priority_size(click_priority)) {
+                            str="Stacked tiles:|-"
+                            i=-1
+                            do {
+                               i+=1
+                               prio=ds_priority_find_priority(click_priority,ds_priority_find_max(click_priority))
+                               inst[i]=ds_priority_delete_max(click_priority)
+                               str+="|"+inst[i].bgname+" ("+string(tile_get_left(inst[i].tile))+","+string(tile_get_top(inst[i].tile))+","+string(tile_get_width(inst[i].tile))+","+string(tile_get_height(inst[i].tile))+")"
+
+                               //as long as the next instance has the same dimensions, keep going
+                               next=ds_priority_find_max(click_priority)
+                               if (next) if (!(next.bbox_left==inst[i].bbox_left && next.bbox_top==inst[i].bbox_top && next.bbox_right==inst[i].bbox_right && next.bbox_bottom==inst[i].bbox_bottom)) break
+                            } until (!ds_priority_size(click_priority))
+
+                            if (i>0 && !keyboard_check(vk_control)) {menued=true i=show_menu(str,0)-1}
+
+                            if (i!=-1) with (inst[i]) {
+                                sel=1
+                                update_inspector()
+                                //ctrl+left = move
+                                if (keyboard_check(vk_control)) {
+                                    focus_tile(tile)
+                                    if (!menued) {
+                                        //group operation
+                                        if (selection) {
+                                            grabselection=1
+                                        }
+                                        with (tileholder) if (sel) {
+                                            start_dragging()
+                                        }
+                                    }
+                                } else {
+                                    deselect()
+                                    sel=1
+                                    selectt=id
+                                    if (!menued) start_dragging()
+                                }
+                            }
+                            ds_priority_clear(click_priority)
                         }
                     }
                     if (!selectt) {
@@ -280,7 +336,7 @@ if (paint) {
                     x=paintx
                     y=painty
                     reduce_collision()
-                    with (instance) if (obj=objpal) if (place_meeting(x,y,Controller)) {
+                    with (instance) if (obj=objpal) if (instance_place(x,y,Controller)) {
                         yes=0
                     }
                     restore_collision()
@@ -313,7 +369,7 @@ if (paint) {
                     x=paintx
                     y=painty
                     reduce_collision()
-                    with (tileholder) if (bg=tex) if (place_meeting(x,y,Controller)) {
+                    with (tileholder) if (bg=tex) if (instance_place(x,y,Controller)) {
                         yes=0
                     }
                     restore_collision()
