@@ -69,7 +69,7 @@ if (mouse_check_button_pressed(mb_left)) {
                         with (instance) {
                             if (instance_position(global.mousex,global.mousey,id)) {
                                 //sort by reverse scale
-                                ds_priority_add(click_priority,id,(max_int-depth)/(sprite_width*sprite_height))
+                                ds_priority_add(click_priority,id,(max_int-depth)/abs(sprite_width*sprite_height))
                             }
                         }
                         if (ds_priority_size(click_priority)) {
@@ -155,7 +155,7 @@ if (mouse_check_button_pressed(mb_left)) {
                         with (tileholder) {
                             if (instance_position(global.mousex,global.mousey,id)) {
                                 //sort by reverse scale
-                                ds_priority_add(click_priority,id,(max_int-depth)/(tilesx*tilew*tilesy*tileh))
+                                ds_priority_add(click_priority,id,(max_int-depth)/abs(tilesx*tilew*tilesy*tileh))
                             }
                         }
                         if (ds_priority_size(click_priority)) {
