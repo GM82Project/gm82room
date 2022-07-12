@@ -274,16 +274,6 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
         orderlast+=1
         o.order=orderlast
 
-        o.obj=get_object(o.objname)
-
-        o.depth=objdepth[o.obj]
-        o.sprite_index=objspr[o.obj]
-
-        o.sprw=sprite_get_width(o.sprite_index)
-        o.sprh=sprite_get_height(o.sprite_index)
-        o.sprox=sprite_get_xoffset(o.sprite_index)
-        o.sproy=sprite_get_yoffset(o.sprite_index)
-
         string_token_next() //skip "locked" flag
         o.image_xscale=real(string_token_next())
         o.image_yscale=real(string_token_next())
@@ -300,6 +290,17 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
             l=string_length(o.code)
             if (string_char_at(o.code,l)==lf) o.code=string_copy(o.code,1,l-1)
         }
+
+        //load this last so we don't interrupt the token stream
+        o.obj=get_object(o.objname)
+
+        o.depth=objdepth[o.obj]
+        o.sprite_index=objspr[o.obj]
+
+        o.sprw=sprite_get_width(o.sprite_index)
+        o.sprh=sprite_get_height(o.sprite_index)
+        o.sprox=sprite_get_xoffset(o.sprite_index)
+        o.sproy=sprite_get_yoffset(o.sprite_index)
 
         parse_code_into_fields(o)
 
