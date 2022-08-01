@@ -101,7 +101,7 @@ if (mouse_check_button_pressed(mb_left)) {
                                         //group operation
                                         if (selection) {
                                             grabselection=1
-                                        }
+                                        } else selection=(num_selected()>1)
                                         with (instance) if (sel) {
                                             start_dragging()
                                         }
@@ -112,7 +112,7 @@ if (mouse_check_button_pressed(mb_left)) {
                                     select=id
                                     if (!menued) start_dragging()
                                 }
-
+                                update_selection_bounds()
                             }
                             ds_priority_clear(click_priority)
                         }
@@ -184,7 +184,7 @@ if (mouse_check_button_pressed(mb_left)) {
                                         //group operation
                                         if (selection) {
                                             grabselection=1
-                                        }
+                                        } else selection=(num_selected()>1)
                                         with (tileholder) if (sel) {
                                             start_dragging()
                                         }
@@ -195,6 +195,7 @@ if (mouse_check_button_pressed(mb_left)) {
                                     selectt=id
                                     if (!menued) start_dragging()
                                 }
+                                update_selection_bounds()
                             }
                             ds_priority_clear(click_priority)
                         }

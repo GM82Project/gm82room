@@ -166,4 +166,5 @@ if (size) {
 
     change_mode(mode)
     if (combo) pop_undo()
+    else update_selection_bounds()
 }
