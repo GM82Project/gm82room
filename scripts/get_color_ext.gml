@@ -4,6 +4,12 @@ var w,h,dx,dy,cx,cy,hue,sat,val,red,green,blue,offx,offy,color,oldcolor;
 color=argument0
 oldcolor=color
 
+if (colorpickertype==1) {
+    color=get_color(oldcolor)
+    if (color==-1) return oldcolor
+    return color
+}
+
 hue=color_get_hue(color)
 sat=color_get_saturation(color)
 val=color_get_value(color)

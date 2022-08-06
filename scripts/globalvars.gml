@@ -16,5 +16,6 @@ globalvar
     orderlast,
     knobx,knoby,grabknob,
     click_priority,
-    grab_background,grab_bgoffx,grab_bgoffy
+    grab_background,grab_bgoffx,grab_bgoffy,
+    codeeditortype,colorpickertype
 ;

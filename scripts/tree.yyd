@@ -54,6 +54,8 @@
 	|update_instance_memory
 	|do_change_undo
 +preferences
+	|write_preferences
+	|read_preferences
 	|show_prefs
 	|load_theme
 	|load_palette

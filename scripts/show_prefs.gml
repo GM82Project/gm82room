@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=488
-h=208
+h=224
 
 act=""
 button=1
@@ -35,6 +35,7 @@ while (1) {
             act="grabok"
         }
 
+        //code editor checkboxes
         if (point_in_rectangle(mx,my,8,32,8+24,32+24)) {
             codeeditortype=0
         }
@@ -45,6 +46,15 @@ while (1) {
             codeeditortype=2
         }
 
+        //color picker checkboxes
+        if (point_in_rectangle(mx,my,8,152,8+24,152+24)) {
+            colorpickertype=0
+        }
+        if (point_in_rectangle(mx,my,8,184,8+24,184+24)) {
+            colorpickertype=1
+        }
+
+        //theme checkboxes
         if (point_in_rectangle(mx,my,240,32,240+24,32+24)) {
             theme=0
             load_theme()
@@ -60,6 +70,8 @@ while (1) {
             load_theme()
             continue
         }
+
+        //custom theme controls
         if (theme==2) {
             if (point_in_rectangle(mx,my,280,128,280+32,128+24)) {
                 global.col_main=get_color_ext(global.col_main,"Select Main Color")
@@ -106,6 +118,8 @@ while (1) {
             }
         }
     }
+
+    //ok button
     if (act="grabok") {
         if (!button) {
             act=""
@@ -121,14 +135,26 @@ while (1) {
     draw_text(8,-32+6,"Preferences")
     draw_text(8,8,"Code editor")
     draw_text(240,8,"Theme")
+    draw_text(8,128,"Color picker")
 
+    //ok button
     dx=432 dy=h-48 draw_button_ext(dx,dy,48,40,act!="grabok",global.col_main) draw_sprite(sprMenuButtons,0,dx+24,dy+20)
+
+    //code editor checkboxes
     dx=8 dy=32 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"External") if (codeeditortype=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     dx=8 dy=64 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Simple") if (codeeditortype=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     dx=8 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Notepad.exe") if (codeeditortype=2) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //theme checkboxes
     dx=240 dy=32 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Dark") if (theme=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     dx=240 dy=64 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Light") if (theme=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     dx=240 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Custom") if (theme=2) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //color picker checkboxes
+    dx=8 dy=152 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Builtin") if (colorpickertype=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=8 dy=184 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Paint") if (colorpickertype=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //custom theme controls
     if (theme=2) {
         dx=280 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_main)
         dx=320 dy=128 draw_button_ext(dx,dy,32,24,0,global.col_high)
