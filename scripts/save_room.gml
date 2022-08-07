@@ -1,11 +1,20 @@
+///save_room(backup?)
 var f,f2,i,l,cl,dir,savecode,str,crc,pr,yes;
 
 dir=self.dir
-
-//remove any unused code files from the room folder on save
-for (f=file_find_first(dir+"*.gml",0);f!="";f=file_find_next()) {
-    file_delete(dir+f)
-} file_find_close()
+if (argument0) {
+    //backup save
+    dir+="autosave\"
+    directory_create(dir)
+    file_text_close(file_text_open_write(dir+"gm82room lockfile"))
+    message("Autosaved")
+} else {
+    //normal save;
+    //remove any unused code files from the room folder on save
+    for (f=file_find_first(dir+"*.gml",0);f!="";f=file_find_next()) {
+        file_delete(dir+f)
+    } file_find_close()
+}
 
 instance_activate_all()
 
@@ -137,3 +146,8 @@ file_text_write_string(f,roomcode)
 file_text_close(f)
 
 change_mode(mode)
+
+if (!argument0) {
+    //normal save succeeded; remove backup
+    delete_backups()
+}

@@ -259,6 +259,13 @@ if (mode==4) {
 //this is where the room space ends and the hud space starts================================================
 d3d_set_projection_ortho(0,0,width,height,0)
 
+if (messagetime>0) {
+    draw_set_alpha(messagetime)
+    draw_set_halign(2)
+    draw_text_outline(width-160-16,48,messagestr,$ffff)
+    draw_set_halign(0)
+    draw_set_alpha(1)
+}
 
 focus=noone
 if (mousein) {

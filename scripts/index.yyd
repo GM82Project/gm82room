@@ -137,3 +137,7 @@ draw_sprite_outline
 draw_knob
 write_preferences
 read_preferences
+
+message
+draw_text_outline
+delete_backups

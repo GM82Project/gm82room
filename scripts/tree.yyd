@@ -11,6 +11,7 @@
 	|get_color_ext
 	|string_wrap
 	|string_delete_edge_spaces
+	|draw_text_outline
 +file
 	|gensavecode
 	|parsereal
@@ -65,6 +66,8 @@
 |create
 |load_room
 |save_room
+|delete_backups
+|message
 |gameend
 |createui
 +createui

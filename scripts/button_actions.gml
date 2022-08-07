@@ -9,7 +9,7 @@ nsel=num_selected()
 
 with (Controller) switch (argument0) {
     //top panel
-    case "save and quit": {save_room() game_end()}break
+    case "save and quit": {save_room(0) game_end()}break
     case "object mode"  : {change_mode(0)}break
     case "tile mode"    : {change_mode(1)}break
     case "bg mode"      : {change_mode(2)}break

@@ -17,5 +17,7 @@ globalvar
     knobx,knoby,grabknob,
     click_priority,
     grab_background,grab_bgoffx,grab_bgoffy,
-    codeeditortype,colorpickertype
+    codeeditortype,colorpickertype,
+    messagestr,messagetime,
+    autosave_timer,autosave_interval
 ;

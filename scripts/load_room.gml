@@ -7,6 +7,8 @@ globalvar vw_enabled,vw_visible,vw_x,vw_y,vw_w,vw_h,vw_xp,vw_yp,vw_wp,vw_hp,vw_f
 globalvar layers;
 globalvar paths,pathnum;
 
+var loading_autosave;
+
 var f,p,i,l,inst,layer,map,tileid;
 
 draw_loader("Loading project...",0.125,"")
@@ -132,6 +134,14 @@ load_datafiles(root+"datafiles\index.yyd")
 //look for paths
 load_paths()
 
+//check autosave
+loading_autosave=false
+if (directory_exists(dir+"autosave")) {
+    if (show_question("Hey, it looks like something happened before#and there's an autosave backup for this room.##Do you want to load the backup?")) {
+        dir+="autosave\"
+        loading_autosave=true
+    }
+}
 
 //read room settings
 settings=ds_map_create()
@@ -328,6 +338,10 @@ repeat (3) {
     }
 }
 objpal=lastobj
+
+if (loading_autosave) {
+    dir=directory_previous(dir)
+}
 
 draw_loader("Finishing up...",progress,"")
 

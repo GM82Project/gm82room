@@ -28,10 +28,27 @@ if (window_has_focus()) {
     powersave=false
     selcol=merge_color($ff0000,$ffffff,dsin((0.5+0.5*sin(current_time/200))*90))
 } else if (window_focused) {
+    window_focused=false
     with (TextField) if (active) {dtext=oldtext active=0}
     room_speed=5
     powersave=true
     selcol=$ff8000
+    save_room(1)
+}
+
+if (messagetime>0) {
+    messagetime-=1/room_speed
+    if (messagetime<=0) {
+        messagetime=0
+        messagestr=""
+    }
+}
+
+if (current_time>autosave_timer+autosave_interval) {
+    if (!mouse_check_button(mb_any) && !keyboard_check(vk_anykey)) {
+        autosave_timer=current_time
+        save_room(1)
+    }
 }
 
 mouse_wx=window_mouse_get_x()
