@@ -1,5 +1,8 @@
 var yes,dx,dy,tex,l,t,r,b,zm,menued;
 
+//give priority to right click
+if (mouse_check_button(mb_right)) exit
+
 if (mouse_check_button_pressed(mb_left)) {
     menued=false
     zm=max(0.5,zoom)
