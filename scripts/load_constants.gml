@@ -1,7 +1,5 @@
 var f,str,resname,p;
 
-globalvar constmenu,constmenuitems;
-
 constmenuitems=ds_map_create()
 constmenu=N_Menu_CreatePopupMenu()
 

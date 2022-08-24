@@ -1,7 +1,5 @@
 var f,str,resname,path,curindent;
 
-globalvar sprmenu,sprmenuitems;
-
 sprmenuitems=ds_map_create()
 sprmenu=N_Menu_CreatePopupMenu()
 

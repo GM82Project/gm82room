@@ -1,7 +1,5 @@
 var f,str,resname,path,curindent;
 
-globalvar scriptmenu,scriptmenuitems;
-
 scriptmenuitems=ds_map_create()
 scriptmenu=N_Menu_CreatePopupMenu()
 

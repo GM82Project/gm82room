@@ -1,7 +1,5 @@
 var f,str,resname,path,curindent;
 
-globalvar roommenu,roommenuitems;
-
 roommenuitems=ds_map_create()
 roommenu=N_Menu_CreatePopupMenu()
 

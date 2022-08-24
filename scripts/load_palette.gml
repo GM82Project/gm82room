@@ -1,5 +1,3 @@
-globalvar mspal;
-
 //microsoft palette
 mspal[ 0]=$ff8080 mspal[ 1]=$ffff80 mspal[ 2]=$80ff80 mspal[ 3]=$00ff80 mspal[ 4]=$80ffff mspal[ 5]=$0080ff mspal[ 6]=$ff80c0 mspal[ 7]=$ff80ff
 mspal[ 8]=$ff0000 mspal[ 9]=$ffff00 mspal[10]=$80ff00 mspal[11]=$00ff40 mspal[12]=$00ffff mspal[13]=$0080c0 mspal[14]=$8080c0 mspal[15]=$ff00ff

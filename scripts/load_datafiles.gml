@@ -1,7 +1,5 @@
 var f,str,resname,p;
 
-globalvar datafilemenu,datafilemenuitems;
-
 datafilemenuitems=ds_map_create()
 datafilemenu=N_Menu_CreatePopupMenu()
 

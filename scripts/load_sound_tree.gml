@@ -1,7 +1,5 @@
 var f,str,resname,path,curindent;
 
-globalvar soundmenu,soundmenuitems;
-
 soundmenuitems=ds_map_create()
 soundmenu=N_Menu_CreatePopupMenu()
 

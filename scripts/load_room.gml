@@ -1,12 +1,3 @@
-globalvar sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objspr,objvis,objdepth;
-
-globalvar gamename,roomname,roomcode,roomspeed,roomcaption,roompersistent,clearscreen,clearview,settings,gridx,gridy;
-
-globalvar backgroundcolor,bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch;
-globalvar vw_enabled,vw_visible,vw_x,vw_y,vw_w,vw_h,vw_xp,vw_yp,vw_wp,vw_hp,vw_follow,vw_hspeed,vw_vspeed,vw_hbor,vw_vbor;
-globalvar layers;
-globalvar paths,pathnum;
-
 var loading_autosave;
 
 var f,p,i,l,inst,layer,map,tileid;

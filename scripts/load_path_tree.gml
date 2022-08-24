@@ -1,7 +1,5 @@
 var f,str,resname,path,curindent;
 
-globalvar pathmenu,pathmenuitems;
-
 pathmenuitems=ds_map_create()
 pathmenu=N_Menu_CreatePopupMenu()
 

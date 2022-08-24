@@ -1,7 +1,5 @@
 var f,str,resname,path,curindent;
 
-globalvar fontmenu,fontmenuitems;
-
 fontmenuitems=ds_map_create()
 fontmenu=N_Menu_CreatePopupMenu()
 

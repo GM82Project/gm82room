@@ -1,7 +1,5 @@
 var f,str,resname,path,curindent;
 
-globalvar bgmenu,tilebgmenu,bgmenuitems;
-
 bgmenuitems=ds_map_create()
 bgmenu=N_Menu_CreatePopupMenu()
 bgmenuicons=ds_map_create()

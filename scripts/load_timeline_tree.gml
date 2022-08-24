@@ -1,7 +1,5 @@
 var f,str,resname,path,curindent;
 
-globalvar timelinemenu,timelinemenuitems;
-
 timelinemenuitems=ds_map_create()
 timelinemenu=N_Menu_CreatePopupMenu()
 

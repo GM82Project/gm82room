@@ -1,7 +1,5 @@
 var f,f2,fn,str,resname,path,curindent;
 
-globalvar objmenu,objmenuitems;
-
 objmenuitems=ds_map_create()
 objmenu=N_Menu_CreatePopupMenu()
 
