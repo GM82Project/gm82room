@@ -141,3 +141,4 @@ read_preferences
 message
 draw_text_outline
 delete_backups
+get_object_parent

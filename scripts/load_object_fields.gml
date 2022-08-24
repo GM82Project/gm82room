@@ -9,9 +9,8 @@ var i,f,reading,str,p,linec,actionc,line,fp;
 
 i=argument0
 
-objfields[i]=0
-objdesc[i]=""
 reading=0
+actionc=0
 f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
     line=file_text_read_string(f)
     file_text_readln(f)
@@ -24,32 +23,50 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
             actionc=0
         }
     } else {
+        //expect end of room start event
         if (string_pos("#define",str)) {
-            //we're done with room start
             reading=0 break
         }
 
+        //expect drag and drop action header
         if (string_pos("/*"+qt+"/*'/**//*",str)) {
-            //dnd action headers are 5 lines long
             actionc+=1
-            linec=-5
+            //jump to where the action id is
+            file_text_readln(f)
+            //look for "call event" action
+            if (string_pos("action_id=604",file_text_read_string(f))) {
+                parent=get_object_parent(argument1)
+                if (parent!="") load_object_fields(i,parent)
+            }
+            //skip the rest of the action block
+            do {file_text_readln(f) str=file_text_read_string(f)} until (str=="*/" || file_text_eof(f))
+            linec=0
         }
 
+        //expect field inheritance
+        if (string_pos("event_inherited()",str)) {
+            parent=get_object_parent(argument1)
+            if (parent!="") load_object_fields(i,parent)
+        }
+
+        //expect description field
         linec+=1
         fp=string_pos("/*desc",str)
         if (fp) {
-            //yoooooooo we found one of those cool new description fields, let's parse it
-            indent=fp
             while (1) {
                 str=file_text_read_string(f)
                 file_text_readln(f)
                 if (string_pos("*/",str) || file_text_eof(f)) break
                 //delete indentation
-                p=0 repeat (indent) {if (string_char_at(str,p+1)=" ") p+=1}
-                objdesc[i]+=string_delete(str,1,p)+lf
+                if (str!="") {
+                    p=1 while (string_char_at(str,p)==" ") do p+=1
+                    objdesc[i]+=string_delete(str,1,p-1)+lf
+                }
             }
             objdesc[i]=string_copy(objdesc[i],1,string_length(objdesc[i])-1)
         }
+
+        //expect field
         fp=string_pos("//field ",str)
         if (fp) {
             //all the errors start with this so we cache it now
@@ -135,3 +152,9 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         }
     }
 } until (file_text_eof(f)) file_text_close(f)}
+
+//load parent's fields if there was no room start event
+if (actionc==0) {
+    parent=get_object_parent(argument1)
+    if (parent!="") load_object_fields(i,parent)
+}

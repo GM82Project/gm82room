@@ -18,6 +18,7 @@
 	|get_sprite
 	|get_background
 	|get_object
+	|get_object_parent
 	|file_text_read_list
 	|edit_creation_code
 	|external_code_editor
