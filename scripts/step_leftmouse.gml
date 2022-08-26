@@ -381,7 +381,7 @@ if (paint) {
         if (mode==1) {
             if (tilebgpal!=noone) {
                 tex=bg_background[tilebgpal]
-                if (overlap_check) {
+                if (tile_overlap_check) {
                     sprite_index=spr1x1
                     image_xscale=ds_list_find_value(curtile,2)
                     image_yscale=ds_list_find_value(curtile,3)
