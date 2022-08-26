@@ -21,8 +21,8 @@ if (objdesc[obj]!="") {
 
     str=string_replace_all(str,lf,crlf)
 
-    w=string_width_ext(str,-1,width*0.5)+8
-    h=string_height_ext(str,-1,width*0.5)+8
+    w=string_width_ext(str,-1,width*0.75)+8
+    h=string_height_ext(str,-1,width*0.75)+8
 
     if (fieldactive) draw_set_color_sel()
     else draw_set_color(0)
@@ -34,7 +34,7 @@ if (objdesc[obj]!="") {
 
     draw_rectangle_color(x1,y1,x1+w,y1+h,$ddffff,$ddffff,$ddffff,$ddffff,0)
     draw_rectangle_color(x1,y1,x1+w,y1+h,0,0,0,0,1)
-    draw_text_ext_color(x1+4,y1+4,str,-1,width*0.5,0,0,0,0,1)
+    draw_text_ext_color(x1+4,y1+4,str,-1,width*0.75,0,0,0,0,1)
 
     dy+=h+8
 }
@@ -178,4 +178,48 @@ for (i=0;i<objfields[obj];i+=1) {
 }
 
 draw_set_valign(0)
+
+//creation code
+repeat (1) {
+    if (code="") {
+        if (argument0) continue
+        str=""
+        h=24
+        w=string_width("Creation code")+24+8
+        col1=$808080
+    } else {
+        if (argument0) col1=$808080
+        else col1=$ddffff
+        str=code
+        h=string_height(str)+8+24
+        w=max(string_width_ext(str,-1,width*0.75),string_width("Creation code:")+24)+8
+    }
+
+    if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+w+16,dy+h+4)) {
+        col1=$ffffff
+        col2=selcol
+    } else {
+        col2=0
+    }
+
+    if (fieldactive) draw_set_color_sel()
+    else draw_set_color(0)
+
+    draw_line(dx,dy-16,dx,dy+h-8)
+    draw_line(dx,dy+h-8,dx+16,dy+h-8)
+
+    x1=dx+16
+    y1=dy+4
+
+    draw_rectangle_color(x1,y1,x1+w,y1+h,col1,col1,col1,col1,0)
+    draw_rectangle_color(x1,y1,x1+w,y1+h,0,0,0,0,1)
+    if (str!="") draw_text_ext_color(x1+28,y1+2,"Creation code:",-1,width*0.75,0,0,0,0,1)
+    else draw_text_color(x1+28,y1+2,"Creation code",0,0,0,0,1)
+    draw_text_color(x1+4,y1+24+2,str,0,0,0,0,1)
+
+    fr=21
+    draw_sprite(sprFieldIcons,fr,dx+28,dy+16)
+
+    dy+=h+8
+}
 draw_set_color($ffffff)

@@ -3,6 +3,7 @@ var i,l;
 
 for (i=0;i<objfields[argument[0].obj];i+=1) {
     if (objfieldname[argument[0].obj,i]==argument[1]) {
+        argument[0].hasfields=1
         argument[0].fields[i,0]=1
 
         if (objfieldtype[argument[0].obj,i]=="instance") {

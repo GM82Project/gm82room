@@ -37,7 +37,7 @@ if (mouse_check_button_pressed(mb_left)) {
                 //if something's already selected, operate on it
                 if (!keyboard_check(vk_shift)) {
                     if (keyboard_check(ord("C"))) {
-                        with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm && objfields[obj]) {
+                        with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
                             fieldactive=1
                             deselect()
                             sel=1
@@ -49,7 +49,7 @@ if (mouse_check_button_pressed(mb_left)) {
                         if (fieldactive) {
                             edit_instance_fields(0)
                             yes=1
-                        } else if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm && objfields[obj]) {
+                        } else if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
                             fieldactive=1
                             yes=1
                         } else if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {

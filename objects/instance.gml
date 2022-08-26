@@ -264,58 +264,54 @@ applies_to=self
 */
 ///draw field indicator
 
-if (hasfields) {
-    d3d_transform_add_translation(-0.5,-0.5,0)
-    draw_set_color($ff)
+d3d_transform_add_translation(-0.5,-0.5,0)
+draw_set_color($ff)
 
-    zm=max(0.5,zoom)
+zm=max(0.5,zoom)
 
-    if (Controller.focus!=id) event_user(5)
+if (Controller.focus!=id && (hasfields || code!="")) event_user(5)
 
-    //draw arrows if instance has any "xy" or "instance" fields
-    if !(abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
-        var i,dx,dy;
-        dx=(bbox_left+bbox_right+1)/2
-        dy=(bbox_top+bbox_bottom+1)/2
-        for (i=0;i<objfields[obj];i+=1) {
-            if (fields[i,0]) {
-                if (objfieldtype[obj,i]=="xy") {
-                    draw_arrow(dx,dy,real(fields[i,1]),real(fields[i,2]),10)
-                }
-                if (objfieldtype[obj,i]=="instance") {
-                    with (ds_map_get(uidmap,string_replace(fields[i,1],roomname+"_",""))) {
-                        draw_arrow(dx,dy,(bbox_left+bbox_right+1)/2,(bbox_top+bbox_bottom+1)/2,10)
-                    }
+//draw arrows if instance has any "xy" or "instance" fields
+if !(abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+    var i,dx,dy;
+    dx=(bbox_left+bbox_right+1)/2
+    dy=(bbox_top+bbox_bottom+1)/2
+    for (i=0;i<objfields[obj];i+=1) {
+        if (fields[i,0]) {
+            if (objfieldtype[obj,i]=="xy") {
+                draw_arrow(dx,dy,real(fields[i,1]),real(fields[i,2]),10)
+            }
+            if (objfieldtype[obj,i]=="instance") {
+                with (ds_map_get(uidmap,string_replace(fields[i,1],roomname+"_",""))) {
+                    draw_arrow(dx,dy,(bbox_left+bbox_right+1)/2,(bbox_top+bbox_bottom+1)/2,10)
                 }
             }
         }
     }
-
-    draw_set_color($ffffff)
-    draw_set_alpha(1)
-    d3d_transform_set_identity()
 }
+
+draw_set_color($ffffff)
+draw_set_alpha(1)
+d3d_transform_set_identity()
 #define Other_15
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
-if (hasfields) {
-    zm=max(0.5,zoom)
+zm=max(0.5,zoom)
 
-    fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
-    fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_y(-(sprox)*image_xscale,image_angle)
-    if (point_distance(fieldhandx,fieldhandy,draghandx,draghandy)<20) {
-        w=point_distance(x,y,fieldhandx,fieldhandy)+20
-        a=point_direction(x,y,fieldhandx,fieldhandy)
-        fieldhandx=x+lengthdir_x(w,a)
-        fieldhandy=y+lengthdir_y(w,a)
-    }
-
-    draw_rectangle(fieldhandx-6*zm,fieldhandy-7*zm,fieldhandx+8*zm,fieldhandy+9*zm,1)
-    draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
-    draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
-    if (fieldactive) draw_triangle(fieldhandx-8*zm,fieldhandy+1*zm,fieldhandx+2*zm,fieldhandy+1*zm,fieldhandx-3*zm,fieldhandy+11*zm,0)
-    else draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1*zm,fieldhandy+4*zm,1)
+fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
+fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_y(-(sprox)*image_xscale,image_angle)
+if (point_distance(fieldhandx,fieldhandy,draghandx,draghandy)<20) {
+    w=point_distance(x,y,fieldhandx,fieldhandy)+20
+    a=point_direction(x,y,fieldhandx,fieldhandy)
+    fieldhandx=x+lengthdir_x(w,a)
+    fieldhandy=y+lengthdir_y(w,a)
 }
+
+draw_rectangle(fieldhandx-6*zm,fieldhandy-7*zm,fieldhandx+8*zm,fieldhandy+9*zm,1)
+draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
+draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
+if (fieldactive) draw_triangle(fieldhandx-8*zm,fieldhandy+1*zm,fieldhandx+2*zm,fieldhandy+1*zm,fieldhandx-3*zm,fieldhandy+11*zm,0)
+else draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1*zm,fieldhandy+4*zm,1)

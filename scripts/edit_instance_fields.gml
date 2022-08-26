@@ -48,6 +48,33 @@ for (i=0;i<objfields[obj];i+=1) {
     dy+=32
 }
 
+//creation code
+if (menu==-1) repeat (1) {
+    if (code="") {
+        str=""
+        h=24
+        w=string_width("Creation code")+24+8
+    } else {
+        str=code
+        h=string_height(str)+8+24
+        w=max(string_width(str),string_width("Creation code:")+24)+8
+    }
+
+    if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+w+16,dy+h+4)) {
+        begin_undo(act_change,"modifying instance creation code",0)
+        if (argument0) {
+            str=""
+        } else {
+            str=external_code_editor(code)
+        }
+        if (code!=str) add_undo_instance_props()
+        code=str
+        update_inspector()
+        push_undo()
+        exit
+    }
+}
+
 //clicked outside of all fields, turn off field display
 if (menu==-1) {fieldactive=0 exit}
 
@@ -61,6 +88,8 @@ if (argument0) {
     fields[menu,0]=0
     exit
 }
+
+hasfields=1
 
 switch (objfieldtype[obj,menu]) {
     case "sprite": {show_field_resource_menu(sprmenu,menu) break}

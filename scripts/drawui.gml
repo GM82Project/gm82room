@@ -101,7 +101,6 @@ if (mode==0) {
     if (keyboard_check(ord("C"))) with (instance) {
         if (code!="") {
             d3d_set_fog(1,$ff,0,0)
-            draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
             draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)
             d3d_set_fog(0,0,0,0)
         }
@@ -271,9 +270,6 @@ focus=noone
 if (mousein) {
     if (mode==0) {
         focus=instance_position(global.mousex,global.mousey,instance)
-        with (focus) if (code!="") {
-            drawtooltip(code)
-        }
     }
     if (mode==1) focus=instance_position(global.mousex,global.mousey,tileholder)
 }
