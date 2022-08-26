@@ -475,19 +475,17 @@ if (mode==1) {
     draw_text(dx+12,228+12,"Blend")
     draw_set_color($ffffff)
 
-    if (tilebgpal!=noone) {
-        for (i=0;i<layersize;i+=1) {
-            dy=360+i*32+layerscroll
-            if (dy>360-32 && dy<height-100+32) {
-                draw_button_ext(dx,dy,160,32,ly_current!=i,global.col_main)
-                draw_set_color(global.col_text)
-                draw_text(dx+12,dy+6,ds_list_find_value(layers,i))
-                draw_set_color($ffffff)
-            }
+    for (i=0;i<layersize;i+=1) {
+        dy=360+i*32+layerscroll
+        if (dy>360-32 && dy<height-100+32) {
+            draw_button_ext(dx,dy,160,32,ly_current!=i,global.col_main)
+            draw_set_color(global.col_text)
+            draw_text(dx+12,dy+6,ds_list_find_value(layers,i))
+            draw_set_color($ffffff)
         }
-        draw_button_ext(dx,360+i*32+layerscroll,160,32,ly_current!=i,global.col_main)
-        draw_sprite(sprMenuButtons,23,dx+80,360+i*32+layerscroll+16)
     }
+    draw_button_ext(dx,360+i*32+layerscroll,160,32,ly_current!=i,global.col_main)
+    draw_sprite(sprMenuButtons,23,dx+80,360+i*32+layerscroll+16)
 
     draw_button_ext(dx,304,160,32,1,global.col_main)
     draw_set_color(global.col_text)
