@@ -69,60 +69,62 @@ if (mouse_check_button_pressed(mb_left)) {
                     clear_inspector()
                     select=noone
                     if (!keyboard_check(vk_shift)) {
-                        with (instance) {
-                            if (instance_position(global.mousex,global.mousey,id)) {
-                                //sort by reverse scale
-                                ds_priority_add(click_priority,id,(max_int-depth)/abs(sprite_width*sprite_height))
-                            }
-                        }
-                        if (ds_priority_size(click_priority)) {
-                            str="Stacked instances:|-"
-                            i=-1
-                            do {
-                               i+=1
-                               prio=ds_priority_find_priority(click_priority,ds_priority_find_max(click_priority))
-                               inst[i]=ds_priority_delete_max(click_priority)
-                               str+="|"+inst[i].objname+" ("+inst[i].uid+")"
-
-                               //as long as the next instance has the same dimensions, keep going
-                               next=ds_priority_find_max(click_priority)
-                               if (next) if (next.bbox_left==inst[i].bbox_left && next.bbox_top==inst[i].bbox_top && next.bbox_right==inst[i].bbox_right && next.bbox_bottom==inst[i].bbox_bottom) continue
-
-                               //stop when the next instance has a lower priority
-                               if (prio!=ds_priority_find_priority(click_priority,next)) break
-                            } until (!ds_priority_size(click_priority))
-
-                            if (i>0 && !keyboard_check(vk_control)) {menued=true i=show_menu(str,0)-1}
-
-                            if (i!=-1) with (inst[i]) {
-                                sel=1
-                                update_inspector()
-                                //ctrl+left = move
-                                if (keyboard_check(vk_control)) {
-                                    focus_object(obj)
-                                    if (!menued) {
-                                        //group operation
-                                        if (selection) {
-                                            grabselection=1
-                                        } else selection=(num_selected()>1)
-                                        with (instance) if (sel) {
-                                            start_dragging()
-                                        }
-                                    }
-                                } else {
-                                    deselect()
-                                    sel=1
-                                    select=id
-                                    if (!menued) start_dragging()
+                        if (!overmode || keyboard_check(vk_control)) {
+                            with (instance) {
+                                if (instance_position(global.mousex,global.mousey,id)) {
+                                    //sort by reverse scale
+                                    ds_priority_add(click_priority,id,(max_int-depth)/abs(sprite_width*sprite_height))
                                 }
-                                update_selection_bounds()
                             }
-                            ds_priority_clear(click_priority)
+                            if (ds_priority_size(click_priority)) {
+                                str="Stacked instances:|-"
+                                i=-1
+                                do {
+                                   i+=1
+                                   prio=ds_priority_find_priority(click_priority,ds_priority_find_max(click_priority))
+                                   inst[i]=ds_priority_delete_max(click_priority)
+                                   str+="|"+inst[i].objname+" ("+inst[i].uid+")"
+
+                                   //as long as the next instance has the same dimensions, keep going
+                                   next=ds_priority_find_max(click_priority)
+                                   if (next) if (next.bbox_left==inst[i].bbox_left && next.bbox_top==inst[i].bbox_top && next.bbox_right==inst[i].bbox_right && next.bbox_bottom==inst[i].bbox_bottom) continue
+
+                                   //stop when the next instance has a lower priority
+                                   if (prio!=ds_priority_find_priority(click_priority,next)) break
+                                } until (!ds_priority_size(click_priority))
+
+                                if (i>0 && !keyboard_check(vk_control)) {menued=true i=show_menu(str,0)-1}
+
+                                if (i!=-1) with (inst[i]) {
+                                    sel=1
+                                    update_inspector()
+                                    //ctrl+left = move
+                                    if (keyboard_check(vk_control)) {
+                                        focus_object(obj)
+                                        if (!menued) {
+                                            //group operation
+                                            if (selection) {
+                                                grabselection=1
+                                            } else selection=(num_selected()>1)
+                                            with (instance) if (sel) {
+                                                start_dragging()
+                                            }
+                                        }
+                                    } else {
+                                        deselect()
+                                        sel=1
+                                        select=id
+                                        if (!menued) start_dragging()
+                                    }
+                                    update_selection_bounds()
+                                }
+                                ds_priority_clear(click_priority)
+                            }
                         }
                     }
                     if (!select && !menued) {
                         //if not holding control, reset selection
-                        if (!keyboard_check(vk_control)) {with (instance) sel=0 with (select) sel=1}
+                        //if (!keyboard_check(vk_control)) {with (instance) sel=0 with (select) sel=1}
                         if (keyboard_check(vk_shift)) {
                             //selection rectangle
                             selecting=1
@@ -155,57 +157,59 @@ if (mouse_check_button_pressed(mb_left)) {
                     clear_inspector()
                     selectt=noone
                     if (!keyboard_check(vk_shift)) {
-                        with (tileholder) {
-                            if (instance_position(global.mousex,global.mousey,id)) {
-                                //sort by reverse scale
-                                ds_priority_add(click_priority,id,(max_int-depth)/abs(tilesx*tilew*tilesy*tileh))
-                            }
-                        }
-                        if (ds_priority_size(click_priority)) {
-                            str="Stacked tiles:|-"
-                            i=-1
-                            do {
-                               i+=1
-                               prio=ds_priority_find_priority(click_priority,ds_priority_find_max(click_priority))
-                               inst[i]=ds_priority_delete_max(click_priority)
-                               str+="|"+inst[i].bgname+" ("+string(tile_get_left(inst[i].tile))+","+string(tile_get_top(inst[i].tile))+","+string(tile_get_width(inst[i].tile))+","+string(tile_get_height(inst[i].tile))+")"
-
-                               //as long as the next instance has the same dimensions, keep going
-                               next=ds_priority_find_max(click_priority)
-                               if (next) if (!(next.bbox_left==inst[i].bbox_left && next.bbox_top==inst[i].bbox_top && next.bbox_right==inst[i].bbox_right && next.bbox_bottom==inst[i].bbox_bottom)) break
-                            } until (!ds_priority_size(click_priority))
-
-                            if (i>0 && !keyboard_check(vk_control)) {menued=true i=show_menu(str,0)-1}
-
-                            if (i!=-1) with (inst[i]) {
-                                sel=1
-                                update_inspector()
-                                //ctrl+left = move
-                                if (keyboard_check(vk_control)) {
-                                    focus_tile(tile)
-                                    if (!menued) {
-                                        //group operation
-                                        if (selection) {
-                                            grabselection=1
-                                        } else selection=(num_selected()>1)
-                                        with (tileholder) if (sel) {
-                                            start_dragging()
-                                        }
-                                    }
-                                } else {
-                                    deselect()
-                                    sel=1
-                                    selectt=id
-                                    if (!menued) start_dragging()
+                        if (!overmode || keyboard_check(vk_control)) {
+                            with (tileholder) {
+                                if (instance_position(global.mousex,global.mousey,id)) {
+                                    //sort by reverse scale
+                                    ds_priority_add(click_priority,id,(max_int-depth)/abs(tilesx*tilew*tilesy*tileh))
                                 }
-                                update_selection_bounds()
                             }
-                            ds_priority_clear(click_priority)
+                            if (ds_priority_size(click_priority)) {
+                                str="Stacked tiles:|-"
+                                i=-1
+                                do {
+                                   i+=1
+                                   prio=ds_priority_find_priority(click_priority,ds_priority_find_max(click_priority))
+                                   inst[i]=ds_priority_delete_max(click_priority)
+                                   str+="|"+inst[i].bgname+" ("+string(tile_get_left(inst[i].tile))+","+string(tile_get_top(inst[i].tile))+","+string(tile_get_width(inst[i].tile))+","+string(tile_get_height(inst[i].tile))+")"
+
+                                   //as long as the next instance has the same dimensions, keep going
+                                   next=ds_priority_find_max(click_priority)
+                                   if (next) if (!(next.bbox_left==inst[i].bbox_left && next.bbox_top==inst[i].bbox_top && next.bbox_right==inst[i].bbox_right && next.bbox_bottom==inst[i].bbox_bottom)) break
+                                } until (!ds_priority_size(click_priority))
+
+                                if (i>0 && !keyboard_check(vk_control)) {menued=true i=show_menu(str,0)-1}
+
+                                if (i!=-1) with (inst[i]) {
+                                    sel=1
+                                    update_inspector()
+                                    //ctrl+left = move
+                                    if (keyboard_check(vk_control)) {
+                                        focus_tile(tile)
+                                        if (!menued) {
+                                            //group operation
+                                            if (selection) {
+                                                grabselection=1
+                                            } else selection=(num_selected()>1)
+                                            with (tileholder) if (sel) {
+                                                start_dragging()
+                                            }
+                                        }
+                                    } else {
+                                        deselect()
+                                        sel=1
+                                        selectt=id
+                                        if (!menued) start_dragging()
+                                    }
+                                    update_selection_bounds()
+                                }
+                                ds_priority_clear(click_priority)
+                            }
                         }
                     }
                     if (!selectt) {
                         //if not holding control, reset selection
-                        if (!keyboard_check(vk_control)) {with (tileholder) sel=0 with (selectt) sel=1}
+                        //if (!keyboard_check(vk_control)) {with (tileholder) sel=0 with (selectt) sel=1}
                         if (keyboard_check(vk_shift)) {
                             //selection rectangle
                             selecting=1

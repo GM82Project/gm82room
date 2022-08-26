@@ -55,6 +55,8 @@ mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
 mousein=(point_in_rectangle(mouse_wx,mouse_wy,160,32,width-160,height-32))
 
+if (keyboard_check_pressed(vk_insert)) overmode=!overmode
+
 //zooming
 if (grabknob) {
     if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {

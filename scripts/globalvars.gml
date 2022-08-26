@@ -39,3 +39,4 @@ globalvar
     scriptmenu,scriptmenuitems,
     fontmenu,fontmenuitems,
     timelinemenu,timelinemenuitems,
+    overmode,
