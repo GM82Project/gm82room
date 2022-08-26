@@ -40,6 +40,7 @@ if (!bgloaded[i]) {
     if (ds_map_exists(bgmenuicons,argument0))
         icon=ds_map_find_value(bgmenuicons,argument0)
     N_Menu_ItemSetBitmap(tilebgmenu,item,icon)
+    tilebgmenu_contains=true
     ds_map_add(bgmenuitems,item,argument0)
 }
 

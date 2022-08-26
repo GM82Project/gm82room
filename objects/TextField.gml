@@ -62,7 +62,8 @@ if (down!=0 && focus && !active && !(gray)) {
         Controller.menutype="background"
     }
     if (action=="tile bg name") {
-        N_Menu_ShowPopupMenu(window_handle(),tilebgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
+        if (tilebgmenu_contains) N_Menu_ShowPopupMenu(window_handle(),tilebgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
+        else N_Menu_ShowPopupMenu(window_handle(),bgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
         Controller.menutype="tilebg"
     }
     if (action=="view follow") {

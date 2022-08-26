@@ -27,7 +27,7 @@ globalvar
     layers,
     paths,pathnum,
     objmenu,objmenuitems,
-    bgmenu,tilebgmenu,bgmenuitems,
+    bgmenu,tilebgmenu,bgmenuitems,tilebgmenu_contains,
     undostack,undolist,undoing,uidmap,lastuid,current_undo_size,total_undo_size,
     mspal,
     constmenu,constmenuitems,

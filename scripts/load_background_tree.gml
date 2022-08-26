@@ -4,6 +4,7 @@ bgmenuitems=ds_map_create()
 bgmenu=N_Menu_CreatePopupMenu()
 bgmenuicons=ds_map_create()
 tilebgmenu=N_Menu_CreatePopupMenu()
+tilebgmenu_contains=false
 N_Menu_AddMenu(tilebgmenu,bgmenu,"Backgrounds")
 N_Menu_AddSeparator(tilebgmenu)
 
