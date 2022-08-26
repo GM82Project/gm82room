@@ -217,11 +217,13 @@ if (mouse_check_button_pressed(mb_left)) {
                             selx=global.mousex
                             sely=global.mousey
                         } else if (!keyboard_check(vk_control)) {
-                            //paint
-                            deselect()
-                            paint=2
-                            paintx=0
-                            painty=0
+                            if (tilebgpal!=noone && curtile!=noone) {
+                                //paint
+                                deselect()
+                                paint=2
+                                paintx=0
+                                painty=0
+                            }
                         }
                     }
                 }
