@@ -28,4 +28,53 @@ if (mode==4) {
             sizechunk=0
         }
     }
+
+    //resize room
+    if (grabroom) {
+        if (keyboard_check(vk_alt)) {
+            dx=global.mousex
+            dy=global.mousey
+        } else {
+            dx=floorto(global.mousex,gridx)
+            dy=floorto(global.mousey,gridy)
+        }
+        if (grabroom==1) {
+            roomleft=dx
+            roomtop=dy
+        }
+        if (grabroom==2) {
+            roomwidth=dx
+            roomtop=dy
+        }
+        if (grabroom==3) {
+            roomwidth=dx
+            roomheight=dy
+        }
+        if (grabroom==4) {
+            roomleft=dx
+            roomheight=dy
+        }
+        if (grabroom==5) {
+            if (keyboard_check(vk_alt)) {
+                roomleft=global.mousex-offx
+                roomtop=global.mousey-offy
+            } else {
+                roomleft=floorto(global.mousex-offx,gridx)
+                roomtop=floorto(global.mousey-offy,gridy)
+            }
+            roomwidth=roomleft+storex
+            roomheight=roomtop+storey
+        }
+        if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
+            grabroom=0
+            if (roomleft!=0 || roomtop!=0) {
+                room_shift(-roomleft,-roomtop)
+                roomwidth-=roomleft
+                roomheight-=roomtop
+                roomleft=0
+                roomtop=0
+            }
+        }
+        update_settingspanel()
+    }
 }

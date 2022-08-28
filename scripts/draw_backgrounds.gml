@@ -2,8 +2,8 @@
 if (!argument0) {
     d3d_set_depth(12000)
     d3d_set_hidden(0)
-    if (clearscreen) rect(0,0,roomwidth,roomheight,backgroundcolor,1)
-    else rect(0,0,roomwidth,roomheight,fillcolor,1)
+    if (clearscreen) rect(roomleft,roomtop,roomwidth-roomleft,roomheight-roomtop,backgroundcolor,1)
+    else rect(roomleft,roomtop,roomwidth-roomleft,roomheight-roomtop,fillcolor,1)
 } else d3d_set_depth(-12000)
 
 if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg_source[i]!="" && bg_visible[i] && bg_is_foreground[i]==argument0) {

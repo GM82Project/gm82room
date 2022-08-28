@@ -142,3 +142,5 @@ message
 draw_text_outline
 delete_backups
 get_object_parent
+draw_resize_handle
+room_shift

@@ -288,6 +288,18 @@ if (mouse_check_button_pressed(mb_left)) {
                 } else {
                     deselect()
                 }
+            } else {
+                if (abs(global.mousex-(roomwidth))<8*zm && abs(global.mousey-(roomheight))<8*zm) grabroom=3
+                else if (abs(global.mousex-(roomleft))<8*zm && abs(global.mousey-(roomtop))<8*zm) grabroom=1
+                else if (abs(global.mousex-(roomwidth))<8*zm && abs(global.mousey-(roomtop))<8*zm) grabroom=2
+                else if (abs(global.mousex-(roomleft))<8*zm && abs(global.mousey-(roomheight))<8*zm) grabroom=4
+                else if (point_in_rectangle(global.mousex,global.mousey,0,0,roomwidth,roomheight)) {
+                    grabroom=5
+                    offx=global.mousex
+                    offy=global.mousey
+                    storex=roomwidth
+                    storey=roomheight
+                }
             }
         }
     }

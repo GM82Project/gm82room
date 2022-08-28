@@ -40,3 +40,4 @@ globalvar
     fontmenu,fontmenuitems,
     timelinemenu,timelinemenuitems,
     overmode,
+    grabroom,

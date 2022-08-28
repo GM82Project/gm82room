@@ -94,6 +94,8 @@ view[7]=1 //paths
 
 chunkwidth=roomwidth
 chunkheight=roomheight
+roomleft=0
+roomtop=0
 
 //adjust window to fit room
 width=max(min_width,min(width,roomwidth+64+160*2))
