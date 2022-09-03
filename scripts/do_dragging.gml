@@ -1,6 +1,6 @@
 if (!keyboard_check(vk_alt)) {
-    x=floorto(global.mousex-grabx-offx,gridx)+offx
-    y=floorto(global.mousey-graby-offy,gridy)+offy
+    x=roundto(global.mousex-grabx-offx,gridx)+offx
+    y=roundto(global.mousey-graby-offy,gridy)+offy
 } else {
     x=global.mousex-grabx
     y=global.mousey-graby
