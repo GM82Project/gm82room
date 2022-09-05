@@ -59,6 +59,10 @@ icon_mode=0
 focus=noone
 window_focused=false
 
+searchresults=ds_list_create()
+searchmenu=N_Menu_CreatePopupMenu()
+searchmenuitems=ds_map_create()
+
 click_priority=ds_priority_create()
 
 knobz=0

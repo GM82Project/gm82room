@@ -144,3 +144,5 @@ delete_backups
 get_object_parent
 draw_resize_handle
 room_shift
+
+search_for_objects

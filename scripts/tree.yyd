@@ -148,3 +148,4 @@
 	|draw_sprite_outline
 |draw_resize_handle
 |room_shift
+|search_for_objects

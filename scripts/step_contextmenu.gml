@@ -107,4 +107,13 @@ if (click) {
             update_tilepanel()
         }
     }
+    if (menutype=="search") {
+        str=ds_map_get(searchmenuitems,click)
+        if (str!=undefined) {
+            if (mode==0) {
+                get_object(str)
+                textfield_set("palette name",ds_list_find_value(objects,objpal))
+            }
+        }
+    }
 }
