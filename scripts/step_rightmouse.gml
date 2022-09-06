@@ -6,7 +6,7 @@ if (mousein && mode==0 && mouse_check_button_pressed(mb_right)) {
 }
 
 if (!keyboard_check(vk_control)) {
-    if (mouse_check_button_pressed(mb_right)) {
+    if (mousein && mouse_check_button_pressed(mb_right)) {
         if (selecting) selecting=0
         with (TextField) textfield_actions()
         clear_inspector()
