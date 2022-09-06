@@ -15,7 +15,7 @@ if (objdesc[obj]!="") {
 
     str=string_replace_all(str,lf,crlf)
 
-    h=string_height_ext(str,-1,width*0.5)+8
+    h=string_height_ext(str,-1,width*0.75)+8
 
     dy+=h+8
 }
