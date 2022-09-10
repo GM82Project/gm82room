@@ -5,7 +5,7 @@
 //can potentially read through thousands of lines of gml when loading a room
 //so it's been written for speed in most places
 
-var i,f,reading,str,p,linec,actionc,line,fp;
+var i,f,reading,str,p,linec,actionc,line,fp,action,temp;
 
 i=argument0
 
@@ -33,19 +33,43 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
             actionc+=1
             //jump to where the action id is
             file_text_readln(f)
-            //look for "call event" action
-            if (string_pos("action_id=604",file_text_read_string(f))) {
+            action=file_text_read_string(f)
+            //look for "event inherited" action
+            if (string_pos("action_id=604",action)) {
                 parent=get_object_parent(argument1)
                 if (parent!="") load_object_fields(i,parent)
             }
-            //skip the rest of the action block
-            do {file_text_readln(f) str=file_text_read_string(f)} until (str=="*/" || file_text_eof(f))
-            linec=0
+            //look for gm82 "inherit object" action
+            if (string_pos("action_id=902",action)) {
+                //scroll down to argument 0
+                file_text_readln(f)
+                file_text_readln(f)
+                file_text_readln(f)
+                parent=string_delete(file_text_read_string(f),1,5) //erase "arg0="
+                if (parent!="") load_object_fields(i,parent)
+            }
+
+            //look for a code action
+            if (string_pos("action_id=603",action)) {
+                //skip the rest of the action block
+                do {file_text_readln(f) str=file_text_read_string(f)} until (str=="*/" || file_text_eof(f))
+                linec=0
+            } else continue
         }
 
+        temp=string_replace_all(str," ","")
+
         //expect field inheritance
-        if (string_pos("event_inherited()",str)) {
+        if (string_pos("event_inherited()",temp)) {
             parent=get_object_parent(argument1)
+            if (parent!="") load_object_fields(i,parent)
+        }
+
+        //expect field object inheritance
+        p=string_pos("event_inherit_object(",temp)
+        if (p) {
+            temp=string_delete(temp,1,p+20)
+            parent=string_copy(temp,1,string_pos(")",temp)-1)
             if (parent!="") load_object_fields(i,parent)
         }
 
