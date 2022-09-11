@@ -123,7 +123,7 @@ switch (objfieldtype[obj,menu]) {
     } break
 
     case "color": case "colour": {
-        fields[menu,1]="$"+string_hex(get_color_ext(real_hex(fields[menu,1]),"Select new "+objfieldtype[obj,menu]+"for "+qt+objfieldname[obj,menu]+qt+":"))
+        fields[menu,1]="$"+string_hex(get_color_ext(real_hex(fields[menu,1]),"Select new "+objfieldtype[obj,menu]+" for "+qt+objfieldname[obj,menu]+qt+":"))
         fields[menu,0]=1
     } break
 
