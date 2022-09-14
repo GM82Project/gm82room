@@ -35,8 +35,8 @@ if (mode==4) {
             dx=global.mousex
             dy=global.mousey
         } else {
-            dx=floorto(global.mousex,gridx)
-            dy=floorto(global.mousey,gridy)
+            dx=roundto(global.mousex,gridx)
+            dy=roundto(global.mousey,gridy)
         }
         if (grabroom==1) {
             roomleft=dx
@@ -59,8 +59,8 @@ if (mode==4) {
                 roomleft=global.mousex-offx
                 roomtop=global.mousey-offy
             } else {
-                roomleft=floorto(global.mousex-offx,gridx)
-                roomtop=floorto(global.mousey-offy,gridy)
+                roomleft=roundto(global.mousex-offx,gridx)
+                roomtop=roundto(global.mousey-offy,gridy)
             }
             roomwidth=roomleft+storex
             roomheight=roomtop+storey
