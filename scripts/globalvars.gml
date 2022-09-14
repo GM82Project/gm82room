@@ -41,3 +41,4 @@ globalvar
     timelinemenu,timelinemenuitems,
     overmode,
     grabroom,
+    searchresults,searchmenu,searchmenuitems,
