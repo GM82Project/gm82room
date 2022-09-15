@@ -32,6 +32,10 @@ for (i=0;i<objfields[obj];i+=1) {
             str=objfieldname[obj,i]+": "+string_replace_all(destringify(fields[i,1]),"#","\#")
         } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean") {
             str=objfieldname[obj,i]
+        } else if (objfieldtype[obj,i]=="instance") {
+            if (ds_map_exists(uidmap,fields[i,1])) {
+                str=objfieldname[obj,i]+": "+fields[i,1]+" ("+(ds_map_get(uidmap,fields[i,1])).objname+")"
+            } else str=objfieldname[obj,i]+": "+fields[i,1]+" (missing)"
         } else {
             str=objfieldname[obj,i]+": "+fields[i,1]
         }
