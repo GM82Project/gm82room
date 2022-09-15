@@ -3,7 +3,7 @@ seln=num_selected()
 
 if (object_index!=Controller) {
     if (mode==0) {
-        textfield_set("object name",uid)
+        textfield_set("object name",objname)
 
         textfield_set("inst x",x)
         textfield_set("inst y",y)
