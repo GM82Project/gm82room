@@ -21,9 +21,16 @@ i.type=3
 i.anchor=2
 i.dynamic=-1
 i.maxlen=13
-i.w=160-16
+i.w=112
 i.tagmode=0
 if (objpal!=noone) textfield_set("palette name",ds_list_find_value(objects,objpal))
+
+i=instance_create(120,height-104,Button)
+i.anchor=2
+i.spr=34
+i.action="object search"
+i.alt="Search..."
+i.tagmode=0
 
 i=instance_create(8,height-100+32,Button)
 i.type=1

@@ -19,6 +19,7 @@ with (Controller) switch (argument0) {
     case "prefs"        : {show_prefs()}break
     case "undo"         : {pop_undo()}break
 
+
     //settings
     case "room code"   : {undo_global("roomcode","room creation code") roomcode=external_code_editor(roomcode) other.alt=roomcode}break
     case "room persist": {undo_global("roompersistent","room options") roompersistent=!roompersistent}break
@@ -134,6 +135,7 @@ with (Controller) switch (argument0) {
     case "palscroldown" : {palettescrollgo-=200}break
     case "palscrolup"   : {palettescrollgo+=200}break
     case "overlap check": {overlap_check=!overlap_check}break
+    case "object search": {search_for_objects(get_string("Object name:",""))}break
     case "cement"       : {cement_instances()}break
     case "cleanup"      : {cleanup_instances()}break
     case "parsecode"    : {parsecode_instances()}break
