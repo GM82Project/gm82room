@@ -1,5 +1,5 @@
 ///edit_instance_fields(delete)
-var str,i,dx,dy,menu,menu2,left,right;
+var str,i,dx,dy,menu,menu2,left,right,deac,get;
 
 //yeah i know this is the same as the draw script but what can i do
 
@@ -33,8 +33,12 @@ for (i=0;i<objfields[obj];i+=1) {
         } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean") {
             str=objfieldname[obj,i]
         } else if (objfieldtype[obj,i]=="instance") {
+            deac=0
             if (ds_map_exists(uidmap,fields[i,1])) {
-                str=objfieldname[obj,i]+": "+fields[i,1]+" ("+(ds_map_get(uidmap,fields[i,1])).objname+")"
+                get=ds_map_get(uidmap,fields[i,1])
+                if (!instance_exists(get)) {deac=1 instance_activate_object(get)}
+                str=objfieldname[obj,i]+": "+fields[i,1]+" ("+(get).objname+")"
+                if (deac) instance_deactivate_object(get)
             } else str=objfieldname[obj,i]+": "+fields[i,1]+" (missing)"
         } else {
             str=objfieldname[obj,i]+": "+fields[i,1]

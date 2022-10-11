@@ -1,5 +1,5 @@
 ///draw_instance_fields(preview)
-var str,i,dx,dy,h;
+var str,i,dx,dy,h,deac,get;
 str=""
 
 fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
@@ -58,8 +58,11 @@ for (i=0;i<objfields[obj];i+=1) {
         } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean") {
             str=objfieldname[obj,i]
         } else if (objfieldtype[obj,i]=="instance") {
+            deac=0
             if (ds_map_exists(uidmap,fields[i,1])) {
-                str=objfieldname[obj,i]+": "+fields[i,1]+" ("+(ds_map_get(uidmap,fields[i,1])).objname+")"
+                get=ds_map_get(uidmap,fields[i,1])
+                if (!instance_exists(get)) {deac=1 instance_activate_object(get)}
+                str=objfieldname[obj,i]+": "+fields[i,1]+" ("+(get).objname+")"
             } else str=objfieldname[obj,i]+": "+fields[i,1]+" (missing)"
         } else {
             str=objfieldname[obj,i]+": "+fields[i,1]
@@ -133,10 +136,12 @@ for (i=0;i<objfields[obj];i+=1) {
         if (objfieldtype[obj,i]=="instance") {
             draw_set_color(selcol)
             if (ds_map_exists(uidmap,fields[i,1])) {
-                with (ds_map_get(uidmap,fields[i,1])) {
+                get=ds_map_get(uidmap,fields[i,1])
+                with (get) {
                     draw_rectangle(floor((bbox_left-view_xview-0.5)/zoom),floor((bbox_top-view_yview-0.5)/zoom),floor((bbox_right+0.5-view_xview)/zoom),floor((bbox_bottom+0.5-view_yview)/zoom),1)
                     draw_arrow(dx,dy+16,floor(((bbox_left+bbox_right+1)/2-view_xview)/zoom),floor(((bbox_top+bbox_bottom+1)/2-view_yview)/zoom),10)
                 }
+                if (deac) instance_deactivate_object(get)
             } else {
                 draw_set_color($ff)
                 draw_line_width(dx-8,dy+8,dx+8,dy+24,4)
