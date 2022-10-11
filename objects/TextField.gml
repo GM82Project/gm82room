@@ -87,12 +87,17 @@ if (active) {
     if (type=4) {
         text=string_copy(keyboard_string,1,maxlen)
     } else {
-        if (type=0) text=string_number(keyboard_string)
+        if (type=0) {
+            if (string_length(keyboard_string)<2 && keyboard_lastkey==vk_backspace) {
+                keyboard_string=string_replace(keyboard_string,"-","")
+            }
+            text=string_number(keyboard_string)
+        }
         neg=!!string_pos("-",text)
         if (maxval>0) text=string(min(maxval,real(text)))
         if (minval<maxval) text=string(max(minval,real(text)))
         text=string_copy(text,1,maxlen)
-        if (text="0" && neg) text="-0"
+        if (text=="0" && neg) text="-0"
     }
     if (selected) {
         if (keyboard_lastkey==vk_backspace || keyboard_lastkey==vk_delete || keyboard_lastkey==vk_return)
