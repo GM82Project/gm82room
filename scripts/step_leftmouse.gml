@@ -77,25 +77,7 @@ if (mouse_check_button_pressed(mb_left)) {
                                 }
                             }
                             if (ds_priority_size(click_priority)) {
-                                str="Stacked instances:|-"
-                                i=-1
-                                do {
-                                   i+=1
-                                   prio=ds_priority_find_priority(click_priority,ds_priority_find_max(click_priority))
-                                   inst[i]=ds_priority_delete_max(click_priority)
-                                   str+="|"+inst[i].objname+" ("+inst[i].uid+")"
-
-                                   //as long as the next instance has the same dimensions, keep going
-                                   next=ds_priority_find_max(click_priority)
-                                   if (next) if (next.bbox_left==inst[i].bbox_left && next.bbox_top==inst[i].bbox_top && next.bbox_right==inst[i].bbox_right && next.bbox_bottom==inst[i].bbox_bottom) continue
-
-                                   //stop when the next instance has a lower priority
-                                   if (prio!=ds_priority_find_priority(click_priority,next)) break
-                                } until (!ds_priority_size(click_priority))
-
-                                if (i>0 && !keyboard_check(vk_control)) {menued=true i=show_menu(str,0)-1}
-
-                                if (i!=-1) with (inst[i]) {
+                                with (ds_priority_find_max(click_priority)) {
                                     sel=1
                                     update_inspector()
                                     //ctrl+left = move
@@ -165,22 +147,7 @@ if (mouse_check_button_pressed(mb_left)) {
                                 }
                             }
                             if (ds_priority_size(click_priority)) {
-                                str="Stacked tiles:|-"
-                                i=-1
-                                do {
-                                   i+=1
-                                   prio=ds_priority_find_priority(click_priority,ds_priority_find_max(click_priority))
-                                   inst[i]=ds_priority_delete_max(click_priority)
-                                   str+="|"+inst[i].bgname+" ("+string(tile_get_left(inst[i].tile))+","+string(tile_get_top(inst[i].tile))+","+string(tile_get_width(inst[i].tile))+","+string(tile_get_height(inst[i].tile))+")"
-
-                                   //as long as the next instance has the same dimensions, keep going
-                                   next=ds_priority_find_max(click_priority)
-                                   if (next) if (!(next.bbox_left==inst[i].bbox_left && next.bbox_top==inst[i].bbox_top && next.bbox_right==inst[i].bbox_right && next.bbox_bottom==inst[i].bbox_bottom)) break
-                                } until (!ds_priority_size(click_priority))
-
-                                if (i>0 && !keyboard_check(vk_control)) {menued=true i=show_menu(str,0)-1}
-
-                                if (i!=-1) with (inst[i]) {
+                                with (ds_priority_find_max(click_priority)) {
                                     sel=1
                                     update_inspector()
                                     //ctrl+left = move
