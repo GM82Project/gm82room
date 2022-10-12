@@ -7,12 +7,12 @@ i.text="Colour"
 i.alt="Draw background colour"
 i.tagmode=2
 
-i=instance_create(96,100,TextField)
+i=instance_create(104,100,TextField)
 i.action="bgcol"
 i.alt="Background colour"
 i.type=1
 i.text=string(backgroundcolor)
-i.w=60
+i.w=52
 i.tagmode=2
 
 i=instance_create(0,136,Button) i.action="bgselect" i.actionid=0 i.text="0" i.tagmode=2 i.w=40
