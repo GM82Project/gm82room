@@ -12,6 +12,7 @@ mode=argument0
 instance_activate_object(instance)
 instancecount=instance_number(instance)
 with (instance) {
+    fieldactive=0
     visible=((view[0] && (view[5] || objvis[obj]) && (view[6] || objspr[obj]!=sprDefault)) || (argument0==0 && objpal==obj))
     if (!visible) {
         sel=0

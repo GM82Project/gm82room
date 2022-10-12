@@ -6,6 +6,10 @@ if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && keyboard_check_pr
         pop_undo()
     }
 }
+if (keyboard_check_pressed(vk_tab)) {
+    if (keyboard_check(vk_shift)) change_mode(modwrap(mode-1,0,5))
+    else change_mode((mode+1) mod 5)
+}
 if (keyboard_check_pressed(vk_escape)) {
     with (TextField) textfield_actions()
     clear_inspector()
