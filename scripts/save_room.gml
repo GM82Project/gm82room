@@ -9,14 +9,12 @@ if (argument0) {
     file_text_close(file_text_open_write(dir+"gm82room lockfile"))
     message("Autosaved")
 } else {
-    //normal save;
-    //remove any unused code files from the room folder on save
-    for (f=file_find_first(dir+"*.gml",0);f!="";f=file_find_next()) {
-        file_delete(dir+f)
-    } file_find_close()
-    for (f=file_find_first(dir+"*.txt",0);f!="";f=file_find_next()) {
-        file_delete(dir+f)
-    } file_find_close()
+    //normal save, make backup first
+    dirname=string_copy(dir,1,string_length(dir)-1)
+
+    execute_program_silent('cmd /C robocopy "'+dirname+'" "'+directory_previous(dir)+filename_name(dirname)+"_gm82room_backup"+'" /s /e')
+
+    delete_backups()
 }
 
 instance_activate_all()
@@ -152,5 +150,9 @@ change_mode(mode)
 
 if (!argument0) {
     //normal save succeeded; remove backup
-    delete_backups()
+    dirname=directory_previous(dir)+filename_name(string_copy(dir,1,string_length(dir)-1))+"_gm82room_backup"
+
+    if (directory_exists(dirname)) {
+        execute_program_silent("cmd /C "+qt+"rmdir "+qt+dirname+qt+" /s /q"+qt)
+    }
 }
