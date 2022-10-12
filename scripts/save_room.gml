@@ -14,6 +14,9 @@ if (argument0) {
     for (f=file_find_first(dir+"*.gml",0);f!="";f=file_find_next()) {
         file_delete(dir+f)
     } file_find_close()
+    for (f=file_find_first(dir+"*.txt",0);f!="";f=file_find_next()) {
+        file_delete(dir+f)
+    } file_find_close()
 }
 
 instance_activate_all()
