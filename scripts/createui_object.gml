@@ -40,6 +40,8 @@ i.text="No overlap"
 i.alt="Avoid placing instances that overlap existing#instances of the same object type"
 i.tagmode=0
 
+
+//tools
 i=instance_create(120,height-100+60,Button)
 i.action="cement"
 i.alt="Glue adjacent instances of this object to reduce instance count"

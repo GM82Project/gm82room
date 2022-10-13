@@ -1,4 +1,4 @@
-min_width=1072
+min_width=1104
 min_height=580
 max_uint=4294967296
 max_int=2147483647

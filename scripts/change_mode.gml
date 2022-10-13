@@ -1,6 +1,7 @@
 var i,layer,deact,dcur;
 
 dcur=0
+ref_moving=0
 
 if (mode!=argument) {
     deselect()

@@ -17,7 +17,7 @@ draw_button_ext
 button_actions
 createui
 drawtooltip
-gameend
+
 textfield_set
 update_inspector
 clear_inspector
@@ -157,3 +157,5 @@ drawui_view_post
 drawui_settings_post
 drawui_top_layer
 drawui_statusbar
+load_reference
+draw_reference

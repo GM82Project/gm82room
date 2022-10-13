@@ -9,4 +9,7 @@ textfield_set("room width",roomwidth-roomleft)
 textfield_set("room height",roomheight-roomtop)
 textfield_set("room speed",roomspeed)
 
+textfield_set("ref alpha",ref_alpha)
+
+
 with (Button) if (action="room code") alt=roomcode

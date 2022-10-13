@@ -52,7 +52,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-gameend()
+write_preferences()
 #define Other_4
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -112,3 +112,4 @@ if (knobz!=0 || knobx!=0 || knoby!=0) {
 }
 
 draw_backgrounds(0)
+draw_reference(0)

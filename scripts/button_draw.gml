@@ -18,6 +18,8 @@ if (object_index==Button) {
             case "view invis":       {up=(!view[5] && !down)            }break
             case "view nospr":       {up=(!view[6] && !down)            }break
             case "view paths":       {up=(!view[7] && !down)            }break
+            case "view ref":         {up=(!view[8] && !down)            }break
+            case "ref move":         {up=(!ref_moving && !down)         }break
             case "bgselect":         {up=(!down && bg_current!=actionid)}break
             case "vwselect":         {up=(!down && vw_current!=actionid)}break
             case "undo":             {up=(!down && alt!="Undo (empty)") }break
@@ -43,6 +45,8 @@ if (object_index==Button) {
                 case "view visible": {checked=vw_visible[vw_current]}break
 
                 case "chunk crop": {checked=chunkcrop}break
+
+                case "ref top": {checked=ref_top}break
             }
             up=!down
         }

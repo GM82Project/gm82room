@@ -55,10 +55,11 @@ i.text="Clear"
 i.alt="Clear window before drawing"
 i.tagmode=4
 
-i=instance_create(0,364,Button)
+i=instance_create(8,360,Button)
 i.action="room code"
-i.text="Room code"
-i.w=160
+i.text="  Room code"
+i.spr=31
+i.w=144
 i.tagmode=4
 i.alt=roomcode
 
@@ -120,5 +121,36 @@ i.alt="Load and paste a chunk file"
 i.anchor=1
 i.w=72
 i.tagmode=4
+
+i=instance_create(8,432,Button)
+i.action="ref load"
+i.text="  Load"
+i.spr=35
+i.alt="Load an image to use as reference"
+i.w=144
+i.tagmode=4
+
+i=instance_create(80,468,TextField)
+i.action="ref alpha"
+i.basealt="alpha"
+i.displen=6
+i.w=72
+i.maxval=255
+i.tagmode=4
+
+i=instance_create(8,504,Button)
+i.type=1
+i.action="ref top"
+i.text="On top"
+i.alt="Draw reference image on top"
+i.tagmode=4
+
+i=instance_create(8,532,Button)
+i.action="ref move"
+i.text="Move image"
+i.alt="Move reference image around"
+i.w=144
+i.tagmode=4
+
 
 update_settingspanel()

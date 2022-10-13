@@ -4,6 +4,7 @@ if (powersave) sel_alpha=0.5
 else sel_alpha=0.5+0.25*sin(current_time/200)
 
 draw_backgrounds(1)
+draw_reference(1)
 
 draw_paths()
 

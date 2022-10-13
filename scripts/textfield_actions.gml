@@ -12,6 +12,8 @@ if (active) {
         case "room height": {val=clamp(round(real(text)),1,999999) undo_global("roomheight","room height") roomheight=val}break
         case "room speed" : {val=clamp(round(real(text)),1,9999  ) undo_global("roomspeed","room speed")  roomspeed=val }break
 
+        case "ref alpha"  : {ref_alpha=real(text)}break
+
         case "inst x"    : {val=round(real(text)) with (instance) if (sel) {x=val do_change_undo("instance x",0)}}break
         case "inst y"    : {val=round(real(text)) with (instance) if (sel) {y=val do_change_undo("instance y",0)}}break
         case "inst xs"   : {val=real(text) with (instance) {if (sel) image_xscale=val if (abs(image_xscale*sprw)<1) image_xscale=1/sprw do_change_undo("instance xscale",0)}}break

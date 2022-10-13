@@ -60,6 +60,12 @@ icon_mode=0
 focus=noone
 window_focused=false
 
+ref_top=1
+ref_alpha=127
+ref_tex=noone
+ref_w=1
+ref_h=1
+
 searchresults=ds_list_create()
 searchmenu=N_Menu_CreatePopupMenu()
 searchmenuitems=ds_map_create()
@@ -96,6 +102,7 @@ view[4]=0 //views
 view[5]=1 //invisibles
 view[6]=1 //nosprites
 view[7]=1 //paths
+view[8]=0 //reference image
 
 chunkwidth=roomwidth
 chunkheight=roomheight

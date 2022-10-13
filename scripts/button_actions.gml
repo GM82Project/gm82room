@@ -24,9 +24,14 @@ with (Controller) switch (argument0) {
     case "room code"   : {undo_global("roomcode","room creation code") roomcode=external_code_editor(roomcode) other.alt=roomcode}break
     case "room persist": {undo_global("roompersistent","room options") roompersistent=!roompersistent}break
     case "room clear"  : {undo_global("clearview","room options") clearview=!clearview}break
+
     case "chunk crop"  : {chunkcrop=!chunkcrop if (!chunkcrop) chunkleft=0 chunktop=0 chunkwidth=roomwidth chunkheight=roomheight update_settingspanel()}break
     case "chunk export": {chunk_export()}break
     case "chunk import": {chunk_import()}break
+
+    case "ref load"    : {load_reference()}break
+    case "ref top"     : {ref_top=!ref_top}break
+    case "ref move"    : {ref_moving=!ref_moving}break
 
 
     //visibility
@@ -38,7 +43,7 @@ with (Controller) switch (argument0) {
     case "view invis"  : {view[5]=!view[5] change_mode(mode)}break
     case "view nospr"  : {view[6]=!view[6] change_mode(mode)}break
     case "view paths"  : {view[7]=!view[7]}break
-
+    case "view ref"    : {if (ref_loaded) view[8]=!view[8]}break
 
     //zoom
     case "reset view"      : {xgo=roomwidth/2 ygo=roomheight/2 zoomgo=1 zoomcenter=1}break

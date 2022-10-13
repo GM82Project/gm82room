@@ -12,6 +12,7 @@
 	|string_wrap
 	|string_delete_edge_spaces
 	|draw_text_outline
+	|message
 +file
 	|gensavecode
 	|parsereal
@@ -38,6 +39,7 @@
 	|load_jtooldata
 	|load_all_jtool_objs
 	|loadthumb
+	|delete_backups
 +chunks
 	|chunk_export
 	|chunk_import
@@ -65,11 +67,9 @@
 	|live_send_room_data
 |globalvars
 |create
-|load_room
-|save_room
-|delete_backups
-|message
-|gameend
++saving
+	|load_room
+	|save_room
 |createui
 +createui
 	|createui_main
@@ -78,14 +78,11 @@
 	|createui_background
 	|createui_views
 	|createui_settings
-+tiles
-	|add_tile
-	|add_tile_layer
-	|dupe_tile_layer
-	|del_tile_layer
-	|change_tile_layer
 |drawui
 +drawui
+	|draw_backgrounds
+	|draw_paths
+	|draw_knob
 	|drawui_object_pre
 	|drawui_tile_pre
 	|drawui_view_pre
@@ -97,9 +94,6 @@
 	|drawui_view_post
 	|drawui_settings_post
 	|drawui_top_layer
-|draw_backgrounds
-|draw_paths
-|draw_knob
 |step
 +step
 	|step_windowzoom
@@ -112,38 +106,53 @@
 	|step_view
 	|step_settings
 	|step_contextmenu
-|update_inspector
-|clear_inspector
-|update_view
-|update_backgroundpanel
-|update_tilepanel
-|update_viewpanel
-|update_settingspanel
-|update_undo_button
++update
+	|update_inspector
+	|clear_inspector
+	|update_view
+	|update_backgroundpanel
+	|update_tilepanel
+	|update_viewpanel
+	|update_settingspanel
+	|update_undo_button
 |change_mode
-|button_actions
-|button_held
-|button_draw
-|textfield_actions
-|textfield_set
-|focus_object
-|focus_tile
++buttons
+	|button_actions
+	|button_held
+	|button_draw
+	|textfield_actions
+	|textfield_set
 +tools
 	|cement_instances
 	|cleanup_instances
 	|parsecode_instances
 	|replace_instances
 	|load_jmap
-|deselect
-|get_uid
-|set_uid
-|start_dragging
-|do_dragging
-|start_selection_resize
-|do_selection_resize
-|reduce_collision
-|restore_collision
-|update_selection_bounds
+	|load_reference
+	|draw_reference
+	|search_for_objects
+	|room_shift
++instances
+	|get_uid
+	|set_uid
++tiles
+	|add_tile
+	|add_tile_layer
+	|dupe_tile_layer
+	|del_tile_layer
+	|change_tile_layer
++selection
+	|deselect
+	|focus_object
+	|focus_tile
+	|start_dragging
+	|do_dragging
+	|start_selection_resize
+	|do_selection_resize
+	|update_selection_bounds
+	|draw_resize_handle
+	|reduce_collision
+	|restore_collision
 +fields
 	|load_object_fields
 	|invalid_variable_name
@@ -158,6 +167,3 @@
 	|get_nth_token
 	|show_field_resource_menu
 	|draw_sprite_outline
-|draw_resize_handle
-|room_shift
-|search_for_objects
