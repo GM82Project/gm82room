@@ -138,19 +138,49 @@ i.w=72
 i.maxval=255
 i.tagmode=4
 
-i=instance_create(8,504,Button)
+i=instance_create(80,500,TextField)
+i.action="ref angle"
+i.basealt="angle"
+i.displen=6
+i.w=72
+i.maxval=359
+i.tagmode=4
+
+i=instance_create(8,564,TextField)
+i.action="ref xscale"
+i.basealt="xscale"
+i.displen=6
+i.w=72
+i.maxval=359
+i.tagmode=4
+
+i=instance_create(80,564,TextField)
+i.action="ref yscale"
+i.basealt="yscale"
+i.displen=6
+i.w=72
+i.maxval=359
+i.tagmode=4
+
+i=instance_create(8,600,Button)
 i.type=1
 i.action="ref top"
 i.text="On top"
 i.alt="Draw reference image on top"
 i.tagmode=4
 
-i=instance_create(8,532,Button)
+i=instance_create(8,628,Button)
 i.action="ref move"
-i.text="Move image"
+i.text="Move"
 i.alt="Move reference image around"
-i.w=144
+i.w=72
 i.tagmode=4
 
+i=instance_create(80,628,Button)
+i.action="ref reset"
+i.text="Reset"
+i.alt="Reset reference image scaling and position"
+i.w=72
+i.tagmode=4
 
 update_settingspanel()

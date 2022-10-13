@@ -7,33 +7,33 @@ draw_loader("Loading project...",0.125,"")
 //find room
 if (parameter_count()) {
     //summoned from gm82
-    dir=parameter_string(1)
+    savedir=parameter_string(1)
 } else {
     //clicked on
-    dir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
+    savedir=filename_dir(get_open_filename("GM8.2 Room|room.txt","room.txt"))
     window_default()
 }
 
-if (dir="") {
+if (savedir="") {
     //this is for faster testing on my computer :)
     if (working_directory!=program_directory) {
-        dir="C:\Stuff\github\renex-engine\source\rooms\rmTemplate"
-        //dir="C:\Stuff\github\mkfusion\rooms\rm9_S1Area3"
+        savedir="C:\Stuff\github\renex-engine\source\rooms\rmTemplate"
+        //savedir="C:\Stuff\github\mkfusion\rooms\rm9_S1Area3"
     }
-    if (!file_exists(dir+"\room.txt")) {
+    if (!file_exists(savedir+"\room.txt")) {
         //shrug
         game_end()
         return 0
     }
 }
 
-roomname=filename_name(dir)
+roomname=filename_name(savedir)
 room_caption+=" - "+roomname
 set_application_title(roomname+" - Room Editor")
 global.default_caption=room_caption
 
-dir+="\"
-root=directory_previous(directory_previous(dir))
+savedir+="\"
+root=directory_previous(directory_previous(savedir))
 pjfile=file_find_first(root+"*.gm82",0) file_find_close()
 gamename=filename_change_ext(pjfile,"")
 
@@ -127,7 +127,7 @@ load_paths()
 
 //check autosave
 loading_autosave=false
-if (directory_exists(dir+"autosave")) {
+if (directory_exists(savedir+"autosave")) {
     if (show_question("Hey, it looks like something happened before#and there's an autosave backup for this room.##Do you want to load the backup?")) {
         dir+="autosave\"
         loading_autosave=true
@@ -136,7 +136,7 @@ if (directory_exists(dir+"autosave")) {
 
 //read room settings
 settings=ds_map_create()
-ds_map_read_ini(settings,dir+"room.txt")
+ds_map_read_ini(settings,savedir+"room.txt")
 
 backgroundcolor=real(ds_map_find_value(settings,"bg_color"))
 clearscreen=real(ds_map_find_value(settings,"clear_screen"))
@@ -150,7 +150,7 @@ gridy=real(ds_map_find_value(settings,"snap_y"))
 roomcaption=ds_map_find_value(settings,"caption")
 vw_enabled=real(ds_map_find_value(settings,"views_enabled"))
 
-roomcode=file_text_read_all(dir+"code.gml",lf)
+roomcode=file_text_read_all(savedir+"code.gml",lf)
 if (string_replace_all(string_replace_all(string_replace_all(roomcode,chr(9),""),lf,"")," ","")="") roomcode=""
 
 for (i=0;i<8;i+=1) {
@@ -188,13 +188,13 @@ for (i=0;i<8;i+=1) {
 progress=0.25
 time=current_time
 c=0
-layers=file_text_read_list(dir+"layers.txt",noone,false)
+layers=file_text_read_list(savedir+"layers.txt",noone,false)
 layersize=ds_list_size(layers)
 if (layersize) {
     for (i=0;i<layersize;i+=1) {
         layer=real(ds_list_find_value(layers,i))
         ds_list_replace(layers,i,layer)
-        f=file_text_open_read_safe(dir+string(layer)+".txt") if (f) {do {str=file_text_read_string(f) file_text_readln(f)
+        f=file_text_open_read_safe(savedir+string(layer)+".txt") if (f) {do {str=file_text_read_string(f) file_text_readln(f)
             o=instance_create(0,0,tileholder) get_uid(o)
 
             string_token_start(str,",")
@@ -261,7 +261,7 @@ if (layersize) {
 //load instances
 time=current_time
 c=0
-f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_string(f) file_text_readln(f)
+f=file_text_open_read_safe(savedir+"instances.txt") if (f) {do {str=file_text_read_string(f) file_text_readln(f)
     if (str!="") {
         o=instance_create(0,0,instance)
 
@@ -285,7 +285,7 @@ f=file_text_open_read_safe(dir+"instances.txt") if (f) {do {str=file_text_read_s
         o.image_blend=o.image_blend&$ffffff
 
         if (string_token_next()=="1") {//has code flag
-            fn=dir+o.uid+".gml"
+            fn=savedir+o.uid+".gml"
             if (!file_exists(fn)) {show_error("Error loading instance data:"+crlf+crlf+" Missing "+qt+fn+qt+" file.",1) exit}
             o.code=file_text_read_all(fn,lf)
             l=string_length(o.code)
@@ -331,7 +331,7 @@ repeat (3) {
 objpal=lastobj
 
 if (loading_autosave) {
-    dir=directory_previous(dir)
+    savedir=directory_previous(savedir)
 }
 
 draw_loader("Finishing up...",progress,"")

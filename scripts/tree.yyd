@@ -13,6 +13,8 @@
 	|string_delete_edge_spaces
 	|draw_text_outline
 	|message
+	|point_in_quad
+	|draw_quad
 +file
 	|gensavecode
 	|parsereal
@@ -39,7 +41,6 @@
 	|load_jtooldata
 	|load_all_jtool_objs
 	|loadthumb
-	|delete_backups
 +chunks
 	|chunk_export
 	|chunk_import
@@ -70,6 +71,7 @@
 +saving
 	|load_room
 	|save_room
+	|delete_backups
 |createui
 +createui
 	|createui_main

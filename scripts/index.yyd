@@ -159,3 +159,5 @@ drawui_top_layer
 drawui_statusbar
 load_reference
 draw_reference
+point_in_quad
+draw_quad

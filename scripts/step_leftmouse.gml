@@ -254,6 +254,29 @@ if (mouse_check_button_pressed(mb_left)) {
                 } else {
                     deselect()
                 }
+            } else if (ref_moving) {
+                if (ref_loaded) {
+                    draghandx=ref_x+pivot_pos_x(ref_w,ref_h,ref_angle)
+                    draghandy=ref_y+pivot_pos_y(ref_w,ref_h,ref_angle)
+
+                    rothandx=ref_x+lengthdir_x(ref_w,ref_angle)
+                    rothandy=ref_y+lengthdir_y(ref_w,ref_angle)
+                    if (point_distance(rothandx,rothandy,draghandx,draghandy)<20*zm) {
+                        w=point_distance(ref_x,ref_y,draghandx,draghandy)+20*zm
+                        rothandx=ref_x+lengthdir_x(w,ref_angle)
+                        rothandy=ref_y+lengthdir_y(w,ref_angle)
+                    }
+
+                    if (abs(global.mousex-rothandx)<8*zm && abs(global.mousey-rothandy)<8*zm) grabref=1
+                    else if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) grabref=3
+                    else if (point_in_quad(global.mousex,global.mousey,ref_x,ref_y,ref_x+lengthdir_x(ref_w,ref_angle),ref_y+lengthdir_y(ref_w,ref_angle),draghandx,draghandy,ref_x+lengthdir_x(ref_h,ref_angle-90),ref_y+lengthdir_y(ref_h,ref_angle-90))) {
+                        grabref=5
+                        offx=global.mousex-ref_x
+                        offy=global.mousey-ref_y
+                        storex=ref_x+ref_w
+                        storey=ref_y+ref_h
+                    }
+                }
             } else {
                 if (abs(global.mousex-(roomwidth))<8*zm && abs(global.mousey-(roomheight))<8*zm) grabroom=3
                 else if (abs(global.mousex-(roomleft))<8*zm && abs(global.mousey-(roomtop))<8*zm) grabroom=1

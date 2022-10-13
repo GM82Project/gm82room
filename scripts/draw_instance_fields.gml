@@ -4,8 +4,8 @@ str=""
 
 fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
 fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_y(-(sprox)*image_xscale,image_angle)
-if (point_distance(fieldhandx,fieldhandy,draghandx,draghandy)<20) {
-    w=point_distance(x,y,fieldhandx,fieldhandy)+20
+if (point_distance(fieldhandx,fieldhandy,draghandx,draghandy)<20*zm) {
+    w=point_distance(x,y,fieldhandx,fieldhandy)+20*zm
     a=point_direction(x,y,fieldhandx,fieldhandy)
     fieldhandx=x+lengthdir_x(w,a)
     fieldhandy=y+lengthdir_y(w,a)

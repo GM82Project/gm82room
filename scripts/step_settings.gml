@@ -29,6 +29,43 @@ if (mode==4) {
         }
     }
 
+    //resize reference image
+    if (grabref) {
+        if (keyboard_check(vk_alt)) {
+            dx=global.mousex
+            dy=global.mousey
+        } else {
+            dx=roundto(global.mousex,gridx)
+            dy=roundto(global.mousey,gridy)
+        }
+        if (grabref==1) {
+            ref_angle=point_direction(ref_x,ref_y,global.mousex,global.mousey)+90-90*sign(ref_w)
+            if (!keyboard_check(vk_alt)) {
+                ref_angle=roundto(ref_angle,15) mod 360
+            }
+        }
+        if (grabref==3) {
+            dir=point_direction(ref_x,ref_y,dx,dy)
+            len=point_distance(ref_x,ref_y,dx,dy)
+
+            ref_w=lengthdir_x(len,dir-ref_angle)
+            ref_h=lengthdir_y(len,dir-ref_angle)
+        }
+        if (grabref==5) {
+            if (keyboard_check(vk_alt)) {
+                ref_x=global.mousex-offx
+                ref_y=global.mousey-offy
+            } else {
+                ref_x=roundto(global.mousex-offx,gridx)
+                ref_y=roundto(global.mousey-offy,gridy)
+            }
+        }
+        if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
+            grabref=0
+        }
+        update_settingspanel()
+    }
+
     //resize room
     if (grabroom) {
         if (keyboard_check(vk_alt)) {

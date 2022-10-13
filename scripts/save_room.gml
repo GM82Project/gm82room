@@ -1,26 +1,26 @@
 ///save_room(backup?)
-var f,f2,i,l,cl,dir,savecode,str,crc,pr,yes;
+var f,f2,i,l,cl,savecode,str,crc,pr,yes;
 
-dir=self.dir
+
 if (argument0) {
     //backup save
-    dir+="autosave\"
-    directory_create(dir)
-    file_text_close(file_text_open_write(dir+"gm82room lockfile"))
+    savedir+="autosave\"
+    directory_create(savedir)
+    file_text_close(file_text_open_write(savedir+"gm82room lockfile"))
     message("Autosaved")
 } else {
     //normal save, make backup first
-    dirname=string_copy(dir,1,string_length(dir)-1)
+    dirname=string_copy(savedir,1,string_length(savedir)-1)
 
-    execute_program_silent('cmd /C robocopy "'+dirname+'" "'+directory_previous(dir)+filename_name(dirname)+"_gm82room_backup"+'" /s /e')
+    execute_program_silent('cmd /C robocopy "'+dirname+'" "'+directory_previous(savedir)+filename_name(dirname)+"_gm82room_backup"+'" /s /e')
 
     delete_backups()
 
-    for (f=file_find_first(dir+"*.gml",0);f!="";f=file_find_next()) {
-        file_delete(dir+f)
+    for (f=file_find_first(savedir+"*.gml",0);f!="";f=file_find_next()) {
+        file_delete(savedir+f)
     } file_find_close()
-    for (f=file_find_first(dir+"*.txt",0);f!="";f=file_find_next()) {
-        file_delete(dir+f)
+    for (f=file_find_first(savedir+"*.txt",0);f!="";f=file_find_next()) {
+        file_delete(savedir+f)
     } file_find_close()
 }
 
@@ -29,13 +29,13 @@ instance_activate_all()
 pr=ds_priority_create()
 
 //save tiles
-f=file_text_open_write(dir+"layers.txt")
+f=file_text_open_write(savedir+"layers.txt")
 l=ds_list_size(layers) for (i=0;i<l;i+=1) {
     cl=real(ds_list_find_value(layers,i))
     yes=0 with (tileholder) if (tlayer==cl) {yes+=1 ds_priority_add(pr,id,order)}
     if (yes) {
         file_text_write_string(f,string(cl)+lf)
-        f2=file_text_open_write(dir+string(cl)+".txt")
+        f2=file_text_open_write(savedir+string(cl)+".txt")
         repeat (yes) with (ds_priority_delete_min(pr)) {
             str=
                 bgname+","+
@@ -55,7 +55,7 @@ l=ds_list_size(layers) for (i=0;i<l;i+=1) {
 file_text_close(f)
 
 //save instances
-f=file_text_open_write(dir+"instances.txt")
+f=file_text_open_write(savedir+"instances.txt")
 l=0
 with (instance) {
     //yeah i know but whatever works, man
@@ -78,7 +78,7 @@ repeat (l) with (ds_priority_delete_min(pr)) {
     file_text_write_string(f,str+lf)
 
     if (savecode!="") {
-        f2=file_text_open_write(dir+uid+".gml")
+        f2=file_text_open_write(savedir+uid+".gml")
         file_text_write_string(f2,savecode)
         file_text_close(f2)
     }
@@ -88,7 +88,7 @@ file_text_close(f)
 ds_priority_destroy(pr)
 
 //save settings
-f=file_text_open_write(dir+"room.txt")
+f=file_text_open_write(savedir+"room.txt")
 str="caption="+roomcaption+lf
 +"width="+string(roomwidth)+lf
 +"height="+string(roomheight)+lf
@@ -149,7 +149,7 @@ str+="remember="+string(ds_map_find_value(settings,"remember"))+lf
 file_text_write_string(f,str)
 file_text_close(f)
 
-f=file_text_open_write(dir+"code.gml")
+f=file_text_open_write(savedir+"code.gml")
 file_text_write_string(f,roomcode)
 file_text_close(f)
 
@@ -157,7 +157,7 @@ change_mode(mode)
 
 if (!argument0) {
     //normal save succeeded; remove backup
-    dirname=directory_previous(dir)+filename_name(string_copy(dir,1,string_length(dir)-1))+"_gm82room_backup"
+    dirname=directory_previous(savedir)+filename_name(string_copy(savedir,1,string_length(savedir)-1))+"_gm82room_backup"
 
     if (directory_exists(dirname)) {
         execute_program_silent("cmd /C "+qt+"rmdir "+qt+dirname+qt+" /s /q"+qt)

@@ -13,6 +13,9 @@ if (active) {
         case "room speed" : {val=clamp(round(real(text)),1,9999  ) undo_global("roomspeed","room speed")  roomspeed=val }break
 
         case "ref alpha"  : {ref_alpha=real(text)}break
+        case "ref angle"  : {ref_angle=real(text)}break
+        case "ref xscale" : {if (ref_loaded) ref_w=ref_u*real(text)}break
+        case "ref yscale" : {if (ref_loaded) ref_h=ref_v*real(text)}break
 
         case "inst x"    : {val=round(real(text)) with (instance) if (sel) {x=val do_change_undo("instance x",0)}}break
         case "inst y"    : {val=round(real(text)) with (instance) if (sel) {y=val do_change_undo("instance y",0)}}break

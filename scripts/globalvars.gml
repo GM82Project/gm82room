@@ -1,4 +1,5 @@
 globalvar
+    savedir,
     powersave,
     select,selectt
     copyvec,tty,width,height,gridx,gridy,interpolation,
@@ -43,4 +44,4 @@ globalvar
     grabroom,
     searchresults,searchmenu,searchmenuitems,
     sel_alpha,
-    ref_loaded,ref_tex,ref_x,ref_y,ref_w,ref_h,ref_top,ref_angle,ref_alpha,ref_moving,
+    ref_loaded,ref_tex,ref_x,ref_y,ref_w,ref_h,ref_u,ref_v,ref_top,ref_angle,ref_alpha,ref_moving,grabref,
