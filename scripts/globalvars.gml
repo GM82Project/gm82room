@@ -4,7 +4,7 @@ globalvar
     copyvec,tty,width,height,gridx,gridy,interpolation,
     objpal,instancecount,tilecount,
     codeeditor,view,roomwidth,roomheight,selcol,
-    mouse_wx,mouse_wy,mousein,grid,crosshair,zoom,
+    mouse_wx,mouse_wy,mousein,grid,crosshair,zoom,zm,
     removeoutside,fillwithcolor,fillcolor,remember,minimap,mode,
     overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,
     chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname,
@@ -42,3 +42,4 @@ globalvar
     overmode,
     grabroom,
     searchresults,searchmenu,searchmenuitems,
+    sel_alpha

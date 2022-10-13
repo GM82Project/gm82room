@@ -189,8 +189,6 @@ applies_to=self
 d3d_transform_add_translation(-0.5,-0.5,0)
 draw_set_color_sel()
 
-zm=max(0.5,zoom)
-
 draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
 draw_circle(x,y,4*zm,1)
 draw_line(x,y-4*zm,x,y+4*zm)
@@ -267,8 +265,6 @@ applies_to=self
 d3d_transform_add_translation(-0.5,-0.5,0)
 draw_set_color($ff)
 
-zm=max(0.5,zoom)
-
 if (Controller.focus!=id && (hasfields || code!="")) event_user(5)
 
 //draw arrows if instance has any "xy" or "instance" fields
@@ -299,8 +295,6 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-zm=max(0.5,zoom)
-
 fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
 fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_y(-(sprox)*image_xscale,image_angle)
 if (point_distance(fieldhandx,fieldhandy,draghandx,draghandy)<20) {

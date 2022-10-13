@@ -105,6 +105,8 @@ if (abs(zoom-1)<0.1) {
 zoomgo=median(1/8,zoomgo,32)
 zoom=inch((zoom*9+zoomgo)/10,zoomgo,0.02)
 
+zm=max(0.5,zoom)
+
 if (!zoomcenter) {
     xgo-=(mouse_wx-width*0.5)*(zoom-zoomold)
     ygo-=(mouse_wy-height*0.5)*(zoom-zoomold)

@@ -95,8 +95,6 @@ applies_to=self
 d3d_transform_add_translation(-0.5,-0.5,0)
 draw_set_color_sel()
 
-zm=max(0.5,zoom)
-
 draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
 draw_circle(x,y,4*zm,1)
 draw_line(x,y-4*zm,x,y+4*zm)

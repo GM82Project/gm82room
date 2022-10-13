@@ -146,3 +146,14 @@ draw_resize_handle
 room_shift
 
 search_for_objects
+drawui_object_pre
+drawui_tile_pre
+drawui_view_pre
+drawui_settings_pre
+drawui_object_post
+drawui_tile_post
+drawui_bg_post
+drawui_view_post
+drawui_settings_post
+drawui_top_layer
+drawui_statusbar

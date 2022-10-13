@@ -22,6 +22,7 @@ xgo=0
 ygo=0
 zooming=0
 zoom=1
+zm=1
 mousein=0
 zoomcenter=0
 resizecount=0
