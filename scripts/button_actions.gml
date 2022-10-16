@@ -29,7 +29,7 @@ with (Controller) switch (argument0) {
     case "chunk export": {chunk_export()}break
     case "chunk import": {chunk_import()}break
 
-    case "ref load"    : {load_reference()}break
+    case "ref load"    : {load_reference(get_open_filename("Images|*.jpg;*.jpeg;*.png;*.gif;*.bmp",""))}break
     case "ref top"     : {ref_top=!ref_top}break
     case "ref move"    : {ref_moving=!ref_moving && ref_loaded if (ref_moving) view[8]=1}break
     case "ref reset"   : {ref_x=0 ref_y=0 ref_w=ref_u ref_h=ref_v ref_angle=0 update_settingspanel()}break

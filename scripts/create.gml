@@ -130,3 +130,4 @@ change_mode(mode)
 focus_object(objpal)
 
 window_set_foreground()
+file_drag_enable(1)

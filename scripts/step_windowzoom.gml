@@ -36,6 +36,16 @@ if (window_has_focus()) {
     save_room(1)
 }
 
+if (file_drag_count()) {
+    load_reference(file_drag_name(0))
+    ref_x=global.mousex
+    ref_y=global.mousey
+    change_mode(4)
+    ref_moving=1
+    file_drag_clear()
+    window_set_foreground()
+}
+
 if (messagetime>0) {
     messagetime-=1/room_speed
     if (messagetime<=0) {
