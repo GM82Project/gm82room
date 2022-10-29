@@ -4,6 +4,7 @@ var item,icon;
 var f,sprname,fn;
 
 searchterm=argument0
+if (searchterm=="") exit
 searchtermlower=string_lower(searchterm)
 ds_list_clear(searchresults)
 exactmatch=""
