@@ -121,7 +121,6 @@ draw_loader("Loading resource tree...",0.125,"Data")
 load_constants(root+"settings\constants.txt")
 load_datafiles(root+"datafiles\index.yyd")
 
-
 //look for paths
 load_paths()
 
@@ -150,8 +149,7 @@ gridy=real(ds_map_find_value(settings,"snap_y"))
 roomcaption=ds_map_find_value(settings,"caption")
 vw_enabled=real(ds_map_find_value(settings,"views_enabled"))
 
-roomcode=file_text_read_all(savedir+"code.gml",lf)
-if (string_replace_all(string_replace_all(string_replace_all(roomcode,chr(9),""),lf,"")," ","")="") roomcode=""
+roomcode=parse_code_into_flags(file_text_read_all(savedir+"code.gml",lf))
 
 for (i=0;i<8;i+=1) {
     k=string(i)

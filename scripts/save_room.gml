@@ -151,7 +151,7 @@ file_text_write_string(f,str)
 file_text_close(f)
 
 f=file_text_open_write(dir+"code.gml")
-file_text_write_string(f,roomcode)
+file_text_write_string(f,parse_flags_into_code()+roomcode)
 file_text_close(f)
 
 change_mode(mode)

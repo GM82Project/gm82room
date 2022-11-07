@@ -161,3 +161,5 @@ load_reference
 draw_reference
 point_in_quad
 draw_quad
+parse_code_into_flags
+parse_flags_into_code
