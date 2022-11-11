@@ -78,9 +78,10 @@ if (active) {
         if (text=="0" && neg) text="-0"
     }
     if (selected) {
-        if (keyboard_lastkey==vk_backspace || keyboard_lastkey==vk_delete || keyboard_lastkey==vk_return)
+        if (keyboard_lastkey==vk_backspace || keyboard_lastkey==vk_delete || (keyboard_lastkey==vk_return && type!=0)) {
             text=""
-        else if (keyboard_string!=otext) {
+            selected=0
+        } else if (keyboard_string!=otext) {
             selected=0
             text=keyboard_lastchar
         }
