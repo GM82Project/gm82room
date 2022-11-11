@@ -28,18 +28,16 @@ if (mode==1) {
     if (crosshair) {
         with (selectt) if (grab || draggatto) nomorefortnite=1
         if (!keyboard_check(vk_control) && !keyboard_check(vk_shift) && !nomorefortnite && !selecting && !selsize) {
-            if (curtile!=noone) {
-                texture_set_interpolation(interpolation)
-                tex=bg_background[tilebgpal]
-                u=ds_list_find_value(curtile,0)
-                v=ds_list_find_value(curtile,1)
-                tw=ds_list_find_value(curtile,2)
-                th=ds_list_find_value(curtile,3)
+            texture_set_interpolation(interpolation)
+            tex=bg_background[tilebgpal]
+            u=curtilex
+            v=curtiley
+            tw=curtilew
+            th=curtileh
 
-                if (keyboard_check(vk_alt)) draw_background_part_ext(tex,u,v,tw,th,global.mousex,global.mousey,1,1,$ffffff,0.25)
-                else draw_background_part_ext(tex,u,v,tw,th,fmx,fmy,1,1,$ffffff,0.25)
-                texture_set_interpolation(1)
-            }
+            if (keyboard_check(vk_alt)) draw_background_part_ext(tex,u,v,tw,th,global.mousex,global.mousey,1,1,$ffffff,0.25)
+            else draw_background_part_ext(tex,u,v,tw,th,fmx,fmy,1,1,$ffffff,0.25)
+            texture_set_interpolation(1)
         }
     }
 }

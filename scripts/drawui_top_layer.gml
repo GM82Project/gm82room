@@ -34,48 +34,9 @@ if (mode==0) {
 }
 
 if (mode==1 && tilebgpal!=noone) {
-    //tile tab tooltips
-    posx=0
-    posy=0
-    if (mouse_wy>=152 && mouse_wy<height-216 && tilebgpal!=noone) {
-        tex=bg_background[tilebgpal]
-        map=bg_tilemap[tilebgpal]
-        len=ds_map_size(map)
-        key=ds_map_find_first(map)
-        for (i=0;i<len;i+=1) {
-            tile=ds_map_find_value(map,key)
-            key=ds_map_find_next(map,key)
-            dx=20+40*posx
-            dy=172+40*posy+tpalscroll
-            if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
-                u=ds_list_find_value(tile,0)
-                v=ds_list_find_value(tile,1)
-                tw=ds_list_find_value(tile,2)
-                th=ds_list_find_value(tile,3)
-                if (tw>32 || th>32) {
-                    dx=floor(max(1,dx-tw/2)+tw/2)+frac(tw/2)
-                    dy=floor(max(1,dy-th/2)+th/2)+frac(th/2)
-                    draw_set_color_sel() d3d_set_fog(1,draw_get_color(),0,0) draw_set_color($ffffff)
-                    draw_background_part(tex,u,v,tw,th,dx-tw/2+1,dy-th/2+1)
-                    draw_background_part(tex,u,v,tw,th,dx-tw/2+1,dy-th/2-1)
-                    draw_background_part(tex,u,v,tw,th,dx-tw/2-1,dy-th/2+1)
-                    draw_background_part(tex,u,v,tw,th,dx-tw/2-1,dy-th/2-1)
-                    d3d_set_fog(0,0,0,0)
-                }
-                draw_background_part(tex,u,v,tw,th,dx-tw/2,dy-th/2)
-            }
-            posx+=1 if (posx=4) {posx=0 posy+=1}
-        }
+    with (tilepanel) if (point_in_rectangle(mouse_wx,mouse_wy,x+w-36,y,x+w,y+36) && !mouse_check_button(mb_left)) other.tooltiptext="Drag to resize"
 
-        if (paltooltip && !paladdbuttondown) tooltiptext="Add tiles..."
-    }
-
-    if (mouse_wx>=width-160 && mouse_wy>=360 && mouse_wy<height-100) {
-        mem=ly_current
-        if (median(0,floor((mouse_wy-360-layerscroll)/32),layersize+1)==layersize) {
-            tooltiptext="Add layer..."
-        }
-    }
+    if (bgnametooltip!="") tooltiptext=bgnametooltip
 }
 
 draw_knob()

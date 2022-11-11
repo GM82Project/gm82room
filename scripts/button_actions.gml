@@ -16,7 +16,7 @@ with (Controller) switch (argument0) {
     case "view mode"    : {change_mode(3)}break
     case "settings mode": {change_mode(4)}break
     case "help"         : {show_info()}break
-    case "prefs"        : {show_prefs()}break
+    case "prefs"        : {show_prefs() write_preferences()}break
     case "undo"         : {pop_undo()}break
 
 
@@ -153,6 +153,10 @@ with (Controller) switch (argument0) {
     case "tile palscroldown" : {tpalscrollgo-=200}break
     case "tile palscrolup"   : {tpalscrollgo+=200}break
     case "tile overlap check": {tile_overlap_check=!tile_overlap_check}break
+
+    case "tile panel grid"    : {tilepickgrid=!tilepickgrid}break
+    case "tile panel zoom out": {tilepanel.zgo=roundto(min(8,tilepanel.zgo*2),1/8)}break
+    case "tile panel zoom in" : {tilepanel.zgo=roundto(max(1/8,tilepanel.zgo/2),1/8)}break
 
     //tile inspector
     case "tile snap": {

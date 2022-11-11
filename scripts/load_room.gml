@@ -56,6 +56,10 @@ if (gm82version!=4) {
 directory_create(root+"cache")
 if (directory_exists(root+"cache\backgrounds") && directory_exists(root+"cache\sprites")) {
     icon_mode=1
+} else if (!file_exists(root+"cache\ignore_warning")) {
+    if (show_question("Error loading icons: GM82 cache is missing, try saving the project again.##You can still edit, but icons won't be displayed for resources.##Would you like to disable this warning?")) {
+        file_text_close(file_text_open_write(root+"cache\ignore_warning"))
+    }
 }
 
 fn=root+"cache\folder.bmp" export_include_file_location("folder.bmp",fn) folder_menuicon=N_Menu_LoadBitmap(fn)
@@ -83,6 +87,7 @@ sprloaded[sprites_length]=0
 backgrounds=file_text_read_list(root+"backgrounds\index.yyd",bglookup,true)
 backgrounds_length=ds_list_size(backgrounds)
 bgloaded[backgrounds_length]=0
+bghastiles[backgrounds_length]=0
 
 objects=file_text_read_list(root+"objects\index.yyd",objlookup,true)
 objects_length=ds_list_size(objects)
@@ -204,7 +209,7 @@ if (layersize) {
             o.tilew=real(string_token_next())
             o.tileh=real(string_token_next())
 
-            o.bg=get_background(o.bgname)
+            o.bg=get_background_tiles(o.bgname)
             if (micro_optimization_bgid!=noone && o.tilew && o.tileh) {
                 //check that the tile is inside the background
                 bgw=background_get_width(bg_background[micro_optimization_bgid])
@@ -213,18 +218,6 @@ if (layersize) {
                     o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
                     o.tlayer=layer
 
-                    //add tiles to unique tile hashmap
-                    map=bg_tilemap[micro_optimization_bgid]
-                    tileid=string(tileu)+","+string(tilev)+","+string(o.tilew)+","+string(o.tileh)
-                    if (!ds_map_exists(map,tileid)) {
-                        //add this tile
-                        list=ds_list_create()
-                        ds_list_add(list,tileu)
-                        ds_list_add(list,tilev)
-                        ds_list_add(list,o.tilew)
-                        ds_list_add(list,o.tileh)
-                        ds_map_add(map,tileid,list)
-                    }
                     o.image_xscale=o.tilew
                     o.image_yscale=o.tileh
 

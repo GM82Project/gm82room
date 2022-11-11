@@ -12,6 +12,9 @@ dtext=""
 alt=""
 basealt=""
 
+k=20
+cursor=""
+
 spr=noone
 focus=0
 active=0
@@ -28,6 +31,13 @@ gray=0
 multiline=0
 
 selected=0
+#define Alarm_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+alt=""
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -37,39 +47,7 @@ applies_to=self
 focus=instance_position(mouse_wx,mouse_wy,id)
 
 if (down!=0 && focus && !active && !(gray)) {
-    //activate textfield
-    with (TextField) textfield_actions()
-    active=1
-    oldtext=text
-    if (text!="") selected=1
-    if (type==0 || type=4) {
-        keyboard_string=text
-    }
-    if (type==1) {
-        val=get_color_ext(real(text),alt)
-        if (val!=-1) text=string(val)
-        textfield_actions()
-    }
-    if (type==2 || type==3) {
-        active=0
-    }
-    if (action=="palette name") {
-        N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-        Controller.menutype="object"
-    }
-    if (action=="bg name") {
-        N_Menu_ShowPopupMenu(window_handle(),bgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-        Controller.menutype="background"
-    }
-    if (action=="tile bg name") {
-        if (tilebgmenu_contains) N_Menu_ShowPopupMenu(window_handle(),tilebgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-        else N_Menu_ShowPopupMenu(window_handle(),bgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-        Controller.menutype="tilebg"
-    }
-    if (action=="view follow") {
-        N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-        Controller.menutype="object"
-    }
+    textfield_activate()
 }
 
 if (active) {

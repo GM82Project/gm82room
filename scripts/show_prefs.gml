@@ -10,8 +10,8 @@ h=224
 act=""
 button=1
 
-offx=(width-w)/2
-offy=(height-h-32)/2
+offx=(width-w) div 2
+offy=(height-h-32) div 2
 
 io_clear()
 mouse_check_direct(mb_left)
@@ -68,6 +68,12 @@ while (1) {
         if (point_in_rectangle(mx,my,240,96,240+24,96+24)) {
             theme=2
             load_theme()
+            continue
+        }
+
+        //start maximized
+        if (point_in_rectangle(mx,my,240,160,240+24,160+24)) {
+            startmax=!startmax
             continue
         }
 
@@ -135,7 +141,7 @@ while (1) {
     draw_text(8,-32+6,"Preferences")
     draw_text(8,8,"Code editor")
     draw_text(240,8,"Theme")
-    draw_text(8,128,"Color picker")
+    draw_text(8,128,"Colour picker")
 
     //ok button
     dx=432 dy=h-48 draw_button_ext(dx,dy,48,40,act!="grabok",global.col_main) draw_sprite(sprMenuButtons,0,dx+24,dy+20)
@@ -164,6 +170,10 @@ while (1) {
         dx=376 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) if (themebutton=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
         dx=408 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) if (themebutton=2) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     }
+
+    //start maximized
+    dx=240 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Start maximized") if (startmax) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
     draw_set_color($ffffff)
     d3d_transform_set_identity()
 

@@ -32,6 +32,21 @@ if (active) {
         case "tile col"  : {val=round(real(text)) with (tileholder) if (sel) {image_blend=val tile_set_blend(tile,image_blend) do_change_undo("tile colour",0)}}break
         case "tile alpha": {val=real(text)/255    with (tileholder) if (sel) {image_alpha=val tile_set_alpha(tile,image_alpha) do_change_undo("tile alpha",0)}}break
 
+        case "tile panel grid x": {
+            if (tilebgpal!=noone) {
+                tex=Controller.bg_background[tilebgpal]
+                tilepanel.gx=median(1,real(text),background_get_width(tex))
+                text=string(tilepanel.gx)
+            }
+        }break
+        case "tile panel grid y": {
+            if (tilebgpal!=noone) {
+                tex=Controller.bg_background[tilebgpal]
+                tilepanel.gy=median(1,real(text),background_get_height(tex))
+                text=string(tilepanel.gy)
+            }
+        }break
+
         case "layer depth": {val=clamp(round(real(text)),-1000000000,1000000000) change_tile_layer(val)}break
 
         case "bgcol"  : {val=round(real(text)) undo_global("backgroundcolor","background colour") backgroundcolor=val}break

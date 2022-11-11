@@ -20,6 +20,7 @@
 	|parsereal
 	|get_sprite
 	|get_background
+	|get_background_tiles
 	|get_object
 	|get_object_parent
 	|file_text_read_list
@@ -98,6 +99,7 @@
 	|drawui_view_post
 	|drawui_settings_post
 	|drawui_top_layer
+	|draw_tile_panel
 |step
 +step
 	|step_windowzoom
@@ -119,11 +121,13 @@
 	|update_viewpanel
 	|update_settingspanel
 	|update_undo_button
+	|update_newtilepanel
 |change_mode
 +buttons
 	|button_actions
 	|button_held
 	|button_draw
+	|textfield_activate
 	|textfield_actions
 	|textfield_set
 +tools
@@ -140,7 +144,6 @@
 	|get_uid
 	|set_uid
 +tiles
-	|add_tile
 	|add_tile_layer
 	|dupe_tile_layer
 	|del_tile_layer

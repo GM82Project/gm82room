@@ -1,29 +1,65 @@
 //tile mode
+var dy;
 
-i=instance_create(0,96,TextField)
-i.action="tile bg name"
-i.type=3
-i.maxlen=14
-i.w=160
+//tile panel
+instance_create(0,0,tilepanel)
+dy=height-32-tilepanel.h+4
+
+i=instance_create(4,dy,Button)
+i.spr=1
+i.action="tile panel grid"
+i.alt="Show tile grid"
+i.w=32
+i.h=32
+i.anchor=5
+i.tagmode=1
+
+i=instance_create(36,dy,TextField)
+i.action="tile panel grid x"
+i.w=56
+i.alt="Grid X"
+i.maxlen=5
+i.anchor=5
+i.tagmode=1
+
+i=instance_create(92,dy,TextField)
+i.action="tile panel grid y"
+i.w=56
+i.alt="Grid Y"
+i.maxlen=5
+i.anchor=5
+i.tagmode=1
+
+i=instance_create(148,dy,Button)
+i.spr=11
+i.action="tile panel zoom in"
+i.anchor=5
+i.tagmode=1
+
+i=instance_create(180,dy,Button)
+i.spr=12
+i.action="tile panel zoom out"
+i.anchor=5
 i.tagmode=1
 
 
-i=instance_create(0,128,Button)
+//main tile
+i=instance_create(0,96,Button)
 i.spr=19
 i.action="tile palscrolup"
 i.w=160
 i.h=24
 i.tagmode=1
 
-i=instance_create(0,height-160-56,Button)
+i=instance_create(0,height-32-tilepanel.h-24,Button)
 i.spr=20
 i.action="tile palscroldown"
 i.w=160
 i.h=24
-i.anchor=2
+i.anchor=4
 i.tagmode=1
 
-i=instance_create(8,height-32,Button)
+i=instance_create(8,height-28,Button)
 i.type=1
 i.anchor=2
 i.action="tile overlap check"

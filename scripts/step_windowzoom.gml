@@ -6,6 +6,7 @@ if (resizecount<10) {
             if (anchor==1 || anchor==3) offx=width-x
             if (anchor==2 || anchor==3) offy=height-y
         }
+        yes=width
         width=max(min_width,window_get_width())
         height=max(min_height,window_get_height())
         window_set_size(width,height)
@@ -13,9 +14,21 @@ if (resizecount<10) {
         dx8_resize_buffer(width,height)
         view_wport[0]=width
         view_hport[0]=height
+        with (tilepanel) {
+            if (w==yes-160) w=width-160
+
+            w=min(width-160,w)
+            h=min(height-240-32,h)
+
+            y=height-32-h
+            image_xscale=w
+            image_yscale=h
+        }
         with (Button) {
             if (anchor==1 || anchor==3) x=width-offx
             if (anchor==2 || anchor==3) y=height-offy
+            if (anchor==4) y=height-tilepanel.h-32-24
+            if (anchor==5) y=height-tilepanel.h-32+4
         }
         resizecount+=1
         if (resizecount>=10) show_message("Resizing the window failed multiple times. Do you have some sort of weird DPI settings? Either way, I'm disabling resizing for now.")
@@ -63,7 +76,7 @@ if (current_time>autosave_timer+autosave_interval) {
 
 mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
-mousein=(point_in_rectangle(mouse_wx,mouse_wy,160,32,width-160,height-32))
+mousein=(point_in_rectangle(mouse_wx,mouse_wy,160+4,32+4,width-160-4,height-32-4) && (!instance_position(mouse_wx,mouse_wy,tilepanel) || mode!=1))
 
 if (keyboard_check_pressed(vk_insert)) overmode=!overmode
 
@@ -124,6 +137,15 @@ if (!zoomcenter) {
 
 //panning
 if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
+    if (mode==1) with (tilepanel) if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
+        panning=1
+        grabx=mouse_wx
+        graby=mouse_wy
+        grabxgo=xgo
+        grabygo=ygo
+        exit
+    }
+
     //yeah i know i called pan zooming but ok just think like youre zooming around im sorry
     if (keyboard_check(vk_control)) {
         if (mode==0) with (focus) focus_object(obj)

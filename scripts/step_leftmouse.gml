@@ -6,7 +6,7 @@ if (mouse_check_button(mb_right)) exit
 if (mouse_check_button_pressed(mb_left)) {
     menued=false
     with (TextField) textfield_actions()
-    if (point_distance(mouse_wx,mouse_wy,width-48-160,height-48-32)<32) {
+    if (point_distance(mouse_wx,mouse_wy,width-48-160,48+32)<32) {
         grabknob=1
         knoffmx=mouse_wx
         knoffmy=mouse_wy
@@ -183,7 +183,7 @@ if (mouse_check_button_pressed(mb_left)) {
                             selx=global.mousex
                             sely=global.mousey
                         } else if (!keyboard_check(vk_control)) {
-                            if (tilebgpal!=noone && curtile!=noone) {
+                            if (tilebgpal!=noone) {
                                 //paint
                                 deselect()
                                 paint=2
@@ -390,8 +390,8 @@ if (paint) {
                 tex=bg_background[tilebgpal]
                 if (tile_overlap_check) {
                     sprite_index=spr1x1
-                    image_xscale=ds_list_find_value(curtile,2)
-                    image_yscale=ds_list_find_value(curtile,3)
+                    image_xscale=curtilew
+                    image_yscale=curtileh
                     x=paintx
                     y=painty
                     reduce_collision()
@@ -404,11 +404,11 @@ if (paint) {
                     o=instance_create(dx,dy,tileholder) get_uid(o)
                     o.bgname=tilebgname
                     o.bg=tex
-                    o.tilew=ds_list_find_value(curtile,2)
-                    o.tileh=ds_list_find_value(curtile,3)
+                    o.tilew=curtilew
+                    o.tileh=curtileh
                     o.image_xscale=o.tilew
                     o.image_yscale=o.tileh
-                    o.tile=tile_add(tex,ds_list_find_value(curtile,0),ds_list_find_value(curtile,1),o.tilew,o.tileh,paintx,painty,ly_depth)
+                    o.tile=tile_add(tex,curtilex,curtiley,o.tilew,o.tileh,paintx,painty,ly_depth)
                     o.tlayer=ly_depth o.depth=ly_depth-0.01
                     selectt=o
                     o.sel=1

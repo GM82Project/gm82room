@@ -29,7 +29,6 @@ resizecount=0
 objpal=noone
 tilebgpal=noone
 tilebgname=""
-curtile=noone
 tilepal=0
 palettescroll=0
 palettescrollgo=0
@@ -89,7 +88,6 @@ thumbcount=0
 state="load"
 crc_init()
 if (!load_room()) exit
-update_instance_memory()
 state="run"
 
 if (!seen) show_info()
@@ -121,13 +119,17 @@ dx8_resize_buffer(width,height)
 window_set_region_size(width,height,0)
 window_center()
 
+if (startmax) window_maximize()
+
 instance_create(0,0,Interface)
 bgtex=background_get_texture(bgBlack)
 knobtex=background_get_texture(bgKnob)
 
 update_view()
+update_instance_memory()
 change_mode(mode)
 focus_object(objpal)
+update_newtilepanel()
 
 window_set_foreground()
 file_drag_enable(1)

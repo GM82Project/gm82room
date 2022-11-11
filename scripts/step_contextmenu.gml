@@ -2,6 +2,7 @@ var str,p;
 
 click=N_Menu_CheckMenus()
 if (click) {
+    io_clear()
     if (menutype=="resourcefield") {
         resfieldid.fields[resfieldi,0]=1
         if (menusub=="sprite") {
@@ -100,11 +101,11 @@ if (click) {
     if (menutype=="tilebg") {
         str=ds_map_get(bgmenuitems,click)
         if (str!=undefined) {
-            get_background(str)
+            get_background_tiles(str)
             tilebgpal=micro_optimization_bgid
             tilebgname=str
             tilepal=0
-            update_tilepanel()
+            update_newtilepanel()
         }
     }
     if (menutype=="search") {

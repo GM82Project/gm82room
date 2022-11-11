@@ -23,6 +23,7 @@ if (object_index==Button) {
             case "bgselect":         {up=(!down && bg_current!=actionid)}break
             case "vwselect":         {up=(!down && vw_current!=actionid)}break
             case "undo":             {up=(!down && alt!="Undo (empty)") }break
+            case "tile panel grid":  {up=(!down && !tilepickgrid)       }break
             default:                 {up=!down                          }
         }
 
@@ -90,13 +91,13 @@ if (object_index==TextField) {
     if (tagmode==mode || tagmode==-1) {
         if (type==1) {if (gray) col=global.col_main else col=real(text)}
         else {
-            if (active) col=$ffffff
+            if (active) col=merge_color(global.col_high,$ffffff,0.75)
             else {
                 if (type==0 || type==2 || action=="inst code box") {
                     if (gray) col=global.col_main
-                    else col=$c0c0c0
+                    else col=merge_color(global.col_high,$ffffff,0.5)
                 } else {
-                    col=$c0c0c0
+                    col=merge_color(global.col_high,$ffffff,0.5)
                 }
             }
         }
@@ -112,9 +113,11 @@ if (object_index==TextField) {
                     draw_set_color($ffffff)
                     draw_text(x+8,y+6,dtext+cursor)
                 } else {
+                    draw_set_color(merge_color(global.col_low,0,0.5))
                     draw_text(x+8,y+6,dtext+cursor)
                 }
             } else {
+                draw_set_color(merge_color(global.col_low,0,0.5))
                 draw_text(x+8,y+6,dtext)
             }
             draw_set_valign(0)
