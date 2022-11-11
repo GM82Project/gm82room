@@ -3,7 +3,7 @@ var dx,dy;
 if (mode==0 && objects_length) {
     //palette controls
     if (mouse_wx<160 && mouse_wy>=120 && mouse_wy<height-136) {
-        if (mouse_check_button_pressed(mb_left)) {
+        if (mouse_check_button_pressed(mb_left) && !instance_exists(modal)) {
             posx=0
             posy=0
             for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
@@ -23,8 +23,7 @@ if (mode==0 && objects_length) {
                 draw_button_ext(dx-20,dy-20,40,40,0,global.col_main)
                 draw_sprite(sprMenuButtons,18,dx,dy)
                 screen_refresh()
-                N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-                menutype="object"
+                call_nmenu("object",objmenu)
             }
         }
         h=mouse_wheel_down()-mouse_wheel_up()

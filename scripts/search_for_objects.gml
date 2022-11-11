@@ -80,6 +80,5 @@ else {
         ds_map_add(searchmenuitems,item,ds_list_find_value(searchresults,i))
     }
 
-    N_Menu_ShowPopupMenu(window_handle(),searchmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-    menutype="search"
+    call_nmenu("search",searchmenu)
 }

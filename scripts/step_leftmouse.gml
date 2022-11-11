@@ -1,9 +1,9 @@
 var yes,dx,dy,tex,l,t,r,b,menued;
 
 //give priority to right click
-if (mouse_check_button(mb_right)) exit
+if (mouse_check_modal(mb_right)) exit
 
-if (mouse_check_button_pressed(mb_left)) {
+if (mouse_check_modal_pressed(mb_left)) {
     menued=false
     with (TextField) textfield_actions()
     if (point_distance(mouse_wx,mouse_wy,width-48-160,48+32)<32) {

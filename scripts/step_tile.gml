@@ -113,8 +113,7 @@ if (mode==1) {
             dx=0
             dy=120+32*posy+tpalscroll
             if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(mouse_wx,mouse_wy,dx,dy,dx+160,dy+32)) {
-                N_Menu_ShowPopupMenu(window_handle(),bgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-                Controller.menutype="tilebg"
+                call_nmenu("tilebg",bgmenu)
             }
         }
         if (tilebgpal!=noone) {

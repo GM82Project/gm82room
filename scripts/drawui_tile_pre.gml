@@ -5,7 +5,7 @@ if (mode==1) {
 
     draw_set_color($ff8000)
     draw_set_alpha(sel_alpha)
-    with (tileholder) if (sel) {
+    with (tileholder) if (sel && !instance_exists(colorpicker)) {
         draw_rectangle(x-0.5,y-0.5,x+image_xscale-0.5,y+image_yscale-0.5,0)
     }
     draw_set_alpha(1)

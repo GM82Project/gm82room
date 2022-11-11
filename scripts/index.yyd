@@ -167,3 +167,8 @@ draw_tile_panel
 get_background_tiles
 update_newtilepanel
 textfield_activate
+
+mouse_check_modal_pressed
+mouse_check_modal
+call_nmenu
+check_colorpicker_undo

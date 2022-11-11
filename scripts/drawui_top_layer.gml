@@ -63,4 +63,6 @@ if (mousein && mode==0) {
     }
 }
 
+with (colorpicker) event_draw()
+
 if (tooltiptext!="") drawtooltip(tooltiptext)

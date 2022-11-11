@@ -75,6 +75,7 @@ i.tagmode=3
 
 i=instance_create(8,444,TextField)
 i.action="view follow"
+i.basealt="Object"
 i.type=3
 i.maxlen=13
 i.w=160-16

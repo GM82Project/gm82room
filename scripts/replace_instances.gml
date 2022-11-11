@@ -1,7 +1,6 @@
 if (!argument_count) {
     //called from the tool button
-    N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-    menutype="replaceobj"
+    call_nmenu("replaceobj",objmenu)
 } else {
     //called from the menu callback
     instance_activate_object(instance)

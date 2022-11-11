@@ -10,7 +10,7 @@ if (mode==0) {
     }
 
     d3d_set_fog(1,$ff8000,0,0)
-    with (instance) if (sel) {
+    with (instance) if (sel && !instance_exists(colorpicker)) {
         draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,sel_alpha)
     }
     d3d_set_fog(0,0,0,0)

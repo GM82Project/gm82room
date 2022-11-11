@@ -80,28 +80,28 @@ while (1) {
         //custom theme controls
         if (theme==2) {
             if (point_in_rectangle(mx,my,280,128,280+32,128+24)) {
-                global.col_main=get_color_ext(global.col_main,"Select Main Color")
+                global.col_main=get_color_ext(global.col_main,"Select Main Color",noone,noone)
                 screen_redraw()
                 rect(0,0,width,height,0,0.5)
                 load_theme()
                 continue
             }
             if (point_in_rectangle(mx,my,320,128,320+32,128+24)) {
-                global.col_high=get_color_ext(global.col_high,"Select Light Color")
+                global.col_high=get_color_ext(global.col_high,"Select Light Color",noone,noone)
                 screen_redraw()
                 rect(0,0,width,height,0,0.5)
                 load_theme()
                 continue
             }
             if (point_in_rectangle(mx,my,360,128,360+32,128+24)) {
-                global.col_low=get_color_ext(global.col_low,"Select Shadow Color")
+                global.col_low=get_color_ext(global.col_low,"Select Shadow Color",noone,noone)
                 screen_redraw()
                 rect(0,0,width,height,0,0.5)
                 load_theme()
                 continue
             }
             if (point_in_rectangle(mx,my,400,128,400+32,128+24)) {
-                global.col_text=get_color_ext(global.col_text,"Select Text Color")
+                global.col_text=get_color_ext(global.col_text,"Select Text Color",noone,noone)
                 screen_redraw()
                 rect(0,0,width,height,0,0.5)
                 load_theme()

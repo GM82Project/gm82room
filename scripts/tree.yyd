@@ -8,13 +8,15 @@
 	|drawtooltip
 	|file_text_open_read_safe
 	|draw_button_ext
-	|get_color_ext
 	|string_wrap
 	|string_delete_edge_spaces
 	|draw_text_outline
 	|message
 	|point_in_quad
 	|draw_quad
+	|mouse_check_modal_pressed
+	|mouse_check_modal
+	|call_nmenu
 +file
 	|gensavecode
 	|parsereal
@@ -140,6 +142,8 @@
 	|draw_reference
 	|search_for_objects
 	|room_shift
+	|get_color_ext
+	|check_colorpicker_undo
 +instances
 	|get_uid
 	|set_uid

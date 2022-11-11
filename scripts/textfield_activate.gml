@@ -7,7 +7,8 @@ if (type==0 || type=4) {
     keyboard_string=text
 }
 if (type==1) {
-    val=get_color_ext(real(text),alt)
+    textfield_actions()
+    val=get_color_ext(real(text),alt,id,"textfield",noone)
     if (val!=-1) text=string(val)
     textfield_actions()
 }
@@ -22,14 +23,11 @@ if (action=="tile panel grid x" || action=="tile panel grid y") {
     }
 }
 if (action=="palette name") {
-    N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-    Controller.menutype="object"
+    call_nmenu("object",objmenu)
 }
 if (action=="bg name") {
-    N_Menu_ShowPopupMenu(window_handle(),bgmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-    Controller.menutype="background"
+    call_nmenu("background",bgmenu)
 }
 if (action=="view follow") {
-    N_Menu_ShowPopupMenu(window_handle(),objmenu,window_get_x()+mouse_wx,window_get_y()+mouse_wy,0)
-    Controller.menutype="object"
+    call_nmenu("object",objmenu)
 }

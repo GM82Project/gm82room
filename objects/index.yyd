@@ -6,3 +6,5 @@ Button
 TextField
 
 tilepanel
+colorpicker
+modal

@@ -26,6 +26,7 @@ i=instance_create(120,168,Button) i.action="bgselect" i.actionid=7 i.text="7" i.
 
 i=instance_create(8,208,TextField)
 i.action="bg name"
+i.basealt="Background"
 i.type=3
 i.maxlen=13
 i.w=160-16
