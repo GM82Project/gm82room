@@ -25,7 +25,7 @@ if (mode==1) {
     with (focus) draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
     draw_set_color($ffffff)
 
-    if (crosshair) {
+    if (crosshair && tilebgpal!=noone) {
         with (selectt) if (grab || draggatto) nomorefortnite=1
         if (!keyboard_check(vk_control) && !keyboard_check(vk_shift) && !nomorefortnite && !selecting && !selsize) {
             texture_set_interpolation(interpolation)

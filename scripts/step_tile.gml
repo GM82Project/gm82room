@@ -16,8 +16,8 @@ if (mode==1) {
             }
             if (mouse_check_button(mb_left) && tilebgpal!=noone) {
                 if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
-                    clickx=median(0,(mouse_wx-(x+8))*z+xgo-(w-16)*z/2,bgw)
-                    clicky=median(0,(mouse_wy-(y+40))*z+ygo-(h-32-16)*z/2,bgh)
+                    clickx=median(0,(mouse_wx-(x+8))*z+xgo-(w-16)*z/2,bgw)+0.5
+                    clicky=median(0,(mouse_wy-(y+40))*z+ygo-(h-32-16)*z/2,bgh)+0.5
                     if (!keyboard_check(vk_alt)) {
                         if (keyboard_check(vk_shift) && tiling) {
                             clickx=min(bgw,ceilto(clickx-ox,gx+sx)+ox)
