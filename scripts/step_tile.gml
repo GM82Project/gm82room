@@ -1,11 +1,14 @@
-var dx,dy;
+var dx,dy,yes;
 
 if (mode==1) {
     //tile palette
     with (tilepanel) {
         if (instance_position(mouse_wx,mouse_wy,id)) {
-            if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) zgo=roundto(min(8,zgo*2),1/8)
-            if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check_pressed(vk_equals))) zgo=roundto(max(1/8,zgo/2),1/8)
+            yes=1 with (TextField) if (active) {yes=0}
+            if (yes) {
+                if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) zgo=roundto(min(8,zgo*2),1/8)
+                if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check_pressed(vk_equals))) zgo=roundto(max(1/8,zgo/2),1/8)
+            }
 
             if (mouse_check_button_pressed(mb_left)) {
                 if (point_in_rectangle(mouse_wx,mouse_wy,x+w-36,y,x+w,y+36)) {

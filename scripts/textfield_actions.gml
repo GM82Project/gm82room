@@ -35,14 +35,16 @@ if (active) {
         case "tile panel grid x": {
             if (tilebgpal!=noone) {
                 tex=Controller.bg_background[tilebgpal]
-                tilepanel.gx=median(1,real(text),background_get_width(tex))
+                tilepanel.gx=median(0,real(text),background_get_width(tex))
+                if (tilepanel.gx==0) tilepanel.gx=bg_gridx[tilebgpal]
                 text=string(tilepanel.gx)
             }
         }break
         case "tile panel grid y": {
             if (tilebgpal!=noone) {
                 tex=Controller.bg_background[tilebgpal]
-                tilepanel.gy=median(1,real(text),background_get_height(tex))
+                tilepanel.gy=median(0,real(text),background_get_height(tex))
+                if (tilepanel.gy==0) tilepanel.gy=bg_gridy[tilebgpal]
                 text=string(tilepanel.gy)
             }
         }break
