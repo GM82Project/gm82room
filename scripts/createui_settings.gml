@@ -129,6 +129,7 @@ i.text="  Load"
 i.spr=35
 i.alt="Load an image to use as reference"
 i.w=144
+i.anchor=1
 i.tagmode=4
 
 i=instance_create(width-160+80,068+172,TextField)
@@ -137,6 +138,7 @@ i.basealt="alpha"
 i.displen=6
 i.w=72
 i.maxval=255
+i.anchor=1
 i.tagmode=4
 
 i=instance_create(width-160+80,100+172,TextField)
@@ -145,6 +147,7 @@ i.basealt="angle"
 i.displen=6
 i.w=72
 i.maxval=359
+i.anchor=1
 i.tagmode=4
 
 i=instance_create(width-160+8,164+172,TextField)
@@ -152,7 +155,7 @@ i.action="ref xscale"
 i.basealt="xscale"
 i.displen=6
 i.w=72
-i.maxval=359
+i.anchor=1
 i.tagmode=4
 
 i=instance_create(width-160+80,164+172,TextField)
@@ -160,7 +163,7 @@ i.action="ref yscale"
 i.basealt="yscale"
 i.displen=6
 i.w=72
-i.maxval=359
+i.anchor=1
 i.tagmode=4
 
 i=instance_create(width-160+8,200+172,Button)
@@ -168,6 +171,7 @@ i.type=1
 i.action="ref top"
 i.text="On top"
 i.alt="Draw reference image on top"
+i.anchor=1
 i.tagmode=4
 
 i=instance_create(width-160+8,228+172,Button)
@@ -175,6 +179,7 @@ i.action="ref move"
 i.text="Move"
 i.alt="Move reference image around"
 i.w=72
+i.anchor=1
 i.tagmode=4
 
 i=instance_create(width-160+80,228+172,Button)
@@ -182,6 +187,7 @@ i.action="ref reset"
 i.text="Reset"
 i.alt="Reset reference image scaling and position"
 i.w=72
+i.anchor=1
 i.tagmode=4
 
 update_settingspanel()
