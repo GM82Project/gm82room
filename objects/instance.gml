@@ -215,7 +215,11 @@ draw_rectangle(draghandx-8*zm,draghandy-8*zm,draghandx+8*zm,draghandy+8*zm,1)
 draw_rectangle(draghandx-4*zm,draghandy-4*zm,draghandx+4*zm,draghandy+4*zm,1)
 
 if (rotato) w=point_distance(x,y,global.mousex,global.mousey)*sign(image_xscale)
-else w=sprw*image_xscale
+else {
+    //check if the mouse is still on top of the let go handle
+    if !(point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm)
+        w=sprw*image_xscale
+}
 rothandx=x+lengthdir_x(w,image_angle)
 rothandy=y+lengthdir_y(w,image_angle)
 if (point_distance(rothandx,rothandy,draghandx,draghandy)<20*zm) {
@@ -295,6 +299,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+///field handles
 fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
 fieldhandy=y+lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_y(-(sprox)*image_xscale,image_angle)
 if (point_distance(fieldhandx,fieldhandy,draghandx,draghandy)<20*zm) {
