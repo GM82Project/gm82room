@@ -1,5 +1,7 @@
 var l,t,r,b;
 
+endstep()
+
 if (powersave) sel_alpha=0.5
 else sel_alpha=0.5+0.25*sin(current_time/200)
 

@@ -321,7 +321,7 @@ if (selecting) {
             }
         }
     }
-    if (!mouse_check_direct(mb_left)) {
+    if (!direct_mbleft) {
         selecting=0
         selection=0
         sel=num_selected()
@@ -419,7 +419,7 @@ if (paint) {
         }
         update_instance_memory()
     }
-    if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
+    if (!direct_mbleft) {
         paint=0
         begin_undo(act_destroy,"drawing "+pick(mode,"instances","tiles"),0)
         if (mode==0) {
@@ -438,22 +438,15 @@ if (selsize) {
         selwidth=(global.mousex-selleft)
         selheight=(global.mousey-seltop)
     } else {
-        selwidth=roundto(global.mousex,gridx)-selleft
-        selheight=roundto(global.mousey,gridy)-seltop
+        selwidth=roundto_unbiased(global.mousex,gridx)-selleft
+        selheight=roundto_unbiased(global.mousey,gridy)-seltop
     }
 
     if (abs(selwidth)<gridx) selwidth=esign(selwidth,1)*gridx
     if (abs(selheight)<gridy) selheight=esign(selheight,1)*gridy
 
-    if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
+    if (!direct_mbleft) {
         selsize=0
-    }
-}
-
-if (grabselection) {
-    update_selection_bounds()
-    if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
-        grabselection=0
     }
 }
 
@@ -461,7 +454,7 @@ if (grabknob) {
     knoby=knoffy+mouse_wx-knoffmx
     knobx=knoffx-(mouse_wy-knoffmy)
     knobz=(knobz*19+knobzgo)/20
-    if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
+    if (!direct_mbleft) {
         grabknob=0
     }
 } else {
@@ -475,10 +468,10 @@ if (grab_background) {
         bg_xoffset[bg_current]=global.mousex+grab_bgoffx
         bg_yoffset[bg_current]=global.mousey+grab_bgoffy
     } else {
-        bg_xoffset[bg_current]=roundto(global.mousex+grab_bgoffx,gridx)
-        bg_yoffset[bg_current]=roundto(global.mousey+grab_bgoffy,gridy)
+        bg_xoffset[bg_current]=roundto_unbiased(global.mousex+grab_bgoffx,gridx)
+        bg_yoffset[bg_current]=roundto_unbiased(global.mousey+grab_bgoffy,gridy)
     }
     update_backgroundpanel()
 
-    if (!mouse_check_direct(mb_left)) grab_background=false
+    if (!direct_mbleft) grab_background=false
 }

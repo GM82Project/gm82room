@@ -56,7 +56,7 @@ if (sel) {
         if (!keyboard_check(vk_alt)) {
             image_angle=roundto(image_angle,15) mod 360
         }
-        if (!mouse_check_direct(mb_left)) {rotato=0 event_user(1) update_inspector() do_change_undo("rotation",0)}
+        if (!direct_mbleft) {rotato=0 event_user(1) update_inspector() do_change_undo("rotation",0)}
         update_inspector()
     }
     if (grab) {
@@ -71,8 +71,8 @@ if (sel) {
         dy=global.mousey
 
         if (!keyboard_check(vk_alt)) {
-            dx=roundto(dx,gridx)
-            dy=roundto(dy,gridy)
+            dx=roundto_unbiased(dx,gridx)
+            dy=roundto_unbiased(dy,gridy)
         }
 
         dir=point_direction(x,y,dx,dy)
@@ -91,7 +91,7 @@ if (sel) {
 
         if (abs(image_xscale*sprw)<1) image_xscale=1/sprw
         if (abs(image_yscale*sprh)<1) image_yscale=1/sprh
-        if (!mouse_check_direct(mb_left)) {draggatto=0 event_user(1) do_change_undo("scaling",0)}
+        if (!direct_mbleft) {draggatto=0 event_user(1) do_change_undo("scaling",0)}
         update_inspector()
     }
 
@@ -103,11 +103,11 @@ if (sel) {
                 fields[editfid,1]=string(global.mousex)
                 fields[editfid,2]=string(global.mousey)
             } else {
-                fields[editfid,1]=string(roundto(global.mousex,gridx))
-                fields[editfid,2]=string(roundto(global.mousey,gridy))
+                fields[editfid,1]=string(roundto_unbiased(global.mousex,gridx))
+                fields[editfid,2]=string(roundto_unbiased(global.mousey,gridy))
             }
         }
-        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
+        if (!direct_mbleft) {
             if (editxy==1) {
                 if (fields[editfid,0]) str=get_string("Insert new coordinate (x,y) for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1]+","+fields[editfid,2])
                 else str=get_string("Insert new coordinate (x,y) for "+qt+objfieldname[obj,editfid]+qt+":","")
@@ -128,10 +128,10 @@ if (sel) {
             if (keyboard_check(vk_alt)) {
                 fields[editfid,1]=string(point_direction(x,y,global.mousex,global.mousey))
             } else {
-                fields[editfid,1]=string(point_direction(x,y,roundto(global.mousex,gridx),roundto(global.mousey,gridy)))
+                fields[editfid,1]=string(point_direction(x,y,roundto_unbiased(global.mousex,gridx),roundto_unbiased(global.mousey,gridy)))
             }
         }
-        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
+        if (!direct_mbleft) {
             if (editangle==1) {
                 if (fields[editfid,0]) str=get_string("Insert new angle for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
                 else str=get_string("Insert new angle for "+qt+objfieldname[obj,editfid]+qt+":","")
@@ -150,10 +150,10 @@ if (sel) {
             if (keyboard_check(vk_alt)) {
                 fields[editfid,1]=string(point_distance(x,y,global.mousex,global.mousey))
             } else {
-                fields[editfid,1]=string(point_distance(x,y,roundto(global.mousex,gridx),roundto(global.mousey,gridy)))
+                fields[editfid,1]=string(point_distance(x,y,roundto_unbiased(global.mousex,gridx),roundto_unbiased(global.mousey,gridy)))
             }
         }
-        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {
+        if (!direct_mbleft) {
             if (editrad==1) {
                 if (fields[editfid,0]) str=get_string("Insert new radius for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
                 else str=get_string("Insert new radius for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
@@ -175,7 +175,7 @@ if (sel) {
                 fields[editfid,1]=focus.uid
             }
         }
-        if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) editinst=0
+        if (!direct_mbleft) editinst=0
     }
 }
 #define Other_10

@@ -15,6 +15,7 @@ globalvar
     objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef
     thumbmap,thumbcount,
     orderlast,
+    direct_mbleft,direct_mbright,
     knobx,knoby,grabknob,
     click_priority,
     grab_background,grab_bgoffx,grab_bgoffy,

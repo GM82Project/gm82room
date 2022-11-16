@@ -114,6 +114,7 @@
 	|step_view
 	|step_settings
 	|step_contextmenu
+|endstep
 +update
 	|update_inspector
 	|clear_inspector

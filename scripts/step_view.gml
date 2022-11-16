@@ -9,7 +9,7 @@ if (mode==3) {
             vw_y[vw_current]=floorto(global.mousey-offy,gridy)
         }
         update_viewpanel()
-        if (!mouse_check_direct(mb_left)) {
+        if (!direct_mbleft) {
             begin_undo(act_globalvec,"changing view "+string(vw_current)+" position",0) add_undo("vw_x") add_undo(vw_current) add_undo(storex) add_undo("vw_y") add_undo(vw_current) add_undo(storey) push_undo()
             grabview=0
         }
@@ -25,7 +25,7 @@ if (mode==3) {
             vw_h[vw_current]=max(gridy,roundto(global.mousey,gridy)-vw_y[vw_current])
         }
         update_viewpanel()
-        if (!mouse_check_direct(mb_left)) {
+        if (!direct_mbleft) {
             begin_undo(act_globalvec,"changing view "+string(vw_current)+" size",0) add_undo("vw_w") add_undo(vw_current) add_undo(storex) add_undo("vw_h") add_undo(vw_current) add_undo(storey) push_undo()
             sizeview=0
         }

@@ -19,7 +19,7 @@ image_yscale=grabh*sy
 
 event_user(1)
 
-if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {
+if (!direct_mbleft) {
     selresize=0
     x=round(x)
     y=round(y)

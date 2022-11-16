@@ -15,8 +15,6 @@ if (fn!="") {
     deselect()
     view[0]=1
     view[1]=1
-    chunkcrop=1
-    chunkloaded=1
     chunkname=filename_name(fn)
 
     b=buffer_create()
@@ -32,7 +30,7 @@ if (fn!="") {
 
     name=buffer_read_string(b)
     if (gamename!=name) {
-        if (!show_question("This chunk file seems to be from a different game:##Current game: '"+gamename+"'#Chunk file: '"+name+"'##Do you still want to load it? It may cause corruption.")) {
+        if (!show_question("This chunk file seems to be from a different game:##Current game: '"+gamename+"'#Chunk file: '"+name+"'##Do you still want to load it? It may not work correctly.")) {
             buffer_destroy(b)
             exit
         }
@@ -107,7 +105,7 @@ if (fn!="") {
             o.code=buffer_read_string(b)
             o.modified=1
 
-            parse_code_into_fields(o)
+            parse_code_into_fields(o,1)
         }
     }
 
@@ -124,3 +122,6 @@ push_undo()
 mode=4
 
 update_instance_memory()
+
+chunkcrop=1
+chunkloaded=1

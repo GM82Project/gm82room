@@ -78,6 +78,9 @@ mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
 mousein=(point_in_rectangle(mouse_wx,mouse_wy,160+4,32+4,width-160-4,height-32-4) && (!instance_position(mouse_wx,mouse_wy,tilepanel) || mode!=1))
 
+direct_mbleft=mouse_check_direct(mb_left) && mouse_check_direct(mb_left)
+direct_mbright=mouse_check_direct(mb_right) && mouse_check_direct(mb_right)
+
 if (keyboard_check_pressed(vk_insert)) overmode=!overmode
 
 //zooming
