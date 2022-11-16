@@ -40,7 +40,7 @@ if (size) {
                 o.sprh=sprite_get_height(o.sprite_index)
                 o.sprox=sprite_get_xoffset(o.sprite_index)
                 o.sproy=sprite_get_yoffset(o.sprite_index)
-                parse_code_into_fields(o)
+                parse_code_into_fields(o,1)
                 i+=11
 
                 //read fields

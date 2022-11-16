@@ -126,12 +126,14 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 o.image_blend=copyvec[cur,7]
                 o.image_alpha=copyvec[cur,8]
                 o.code=copyvec[cur,9]
-                parse_code_into_fields(o)
+                parse_code_into_fields(o,1)
 
                 for (i=0;i<objfields[o.obj];i+=1) {
-                    o.fields[i,0]=copyvec[cur,10+i*3]
-                    o.fields[i,1]=copyvec[cur,11+i*3]
-                    o.fields[i,2]=copyvec[cur,12+i*3]
+                    if (objfieldtype[o.obj,i]!="instance") {
+                        o.fields[i,0]=copyvec[cur,10+i*3]
+                        o.fields[i,1]=copyvec[cur,11+i*3]
+                        o.fields[i,2]=copyvec[cur,12+i*3]
+                    }
                 }
 
                 o.sel=1

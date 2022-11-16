@@ -294,7 +294,7 @@ f=file_text_open_read_safe(savedir+"instances.txt") if (f) {do {str=file_text_re
         o.sprox=sprite_get_xoffset(o.sprite_index)
         o.sproy=sprite_get_yoffset(o.sprite_index)
 
-        parse_code_into_fields(o)
+        parse_code_into_fields(o,0)
 
         c+=1
 

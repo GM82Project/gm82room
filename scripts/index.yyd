@@ -172,3 +172,4 @@ mouse_check_modal_pressed
 mouse_check_modal
 call_nmenu
 check_colorpicker_undo
+is_field_copypaste_safe

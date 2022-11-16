@@ -377,7 +377,7 @@ if (paint) {
                     o.sprh=sprite_get_height(o.sprite_index)
                     o.sprox=sprite_get_xoffset(o.sprite_index)
                     o.sproy=sprite_get_yoffset(o.sprite_index)
-                    parse_code_into_fields(o)
+                    parse_code_into_fields(o,0)
                     select=o
                     o.sel=1
                     o.modified=1

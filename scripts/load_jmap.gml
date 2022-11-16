@@ -43,7 +43,7 @@ if (file_exists(fn)) {
                             o.image_xscale=0.5
                             o.image_yscale=0.5
                         }
-                        parse_code_into_fields(o)
+                        parse_code_into_fields(o,1)
                         o.sel=1
                         o.modified=1
                     }

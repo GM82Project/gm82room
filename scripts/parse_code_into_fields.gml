@@ -1,4 +1,6 @@
-var i,str,next,state,p,name,value,value2;
+///parse_code_into_fields(obj,pastereset)
+//if pastereset is true, resets any fields that are undesirable to copypaste
+var i,str,next,state,p,name,value,value2,fail;
 
 for (i=0;i<objfields[argument0.obj];i+=1) {
     argument0.fields[i,0]=0
@@ -39,7 +41,9 @@ if (str!="") {
                 p=string_pos("=",next)
                 name=string_copy(next,1,p-1)
                 value=string_delete(next,1,p)
-                set_instance_field(argument0,name,value)
+                //it's split like this for speed
+                if (!argument1) set_instance_field(argument0,name,value)
+                else if (is_field_copypaste_safe(argument0,name)) set_instance_field(argument0,name,value)
             }
         }
         if (state=2) {
