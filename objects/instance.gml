@@ -283,6 +283,7 @@ if !(abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
             }
             if (objfieldtype[obj,i]=="instance") {
                 with (ds_map_get(uidmap,string_replace(fields[i,1],roomname+"_",""))) {
+                    draw_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,1)
                     draw_arrow(dx,dy,(bbox_left+bbox_right+1)/2,(bbox_top+bbox_bottom+1)/2,10*zm)
                 }
             }

@@ -182,8 +182,12 @@ for (i=0;i<objfields[obj];i+=1) {
             draw_circle(px,py,a,1)
             draw_set_circle_precision(8)
         }
+    } else if (editinst && editfid==i) {
+        draw_set_color(selcol)
+        draw_arrow(dx,dy+16,mouse_wx,mouse_wy,10*zm)
     }
     dy+=32
+    draw_set_color($ffffff)
 }
 
 draw_set_valign(0)
