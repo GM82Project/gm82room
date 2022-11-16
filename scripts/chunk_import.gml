@@ -116,9 +116,11 @@ mode=0
 begin_undo(act_destroy,"",0)
 with (instance) if (modified) {add_undo(uid) modified=0 sel=1}
 mode=1
+push_undo()
 begin_undo(act_destroy,"importing a chunk file",1)
 with (tileholder) if (modified) {add_undo(uid) modified=0 sel=1}
 push_undo()
+
 mode=4
 
 update_instance_memory()
