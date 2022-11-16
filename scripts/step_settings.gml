@@ -5,8 +5,8 @@ if (mode==4) {
             chunkleft=global.mousex-offx
             chunktop=global.mousey-offy
         } else {
-            chunkleft=floorto(global.mousex-offx,gridx)
-            chunktop=floorto(global.mousey-offy,gridy)
+            chunkleft=roundto(global.mousex-offx,gridx)
+            chunktop=roundto(global.mousey-offy,gridy)
         }
         update_settingspanel()
         if (!mouse_check_direct(mb_left) || !mouse_check_button(mb_left)) {

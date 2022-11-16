@@ -156,7 +156,7 @@ for (i=0;i<objfields[obj];i+=1) {
 
             a=real(fields[i,1])
 
-            draw_arrow(px,py,px+lengthdir_x(100,a),py+lengthdir_y(100,a),8)
+            draw_arrow(px,py,px+lengthdir_x(100,a),py+lengthdir_y(100,a),10)
 
             if (editangle==2 && editfid==i) {
                 if (keyboard_check(vk_alt)) {
