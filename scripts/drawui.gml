@@ -21,9 +21,7 @@ tty=0
 
 focus=noone
 if (mousein) {
-    if (mode==0) {
-        focus=instance_position(global.mousex,global.mousey,instance)
-    }
+    if (mode==0) focus=instance_position(global.mousex,global.mousey,instance)
     if (mode==1) focus=instance_position(global.mousex,global.mousey,tileholder)
 }
 
