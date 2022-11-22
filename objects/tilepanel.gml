@@ -15,6 +15,11 @@ zgo=1
 gx=16
 gy=16
 
+ox=0
+oy=0
+sx=0
+sy=0
+
 panning=0
 tiling=0
 xgo=0
