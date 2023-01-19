@@ -76,9 +76,11 @@ knobzgo=1
 
 undo_initialize()
 
+theme_init()
+
 read_preferences()
 
-load_theme()
+theme_apply()
 load_palette()
 
 jtool_objs=ds_map_create()

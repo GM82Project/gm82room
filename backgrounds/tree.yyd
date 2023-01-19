@@ -1,5 +1,6 @@
 |bgDefault
 |bgBlack
-|bgMessage
 |bgKnob
 |bgDefaultBgIcon
++theming
+	|bgMessage

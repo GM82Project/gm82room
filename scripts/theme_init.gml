@@ -1,0 +1,1 @@
+globalvar theme,buttontex,themebutton;

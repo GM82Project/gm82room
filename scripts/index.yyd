@@ -97,7 +97,7 @@ get_color_ext
 show_prefs
 
 
-load_theme
+theme_apply
 load_palette
 parsecode_instances
 load_jmap
@@ -174,3 +174,6 @@ call_nmenu
 check_colorpicker_undo
 is_field_copypaste_safe
 endstep
+theme_init
+theme_load
+theme_save

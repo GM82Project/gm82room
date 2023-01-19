@@ -65,7 +65,6 @@
 	|write_preferences
 	|read_preferences
 	|show_prefs
-	|load_theme
 	|load_palette
 +gm82live
 	|live_send_room_data
@@ -180,3 +179,8 @@
 	|get_nth_token
 	|show_field_resource_menu
 	|draw_sprite_outline
++theming
+	|theme_init
+	|theme_apply
+	|theme_load
+	|theme_save

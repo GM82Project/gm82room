@@ -10,7 +10,6 @@ globalvar
     overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,
     chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname,
     selection,selleft,seltop,selwidth,selheight,selsize,grabselection,
-    theme,buttontex,themebutton,
     jtool_objs,
     objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef
     thumbmap,thumbcount,

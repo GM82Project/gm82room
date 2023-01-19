@@ -1,10 +1,11 @@
 |sprDefault
+|spr1x1
 |sprMenuButtons
 |sprFieldIcons
 |sprFieldAngle
-|spr1x1
-|sprButton
-|sprButtonWhitemask
-|sprButtonWhitemaskSmooth
-|sprButton0
-|sprButton1
++theming
+	|sprButton
+	|sprButtonWhitemask
+	|sprButtonWhitemaskSmooth
+	|sprButton0
+	|sprButton1

@@ -57,17 +57,17 @@ while (1) {
         //theme checkboxes
         if (point_in_rectangle(mx,my,240,32,240+24,32+24)) {
             theme=0
-            load_theme()
+            theme_apply()
             continue
         }
         if (point_in_rectangle(mx,my,240,64,240+24,64+24)) {
             theme=1
-            load_theme()
+            theme_apply()
             continue
         }
         if (point_in_rectangle(mx,my,240,96,240+24,96+24)) {
             theme=2
-            load_theme()
+            theme_apply()
             continue
         }
 
@@ -80,46 +80,46 @@ while (1) {
         //custom theme controls
         if (theme==2) {
             if (point_in_rectangle(mx,my,280,128,280+32,128+24)) {
-                global.col_main=get_color_ext(global.col_main,"Select Main Color",noone,noone)
+                global.col_main=get_color_ext(global.col_main,"Select Main Color",noone,noone,noone)
                 screen_redraw()
                 rect(0,0,width,height,0,0.5)
-                load_theme()
+                theme_apply()
                 continue
             }
             if (point_in_rectangle(mx,my,320,128,320+32,128+24)) {
-                global.col_high=get_color_ext(global.col_high,"Select Light Color",noone,noone)
+                global.col_high=get_color_ext(global.col_high,"Select Light Color",noone,noone,noone)
                 screen_redraw()
                 rect(0,0,width,height,0,0.5)
-                load_theme()
+                theme_apply()
                 continue
             }
             if (point_in_rectangle(mx,my,360,128,360+32,128+24)) {
-                global.col_low=get_color_ext(global.col_low,"Select Shadow Color",noone,noone)
+                global.col_low=get_color_ext(global.col_low,"Select Shadow Color",noone,noone,noone)
                 screen_redraw()
                 rect(0,0,width,height,0,0.5)
-                load_theme()
+                theme_apply()
                 continue
             }
             if (point_in_rectangle(mx,my,400,128,400+32,128+24)) {
-                global.col_text=get_color_ext(global.col_text,"Select Text Color",noone,noone)
+                global.col_text=get_color_ext(global.col_text,"Select Text Color",noone,noone,noone)
                 screen_redraw()
                 rect(0,0,width,height,0,0.5)
-                load_theme()
+                theme_apply()
                 continue
             }
             if (point_in_rectangle(mx,my,344,96,344+24,96+24)) {
                 themebutton=0
-                load_theme()
+                theme_apply()
                 continue
             }
             if (point_in_rectangle(mx,my,376,96,376+24,96+24)) {
                 themebutton=1
-                load_theme()
+                theme_apply()
                 continue
             }
             if (point_in_rectangle(mx,my,408,96,408+24,96+24)) {
                 themebutton=2
-                load_theme()
+                theme_apply()
                 continue
             }
         }
