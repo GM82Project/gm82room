@@ -151,6 +151,6 @@ if (mode==1) {
         h=mouse_wheel_down()-mouse_wheel_up()
         layerscrollgo-=h*120
     }
-    layerscrollgo=clamp(layerscrollgo,-(layersize+1)*32+(height-56-100),0)
-    layerscroll=clamp(inch((layerscroll*4+layerscrollgo)/5,layerscrollgo,2),-(layersize+1)*32+(height-56-100),0)
+    layerscrollgo=clamp(layerscrollgo,-(layersize+1)*32+(height-100-360),0)
+    layerscroll=clamp(inch((layerscroll*4+layerscrollgo)/5,layerscrollgo,2),-(layersize+1)*32+(height-100-360),0)
 }

@@ -138,8 +138,8 @@ with (Controller) switch (argument0) {
 
 
     //instances
-    case "palscroldown" : {palettescrollgo-=200}break
-    case "palscrolup"   : {palettescrollgo+=200}break
+    case "palscroldown" : {palettescrollgo-=192}break
+    case "palscrolup"   : {palettescrollgo+=192}break
     case "overlap check": {overlap_check=!overlap_check}break
     case "object search": {search_for_objects(get_string("Object name:",""))}break
     case "cement"       : {cement_instances()}break
@@ -150,8 +150,8 @@ with (Controller) switch (argument0) {
 
 
     //tiles
-    case "tile palscroldown" : {tpalscrollgo-=200}break
-    case "tile palscrolup"   : {tpalscrollgo+=200}break
+    case "tile palscroldown" : {tpalscrollgo-=192}break
+    case "tile palscrolup"   : {tpalscrollgo+=192}break
     case "tile overlap check": {tile_overlap_check=!tile_overlap_check}break
 
     case "tile panel grid"    : {tilepickgrid=!tilepickgrid}break
@@ -215,8 +215,8 @@ with (Controller) switch (argument0) {
         update_selection_bounds()
     }break
 
-    case "layerscroldown": {layerscrollgo-=200}break
-    case "layerscrolup"  : {layerscrollgo+=200}break
+    case "layerscroldown": {layerscrollgo-=192}break
+    case "layerscrolup"  : {layerscrollgo+=192}break
     case "layer dupe"    : {dupe_tile_layer()}break
     case "layer delete"  : {del_tile_layer()}break
 
