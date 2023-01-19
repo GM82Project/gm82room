@@ -1,3 +1,4 @@
+dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
 theme=registry_read_dword(dir+"GM82CustomThemeIndex",0)
 if (theme==2) {
     global.col_low=registry_read_dword(dir+"GM82CustomThemeColorLow",$203020)
