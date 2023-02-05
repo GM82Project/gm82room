@@ -84,9 +84,9 @@ if (click) {
     }
     if (menutype=="background") {
         str=ds_map_get(bgmenuitems,click)
-        begin_undo(act_globalvec,"background "+string(bg_current)+" options",0) add_undo("vw_follow") add_undo(vw_current) add_undo(bg_tex[bg_current]) push_undo()
-        begin_undo(act_globalvec,"",1) add_undo("bg_source") add_undo(vw_current) add_undo(bg_source[bg_current]) push_undo()
-        begin_undo(act_globalvec,"",1) add_undo("bg_visible") add_undo(vw_current) add_undo(bg_visible[bg_current]) push_undo()
+        begin_undo(act_globalvec,"background "+string(bg_current)+" options",0) add_undo("bg_tex") add_undo(bg_current) add_undo(bg_tex[bg_current]) push_undo()
+        begin_undo(act_globalvec,"",1) add_undo("bg_source") add_undo(bg_current) add_undo(bg_source[bg_current]) push_undo()
+        begin_undo(act_globalvec,"",1) add_undo("bg_visible") add_undo(bg_current) add_undo(bg_visible[bg_current]) push_undo()
         if (str==undefined) {
             bg_tex[bg_current]=bgDefault
             bg_source[bg_current]=""
