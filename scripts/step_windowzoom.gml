@@ -11,7 +11,7 @@ if (resizecount<10) {
         height=max(min_height,window_get_height())
         window_set_size(width,height)
         window_set_region_size(width,height,0)
-        dx8_resize_buffer(width,height)
+        window_resize_buffer(width,height)
         view_wport[0]=width
         view_hport[0]=height
         with (tilepanel) {

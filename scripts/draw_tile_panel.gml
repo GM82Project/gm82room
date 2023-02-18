@@ -7,7 +7,7 @@ if (tilebgpal!=noone) {
     tex=Controller.bg_background[tilebgpal]
     bgw=background_get_width(tex)
     bgh=background_get_height(tex)
-    dx8_set_clip_region(x+8,y+32+8,w-16,h-32-16)
+    d3d_set_scissor(x+8,y+32+8,w-16,h-32-16)
     d3d_set_projection_ortho(round(xgo-(w-16)*z/2),round(ygo-(h-32-16)*z/2),(w-16)*z,(h-32-16)*z,0)
     texture_set_interpolation(0)
     draw_set_color(global.col_text)
@@ -44,7 +44,6 @@ if (tilebgpal!=noone) {
     draw_rectangle(curtilex-0.5,curtiley-0.5,curtilex+curtilew-0.5,curtiley+curtileh-0.5,1)
     draw_set_color($ffffff)
 
-    dx8_set_clip_region(0,0,width,height)
+    d3d_set_scissor(0,0,width,height)
     d3d_set_projection_ortho(0,0,width,height,0)
-
 }

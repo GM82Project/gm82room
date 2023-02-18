@@ -12,7 +12,7 @@ draw_paths()
 
 d3d_transform_set_identity()
 d3d_end()
-dx8_reset_projection()
+d3d_set_projection_default()
 d3d_set_depth(0)
 
 fmx=floorto(global.mousex,gridx)

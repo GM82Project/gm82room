@@ -39,13 +39,6 @@ action_id=603
 applies_to=self
 */
 step()
-#define Other_2
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-dx8_set_vsync(0)
 #define Other_3
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -86,11 +79,11 @@ if (theme==1) {
     draw_set_blend_mode(0)
 }
 
-dx8_reset_projection()
+d3d_set_projection_default()
 
 if (knobz!=0 || knobx!=0 || knoby!=0) {
     d3d_start()
-    dx8_clear_depth_buffer()
+    d3d_clear_depth_buffer()
     var xc,yc;
 
     xc=view_xview+view_wview/2

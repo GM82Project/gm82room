@@ -272,7 +272,7 @@ draw_set_color($ffffff)
     //color wheel
     d3d_transform_stack_push()
     d3d_transform_set_identity()
-    s=dx8_surface_engage(s,808,808)
+    s=surface_set("colorwheel1",808,808)
         draw_clear(global.col_main)
         d3d_set_projection_ortho(0,0,202,202,0)
 
@@ -314,7 +314,7 @@ draw_set_color($ffffff)
         draw_set_circle_precision(8)
 
         texture_set_interpolation(1)
-        s2=dx8_surface_engage(s2,404,404)
+        s2=surface_set("colorwheel2",404,404)
             draw_surface_ext(s,0,0,0.5,0.5,0,$ffffff,1)
     surface_reset_target()
     d3d_set_projection_ortho(0,0,width,height,0)
