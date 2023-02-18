@@ -177,3 +177,9 @@ endstep
 theme_init
 theme_load
 theme_save
+load_fonts
+Font
+Field
+preview_instance_fields
+Sprite
+FieldDefined

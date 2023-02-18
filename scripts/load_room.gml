@@ -82,7 +82,8 @@ bglookup=ds_map_create()
 
 sprites=file_text_read_list(root+"sprites\index.yyd",noone,true)
 sprites_length=ds_list_size(sprites)
-sprloaded[sprites_length]=0
+for (i=sprites_length;i>=0;i-=1)
+    sprloaded[i,1]=0
 
 backgrounds=file_text_read_list(root+"backgrounds\index.yyd",bglookup,true)
 backgrounds_length=ds_list_size(backgrounds)
@@ -93,8 +94,12 @@ objects=file_text_read_list(root+"objects\index.yyd",objlookup,true)
 objects_length=ds_list_size(objects)
 objloaded[objects_length]=0
 
+load_constants(root+"settings\constants.txt")
+load_datafiles(root+"datafiles\index.yyd")
+
 //i know this is terrible but i can't make this clean and fast simultaneously
-//also we load objects first to make sure we don't run out of thumbnails on the more important menu
+//also we load objects first to make sure we don't run out of GDI objects on the more important menu
+//(windows has a 9999 GDI object per program limit and every menu thumbnail is one)
 draw_loader("Loading resource tree...",0.125,"Objects")
 load_object_tree(root+"objects\tree.yyd")
 
@@ -109,25 +114,20 @@ load_background_tree(root+"backgrounds\tree.yyd")
 
 draw_loader("Loading resource tree...",0.125,"Paths")
 load_path_tree(root+"paths\tree.yyd")
+load_paths()
 
 draw_loader("Loading resource tree...",0.125,"Scripts")
 load_script_tree(root+"scripts\tree.yyd")
 
 draw_loader("Loading resource tree...",0.125,"Fonts")
 load_font_tree(root+"fonts\tree.yyd")
+load_fonts()
 
 draw_loader("Loading resource tree...",0.125,"Timelines")
 load_timeline_tree(root+"timelines\tree.yyd")
 
 draw_loader("Loading resource tree...",0.125,"Rooms")
 load_room_tree(root+"rooms\tree.yyd")
-
-draw_loader("Loading resource tree...",0.125,"Data")
-load_constants(root+"settings\constants.txt")
-load_datafiles(root+"datafiles\index.yyd")
-
-//look for paths
-load_paths()
 
 //check autosave
 loading_autosave=false

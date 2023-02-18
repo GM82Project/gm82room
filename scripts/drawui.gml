@@ -10,6 +10,11 @@ draw_reference(1)
 
 draw_paths()
 
+with (instance) {
+    d3d_set_depth(depth)
+    preview_instance_fields()
+}
+
 d3d_transform_set_identity()
 d3d_end()
 d3d_set_projection_default()

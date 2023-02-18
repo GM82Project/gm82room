@@ -1,5 +1,5 @@
 globalvar
-    savedir,
+    root,savedir,
     powersave,startmax,
     select,selectt
     copyvec,tty,width,height,interpolation,
@@ -12,6 +12,7 @@ globalvar
     selection,selleft,seltop,selwidth,selheight,selsize,grabselection,
     jtool_objs,
     objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef
+    objprev_objectid,objprev_eventid,objprev_curobj,objprev_curevent,
     thumbmap,thumbcount,
     orderlast,
     direct_mbleft,direct_mbright,
@@ -35,7 +36,7 @@ globalvar
     tilepickgrid,
     constmenu,constmenuitems,
     datafilemenu,datafilemenuitems,
-    sprmenu,sprmenuitems,
+    sprmenu,sprmenuitems,spr_sprite,
     roommenu,roommenuitems,
     soundmenu,soundmenuitems,
     pathmenu,pathmenuitems,
@@ -47,3 +48,4 @@ globalvar
     searchresults,searchmenu,searchmenuitems,
     sel_alpha,
     ref_loaded,ref_tex,ref_x,ref_y,ref_w,ref_h,ref_u,ref_v,ref_top,ref_angle,ref_alpha,ref_moving,grabref,
+    fontmap,

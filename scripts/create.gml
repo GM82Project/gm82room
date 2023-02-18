@@ -84,6 +84,9 @@ jtool_objs=ds_map_create()
 thumbmap=ds_map_create()
 thumbcount=0
 
+objprev_curobj=object_add()
+objprev_curevent=0
+
 state="load"
 crc_init()
 if (!load_room()) exit

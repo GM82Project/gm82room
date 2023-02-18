@@ -9,6 +9,7 @@ var i,f,reading,str,p,linec,actionc,line,fp,action,temp;
 
 i=argument0
 
+objprev=""
 reading=0
 actionc=0
 f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
@@ -51,13 +52,14 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
 
             //look for a code action
             if (string_pos("action_id=603",action)) {
-                //skip the rest of the action block
+                //skip the rest of the action header
                 do {file_text_readln(f) str=file_text_read_string(f)} until (str=="*/" || file_text_eof(f))
                 linec=0
             } else continue
         }
 
         temp=string_replace_all(str," ","")
+        linec+=1
 
         //expect field inheritance
         if (string_pos("event_inherited()",temp)) {
@@ -74,7 +76,6 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         }
 
         //expect description field
-        linec+=1
         fp=string_pos("/*desc",str)
         if (fp) {
             while (1) {
@@ -88,6 +89,19 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                 }
             }
             objdesc[i]=string_copy(objdesc[i],1,string_length(objdesc[i])-1)
+        }
+
+        //expect preview field
+        fp=string_pos("/*preview",str)
+        if (fp) {
+            while (1) {
+                str=file_text_read_string(f)
+                file_text_readln(f)
+                if (string_pos("*/",str) || file_text_eof(f)) break
+                if (str!="") {
+                    objprev+=str+crlf
+                }
+            }
         }
 
         //expect field
@@ -175,7 +189,29 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
             }
         }
     }
-} until (file_text_eof(f)) file_text_close(f)}
+} until (file_text_eof(f)) file_text_close(f)
+    //compile field preview code
+
+    if (objprev!="") {
+        fieldshim=""
+        for (j=0;j<objfields[i];j+=1) {
+            if (objfieldtype[i,j]=="font") fieldshim+=objfieldname[i,j]+"=Font(Field('"+objfieldname[i,j]+"'))"+crlf
+            else if (objfieldtype[i,j]=="sprite") fieldshim+=objfieldname[i,j]+"=Sprite(Field('"+objfieldname[i,j]+"'))"+crlf
+            else if (objfieldtype[i,j]=="xy") fieldshim+=objfieldname[i,j]+"[0]=Field('"+objfieldname[i,j]+"',0) "+objfieldname[i,j]+"[1]=Field('"+objfieldname[i,j]+"',1) "+crlf
+            else fieldshim+=objfieldname[i,j]+"=Field('"+objfieldname[i,j]+"')"+crlf
+        }
+
+        object_event_add(objprev_curobj,ev_other,ev_user0+objprev_curevent,fieldshim+objprev)
+        objprev_objectid[i]=objprev_curobj
+        objprev_eventid[i]=objprev_curevent
+
+        objprev_curevent+=1
+        if (objprev_curevent==16) {
+            objprev_curobj=object_add()
+            objprev_curevent=0
+        }
+    }
+}
 
 //load parent's fields if there was no room start event
 if (actionc==0) {

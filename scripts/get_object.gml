@@ -12,6 +12,7 @@ if (!objloaded[i]) {
     objparent[i]=ds_map_find_value(object[i],"parent")
     objfields[i]=0
     objdesc[i]=""
+    objprev_objectid[i]=noone
     load_object_fields(i,argument0)
     palettesize+=1
 }
