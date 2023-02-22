@@ -6,6 +6,8 @@ if (is_real(argument0)) return bgDefault
 if (argument0=="") return bgDefault
 
 i=ds_list_find_index(backgrounds,argument0)
+if (i<0) {show_error("Error loading project: background "+qt+argument0+qt+" doesn't seem to exist in the project.",0) return bgDefault}
+
 if (!bgloaded[i]) {
     bg_background[i]=background_add(root+"backgrounds\"+argument0+".png",0,0)
     if (bg_background[i]==-1) bg_background[i]=bgDefault
