@@ -11,7 +11,7 @@ room_speed=maxfps
 room_caption="Game Maker 8.2 Room Editor"
 
 autosave_timer=current_time
-autosave_interval=5*60*1000 //5 minute autosave in ms
+autosave_interval=3*60*1000 //3 minute autosave in ms
 
 global.livesock=noone
 

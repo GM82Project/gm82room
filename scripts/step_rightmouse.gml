@@ -1,3 +1,5 @@
+if (selecting || paint || selsize || grabknob || grab_background) exit
+
 if (mousein && mode==0 && mouse_check_button_pressed(mb_right)) {
     with (select) if (fieldactive) {
         edit_instance_fields(1)

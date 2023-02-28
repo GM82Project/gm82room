@@ -39,6 +39,23 @@ action_id=603
 applies_to=self
 */
 step()
+#define Step_2
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+if (error_occurred) {
+    error_occurred=0
+    show_message("Error detected:##"+error_last)
+    save_room(1)
+    if (error_occurred) {
+        show_message("The editor had an error, and then had an additional error while attempting to recover the project.##The editor will now close to protect your data.")
+        game_end()
+        exit
+    }
+    show_message("The editor has attempted to autosave your work.##Please restart the editor and choose to load the autosave.")
+}
 #define Other_3
 /*"/*'/**//* YYD ACTION
 lib_id=1

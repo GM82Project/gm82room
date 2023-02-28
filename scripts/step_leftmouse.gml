@@ -1,7 +1,6 @@
 var yes,dx,dy,tex,l,t,r,b,menued;
 
-//give priority to right click
-if (mouse_check_modal(mb_right)) exit
+if (erasing) exit
 
 if (mouse_check_modal_pressed(mb_left)) {
     menued=false

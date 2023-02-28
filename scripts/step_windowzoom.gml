@@ -81,6 +81,12 @@ mousein=(point_in_rectangle(mouse_wx,mouse_wy,160+4,32+4,width-160-4,height-32-4
 direct_mbleft=mouse_check_direct(mb_left) && mouse_check_direct(mb_left)
 direct_mbright=mouse_check_direct(mb_right) && mouse_check_direct(mb_right)
 
+if (direct_mbleft && direct_mbright) {
+    //don't allow mouse left+right
+    direct_mbleft=0
+    direct_mbright=0
+}
+
 if (keyboard_check_pressed(vk_insert)) overmode=!overmode
 
 //zooming
