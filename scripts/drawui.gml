@@ -10,11 +10,6 @@ draw_reference(1)
 
 draw_paths()
 
-with (instance) {
-    d3d_set_depth(depth)
-    preview_instance_fields()
-}
-
 d3d_transform_set_identity()
 d3d_end()
 d3d_set_projection_default()
@@ -121,6 +116,7 @@ drawui_settings_pre()
 
 //this is where the room space ends and the hud space starts================================================
 d3d_set_projection_ortho(0,0,width,height,0)
+shader_reset()
 
 if (messagetime>0) {
     draw_set_alpha(messagetime)

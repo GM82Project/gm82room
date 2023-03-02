@@ -48,4 +48,4 @@ globalvar
     searchresults,searchmenu,searchmenuitems,
     sel_alpha,
     ref_loaded,ref_tex,ref_x,ref_y,ref_w,ref_h,ref_u,ref_v,ref_top,ref_angle,ref_alpha,ref_moving,grabref,
-    fontmap,
+    fontmap,shadermap,

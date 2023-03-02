@@ -171,6 +171,9 @@
 		|FieldDefined
 		|Font
 		|Sprite
+		|Background
+		|Shader
+		|ShaderFromBase64
 	|load_object_fields
 	|is_field_copypaste_safe
 	|invalid_variable_name

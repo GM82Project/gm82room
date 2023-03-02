@@ -183,3 +183,6 @@ Field
 preview_instance_fields
 Sprite
 FieldDefined
+Background
+Shader
+ShaderFromBase64

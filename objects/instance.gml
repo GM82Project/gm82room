@@ -19,6 +19,7 @@ editinst=0
 editangle=0
 editrad=0
 editfid=0
+disabled_preview=0
 
 rothandx=-9999999
 rothandy=-9999999
@@ -315,3 +316,11 @@ draw_line(fieldhandx-4*zm,fieldhandy-4*zm,fieldhandx+6*zm,fieldhandy-4*zm)
 draw_line(fieldhandx-4*zm,fieldhandy-1*zm,fieldhandx+6*zm,fieldhandy-1*zm)
 if (fieldactive) draw_triangle(fieldhandx-8*zm,fieldhandy+1*zm,fieldhandx+2*zm,fieldhandy+1*zm,fieldhandx-3*zm,fieldhandy+11*zm,0)
 else draw_triangle(fieldhandx-8*zm,fieldhandy-1*zm,fieldhandx-8*zm,fieldhandy+9*zm,fieldhandx+1*zm,fieldhandy+4*zm,1)
+#define Draw_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+draw_self()
+preview_instance_fields()
