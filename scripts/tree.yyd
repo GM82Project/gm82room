@@ -17,6 +17,7 @@
 	|mouse_check_modal_pressed
 	|mouse_check_modal
 	|call_nmenu
+	|string_antivirus
 +file
 	|gensavecode
 	|parsereal

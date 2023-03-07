@@ -193,22 +193,28 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
     //compile field preview code
 
     if (objprev!="") {
-        fieldshim=""
-        for (j=0;j<objfields[i];j+=1) {
-            if (objfieldtype[i,j]=="font") fieldshim+=objfieldname[i,j]+"=Font(Field('"+objfieldname[i,j]+"'))"+crlf
-            else if (objfieldtype[i,j]=="sprite") fieldshim+=objfieldname[i,j]+"=Sprite(Field('"+objfieldname[i,j]+"'))"+crlf
-            else if (objfieldtype[i,j]=="xy") fieldshim+=objfieldname[i,j]+"[0]=Field('"+objfieldname[i,j]+"',0) "+objfieldname[i,j]+"[1]=Field('"+objfieldname[i,j]+"',1) "+crlf
-            else fieldshim+=objfieldname[i,j]+"=Field('"+objfieldname[i,j]+"')"+crlf
-        }
+        check=string_antivirus(objprev)
+        if (check="size limit") show_message("Error compiling object preview field for "+argument1+":##Preview code is too big. Keep it to 8192 characters.")
+        else if (check!="") show_message("Error compiling object preview field for "+argument1+":##Forbidden word detected "+qt+check+qt)
+        else {
+            fieldshim=""
+            for (j=0;j<objfields[i];j+=1) {
+                if (objfieldtype[i,j]=="font") fieldshim+=objfieldname[i,j]+"=Font(Field('"+objfieldname[i,j]+"'))"+crlf
+                else if (objfieldtype[i,j]=="sprite") fieldshim+=objfieldname[i,j]+"=Sprite(Field('"+objfieldname[i,j]+"'))"+crlf
+                else if (objfieldtype[i,j]=="xy") fieldshim+=objfieldname[i,j]+"[0]=Field('"+objfieldname[i,j]+"',0) "+objfieldname[i,j]+"[1]=Field('"+objfieldname[i,j]+"',1) "+crlf
+                else fieldshim+=objfieldname[i,j]+"=Field('"+objfieldname[i,j]+"')"+crlf
+            }
 
-        object_event_add(objprev_curobj,ev_other,ev_user0+objprev_curevent,fieldshim+objprev)
-        objprev_objectid[i]=objprev_curobj
-        objprev_eventid[i]=objprev_curevent
+            object_event_add(objprev_curobj,ev_other,ev_user0+objprev_curevent,fieldshim+objprev)
+            if (error_occurred) show_message("Error compiling object preview field for "+argument1+":##"+error_last)
+            objprev_objectid[i]=objprev_curobj
+            objprev_eventid[i]=objprev_curevent
 
-        objprev_curevent+=1
-        if (objprev_curevent==16) {
-            objprev_curobj=object_add()
-            objprev_curevent=0
+            objprev_curevent+=1
+            if (objprev_curevent==16) {
+                objprev_curobj=object_add()
+                objprev_curevent=0
+            }
         }
     }
 }
