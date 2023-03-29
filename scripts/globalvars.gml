@@ -1,5 +1,5 @@
 globalvar
-    root,savedir,
+    root,savedir,error_buffer,
     powersave,startmax,
     select,selectt
     copyvec,tty,width,height,interpolation,

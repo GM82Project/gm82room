@@ -4,58 +4,27 @@ click=N_Menu_CheckMenus()
 if (click) {
     io_clear()
     if (menutype=="resourcefield") {
-        resfieldid.fields[resfieldi,0]=1
-        if (menusub=="sprite") {
-            get=ds_map_get(sprmenuitems,click)
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else resfieldid.fields[resfieldi,1]=get
-        }
-        if (menusub=="background") {
-            get=ds_map_get(bgmenuitems,click)
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else resfieldid.fields[resfieldi,1]=get
-        }
-        if (menusub=="path") {
-            get=ds_map_get(pathmenuitems,click)
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else resfieldid.fields[resfieldi,1]=get
-        }
-        if (menusub=="script") {
-            get=ds_map_get(scriptmenuitems,click)
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else resfieldid.fields[resfieldi,1]=get
-        }
-        if (menusub=="font") {
-            get=ds_map_get(fontmenuitems,click)
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else resfieldid.fields[resfieldi,1]=get
-        }
-        if (menusub=="timeline") {
-            get=ds_map_get(timelinemenuitems,click)
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else resfieldid.fields[resfieldi,1]=get
-        }
-        if (menusub=="object") {
-            get=ds_map_get(objmenuitems,click)
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else resfieldid.fields[resfieldi,1]=get
-        }
-        if (menusub=="room") {
-            get=ds_map_get(roommenuitems,click)
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else resfieldid.fields[resfieldi,1]=get
-        }
-        if (menusub=="datafile") {
-            get=ds_map_get(datafilemenuitems,click)
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else resfieldid.fields[resfieldi,1]=get
-        }
-        if (menusub=="constant") {
-            get=ds_map_get(constmenuitems,click)
+        if (menusub=="sprite")     get=ds_map_get(sprmenuitems,click)
+        if (menusub=="background") get=ds_map_get(bgmenuitems,click)
+        if (menusub=="path")       get=ds_map_get(pathmenuitems,click)
+        if (menusub=="script")     get=ds_map_get(scriptmenuitems,click)
+        if (menusub=="font")       get=ds_map_get(fontmenuitems,click)
+        if (menusub=="timeline")   get=ds_map_get(timelinemenuitems,click)
+        if (menusub=="object")     get=ds_map_get(objmenuitems,click)
+        if (menusub=="room")       get=ds_map_get(roommenuitems,click)
+        if (menusub=="datafile")   get=ds_map_get(datafilemenuitems,click)
+        if (menusub=="constant")   get=ds_map_get(constmenuitems,click)
+
+        if (invalid_variable_name(get)) {
+            show_message("This resource has invalid characters in its name and can't be used on a field:##"+qt+get+qt+"##Click the broom icon in Game Maker and resolve any such problems.")
+        } else {
+            resfieldid.fields[resfieldi,0]=1
             if (get==undefined) resfieldid.fields[resfieldi,0]=0
             else {
-                p=string_pos(" (",get)
-                resfieldid.fields[resfieldi,1]=string_copy(get,1,p-1)
+                if (menusub=="constant") {
+                    //cut the constant name out
+                    resfieldid.fields[resfieldi,1]=string_copy(get,1,string_pos(" (",get)-1)
+                } else resfieldid.fields[resfieldi,1]=get
             }
         }
     }
