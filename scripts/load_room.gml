@@ -239,7 +239,7 @@ if (layersize) {
 
             c+=1
 
-            if (current_time>time) {
+            if (current_time>time+200) {
                 time=current_time
                 progress=(progress*9+0.25+0.5*i/layersize)/10
                 draw_loader("Loading tiles...",progress,string(c))
@@ -298,7 +298,7 @@ f=file_text_open_read_safe(savedir+"instances.txt") if (f) {do {str=file_text_re
 
         c+=1
 
-        if (current_time>time) {
+        if (current_time>time+200) {
             time=current_time
             progress=(progress*9+1)/10
             draw_loader("Loading instances...",progress,string(c))
