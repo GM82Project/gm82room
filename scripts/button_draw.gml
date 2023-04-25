@@ -19,6 +19,7 @@ if (object_index==Button) {
             case "view nospr":       {up=(!view[6] && !down)            }break
             case "view paths":       {up=(!view[7] && !down)            }break
             case "view ref":         {up=(!view[8] && !down)            }break
+            case "view draw":        {up=(!view[9] && !down)            }break
             case "ref move":         {up=(!ref_moving && !down)         }break
             case "bgselect":         {up=(!down && bg_current!=actionid)}break
             case "vwselect":         {up=(!down && vw_current!=actionid)}break

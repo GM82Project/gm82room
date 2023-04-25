@@ -103,6 +103,7 @@ view[5]=1 //invisibles
 view[6]=1 //nosprites
 view[7]=1 //paths
 view[8]=0 //reference image
+view[9]=1 //preview field
 
 chunkwidth=roomwidth
 chunkheight=roomheight

@@ -116,35 +116,40 @@ i.spr=35
 i.action="view ref"
 i.alt="Show reference image"
 
+i=instance_create(160+544,0,Button)
+i.spr=31
+i.action="view draw"
+i.alt="Execute instance preview fields"
+
 
 //view
-i=instance_create(160+560,0,Button)
+i=instance_create(160+592,0,Button)
 i.spr=10
 i.action="reset view"
 i.alt="Reset view"
 
-i=instance_create(160+592,0,Button)
+i=instance_create(160+624,0,Button)
 i.spr=11
 i.action="zoom in"
 i.alt="Zoom in"
 
-i=instance_create(160+624,0,Button)
+i=instance_create(160+656,0,Button)
 i.spr=12
 i.action="zoom out"
 i.alt="Zoom out"
 
-i=instance_create(160+656,0,Button)
+i=instance_create(160+688,0,Button)
 i.spr=16
 i.action="interp"
 i.alt="Smoothing"
 
 //halp
-i=instance_create(160+704,0,Button)
+i=instance_create(160+736,0,Button)
 i.spr=22
 i.action="help"
 i.alt="Quick guide"
 
-i=instance_create(160+736,0,Button)
+i=instance_create(160+768,0,Button)
 i.spr=21
 i.action="prefs"
 i.alt="Preferences"
