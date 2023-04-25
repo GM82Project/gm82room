@@ -34,6 +34,7 @@ if (argument0==1) {
 }
 tilecount=instance_number(tileholder)
 
+if (argument0 <2) update_selection_bounds()
 if (argument0==2) update_backgroundpanel()
 if (argument0==3) update_viewpanel()
 if (argument0==4) update_settingspanel()
