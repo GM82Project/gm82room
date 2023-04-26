@@ -54,8 +54,8 @@ if (active) {
         case "bgcol"  : {val=round(real(text)) if (check_colorpicker_undo(0)) undo_global("backgroundcolor","background colour") backgroundcolor=val}break
         case "bg xpos": {val=round(real(text)) undo_globalvec("bg_xoffset",bg_current,"background "+string(bg_current)+" options") bg_xoffset[bg_current]=val}break
         case "bg ypos": {val=round(real(text)) undo_globalvec("bg_yoffset",bg_current,"background "+string(bg_current)+" options") bg_yoffset[bg_current]=val}break
-        case "bg hsp" : {val=round(real(text)) undo_globalvec("bg_hspeed",bg_current,"background "+string(bg_current)+" options") bg_hspeed [bg_current]=val}break
-        case "bg vsp" : {val=round(real(text)) undo_globalvec("bg_vspeed",bg_current,"background "+string(bg_current)+" options") bg_vspeed [bg_current]=val}break
+        case "bg hsp" : {val=round(real(text)) undo_globalvec("bg_hspeed",bg_current,"background "+string(bg_current)+" options") bg_hspeed[bg_current]=val}break
+        case "bg vsp" : {val=round(real(text)) undo_globalvec("bg_vspeed",bg_current,"background "+string(bg_current)+" options") bg_vspeed[bg_current]=val}break
 
         case "view x": {val=round(real(text)) undo_globalvec("vw_x",vw_current,"view "+string(vw_current)+" options") vw_x[vw_current]=val}break
         case "view y": {val=round(real(text)) undo_globalvec("vw_y",vw_current,"view "+string(vw_current)+" options") vw_y[vw_current]=val}break
@@ -71,6 +71,8 @@ if (active) {
         case "view vbor"  : {val=round(real(text)) undo_globalvec("vw_vbor",vw_current,"view "+string(vw_current)+" options") vw_vbor[vw_current]=val}break
         case "view hspeed": {val=round(real(text)) undo_globalvec("vw_hspeed",vw_current,"view "+string(vw_current)+" options") vw_hspeed[vw_current]=val}break
         case "view vspeed": {val=round(real(text)) undo_globalvec("vw_vspeed",vw_current,"view "+string(vw_current)+" options") vw_vspeed[vw_current]=val}break
+
+        case "path precision": {path_precision=median(1,real(text),8) path_set_precision(current_path,path_precision) global.modified=1 text=string(path_precision)}break
     }
 
     //these actions accept empty strings

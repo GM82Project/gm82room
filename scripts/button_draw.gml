@@ -10,6 +10,7 @@ if (object_index==Button) {
             case "bg mode":          {up=(mode!=2 && !down)             }break
             case "view mode":        {up=(mode!=3 && !down)             }break
             case "settings mode":    {up=(mode!=4 && !down)             }break
+            case "path mode":        {up=(mode!=5 && !down)             }break
             case "view objects":     {up=(!view[0] && !down)            }break
             case "view tiles":       {up=(!view[1] && !down)            }break
             case "view bgs":         {up=(!view[2] && !down)            }break
@@ -67,13 +68,13 @@ if (object_index==Button) {
             if (type==0) {
                 draw_set_halign(1)
                 draw_set_valign(1)
-                draw_text(x+w/2,y+h/2,text)
+                draw_text(x+w/2,y+h/2-1,text)
                 draw_set_halign(0)
                 draw_set_valign(0)
             }
             if (type==1) {
                 draw_set_valign(1)
-                draw_text(x+w+8,y+h/2,text)
+                draw_text(x+w+8,y+h/2-1,text)
                 draw_set_valign(0)
             }
             draw_set_color($ffffff)
@@ -110,16 +111,16 @@ if (object_index==TextField) {
             draw_set_valign(0)
             if (active) {
                 if (selected) {
-                    draw_rectangle_color(x+8,y+6,x+7+string_width(dtext),y+6+string_height(dtext),$ff8000,$ff8000,$ff8000,$ff8000,0)
+                    draw_rectangle_color(x+8,y+5,x+7+string_width(dtext),y+5+string_height(dtext),$ff8000,$ff8000,$ff8000,$ff8000,0)
                     draw_set_color($ffffff)
-                    draw_text(x+8,y+6,dtext+cursor)
+                    draw_text(x+8,y+5,dtext+cursor)
                 } else {
                     draw_set_color(merge_color(global.col_low,0,0.5))
-                    draw_text(x+8,y+6,dtext+cursor)
+                    draw_text(x+8,y+5,dtext+cursor)
                 }
             } else {
                 draw_set_color(merge_color(global.col_low,0,0.5))
-                draw_text(x+8,y+6,dtext)
+                draw_text(x+8,y+5,dtext)
             }
             draw_set_valign(0)
             draw_set_color($ffffff)

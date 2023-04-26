@@ -33,3 +33,8 @@ if (action=="bg name") {
 if (action=="view follow") {
     call_nmenu("object",objmenu)
 }
+if (action=="path precision") {
+    text=string(show_menu("1 - less precise|2|3|4 - normal|5|6|7|8 - most precise",path_precision-1)+1)
+    textfield_actions()
+    active=0
+}

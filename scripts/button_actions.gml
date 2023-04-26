@@ -15,6 +15,7 @@ with (Controller) switch (argument0) {
     case "bg mode"      : {change_mode(2)}break
     case "view mode"    : {change_mode(3)}break
     case "settings mode": {change_mode(4)}break
+    case "path mode"    : {change_mode(5)}break
     case "help"         : {show_info()}break
     case "prefs"        : {show_prefs() write_preferences()}break
     case "undo"         : {pop_undo()}break

@@ -187,3 +187,5 @@ Background
 Shader
 ShaderFromBase64
 string_antivirus
+createui_paths
+drawui_path

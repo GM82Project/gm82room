@@ -86,6 +86,7 @@
 	|createui_background
 	|createui_views
 	|createui_settings
+	|createui_paths
 |drawui
 +drawui
 	|draw_backgrounds
@@ -102,6 +103,7 @@
 	|drawui_view_post
 	|drawui_settings_post
 	|drawui_top_layer
+	|drawui_path
 	|draw_tile_panel
 |step
 +step

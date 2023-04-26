@@ -30,5 +30,6 @@ if (object_index!=Controller) {
 }
 
 with (Button) {
-    if (dynamic==mode) gray=!seln
+    if (mode==0 || mode==1) if (dynamic==mode) gray=!seln
+    if (mode==5 && tagmode==5 && dynamic) gray=(current_path==noone)
 }

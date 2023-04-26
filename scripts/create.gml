@@ -56,6 +56,8 @@ icon_mode=0
 focus=noone
 window_focused=false
 
+current_path=noone
+
 ref_top=1
 ref_alpha=127
 ref_tex=noone

@@ -3,39 +3,46 @@ i=instance_create(0,0,Button)
 i.spr=0
 i.action="save and quit"
 i.alt="Save and close"
-i.w=80
+i.w=160
 
 
 //tabs
-i=instance_create(80,0,Button)
-i.spr=21
-i.action="settings mode"
-i.alt="Room Settings"
-i.w=80
-
 i=instance_create(0,32,Button)
 i.spr=2
 i.action="object mode"
 i.alt="Instances"
-i.w=80
+i.w=53
 
-i=instance_create(80,32,Button)
+i=instance_create(53,32,Button)
 i.spr=3
 i.action="tile mode"
 i.alt="Tiles"
-i.w=80
+i.w=54
+
+i=instance_create(107,32,Button)
+i.spr=28
+i.action="path mode"
+i.alt="Paths"
+i.w=53
 
 i=instance_create(0,64,Button)
 i.spr=4
 i.action="bg mode"
 i.alt="Background"
-i.w=80
+i.w=53
 
-i=instance_create(80,64,Button)
+i=instance_create(53,64,Button)
 i.spr=6
 i.action="view mode"
 i.alt="Views"
-i.w=80
+i.w=54
+
+i=instance_create(107,64,Button)
+i.spr=21
+i.action="settings mode"
+i.alt="Room Settings"
+i.w=53
+
 
 
 i=instance_create(160+16,0,Button)

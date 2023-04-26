@@ -145,5 +145,6 @@ drawui_tile_post()
 drawui_bg_post()
 drawui_view_post()
 drawui_settings_post()
+drawui_path()
 
 drawui_top_layer()
