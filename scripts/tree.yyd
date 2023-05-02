@@ -42,6 +42,7 @@
 		|load_datafiles
 		|load_constants
 	|load_paths
+	|generate_path_model
 	|load_fonts
 	|load_jtooldata
 	|load_all_jtool_objs
@@ -111,12 +112,21 @@
 	|step_hotkeys
 	|step_clipboard
 	|step_leftmouse
+	+leftmouse
+		|step_painting
+		|objects_leftclick
+		|tiles_leftclick
+		|backgrounds_leftclick
+		|views_leftclick
+		|settings_leftclick
+		|paths_leftclick
 	|step_rightmouse
 	|step_object
 	|step_tile
 	|step_view
 	|step_settings
 	|step_contextmenu
+	|step_path
 |endstep
 +update
 	|update_inspector
@@ -197,3 +207,5 @@
 	|theme_apply
 	|theme_load
 	|theme_save
+|begin_trim
+|end_trim

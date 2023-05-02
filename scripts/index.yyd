@@ -189,3 +189,15 @@ ShaderFromBase64
 string_antivirus
 createui_paths
 drawui_path
+settings_leftclick
+views_leftclick
+backgrounds_leftclick
+tiles_leftclick
+objects_leftclick
+step_painting
+paths_leftclick
+begin_trim
+end_trim
+step_path
+generate_path_model
+

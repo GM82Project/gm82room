@@ -60,14 +60,33 @@ if (h!=0 || v!=0) {
             with (instance) if (sel) {x+=h y+=v add_undo_instance_props()}
             push_undo()
             with (select) update_inspector()
+            update_instance_memory()
+            update_selection_bounds()
         }
         if (mode==1) {
             begin_undo(act_change,"moving tiles",0)
             with (tileholder) if (sel) {x+=h y+=v tile_set_position(tile,x,y) add_undo_tile_props()}
             push_undo()
             with (selectt) update_inspector()
+            update_instance_memory()
+            update_selection_bounds()
         }
-        update_instance_memory()
-        update_selection_bounds()
+        if (mode==5 && current_path!=noone) {
+            path_change_point(
+                current_path,current_pathpoint,
+                path_get_point_x(current_path,current_pathpoint)+h,
+                path_get_point_y(current_path,current_pathpoint)+v,
+                path_get_point_speed(current_path,current_pathpoint)
+            )
+            generate_path_model(current_pathindex)
+            update_inspector()
+        }
     }
+}
+
+if (mode==5) {
+    if (keyboard_check_pressed(vk_pageup)) button_actions("path point-")
+    if (keyboard_check_pressed(vk_pagedown)) button_actions("path point+")
+    //insert: add point
+    //delete: remove point
 }

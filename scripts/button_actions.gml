@@ -1,11 +1,9 @@
-var sx,sy,cx,cy,nsel,cl,ct,cr,cb,mycx,mycy;
+var sx,sy,cx,cy,cl,ct,cr,cb,mycx,mycy;
 
 cl=max_int
 ct=max_int
 cr=-max_int
 cb=-max_int
-
-nsel=num_selected()
 
 with (Controller) switch (argument0) {
     //top panel
@@ -235,9 +233,14 @@ with (Controller) switch (argument0) {
 
     //views
     case "vwselect": {vw_current=other.actionid update_viewpanel()}break
-
-
-    //views
     case "enable views": {undo_global("vw_enabled","view options") vw_enabled=!vw_enabled}break
     case "view visible": {undo_globalvec("vw_visible",vw_current,"view "+string(vw_current)+" options") vw_visible[vw_current]=!vw_visible[vw_current]}break
+
+
+    //paths
+    case "pathscroldown" : {pathscrollgo-=192}break
+    case "pathscrolup"   : {pathscrollgo+=192}break
+    case "path point+"   : {if (current_path!=noone) current_pathpoint=min(path_get_number(current_path)-1,current_pathpoint+1) update_inspector()}break
+    case "path point-"   : {if (current_path!=noone) current_pathpoint=max(0,current_pathpoint-1) update_inspector()}break
+
 }

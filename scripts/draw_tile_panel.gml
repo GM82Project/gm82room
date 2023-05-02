@@ -44,6 +44,5 @@ if (tilebgpal!=noone) {
     draw_rectangle(curtilex-0.5,curtiley-0.5,curtilex+curtilew-0.5,curtiley+curtileh-0.5,1)
     draw_set_color($ffffff)
 
-    d3d_set_viewport(0,0,width,height)
-    d3d_set_projection_ortho(0,0,width,height,0)
+    end_trim()
 }

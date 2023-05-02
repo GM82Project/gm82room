@@ -15,4 +15,9 @@ with (Controller) switch (argument0) {
     //tile inspector
     case "layerscroldown"    : {layerscrollgo-=20}break
     case "layerscrolup"      : {layerscrollgo+=20}break
+
+    //paths
+    case "pathscroldown"     : {pathscrollgo-=20}break
+    case "pathscrolup"       : {pathscrollgo+=20}break
+
 }

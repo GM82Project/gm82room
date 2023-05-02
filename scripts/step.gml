@@ -11,6 +11,7 @@ if (!instance_exists(modal)) {
     step_object()
     step_tile()
     step_view()
+    step_path()
     step_settings()
 }
 

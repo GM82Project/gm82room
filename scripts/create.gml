@@ -36,6 +36,8 @@ layersize=0
 tpalscrollgo=0
 tpalscroll=0
 tpalsize=0
+pathscroll=0
+pathscrollgo=0
 paint=0
 erasing=0
 overlap_check=1
@@ -55,6 +57,7 @@ ly_current=0
 icon_mode=0
 focus=noone
 window_focused=false
+drag_point=-1
 
 current_path=noone
 

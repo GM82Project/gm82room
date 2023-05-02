@@ -1,13 +1,13 @@
 i=instance_create(0,96,Button)
 i.spr=19
-i.action="path scrolup"
+i.action="pathscrolup"
 i.w=160
 i.h=24
 i.tagmode=5
 
 i=instance_create(0,height-276-32-24,Button)
 i.spr=20
-i.action="path scroldown"
+i.action="pathscroldown"
 i.w=160
 i.h=24
 i.tagmode=5
@@ -52,7 +52,7 @@ textfield_set("path precision",4)
 i.tagmode=5
 i.anchor=2
 
-i=instance_create(8,height-180+8,TextField)
+i=instance_create(8,height-180+4,TextField)
 i.action="path x"
 i.basealt="x"
 i.w=72
@@ -62,7 +62,7 @@ i.tagmode=5
 i.anchor=2
 textfield_set("path x","")
 
-i=instance_create(80,height-180+8,TextField)
+i=instance_create(80,height-180+4,TextField)
 i.action="path y"
 i.basealt="y"
 i.w=72

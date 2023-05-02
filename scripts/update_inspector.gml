@@ -29,6 +29,15 @@ if (object_index!=Controller) {
     }
 }
 
+if (mode==5) {
+    textfield_set("path name",paths[current_path,1])
+    textfield_set("path precision",path_get_precision(current_path))
+    textfield_set("path point",current_pathpoint)
+    textfield_set("path x",path_get_point_x(current_path,current_pathpoint))
+    textfield_set("path y",path_get_point_y(current_path,current_pathpoint))
+    textfield_set("path speed",path_get_point_speed(current_path,current_pathpoint))
+}
+
 with (Button) {
     if (mode==0 || mode==1) if (dynamic==mode) gray=!seln
     if (mode==5 && tagmode==5 && dynamic) gray=(current_path==noone)
