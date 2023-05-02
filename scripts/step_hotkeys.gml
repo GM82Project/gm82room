@@ -79,6 +79,7 @@ if (h!=0 || v!=0) {
                 path_get_point_speed(current_path,current_pathpoint)
             )
             generate_path_model(current_pathindex)
+            paths[current_pathindex,5]=true
             update_inspector()
         }
     }

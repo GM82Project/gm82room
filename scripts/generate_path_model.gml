@@ -11,6 +11,9 @@ length=path_get_length(path)
 pointnum=path_get_number(path)
 closed=path_get_closed(path)
 
+yellow=$ffff
+if (path==current_path) yellow=$ff00ff
+
 //generate model
 if (smooth) {
     //smooth path
@@ -64,19 +67,19 @@ if (smooth) {
             dx=lengthdir_x(0.5,d)
             dy=lengthdir_y(0.5,d)
             if (p>4) {
-                d3d_model_vertex_color(model,opx-odx,opy-ody,0,$ffff,1)
-                d3d_model_vertex_color(model,opx+odx,opy+ody,0,$ffff,1)
-                d3d_model_vertex_color(model,opx-dx,opy-dy,0,$ffff,1)
-                d3d_model_vertex_color(model,opx-dx,opy-dy,0,$ffff,1)
-                d3d_model_vertex_color(model,opx+odx,opy+ody,0,$ffff,1)
-                d3d_model_vertex_color(model,opx+dx,opy+dy,0,$ffff,1)
+                d3d_model_vertex_color(model,opx-odx,opy-ody,0,yellow,1)
+                d3d_model_vertex_color(model,opx+odx,opy+ody,0,yellow,1)
+                d3d_model_vertex_color(model,opx-dx,opy-dy,0,yellow,1)
+                d3d_model_vertex_color(model,opx-dx,opy-dy,0,yellow,1)
+                d3d_model_vertex_color(model,opx+odx,opy+ody,0,yellow,1)
+                d3d_model_vertex_color(model,opx+dx,opy+dy,0,yellow,1)
             }
-            d3d_model_vertex_color(model,opx-dx,opy-dy,0,$ffff,1)
-            d3d_model_vertex_color(model,opx+dx,opy+dy,0,$ffff,1)
-            d3d_model_vertex_color(model,px-dx,py-dy,0,$ffff,1)
-            d3d_model_vertex_color(model,px-dx,py-dy,0,$ffff,1)
-            d3d_model_vertex_color(model,opx+dx,opy+dy,0,$ffff,1)
-            d3d_model_vertex_color(model,px+dx,py+dy,0,$ffff,1)
+            d3d_model_vertex_color(model,opx-dx,opy-dy,0,yellow,1)
+            d3d_model_vertex_color(model,opx+dx,opy+dy,0,yellow,1)
+            d3d_model_vertex_color(model,px-dx,py-dy,0,yellow,1)
+            d3d_model_vertex_color(model,px-dx,py-dy,0,yellow,1)
+            d3d_model_vertex_color(model,opx+dx,opy+dy,0,yellow,1)
+            d3d_model_vertex_color(model,px+dx,py+dy,0,yellow,1)
         }
     }
     d3d_model_primitive_end(model)
@@ -115,12 +118,12 @@ if (smooth) {
             d=point_direction(opx,opy,px,py)-90
             dx=lengthdir_x(0.5,d)
             dy=lengthdir_y(0.5,d)
-            d3d_model_vertex_color(model,opx-dx,opy-dy,0,$ffff,1)
-            d3d_model_vertex_color(model,opx+dx,opy+dy,0,$ffff,1)
-            d3d_model_vertex_color(model,px-dx,py-dy,0,$ffff,1)
-            d3d_model_vertex_color(model,px-dx,py-dy,0,$ffff,1)
-            d3d_model_vertex_color(model,opx+dx,opy+dy,0,$ffff,1)
-            d3d_model_vertex_color(model,px+dx,py+dy,0,$ffff,1)
+            d3d_model_vertex_color(model,opx-dx,opy-dy,0,yellow,1)
+            d3d_model_vertex_color(model,opx+dx,opy+dy,0,yellow,1)
+            d3d_model_vertex_color(model,px-dx,py-dy,0,yellow,1)
+            d3d_model_vertex_color(model,px-dx,py-dy,0,yellow,1)
+            d3d_model_vertex_color(model,opx+dx,opy+dy,0,yellow,1)
+            d3d_model_vertex_color(model,px+dx,py+dy,0,yellow,1)
         }
     }
     d3d_model_primitive_end(model)

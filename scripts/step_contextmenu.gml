@@ -15,12 +15,37 @@ if (click) {
         if (menusub=="datafile")   get=ds_map_get(datafilemenuitems,click)
         if (menusub=="constant")   get=ds_map_get(constmenuitems,click)
 
-        if (invalid_variable_name(get)) {
-            show_message("This resource has invalid characters in its name and can't be used on a field:##"+qt+get+qt+"##Click the broom icon in Game Maker and resolve any such problems.")
-        } else {
+        if (menusub=="path" && get==noone) {
+            pathname="path"+string(path_indexsize)+"_"+resfieldid.objname+"_"+resfieldid.uid
+
+            //create a new path for this field
             resfieldid.fields[resfieldi,0]=1
-            if (get==undefined) resfieldid.fields[resfieldi,0]=0
-            else {
+            resfieldid.fields[resfieldi,1]=pathname
+            change_mode(5)
+
+            current_path=path_add()
+            paths[pathnum,0]=current_path
+            paths[pathnum,1]=pathname path_indexsize+=1
+            paths[pathnum,3]=d3d_model_create()
+            paths[pathnum,4]=true //new to this session
+            paths[pathnum,5]=true //modified
+            path_set_closed(current_path,0)
+            path_set_precision(current_path,4)
+            path_set_kind(current_path,0)
+            path_add_point(current_path,round(resfieldid.x),round(resfieldid.y),100)
+
+            current_pathindex=pathnum
+            current_pathpoint=0
+            generate_path_model(current_pathindex)
+            update_inspector()
+
+            pathnum+=1
+        } else if (get==undefined) resfieldid.fields[resfieldi,0]=0
+        else {
+            if (invalid_variable_name(get)) {
+                show_message("This resource has invalid characters in its name and can't be used on a field:##"+qt+get+qt+"##Click the broom icon in Game Maker and resolve any such problems.")
+            } else {
+                resfieldid.fields[resfieldi,0]=1
                 if (menusub=="constant") {
                     //cut the constant name out
                     resfieldid.fields[resfieldi,1]=string_copy(get,1,string_pos(" (",get)-1)

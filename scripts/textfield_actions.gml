@@ -72,7 +72,8 @@ if (active) {
         case "view hspeed": {val=round(real(text)) undo_globalvec("vw_hspeed",vw_current,"view "+string(vw_current)+" options") vw_hspeed[vw_current]=val}break
         case "view vspeed": {val=round(real(text)) undo_globalvec("vw_vspeed",vw_current,"view "+string(vw_current)+" options") vw_vspeed[vw_current]=val}break
 
-        case "path precision": {path_precision=median(1,real(text),8) path_set_precision(current_path,path_precision) global.modified=1 text=string(path_precision)}break
+        case "path precision": {path_precision=median(1,real(text),8) path_set_precision(current_path,path_precision) paths[current_pathindex,5]=true generate_path_model(current_pathindex) text=string(path_precision)}break
+        case "path point": {current_pathpoint=median(0,real(text),path_get_number(current_path)-1) text=string(current_pathpoint)}break
     }
 
     //these actions accept empty strings

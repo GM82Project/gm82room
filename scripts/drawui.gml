@@ -8,15 +8,20 @@ else sel_alpha=0.5+0.25*sin(current_time/200)
 draw_backgrounds(1)
 draw_reference(1)
 
-draw_paths()
+if (mode!=5) draw_paths()
 
 d3d_transform_set_identity()
 d3d_end()
 d3d_set_projection_default()
 d3d_set_depth(0)
 
-fmx=floorto(global.mousex,gridx)
-fmy=floorto(global.mousey,gridy)
+if (mode==5) {
+    fmx=roundto(global.mousex,gridx)
+    fmy=roundto(global.mousey,gridy)
+} else {
+    fmx=floorto(global.mousex,gridx)
+    fmy=floorto(global.mousey,gridy)
+}
 tty=0
 
 focus=noone
@@ -25,8 +30,8 @@ if (mousein) {
     if (mode==1) focus=instance_position(global.mousex,global.mousey,tileholder)
 }
 
-//grid and crosshair for object and tile mode
-if (mode==0 || mode==1) {
+//grid and crosshair for object, tile and path mode
+if (mode==0 || mode==1 || mode==5) {
     if (keyboard_check_direct(vk_control)) window_set_cursor(cr_size_all)
     else if (keyboard_check_direct(vk_shift)) window_set_cursor(cr_cross)
     else window_set_cursor(cr_default)
@@ -73,6 +78,7 @@ if (mode==0 || mode==1) {
 
 drawui_object_pre()
 drawui_tile_pre()
+if (mode==5) draw_paths()
 
 //selection rectangle
 if (selecting) {

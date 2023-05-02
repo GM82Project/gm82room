@@ -28,7 +28,7 @@ globalvar
     vw_enabled,vw_visible,vw_x,vw_y,vw_w,vw_h,vw_xp,vw_yp,vw_wp,vw_hp,vw_follow,vw_hspeed,vw_vspeed,vw_hbor,vw_vbor,
     bg_gridx,bg_gridy,bg_gridox,bg_gridoy,bg_gridsx,bg_gridsy,bg_istile,
     layers,curtilex,curtiley,curtilew,curtileh,
-    paths,pathnum,path_precision,current_path,current_pathpoint,drag_point,current_pathindex,
+    paths,pathnum,path_precision,current_path,current_pathpoint,drag_point,current_pathindex,path_indexsize,
     objmenu,objmenuitems,
     bgmenu,bgmenuitems,tilebgmenu_contains,
     undostack,undolist,undoing,uidmap,lastuid,current_undo_size,total_undo_size,

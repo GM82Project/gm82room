@@ -142,6 +142,7 @@ if (drag_point) {
 
     if (pxo!=path_get_point_x(current_path,current_pathpoint) || pyo!=path_get_point_y(current_path,current_pathpoint)) {
         generate_path_model(current_pathindex)
+        paths[current_pathindex,5]=true
         update_inspector()
     }
 

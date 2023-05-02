@@ -7,6 +7,7 @@
 	|draw_loader
 	|drawtooltip
 	|file_text_open_read_safe
+	|file_text_open_append_safe
 	|draw_button_ext
 	|string_wrap
 	|string_delete_edge_spaces
@@ -41,9 +42,7 @@
 		|load_room_tree
 		|load_datafiles
 		|load_constants
-	|load_paths
 	|generate_path_model
-	|load_fonts
 	|load_jtooldata
 	|load_all_jtool_objs
 	|loadthumb
@@ -76,6 +75,9 @@
 +save/load
 	|load_room
 	|save_room
+	|load_paths
+	|save_paths
+	|load_fonts
 	|delete_backups
 	|parse_code_into_flags
 	|parse_flags_into_code

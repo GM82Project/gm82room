@@ -5,7 +5,7 @@ i.w=160
 i.h=24
 i.tagmode=5
 
-i=instance_create(0,height-276-32-24,Button)
+i=instance_create(0,height-276-48,Button)
 i.spr=20
 i.action="pathscroldown"
 i.w=160
@@ -13,7 +13,7 @@ i.h=24
 i.tagmode=5
 i.anchor=2
 
-i=instance_create(0,height-276-32,TextField)
+i=instance_create(0,height-276-24,TextField)
 i.action="path name"
 i.basealt="Path"
 i.type=3
@@ -46,9 +46,9 @@ i=instance_create(116,height-164+124,TextField)
 i.action="path precision"
 i.w=36
 i.dynamic=1
-i.basealt="precision"
+i.basealt="How many bezier iterations are used on a smooth path"
 i.maxlen=4
-textfield_set("path precision",4)
+textfield_set("path precision","")
 i.tagmode=5
 i.anchor=2
 
@@ -82,7 +82,7 @@ i.tagmode=5
 i.anchor=2
 textfield_set("path speed","")
 
-i=instance_create(40,height-280+36,TextField)
+i=instance_create(40,height-280+36+8,TextField)
 i.action="path point"
 i.w=80
 i.basealt="point"
@@ -90,15 +90,15 @@ i.maxlen=4
 i.dynamic=1
 i.tagmode=5
 i.anchor=2
-textfield_set("path point","0")
+textfield_set("path point","")
 
-i=instance_create(8,height-280+36,Button)
+i=instance_create(8,height-280+36+8,Button)
 i.spr=37
 i.action="path point-"
 i.tagmode=5
 i.anchor=2
 
-i=instance_create(40+80,height-280+36,Button)
+i=instance_create(40+80,height-280+36+8,Button)
 i.spr=38
 i.action="path point+"
 i.tagmode=5

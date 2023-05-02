@@ -50,6 +50,9 @@ if (object_index==Button) {
                 case "chunk crop": {checked=chunkcrop}break
 
                 case "ref top": {checked=ref_top}break
+
+                case "path smooth": {checked=path_get_kind(current_path)}break
+                case "path closed": {checked=path_get_closed(current_path)}break
             }
             up=!down
         }

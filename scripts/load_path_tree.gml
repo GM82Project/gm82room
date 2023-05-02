@@ -4,6 +4,8 @@ pathmenuitems=ds_map_create()
 pathmenu=N_Menu_CreatePopupMenu()
 
 ds_map_add(pathmenuitems,N_Menu_AddItem(pathmenu,"(no path)",""),undefined)
+ds_map_add(pathmenuitems,N_Menu_AddItem(pathmenu,"[+] Add new path",""),noone)
+N_Menu_AddSeparator(pathmenu)
 
 path[0]=pathmenu
 curindent=0

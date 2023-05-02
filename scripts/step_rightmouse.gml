@@ -75,9 +75,34 @@ if (mouse_check_button_pressed(mb_right)) {
             if (selecting) selecting=0
             with (TextField) textfield_actions()
             clear_inspector()
-            deselect()
-            begin_undo(act_create,"erasing "+pick(mode,"instances","tiles"),0)
-            erasing=1
+            if (mode==0 || mode==1) {
+                deselect()
+                begin_undo(act_create,"erasing "+pick(mode,"instances","tiles"),0)
+                erasing=1
+            }
+            if (mode==5) {
+                var maxd,point,p;
+
+                maxd=8*zm point=-1
+                pointnum=path_get_number(current_path)
+
+                if (pointnum>1) {
+                    for (p=0;p<pointnum;p+=1) {
+                        px=path_get_point_x(current_path,p)
+                        py=path_get_point_y(current_path,p)
+                        d=point_distance(global.mousex,global.mousey,px,py)
+                        if (d<=maxd) {point=p maxd=d}
+                    }
+
+                    if (point>=0) {
+                        current_pathpoint=max(0,point-1)
+                        path_delete_point(current_path,point)
+                        paths[current_pathindex,5]=true
+                        generate_path_model(current_pathindex)
+                        update_inspector()
+                    }
+                }
+            }
         }
     }
 }
