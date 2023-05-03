@@ -8,11 +8,19 @@ if (mode==5 && current_path!=noone) {
     dx=path_get_point_x(current_path,current_pathpoint)-0.5
     dy=path_get_point_y(current_path,current_pathpoint)-0.5
     if (current_pathpoint>0) {
-        draw_circle_color(dx,dy,4,0,0,0)
-        draw_circle_color(dx,dy,3,selcol,selcol,0)
+        if (path_thin) {
+            draw_circle_color(dx,dy,3,selcol,selcol,1)
+        } else {
+            draw_circle_color(dx,dy,4,0,0,0)
+            draw_circle_color(dx,dy,3,selcol,selcol,0)
+        }
     } else {
-        draw_rectangle_color(dx-4,dy-4,dx+4,dy+4,1,1,1,1,0)
-        draw_rectangle_color(dx-3,dy-3,dx+3,dy+3,selcol,selcol,selcol,selcol,0)
+        if (path_thin) {
+            draw_rectangle_color(dx-3,dy-3,dx+3,dy+3,selcol,selcol,selcol,selcol,1)
+        } else {
+            draw_rectangle_color(dx-4,dy-4,dx+4,dy+4,1,1,1,1,0)
+            draw_rectangle_color(dx-3,dy-3,dx+3,dy+3,selcol,selcol,selcol,selcol,0)
+        }
     }
 
     if (!drag_point && mousein) {
@@ -37,32 +45,52 @@ if (mode==5 && current_path!=noone) {
         } else {
             if (keyboard_check(vk_alt)) {mx=global.mousex-0.5 my=global.mousey-0.5} else {mx=fmx-0.5 my=fmy-0.5}
             closed=path_get_closed(current_path)
-            draw_set_alpha(0.3)
-            draw_line_width_color(
-                path_get_point_x(current_path,current_pathpoint)-0.5,
-                path_get_point_y(current_path,current_pathpoint)-0.5,
-                mx,my,
-                3,0,0
-            )
-            if (current_pathpoint<n-1 || closed) draw_line_width_color(
-                mx,my,
-                path_get_point_x(current_path,(current_pathpoint+1) mod n)-0.5,
-                path_get_point_y(current_path,(current_pathpoint+1) mod n)-0.5,
-                3,0,0
-            )
+
+            if (!path_thin) {
+                draw_set_alpha(0.3)
+                draw_line_width_color(
+                    path_get_point_x(current_path,current_pathpoint)-0.5,
+                    path_get_point_y(current_path,current_pathpoint)-0.5,
+                    mx,my,
+                    3,0,0
+                )
+                if (current_pathpoint<n-1 || closed) {
+                    draw_line_width_color(
+                        mx,my,
+                        path_get_point_x(current_path,(current_pathpoint+1) mod n)-0.5,
+                        path_get_point_y(current_path,(current_pathpoint+1) mod n)-0.5,
+                        3,0,0
+                    )
+                }
+            }
             draw_set_alpha(0.5)
-            draw_line_width_color(
+            if (!path_thin) draw_line_width_color(
                 path_get_point_x(current_path,current_pathpoint)-0.5,
                 path_get_point_y(current_path,current_pathpoint)-0.5,
                 mx,my,
                 1,$ff00ff,$ff00ff
             )
-            if (current_pathpoint<n-1 || closed) draw_line_width_color(
+            draw_line_color(
+                path_get_point_x(current_path,current_pathpoint)-0.5,
+                path_get_point_y(current_path,current_pathpoint)-0.5,
                 mx,my,
-                path_get_point_x(current_path,(current_pathpoint+1) mod n)-0.5,
-                path_get_point_y(current_path,(current_pathpoint+1) mod n)-0.5,
-                1,$ff00ff,$ff00ff
+                $ff00ff,$ff00ff
             )
+            if (current_pathpoint<n-1 || closed) {
+                if (!path_thin) draw_line_width_color(
+                    mx,my,
+                    path_get_point_x(current_path,(current_pathpoint+1) mod n)-0.5,
+                    path_get_point_y(current_path,(current_pathpoint+1) mod n)-0.5,
+                    1,$ff00ff,$ff00ff
+                )
+                draw_line_color(
+                    mx,my,
+                    path_get_point_x(current_path,(current_pathpoint+1) mod n)-0.5,
+                    path_get_point_y(current_path,(current_pathpoint+1) mod n)-0.5,
+                    $ff00ff,$ff00ff
+                )
+            }
+
             draw_set_alpha(1)
         }
     }

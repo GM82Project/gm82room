@@ -242,6 +242,7 @@ with (Controller) switch (argument0) {
     case "pathscrolup"   : {pathscrollgo+=192}break
     case "path point+"   : {if (current_path!=noone) current_pathpoint=min(path_get_number(current_path)-1,current_pathpoint+1) update_inspector()}break
     case "path point-"   : {if (current_path!=noone) current_pathpoint=max(0,current_pathpoint-1) update_inspector()}break
-    case "path smooth": {path_set_kind(current_path,!path_get_kind(current_path)) paths[current_pathindex,5]=true generate_path_model(current_pathindex)}break
-    case "path closed": {path_set_closed(current_path,!path_get_closed(current_path)) paths[current_pathindex,5]=true generate_path_model(current_pathindex)}break
+    case "path smooth"   : {path_set_kind(current_path,!path_get_kind(current_path)) paths[current_pathindex,5]=true generate_path_model(current_pathindex)}break
+    case "path closed"   : {path_set_closed(current_path,!path_get_closed(current_path)) paths[current_pathindex,5]=true generate_path_model(current_pathindex)}break
+    case "path thin"     : {path_thin=!path_thin if (current_path!=noone) generate_path_model(current_pathindex)}break
 }

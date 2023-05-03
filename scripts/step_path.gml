@@ -1,13 +1,13 @@
 var h,oldpath;
 
-if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,height-324)) {
+if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,height-328)) {
     if (mouse_check_button_pressed(mb_left)) {
         dy=pathscroll i=0 repeat (pathnum) {
             if (mouse_wy-120==median(dy,mouse_wy-120,dy+31)) {
                 oldpath=current_pathindex
                 current_pathindex=i
                 current_path=paths[i,0]
-                current_pathpoint=0
+                current_pathpoint=path_get_number(current_path)-1
                 if (oldpath!=noone) generate_path_model(oldpath)
                 generate_path_model(i)
                 update_inspector()
@@ -40,5 +40,5 @@ if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,height-324)) {
     pathscrollgo-=h*120
 }
 
-pathscrollgo=clamp(pathscrollgo,-(pathnum+1)*32+(height-324-120),0)
-pathscroll=clamp(inch((pathscroll*4+pathscrollgo)/5,pathscrollgo,2),-(pathnum+1)*32+(height-324-120),0)
+pathscrollgo=clamp(pathscrollgo,-(pathnum+1)*32+(height-328-120),0)
+pathscroll=clamp(inch((pathscroll*4+pathscrollgo)/5,pathscrollgo,2),-(pathnum+1)*32+(height-328-120),0)

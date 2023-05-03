@@ -19,6 +19,7 @@
 	|mouse_check_modal
 	|call_nmenu
 	|string_antivirus
+	|generate_path_model
 +file
 	|gensavecode
 	|parsereal
@@ -42,7 +43,6 @@
 		|load_room_tree
 		|load_datafiles
 		|load_constants
-	|generate_path_model
 	|load_jtooldata
 	|load_all_jtool_objs
 	|loadthumb
