@@ -1,5 +1,5 @@
 ///generate_path_model(path)
-var path,model,smooth,length,pointnum,closed,p,i,d,px,py,dx,dy,opx,opy,odx,ody,col,v,thin;
+var path,model,smooth,length,pointnum,closed,stepsize,p,i,d,px,py,dx,dy,opx,opy,odx,ody,col,v,thin,iter,op;
 
 path=paths[argument0,0]
 model=paths[argument0,3]
@@ -19,25 +19,27 @@ if (path==current_path) yellow=$ff00ff
 //generate model
 if (smooth) {
     //smooth path
+    stepsize=max(4,length/1000)
     if (!thin) {
         d3d_model_primitive_begin(model,pr_trianglelist)
         v=0
-        for (p=0;p<length;p+=4) {
-            if (p>0) {
+        for ({p=0 iter=0};p<=length+stepsize;{p+=stepsize iter+=1}) {
+            if (iter>0) {
                 opx=px
                 opy=py
             }
-            px=path_get_x(path,p/length)-0.5
-            py=path_get_y(path,p/length)-0.5
-            if (p>0) {
-                if (p>4) {
+            op=min(1,p/length)
+            px=path_get_x(path,op)-0.5
+            py=path_get_y(path,op)-0.5
+            if (iter>0) {
+                if (iter>1) {
                     odx=dx
                     ody=dy
                 }
                 d=point_direction(opx,opy,px,py)-90
                 dx=lengthdir_x(1.5,d)
                 dy=lengthdir_y(1.5,d)
-                if (p>4) {
+                if (iter>1) {
                     d3d_model_vertex_color(model,opx-odx,opy-ody,0,0,1)
                     d3d_model_vertex_color(model,opx+odx,opy+ody,0,0,1)
                     d3d_model_vertex_color(model,opx-dx,opy-dy,0,0,1)
@@ -67,22 +69,23 @@ if (smooth) {
     if (thin) d3d_model_primitive_begin(model,pr_linelist)
     else d3d_model_primitive_begin(model,pr_trianglelist)
     v=0
-    for (p=0;p<length;p+=4) {
-        if (p>0) {
+    for ({p=0 iter=0};p<=length+stepsize;{p+=stepsize iter+=1}) {
+        if (iter>0) {
             opx=px
             opy=py
         }
-        px=path_get_x(path,p/length)-0.5
-        py=path_get_y(path,p/length)-0.5
-        if (p>0) {
-            if (p>4) {
+        op=min(1,p/length)
+        px=path_get_x(path,op)-0.5
+        py=path_get_y(path,op)-0.5
+        if (iter>0) {
+            if (iter>1) {
                 odx=dx
                 ody=dy
             }
             d=point_direction(opx,opy,px,py)-90
             dx=lengthdir_x(0.5,d)
             dy=lengthdir_y(0.5,d)
-            if (p>4) {
+            if (iter>1) {
                 if (thin) {
                     d3d_model_vertex_color(model,opx,opy,0,$ff00ff,1)
                     d3d_model_vertex_color(model,px,py,0,$ff00ff,1)
