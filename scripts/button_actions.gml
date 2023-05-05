@@ -245,4 +245,17 @@ with (Controller) switch (argument0) {
     case "path smooth"   : {path_set_kind(current_path,!path_get_kind(current_path)) paths[current_pathindex,5]=true generate_path_model(current_pathindex)}break
     case "path closed"   : {path_set_closed(current_path,!path_get_closed(current_path)) paths[current_pathindex,5]=true generate_path_model(current_pathindex)}break
     case "path thin"     : {path_thin=!path_thin if (current_path!=noone) generate_path_model(current_pathindex)}break
+    case "path point add": {if (current_path!=noone) {
+        current_pathpoint+=1
+        path_insert_point(current_path,current_pathpoint,path_get_point_x(current_path,current_pathpoint-1),path_get_point_y(current_path,current_pathpoint-1),path_get_point_speed(current_path,current_pathpoint-1))
+        generate_path_model(current_pathindex)
+        update_inspector()
+    }}break
+    case "path point del": {if (current_path!=noone) if (path_get_number(current_path)>1) {
+        path_delete_point(current_path,current_pathpoint)
+        current_pathpoint=max(0,current_pathpoint-1)
+        paths[current_pathindex,5]=true
+        generate_path_model(current_pathindex)
+        update_inspector()
+    }}break
 }

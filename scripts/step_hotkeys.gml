@@ -8,7 +8,7 @@ if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && keyboard_check_pr
 }
 if (keyboard_check_pressed(vk_tab)) {
     if (keyboard_check(vk_shift)) change_mode(modwrap(mode-1,0,5))
-    else change_mode((mode+1) mod 5)
+    else change_mode((mode+1) mod 6)
 }
 if (keyboard_check_pressed(vk_escape)) {
     with (TextField) textfield_actions()
@@ -19,16 +19,20 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("G"))) {
     grid=!grid
 }
 
-if (keyboard_check_pressed(vk_delete)) {
-    yes=1 with (TextField) if (active) yes=0 if (yes) {
-        clear_inspector()
-        select=noone
-        selectt=noone
-        if (num_selected()) begin_undo(act_create,"deleting "+pick(mode,"instances","tiles"),0)
-        if (mode==0) with (instance) if (sel) {add_undo_instance() instance_destroy()}
-        if (mode==1) with (tileholder) if (sel) {add_undo_tile() instance_destroy()}
-        push_undo()
-        selection=0
+if (mode==0 || mode==1) {
+    if (keyboard_check_pressed(vk_insert)) overmode=!overmode
+
+    if (keyboard_check_pressed(vk_delete)) {
+        yes=1 with (TextField) if (active) yes=0 if (yes) {
+            clear_inspector()
+            select=noone
+            selectt=noone
+            if (num_selected()) begin_undo(act_create,"deleting "+pick(mode,"instances","tiles"),0)
+            if (mode==0) with (instance) if (sel) {add_undo_instance() instance_destroy()}
+            if (mode==1) with (tileholder) if (sel) {add_undo_tile() instance_destroy()}
+            push_undo()
+            selection=0
+        }
     }
 }
 
@@ -88,6 +92,6 @@ if (h!=0 || v!=0) {
 if (mode==5) {
     if (keyboard_check_pressed(vk_pageup)) button_actions("path point-")
     if (keyboard_check_pressed(vk_pagedown)) button_actions("path point+")
-    //insert: add point
-    //delete: remove point
+    if (keyboard_check_pressed(vk_insert)) button_actions("path point add")
+    if (keyboard_check_pressed(vk_delete)) button_actions("path point del")
 }

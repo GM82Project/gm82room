@@ -87,8 +87,6 @@ if (direct_mbleft && direct_mbright) {
     direct_mbright=0
 }
 
-if (keyboard_check_pressed(vk_insert)) overmode=!overmode
-
 //zooming
 if (grabknob) {
     if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
