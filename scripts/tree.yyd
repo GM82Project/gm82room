@@ -211,3 +211,4 @@
 	|theme_save
 |begin_trim
 |end_trim
+|error_handler
