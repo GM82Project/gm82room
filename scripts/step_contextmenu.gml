@@ -16,7 +16,7 @@ if (click) {
         if (menusub=="constant")   get=ds_map_get(constmenuitems,click)
 
         if (menusub=="path" && get==noone) {
-            pathname="path"+string(path_indexsize)+"_"+resfieldid.objname+"_"+resfieldid.uid
+            pathname="path"+string(ds_list_size(path_index_list))+"_"+resfieldid.objname+"_"+resfieldid.uid
 
             //create a new path for this field
             resfieldid.fields[resfieldi,0]=1
@@ -24,22 +24,22 @@ if (click) {
             change_mode(5)
 
             current_path=path_add()
-            paths[pathnum,0]=current_path
-            paths[pathnum,1]=pathname path_indexsize+=1
-            paths[pathnum,3]=d3d_model_create()
-            paths[pathnum,4]=true //new to this session
-            paths[pathnum,5]=true //modified
+            ds_map_add(pathmap_model,pathname,d3d_model_create())
+            ds_map_add(pathmap_path,pathname,current_path)
+            ds_map_add(pathmap_edited,pathname,true)
             path_set_closed(current_path,0)
             path_set_precision(current_path,4)
             path_set_kind(current_path,0)
             path_add_point(current_path,round(resfieldid.x),round(resfieldid.y),100)
 
-            current_pathindex=pathnum
+            current_pathname=pathname
             current_pathpoint=0
-            generate_path_model(current_pathindex)
+            generate_path_model(current_pathname)
             update_inspector()
 
-            pathnum+=1
+            ds_list_add(path_index_list,pathname)
+            ds_list_add(path_tree_list,"|"+pathname)
+            ds_map_add(path_tree_map,"|"+pathname,pathname)
         } else if (get==undefined) resfieldid.fields[resfieldi,0]=0
         else {
             if (invalid_variable_name(get)) {

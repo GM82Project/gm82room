@@ -2,14 +2,14 @@ if (mode==5) {
     begin_trim(0,120,160,height-328-120)
         draw_set_color(global.col_text)
 
-        dy=pathscroll i=0 repeat (pathnum) {
+        dy=pathscroll key=ds_map_find_first(pathmap_path) repeat (ds_map_size(pathmap_path)) {
             if (dy>-32 && dy<height-328-120) {
-                draw_button_ext(0,dy,160,32,(current_path!=paths[i,0]),noone)
-                str=paths[i,1]
+                draw_button_ext(0,dy,160,32,(current_pathname!=key),noone)
+                str=key
                 if (string_length(str)>14) str=string_copy(str,1,11)+"..."
                 draw_text(12,dy+6,str)
             }
-        i+=1 dy+=32}
+        i+=1 dy+=32 key=ds_map_find_next(pathmap_path,key)}
 
         draw_button_ext(0,dy,160,32,1,noone)
         draw_sprite(sprMenuButtons,39,16,dy+16)

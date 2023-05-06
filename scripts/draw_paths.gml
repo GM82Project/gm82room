@@ -1,7 +1,10 @@
-if (mode==5 || view[7]) for (i=0;i<pathnum;i+=1) {
-    if ((paths[i,0]==current_path && mode==5) || view[7]) {
-        d3d_model_draw(paths[i,3],0,0,0,-1)
-    }
+if (mode==5 || view[7]) {
+    key=ds_map_find_first(pathmap_path)
+    repeat (ds_map_size(pathmap_path)) {
+        if ((key==current_pathname && mode==5) || view[7]) {
+            d3d_model_draw(ds_map_find_value(pathmap_model,key),0,0,0,-1)
+        }
+    key=ds_map_find_next(pathmap_path,key)}
 }
 
 if (mode==5 && current_path!=noone) {

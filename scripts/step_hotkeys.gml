@@ -82,8 +82,8 @@ if (h!=0 || v!=0) {
                 path_get_point_y(current_path,current_pathpoint)+v,
                 path_get_point_speed(current_path,current_pathpoint)
             )
-            generate_path_model(current_pathindex)
-            paths[current_pathindex,5]=true
+            generate_path_model(current_pathname)
+            dsmap(pathmap_edited,current_pathname,true)
             update_inspector()
         }
     }

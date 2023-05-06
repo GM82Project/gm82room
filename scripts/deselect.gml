@@ -8,7 +8,7 @@ selection=0
 
 if (mode==5) {
     current_path=noone
-    if (current_pathindex!=noone) generate_path_model(current_pathindex)
+    if (current_path!=noone) generate_path_model(current_pathname)
     update_inspector()
-    current_pathindex=noone
+    current_pathname=""
 }

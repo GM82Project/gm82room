@@ -60,7 +60,7 @@ window_focused=false
 drag_point=-1
 
 current_path=noone
-current_pathindex=noone
+current_pathname=""
 
 ref_top=1
 ref_alpha=127

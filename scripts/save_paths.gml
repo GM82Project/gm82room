@@ -1,20 +1,28 @@
-var f,f2,f3,i,path,pathname,j;
+var f,f2,f3,i,path,pathname,j,str;
 
-f=file_text_open_append_safe(root+"paths\index.yyd")
-f3=file_text_open_append_safe(root+"paths\tree.yyd")
+f=file_text_open_write(root+"paths\index.yyd")
+f3=file_text_open_write(root+"paths\tree.yyd")
+
+str=""
+i=0 repeat (ds_list_size(path_index_list)) {
+    str+=ds_list_find_value(path_index_list,i)+lf
+i+=1}
+file_text_write_string(f,str)
+
+str=""
+i=0 repeat (ds_list_size(path_tree_list)) {
+    str+=ds_list_find_value(path_tree_list,i)+lf
+i+=1}
+file_text_write_string(f3,str)
+
 if (f && f3) {
-    i=0 repeat (pathnum) {if (paths[i,4] || paths[i,5]) {
-        pathname=paths[i,1]
+    key=ds_map_find_first(pathmap_path) repeat (ds_map_size(pathmap_path)) {if (ds_map_find_value(pathmap_edited,key)) {
+        pathname=key
 
-        if (paths[i,4]) {
-            //new path, add to index and tree
-            file_text_write_string(f,paths[i,1]) file_text_writeln(f)
-            file_text_write_string(f3,"|"+paths[i,1]) file_text_writeln(f3)
-            directory_create(root+"paths\"+pathname)
-        }
+        directory_create(root+"paths\"+pathname)
 
         f2=file_text_open_write(root+"paths\"+pathname+"\path.txt") if (f2) {
-            path=paths[i,0]
+            path=ds_map_find_value(pathmap_path,key)
             file_text_write_string(f2,"connection="+string(path_get_kind(path))) file_text_writeln(f2)
             file_text_write_string(f2,"closed="+string(path_get_closed(path))) file_text_writeln(f2)
             file_text_write_string(f2,"precision="+string(path_get_precision(path))) file_text_writeln(f2)
@@ -30,5 +38,5 @@ if (f && f3) {
                 j+=1}
             file_text_close(f2)}
         }
-    }i+=1}
+    } key=ds_map_find_next(pathmap_path,key)}
 file_text_close(f) file_text_close(f3)}

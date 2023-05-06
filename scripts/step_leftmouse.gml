@@ -141,8 +141,8 @@ if (drag_point) {
     else path_change_point(current_path,current_pathpoint,fmx,fmy,path_get_point_speed(current_path,current_pathpoint))
 
     if (pxo!=path_get_point_x(current_path,current_pathpoint) || pyo!=path_get_point_y(current_path,current_pathpoint)) {
-        generate_path_model(current_pathindex)
-        paths[current_pathindex,5]=true
+        generate_path_model(current_pathname)
+        dsmap(pathmap_edited,current_pathname,true)
         update_inspector()
     }
 

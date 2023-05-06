@@ -97,8 +97,8 @@ if (mouse_check_button_pressed(mb_right)) {
                     if (point>=0) {
                         current_pathpoint=max(0,point-1)
                         path_delete_point(current_path,point)
-                        paths[current_pathindex,5]=true
-                        generate_path_model(current_pathindex)
+                        dsmap(pathmap_edited,current_pathname,true)
+                        generate_path_model(current_pathname)
                         update_inspector()
                     }
                 }
