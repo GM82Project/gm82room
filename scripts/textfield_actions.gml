@@ -73,9 +73,9 @@ if (active) {
         case "view vspeed": {val=round(real(text)) undo_globalvec("vw_vspeed",vw_current,"view "+string(vw_current)+" options") vw_vspeed[vw_current]=val}break
 
         case "path precision": {path_precision=median(1,real(text),8) path_set_precision(current_path,path_precision) dsmap(pathmap_edited,current_pathname,true) generate_path_model(current_pathname) text=string(path_precision)}break
-        case "path point"    : {current_pathpoint=median(0,real(text),path_get_number(current_path)-1) text=string(current_pathpoint)}break
-        case "path x"        : {path_change_point(current_path,current_pathpoint,real(text),path_get_point_y(current_path,current_pathpoint),path_get_point_speed(current_path,current_pathpoint)) dsmap(pathmap_edited,current_pathname,true) generate_path_model(current_pathname)}break
-        case "path y"        : {path_change_point(current_path,current_pathpoint,path_get_point_x(current_path,current_pathpoint),real(text),path_get_point_speed(current_path,current_pathpoint)) dsmap(pathmap_edited,current_pathname,true) generate_path_model(current_pathname)}break
+        case "path point"    : {select_path_point(median(0,real(text),path_get_number(current_path)-1),0) text=string(current_pathpoint)}break
+        case "path x"        : {path_change_point(current_path,current_pathpoint,real(text),path_get_point_y(current_path,current_pathpoint),path_get_point_speed(current_path,current_pathpoint)) dsmap(pathmap_edited,current_pathname,true) update_selection_bounds() generate_path_model(current_pathname)}break
+        case "path y"        : {path_change_point(current_path,current_pathpoint,path_get_point_x(current_path,current_pathpoint),real(text),path_get_point_speed(current_path,current_pathpoint)) dsmap(pathmap_edited,current_pathname,true) update_selection_bounds() generate_path_model(current_pathname)}break
         case "path speed"    : {path_change_point(current_path,current_pathpoint,path_get_point_x(current_path,current_pathpoint),path_get_point_y(current_path,current_pathpoint),real(text)) dsmap(pathmap_edited,current_pathname,true)}break
     }
 

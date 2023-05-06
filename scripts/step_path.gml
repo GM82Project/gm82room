@@ -2,6 +2,7 @@ var h,oldpath;
 
 if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,height-328)) {
     if (mouse_check_button_pressed(mb_left)) {
+        //select a different path
         dy=pathscroll key=ds_map_find_first(pathmap_path) repeat (ds_map_size(pathmap_path)) {
             if (mouse_wy-120==median(dy,mouse_wy-120,dy+31)) {
                 oldpath=current_pathname
@@ -9,8 +10,11 @@ if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,height-328)) {
                 current_path=ds_map_find_value(pathmap_path,key)
                 current_pathpoint=path_get_number(current_path)-1
                 if (oldpath!="") generate_path_model(oldpath)
-                generate_path_model(i)
+                generate_path_model(current_pathname)
+                ds_list_clear(path_sel)
+                selection=0
                 update_inspector()
+                update_selection_bounds()
             }
         i+=1 dy+=32 key=ds_map_find_next(pathmap_path,key)}
 
@@ -35,7 +39,10 @@ if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,height-328)) {
             ds_map_add(path_tree_map,"|"+pathname,pathname)
 
             generate_path_model(current_pathname)
+            ds_list_clear(path_sel)
+            selection=0
             update_inspector()
+            update_selection_bounds()
         }
     }
     h=mouse_wheel_down()-mouse_wheel_up()

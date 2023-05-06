@@ -212,3 +212,4 @@
 |begin_trim
 |end_trim
 |error_handler
+|select_path_point

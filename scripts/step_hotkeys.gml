@@ -76,12 +76,24 @@ if (h!=0 || v!=0) {
             update_selection_bounds()
         }
         if (mode==5 && current_path!=noone) {
-            path_change_point(
-                current_path,current_pathpoint,
-                path_get_point_x(current_path,current_pathpoint)+h,
-                path_get_point_y(current_path,current_pathpoint)+v,
-                path_get_point_speed(current_path,current_pathpoint)
-            )
+            if (ds_list_size(path_sel)==0) {
+                path_change_point(
+                    current_path,current_pathpoint,
+                    path_get_point_x(current_path,current_pathpoint)+h,
+                    path_get_point_y(current_path,current_pathpoint)+v,
+                    path_get_point_speed(current_path,current_pathpoint)
+                )
+            } else {
+                i=0 repeat (ds_list_size(path_sel)) {
+                    point=ds_list_find_value(path_sel,i)
+                    path_change_point(
+                        current_path,point,
+                        path_get_point_x(current_path,point)+h,
+                        path_get_point_y(current_path,point)+v,
+                        path_get_point_speed(current_path,point)
+                    )
+                i+=1}
+            }
             generate_path_model(current_pathname)
             dsmap(pathmap_edited,current_pathname,true)
             update_inspector()

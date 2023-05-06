@@ -61,6 +61,7 @@ drag_point=-1
 
 current_path=noone
 current_pathname=""
+path_sel=ds_list_create()
 
 ref_top=1
 ref_alpha=127

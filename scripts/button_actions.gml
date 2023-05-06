@@ -240,8 +240,8 @@ with (Controller) switch (argument0) {
     //paths
     case "pathscroldown" : {pathscrollgo-=192}break
     case "pathscrolup"   : {pathscrollgo+=192}break
-    case "path point+"   : {if (current_path!=noone) current_pathpoint=min(path_get_number(current_path)-1,current_pathpoint+1) update_inspector()}break
-    case "path point-"   : {if (current_path!=noone) current_pathpoint=max(0,current_pathpoint-1) update_inspector()}break
+    case "path point+"   : {if (current_path!=noone) select_path_point(min(path_get_number(current_path)-1,current_pathpoint+1),0)}break
+    case "path point-"   : {if (current_path!=noone) select_path_point(max(0,current_pathpoint-1),0) update_inspector()}break
     case "path smooth"   : {path_set_kind(current_path,!path_get_kind(current_path)) dsmap(pathmap_edited,current_pathname,true) generate_path_model(current_pathname)}break
     case "path closed"   : {path_set_closed(current_path,!path_get_closed(current_path)) dsmap(pathmap_edited,current_pathname,true) generate_path_model(current_pathname)}break
     case "path thin"     : {path_thin=!path_thin if (current_path!=noone) generate_path_model(current_pathname)}break
@@ -249,26 +249,40 @@ with (Controller) switch (argument0) {
         current_pathpoint+=1
         path_insert_point(current_path,current_pathpoint,path_get_point_x(current_path,current_pathpoint-1),path_get_point_y(current_path,current_pathpoint-1),path_get_point_speed(current_path,current_pathpoint-1))
         generate_path_model(current_pathname)
-        update_inspector()
+        select_path_point(current_pathpoint,1)
     }}break
     case "path point del": {if (current_path!=noone) if (path_get_number(current_path)>1) {
-        path_delete_point(current_path,current_pathpoint)
-        current_pathpoint=max(0,current_pathpoint-1)
+        if (ds_list_size(path_sel)==0) {
+            path_delete_point(current_path,current_pathpoint)
+            current_pathpoint=max(0,current_pathpoint-1)
+        } else {
+            //we need to sort the selection list because we have to delete the points backwards
+            ds_list_sort(path_sel,0)
+            minpoint=ds_list_find_value(path_sel,ds_list_size(path_sel)-1)
+            i=0 repeat (ds_list_size(path_sel)) {
+                point=ds_list_find_value(path_sel,i)
+                if (current_pathpoint==point) current_pathpoint=max(0,minpoint-1)
+                path_delete_point(current_path,point)
+            i+=1}
+        }
+
         dsmap(pathmap_edited,current_pathname,true)
         generate_path_model(current_pathname)
-        update_inspector()
+        select_path_point(current_pathpoint,1)
     }}break
     case "path destroy"  : {
-        //replace index with empty line
-        ds_list_replace(path_index_list,ds_list_find_index(path_index_list,current_pathname),"")
-        //delete from tree
-        ds_list_delete(path_tree_list,ds_list_find_index(path_tree_list,ds_map_find_value(path_tree_map,current_pathname)))
-        //delete associated data
-        path_delete(ds_map_find_value(pathmap_path,current_pathname))
-        ds_map_delete(pathmap_path,current_pathname)
-        d3d_model_destroy(ds_map_find_value(pathmap_model,current_pathname))
-        ds_map_delete(pathmap_model,current_pathname)
-        ds_map_delete(pathmap_edited,current_pathname)
-        deselect()
+        if (show_question("Are you sure you want to delete "+qt+current_pathname+qt+"?#This action is irreversible.")) {
+            //replace index with empty line
+            ds_list_replace(path_index_list,ds_list_find_index(path_index_list,current_pathname),"")
+            //delete from tree
+            ds_list_delete(path_tree_list,ds_list_find_index(path_tree_list,ds_map_find_value(path_tree_map,current_pathname)))
+            //delete associated data
+            path_delete(ds_map_find_value(pathmap_path,current_pathname))
+            ds_map_delete(pathmap_path,current_pathname)
+            d3d_model_destroy(ds_map_find_value(pathmap_model,current_pathname))
+            ds_map_delete(pathmap_model,current_pathname)
+            ds_map_delete(pathmap_edited,current_pathname)
+            deselect()
+        }
     }break
 }

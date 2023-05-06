@@ -199,7 +199,16 @@ i.alt=""
 i.tagmode=5
 i.anchor=1
 
-i=instance_create(width-160+8,8+192+4,Button)
+i=instance_create(width-160+8,8+192,Button)
+i.w=144
+i.spr=1
+i.action="path snap"
+i.text="  Snap"
+i.alt=""
+i.tagmode=5
+i.anchor=1
+
+i=instance_create(width-160+8,8+224+4,Button)
 i.type=1
 i.action="path thin"
 i.text="Thin lines"

@@ -95,11 +95,12 @@ if (mouse_check_button_pressed(mb_right)) {
                     }
 
                     if (point>=0) {
+                        //delete point
                         current_pathpoint=max(0,point-1)
                         path_delete_point(current_path,point)
                         dsmap(pathmap_edited,current_pathname,true)
                         generate_path_model(current_pathname)
-                        update_inspector()
+                        select_path_point(current_pathpoint,1)
                     }
                 }
             }

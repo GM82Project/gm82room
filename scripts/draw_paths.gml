@@ -8,20 +8,27 @@ if (mode==5 || view[7]) {
 }
 
 if (mode==5 && current_path!=noone) {
+    i=0 repeat (ds_list_size(path_sel)) {
+        point=ds_list_find_value(path_sel,i)
+        dx=path_get_point_x(current_path,point)-0.5
+        dy=path_get_point_y(current_path,point)-0.5
+        draw_circle_color(dx,dy,3,$ffffff,$ffffff,0)
+    i+=1}
+
     dx=path_get_point_x(current_path,current_pathpoint)-0.5
     dy=path_get_point_y(current_path,current_pathpoint)-0.5
     if (current_pathpoint>0) {
         if (path_thin) {
             draw_circle_color(dx,dy,3,selcol,selcol,1)
         } else {
-            draw_circle_color(dx,dy,4,0,0,0)
+            //draw_circle_color(dx,dy,4,0,0,0)
             draw_circle_color(dx,dy,3,selcol,selcol,0)
         }
     } else {
         if (path_thin) {
             draw_rectangle_color(dx-3,dy-3,dx+3,dy+3,selcol,selcol,selcol,selcol,1)
         } else {
-            draw_rectangle_color(dx-4,dy-4,dx+4,dy+4,1,1,1,1,0)
+            //draw_rectangle_color(dx-4,dy-4,dx+4,dy+4,1,1,1,1,0)
             draw_rectangle_color(dx-3,dy-3,dx+3,dy+3,selcol,selcol,selcol,selcol,0)
         }
     }

@@ -144,6 +144,7 @@ if (drag_point) {
         generate_path_model(current_pathname)
         dsmap(pathmap_edited,current_pathname,true)
         update_inspector()
+        update_selection_bounds()
     }
 
     if (!mouse_check_direct(mb_left) && !mouse_check_button_pressed(mb_left)) {

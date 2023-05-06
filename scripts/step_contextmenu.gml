@@ -34,8 +34,11 @@ if (click) {
 
             current_pathname=pathname
             current_pathpoint=0
+            ds_list_clear(path_sel)
+            selection=0
             generate_path_model(current_pathname)
             update_inspector()
+            update_selection_bounds()
 
             ds_list_add(path_index_list,pathname)
             ds_list_add(path_tree_list,"|"+pathname)

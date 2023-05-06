@@ -12,9 +12,10 @@ if (mode==5) {
     }
 
     if (point>=0) {
-        current_pathpoint=point
+        select_path_point(point,0)
         drag_point=1
     } else {
+        //add new point
         current_pathpoint+=1
         path_insert_point(current_path,current_pathpoint,0,0,path_get_point_speed(current_path,current_pathpoint-1))
         drag_point=1
