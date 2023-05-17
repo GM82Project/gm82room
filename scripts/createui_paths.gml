@@ -32,33 +32,33 @@ i.alt="Delete path"
 i.tagmode=5
 i.anchor=2
 
-    i=instance_create(8,height-164+72-172,Button)
-    i.type=1
-    i.dynamic=1
-    i.action="path smooth"
-    i.text="Smooth"
-    i.alt="Path uses a bezier curve instead of straight lines"
-    i.tagmode=5
-    i.anchor=2
+i=instance_create(8,height-164+72-172,Button)
+i.type=1
+i.dynamic=1
+i.action="path smooth"
+i.text="Smooth"
+i.alt="Path uses a bezier curve instead of straight lines"
+i.tagmode=5
+i.anchor=2
 
-    i=instance_create(8,height-164+100-172,Button)
-    i.type=1
-    i.dynamic=1
-    i.action="path closed"
-    i.text="Closed"
-    i.alt="The last point connects to the first point"
-    i.tagmode=5
-    i.anchor=2
+i=instance_create(8,height-164+100-172,Button)
+i.type=1
+i.dynamic=1
+i.action="path closed"
+i.text="Closed"
+i.alt="The last point connects to the first point"
+i.tagmode=5
+i.anchor=2
 
-    i=instance_create(120,height-164+124-172,TextField)
-    i.action="path precision"
-    i.w=32
-    i.dynamic=1
-    i.basealt="How many bezier iterations are used on a smooth path"
-    i.maxlen=4
-    textfield_set("path precision","")
-    i.tagmode=5
-    i.anchor=2
+i=instance_create(120,height-164+124-172,TextField)
+i.action="path precision"
+i.w=32
+i.dynamic=1
+i.basealt="How many bezier iterations are used on a smooth path"
+i.maxlen=4
+textfield_set("path precision","")
+i.tagmode=5
+i.anchor=2
 
 i=instance_create(8,height-180+4+100,TextField)
 i.action="path x"

@@ -270,7 +270,7 @@ with (Controller) switch (argument0) {
         generate_path_model(current_pathname)
         select_path_point(current_pathpoint,1)
     }}break
-    case "path destroy"  : {
+    case "path destroy": {
         if (show_question("Are you sure you want to delete "+qt+current_pathname+qt+"?#This action is irreversible.")) {
             //replace index with empty line
             ds_list_replace(path_index_list,ds_list_find_index(path_index_list,current_pathname),"")
@@ -283,6 +283,87 @@ with (Controller) switch (argument0) {
             ds_map_delete(pathmap_model,current_pathname)
             ds_map_delete(pathmap_edited,current_pathname)
             deselect()
+        }
+    }break
+
+    case "path clear": {
+        if (current_path!=noone) {
+            px=path_get_point_x(current_path,0)
+            py=path_get_point_y(current_path,0)
+            ps=path_get_point_speed(current_path,0)
+            path_clear_points(current_path)
+            path_add_point(current_path,px,py,ps)
+            generate_path_model(current_pathname)
+            select_path_point(0,1)
+        }
+    }break
+
+    case "path reverse": {
+        if (current_path!=noone) {
+            path_reverse(current_path)
+            generate_path_model(current_pathname)
+            select_path_point(path_get_number(current_path)-1,1)
+        }
+    }break
+
+    case "path shift": {
+        if (current_path!=noone) {
+            str=get_string("Shift path by amount: (x,y)","0,0")
+            if (str="" || !string_pos(",",str)) break
+            p=string_pos(",",str)
+            movex=string_digits(string_copy(str,1,p-1))
+            movey=string_digits(string_delete(str,1,p))
+            if (movex="" || movey="") break
+            path_shift(current_path,real(movex),real(movey))
+            generate_path_model(current_pathname)
+        }
+    }break
+
+    case "path fliph": {
+        if (current_path!=noone) {
+            path_mirror(current_path)
+            generate_path_model(current_pathname)
+        }
+    }break
+
+    case "path flipv": {
+        if (current_path!=noone) {
+            path_flip(current_path)
+            generate_path_model(current_pathname)
+        }
+    }break
+
+    case "path rotate": {
+        if (current_path!=noone) {
+            str=get_string("Rotate path by angle:","0")
+            if (str="" || string_digits(str)="") break
+            path_rotate(current_path,real(str))
+            generate_path_model(current_pathname)
+        }
+    }break
+    case "path scale": {
+        if (current_path!=noone) {
+            str=get_string("Scale path by amount %: (h,v)","100,100")
+            if (str="" || !string_pos(",",str)) break
+            p=string_pos(",",str)
+            sx=string_digits(string_copy(str,1,p-1))
+            sy=string_digits(string_delete(str,1,p))
+            if (sx="" || sy="") break
+            path_scale(current_path,real(sx)/100,real(sy)/100)
+            generate_path_model(current_pathname)
+        }
+    }break
+
+    case "path snap": {
+        if (current_path!=noone) {
+            i=0 repeat (path_get_number(current_path)) {
+                path_change_point(current_path,i,
+                    roundto(path_get_point_x(current_path,i),gridx),
+                    roundto(path_get_point_y(current_path,i),gridx),
+                    path_get_point_speed(current_path,i)
+                )
+            i+=1}
+            generate_path_model(current_pathname)
         }
     }break
 }
