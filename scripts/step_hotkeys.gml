@@ -97,6 +97,7 @@ if (h!=0 || v!=0) {
             generate_path_model(current_pathname)
             dsmap(pathmap_edited,current_pathname,true)
             update_inspector()
+            update_selection_bounds()
         }
     }
 }
