@@ -8,7 +8,7 @@ ds_map_add(soundmenuitems,N_Menu_AddItem(soundmenu,"(no sound)",""),undefined)
 path[0]=soundmenu
 curindent=0
 
-f=file_text_open_read_safe(argument0) if (f) {do {
+if (has_sounds) {f=file_text_open_read_safe(argument0) if (f) {do {
     str=file_text_read_string(f)
     file_text_readln(f)
     if (str!="") {
@@ -29,4 +29,4 @@ f=file_text_open_read_safe(argument0) if (f) {do {
             ds_map_add(soundmenuitems,item,resname)
         }
     }
-} until (file_text_eof(f)) file_text_close(f)}
+} until (file_text_eof(f)) file_text_close(f)}}

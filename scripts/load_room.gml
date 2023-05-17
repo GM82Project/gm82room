@@ -42,11 +42,32 @@ gamename=filename_change_ext(pjfile,"")
 project=ds_map_create()
 ds_map_read_ini(project,root+pjfile)
     gm82version=real(ds_map_find_value(project,"gm82_version"))
-ds_map_destroy(project)
+    if (gm82version==5) {
+        has_backgrounds=real(ds_map_find_value(project,"has_backgrounds"))
+        has_datafiles=real(ds_map_find_value(project,"has_datafiles"))
+        has_fonts=real(ds_map_find_value(project,"has_fonts"))
+        has_objects=real(ds_map_find_value(project,"has_objects"))
+        has_paths=real(ds_map_find_value(project,"has_paths"))
+        has_scripts=real(ds_map_find_value(project,"has_scripts"))
+        has_sounds=real(ds_map_find_value(project,"has_sounds"))
+        has_sprites=real(ds_map_find_value(project,"has_sprites"))
+        has_timelines=real(ds_map_find_value(project,"has_timelines"))
+    } else {
+        has_backgrounds=1
+        has_datafiles=1
+        has_fonts=1
+        has_objects=1
+        has_paths=1
+        has_scripts=1
+        has_sounds=1
+        has_sprites=1
+        has_timelines=1
+    }
+//ds_map_destroy(project)
 
-if (gm82version!=4) {
-    if (gm82version<4) show_message("Error loading "+gamename+": "+crlf+"Project version ("+string(gm82version)+") is too old."+crlf+"Please update Game Maker 8.2.")
-    else show_message("Error loading "+gamename+": "+crlf+"Project version ("+string(gm82version)+") is too new!"+crlf+"Please update Game Maker 8.2.")
+if (gm82version!=4 && gm82version!=5) {
+    if (gm82version<4) show_message("Error loading "+gamename+": "+crlf+"Project version ("+string(gm82version)+") is too old."+crlf+"Please update Game Maker 8.2 and Save As to refresh the project.")
+    else show_message("Error loading "+gamename+": "+crlf+"Project version ("+string(gm82version)+") is too new!"+crlf+"Please update Game Maker 8.2 and Save As to refresh the project.")
     game_end()
     exit
 }

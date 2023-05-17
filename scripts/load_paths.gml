@@ -7,7 +7,7 @@ pathmap_path=ds_map_create()
 pathmap_model=ds_map_create()
 pathmap_edited=ds_map_create()
 
-f=file_text_open_read_safe(root+"paths\index.yyd") if (f) {do {pathname=file_text_read_string(f) file_text_readln(f)
+if (has_paths) {f=file_text_open_read_safe(root+"paths\index.yyd") if (f) {do {pathname=file_text_read_string(f) file_text_readln(f)
     ds_list_add(path_index_list,pathname)
     if (pathname!="") {
         f2=file_text_open_read_safe(root+"paths\"+pathname+"\path.txt") if (f2) {
@@ -38,4 +38,4 @@ f=file_text_open_read_safe(root+"paths\index.yyd") if (f) {do {pathname=file_tex
             }
         }
     }
-} until (file_text_eof(f)) file_text_close(f)}
+} until (file_text_eof(f)) file_text_close(f)}}

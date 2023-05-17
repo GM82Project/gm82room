@@ -20,6 +20,7 @@
 	|call_nmenu
 	|string_antivirus
 	|generate_path_model
+	|ds_map_save_ini
 +file
 	|gensavecode
 	|parsereal
