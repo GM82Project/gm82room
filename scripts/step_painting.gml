@@ -1,3 +1,5 @@
+var yes,dx,dy,tex,o;
+
 if (keyboard_check(vk_alt)) {
     dx=global.mousex
     dy=global.mousey
