@@ -190,6 +190,7 @@
 		|Background
 		|Shader
 		|ShaderFromBase64
+		|ShaderFromPack
 	|load_object_fields
 	|is_field_copypaste_safe
 	|invalid_variable_name
