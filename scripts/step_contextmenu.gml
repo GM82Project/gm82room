@@ -15,7 +15,7 @@ if (click) {
         if (menusub=="datafile")   get=ds_map_get(datafilemenuitems,click)
         if (menusub=="constant")   get=ds_map_get(constmenuitems,click)
 
-        if (menusub=="path" && get==noone) {
+        if (menusub=="path" && string(get)==string(noone)) {
             pathname="path"+string(ds_list_size(path_index_list))+"_"+resfieldid.objname+"_"+resfieldid.uid
 
             //create a new path for this field
