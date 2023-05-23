@@ -1,6 +1,9 @@
 ///Field(field,index)
 var val,type;
 
+type="<undefined>"
+val=0
+
 for (i=0;i<objfields[obj];i+=1) {
     if (objfieldname[obj,i]==argument[0]) {
         type=objfieldtype[obj,i]
