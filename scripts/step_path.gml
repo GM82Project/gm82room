@@ -37,7 +37,7 @@ if (mode==5) {
 
                 ds_list_add(path_index_list,pathname)
                 ds_list_add(path_tree_list,"|"+pathname)
-                ds_map_add(path_tree_map,"|"+pathname,pathname)
+                ds_map_add(path_tree_map,pathname,"|"+pathname)
 
                 generate_path_model(current_pathname)
                 ds_list_clear(path_sel)

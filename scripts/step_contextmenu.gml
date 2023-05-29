@@ -42,7 +42,7 @@ if (click) {
 
             ds_list_add(path_index_list,pathname)
             ds_list_add(path_tree_list,"|"+pathname)
-            ds_map_add(path_tree_map,"|"+pathname,pathname)
+            ds_map_add(path_tree_map,pathname,"|"+pathname)
         } else if (get==undefined) resfieldid.fields[resfieldi,0]=0
         else {
             if (invalid_variable_name(get)) {
