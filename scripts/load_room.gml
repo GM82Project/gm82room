@@ -189,6 +189,10 @@ for (i=0;i<8;i+=1) {
     bg_vspeed[i]=real(ds_map_find_value(settings,"bg_vspeed"+k))
     bg_stretch[i]=real(ds_map_find_value(settings,"bg_stretch"+k))
 
+    //preview values
+    bg_scrollx[i]=0
+    bg_scrolly[i]=0
+
     vw_visible[i]=real(ds_map_find_value(settings,"view_visible"+k))
     vw_x[i]=real(ds_map_find_value(settings,"view_xview"+k))
     vw_y[i]=real(ds_map_find_value(settings,"view_yview"+k))

@@ -126,7 +126,7 @@ i.alt="Show reference image"
 i=instance_create(160+544,0,Button)
 i.spr=31
 i.action="view draw"
-i.alt="Execute instance preview fields"
+i.alt="Enable realtime previews"
 
 
 //view

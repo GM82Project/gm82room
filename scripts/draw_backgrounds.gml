@@ -7,9 +7,21 @@ if (!argument0) {
 } else d3d_set_depth(-12000)
 
 if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg_source[i]!="" && bg_visible[i] && bg_is_foreground[i]==argument0) {
+    if (window_focused && view[9]) {
+        //preview background speed
+        if (bg_tile_h[i]) bg_scrollx[i]+=bg_hspeed[i]*roomspeed/room_speed
+        if (bg_tile_v[i]) bg_scrolly[i]+=bg_vspeed[i]*roomspeed/room_speed
+    } else {
+        bg_scrollx[i]=0
+        bg_scrolly[i]=0
+    }
+
     bg=bg_tex[i]
     w=background_get_width(bg)
     h=background_get_height(bg)
+
+    offx=bg_xoffset[i]+bg_scrollx[i]
+    offy=bg_yoffset[i]+bg_scrolly[i]
 
     if (bg_stretch[i]) {
         l=0
@@ -21,27 +33,27 @@ if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg
         v=0
         v2=1
         if (bg_tile_h[i]) {
-           u=-bg_xoffset[i]/r
+           u=-offx/r
            u2+=u
         } else {
-            l+=bg_xoffset[i]
+            l+=offx
             r+=l
         }
         if (bg_tile_v[i]) {
-           v=-bg_yoffset[i]/b
+           v=-offy/b
            v2+=v
         } else {
-            t+=bg_yoffset[i]
+            t+=offy
             b+=t
         }
     } else {
         if (bg_tile_h[i]) {
             l=0
             r=roomwidth
-            u=-bg_xoffset[i]/w
+            u=-offx/w
             u2=u+r/w
         } else {
-            l=bg_xoffset[i]
+            l=offx
             r=l+w
             u=0
             u2=1
@@ -49,10 +61,10 @@ if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg
         if (bg_tile_v[i]) {
             t=0
             b=roomheight
-            v=-bg_yoffset[i]/h
+            v=-offy/h
             v2=v+b/h
         } else {
-            t=bg_yoffset[i]
+            t=offy
             b=t+h
             v=0
             v2=1
