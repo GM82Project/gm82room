@@ -88,6 +88,8 @@ file_text_close(f)
 
 ds_priority_destroy(pr)
 
+file_text_write_all(dir+"code.gml",parse_flags_into_code()+roomcode)
+
 //save settings
 f=file_text_open_write(dir+"room.txt")
 str="caption="+roomcaption+lf
@@ -148,10 +150,6 @@ str+="remember="+string(ds_map_find_value(settings,"remember"))+lf
 +"editor_x="+string(ds_map_find_value(settings,"editor_x"))+lf
 +"editor_y="+string(ds_map_find_value(settings,"editor_y"))+lf
 file_text_write_string(f,str)
-file_text_close(f)
-
-f=file_text_open_write(dir+"code.gml")
-file_text_write_string(f,parse_flags_into_code()+roomcode)
 file_text_close(f)
 
 //save paths

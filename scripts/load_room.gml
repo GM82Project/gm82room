@@ -175,8 +175,6 @@ gridy=real(ds_map_find_value(settings,"snap_y"))
 roomcaption=ds_map_find_value(settings,"caption")
 vw_enabled=real(ds_map_find_value(settings,"views_enabled"))
 
-roomcode=parse_code_into_flags(file_text_read_all(savedir+"code.gml",lf))
-
 for (i=0;i<8;i+=1) {
     k=string(i)
     bg_visible[i]=real(ds_map_find_value(settings,"bg_visible"+k))
@@ -207,6 +205,7 @@ for (i=0;i<8;i+=1) {
     vw_follow[i]=ds_map_find_value(settings,"view_fol_target"+k)
 }
 
+roomcode=parse_code_into_flags(file_text_read_all(savedir+"code.gml",lf))
 
 //load tiles
 progress=0.25

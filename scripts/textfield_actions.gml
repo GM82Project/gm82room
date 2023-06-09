@@ -54,8 +54,8 @@ if (active) {
         case "bgcol"  : {val=round(real(text)) if (check_colorpicker_undo(0)) undo_global("backgroundcolor","background colour") backgroundcolor=val}break
         case "bg xpos": {val=round(real(text)) undo_globalvec("bg_xoffset",bg_current,"background "+string(bg_current)+" options") bg_xoffset[bg_current]=val}break
         case "bg ypos": {val=round(real(text)) undo_globalvec("bg_yoffset",bg_current,"background "+string(bg_current)+" options") bg_yoffset[bg_current]=val}break
-        case "bg hsp" : {val=round(real(text)) undo_globalvec("bg_hspeed",bg_current,"background "+string(bg_current)+" options") bg_hspeed[bg_current]=val}break
-        case "bg vsp" : {val=round(real(text)) undo_globalvec("bg_vspeed",bg_current,"background "+string(bg_current)+" options") bg_vspeed[bg_current]=val}break
+        case "bg hsp" : {val=real(text) undo_globalvec("bg_hspeed",bg_current,"background "+string(bg_current)+" options") bg_hspeed[bg_current]=val}break
+        case "bg vsp" : {val=real(text) undo_globalvec("bg_vspeed",bg_current,"background "+string(bg_current)+" options") bg_vspeed[bg_current]=val}break
 
         case "view x": {val=round(real(text)) undo_globalvec("vw_x",vw_current,"view "+string(vw_current)+" options") vw_x[vw_current]=val}break
         case "view y": {val=round(real(text)) undo_globalvec("vw_y",vw_current,"view "+string(vw_current)+" options") vw_y[vw_current]=val}break

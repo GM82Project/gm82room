@@ -66,8 +66,8 @@ if (active) {
         text=string_copy(keyboard_string,1,maxlen)
     } else {
         if (type=0) {
-            if (string_length(keyboard_string)<2 && keyboard_lastkey==vk_backspace) {
-                keyboard_string=string_replace(keyboard_string,"-","")
+            if (keyboard_string=="-" && keyboard_lastkey==vk_backspace) {
+                keyboard_string=""
             }
             text=string_number(keyboard_string)
         }
