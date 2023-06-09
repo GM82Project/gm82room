@@ -9,8 +9,8 @@ if (!argument0) {
 if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg_source[i]!="" && bg_visible[i] && bg_is_foreground[i]==argument0) {
     if (window_focused && view[9]) {
         //preview background speed
-        if (bg_tile_h[i]) bg_scrollx[i]+=bg_hspeed[i]*roomspeed/room_speed
-        if (bg_tile_v[i]) bg_scrolly[i]+=bg_vspeed[i]*roomspeed/room_speed
+        if (bg_tile_h[i]) bg_scrollx[i]+=bg_hspeed[i]*roomspeed/room_speed else bg_scrollx[i]=0
+        if (bg_tile_v[i]) bg_scrolly[i]+=bg_vspeed[i]*roomspeed/room_speed else bg_scrolly[i]=0
     } else {
         bg_scrollx[i]=0
         bg_scrolly[i]=0
