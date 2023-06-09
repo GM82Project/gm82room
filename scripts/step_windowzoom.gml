@@ -42,7 +42,7 @@ if (window_has_focus()) {
     selcol=merge_color($ff0000,$ffffff,dsin((0.5+0.5*sin(current_time/200))*90))
 } else if (window_focused) {
     window_focused=false
-    with (TextField) if (active) {dtext=oldtext active=0}
+    with (TextField) textfield_actions()
     room_speed=5
     powersave=true
     selcol=$ff8000

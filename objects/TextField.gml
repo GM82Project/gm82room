@@ -126,3 +126,5 @@ if (type==4 || type==0) {
     }
     dtext=string_replace_all(dtext,"#","\#")
 } else dtext=text
+
+oldtext=text

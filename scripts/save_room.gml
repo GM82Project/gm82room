@@ -112,8 +112,8 @@ for (i=0;i<8;i+=1) {
     +"bg_yoffset"+string(i)+"="+string(bg_yoffset[i])+lf
     +"bg_tile_h"+string(i)+"="+string(bg_tile_h[i])+lf
     +"bg_tile_v"+string(i)+"="+string(bg_tile_v[i])+lf
-    +"bg_hspeed"+string(i)+"="+string(bg_hspeed[i])+lf
-    +"bg_vspeed"+string(i)+"="+string(bg_vspeed[i])+lf
+    +"bg_hspeed"+string(i)+"="+string(floor(bg_hspeed[i]))+lf
+    +"bg_vspeed"+string(i)+"="+string(floor(bg_vspeed[i]))+lf
     +"bg_stretch"+string(i)+"="+string(bg_stretch[i])+lf
 }
 str+=lf
