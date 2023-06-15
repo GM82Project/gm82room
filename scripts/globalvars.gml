@@ -5,7 +5,7 @@ globalvar
     select,selectt
     copyvec,tty,width,height,interpolation,
     objpal,instancecount,tilecount,
-    codeeditor,view,roomwidth,roomheight,selcol,
+    codeeditor,view,roomwidth,roomheight,selcol,outroomgrid,
     mouse_wx,mouse_wy,mousein,crosshair,zoom,zm,grid,gridx,gridy,
     removeoutside,fillwithcolor,fillcolor,remember,mode,
     overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,

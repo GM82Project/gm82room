@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=488
-h=224
+h=284
 
 act=""
 button=1
@@ -74,6 +74,12 @@ while (1) {
         //start maximized
         if (point_in_rectangle(mx,my,240,160,240+24,160+24)) {
             startmax=!startmax
+            continue
+        }
+
+        //grid off room
+        if (point_in_rectangle(mx,my,240,192,240+24,192+24)) {
+            outroomgrid=!outroomgrid
             continue
         }
 
@@ -147,7 +153,7 @@ while (1) {
     dx=432 dy=h-48 draw_button_ext(dx,dy,48,40,act!="grabok",global.col_main) draw_sprite(sprMenuButtons,0,dx+24,dy+20)
 
     //code editor checkboxes
-    dx=8 dy=32 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"External") if (codeeditortype=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=8 dy=32 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"External (gm prefs)") if (codeeditortype=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     dx=8 dy=64 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Simple") if (codeeditortype=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
     dx=8 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Notepad.exe") if (codeeditortype=2) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
@@ -158,7 +164,7 @@ while (1) {
 
     //color picker checkboxes
     dx=8 dy=152 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Builtin") if (colorpickertype=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
-    dx=8 dy=184 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Paint") if (colorpickertype=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=8 dy=184 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Windows") if (colorpickertype=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //custom theme controls
     if (theme=2) {
@@ -173,6 +179,10 @@ while (1) {
 
     //start maximized
     dx=240 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Start maximized") if (startmax) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //grid off room
+    dx=240 dy=192 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Draw grid outside#of the room area") if (outroomgrid) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
 
     draw_set_color($ffffff)
     d3d_transform_set_identity()

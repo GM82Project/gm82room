@@ -42,7 +42,7 @@ if (mode==0 || mode==1 || mode==5) {
     draw_set_blend_mode_ext(10,1)
     draw_primitive_begin(pr_linelist)
         if (grid) {
-            if (mousein) {
+            if (mousein && outroomgrid) {
                 x1=min(fmx,0)
                 x2=max(roomwidth,fmx+gridx)
                 y1=min(fmy,0)

@@ -14,5 +14,6 @@ codeeditortype=registry_read_dword(dir+"GM82CodeEditorType",0)
 colorpickertype=registry_read_dword(dir+"GM82ColorPickerType",0)
 
 tilepickgrid=registry_read_dword(dir+"RoomTilePickerGrid",1)
+outroomgrid=registry_read_dword(dir+"GM82DrawGridOutsideRoom",1)
 
 theme_load()

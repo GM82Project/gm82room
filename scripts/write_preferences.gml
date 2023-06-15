@@ -8,5 +8,6 @@ if (!seen) registry_write_dword(dir+"NewRoomEditorSeen",1)
 
 registry_write_dword(dir+"GM82CodeEditorType",codeeditortype)
 registry_write_dword(dir+"GM82ColorPickerType",colorpickertype)
+registry_write_dword(dir+"GM82DrawGridOutsideRoom",outroomgrid)
 
 theme_save()
