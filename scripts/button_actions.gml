@@ -228,7 +228,7 @@ with (Controller) switch (argument0) {
     case "bg fore"   : {undo_globalvec("bg_is_foreground",bg_current,"background "+string(bg_current)+" options") bg_is_foreground[bg_current]=!bg_is_foreground[bg_current]}break
     case "bg tileh"  : {undo_globalvec("bg_tile_h",bg_current,"background "+string(bg_current)+" options") bg_tile_h[bg_current]=!bg_tile_h[bg_current]}break
     case "bg tilev"  : {undo_globalvec("bg_tile_v",bg_current,"background "+string(bg_current)+" options") bg_tile_v[bg_current]=!bg_tile_v[bg_current]}break
-    case "bg stretch": {undo_globalvec("bg_stretch",bg_current,"background "+string(bg_current)+" options") bg_stretch[bg_current]=!bg_stretch[bg_current]}break
+    case "bg stretch": {undo_globalvec("bg_stretch",bg_current,"background "+string(bg_current)+" options") bg_stretch[bg_current]=!bg_stretch[bg_current] update_backgroundpanel()}break
 
 
     //views

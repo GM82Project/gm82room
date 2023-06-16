@@ -1,4 +1,6 @@
 ///draw_backgrounds(foregrounds)
+var i,bg,w,h,blend,alpha,offx,offy,l,r,t,b,u,v,u2,v2;
+
 if (!argument0) {
     d3d_set_depth(12000)
     d3d_set_hidden(0)
@@ -17,8 +19,11 @@ if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg
     }
 
     bg=bg_tex[i]
-    w=background_get_width(bg)
-    h=background_get_height(bg)
+    w=background_get_width(bg)*bg_xscale[i]
+    h=background_get_height(bg)*bg_yscale[i]
+
+    blend=bg_blend[i]
+    alpha=bg_alpha[i]
 
     offx=bg_xoffset[i]+bg_scrollx[i]
     offy=bg_yoffset[i]+bg_scrolly[i]
@@ -73,10 +78,10 @@ if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg
 
     texture_set_repeat(1)
     draw_primitive_begin_texture(pr_trianglestrip,background_get_texture(bg))
-        draw_vertex_texture(l-0.5,t-0.5,u,v)
-        draw_vertex_texture(r-0.5,t-0.5,u2,v)
-        draw_vertex_texture(l-0.5,b-0.5,u,v2)
-        draw_vertex_texture(r-0.5,b-0.5,u2,v2)
+        draw_vertex_texture_color(l-0.5,t-0.5,u,v,blend,alpha)
+        draw_vertex_texture_color(r-0.5,t-0.5,u2,v,blend,alpha)
+        draw_vertex_texture_color(l-0.5,b-0.5,u,v2,blend,alpha)
+        draw_vertex_texture_color(r-0.5,b-0.5,u2,v2,blend,alpha)
     draw_primitive_end()
 }
 

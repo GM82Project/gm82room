@@ -189,6 +189,12 @@ for (i=0;i<8;i+=1) {
     bg_vspeed[i]=real(ds_map_find_value(settings,"bg_vspeed"+k))
     bg_stretch[i]=real(ds_map_find_value(settings,"bg_stretch"+k))
 
+    //placeholders for room editor mods
+    bg_blend[i]=$ffffff
+    bg_alpha[i]=1
+    bg_xscale[i]=1
+    bg_yscale[i]=1
+
     //preview values
     bg_scrollx[i]=0
     bg_scrolly[i]=0

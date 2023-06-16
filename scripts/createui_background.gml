@@ -86,4 +86,30 @@ i.basealt="vspeed"
 i.w=72
 i.tagmode=2
 
+i=instance_create(8,528,TextField)
+i.action="bg xsc"
+i.basealt="xscale"
+i.w=72
+i.tagmode=2
+
+i=instance_create(80,528,TextField)
+i.action="bg ysc"
+i.basealt="yscale"
+i.w=72
+i.tagmode=2
+
+i=instance_create(8,588,TextField)
+i.action="bg blend"
+i.alt="Blend"
+i.type=1
+i.text=string($ffffff)
+i.w=72
+i.tagmode=2
+
+i=instance_create(80,588,TextField)
+i.action="bg alpha"
+i.basealt="alpha"
+i.w=72
+i.tagmode=2
+
 update_backgroundpanel()
