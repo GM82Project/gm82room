@@ -137,7 +137,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                             if (str="") {
                                 show_message(error+"Enum declaration has empty option list.")
                             } else {
-                                objfieldargs[i,objfields[i]]=str
+                                objfieldargs[i,objfields[i]]=string_delete_edge_spaces(str)
                                 objfields[i]+=1
                             }
                         } else {
