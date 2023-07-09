@@ -18,6 +18,19 @@ if (keyboard_check_pressed(vk_escape)) {
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("G"))) {
     grid=!grid
 }
+if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) {
+    if (mode==0) with (instance) sel=1
+    if (mode==1) with (tileholder) sel=1
+    if (mode==5) {
+        if (current_path) {
+            ds_list_clear(path_sel)
+            i=0 repeat (path_get_number(current_path)) {ds_list_add(path_sel,i) i+=1}
+        }
+    }
+    selection=1
+    update_inspector()
+    update_selection_bounds()
+}
 
 if (mode==0 || mode==1) {
     if (keyboard_check_pressed(vk_insert)) overmode=!overmode
