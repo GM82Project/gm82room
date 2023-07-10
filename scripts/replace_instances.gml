@@ -32,6 +32,8 @@ if (!argument_count) {
             sprh=sprite_get_height(sprite_index)
             sprox=sprite_get_xoffset(sprite_index)
             sproy=sprite_get_yoffset(sprite_index)
+
+            clear_instance_fields(id)
         }
     }
     push_undo()

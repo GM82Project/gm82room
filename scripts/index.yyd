@@ -207,3 +207,4 @@ error_handler
 select_path_point
 ds_map_save_ini
 ShaderFromPack
+clear_instance_fields

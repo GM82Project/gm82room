@@ -201,6 +201,7 @@
 	|parse_code_into_fields
 	|parse_fields_into_code
 	|set_instance_field
+	|clear_instance_fields
 	|stringify
 	|destringify
 	|get_nth_token
