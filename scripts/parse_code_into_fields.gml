@@ -14,8 +14,7 @@ state=0
 
 if (str!="") {
     argument0.code=""
-    string_token_start(str,lf)
-    do {
+    repeat (string_token_start(str,lf)) {
         next=string_token_next()
         if (state=0) {
             //hasn't started
@@ -50,7 +49,7 @@ if (str!="") {
             //we're done reading fields, re-add normal instance code
             argument0.code+=next+lf
         }
-    } until (next="")
+    }
 }
 if (state=0) argument0.code=str
 
