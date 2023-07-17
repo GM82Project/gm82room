@@ -11,7 +11,7 @@ globalvar
     overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,
     chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname,
     selection,selleft,seltop,selwidth,selheight,selsize,grabselection,
-    jtool_objs,
+    jtool_objs,has_jtool_table,jtool_loaded_engine,
     objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef
     objprev_objectid,objprev_eventid,objprev_curobj,objprev_curevent,
     thumbmap,thumbcount,

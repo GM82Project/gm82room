@@ -47,6 +47,7 @@
 	|load_jtooldata
 	|load_all_jtool_objs
 	|loadthumb
+	|load_jtool_table
 +chunks
 	|chunk_export
 	|chunk_import

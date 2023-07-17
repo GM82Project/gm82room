@@ -1,7 +1,7 @@
 var i;
 
 i=ds_list_find_index(objects,argument0)
-if (i<0) {show_error("Error loading project: object "+qt+argument0+qt+" doesn't seem to exist in the project.",0) return noone}
+if (i<0) {show_error("Error loading project: object "+qt+string(argument0)+qt+" doesn't seem to exist in the project.",0) return noone}
 
 if (!objloaded[i]) {
     objloaded[i]=1

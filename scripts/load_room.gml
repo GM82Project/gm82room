@@ -37,6 +37,7 @@ root=directory_previous(directory_previous(savedir))
 pjfile=file_find_first(root+"*.gm82",0) file_find_close()
 gamename=filename_change_ext(pjfile,"")
 
+jtool_loaded_engine="yoyoyo"
 
 //load main project file
 project=ds_map_create()

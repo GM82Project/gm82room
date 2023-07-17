@@ -1,8 +1,6 @@
-//right now we only support renex engine but i'll add more if requested
-//just hit me up on discord
 ds_map_clear(jtool_objs)
 
-if (argument0=="renex engine") {
+if (argument0=="renex") {
     ds_map_add(jtool_objs,1,"Block")
     ds_map_add(jtool_objs,2,"MiniBlock")
     ds_map_add(jtool_objs,3,"SpikeU")
@@ -26,6 +24,39 @@ if (argument0=="renex engine") {
     ds_map_add(jtool_objs,21,"Warp")
     ds_map_add(jtool_objs,22,"JumpRefresher")
     ds_map_add(jtool_objs,23,"Water3")
+    ds_map_add(jtool_objs,24,"GravFlip")
+    ds_map_add(jtool_objs,25,"GravNormal")
+    ds_map_add(jtool_objs,26,"SavePointVeryHard")
+    ds_map_add(jtool_objs,27,"KillBlock")
+}
+if (argument0=="verve") {
+    ds_map_add(jtool_objs,1,"Block")
+    ds_map_add(jtool_objs,2,"BlockMini")
+    ds_map_add(jtool_objs,3,"SpikeUp")
+    ds_map_add(jtool_objs,4,"SpikeRight")
+    ds_map_add(jtool_objs,5,"SpikeLeft")
+    ds_map_add(jtool_objs,6,"SpikeDown")
+    ds_map_add(jtool_objs,7,"MiniSpikeUp")
+    ds_map_add(jtool_objs,8,"MiniSpikeRight")
+    ds_map_add(jtool_objs,9,"MiniSpikeLeft")
+    ds_map_add(jtool_objs,10,"MiniSpikeDown")
+    ds_map_add(jtool_objs,11,"Cherry")
+    ds_map_add(jtool_objs,12,"SaveVeryHard")
+    ds_map_add(jtool_objs,13,"Platform")
+    ds_map_add(jtool_objs,14,"WaterGroundJump")
+    ds_map_add(jtool_objs,15,"Water")
+    ds_map_add(jtool_objs,16,"VineLeft")
+    ds_map_add(jtool_objs,17,"VineRight")
+    ds_map_add(jtool_objs,18,"KillerBlock")
+    ds_map_add(jtool_objs,19,"SaveBlocker")
+    ds_map_add(jtool_objs,20,"PlayerStart")
+    ds_map_add(jtool_objs,21,"Warp")
+    ds_map_add(jtool_objs,22,"JumpRefresher")
+    ds_map_add(jtool_objs,23,"WaterRefreshing")
+    ds_map_add(jtool_objs,24,"GravityUp")
+    ds_map_add(jtool_objs,25,"GravityDown")
+    ds_map_add(jtool_objs,26,"SaveVeryHard")
+    ds_map_add(jtool_objs,27,"KillerBlock")
 }
 if (argument0=="yoyoyo") {
     ds_map_add(jtool_objs,1,"objBlock")
@@ -51,6 +82,10 @@ if (argument0=="yoyoyo") {
     ds_map_add(jtool_objs,21,"objWarp")
     ds_map_add(jtool_objs,22,"objJumpRefresher")
     ds_map_add(jtool_objs,23,"objWater3")
+    ds_map_add(jtool_objs,24,"objGravityUp")
+    ds_map_add(jtool_objs,25,"objGravityDown")
+    ds_map_add(jtool_objs,26,"objSaveVHardFlip")
+    ds_map_add(jtool_objs,27,"objKillerBlock")
 }
 if (argument0=="nane") {
     ds_map_add(jtool_objs,1,"objBlock")
@@ -76,4 +111,8 @@ if (argument0=="nane") {
     ds_map_add(jtool_objs,21,"objWarp")
     ds_map_add(jtool_objs,22,"objJumpRefresher")
     ds_map_add(jtool_objs,23,"objWater3")
+    ds_map_add(jtool_objs,24,"objGravityUp")
+    ds_map_add(jtool_objs,25,"objGravityDown")
+    ds_map_add(jtool_objs,26,"objSaveVHardFlip")
+    ds_map_add(jtool_objs,27,"objKillerBlock")
 }

@@ -27,6 +27,9 @@ if (has_scripts) {f=file_text_open_read_safe(argument0) if (f) {do {
             icon=script_menuicon
             N_Menu_ItemSetBitmap(path[curindent],item,icon)
             ds_map_add(scriptmenuitems,item,resname)
+
+            //load jtool table script
+            if (resname=="gm82room_jtool_table") load_jtool_table(resname)
         }
     }
 } until (file_text_eof(f)) file_text_close(f)}}

@@ -208,3 +208,4 @@ select_path_point
 ds_map_save_ini
 ShaderFromPack
 clear_instance_fields
+load_jtool_table
