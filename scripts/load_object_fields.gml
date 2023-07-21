@@ -113,9 +113,13 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
 
             //find annotations
             objfielddef[i,objfields[i]]=""
-            p=string_pos("-",str)
+            p=string_length(str)-3
+            repeat (p) {
+                if (string_copy(str,p,3)==" - ") break
+            p-=1}
+
             if (p) {
-                objfielddef[i,objfields[i]]=" - "+string_delete_edge_spaces(string_delete(str,1,p))
+                objfielddef[i,objfields[i]]=" - "+string_delete_edge_spaces(string_delete(str,1,p+2))
                 str=string_delete_edge_spaces(string_copy(str,1,p-1))
             }
 
