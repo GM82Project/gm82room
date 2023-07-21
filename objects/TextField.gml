@@ -46,6 +46,8 @@ applies_to=self
 */
 focus=instance_position(mouse_wx,mouse_wy,id)
 
+if (focus) current_cursor=cr_beam
+
 if (down!=0 && focus && !active && !(gray)) {
     textfield_activate()
 }

@@ -1,3 +1,5 @@
 cache
 game_errors.log
 desktop.ini
+*.exe
+*.dll

@@ -43,6 +43,7 @@ if (window_has_focus()) {
 } else if (window_focused) {
     window_focused=false
     with (TextField) textfield_actions()
+    with (colorpicker) act=""
     room_speed=5
     powersave=true
     selcol=$ff8000

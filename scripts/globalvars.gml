@@ -1,4 +1,5 @@
 globalvar
+    current_cursor,
     root,savedir,error_buffer,
     has_backgrounds,has_datafiles,has_fonts,has_objects,has_paths,has_scripts,has_sounds,has_sprites,has_timelines,
     powersave,startmax,
@@ -34,7 +35,7 @@ globalvar
     objmenu,objmenuitems,
     bgmenu,bgmenuitems,tilebgmenu_contains,
     undostack,undolist,undoing,uidmap,lastuid,current_undo_size,total_undo_size,
-    mspal,
+    mspal,customcolors,
     tilepickgrid,
     constmenu,constmenuitems,
     datafilemenu,datafilemenuitems,

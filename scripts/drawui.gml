@@ -34,7 +34,7 @@ if (mousein) {
 if (mode==0 || mode==1 || mode==5) {
     if (keyboard_check_direct(vk_control)) window_set_cursor(cr_size_all)
     else if (keyboard_check_direct(vk_shift)) window_set_cursor(cr_cross)
-    else window_set_cursor(cr_default)
+    else window_set_cursor(current_cursor)
 
     d3d_transform_add_translation(-0.5,-0.5,0)
     texture_set_interpolation(1)

@@ -57,6 +57,7 @@ ly_current=0
 icon_mode=0
 focus=noone
 window_focused=false
+current_cursor=cr_default
 drag_point=-1
 
 current_path=noone
