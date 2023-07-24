@@ -65,7 +65,7 @@ var h,v;
 h=keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left)
 v=keyboard_check_pressed(vk_down)-keyboard_check_pressed(vk_up)
 
-if (h!=0 || v!=0) {
+if ((h!=0 || v!=0) && !paint) {
     yes=1 with (TextField) if (active) yes=0 if (yes) {
         keyboard_clear(vk_left)
         keyboard_clear(vk_right)

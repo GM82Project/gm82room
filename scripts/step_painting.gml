@@ -7,11 +7,27 @@ if (keyboard_check(vk_alt)) {
     dx=floorto(global.mousex,gridx)
     dy=floorto(global.mousey,gridy)
 }
-if (dx!=paintx || dy!=painty || paint=2) {
+
+h=keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left)
+v=keyboard_check_pressed(vk_down)-keyboard_check_pressed(vk_up)
+
+if (dx!=paintx || dy!=painty || paint=2 || h!=0 || v!=0) {
     paint=1
+    yes=1
+
+    if (h!=0 || v!=0) {
+        keyboard_clear(vk_up)
+        keyboard_clear(vk_down)
+        keyboard_clear(vk_left)
+        keyboard_clear(vk_right)
+        dx+=gridx*h
+        dy+=gridy*v
+        window_mouse_set((dx-view_xview+gridx/2)/zoom,(dy-view_yview+gridy/2)/zoom)
+    }
+
     paintx=dx
     painty=dy
-    yes=1
+
     if (mode==0) {
         if (objpal!=noone) {
             if (overlap_check) {
