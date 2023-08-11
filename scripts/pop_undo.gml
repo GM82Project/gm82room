@@ -55,7 +55,7 @@ if (size) {
                 }
             } until (i>=size)
 
-            if (lmode==1) repeat (size/14) {
+            if (lmode==1) do {
                 o=instance_create(ds_list_find_value(l,i+3),ds_list_find_value(l,i+4),tileholder)
                 set_uid(o,ds_list_find_value(l,i))
                 o.bg=ds_list_find_value(l,i+1)
@@ -77,7 +77,7 @@ if (size) {
                 tile_set_blend(o.tile,o.image_blend)
                 tile_set_alpha(o.tile,o.image_alpha)
                 i+=15
-            }
+            } until (i>=size)
         }break
         case act_change: {
             if (lmode==0) do {
@@ -104,7 +104,7 @@ if (size) {
                 }
             } until (i>=size)
 
-            if (lmode==1) repeat (size/8) {
+            if (lmode==1) do {
                 o=ds_map_find_value(uidmap,ds_list_find_value(l,i))
                 o.x=ds_list_find_value(l,i+1)
                 o.y=ds_list_find_value(l,i+2)
@@ -121,7 +121,7 @@ if (size) {
                 tile_set_blend(o.tile,o.image_blend)
                 tile_set_alpha(o.tile,o.image_alpha)
                 i+=8
-            }
+            } until (i>=size)
         }break
         case act_global: {
             variable_global_set(ds_list_find_value(l,i),ds_list_find_value(l,i+1))

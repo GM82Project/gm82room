@@ -68,7 +68,7 @@ ds_map_read_ini(project,root+pjfile)
 
 if (gm82version!=4 && gm82version!=5) {
     if (gm82version<4) show_message("Error loading "+gamename+": "+crlf+"Project version ("+string(gm82version)+") is too old."+crlf+"Please update Game Maker 8.2 and Save As to refresh the project.")
-    else show_message("Error loading "+gamename+": "+crlf+"Project version ("+string(gm82version)+") is too new!"+crlf+"Please update Game Maker 8.2 and Save As to refresh the project.")
+    else show_message("Error loading "+gamename+": "+crlf+"Project version ("+string(gm82version)+") is too new!"+crlf+"Please update Game Maker 8.2.")
     game_end()
     exit
 }
@@ -79,7 +79,7 @@ directory_create(root+"cache")
 if (directory_exists(root+"cache\backgrounds") && directory_exists(root+"cache\sprites")) {
     icon_mode=1
 } else if (!file_exists(root+"cache\ignore_warning")) {
-    if (show_question("Error loading icons: GM82 cache is missing, try saving the project again.##You can still edit, but icons won't be displayed for resources.##Would you like to disable this warning?")) {
+    if (show_question("Error loading icons: GM82 cache is missing, try to Save As the project to fix this.##You can still edit, but icons won't be displayed for resources.##Would you like to disable this warning?")) {
         file_text_close(file_text_open_write(root+"cache\ignore_warning"))
     }
 }
@@ -241,31 +241,34 @@ if (layersize) {
             o.tileh=real(string_token_next())
 
             o.bg=get_background_tiles(o.bgname)
-            if (micro_optimization_bgid!=noone && o.tilew && o.tileh) {
+            if (micro_optimization_bgid!=noone) {
                 //check that the tile is inside the background
+                if (o.tilew==0) o.tilew=16
+                if (o.tileh==0) o.tileh=16
                 bgw=background_get_width(bg_background[micro_optimization_bgid])
                 bgh=background_get_height(bg_background[micro_optimization_bgid])
-                if (tileu<bgw && tilev<bgh) {
-                    o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
-                    o.tlayer=layer
+                tileu=min(bgw-o.tilew,tileu)
+                tilev=min(bgh-o.tileh,tilev)
 
-                    o.image_xscale=o.tilew
-                    o.image_yscale=o.tileh
+                o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
+                o.tlayer=layer
 
-                    string_token_next() //skip "locked" flag
-                    o.tilesx=real(string_token_next())
-                    o.tilesy=real(string_token_next())
-                    tileblend=real(string_token_next())
+                o.image_xscale=o.tilew
+                o.image_yscale=o.tileh
 
-                    o.image_xscale*=o.tilesx
-                    o.image_yscale*=o.tilesy
-                    o.image_alpha=floor(tileblend/$1000000)/$ff
-                    o.image_blend=tileblend&$ffffff
+                string_token_next() //skip "locked" flag
+                o.tilesx=real(string_token_next())
+                o.tilesy=real(string_token_next())
+                tileblend=real(string_token_next())
 
-                    tile_set_scale(o.tile,o.tilesx,o.tilesy)
-                    tile_set_alpha(o.tile,o.image_alpha)
-                    tile_set_blend(o.tile,o.image_blend)
-                } else with (o) instance_destroy()
+                o.image_xscale*=o.tilesx
+                o.image_yscale*=o.tilesy
+                o.image_alpha=floor(tileblend/$1000000)/$ff
+                o.image_blend=tileblend&$ffffff
+
+                tile_set_scale(o.tile,o.tilesx,o.tilesy)
+                tile_set_alpha(o.tile,o.image_alpha)
+                tile_set_blend(o.tile,o.image_blend)
             } else with (o) instance_destroy()
 
             c+=1
