@@ -7,12 +7,12 @@ if (error_occurred) {
         exit
     } else {
         error_buffer=true
-        save_room(1)
+        save_room(0)
         if (error_occurred) {
             show_message("Error detected:##"+error_last+"##The editor had an error, and then had an additional error while attempting to recover the project.##The editor will now close to protect your data.")
             game_end()
             exit
         }
-        show_message("Error detected:##"+error_last+"##The editor has saved your work.##Please restart the editor and choose to load the autosave.")
+        show_message("Error detected:##"+error_last+"##The editor has saved your work.##Please restart the editor.")
     }
 } else error_buffer=false
