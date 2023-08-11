@@ -209,3 +209,6 @@ ds_map_save_ini
 ShaderFromPack
 clear_instance_fields
 load_jtool_table
+live_listen
+show_live_message
+live_start

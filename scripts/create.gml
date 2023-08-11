@@ -14,6 +14,8 @@ autosave_timer=current_time
 autosave_interval=3*60*1000 //3 minute autosave in ms
 
 global.livesock=noone
+global.livebuf=noone
+global.live_connect=0
 
 xgo=0
 ygo=0

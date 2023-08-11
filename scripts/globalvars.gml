@@ -17,6 +17,7 @@ globalvar
     objprev_objectid,objprev_eventid,objprev_curobj,objprev_curevent,
     thumbmap,thumbcount,
     orderlast,
+    live_message,live_message_alpha,
     direct_mbleft,direct_mbright,
     knobx,knoby,grabknob,
     click_priority,

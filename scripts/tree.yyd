@@ -71,7 +71,10 @@
 	|show_prefs
 	|load_palette
 +gm82live
+	|live_start
+	|show_live_message
 	|live_send_room_data
+	|live_listen
 |globalvars
 |create
 +save/load

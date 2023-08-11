@@ -1,0 +1,2 @@
+live_message=argument0
+live_message_alpha=200

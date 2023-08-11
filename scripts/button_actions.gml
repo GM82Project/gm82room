@@ -16,6 +16,7 @@ with (Controller) switch (argument0) {
     case "path mode"    : {change_mode(5)}break
     case "help"         : {show_info()}break
     case "prefs"        : {show_prefs() write_preferences()}break
+    case "live"         : {live_start()}break
     case "undo"         : {pop_undo()}break
 
 

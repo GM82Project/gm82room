@@ -160,3 +160,8 @@ i=instance_create(160+768,0,Button)
 i.spr=21
 i.action="prefs"
 i.alt="Preferences"
+
+i=instance_create(160+800,0,Button)
+i.spr=49
+i.action="live"
+i.alt="Start Live connection to game"

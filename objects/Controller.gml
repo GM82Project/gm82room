@@ -53,6 +53,8 @@ action_id=603
 applies_to=self
 */
 error_handler()
+
+live_listen()
 #define Other_3
 /*"/*'/**//* YYD ACTION
 lib_id=1

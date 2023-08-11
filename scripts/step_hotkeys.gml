@@ -49,11 +49,6 @@ if (mode==0 || mode==1) {
     }
 }
 
-if (keyboard_check_pressed(vk_f5)) {
-    live_send_room_data()
-    alarm[3]=room_speed/2
-}
-
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("F"))) {
     if (mode==0) {
         search_for_objects(get_string("Object name:",""))

@@ -7,9 +7,9 @@ if (sock=noone) {
     socket_connect(sock,"127.0.0.1",4126)
     global.livesock=sock
     global.livebuf=buffer_create()
+    show_live_message("Live: Connecting to Game...")
+    global.live_connect=1
 }
-
-socket_update_read(sock)
 
 if (mode==0) {
     instance_activate_object(instance)
@@ -20,7 +20,8 @@ if (mode==0) {
     if (objc) {
         b=global.livebuf
         buffer_clear(b)
-        buffer_write_u8(b,0)
+        buffer_write_u8(b,1) //1 == object data
+        buffer_write_string(b,roomname)
         buffer_write_u16(b,objc)
         for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
             insc=0
