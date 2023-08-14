@@ -196,7 +196,7 @@ i.tagmode=0
 //blend
 i=instance_create(width-160+8,336,TextField)
 i.action="inst col"
-i.alt="colour"
+i.alt="color"
 i.anchor=1
 i.dynamic=0
 i.type=1

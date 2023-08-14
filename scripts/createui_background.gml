@@ -3,13 +3,13 @@
 i=instance_create(8,104,Button)
 i.type=1
 i.action="clear bg"
-i.text="Colour"
-i.alt="Draw background colour"
+i.text="Color"
+i.alt="Draw background color"
 i.tagmode=2
 
 i=instance_create(104,100,TextField)
 i.action="bgcol"
-i.alt="Background colour"
+i.alt="Background color"
 i.type=1
 i.text=string(backgroundcolor)
 i.w=52

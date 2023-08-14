@@ -22,14 +22,14 @@ if (active) {
         case "inst xs"   : {val=real(text) with (instance) {if (sel) image_xscale=val if (abs(image_xscale*sprw)<1) image_xscale=1/sprw do_change_undo("instance xscale",0)}}break
         case "inst ys"   : {val=real(text) with (instance) {if (sel) image_yscale=val if (abs(image_yscale*sprw)<1) image_yscale=1/sprw do_change_undo("instance yscale",0)}}break
         case "inst ang"  : {val=real(text) with (instance) if (sel) image_angle=val do_change_undo("instance angle",0)}break
-        case "inst col"  : {val=round(real(text)) with (instance) if (sel) image_blend=val if (check_colorpicker_undo(1)) do_change_undo("instance colour",0)}break
+        case "inst col"  : {val=round(real(text)) with (instance) if (sel) image_blend=val if (check_colorpicker_undo(1)) do_change_undo("instance color",0)}break
         case "inst alpha": {val=real(text)/255    with (instance) if (sel) image_alpha=val do_change_undo("instance alpha",0)}break
 
         case "tile x"    : {val=round(real(text)) with (tileholder) if (sel) {x=val tile_set_position(tile,x,y) do_change_undo("tile x",0)}}break
         case "tile y"    : {val=round(real(text)) with (tileholder) if (sel) {y=val tile_set_position(tile,x,y) do_change_undo("tile y",0)}}break
         case "tile xs"   : {val=real(text) with (tileholder) if (sel) {image_xscale=val*tilew if (abs(image_xscale)<1) image_xscale=1 tilesx=image_xscale/tilew tile_set_scale(tile,tilesx,tilesy) do_change_undo("tile xscale",0)}}break
         case "tile ys"   : {val=real(text) with (tileholder) if (sel) {image_yscale=val*tileh if (abs(image_yscale)<1) image_yscale=1 tilesy=image_yscale/tileh tile_set_scale(tile,tilesx,tilesy) do_change_undo("tile yscale",0)}}break
-        case "tile col"  : {val=round(real(text)) with (tileholder) if (sel) {image_blend=val tile_set_blend(tile,image_blend) if (check_colorpicker_undo(1)) do_change_undo("tile colour",0)}}break
+        case "tile col"  : {val=round(real(text)) with (tileholder) if (sel) {image_blend=val tile_set_blend(tile,image_blend) if (check_colorpicker_undo(1)) do_change_undo("tile color",0)}}break
         case "tile alpha": {val=real(text)/255    with (tileholder) if (sel) {image_alpha=val tile_set_alpha(tile,image_alpha) do_change_undo("tile alpha",0)}}break
 
         case "tile panel grid x": {
@@ -51,7 +51,7 @@ if (active) {
 
         case "layer depth": {val=clamp(round(real(text)),-1000000000,1000000000) change_tile_layer(val)}break
 
-        case "bgcol"  : {val=round(real(text)) if (check_colorpicker_undo(0)) undo_global("backgroundcolor","background colour") backgroundcolor=val}break
+        case "bgcol"  : {val=round(real(text)) if (check_colorpicker_undo(0)) undo_global("backgroundcolor","background color") backgroundcolor=val}break
         case "bg xpos": {val=round(real(text)) undo_globalvec("bg_xoffset",bg_current,"background "+string(bg_current)+" options") bg_xoffset[bg_current]=val}break
         case "bg ypos": {val=round(real(text)) undo_globalvec("bg_yoffset",bg_current,"background "+string(bg_current)+" options") bg_yoffset[bg_current]=val}break
         case "bg hsp" : {val=real(text) undo_globalvec("bg_hspeed",bg_current,"background "+string(bg_current)+" options") bg_hspeed[bg_current]=val}break

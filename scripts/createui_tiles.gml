@@ -148,7 +148,7 @@ i.tagmode=1
 //blend
 i=instance_create(width-160+8,264,TextField)
 i.action="tile col"
-i.alt="colour"
+i.alt="color"
 i.anchor=1
 i.dynamic=1
 i.type=1
