@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=488
-h=284
+h=320
 
 act=""
 button=1
@@ -47,10 +47,10 @@ while (1) {
         }
 
         //color picker checkboxes
-        if (point_in_rectangle(mx,my,8,152,8+24,152+24)) {
+        if (point_in_rectangle(mx,my,8,160,8+24,160+24)) {
             colorpickertype=0
         }
-        if (point_in_rectangle(mx,my,8,184,8+24,184+24)) {
+        if (point_in_rectangle(mx,my,8,192,8+24,192+24)) {
             colorpickertype=1
         }
 
@@ -80,6 +80,11 @@ while (1) {
         //grid off room
         if (point_in_rectangle(mx,my,240,192,240+24,192+24)) {
             outroomgrid=!outroomgrid
+            continue
+        }
+        //grid off room
+        if (point_in_rectangle(mx,my,240,240,240+24,240+24)) {
+            do_autosaves=!do_autosaves
             continue
         }
 
@@ -147,7 +152,7 @@ while (1) {
     draw_text(8,-32+6,"Preferences")
     draw_text(8,8,"Code editor")
     draw_text(240,8,"Theme")
-    draw_text(8,128,"Colour picker")
+    draw_text(8,136,"Color picker")
 
     //ok button
     dx=432 dy=h-48 draw_button_ext(dx,dy,48,40,act!="grabok",global.col_main) draw_sprite(sprMenuButtons,0,dx+24,dy+20)
@@ -163,8 +168,8 @@ while (1) {
     dx=240 dy=96 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Custom") if (theme=2) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //color picker checkboxes
-    dx=8 dy=152 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Builtin") if (colorpickertype=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
-    dx=8 dy=184 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Windows") if (colorpickertype=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=8 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Builtin") if (colorpickertype=0) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=8 dy=192 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Windows") if (colorpickertype=1) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //custom theme controls
     if (theme=2) {
@@ -182,6 +187,9 @@ while (1) {
 
     //grid off room
     dx=240 dy=192 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Draw grid outside#of the room area") if (outroomgrid) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //autosave
+    dx=240 dy=240 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Do autosaves") if (do_autosaves) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
 
     draw_set_color($ffffff)

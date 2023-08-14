@@ -5,6 +5,7 @@ dir=savedir
 
 if (argument0) {
     //backup save
+    if (!do_autosaves) exit
     dir+="autosave\"
     directory_create(dir)
     file_text_close(file_text_open_write(dir+"gm82room lockfile"))

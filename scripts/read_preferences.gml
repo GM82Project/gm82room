@@ -15,6 +15,7 @@ colorpickertype=registry_read_dword(dir+"GM82ColorPickerType",0)
 
 tilepickgrid=registry_read_dword(dir+"RoomTilePickerGrid",1)
 outroomgrid=registry_read_dword(dir+"GM82DrawGridOutsideRoom",1)
+do_autosaves=registry_read_dword(dir+"GM82RoomAutosave",1)
 
 for (i=0;i<16;i+=1) customcolors[i]=registry_read_dword(dir+"RoomCustomColors"+string(i),0)
 
