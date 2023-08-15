@@ -2,11 +2,7 @@
 //if pastereset is true, resets any fields that are undesirable to copypaste
 var i,str,next,state,p,name,value,value2,fail;
 
-for (i=0;i<objfields[argument0.obj];i+=1) {
-    argument0.fields[i,0]=0
-    argument0.fields[i,1]=noone
-    argument0.fields[i,2]=noone
-}
+init_instance_fields(argument0)
 
 str=argument0.code
 

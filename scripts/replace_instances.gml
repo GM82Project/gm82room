@@ -33,7 +33,7 @@ if (!argument_count) {
             sprox=sprite_get_xoffset(sprite_index)
             sproy=sprite_get_yoffset(sprite_index)
 
-            clear_instance_fields(id)
+            init_instance_fields(id)
         }
     }
     push_undo()
