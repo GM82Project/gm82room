@@ -126,6 +126,8 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                         o.fields[i,0]=copyvec[cur,10+i*3]
                         o.fields[i,1]=copyvec[cur,11+i*3]
                         o.fields[i,2]=copyvec[cur,12+i*3]
+                        
+                        if (o.fields[i,0]) o.hasfields=1
                     }
                 }
 
