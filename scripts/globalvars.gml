@@ -25,7 +25,7 @@ globalvar
     codeeditortype,colorpickertype,
     messagestr,messagetime,
     autosave_timer,autosave_interval,
-    sprites,backgrounds,objects,sprloaded,bgloaded,objloaded,objparent,objspr,objvis,objdepth,bghastiles,bgsmallicon,
+    sprites,backgrounds,objects,sprloaded,sprloaded_len,bgloaded,objloaded,objparent,objspr,objvis,objdepth,bghastiles,bgsmallicon,
     gamename,roomname,roomcode,roomspeed,roomcaption,roompersistent,clearscreen,clearview,settings,
     backgroundcolor,bg_tex,bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch,
     bg_xscale,bg_yscale,bg_blend,bg_alpha,

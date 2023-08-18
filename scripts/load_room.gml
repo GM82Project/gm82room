@@ -104,8 +104,7 @@ bglookup=ds_map_create()
 
 sprites=file_text_read_list(root+"sprites\index.yyd",noone,true)
 sprites_length=ds_list_size(sprites)
-for (i=sprites_length;i>=0;i-=1)
-    sprloaded[i,1]=0
+sprloaded_len[sprites_length]=0
 
 backgrounds=file_text_read_list(root+"backgrounds\index.yyd",bglookup,true)
 backgrounds_length=ds_list_size(backgrounds)
