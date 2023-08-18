@@ -5,7 +5,7 @@ type="<undefined>"
 val=0
 
 for (i=0;i<objfields[obj];i+=1) {
-    if (objfieldname[obj,i]==argument[0]) {
+    if (objfieldname[obj,i]==string(argument[0])) {
         type=objfieldtype[obj,i]
         if (!fields[i,0]) {
             //return default
