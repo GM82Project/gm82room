@@ -322,5 +322,5 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-draw_self()
+if (!objnodrawself[obj] && view[9]) draw_self()
 preview_instance_fields()

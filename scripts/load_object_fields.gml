@@ -9,6 +9,8 @@ var i,f,reading,str,p,linec,actionc,line,fp,action,temp;
 
 i=argument0
 
+objnodrawself[i]=false
+
 objprev=""
 reading=0
 actionc=0
@@ -94,6 +96,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         //expect preview field
         fp=string_pos("/*preview",str)
         if (fp) {
+            if (string_pos("nodrawself",str)) objnodrawself[i]=true
             while (1) {
                 str=file_text_read_string(f)
                 file_text_readln(f)
