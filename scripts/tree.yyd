@@ -153,6 +153,7 @@
 	|textfield_activate
 	|textfield_actions
 	|textfield_set
+	|button_rightactions
 +tools
 	|cement_instances
 	|cleanup_instances

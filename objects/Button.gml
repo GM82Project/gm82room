@@ -44,3 +44,11 @@ applies_to=self
 */
 ///click
 down=(tagmode==mode || tagmode==-1)
+#define Other_13
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///right click
+button_rightactions(action)

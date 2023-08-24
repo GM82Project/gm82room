@@ -8,7 +8,12 @@ if (mousein && mode==0 && mouse_check_button_pressed(mb_right)) {
 }
 
 if (mouse_check_button_pressed(mb_right)) {
-    if (keyboard_check(vk_control)) {
+    if (!mousein) {
+        //click on menus
+        with (Button) if (instance_position(mouse_wx,mouse_wy,id)) {
+            event_user(3)
+        }
+    } else if (keyboard_check(vk_control)) {
         if (mode==0) {
             with (instance) {
                 if (instance_position(global.mousex,global.mousey,id)) {
@@ -71,37 +76,35 @@ if (mouse_check_button_pressed(mb_right)) {
             }
         }
     } else {
-        if (mousein) {
-            if (selecting) selecting=0
-            with (TextField) textfield_actions()
-            clear_inspector()
-            if (mode==0 || mode==1) {
-                deselect()
-                begin_undo(act_create,"erasing "+pick(mode,"instances","tiles"),0)
-                erasing=1
-            }
-            if (mode==5) {
-                var maxd,point,p;
+        if (selecting) selecting=0
+        with (TextField) textfield_actions()
+        clear_inspector()
+        if (mode==0 || mode==1) {
+            deselect()
+            begin_undo(act_create,"erasing "+pick(mode,"instances","tiles"),0)
+            erasing=1
+        }
+        if (mode==5) {
+            var maxd,point,p;
 
-                maxd=8*zm point=-1
-                pointnum=path_get_number(current_path)
+            maxd=8*zm point=-1
+            pointnum=path_get_number(current_path)
 
-                if (pointnum>1) {
-                    for (p=0;p<pointnum;p+=1) {
-                        px=path_get_point_x(current_path,p)
-                        py=path_get_point_y(current_path,p)
-                        d=point_distance(global.mousex,global.mousey,px,py)
-                        if (d<=maxd) {point=p maxd=d}
-                    }
+            if (pointnum>1) {
+                for (p=0;p<pointnum;p+=1) {
+                    px=path_get_point_x(current_path,p)
+                    py=path_get_point_y(current_path,p)
+                    d=point_distance(global.mousex,global.mousey,px,py)
+                    if (d<=maxd) {point=p maxd=d}
+                }
 
-                    if (point>=0) {
-                        //delete point
-                        current_pathpoint=max(0,point-1)
-                        path_delete_point(current_path,point)
-                        dsmap(pathmap_edited,current_pathname,true)
-                        generate_path_model(current_pathname)
-                        select_path_point(current_pathpoint,1)
-                    }
+                if (point>=0) {
+                    //delete point
+                    current_pathpoint=max(0,point-1)
+                    path_delete_point(current_path,point)
+                    dsmap(pathmap_edited,current_pathname,true)
+                    generate_path_model(current_pathname)
+                    select_path_point(current_pathpoint,1)
                 }
             }
         }
