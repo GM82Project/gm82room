@@ -4,7 +4,7 @@ if (erasing) exit
 
 if (mouse_check_modal_pressed(mb_left)) {
     with (TextField) textfield_actions()
-    if (point_distance(mouse_wx,mouse_wy,width-48-160,48+32)<32) {
+    if (point_distance(mouse_wx,mouse_wy,width-48-160,48+32)<32 && !hide3dgizmo) {
         grabknob=1
         knoffmx=mouse_wx
         knoffmy=mouse_wy

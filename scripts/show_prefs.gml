@@ -82,9 +82,14 @@ while (1) {
             outroomgrid=!outroomgrid
             continue
         }
-        //grid off room
+        //autosaves
         if (point_in_rectangle(mx,my,240,240,240+24,240+24)) {
             do_autosaves=!do_autosaves
+            continue
+        }
+        //hide gizmo
+        if (point_in_rectangle(mx,my,240,272,240+24,272+24)) {
+            hide3dgizmo=!hide3dgizmo
             continue
         }
 
@@ -190,6 +195,9 @@ while (1) {
 
     //autosave
     dx=240 dy=240 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Do autosaves") if (do_autosaves) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //gizmo
+    dx=240 dy=272 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Hide 3D Gizmo") if (hide3dgizmo) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
 
     draw_set_color($ffffff)
