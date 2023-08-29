@@ -128,7 +128,7 @@ zoom=max(1,(roomwidth)/(width-320),(roomheight+64)/(height-64))
 zoomgo=zoom
 
 window_set_size(width,height)
-window_resize_buffer(width,height)
+window_resize_buffer(width,height,1,0)
 window_set_region_size(width,height,0)
 window_center()
 
