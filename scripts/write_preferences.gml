@@ -11,6 +11,7 @@ registry_write_dword(dir+"GM82ColorPickerType",colorpickertype)
 registry_write_dword(dir+"GM82DrawGridOutsideRoom",outroomgrid)
 registry_write_dword(dir+"GM82RoomAutosave",do_autosaves)
 registry_write_dword(dir+"GM82RoomHide3dGizmo",hide3dgizmo)
+registry_write_dword(dir+"GM82RoomCropBackgrounds",cropbackgrounds)
 
 for (i=0;i<16;i+=1) registry_write_dword(dir+"RoomCustomColors"+string(i),customcolors[i])
 

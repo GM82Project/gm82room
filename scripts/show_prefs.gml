@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=488
-h=320
+h=380
 
 act=""
 button=1
@@ -90,6 +90,11 @@ while (1) {
         //hide gizmo
         if (point_in_rectangle(mx,my,240,272,240+24,272+24)) {
             hide3dgizmo=!hide3dgizmo
+            continue
+        }
+        //crop bgs
+        if (point_in_rectangle(mx,my,240,304,240+24,304+24)) {
+            cropbackgrounds=!cropbackgrounds
             continue
         }
 
@@ -198,6 +203,9 @@ while (1) {
 
     //gizmo
     dx=240 dy=272 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Hide 3D Gizmo") if (hide3dgizmo) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //gizmo
+    dx=240 dy=304 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Crop Backgrounds") if (cropbackgrounds) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
 
     draw_set_color($ffffff)

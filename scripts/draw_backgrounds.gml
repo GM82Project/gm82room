@@ -57,6 +57,11 @@ if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg
             r=roomwidth
             u=-offx/w
             u2=u+r/w
+        } else if (cropbackgrounds) {
+            l=max(0,offx)
+            r=min(roomwidth,offx+w)
+            u=(l-offx)/w
+            u2=u+(r-l)/w
         } else {
             l=offx
             r=l+w
@@ -68,6 +73,11 @@ if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg
             b=roomheight
             v=-offy/h
             v2=v+b/h
+        } else if (cropbackgrounds) {
+            t=max(0,offy)
+            b=min(roomheight,offy+h)
+            v=(t-offy)/h
+            v2=v+(b-t)/h
         } else {
             t=offy
             b=t+h
