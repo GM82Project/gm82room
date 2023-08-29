@@ -106,9 +106,10 @@ if (mode==1) {
                     dx=0
                     dy=120+32*posy+tpalscroll
                     if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(mouse_wx,mouse_wy,dx,dy,dx+160,dy+32)) {
+                        reset=(tilebgpal!=i)
                         tilebgpal=i
                         tilebgname=ds_list_find_value(backgrounds,tilebgpal)
-                        update_newtilepanel()
+                        update_newtilepanel(reset)
                     }
                     posy+=1
                 }

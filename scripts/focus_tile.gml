@@ -7,10 +7,10 @@ with (Controller) {
     get_background(tilebgname)
     tilebgpal=micro_optimization_bgid
 
-    update_newtilepanel()
-
     curtilex=tile_get_left(tile)
     curtiley=tile_get_top(tile)
     curtilew=tile_get_width(tile)
     curtileh=tile_get_height(tile)
+
+    update_newtilepanel(0)
 }

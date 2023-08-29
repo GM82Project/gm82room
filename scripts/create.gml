@@ -142,7 +142,7 @@ update_view()
 update_instance_memory()
 change_mode(mode)
 focus_object(objpal)
-update_newtilepanel()
+update_newtilepanel(1)
 
 window_set_foreground()
 file_drag_enable(1)

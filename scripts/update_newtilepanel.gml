@@ -1,3 +1,5 @@
+///update_newtilepanel(reset)
+
 with (tilepanel) {
     if (tilebgpal!=noone) {
         tex=Controller.bg_background[tilebgpal]
@@ -21,14 +23,16 @@ with (tilepanel) {
         textfield_set("tile panel grid x",gx)
         textfield_set("tile panel grid y",gy)
 
-        z=1
-        zgo=1
-        xgo=bgw/2
-        ygo=bgh/2
+        if (argument0) {
+            z=1
+            zgo=1
+            curtilex=ox
+            curtiley=oy
+            curtilew=gx
+            curtileh=gy
+        }
 
-        curtilex=ox
-        curtiley=oy
-        curtilew=gx
-        curtileh=gy
+        xgo=curtilex+curtilew/2
+        ygo=curtiley+curtileh/2
     }
 }

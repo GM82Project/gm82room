@@ -102,7 +102,7 @@ if (click) {
             tilebgpal=micro_optimization_bgid
             tilebgname=str
             tilepal=0
-            update_newtilepanel()
+            update_newtilepanel(1)
         }
     }
     if (menutype=="search") {
