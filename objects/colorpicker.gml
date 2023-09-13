@@ -21,8 +21,8 @@ postundo=0
 
 customcolor=noone
 
-offx=(width-w)/2
-offy=(height-h-32)/2
+offx=(width-w) div 2
+offy=(height-h-32) div 2
 #define Destroy_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
