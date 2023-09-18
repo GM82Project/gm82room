@@ -24,50 +24,50 @@ i.tagmode=3
 //room
 i=instance_create(8,260,TextField)
 i.action="view x"
-i.basealt="x"
+i.basealt="view_xview"
 i.w=72
 i.tagmode=3
 
 i=instance_create(8,292,TextField)
 i.action="view y"
-i.basealt="y"
+i.basealt="view_yview"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,260,TextField)
 i.action="view w"
-i.basealt="width"
+i.basealt="view_wview"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,292,TextField)
 i.action="view h"
-i.basealt="height"
+i.basealt="view_hview"
 i.w=72
 i.tagmode=3
 
 //port
 i=instance_create(8,352,TextField)
 i.action="view xp"
-i.basealt="x"
+i.basealt="view_xport"
 i.w=72
 i.tagmode=3
 
 i=instance_create(8,384,TextField)
 i.action="view yp"
-i.basealt="y"
+i.basealt="view_yport"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,352,TextField)
 i.action="view wp"
-i.basealt="width"
+i.basealt="view_wport"
 i.w=72
 i.tagmode=3
 
 i=instance_create(80,384,TextField)
 i.action="view hp"
-i.basealt="height"
+i.basealt="view_hport"
 i.w=72
 i.tagmode=3
 
