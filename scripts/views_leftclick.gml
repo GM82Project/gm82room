@@ -3,6 +3,8 @@ if (mode==3) {
         sizeview=1
         storex=vw_w[vw_current]
         storey=vw_h[vw_current]
+        storexp=vw_wp[vw_current]
+        storeyp=vw_hp[vw_current]
     } else if (point_in_rectangle(global.mousex,global.mousey,vw_x[vw_current],vw_y[vw_current],vw_x[vw_current]+vw_w[vw_current],vw_y[vw_current]+vw_h[vw_current])) {
         grabview=1
         storex=vw_x[vw_current]
