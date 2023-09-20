@@ -166,6 +166,7 @@
 	|room_shift
 	|get_color_ext
 	|check_colorpicker_undo
+	|test_run
 +instances
 	|get_uid
 	|set_uid

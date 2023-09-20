@@ -15,6 +15,9 @@ if (keyboard_check_pressed(vk_escape)) {
     clear_inspector()
     deselect()
 }
+if (keyboard_check_pressed(vk_f5)) {
+    test_run()
+}
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("G"))) {
     grid=!grid
 }
