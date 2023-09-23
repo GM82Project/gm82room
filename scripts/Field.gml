@@ -20,8 +20,9 @@ for (i=0;i<objfields[obj];i+=1) {
     }
 }
 
+if (type=="bool" || type=="boolean") return val=="true"
 if (type=="value" || type=="color" || type=="colour" || type=="string" || type=="enum") return execute_string("return "+val)
-if (type=="number" || type=="number_range" || type=="bool" || type=="boolean" || type=="radius" || type=="angle" || type=="xy")
+if (type=="number" || type=="number_range" || type=="radius" || type=="angle" || type=="xy")
     return real(val)
 
 return val
