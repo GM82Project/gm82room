@@ -7,8 +7,8 @@ if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && keyboard_check_pr
     }
 }
 if (keyboard_check_pressed(vk_tab)) {
-    if (keyboard_check(vk_shift)) change_mode(modwrap(mode-1,0,5))
-    else change_mode((mode+1) mod 6)
+    if (keyboard_check(vk_shift)) change_mode(pick(mode,4,0,5,2,3,1))
+    else change_mode(pick(mode,1,5,3,4,0,2))
 }
 if (keyboard_check_pressed(vk_escape)) {
     with (TextField) textfield_actions()
