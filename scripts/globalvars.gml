@@ -13,7 +13,7 @@ globalvar
     chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname,
     selection,selleft,seltop,selwidth,selheight,selsize,grabselection,
     jtool_objs,has_jtool_table,jtool_loaded_engine,
-    objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef,objnodrawself,
+    objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef,objnodrawself, objtrigger
     objprev_objectid,objprev_eventid,objprev_curobj,objprev_curevent,
     thumbmap,thumbcount,
     orderlast,

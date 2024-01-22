@@ -10,6 +10,7 @@ var i,f,reading,str,p,linec,actionc,line,fp,action,temp;
 i=argument0
 
 objnodrawself[i]=false
+objtrigger[i]=false;
 
 objprev=""
 reading=0
@@ -97,6 +98,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         fp=string_pos("/*preview",str)
         if (fp) {
             if (string_pos("nodrawself",str)) objnodrawself[i]=true
+            if (string_pos("trigger",str)) objtrigger[i]=true
             while (1) {
                 str=file_text_read_string(f)
                 file_text_readln(f)

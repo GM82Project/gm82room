@@ -114,6 +114,7 @@ view[6]=1 //nosprites
 view[7]=1 //paths
 view[8]=0 //reference image
 view[9]=1 //preview field
+view[10]=1 //trigger draw
 
 chunkwidth=roomwidth
 chunkheight=roomheight
