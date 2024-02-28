@@ -75,23 +75,23 @@ if (mode==4) {
             dx=roundto(global.mousex,gridx)
             dy=roundto(global.mousey,gridy)
         }
-        if (grabroom==1) {                                    //[1]--------------------------[2]
-            roomleft=min(dx,roomwidth)                        ///|                            |
-            roomtop=min(dy,roomheight)                        ///|                            |
-        }                                                     ///|                            |
-        if (grabroom==2) {                                    ///|                            |
-            roomwidth=max(dx,1)                               //[4]---------------------------[3]
-            roomtop=min(dy,roomheight)
+        if (grabroom==1) {//top left
+            roomleft=min(dx,roomwidth-1)
+            roomtop=min(dy,roomheight-1)
         }
-        if (grabroom==3) {
+        if (grabroom==2) {//top right
+            roomwidth=max(dx,1)
+            roomtop=min(dy,roomheight-1)
+        }
+        if (grabroom==3) {//bottom right
             roomwidth=max(dx,1)
             roomheight=max(dy,1)
         }
-        if (grabroom==4) {
-            roomleft=min(dx,roomwidth)
+        if (grabroom==4) {//bottom left
+            roomleft=min(dx,roomwidth-1)
             roomheight=max(dy,1)
         }
-        if (grabroom==5) {
+        if (grabroom==5) {//area grab
             if (keyboard_check(vk_alt)) {
                 roomleft=global.mousex-offx
                 roomtop=global.mousey-offy
@@ -106,8 +106,6 @@ if (mode==4) {
             grabroom=0
             if (roomleft!=0 || roomtop!=0) {
                 room_shift(-roomleft,-roomtop)
-                //roomwidth-=roomleft
-                //roomheight-=roomtop
                 roomwidth=abs(roomwidth-roomleft)
                 roomheight=abs(roomheight-roomtop)
                 roomleft=0
