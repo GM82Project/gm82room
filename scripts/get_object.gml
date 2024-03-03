@@ -13,6 +13,7 @@ if (!objloaded[i]) {
     objfields[i]=0
     objdesc[i]=""
     objprev_objectid[i]=noone
+    objshow[i]=true
     load_object_fields(i,argument0)
     palettesize+=1
 }

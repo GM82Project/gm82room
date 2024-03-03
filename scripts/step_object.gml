@@ -10,9 +10,15 @@ if (mode==0 && objects_length) {
                 dx=20+40*posx
                 dy=140+40*posy+palettescroll
                 if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
-                    objpal=i
+                    //clicked on object
+                    if (point_in_rectangle(mouse_wx,mouse_wy,dx,dy,dx+20,dy+20)) {
+                        //hide/show object
+                        objshow[i]=!objshow[i]
+                    } else {
+                        objpal=i
+                        textfield_set("palette name",ds_list_find_value(objects,objpal))
+                    }
                     change_mode(mode)
-                    textfield_set("palette name",ds_list_find_value(objects,objpal))
                 }
                 posx+=1 if (posx=4) {posx=0 posy+=1}
             }
@@ -30,5 +36,5 @@ if (mode==0 && objects_length) {
         palettescrollgo-=h*120
     }
     palettescrollgo=clamp(palettescrollgo,-(palettesize div 4+1)*40+(height-120-136),0)
-    palettescroll=clamp(inch((palettescroll*4+palettescrollgo)/5,palettescrollgo,2),-(palettesize div 4+1)*40+(height-120-136),0)
+    palettescroll=clamp(approach((palettescroll*4+palettescrollgo)/5,palettescrollgo,2),-(palettesize div 4+1)*40+(height-120-136),0)
 }

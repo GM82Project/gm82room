@@ -71,7 +71,7 @@ if (mode==1) {
             }
         }
         zo=z
-        z=inch(z,zgo,z/8)
+        z=approach(z,zgo,z/8)
 
         if (z!=zo) {
             if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
@@ -128,7 +128,7 @@ if (mode==1) {
     }
     if (tilebgpal!=noone) {
         tpalscrollgo=clamp(tpalscrollgo,-(posy+1)*32+(tilepanel.y-24-120),0)
-        tpalscroll=clamp(inch((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(posy+1)*32+(tilepanel.y-24-120),0)
+        tpalscroll=clamp(approach((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(posy+1)*32+(tilepanel.y-24-120),0)
     }
 
     //layer inspector
@@ -153,5 +153,5 @@ if (mode==1) {
         layerscrollgo-=h*120
     }
     layerscrollgo=clamp(layerscrollgo,-(layersize+1)*32+(height-100-360),0)
-    layerscroll=clamp(inch((layerscroll*4+layerscrollgo)/5,layerscrollgo,2),-(layersize+1)*32+(height-100-360),0)
+    layerscroll=clamp(approach((layerscroll*4+layerscrollgo)/5,layerscrollgo,2),-(layersize+1)*32+(height-100-360),0)
 }

@@ -116,9 +116,9 @@ if (grabknob) {
         grabknob=0
     }
 } else {
-    knobx=inch(knobx*0.95,0,0.1)
-    knoby=inch(knoby*0.95,0,0.1)
-    knobz=inch(knobz*0.98,0,0.01)
+    knobx=approach(knobx*0.95,0,0.1)
+    knoby=approach(knoby*0.95,0,0.1)
+    knobz=approach(knobz*0.98,0,0.01)
 }
 
 if (grab_background) {

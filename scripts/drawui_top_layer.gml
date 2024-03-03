@@ -1,3 +1,5 @@
+var dx2,dy2;
+
 tooltiptext=""
 
 if (mode==0) {
@@ -10,17 +12,19 @@ if (mode==0) {
         if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
             w=sprite_get_width(objspr[i])
             h=sprite_get_height(objspr[i])
+            dx2=dx dy2=dy
             if (w>32 || h>32) {
-                dx=floor(max(1,dx-w/2)+w/2)+frac(w/2)
-                dy=floor(max(1,dy-h/2)+h/2)+frac(h/2)
+                dx2=floor(max(1,dx-w/2)+w/2)+frac(w/2)
+                dy2=floor(max(1,dy-h/2)+h/2)+frac(h/2)
                 draw_set_color_sel() d3d_set_fog(1,draw_get_color(),0,0) draw_set_color($ffffff)
-                draw_sprite_stretched_ext(objspr[i],0,dx-w/2+1,dy-h/2+1,w,h,0,1)
-                draw_sprite_stretched_ext(objspr[i],0,dx-w/2+1,dy-h/2-1,w,h,0,1)
-                draw_sprite_stretched_ext(objspr[i],0,dx-w/2-1,dy-h/2+1,w,h,0,1)
-                draw_sprite_stretched_ext(objspr[i],0,dx-w/2-1,dy-h/2-1,w,h,0,1)
+                draw_sprite_stretched_ext(objspr[i],0,dx2-w/2+1,dy2-h/2+1,w,h,0,1)
+                draw_sprite_stretched_ext(objspr[i],0,dx2-w/2+1,dy2-h/2-1,w,h,0,1)
+                draw_sprite_stretched_ext(objspr[i],0,dx2-w/2-1,dy2-h/2+1,w,h,0,1)
+                draw_sprite_stretched_ext(objspr[i],0,dx2-w/2-1,dy2-h/2-1,w,h,0,1)
                 d3d_set_fog(0,0,0,0)
             }
-            draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
+            draw_sprite_stretched(objspr[i],0,dx2-w/2,dy2-h/2,w,h)
+            draw_sprite(sprMenuButtons,52-objshow[i],dx+8,dy+8)
             tooltiptext=ds_list_find_value(objects,i)
             if (objdesc[i]!="") tooltiptext=tooltiptext+lf+lf+objdesc[i]
         }
