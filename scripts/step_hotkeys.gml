@@ -50,6 +50,21 @@ if (mode==0 || mode==1) {
             selection=0
         }
     }
+
+    if (keyboard_check(vk_shift) && mode==0) {
+        if (keyboard_check_pressed(ord("Q"))) button_actions("inst rot left")
+        if (keyboard_check_pressed(ord("E"))) button_actions("inst rot right")
+    }
+    if (keyboard_check(vk_control)) {
+        if (mode==0) {
+            if (keyboard_check_pressed(ord("Q"))) button_actions("inst flip xs")
+            if (keyboard_check_pressed(ord("E"))) button_actions("inst flip ys")
+        }
+        if (mode==1) {
+            if (keyboard_check_pressed(ord("Q"))) button_actions("tile flip xs")
+            if (keyboard_check_pressed(ord("E"))) button_actions("tile flip ys")
+        }
+    }
 }
 
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("F"))) {
