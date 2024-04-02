@@ -65,6 +65,15 @@ if (selecting) {
             }
         }
     }
+    if (mode==5) {
+        if (!keyboard_check(vk_control)) ds_list_clear(path_sel)
+
+        for (p=0;p<pointnum;p+=1) {
+            px=path_get_point_x(current_path,p)
+            py=path_get_point_y(current_path,p)
+            if (point_in_rectangle(px,py,l,t,r,b)) if (ds_list_find_index(path_sel,p)==-1) ds_list_add(path_sel,p)
+        }
+    }
     if (!direct_mbleft) {
         selecting=0
         selection=0

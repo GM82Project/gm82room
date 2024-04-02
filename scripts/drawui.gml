@@ -79,6 +79,7 @@ if (mode==0 || mode==1 || mode==5) {
 drawui_object_pre()
 drawui_tile_pre()
 if (mode==5) draw_paths()
+drawui_path_pre()
 
 //selection rectangle
 if (selecting) {
@@ -89,6 +90,7 @@ if (selecting) {
     r=max(selx,global.mousex)+0.5
     b=max(sely,global.mousey)+0.5
     draw_rectangle(l,t,r,b,0)
+    draw_set_color_sel()
     draw_rectangle(l,t,r,b,1)
     draw_set_alpha(1)
     draw_set_color($ffffff)

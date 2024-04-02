@@ -1,4 +1,4 @@
-name=JetBrains Mono
+name=JetBrains Mono Medium
 size=12
 bold=0
 italic=0

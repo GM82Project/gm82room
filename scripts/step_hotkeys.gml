@@ -25,7 +25,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) {
     if (mode==0) with (instance) sel=1
     if (mode==1) with (tileholder) sel=1
     if (mode==5) {
-        if (current_path) {
+        if (current_path!=noone) {
             ds_list_clear(path_sel)
             i=0 repeat (path_get_number(current_path)) {ds_list_add(path_sel,i) i+=1}
         }

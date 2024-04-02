@@ -266,6 +266,7 @@ with (Controller) switch (argument0) {
                 point=ds_list_find_value(path_sel,i)
                 if (current_pathpoint==point) current_pathpoint=max(0,minpoint-1)
                 path_delete_point(current_path,point)
+                if (path_get_number(path)==1) break
             i+=1}
         }
 

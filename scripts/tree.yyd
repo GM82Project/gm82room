@@ -103,6 +103,7 @@
 	|drawui_object_pre
 	|drawui_tile_pre
 	|drawui_view_pre
+	|drawui_path_pre
 	|drawui_settings_pre
 	|drawui_statusbar
 	|drawui_object_post

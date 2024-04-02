@@ -2,7 +2,7 @@ var h,oldpath;
 
 if (mode==5) {
     if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,height-328)) {
-        if (mouse_check_button_pressed(mb_left)) {
+        if (mouse_check_modal_pressed(mb_left)) {
             //select a different path
             dy=pathscroll key=ds_map_find_first(pathmap_path) repeat (ds_map_size(pathmap_path)) {
                 if (mouse_wy-120==median(dy,mouse_wy-120,dy+31)) {
@@ -51,6 +51,23 @@ if (mode==5) {
         }
         h=mouse_wheel_down()-mouse_wheel_up()
         pathscrollgo-=h*120
+    }
+
+    if (mouse_check_modal_pressed(mb_left) && mousein && current_path==noone) {
+        dist=1000000
+        key=ds_map_find_first(pathmap_path) repeat (ds_map_size(pathmap_path)) {
+            path=ds_map_find_value(pathmap_path,key)
+            d=distance_to_path(global.mousex,global.mousey,path)
+            if (d<8*zm && d<dist) {dist=d current_path=path current_pathname=key}
+        key=ds_map_find_next(pathmap_path,key)}
+        if (current_path!=noone) {
+            current_pathpoint=path_get_number(current_path)-1
+            generate_path_model(current_pathname)
+            ds_list_clear(path_sel)
+            selection=0
+            update_inspector()
+            update_selection_bounds()
+        }
     }
 
     pathnum=ds_map_size(pathmap_path)
