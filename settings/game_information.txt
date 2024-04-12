@@ -1,4 +1,4 @@
-color=4210752
+color=0
 new_window=0
 caption=Quick Guide
 left=-1
