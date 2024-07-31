@@ -39,7 +39,6 @@ if (mode==0 || mode==1 || mode==5) {
     d3d_transform_add_translation(-0.5,-0.5,0)
     texture_set_interpolation(1)
 
-    draw_set_blend_mode_ext(10,1)
     draw_primitive_begin(pr_linelist)
         if (grid) {
             if (mousein && outroomgrid) {
@@ -70,7 +69,12 @@ if (mode==0 || mode==1 || mode==5) {
                 }
             }
         }
+    draw_set_blend_mode_ext(10,1)
     draw_primitive_end()
+    draw_set_blend_mode(bm_add)
+    d3d_set_fog(1,$202020,0,0)
+    draw_primitive_end()
+    d3d_set_fog(0,0,0,0)
     draw_set_blend_mode(0)
 
     d3d_transform_set_identity()
