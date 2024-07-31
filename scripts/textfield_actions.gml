@@ -51,7 +51,7 @@ if (active) {
 
         case "layer depth": {val=clamp(round(real(text)),-1000000000,1000000000) change_tile_layer(val)}break
 
-        case "bgcol"  : {val=round(real(text)) if (check_colorpicker_undo(0)) {if (!clearscreen) {undo_global("clearscreen","room options") clearscreen=1} undo_global("backgroundcolor","background color") backgroundcolor=val}}break
+        case "bgcol"  : {val=round(real(text)) if (check_colorpicker_undo(0)) {if (!clearscreen) {undo_global("clearscreen","room options") clearscreen=1} undo_global("backgroundcolor","background color")}backgroundcolor=val}break
         case "bg xpos": {val=round(real(text)) undo_globalvec("bg_xoffset",bg_current,"background "+string(bg_current)+" options") bg_xoffset[bg_current]=val}break
         case "bg ypos": {val=round(real(text)) undo_globalvec("bg_yoffset",bg_current,"background "+string(bg_current)+" options") bg_yoffset[bg_current]=val}break
         case "bg hsp" : {val=real(text) undo_globalvec("bg_hspeed",bg_current,"background "+string(bg_current)+" options") bg_hspeed[bg_current]=val}break
