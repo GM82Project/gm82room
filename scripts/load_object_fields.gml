@@ -5,11 +5,15 @@
 //can potentially read through thousands of lines of gml when loading a room
 //so it's been written for speed in most places
 
-var i,f,reading,str,p,linec,actionc,line,fp,action,temp;
+var i,f,reading,str,p,linec,actionc,line,fp,action,temp,previousindent,parent,stack;
 
 i=argument0
 
 objnodrawself[i]=false
+
+previousindent=1
+parent=noone
+stack=ds_stack_create()
 
 objprev=""
 reading=0
@@ -113,6 +117,19 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
             //all the errors start with this so we cache it now
             error="Error in action "+string(actionc)+" of Room Start event for "+qt+argument1+qt+":"+crlf+crlf+string(linec)+" | "+line+crlf+crlf
             //found a field signature; parse it
+
+            if (fp>previousindent) {
+                //field is more indented, store previous field dependency parent
+                repeat (fp-previousindent) ds_stack_push(stack,parent)
+                parent=objfields[i]-1
+            }
+            if (fp<previousindent) {
+                //deindent; restore old parent
+                repeat (previousindent-fp) parent=ds_stack_pop(stack)
+            }
+            objfielddepends[i,objfields[i]]=parent
+            objfieldindent[i,objfields[i]]=fp-1
+            previousindent=fp
 
             //find annotations
             objfielddef[i,objfields[i]]=""
@@ -225,6 +242,8 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         }
     }
 }
+
+ds_stack_destroy(stack)
 
 //load parent's fields if there was no room start event
 if (actionc==0) {

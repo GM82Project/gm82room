@@ -1,5 +1,5 @@
 ///draw_instance_fields(preview)
-var str,i,dx,dy,h,deac,get;
+var str,i,dx,dy,h,deac,get,parent,parentdrawy;
 str=""
 
 fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
@@ -13,6 +13,8 @@ if (point_distance(fieldhandx,fieldhandy,draghandx,draghandy)<20*zm) {
 
 dx=floor((fieldhandx-view_xview)/zoom)
 dy=floor((fieldhandy-view_yview)/zoom+24)
+odx=dx
+ody=dy-16
 
 if (objdesc[obj]!="") {
     //object has a description field; let's draw it before
@@ -42,8 +44,22 @@ if (objdesc[obj]!="") {
 draw_set_valign(1)
 
 for (i=0;i<objfields[obj];i+=1) {
+    parent=objfielddepends[obj,i]
+    parentdrawy[i]=dy
+    
+    dx=odx+objfieldindent[obj,i]*10
+    hdy=dy-16
+    if (parent!=noone) {
+        hdy=parentdrawy[parent]+29
+        do {
+            if (!fields[parent,0]) break
+            parent=objfielddepends[obj,parent]
+        } until (parent==noone)
+        if (parent!=noone) if (!fields[parent,0]) continue
+    } else hdy=ody
+    
     if (!fields[i,0]) {
-        if (argument0) continue
+        if (argument0) continue        
         str=objfieldname[obj,i]+objfielddef[obj,i]
         col1=$808080
     } else {
@@ -55,7 +71,7 @@ for (i=0;i<objfields[obj];i+=1) {
             str=objfieldname[obj,i]+": ("+fields[i,1]+", "+fields[i,2]+")"
         } else if (objfieldtype[obj,i]=="string") {
             str=objfieldname[obj,i]+": "+string_replace_all(destringify(fields[i,1]),"#","\#")
-        } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean") {
+        } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean" || objfieldtype[obj,i]=="true" || objfieldtype[obj,i]=="false") {
             str=objfieldname[obj,i]
         } else if (objfieldtype[obj,i]=="instance") {
             deac=0
@@ -78,7 +94,7 @@ for (i=0;i<objfields[obj];i+=1) {
 
     if (fieldactive) draw_set_color_sel()
     else draw_set_color(0)
-    draw_line(dx,dy-16,dx,dy+16)
+    draw_line(dx,hdy,dx,dy+16)
     draw_line(dx,dy+16,dx+16,dy+16)
 
     draw_rectangle_color(dx+16,dy+4,dx+dw,dy+28,col1,col1,col1,col1,0)
@@ -105,7 +121,8 @@ for (i=0;i<objfields[obj];i+=1) {
         case "datafile": fr=14 break
         case "constant": fr=15 break
         case "instance": fr=16 break
-        case "bool": case "boolean": fr=17 if (fields[i,0]) if (fields[i,1]=="true") fr=18 break
+        case "true": fr=18 if (fields[i,0]) if (fields[i,1]=="true") fr=18 else fr=17 break
+        case "bool": case "boolean": case "false": fr=22 if (fields[i,0]) if (fields[i,1]=="true") fr=18 else fr=17 break
         case "number": case "number_range": fr=19 break
         case "radius": fr=20 break
     }
@@ -189,6 +206,7 @@ for (i=0;i<objfields[obj];i+=1) {
     dy+=32
     draw_set_color($ffffff)
 }
+dx=odx
 
 draw_set_valign(0)
 

@@ -1,10 +1,12 @@
 ///edit_instance_fields(delete)
-var str,i,dx,dy,menu,menu2,left,right,deac,get;
+var str,i,dx,dy,menu,menu2,left,right,deac,get,parent;
 
 //yeah i know this is the same as the draw script but what can i do
 
 dx=floor((fieldhandx-view_xview)/zoom)
 dy=floor((fieldhandy-view_yview)/zoom+24)
+odx=dx
+ody=dy-16
 
 menu=-1
 
@@ -21,6 +23,18 @@ if (objdesc[obj]!="") {
 }
 
 for (i=0;i<objfields[obj];i+=1) {
+    parent=objfielddepends[obj,i]
+    parentdrawy[i]=dy
+
+    dx=odx+objfieldindent[obj,i]*10
+    if (parent!=noone) {
+        do {
+            if (!fields[parent,0]) break
+            parent=objfielddepends[obj,parent]
+        } until (parent==noone)
+        if (parent!=noone) if (!fields[parent,0]) continue
+    }
+
     if (!fields[i,0]) {
         str=objfieldname[obj,i]+objfielddef[obj,i]
     } else {
@@ -30,7 +44,7 @@ for (i=0;i<objfields[obj];i+=1) {
             str=objfieldname[obj,i]+": ("+fields[i,1]+", "+fields[i,2]+")"
         } else if (objfieldtype[obj,i]=="string") {
             str=objfieldname[obj,i]+": "+string_replace_all(destringify(fields[i,1]),"#","\#")
-        } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean") {
+        } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean" || objfieldtype[obj,i]=="true" || objfieldtype[obj,i]=="false") {
             str=objfieldname[obj,i]
         } else if (objfieldtype[obj,i]=="instance") {
             deac=0
@@ -112,7 +126,14 @@ switch (objfieldtype[obj,menu]) {
     case "datafile": {show_field_resource_menu(datafilemenu,menu) break}
     case "constant": {show_field_resource_menu(constmenu,menu) break}
 
-    case "bool": case "boolean": {
+    case "true": {
+        if (fields[menu,0]) {
+            if (fields[menu,1]=="true") fields[menu,1]="false"
+            else fields[menu,1]="true"
+        } else fields[menu,1]="false"
+        fields[menu,0]=1
+    } break
+    case "bool": case "boolean": case "false": {
         if (fields[menu,0]) {
             if (fields[menu,1]=="true") fields[menu,1]="false"
             else fields[menu,1]="true"

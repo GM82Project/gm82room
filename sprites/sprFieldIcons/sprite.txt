@@ -1,4 +1,4 @@
-frames=22
+frames=23
 origin_x=8
 origin_y=8
 collision_shape=1
