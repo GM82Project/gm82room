@@ -1,5 +1,5 @@
 ///edit_instance_fields(delete)
-var str,i,dx,dy,menu,menu2,left,right,deac,get,parent;
+var str,i,dx,dy,menu,menu2,left,right,deac,get,fieldparent;
 
 //yeah i know this is the same as the draw script but what can i do
 
@@ -23,16 +23,16 @@ if (objdesc[obj]!="") {
 }
 
 for (i=0;i<objfields[obj];i+=1) {
-    parent=objfielddepends[obj,i]
+    fieldparent=objfielddepends[obj,i]
     parentdrawy[i]=dy
 
     dx=odx+objfieldindent[obj,i]*10
-    if (parent!=noone) {
+    if (fieldparent!=noone) {
         do {
-            if (!fields[parent,0]) break
-            parent=objfielddepends[obj,parent]
-        } until (parent==noone)
-        if (parent!=noone) if (!fields[parent,0]) continue
+            if (!fields[fieldparent,0]) break
+            fieldparent=objfielddepends[obj,fieldparent]
+        } until (fieldparent==noone)
+        if (fieldparent!=noone) if (!fields[fieldparent,0]) continue
     }
 
     if (!fields[i,0]) {

@@ -5,14 +5,14 @@
 //can potentially read through thousands of lines of gml when loading a room
 //so it's been written for speed in most places
 
-var i,f,reading,str,p,linec,actionc,line,fp,action,temp,previousindent,parent,stack;
+var i,f,reading,str,p,linec,actionc,line,fp,action,temp,previousindent,parent,fieldparent,stack;
 
 i=argument0
 
 objnodrawself[i]=false
 
 previousindent=1
-parent=noone
+fieldparent=noone
 stack=ds_stack_create()
 
 objprev=""
@@ -120,14 +120,14 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
 
             if (fp>previousindent) {
                 //field is more indented, store previous field dependency parent
-                repeat (fp-previousindent) ds_stack_push(stack,parent)
-                parent=objfields[i]-1
+                repeat (fp-previousindent) ds_stack_push(stack,fieldparent)
+                fieldparent=objfields[i]-1
             }
             if (fp<previousindent) {
                 //deindent; restore old parent
-                repeat (previousindent-fp) parent=ds_stack_pop(stack)
+                repeat (previousindent-fp) fieldparent=ds_stack_pop(stack)
             }
-            objfielddepends[i,objfields[i]]=parent
+            objfielddepends[i,objfields[i]]=fieldparent
             objfieldindent[i,objfields[i]]=fp-1
             previousindent=fp
 

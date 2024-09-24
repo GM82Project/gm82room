@@ -1,15 +1,15 @@
-var str,i;
+var str,i,fieldparent;
 str=""
 
 for (i=0;i<objfields[obj];i+=1) {
     if (fields[i,0]) {
-        parent=objfielddepends[obj,i]
-        if (parent!=noone) {
+        fieldparent=objfielddepends[obj,i]
+        if (fieldparent!=noone) {
             do {
-                if (!fields[parent,0]) break
-                parent=objfielddepends[obj,parent]
-            } until (parent==noone)
-            if (parent!=noone) if (!fields[parent,0]) continue
+                if (!fields[fieldparent,0]) break
+                parent=objfielddepends[obj,fieldparent]
+            } until (fieldparent==noone)
+            if (fieldparent!=noone) if (!fields[fieldparent,0]) continue
         }
 
         if (objfieldtype[obj,i]=="instance") {

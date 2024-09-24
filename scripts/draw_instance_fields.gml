@@ -1,5 +1,5 @@
 ///draw_instance_fields(preview)
-var str,i,dx,dy,h,deac,get,parent,parentdrawy;
+var str,i,dx,dy,h,deac,get,fieldparent,parentdrawy;
 str=""
 
 fieldhandx=x+lengthdir_x((sprh-sproy)*image_yscale,image_angle-90)+lengthdir_x(-(sprox)*image_xscale,image_angle)
@@ -44,18 +44,18 @@ if (objdesc[obj]!="") {
 draw_set_valign(1)
 
 for (i=0;i<objfields[obj];i+=1) {
-    parent=objfielddepends[obj,i]
-    parentdrawy[i]=dy
+    fieldparent=objfielddepends[obj,i]
+    parentdrawy[i]=dy           
     
     dx=odx+objfieldindent[obj,i]*10
     hdy=dy-16
-    if (parent!=noone) {
-        hdy=parentdrawy[parent]+29
+    if (fieldparent!=noone) {
+        hdy=parentdrawy[fieldparent]+29
         do {
-            if (!fields[parent,0]) break
-            parent=objfielddepends[obj,parent]
-        } until (parent==noone)
-        if (parent!=noone) if (!fields[parent,0]) continue
+            if (!fields[fieldparent,0]) break
+            fieldparent=objfielddepends[obj,fieldparent]
+        } until (fieldparent==noone)
+        if (fieldparent!=noone) if (!fields[fieldparent,0]) continue
     } else hdy=ody
     
     if (!fields[i,0]) {
@@ -122,7 +122,8 @@ for (i=0;i<objfields[obj];i+=1) {
         case "constant": fr=15 break
         case "instance": fr=16 break
         case "true": fr=18 if (fields[i,0]) if (fields[i,1]=="true") fr=18 else fr=17 break
-        case "bool": case "boolean": case "false": fr=22 if (fields[i,0]) if (fields[i,1]=="true") fr=18 else fr=17 break
+        case "false": fr=17 if (fields[i,0]) if (fields[i,1]=="true") fr=18 else fr=17 break
+        case "bool": case "boolean": fr=22 if (fields[i,0]) if (fields[i,1]=="true") fr=18 else fr=17 break
         case "number": case "number_range": fr=19 break
         case "radius": fr=20 break
     }
