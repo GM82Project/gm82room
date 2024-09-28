@@ -7,7 +7,7 @@ for (i=0;i<objfields[obj];i+=1) {
         if (fieldparent!=noone) {
             do {
                 if (!fields[fieldparent,0]) break
-                parent=objfielddepends[obj,fieldparent]
+                fieldparent=objfielddepends[obj,fieldparent]
             } until (fieldparent==noone)
             if (fieldparent!=noone) if (!fields[fieldparent,0]) continue
         }
