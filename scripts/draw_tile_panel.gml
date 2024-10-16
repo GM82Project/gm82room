@@ -4,7 +4,7 @@ draw_sprite(sprMenuButtons,36,x+w-20,y+20)
 draw_button_ext(x+4,y+36,w-8,h-36-4,0,global.col_main)
 
 if (tilebgpal!=noone) {
-    tex=Controller.bg_background[tilebgpal]
+    tex=bg_background[tilebgpal]
     bgw=background_get_width(tex)
     bgh=background_get_height(tex)
     d3d_set_viewport(x+8,y+32+8,w-16,h-32-16)

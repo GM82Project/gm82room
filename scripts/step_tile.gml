@@ -91,7 +91,7 @@ if (mode==1) {
         }
 
         if (tilebgpal!=noone) {
-            tex=Controller.bg_background[tilebgpal]
+            tex=bg_background[tilebgpal]
 
             xgo=median(0,xgo,background_get_width(tex))
             ygo=median(0,ygo,background_get_height(tex))
