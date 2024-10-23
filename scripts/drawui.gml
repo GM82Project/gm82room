@@ -56,17 +56,35 @@ if (mode==0 || mode==1 || mode==5) {
             for (i=x1;i<=x2;i+=gridx) {draw_vertex(i,y1) draw_vertex(i,y2) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
             for (i=y1;i<=y2;i+=gridy) {draw_vertex(x1,i) draw_vertex(x2,i) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
         }
-        if (crosshair) {
+        if (crosshair && mousein) {
             if (keyboard_check(vk_alt)) {
                 draw_vertex(global.mousex,min(0,global.mousey)) draw_vertex(global.mousex,max(roomheight,global.mousey))
                 draw_vertex(min(0,global.mousex),global.mousey) draw_vertex(max(roomwidth,global.mousex),global.mousey)
+                dx=global.mousex
+                dy=global.mousey
             } else {
-                if (!grid) {
-                    draw_vertex(fmx,fmy+gridy) draw_vertex(fmx+gridx,fmy+gridy)
-                    draw_vertex(fmx+gridx,fmy) draw_vertex(fmx+gridx,fmy+gridy)
-                    draw_vertex(fmx,min(0,fmy)) draw_vertex(fmx,max(roomheight,fmy))
-                    draw_vertex(min(0,fmx),fmy) draw_vertex(max(roomwidth,fmx),fmy)
-                }
+                draw_vertex(fmx,fmy+gridy) draw_vertex(fmx+gridx,fmy+gridy)
+                draw_vertex(fmx+gridx,fmy) draw_vertex(fmx+gridx,fmy+gridy)
+                draw_vertex(fmx,min(0,fmy)) draw_vertex(fmx,max(roomheight,fmy))
+                draw_vertex(min(0,fmx),fmy) draw_vertex(max(roomwidth,fmx),fmy)
+                dx=fmx
+                dy=fmy
+            }
+            if (dx>roomwidth) {
+                draw_vertex(dx,0) draw_vertex(max(roomwidth,dx-gridx),0)
+                draw_vertex(dx,roomheight) draw_vertex(max(roomwidth,dx-gridx),roomheight)
+            }
+            if (dx<0) {
+                draw_vertex(dx,0) draw_vertex(min(0,dx+gridx),0)
+                draw_vertex(dx,roomheight) draw_vertex(min(0,dx+gridx),roomheight)
+            }
+            if (dy>roomheight) {
+                draw_vertex(0,dy) draw_vertex(0,max(roomheight,dy-gridy))
+                draw_vertex(roomwidth,dy) draw_vertex(roomwidth,max(roomheight,dy-gridy))
+            }
+            if (dy<0) {
+                draw_vertex(0,dy) draw_vertex(0,min(0,dy+gridy))
+                draw_vertex(roomwidth,dy) draw_vertex(roomwidth,min(0,dy+gridy))
             }
         }
     draw_set_blend_mode_ext(10,1)
