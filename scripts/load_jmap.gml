@@ -1,6 +1,8 @@
 ///load_jmap()
 //loads a jmap file and converts it into engine objects
-var fn,f,str,sx,sy,st,name,o,spr;
+var fn,f,str,sx,sy,st,name,o,spr,mapsize,errorchoice;
+
+errorchoice=-1
 
 fn=get_open_filename("jtool map|*.jmap","")
 
@@ -26,6 +28,8 @@ if (file_exists(fn)) {
                 if (!load_all_jtool_objs()) {
                     show_message("Some engine objects weren't found. Instances may be missing.")
                 }
+                
+                mapsize=ds_map_size(jtool_objs)
 
                 //phew
                 deselect()
@@ -34,7 +38,18 @@ if (file_exists(fn)) {
                     sy=file_text_read_real(f)
                     st=file_text_read_real(f)
                     name=ds_map_find_value(jtool_objs,st)
-                    if string(name)=="0" show_message(st)
+                    if (st>mapsize || string(name)=="0") {
+                        if (errorchoice==-1) errorchoice=show_question("Invalid object "+string(st)+" found while loading jmap.#The engine only seems to define "+string(mapsize)+" jtool objects.##Do you wish to continue loading and ignore future errors?")
+                        if (errorchoice==0) {
+                            //cancel, quit
+                            with (instance) if (modified) instance_destroy()
+                            file_text_close(f)
+                            return 0
+                        } else {
+                            //skip invalid objects
+                            continue
+                        }      
+                    }
                     if (get_object(name)!=noone) {
                         o=instance_create(sx,sy,instance) get_uid(o)
                         o.obj=objpal
