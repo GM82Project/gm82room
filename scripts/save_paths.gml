@@ -5,6 +5,7 @@ if (ds_list_size(path_index_list) || has_paths) {
         directory_create(root+"\paths")
         ds_map_set(project,"has_paths","1")
         ds_map_save_ini(project,root+pjfile)
+        has_paths=1
     }
 
     f=file_text_open_write(root+"paths\index.yyd")
