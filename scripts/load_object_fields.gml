@@ -5,7 +5,7 @@
 //can potentially read through thousands of lines of gml when loading a room
 //so it's been written for speed in most places
 
-var i,f,reading,str,p,linec,actionc,line,fp,action,temp,previousindent,parent,fieldparent,stack;
+var i,f,reading,str,p,linec,actionc,line,fp,action,temp,previousindent,parent,fieldparent,stack,fail;
 
 i=argument0
 
@@ -18,9 +18,10 @@ stack=ds_stack_create()
 objprev=""
 reading=0
 actionc=0
+linec=0
 f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
     line=file_text_read_string(f)
-    file_text_readln(f)
+    file_text_readln(f) linec+=1
     str=line
     if (!reading) {
         if (string_pos("#define Other_4",str)) {
@@ -60,12 +61,11 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
             if (string_pos("action_id=603",action)) {
                 //skip the rest of the action header
                 do {file_text_readln(f) str=file_text_read_string(f)} until (str=="*/" || file_text_eof(f))
-                linec=0
+                linec=-1
             } else continue
         }
 
         temp=string_replace_all(str," ","")
-        linec+=1
 
         //expect field inheritance
         if (string_pos("event_inherited()",temp)) {
@@ -86,7 +86,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         if (fp) {
             while (1) {
                 str=file_text_read_string(f)
-                file_text_readln(f)
+                file_text_readln(f) linec+=1
                 if (string_pos("*/",str) || file_text_eof(f)) break
                 //delete indentation
                 if (str!="") {
@@ -97,16 +97,47 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
             objdesc[i]=string_copy(objdesc[i],1,string_length(objdesc[i])-1)
         }
 
+        //all the errors start with this so we cache it now
+        errorh="Error in action "+string(actionc)+" of Room Start event for object "+qt+argument1+qt+":"+crlf+crlf
+
         //expect preview field
         fp=string_pos("/*preview",str)
         if (fp) {
             if (string_pos("nodrawself",str)) objnodrawself[i]=true
+            fail=false
             while (1) {
                 str=file_text_read_string(f)
-                file_text_readln(f)
-                if (string_pos("*/",str) || file_text_eof(f)) break
+                file_text_readln(f) linec+=1
+                error=errorh+string(linec)+" | "+str+crlf+crlf
+                if (string_pos("*/",str)) break
                 if (str!="") {
-                    objprev+=str+crlf
+                    //look for constants
+                    alphanumleft="abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    alphanumright=alphanumleft+"0123456789"
+
+                    key=ds_map_find_first(constmap) repeat (constmapsize) {
+                        p=string_pos(key,str)
+                        if (p) {
+                            //if constant is a whole token
+                            if (!string_pos(alphanumleft,string_char_at(str,p-1)))
+                            and (!string_pos(alphanumright,string_char_at(str,p+string_length(key)))) {
+                                //check if constant doesn't contain a function call
+                                if (ds_map_exists(consthasfunc,key)) {
+                                    show_message(error+"Constant '"+key+"' present in preview field appears to have a function call in it, and can't be used in a preview field.")
+                                    objprev=""
+                                    //skip rest of preview field and exit loader
+                                    fail=true
+                                    break
+                                } else {
+                                    //instantiate constant
+                                    str=string_replace_all(str,key,"("+ds_map_find_value(constmap,key)+")")
+                                }
+                            }
+                        }
+                    key=ds_map_find_next(constmap,key)}
+                    
+                    if (fail) break
+                    objprev+=str+crlf                    
                 }
             }
         }
@@ -114,10 +145,9 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         //expect field
         fp=string_pos("//field ",str)
         if (fp) {
-            //all the errors start with this so we cache it now
-            error="Error in action "+string(actionc)+" of Room Start event for "+qt+argument1+qt+":"+crlf+crlf+string(linec)+" | "+line+crlf+crlf
             //found a field signature; parse it
-
+            
+            error=errorh+string(linec)+" | "+line+crlf+crlf
             if (fp>previousindent) {
                 //field is more indented, store previous field dependency parent
                 repeat (fp-previousindent) ds_stack_push(stack,fieldparent)
