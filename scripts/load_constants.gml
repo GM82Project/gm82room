@@ -40,7 +40,7 @@ f=file_text_open_read_safe(argument0) if (f) {do {
 
         item=N_Menu_AddItem(constmenu,resname,"")
         N_Menu_ItemSetBitmap(constmenu,item,constant_menuicon)
-        ds_map_add(constmenuitems,item,resname)
+        ds_map_add(constmenuitems,item,cname)
     }
 } until (file_text_eof(f)) file_text_close(f)}
 

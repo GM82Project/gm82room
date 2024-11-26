@@ -52,10 +52,7 @@ if (click) {
                 show_message("This resource has invalid characters in its name and can't be used on a field:##"+qt+get+qt+"##Click the broom icon in Game Maker and resolve any such problems.")
             } else {
                 resfieldid.fields[resfieldi,0]=1
-                if (menusub=="constant") {
-                    //cut the constant name out
-                    resfieldid.fields[resfieldi,1]=string_copy(get,1,string_pos(" (",get)-1)
-                } else resfieldid.fields[resfieldi,1]=get
+                resfieldid.fields[resfieldi,1]=get
             }
         }
     }
