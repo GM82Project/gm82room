@@ -354,6 +354,30 @@ repeat (3) {
 }
 objpal=lastobj
 
+
+//fill object hotbar with most used objects
+var tempmap;tempmap=ds_map_create()
+var temppr;temppr=ds_priority_create()
+
+with (instance)
+    if (ds_map_exists(tempmap,obj)) ds_map_replace(tempmap,obj,ds_map_find_value(tempmap,obj)+1)
+    else ds_map_add(tempmap,obj,1)
+
+key=ds_map_find_first(tempmap) repeat (ds_map_size(tempmap)) {
+    ds_priority_add(temppr,key,ds_map_find_value(tempmap,key))
+key=ds_map_find_next(tempmap,key)}
+
+ds_map_destroy(tempmap)
+
+i=1 repeat (9) {
+    objhotbar[i]=ds_priority_delete_max(temppr)
+i+=1}
+
+ds_priority_destroy(temppr)
+
+//and before you ask, no, we're not doing that for tiles that would be insanely slow
+
+
 if (loading_autosave) {
     savedir=directory_previous(savedir)
 }

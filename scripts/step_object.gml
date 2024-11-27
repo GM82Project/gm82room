@@ -37,4 +37,11 @@ if (mode==0 && objects_length) {
     }
     palettescrollgo=clamp(palettescrollgo,-(palettesize div 4+1)*40+(height-120-136),0)
     palettescroll=clamp(approach((palettescroll*4+palettescrollgo)/5,palettescrollgo,2),-(palettesize div 4+1)*40+(height-120-136),0)
+
+    //hotbar
+    if (!textfield_active()) {
+        i=1 repeat (9) {
+            if (keyboard_check_pressed(ord("0")+i)) if (objhotbar[i]!=noone) objpal=objhotbar[i]
+        i+=1}
+    }
 }

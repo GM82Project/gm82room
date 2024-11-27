@@ -155,6 +155,7 @@
 	|textfield_actions
 	|textfield_set
 	|button_rightactions
+	|textfield_active
 +tools
 	|cement_instances
 	|cleanup_instances

@@ -62,6 +62,8 @@ window_focused=false
 current_cursor=cr_default
 drag_point=-1
 
+i=1 repeat (9) {objhotbar[i]=noone tilehotbar[i]=noone i+=1}
+
 current_path=noone
 current_pathname=""
 path_sel=ds_list_create()
