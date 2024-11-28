@@ -51,5 +51,14 @@ if (mode==0 && objects_length) {
     if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(mouse_wx,mouse_wy,dx,dy,dx+9*40,dy+40)) {
         i=median(1,(mouse_wx-dx) div 40+1,9)
         if (objhotbar[i]!=noone) objpal=objhotbar[i]
+        objhotbarhold=i
+    }
+    if (objhotbarhold) {
+        i=median(1,(mouse_wx-dx) div 40+1,9)
+        j=1 repeat (9) {
+            if (objpal==objhotbar[j]) break
+        j+=1}
+        if (i!=j) {tmp=objhotbar[i] objhotbar[i]=objhotbar[j] objhotbar[j]=tmp}
+        if (!mouse_check_direct(mb_left)) objhotbarhold=0
     }
 }
