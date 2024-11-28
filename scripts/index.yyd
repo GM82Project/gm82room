@@ -219,3 +219,4 @@ test_run
 
 drawui_path_pre
 textfield_active
+set_objpal

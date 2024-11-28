@@ -11,7 +11,7 @@ if (!argument_count) {
     get_object(argument[0])
     var newobj;newobj=objpal
 
-    objpal=tmp
+    set_objpal(tmp)
 
     var name;name=ds_list_find_value(objects,newobj)
     var checksel;checksel=!!num_selected()

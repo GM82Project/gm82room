@@ -1,7 +1,7 @@
 var dy,loaded,i;
 
 with (Controller) {
-    objpal=argument0
+    set_objpal(argument0)
 
     loaded=0
     for (i=0;i<objpal;i+=1) if (objloaded[i]) loaded+=1

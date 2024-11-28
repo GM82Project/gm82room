@@ -17,5 +17,5 @@ if (!objloaded[i]) {
     load_object_fields(i,argument0)
     palettesize+=1
 }
-objpal=i
+set_objpal(i)
 return i

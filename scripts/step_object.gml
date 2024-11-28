@@ -15,7 +15,7 @@ if (mode==0 && objects_length) {
                         //hide/show object
                         objshow[i]=!objshow[i]
                     } else {
-                        objpal=i
+                        set_objpal(i)
                         textfield_set("palette name",ds_list_find_value(objects,objpal))
                     }
                     change_mode(mode)
@@ -43,5 +43,13 @@ if (mode==0 && objects_length) {
         i=1 repeat (9) {
             if (keyboard_check_pressed(ord("0")+i)) if (objhotbar[i]!=noone) objpal=objhotbar[i]
         i+=1}
+    }
+
+    dx=width div 2 -40*4.5-20
+    dy=height-32-32-20
+
+    if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(mouse_wx,mouse_wy,dx,dy,dx+9*40,dy+40)) {
+        i=median(1,(mouse_wx-dx) div 40+1,9)
+        if (objhotbar[i]!=noone) objpal=objhotbar[i]
     }
 }
