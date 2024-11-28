@@ -369,7 +369,7 @@ key=ds_map_find_next(tempmap,key)}
 
 ds_map_destroy(tempmap)
 
-i=1 repeat (9) {
+i=1 repeat (min(9,ds_priority_size(temppr))) {
     objhotbar[i]=ds_priority_delete_max(temppr)
 i+=1}
 
