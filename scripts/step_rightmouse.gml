@@ -1,13 +1,13 @@
 if (selecting || paint || selsize || grabknob || grab_background) exit
 
-if (mousein && mode==0 && mouse_check_button_pressed(mb_right)) {
+if (mousein && mode==0 && mouse_check_modal_pressed(mb_right)) {
     with (select) if (fieldactive) {
         edit_instance_fields(1)
         exit
     }
 }
 
-if (mouse_check_button_pressed(mb_right)) {
+if (mouse_check_modal_pressed(mb_right)) {
     if (!mousein) {
         //click on menus
         with (Button) if (instance_position(mouse_wx,mouse_wy,id)) {
