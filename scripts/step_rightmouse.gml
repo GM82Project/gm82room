@@ -1,3 +1,5 @@
+var menued;
+
 if (selecting || paint || selsize || grabknob || grab_background) exit
 
 if (mousein && mode==0 && mouse_check_modal_pressed(mb_right)) {
@@ -15,6 +17,7 @@ if (mouse_check_modal_pressed(mb_right)) {
         }
     } else if (!swaprmb && keyboard_check(vk_control)) or (swaprmb && !keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
         //stack menu
+        menued=false
         if (mode==0) {
             with (instance) {
                 if (instance_position(global.mousex,global.mousey,id)) {
@@ -44,7 +47,7 @@ if (mouse_check_modal_pressed(mb_right)) {
                     update_selection_bounds()
                 }
                 ds_priority_clear(click_priority)
-                if (num_selected()==1) with (select) fieldactive=1
+                if (!menued) with (select) fieldactive=1
             }
         }
         if (mode==1) {
@@ -115,9 +118,14 @@ if (mouse_check_modal_pressed(mb_right)) {
 }
 
 if (erasing) {
-    //delete instances
-    if (mode==0) with (instance_position(global.mousex,global.mousey,instance)) {add_undo_instance() instance_destroy()}
-    if (mode==1) with (instance_position(global.mousex,global.mousey,tileholder)) {add_undo_tile() instance_destroy()}
+    //delete instances or tiles
+    var find,justone;
+    justone=((swaprmb && keyboard_check(vk_control)) || (!swaprmb && !keyboard_check(vk_shift)))
+    do {
+        find=false
+        if (mode==0) with (instance_position(global.mousex,global.mousey,instance)) {add_undo_instance() instance_destroy() find=true}
+        if (mode==1) with (instance_position(global.mousex,global.mousey,tileholder)) {add_undo_tile() instance_destroy() find=true}
+    } until (!find || justone)
 
-    if (!direct_mbright) {erasing=0 push_undo()}
+    if (!direct_mbright || justone) {erasing=0 push_undo()}
 }
