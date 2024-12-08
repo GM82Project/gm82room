@@ -13,7 +13,8 @@ if (mouse_check_modal_pressed(mb_right)) {
         with (Button) if (instance_position(mouse_wx,mouse_wy,id)) {
             event_user(3)
         }
-    } else if (keyboard_check(vk_control)) {
+    } else if (!swaprmb && keyboard_check(vk_control)) or (swaprmb && !keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
+        //stack menu
         if (mode==0) {
             with (instance) {
                 if (instance_position(global.mousex,global.mousey,id)) {
@@ -43,6 +44,7 @@ if (mouse_check_modal_pressed(mb_right)) {
                     update_selection_bounds()
                 }
                 ds_priority_clear(click_priority)
+                if (num_selected()==1) with (select) fieldactive=1
             }
         }
         if (mode==1) {
@@ -76,6 +78,7 @@ if (mouse_check_modal_pressed(mb_right)) {
             }
         }
     } else {
+        //delete
         if (selecting) selecting=0
         with (TextField) textfield_actions()
         clear_inspector()

@@ -18,6 +18,7 @@ outroomgrid=registry_read_dword(dir+"GM82DrawGridOutsideRoom",1)
 do_autosaves=registry_read_dword(dir+"GM82RoomAutosave",1)
 hide3dgizmo=registry_read_dword(dir+"GM82RoomHide3dGizmo",0)
 cropbackgrounds=registry_read_dword(dir+"GM82RoomCropBackgrounds",1)
+swaprmb=registry_read_dword(dir+"GM82RoomSwapRMB",1)
 
 for (i=0;i<16;i+=1) customcolors[i]=registry_read_dword(dir+"RoomCustomColors"+string(i),0)
 
