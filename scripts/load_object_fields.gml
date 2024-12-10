@@ -119,10 +119,10 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                         p=string_pos(key,str)
                         if (p) {
                             //if constant is a whole token
-                            if (!string_pos(alphanumleft,string_char_at(str,p-1)))
-                            and (!string_pos(alphanumright,string_char_at(str,p+string_length(key)))) {
+                            if (!string_pos(string_char_at(str,p-1),alphanumleft))
+                            and (!string_pos(string_char_at(str,p+string_length(key)),alphanumright)) {
                                 //check if constant doesn't contain a function call
-                                if (ds_map_exists(consthasfunc,key)) {
+                                if (ds_map_exists(consthasfunc,key)) {                                
                                     show_message(error+"Constant '"+key+"' present in preview field appears to have a function call in it, and can't be used in a preview field.")
                                     objprev=""
                                     //skip rest of preview field and exit loader
