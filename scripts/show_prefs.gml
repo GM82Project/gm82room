@@ -104,6 +104,14 @@ while (1) {
             continue
         }
 
+        if (!swaprmb) {
+            //rmb alwaysdel
+            if (point_in_rectangle(mx,my,8,304,8+24,304+24)) {
+                rmbalwaysdel=!rmbalwaysdel
+                continue
+            }
+        }
+
         //custom theme controls
         if (theme==2) {
             if (point_in_rectangle(mx,my,280,128,280+32,128+24)) {
@@ -216,6 +224,10 @@ while (1) {
     //swap rmb
     dx=8 dy=272 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"8.1 Right-Click") if (swaprmb) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
+    if (!swaprmb) {
+        //rmb always del
+        dx=8 dy=304 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"RMB Delete All") if (rmbalwaysdel) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    }
 
     draw_set_color($ffffff)
     d3d_transform_set_identity()

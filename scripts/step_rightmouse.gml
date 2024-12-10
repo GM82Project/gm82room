@@ -120,7 +120,7 @@ if (mouse_check_modal_pressed(mb_right)) {
 if (erasing) {
     //delete instances or tiles
     var find,justone;
-    justone=((swaprmb && keyboard_check(vk_control)) || (!swaprmb && !keyboard_check(vk_shift)))
+    justone=((swaprmb && keyboard_check(vk_control)) || (!swaprmb && !keyboard_check(vk_shift))) && !(rmbalwaysdel && !swaprmb)
     do {
         find=false
         if (mode==0) with (instance_position(global.mousex,global.mousey,instance)) {add_undo_instance() instance_destroy() find=true}
