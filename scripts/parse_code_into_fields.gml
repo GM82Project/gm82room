@@ -20,7 +20,7 @@ if (str!="") {
             if (string_pos("//gm82 fields end",next)) {state=2 continue}
             //reading fields
             p=string_pos("[0]",next)
-            if (p) {
+            if (p && !string_pos('"',next)) {
                 //this is an array so it must be coordinate
                 name=string_copy(next,1,p-1)
                 p=string_pos("=",next)
