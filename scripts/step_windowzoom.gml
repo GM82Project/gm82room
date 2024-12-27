@@ -109,20 +109,20 @@ if (grabknob) {
         keyboard_clear(vk_equals)
     }
 } else if (mousein) {
-    if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) {
+    if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || (keyboard_check(vk_control) && keyboard_check_pressed(vk_minus))) {
         zoomgo*=1.2
         keyboard_clear(vk_subtract)
         keyboard_clear(vk_minus)
         zoomcenter=0
     }
-    if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check_pressed(vk_equals))) {
+    if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check_pressed(vk_equals) && keyboard_check(vk_control))) {
         zoomgo/=1.2
         keyboard_clear(vk_add)
         keyboard_clear(vk_equals)
         zoomcenter=0
     }
 }
-if (keyboard_check_pressed(ord("0"))) {
+if ((keyboard_check_pressed(vk_multiply) && mousein) || (keyboard_check_pressed(ord("0")) && keyboard_check(vk_control))) {
     yes=1
     with (TextField) if (active) yes=0
     if (yes) {
