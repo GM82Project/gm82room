@@ -48,7 +48,7 @@ if (mouse_check_modal_pressed(mb_right)) {
                 }
                 ds_priority_clear(click_priority)
                 if (!menued) with (select) fieldactive=1
-            }
+            } else deselect()
         }
         if (mode==1) {
             with (tileholder) {
