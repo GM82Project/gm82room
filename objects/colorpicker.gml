@@ -410,8 +410,17 @@ action_id=603
 applies_to=self
 */
 draw_set_color_sel()
-draw_rectangle(target_instance.bbox_left,target_instance.bbox_top,target_instance.bbox_right+1,target_instance.bbox_bottom+1,1)
-draw_arrow(offx+w/2,offy+h/2,mean(target_instance.bbox_left,target_instance.bbox_right+1),mean(target_instance.bbox_top,target_instance.bbox_bottom+1),11)
+if (target_instance.object_index==instance || target_instance.object_index==tileholder) {
+    //instance is in room coords
+    dx=view_xview
+    dy=view_yview
+    draw_rectangle((target_instance.bbox_left-dx)/zoom,(target_instance.bbox_top-dy)/zoom,(target_instance.bbox_right+1-dx)/zoom,(target_instance.bbox_bottom+1-dy)/zoom,1)
+    draw_arrow(offx+w/2,offy+h/2,(mean(target_instance.bbox_left,target_instance.bbox_right+1)-dx)/zoom,(mean(target_instance.bbox_top,target_instance.bbox_bottom+1)-dy)/zoom,11)
+} else {
+    //probably in ui coords
+    draw_rectangle(target_instance.bbox_left,target_instance.bbox_top,target_instance.bbox_right+1,target_instance.bbox_bottom+1,1)
+    draw_arrow(offx+w/2,offy+h/2,mean(target_instance.bbox_left,target_instance.bbox_right+1),mean(target_instance.bbox_top,target_instance.bbox_bottom+1),11)
+}
 draw_set_color($ffffff)
 
     //draw
