@@ -73,30 +73,8 @@ if (gm82version!=4 && gm82version!=5) {
     exit
 }
 
+load_thumbs()
 
-//set up thumbnails
-directory_create(root+"cache")
-if (directory_exists(root+"cache\backgrounds") && directory_exists(root+"cache\sprites")) {
-    icon_mode=1
-} else if (!file_exists(root+"cache\ignore_warning")) {
-    if (show_question("Error loading icons: GM82 cache is missing, try to Save As the project to fix this.##You can still edit, but icons won't be displayed for resources.##Would you like to disable this warning?")) {
-        file_text_close(file_text_open_write(root+"cache\ignore_warning"))
-    }
-}
-
-fn=root+"cache\folder.bmp" export_include_file_location("folder.bmp",fn) folder_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\0.bmp"      export_include_file_location("0.bmp",fn)      sprite_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\1.bmp"      export_include_file_location("1.bmp",fn)      sound_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\2.bmp"      export_include_file_location("2.bmp",fn)      background_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\3.bmp"      export_include_file_location("3.bmp",fn)      path_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\4.bmp"      export_include_file_location("4.bmp",fn)      script_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\5.bmp"      export_include_file_location("5.bmp",fn)      font_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\6.bmp"      export_include_file_location("6.bmp",fn)      timeline_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\7.bmp"      export_include_file_location("7.bmp",fn)      object_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\8.bmp"      export_include_file_location("8.bmp",fn)      room_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\9.bmp"      export_include_file_location("9.bmp",fn)      datafile_menuicon=N_Menu_LoadBitmap(fn)
-fn=root+"cache\10.bmp"     export_include_file_location("10.bmp",fn)     constant_menuicon=N_Menu_LoadBitmap(fn)
-thumbcount=12
 
 //load assets
 objlookup=ds_map_create()

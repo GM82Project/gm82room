@@ -220,3 +220,5 @@ test_run
 drawui_path_pre
 textfield_active
 set_objpal
+load_thumbs
+create_menu_bitmap

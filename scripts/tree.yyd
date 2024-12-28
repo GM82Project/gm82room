@@ -21,6 +21,7 @@
 	|string_antivirus
 	|generate_path_model
 	|ds_map_save_ini
+	|create_menu_bitmap
 +file
 	|gensavecode
 	|parsereal
@@ -44,10 +45,6 @@
 		|load_room_tree
 		|load_datafiles
 		|load_constants
-	|load_jtooldata
-	|load_all_jtool_objs
-	|loadthumb
-	|load_jtool_table
 +chunks
 	|chunk_export
 	|chunk_import
@@ -86,6 +83,11 @@
 	|delete_backups
 	|parse_code_into_flags
 	|parse_flags_into_code
+	|load_jtooldata
+	|load_all_jtool_objs
+	|load_thumbs
+	|loadthumb
+	|load_jtool_table
 |createui
 +createui
 	|createui_main
