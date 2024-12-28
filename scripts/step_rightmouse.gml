@@ -78,7 +78,7 @@ if (mouse_check_modal_pressed(mb_right)) {
                     selectt=id
                 }
                 ds_priority_clear(click_priority)
-            }
+            } else deselect()
         }
     } else {
         //delete
