@@ -3,6 +3,12 @@ if (!argument_count) {
     call_nmenu("replaceobj",objmenu)
 } else {
     //called from the menu callback
+
+    if (argument[0]==undefined) {
+        //user selected nothing in the menu
+        exit
+    }
+
     instance_activate_object(instance)
 
     var tmp;tmp=objpal
