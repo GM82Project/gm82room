@@ -3,6 +3,16 @@ var str,p;
 click=N_Menu_CheckMenus()
 if (click) {
     io_clear()
+    if (menutype=="toolmenu") {
+        get=ds_map_get(toolmenuitems,click)
+        switch (get) {
+            case 0: {replace_instances()}break
+            case 1: {load_jmap()}break
+            case 2: {parsecode_instances()}break
+            case 3: {cleanup_instances()}break
+            case 4: {cement_instances()}break
+        }
+    }
     if (menutype=="resourcefield") {
         if (menusub=="sprite")     get=ds_map_get(sprmenuitems,click)
         if (menusub=="background") get=ds_map_get(bgmenuitems,click)

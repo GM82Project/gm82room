@@ -161,11 +161,8 @@ with (Controller) switch (argument0) {
     case "palscrolup"   : {palettescrollgo+=192}break
     case "overlap check": {overlap_check=!overlap_check}break
     case "object search": {search_for_objects(get_string("Object name:",""))}break
-    case "cement"       : {cement_instances()}break
-    case "cleanup"      : {cleanup_instances()}break
-    case "parsecode"    : {parsecode_instances()}break
-    case "loadjmap"     : {load_jmap()}break
-    case "replaceobj"   : {replace_instances()}break
+
+    case "tools"        : {call_nmenu("toolmenu",toolmenu)}break
 
 
     //tiles

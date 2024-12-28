@@ -33,7 +33,7 @@ globalvar
     bg_gridx,bg_gridy,bg_gridox,bg_gridoy,bg_gridsx,bg_gridsy,bg_istile,
     layers,curtilex,curtiley,curtilew,curtileh,
     path_precision,current_path,current_pathpoint,drag_point,current_pathname,path_thin,pathmap_path,pathmap_model,pathmap_edited,path_sel,
-    objmenu,objmenuitems,
+    objmenu,objmenuitems,toolmenu,toolmenuitems,
     bgmenu,bgmenuitems,tilebgmenu_contains,
     undostack,undolist,undoing,uidmap,lastuid,current_undo_size,total_undo_size,
     mspal,customcolors,

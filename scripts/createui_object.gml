@@ -42,43 +42,10 @@ i.tagmode=0
 
 
 //tools
-i=instance_create(120,height-100+60,Button)
-i.action="cement"
-i.alt="Glue adjacent instances of this object to reduce instance count"
-i.spr=26
-i.w=28
-i.tagmode=0
-i.anchor=2
-
-i=instance_create(92,height-100+60,Button)
-i.action="cleanup"
-i.alt="Remove identical stacked instances of this object"
-i.spr=29
-i.w=28
-i.tagmode=0
-i.anchor=2
-
-i=instance_create(64,height-100+60,Button)
-i.action="parsecode"
-i.alt="Parse all creation code for scaling and blend values"
-i.spr=31
-i.w=28
-i.tagmode=0
-i.anchor=2
-
-i=instance_create(36,height-100+60,Button)
-i.action="loadjmap"
-i.alt="Import jtool jmap file into a compatible engine"
-i.spr=32
-i.w=28
-i.tagmode=0
-i.anchor=2
-
 i=instance_create(8,height-100+60,Button)
-i.action="replaceobj"
-i.alt="Replace selected instances of an object with a different object"
-i.spr=33
-i.w=28
+i.action="tools"
+i.text="Tools"
+i.w=64
 i.tagmode=0
 i.anchor=2
 

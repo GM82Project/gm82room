@@ -222,3 +222,4 @@ textfield_active
 set_objpal
 load_thumbs
 create_menu_bitmap
+load_tool_menu
