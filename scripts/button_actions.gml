@@ -100,6 +100,22 @@ with (Controller) switch (argument0) {
         }
         update_selection_bounds()
     }break
+    case "inst centerx": {
+        cx=roomwidth div 2
+        with (instance) if (sel) {
+            if (x==cx) x=round(cx-(bbox_right+1-bbox_left)/2) else x=cx
+            if (select==id) update_inspector()
+        }
+        update_selection_bounds()
+    }break
+    case "inst centery": {
+        cy=roomheight div 2
+        with (instance) if (sel) {
+            if (y==cy) y=round(cy-(bbox_bottom+1-bbox_top)/2) else y=cy
+            if (select==id) update_inspector()
+        }
+        update_selection_bounds()
+    }break
     case "inst rot left" : {
         with (instance) if (sel) {
             cl=min(cl,bbox_left)
@@ -213,6 +229,24 @@ with (Controller) switch (argument0) {
             tile_set_position(tile,x,y)
             tile_set_scale(tile,tilesx,tilesy)
             do_change_undo("flipping",0)
+            if (selectt==id) update_inspector()
+        }
+        update_selection_bounds()
+    }break
+    case "tile centerx": {
+        cx=roomwidth div 2
+        with (tileholder) if (sel) {
+            if (x==cx) x=round(cx-(bbox_right+1-bbox_left)/2) else x=cx
+            tile_set_position(tile,x,y)
+            if (selectt==id) update_inspector()
+        }
+        update_selection_bounds()
+    }break
+    case "tile centery": {
+        cy=roomheight div 2
+        with (tileholder) if (sel) {
+            if (y==cy) y=round(cy-(bbox_bottom+1-bbox_top)/2) else y=cy
+            tile_set_position(tile,x,y)
             if (selectt==id) update_inspector()
         }
         update_selection_bounds()

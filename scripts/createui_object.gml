@@ -129,6 +129,27 @@ i.w=56
 i.h=24
 i.tagmode=0
 
+i=instance_create(width-160+8,100,Button)
+i.action="inst centerx"
+i.alt="Center Horizontally"
+i.spr=53
+i.anchor=1
+i.dynamic=0
+i.w=24
+i.h=24
+i.tagmode=0
+
+i=instance_create(width-160+36,100,Button)
+i.action="inst centery"
+i.alt="Center Vertically"
+i.spr=54
+i.anchor=1
+i.dynamic=0
+i.w=24
+i.h=24
+i.tagmode=0
+
+
 //scale
 i=instance_create(width-160+8,164,TextField)
 i.action="inst xs"
