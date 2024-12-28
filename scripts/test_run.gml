@@ -1,12 +1,16 @@
 save_room(0)
 
-roaming=directory_previous(directory_previous(directory_previous(temp_directory)))+"Roaming\"
+gm=program_directory+"\GameMaker.exe"
 
-gm=registry_read_sz("SOFTWARE\Game Maker\Version 8.2\Preferences\Directory")
+if (!file_exists(gm)) {
+    roaming=directory_previous(directory_previous(directory_previous(temp_directory)))+"Roaming\"
 
-if (gm==undefined) {show_message("Error building: Can't find Game Maker 8.2 in the registry.") exit}
+    gm=registry_read_sz("SOFTWARE\Game Maker\Version 8.2\Preferences\Directory")
 
-gm+="GameMaker.exe"
+    if (gm==undefined) {show_message("Error building: Can't find Game Maker 8.2. Please try reinstalling the program.") exit}
+
+    gm+="GameMaker.exe"
+}
 
 exe=temp_directory+"\"+filename_change_ext(pjfile,".exe")
 
