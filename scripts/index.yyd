@@ -105,7 +105,7 @@ load_jtooldata
 load_all_jtool_objs
 replace_instances
 live_send_room_data
-string_wrap
+
 globalvars
 edit_instance_fields
 draw_instance_fields
@@ -131,7 +131,7 @@ loadthumb
 show_field_resource_menu
 invalid_variable_name
 invalid_field_type
-string_delete_edge_spaces
+
 load_object_fields
 draw_sprite_outline
 draw_knob

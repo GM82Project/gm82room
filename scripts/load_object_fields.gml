@@ -169,18 +169,18 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
             p-=1}
 
             if (p) {
-                objfielddef[i,objfields[i]]=" - "+string_delete_edge_spaces(string_delete(str,1,p+2))
-                str=string_delete_edge_spaces(string_copy(str,1,p-1))
+                objfielddef[i,objfields[i]]=" - "+string_trim(string_delete(str,1,p+2))
+                str=string_trim(string_copy(str,1,p-1))
             }
 
             p=string_pos(": ",str)
             if (p) {
-                fieldname=string_delete_edge_spaces(string_copy(str,fp+8,p-(fp+8)))
+                fieldname=string_trim(string_copy(str,fp+8,p-(fp+8)))
                 if (invalid_variable_name(fieldname)) {
                     show_message(error+"Field name "+qt+fieldname+qt+" contains invalid characters.")
                 } else {
                     objfieldname[i,objfields[i]]=fieldname
-                    str=string_delete_edge_spaces(string_delete(str,1,p+1))
+                    str=string_trim(string_delete(str,1,p+1))
 
                     if (string_pos("enum",str)) {
                         //enums are parsed differently due to option list
@@ -191,7 +191,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                             if (str="") {
                                 show_message(error+"Enum declaration has empty option list.")
                             } else {
-                                objfieldargs[i,objfields[i]]=string_delete_edge_spaces(str)
+                                objfieldargs[i,objfields[i]]=string_trim(str)
                                 objfields[i]+=1
                             }
                         } else {
@@ -232,7 +232,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                 }
             } else {
                 //default to "value" type when no type is present
-                fieldname=string_delete_edge_spaces(string_delete(str,1,fp+7))
+                fieldname=string_trim(string_delete(str,1,fp+7))
                 if (invalid_variable_name(fieldname)) {
                     show_message(error+"Field name "+qt+fieldname+qt+" contains invalid characters.")
                 } else {

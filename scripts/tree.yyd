@@ -9,8 +9,6 @@
 	|file_text_open_read_safe
 	|file_text_open_append_safe
 	|draw_button_ext
-	|string_wrap
-	|string_delete_edge_spaces
 	|draw_text_outline
 	|message
 	|point_in_quad
