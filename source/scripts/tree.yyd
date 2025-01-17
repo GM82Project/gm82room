@@ -170,6 +170,8 @@
 	|get_color_ext
 	|check_colorpicker_undo
 	|test_run
+	|subdivide_instances
+	|create_french_fry
 +instances
 	|get_uid
 	|set_uid

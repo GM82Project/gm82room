@@ -9,7 +9,7 @@ icon[i]=create_menu_bitmap(sprMenuButtons,32) name[i]="Import Jtool map" i+=1
 icon[i]=create_menu_bitmap(sprMenuButtons,31) name[i]="Parse Creation Code" i+=1
 icon[i]=create_menu_bitmap(sprMenuButtons,29) name[i]="Clean Stacked Copies" i+=1
 icon[i]=create_menu_bitmap(sprMenuButtons,26) name[i]="Glue Adjacent Instances" i+=1
-icon[i]=create_menu_bitmap(sprMenuButtons,1 ) name[i]="Subdivide Instances" i+=1
+icon[i]=create_menu_bitmap(sprMenuButtons,1 ) name[i]="Gigaknife" i+=1
 
 thumbcount+=i
 

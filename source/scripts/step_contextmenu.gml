@@ -11,6 +11,7 @@ if (click) {
             case 2: {parsecode_instances()}break
             case 3: {cleanup_instances()}break
             case 4: {cement_instances()}break
+            case 5: {subdivide_instances()}break
         }
     }
     if (menutype=="resourcefield") {
