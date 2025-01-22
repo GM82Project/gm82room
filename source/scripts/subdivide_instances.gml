@@ -45,8 +45,33 @@ with (instance) if (sel) {
             o=create_french_fry(l,t)
             o.image_yscale=(b-t)/o.sprh
 
+            //right
+            o=create_french_fry(rm,t)
+            o.image_xscale=(r-rm)/o.sprw
+            o.image_yscale=(b-t)/o.sprh
+
+            //middle
+            u=lm repeat ((rm-lm) div gridx) {
+                o=create_french_fry(u,t)
+                o.image_yscale=(b-t)/o.sprh
+            u+=gridx}
         } else if (thin) {
             //we have ourselves tall man
+
+            //top
+            o=create_french_fry(l,t)
+            o.image_xscale=(r-l)/o.sprw
+
+            //bottom
+            o=create_french_fry(l,bm)
+            o.image_xscale=(r-l)/o.sprw
+            o.image_yscale=(b-bm)/o.sprh
+
+            //middle
+            v=tm repeat ((bm-tm) div gridy) {
+                o=create_french_fry(l,v)
+                o.image_xscale=(r-l)/o.sprw
+            v+=gridy}
         } else if (!short && !thin) {
             //we 9-slice dat shizz
             if (dx mod gridx and dy mod gridy) {
@@ -116,5 +141,6 @@ begin_undo(act_destroy,"Subdivide instances",1)
 push_undo()
 
 change_mode(mode)
+update_instance_memory()
 
 if (error!="") show_message("There were errors using the Gigaknife tool:##"+error)
