@@ -8,7 +8,7 @@ if (argument0) {
     if (!do_autosaves) exit
     dir+="autosave\"
     directory_create(dir)
-    file_text_close(file_text_open_write(dir+"gm82room lockfile"))
+    file_create(dir+"gm82room lockfile")
     message("Autosaved")
 } else {
     //normal save, make backup first
