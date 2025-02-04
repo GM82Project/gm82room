@@ -1,3 +1,5 @@
+if (!show_question("Glue Adjacent Instances##This tool will merge instances that share edges into larger rectangles. This can be used to reduce collider counts. Note that this destroys fields in such instances.##Proceed?")) exit
+
 var coll,checksel,deact,dcur;
 
 dcur=0

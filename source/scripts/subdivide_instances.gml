@@ -1,3 +1,5 @@
+if (!show_question("Gigaknife##This tool will split selected instances alongside the room grid. Note that this destroys any fields in such instances.##Proceed?")) exit
+
 var error,count,dx,dy,dw,dh,l,t,r,b,lm,rm,tm,bm,o;
 
 error=""

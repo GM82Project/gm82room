@@ -17,4 +17,7 @@ o.modified=1
 o.image_xscale=(floorto(o.x+gridx,gridx)-o.x)/o.sprw
 o.image_yscale=(floorto(o.y+gridy,gridy)-o.y)/o.sprh
 
+o.image_blend=image_blend
+o.image_alpha=image_alpha
+
 return o

@@ -18,10 +18,3 @@ j=0 repeat (i) {
     N_Menu_ItemSetBitmap(toolmenu,item,icon[j])
     ds_map_add(toolmenuitems,item,j)
 j+=1}
-
-/*
-i.alt="Glue adjacent instances of this object to reduce instance count"
-i.alt="Remove identical stacked instances of this object"
-i.alt="Parse all creation code for scaling and blend values"
-i.alt="Import jtool jmap file into a compatible engine"
-i.alt="Replace selected instances of an object with a different object"

@@ -1,5 +1,6 @@
 if (!argument_count) {
     //called from the tool button
+    if (!show_question("Swap Instance Objects##This tool will replace the object associated with all selected instances. Note that this will erase any fields associated with such instances as fields are bound to specific objects.##Proceed?")) exit
     call_nmenu("replaceobj",objmenu)
 } else {
     //called from the menu callback
