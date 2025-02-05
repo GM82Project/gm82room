@@ -16,13 +16,13 @@ with (Controller) switch (argument0) {
     }break
 
     case "grid x": {
-        m=show_menu("Grid X:|8|16|32|64|128|256|400",-1)
-        if (m) gridx=min(pick(m-1,8,16,32,64,128,256,400),roomwidth)
+        m=show_menu("Grid X:|8|16|32|64|128|256|"+string(roomwidth div 2),-1)
+        if (m) gridx=min(pick(m-1,8,16,32,64,128,256,roomwidth div 2),roomwidth)
         with (other) {text=string(gridx) event_user(4)}
     }break
     case "grid y": {
-        m=show_menu("Grid Y:|8|16|32|64|128|256|304",-1)
-        if (m) gridy=min(pick(m-1,8,16,32,64,128,256,304),roomheight)
+        m=show_menu("Grid Y:|8|16|32|64|128|256|"+string(roomheight div 2),-1)
+        if (m) gridy=min(pick(m-1,8,16,32,64,128,256,roomheight div 2),roomheight)
         with (other) {text=string(gridy) event_user(4)}
     }break
 }
