@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=488
-h=380
+h=412
 
 act=""
 button=1
@@ -97,28 +97,33 @@ while (1) {
             cropbackgrounds=!cropbackgrounds
             continue
         }
+        //skip tool warnings
+        if (point_in_rectangle(mx,my,240,336,240+24,336+24)) {
+            skipwarnings=!skipwarnings
+            continue
+        }
 
         //rmb boxes
 
-        //menu mode
-        if (point_in_rectangle(mx,my,8,256,8+24,256+24)) {
-            swaprmb=1
-            continue
-        }
+            //menu mode
+            if (point_in_rectangle(mx,my,8,256,8+24,256+24)) {
+                swaprmb=1
+                continue
+            }
 
-        //menu mode
-        if (point_in_rectangle(mx,my,8,288,8+24,288+24)) {
-            swaprmb=0
-            rmbalwaysdel=0
-            continue
-        }
+            //delete mode
+            if (point_in_rectangle(mx,my,8,288,8+24,288+24)) {
+                swaprmb=0
+                rmbalwaysdel=0
+                continue
+            }
 
-        //rmb alwaysdel
-        if (point_in_rectangle(mx,my,8,320,8+24,320+24)) {
-            swaprmb=0
-            rmbalwaysdel=1
-            continue
-        }
+            //alwaysdel mode
+            if (point_in_rectangle(mx,my,8,320,8+24,320+24)) {
+                swaprmb=0
+                rmbalwaysdel=1
+                continue
+            }
 
         //custom theme controls
         if (theme==2) {
@@ -229,6 +234,10 @@ while (1) {
 
     //crop backgrounds
     dx=240 dy=304 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Crop Backgrounds") if (cropbackgrounds) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //crop backgrounds
+    dx=240 dy=336 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Skip Tool Warnings") if (skipwarnings) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
 
     //swap rmb
     dx=8 dy=256 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Menu") if (swaprmb) draw_sprite(sprMenuButtons,17,dx+12,dy+12)

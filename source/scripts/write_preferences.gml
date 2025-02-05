@@ -14,6 +14,7 @@ registry_write_dword(dir+"GM82RoomHide3dGizmo",hide3dgizmo)
 registry_write_dword(dir+"GM82RoomCropBackgrounds",cropbackgrounds)
 registry_write_dword(dir+"GM82RoomSwapRMB",swaprmb)
 registry_write_dword(dir+"GM82RoomRMBAlwaysDel",rmbalwaysdel)
+registry_write_dword(dir+"GM82RoomSkipWarnings",skipwarnings)
 
 for (i=0;i<16;i+=1) registry_write_dword(dir+"RoomCustomColors"+string(i),customcolors[i])
 

@@ -1,6 +1,6 @@
 ///load_jmap()
 //loads a jmap file and converts it into engine objects
-if (!show_question("Import Jtool map##This tool will import a Jtool map into a compatible engine. If the game you're editing does not contain the necessary objects, importing may fail.##Proceed?")) exit
+if (!skipwarnings) if (!show_question("Import Jtool map##This tool will import a Jtool map into a compatible engine. If the game you're editing does not contain the necessary objects, importing may fail.##Proceed?")) exit
 
 var fn,f,str,sx,sy,st,name,o,spr,mapsize,errorchoice;
 

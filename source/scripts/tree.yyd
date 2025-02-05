@@ -158,11 +158,13 @@
 	|button_rightactions
 	|textfield_active
 +tools
-	|cement_instances
-	|cleanup_instances
-	|parsecode_instances
-	|replace_instances
-	|load_jmap
+	+tool menu
+		|cement_instances
+		|cleanup_instances
+		|parsecode_instances
+		|replace_instances
+		|load_jmap
+		|subdivide_instances
 	|load_reference
 	|draw_reference
 	|search_for_objects
@@ -170,7 +172,6 @@
 	|get_color_ext
 	|check_colorpicker_undo
 	|test_run
-	|subdivide_instances
 	|create_french_fry
 +instances
 	|get_uid

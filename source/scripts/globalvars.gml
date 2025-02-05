@@ -22,7 +22,7 @@ globalvar
     knobx,knoby,grabknob,
     click_priority,
     grab_background,grab_bgoffx,grab_bgoffy,
-    codeeditortype,colorpickertype,hide3dgizmo,cropbackgrounds,swaprmb,rmbalwaysdel,
+    codeeditortype,colorpickertype,hide3dgizmo,cropbackgrounds,swaprmb,rmbalwaysdel,skipwarnings,
     messagestr,messagetime,
     autosave_timer,autosave_interval,
     sprites,backgrounds,objects,sprloaded,sprloaded_len,bgloaded,objloaded,objparent,objspr,objvis,objdepth,bghastiles,bgsmallicon,

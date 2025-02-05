@@ -1,4 +1,4 @@
-if (!show_question("Parse Creation Code##This tool will check creation code and apply things like scaling, rotation and blending to instances. This can be used to convert old 8.1 rooms to 8.2 format.##Proceed?")) exit
+if (!skipwarnings) if (!show_question("Parse Creation Code##This tool will check creation code and apply things like scaling, rotation and blending to instances. This can be used to convert old 8.1 rooms to 8.2 format.##Proceed?")) exit
 
 var str,p;
 

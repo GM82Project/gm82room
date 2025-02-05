@@ -20,6 +20,7 @@ hide3dgizmo=registry_read_dword(dir+"GM82RoomHide3dGizmo",0)
 cropbackgrounds=registry_read_dword(dir+"GM82RoomCropBackgrounds",1)
 swaprmb=registry_read_dword(dir+"GM82RoomSwapRMB",1)
 rmbalwaysdel=registry_read_dword(dir+"GM82RoomRMBAlwaysDel",0)
+skipwarnings=registry_read_dword(dir+"GM82RoomSkipWarnings",0)
 
 for (i=0;i<16;i+=1) customcolors[i]=registry_read_dword(dir+"RoomCustomColors"+string(i),0)
 
