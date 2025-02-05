@@ -82,44 +82,50 @@ if (size) {
         case act_change: {
             if (lmode==0) do {
                 o=ds_map_find_value(uidmap,ds_list_find_value(l,i))
-                o.x=ds_list_find_value(l,i+1)
-                o.y=ds_list_find_value(l,i+2)
-                o.image_xscale=ds_list_find_value(l,i+3)
-                o.image_yscale=ds_list_find_value(l,i+4)
-                o.image_angle=ds_list_find_value(l,i+5)
-                o.image_blend=ds_list_find_value(l,i+6)
-                o.image_alpha=ds_list_find_value(l,i+7)
-                o.code=ds_list_find_value(l,i+8)
-                i+=9
-
-                //read fields
-                for (j=0;j<objfields[o.obj];j+=1) {
-                    o.fields[j,0]=ds_list_find_value(l,i) i+=1
-                    if (o.fields[j,0]) {//only read fields if they're set
-                        o.fields[j,1]=ds_list_find_value(l,i) i+=1
-                        if (objfieldtype[o.obj,j] == "xy") {//only read second part for coordinate type
-                            o.fields[j,2]=ds_list_find_value(l,i) i+=1
+                if (o<100000 or !instance_exists(o)) show_error("Error undoing a change: instance id "+string(o)+" is invalid",0)
+                else {
+                    o.x=ds_list_find_value(l,i+1)
+                    o.y=ds_list_find_value(l,i+2)
+                    o.image_xscale=ds_list_find_value(l,i+3)
+                    o.image_yscale=ds_list_find_value(l,i+4)
+                    o.image_angle=ds_list_find_value(l,i+5)
+                    o.image_blend=ds_list_find_value(l,i+6)
+                    o.image_alpha=ds_list_find_value(l,i+7)
+                    o.code=ds_list_find_value(l,i+8)
+                    
+                    //read fields
+                    for (j=0;j<objfields[o.obj];j+=1) {
+                        o.fields[j,0]=ds_list_find_value(l,i) i+=1
+                        if (o.fields[j,0]) {//only read fields if they're set
+                            o.fields[j,1]=ds_list_find_value(l,i) i+=1
+                            if (objfieldtype[o.obj,j] == "xy") {//only read second part for coordinate type
+                                o.fields[j,2]=ds_list_find_value(l,i) i+=1
+                            }
                         }
                     }
                 }
+                i+=9
             } until (i>=size)
 
             if (lmode==1) do {
                 o=ds_map_find_value(uidmap,ds_list_find_value(l,i))
-                o.x=ds_list_find_value(l,i+1)
-                o.y=ds_list_find_value(l,i+2)
-                o.tlayer=ds_list_find_value(l,i+3) o.depth=o.tlayer-0.01
-                o.tilesx=ds_list_find_value(l,i+4)
-                o.tilesy=ds_list_find_value(l,i+5)
-                o.image_xscale=o.tilesx*tile_get_width(o.tile)
-                o.image_yscale=o.tilesy*tile_get_height(o.tile)
-                o.image_blend=ds_list_find_value(l,i+6)
-                o.image_alpha=ds_list_find_value(l,i+7)
-                tile_set_position(o.tile,o.x,o.y)
-                tile_set_depth(o.tile,o.tlayer)
-                tile_set_scale(o.tile,o.tilesx,o.tilesy)
-                tile_set_blend(o.tile,o.image_blend)
-                tile_set_alpha(o.tile,o.image_alpha)
+                if (o<100000 or !instance_exists(o)) show_error("Error undoing a change: tile id "+string(o)+" is invalid",0)
+                else {
+                    o.x=ds_list_find_value(l,i+1)
+                    o.y=ds_list_find_value(l,i+2)
+                    o.tlayer=ds_list_find_value(l,i+3) o.depth=o.tlayer-0.01
+                    o.tilesx=ds_list_find_value(l,i+4)
+                    o.tilesy=ds_list_find_value(l,i+5)
+                    o.image_xscale=o.tilesx*tile_get_width(o.tile)
+                    o.image_yscale=o.tilesy*tile_get_height(o.tile)
+                    o.image_blend=ds_list_find_value(l,i+6)
+                    o.image_alpha=ds_list_find_value(l,i+7)
+                    tile_set_position(o.tile,o.x,o.y)
+                    tile_set_depth(o.tile,o.tlayer)
+                    tile_set_scale(o.tile,o.tilesx,o.tilesy)
+                    tile_set_blend(o.tile,o.image_blend)
+                    tile_set_alpha(o.tile,o.image_alpha)
+                }
                 i+=8
             } until (i>=size)
         }break
