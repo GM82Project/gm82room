@@ -1,6 +1,9 @@
 //sets objpal and updates the hotbar
 var i,j;
 
+//update the object name textfield
+textfield_set("palette name",ds_list_find_value(objects,argument0))
+
 //check if the object already exists in the palette, swap if so
 i=1 repeat (9) {
     if (objhotbar[i]==argument0) {

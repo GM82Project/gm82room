@@ -16,7 +16,6 @@ if (mode==0 && objects_length) {
                         objshow[i]=!objshow[i]
                     } else {
                         set_objpal(i)
-                        textfield_set("palette name",ds_list_find_value(objects,objpal))
                     }
                     change_mode(mode)
                 }

@@ -24,11 +24,10 @@ if (!argument_count) {
     var checksel;checksel=!!num_selected()
 
     begin_undo(act_alchemy,"replacing objects",0)
-    add_undo(ds_list_find_value(objects,objpal))
-    add_undo(objpal)
     with (instance) {
-        if (obj==objpal && sel==checksel) {
+        if (sel==checksel) {
             add_undo(uid)
+            add_undo(obj)
             objname=name
             obj=newobj
 

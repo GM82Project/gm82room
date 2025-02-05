@@ -1,8 +1,11 @@
 if (!show_question("Clean Stacked Copies##This tool will delete any identical instances from the room. Note that this only checks for same object, position, and scaling.##Proceed?")) exit
 
 begin_undo(act_create,"cleaning duplicate instances",0)
-with (instance) if (obj==objpal) {
-    with (instance) if (obj==objpal && id<other.id)
+
+var checksel;checksel=!!num_selected()
+
+with (instance) if (sel==checksel) {
+    with (instance) if (sel==checksel && obj==other.obj && id<other.id)
         if (
             x==other.x
          && y==other.y

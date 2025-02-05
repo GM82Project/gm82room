@@ -133,14 +133,10 @@ if (size) {
             }
         }break
         case act_alchemy: {
-            var name;name=ds_list_find_value(l,i)
-            var obj;obj=ds_list_find_value(l,i+1)
-            i+=2
-            repeat ((size-2)) {
+            repeat (size/2) {
                 o=ds_map_find_value(uidmap,ds_list_find_value(l,i))
-                o.obj=obj
-                o.objname=name
-
+                o.obj=ds_list_find_value(l,i+1)
+                o.objname=ds_list_find_value(objects,o.obj)
                 o.depth=objdepth[o.obj]
                 o.sprite_index=objspr[o.obj]
                 o.sprw=sprite_get_width(o.sprite_index)
@@ -148,7 +144,7 @@ if (size) {
                 o.sprox=sprite_get_xoffset(o.sprite_index)
                 o.sproy=sprite_get_yoffset(o.sprite_index)
 
-                i+=1
+                i+=2
             }
         }break
     }
