@@ -98,18 +98,26 @@ while (1) {
             continue
         }
 
-        //swap rmb
-        if (point_in_rectangle(mx,my,8,272,8+24,272+24)) {
-            swaprmb=!swaprmb
+        //rmb boxes
+
+        //menu mode
+        if (point_in_rectangle(mx,my,8,256,8+24,256+24)) {
+            swaprmb=1
             continue
         }
 
-        if (!swaprmb) {
-            //rmb alwaysdel
-            if (point_in_rectangle(mx,my,8,304,8+24,304+24)) {
-                rmbalwaysdel=!rmbalwaysdel
-                continue
-            }
+        //menu mode
+        if (point_in_rectangle(mx,my,8,288,8+24,288+24)) {
+            swaprmb=0
+            rmbalwaysdel=0
+            continue
+        }
+
+        //rmb alwaysdel
+        if (point_in_rectangle(mx,my,8,320,8+24,320+24)) {
+            swaprmb=0
+            rmbalwaysdel=1
+            continue
         }
 
         //custom theme controls
@@ -177,6 +185,7 @@ while (1) {
     draw_text(8,8,"Code editor")
     draw_text(240,8,"Theme")
     draw_text(8,136,"Color picker")
+    draw_text(8,232,"Right Click Action")
 
     //ok button
     dx=432 dy=h-48 draw_button_ext(dx,dy,48,40,act!="grabok",global.col_main) draw_sprite(sprMenuButtons,0,dx+24,dy+20)
@@ -222,12 +231,9 @@ while (1) {
     dx=240 dy=304 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Crop Backgrounds") if (cropbackgrounds) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //swap rmb
-    dx=8 dy=272 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"8.1 Right-Click") if (swaprmb) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
-
-    if (!swaprmb) {
-        //rmb always del
-        dx=8 dy=304 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"RMB Delete All") if (rmbalwaysdel) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
-    }
+    dx=8 dy=256 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Menu") if (swaprmb) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=8 dy=288 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Delete") if (!swaprmb && !rmbalwaysdel) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=8 dy=320 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Continuous Delete") if (!swaprmb && rmbalwaysdel) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     draw_set_color($ffffff)
     d3d_transform_set_identity()
