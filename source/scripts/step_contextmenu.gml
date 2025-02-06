@@ -18,6 +18,7 @@ if (click) {
         if (menusub=="sprite")     get=ds_map_get(sprmenuitems,click)
         if (menusub=="background") get=ds_map_get(bgmenuitems,click)
         if (menusub=="path")       get=ds_map_get(pathmenuitems,click)
+        if (menusub=="sound")      get=ds_map_get(soundmenuitems,click)
         if (menusub=="script")     get=ds_map_get(scriptmenuitems,click)
         if (menusub=="font")       get=ds_map_get(fontmenuitems,click)
         if (menusub=="timeline")   get=ds_map_get(timelinemenuitems,click)
