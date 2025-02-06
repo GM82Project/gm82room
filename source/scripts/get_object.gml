@@ -13,10 +13,9 @@ if (!objloaded[i]) {
     objfields[i]=0
     objprev_objectid[i]=noone
     objshow[i]=true
+    objprops[i]="##Depth: "+string(objdepth[i])+"#Visible: "+pick(objvis[i],"No","Yes")+"#Solid: "+pick(real(ds_map_find_value(object[i],"solid")),"No","Yes")+"#Parent: "+pick(objparent[i]!="","<none>",objparent[i])
     objdesc[i]=""
     load_object_fields(i,argument0)
-    desc="Depth: "+string(objdepth[i])+"#Visible: "+pick(objvis[i],"No","Yes")+"#Solid: "+pick(real(ds_map_find_value(object[i],"solid")),"No","Yes")+"#Parent: "+pick(objparent[i]!="","<none>",objparent[i])
-    if (objdesc[i]!="") objdesc[i]=desc+"##"+objdesc[i] else objdesc[i]=desc
     palettesize+=1
 }
 set_objpal(i)

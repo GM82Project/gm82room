@@ -25,7 +25,7 @@ if (mode==0) {
             }
             draw_sprite_stretched(objspr[i],0,dx2-w/2,dy2-h/2,w,h)
             if (keyboard_check(vk_alt)) draw_sprite(sprMenuButtons,52-objshow[i],dx+8,dy+8)
-            tooltiptext=ds_list_find_value(objects,i)
+            tooltiptext=ds_list_find_value(objects,i)+objprops[i]
             if (objdesc[i]!="") tooltiptext=tooltiptext+lf+lf+objdesc[i]
         }
         posx+=1 if (posx=4) {posx=0 posy+=1}
