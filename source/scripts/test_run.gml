@@ -13,6 +13,9 @@ if (!file_exists(gm)) {
 }
 
 exe=temp_directory+"\"+filename_change_ext(pjfile,".exe")
+if (file_exists(exe)) file_delete(exe)
+sleep(1)
+while (file_exists(exe)) exe=temp_directory+"\a"+string(irandom_range(100000,999999))+".exe"
 
 wdir=working_directory
 set_working_directory(root)
