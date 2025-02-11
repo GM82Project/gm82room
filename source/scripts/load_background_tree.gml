@@ -13,8 +13,7 @@ if (has_backgrounds) {f=file_text_open_read_safe(argument0) if (f) {do {
     str=file_text_read_string(f)
     file_text_readln(f)
     if (str!="") {
-        curindent=string_count(tab,str)
-        str=string_replace_all(str,tab,"")
+        curindent=0 while (string_char_at(str,1)==tab) {curindent+=1 str=string_delete(str,1,1)}
         resname=string_delete(str,1,1)
         if (string_char_at(str,1)=="+") {
             //group

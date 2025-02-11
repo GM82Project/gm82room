@@ -19,8 +19,7 @@ if (has_paths) {f=file_text_open_read_safe(argument0) if (f) {do {
     if (str!="") {
         tree_entry=str
         ds_list_add(path_tree_list,tree_entry)
-        curindent=string_count(tab,str)
-        str=string_replace_all(str,tab,"")
+        curindent=0 while (string_char_at(str,1)==tab) {curindent+=1 str=string_delete(str,1,1)}
         resname=string_delete(str,1,1)
         if (string_char_at(str,1)=="+") {
             //group
