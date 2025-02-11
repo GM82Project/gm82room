@@ -51,7 +51,9 @@ if (keyboard_check(vk_control)) {
         clipboard_set_text("$"+string_repeat("0",6-string_length(col))+col)
     }
     if (keyboard_check(ord("V"))) {
-        color=real_hex(clipboard_get_text())&$ffffff
+        text=clipboard_get_text()
+        color=real_hex(text)&$ffffff
+        if (string_pos("#",text)) color=color_reverse(color)
         hue=color_get_hue(color)
         sat=color_get_saturation(color)
         val=color_get_value(color)
