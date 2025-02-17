@@ -138,7 +138,7 @@ if (sel) {
                 else str=get_string("Insert new angle for "+qt+objfieldname[obj,editfid]+qt+":","")
                 if (string_number(str)!="") {
                     fields[editfid,0]=1
-                    fields[editfid,1]=string_better(modwrap(real(str),0,360))
+                    fields[editfid,1]=string_better_lim(modwrap(real(str),0,360))
                 }
             }
             editangle=0
@@ -160,7 +160,7 @@ if (sel) {
                 else str=get_string("Insert new radius for "+qt+objfieldname[obj,editfid]+qt+":",fields[editfid,1])
                 if (string_number(str)!=""){
                     fields[editfid,0]=1
-                    fields[editfid,1]=string_better(max(0,real(str)))
+                    fields[editfid,1]=string_better_lim(max(0,real(str)))
                 }
             }
             editrad=0

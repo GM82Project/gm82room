@@ -20,6 +20,7 @@
 	|generate_path_model
 	|ds_map_save_ini
 	|create_menu_bitmap
+	|string_better_lim
 +file
 	|gensavecode
 	|parsereal

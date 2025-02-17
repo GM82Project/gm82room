@@ -173,7 +173,7 @@ switch (objfieldtype[obj,menu]) {
             string_token_start(objfieldargs[obj,menu],",")
             __left=string_token_next()
             __right=string_token_next()
-            fields[menu,1]=string_better(median(real(__left),real(__right),real(getstring)))
+            fields[menu,1]=string_better_lim(median(real(__left),real(__right),real(getstring)))
             fields[menu,0]=1
         }
     } break
