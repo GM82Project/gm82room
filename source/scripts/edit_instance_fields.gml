@@ -168,11 +168,11 @@ switch (objfieldtype[obj,menu]) {
         fields[menu,0]=fields[menu,1]!=""
     } break
     case "number_range": {
+        string_token_start(objfieldargs[obj,menu],",")
+        __left=string_token_next()
+        __right=string_token_next()
         getstring=string_number(get_string("Insert new number for "+qt+objfieldname[obj,menu]+qt+"#(between "+__left+" and "+__right+"):",fields[menu,1]))
         if (getstring!="") {
-            string_token_start(objfieldargs[obj,menu],",")
-            __left=string_token_next()
-            __right=string_token_next()
             fields[menu,1]=string_better_lim(median(real(__left),real(__right),real(getstring)))
             fields[menu,0]=1
         }
