@@ -19,6 +19,7 @@ with (Controller) switch (argument0) {
     case "prefs"        : {show_prefs() write_preferences()}break
     case "live"         : {live_start()}break
     case "undo"         : {pop_undo()}break
+    case "plugins"      : {if (noplugins) show_message("There are no plugins installed.") else call_nmenu("pluginmenu",pluginmenu)}break
 
 
     //settings

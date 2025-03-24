@@ -3,6 +3,10 @@ var str,p;
 click=N_Menu_CheckMenus()
 if (click) {
     io_clear()
+    if (menutype=="pluginmenu") {
+        get=ds_map_get(pluginmenuitems,click)
+        if (show_question(plugindesc[get]+"##Proceed?")) code_execute(plugincode[get])
+    }
     if (menutype=="toolmenu") {
         get=ds_map_get(toolmenuitems,click)
         switch (get) {

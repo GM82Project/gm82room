@@ -175,3 +175,8 @@ i=instance_create(160+832,0,Button)
 i.spr=49
 i.action="live"
 i.alt="Start Live connection to game"
+
+i=instance_create(160+864,0,Button)
+i.spr=56
+i.action="plugins"
+i.alt="Run a plugin..."

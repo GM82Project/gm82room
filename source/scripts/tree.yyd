@@ -88,6 +88,7 @@
 	|loadthumb
 	|load_jtool_table
 	|load_tool_menu
+	|load_plugin_menu
 |createui
 +createui
 	|createui_main

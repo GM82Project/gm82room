@@ -145,6 +145,7 @@ change_mode(mode)
 focus_object(objpal)
 update_newtilepanel(1)
 load_tool_menu()
+load_plugin_menu()
 
 window_set_foreground()
 file_drag_enable(1)
