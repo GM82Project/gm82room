@@ -115,8 +115,8 @@ if (sel) {
                 if (string_pos(",",str)) {
                     string_token_start(str,",")
                     fields[editfid,0]=1
-                    fields[editfid,1]=string_trim(string_token_next())
-                    fields[editfid,2]=string_trim(string_token_next())
+                    fields[editfid,1]=string_trim(string_token_next()," ","(",")")
+                    fields[editfid,2]=string_trim(string_token_next()," ","(",")")
                 }
             }
             editxy=0
