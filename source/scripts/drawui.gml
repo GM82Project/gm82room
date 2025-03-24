@@ -30,73 +30,76 @@ if (mousein) {
     if (mode==1) focus=instance_position(global.mousex,global.mousey,tileholder)
 }
 
-//grid and crosshair for object, tile and path mode
+
+//cursor for object, tile and path mode
 if (mode==0 || mode==1 || mode==5) {
     if (keyboard_check_direct(vk_control)) window_set_cursor(cr_size_all)
     else if (keyboard_check_direct(vk_shift)) window_set_cursor(cr_cross)
     else window_set_cursor(current_cursor)
-
-    d3d_transform_add_translation(-0.5,-0.5,0)
-    texture_set_interpolation(1)
-
-    draw_primitive_begin(pr_linelist)
-        if (grid) {
-            if (mousein && outroomgrid) {
-                x1=min(fmx,0)
-                x2=max(roomwidth,fmx+gridx)
-                y1=min(fmy,0)
-                y2=max(roomheight,fmy+gridy)
-            } else {
-                x1=0
-                y1=0
-                x2=roomwidth
-                y2=roomheight
-            }
-            vc=0
-            for (i=x1;i<=x2;i+=gridx) {draw_vertex(i,y1) draw_vertex(i,y2) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
-            for (i=y1;i<=y2;i+=gridy) {draw_vertex(x1,i) draw_vertex(x2,i) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
-        }
-        if (crosshair && mousein) {
-            if (keyboard_check(vk_alt)) {
-                draw_vertex(global.mousex,min(0,global.mousey)) draw_vertex(global.mousex,max(roomheight,global.mousey))
-                draw_vertex(min(0,global.mousex),global.mousey) draw_vertex(max(roomwidth,global.mousex),global.mousey)
-                dx=global.mousex
-                dy=global.mousey
-            } else {
-                draw_vertex(fmx,fmy+gridy) draw_vertex(fmx+gridx,fmy+gridy)
-                draw_vertex(fmx+gridx,fmy) draw_vertex(fmx+gridx,fmy+gridy)
-                draw_vertex(fmx,min(0,fmy)) draw_vertex(fmx,max(roomheight,fmy))
-                draw_vertex(min(0,fmx),fmy) draw_vertex(max(roomwidth,fmx),fmy)
-                dx=fmx
-                dy=fmy
-            }
-            if (dx>roomwidth) {
-                draw_vertex(dx,0) draw_vertex(max(roomwidth,dx-gridx),0)
-                draw_vertex(dx,roomheight) draw_vertex(max(roomwidth,dx-gridx),roomheight)
-            }
-            if (dx<0) {
-                draw_vertex(dx,0) draw_vertex(min(0,dx+gridx),0)
-                draw_vertex(dx,roomheight) draw_vertex(min(0,dx+gridx),roomheight)
-            }
-            if (dy>roomheight) {
-                draw_vertex(0,dy) draw_vertex(0,max(roomheight,dy-gridy))
-                draw_vertex(roomwidth,dy) draw_vertex(roomwidth,max(roomheight,dy-gridy))
-            }
-            if (dy<0) {
-                draw_vertex(0,dy) draw_vertex(0,min(0,dy+gridy))
-                draw_vertex(roomwidth,dy) draw_vertex(roomwidth,min(0,dy+gridy))
-            }
-        }
-    draw_set_blend_mode_ext(10,1)
-    draw_primitive_end()
-    draw_set_blend_mode(bm_add)
-    d3d_set_fog(1,$202020,0,0)
-    draw_primitive_end()
-    d3d_set_fog(0,0,0,0)
-    draw_set_blend_mode(0)
-
-    d3d_transform_set_identity()
 } else window_set_cursor(cr_default)
+
+
+//draw grid
+d3d_transform_add_translation(-0.5,-0.5,0)
+texture_set_interpolation(1)
+
+draw_primitive_begin(pr_linelist)
+    if (grid) {
+        if (mousein && outroomgrid) {
+            x1=min(fmx,0)
+            x2=max(roomwidth,fmx+gridx)
+            y1=min(fmy,0)
+            y2=max(roomheight,fmy+gridy)
+        } else {
+            x1=0
+            y1=0
+            x2=roomwidth
+            y2=roomheight
+        }
+        vc=0
+        for (i=x1;i<=x2;i+=gridx) {draw_vertex(i,y1) draw_vertex(i,y2) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
+        for (i=y1;i<=y2;i+=gridy) {draw_vertex(x1,i) draw_vertex(x2,i) vc+=2 if (vc>998) {vc=0 draw_primitive_end() draw_primitive_begin(pr_linelist)}}
+    }
+    if (crosshair && mousein) {
+        if (keyboard_check(vk_alt)) {
+            draw_vertex(global.mousex,min(0,global.mousey)) draw_vertex(global.mousex,max(roomheight,global.mousey))
+            draw_vertex(min(0,global.mousex),global.mousey) draw_vertex(max(roomwidth,global.mousex),global.mousey)
+            dx=global.mousex
+            dy=global.mousey
+        } else {
+            draw_vertex(fmx,fmy+gridy) draw_vertex(fmx+gridx,fmy+gridy)
+            draw_vertex(fmx+gridx,fmy) draw_vertex(fmx+gridx,fmy+gridy)
+            draw_vertex(fmx,min(0,fmy)) draw_vertex(fmx,max(roomheight,fmy))
+            draw_vertex(min(0,fmx),fmy) draw_vertex(max(roomwidth,fmx),fmy)
+            dx=fmx
+            dy=fmy
+        }
+        if (dx>roomwidth) {
+            draw_vertex(dx,0) draw_vertex(max(roomwidth,dx-gridx),0)
+            draw_vertex(dx,roomheight) draw_vertex(max(roomwidth,dx-gridx),roomheight)
+        }
+        if (dx<0) {
+            draw_vertex(dx,0) draw_vertex(min(0,dx+gridx),0)
+            draw_vertex(dx,roomheight) draw_vertex(min(0,dx+gridx),roomheight)
+        }
+        if (dy>roomheight) {
+            draw_vertex(0,dy) draw_vertex(0,max(roomheight,dy-gridy))
+            draw_vertex(roomwidth,dy) draw_vertex(roomwidth,max(roomheight,dy-gridy))
+        }
+        if (dy<0) {
+            draw_vertex(0,dy) draw_vertex(0,min(0,dy+gridy))
+            draw_vertex(roomwidth,dy) draw_vertex(roomwidth,min(0,dy+gridy))
+        }
+    }
+draw_set_blend_mode_ext(10,1)
+draw_primitive_end()
+draw_set_blend_mode(bm_add)
+d3d_set_fog(1,$202020,0,0)
+draw_primitive_end()
+d3d_set_fog(0,0,0,0)
+draw_set_blend_mode(0)
+d3d_transform_set_identity()
+
 
 drawui_object_pre()
 drawui_tile_pre()
