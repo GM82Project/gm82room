@@ -16,12 +16,13 @@ if (parameter_count()) {
 
 if (savedir="") {
     //this is for faster testing on my computer :)
-    if (working_directory!=program_directory) {
-        savedir="C:\Stuff\github\renex-engine\source\rooms\rmTemplate"
+    if (string_pos("gm_ttt_",program_directory)) {
+        //savedir="C:\Stuff\github\renex-engine\source\rooms\rmTemplate"
+        savedir="C:\Users\rene\Desktop\github\renex-engine\source\rooms\rmTemplate"
         //savedir="C:\Stuff\github\mkfusion\rooms\rm9_S1Area3"
     }
     if (!file_exists(savedir+"\room.txt")) {
-        //shrug
+        //ah. it's not my computer.
         game_end()
         return 0
     }

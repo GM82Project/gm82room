@@ -1,16 +1,9 @@
 save_room(0)
 
-gm=program_directory+"\GameMaker.exe"
+if (gm_directory==undefined) {show_message("Error building: Can't find Game Maker 8.2. Please try reinstalling the program.") exit}
+gm=gm_directory+"\GameMaker.exe"
 
-if (!file_exists(gm)) {
-    roaming=directory_previous(directory_previous(directory_previous(temp_directory)))+"Roaming\"
-
-    gm=registry_read_sz("SOFTWARE\Game Maker\Version 8.2\Preferences\Directory")
-
-    if (gm==undefined) {show_message("Error building: Can't find Game Maker 8.2. Please try reinstalling the program.") exit}
-
-    gm+="GameMaker.exe"
-}
+if (!file_exists(gm)) {show_message("Error building: Can't find Game Maker 8.2. Please try reinstalling the program.") exit}
 
 exe=temp_directory+"\"+filename_change_ext(pjfile,".exe")
 if (file_exists(exe)) file_delete(exe)

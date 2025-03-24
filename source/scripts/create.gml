@@ -3,6 +3,14 @@ globalvars()
 draw_set_font(fntCode)
 draw_set_circle_precision(8)
 
+gm_directory=program_directory
+
+if (!file_exists(gm_directory+"\GameMaker.exe")) {
+    gm_directory=registry_read_sz("SOFTWARE\Game Maker\Version 8.2\Preferences\Directory")
+}
+
+if (gm_directory!=undefined) set_working_directory(gm_directory)
+
 width=display_get_width()-80-64
 height=display_get_height()-80-64
 maxfps=display_get_frequency()

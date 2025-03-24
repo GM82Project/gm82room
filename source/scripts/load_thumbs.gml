@@ -10,7 +10,7 @@ if (directory_exists(root+"cache\backgrounds") && directory_exists(root+"cache\s
 
 thumbmap=ds_map_create()
 
-directory_create(program_directory+"\cache")
+directory_create("cache")
 
 folder_menuicon=create_menu_bitmap(sprMenuButtons,55,"b55")
 sprite_menuicon=create_menu_bitmap(sprFieldIcons,5,"f5")

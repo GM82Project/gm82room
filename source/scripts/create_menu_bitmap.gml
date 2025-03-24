@@ -1,7 +1,7 @@
 ///create_menu_bitmap(sprite,image,filename)
 var s,fn;
 
-fn=program_directory+"\cache\"+argument2+".bmp"
+fn="cache\"+argument2+".bmp"
 
 if (!file_exists(fn)) {
     s=surface_create(16,16)
