@@ -90,9 +90,8 @@ mousein=(
 direct_mbleft=mouse_check_direct(mb_left) && mouse_check_direct(mb_left)
 direct_mbright=mouse_check_direct(mb_right) && mouse_check_direct(mb_right)
 
-if (direct_mbleft && direct_mbright) {
+if (direct_mbleft) {
     //don't allow mouse left+right
-    direct_mbleft=0
     direct_mbright=0
 }
 

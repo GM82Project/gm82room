@@ -2,6 +2,8 @@ var menued;
 
 if (selecting || paint || selsize || grabknob || grab_background) exit
 
+if (direct_mbleft) exit
+
 if (mousein && mode==0 && mouse_check_modal_pressed(mb_right)) {
     with (select) if (fieldactive) {
         edit_instance_fields(1)
