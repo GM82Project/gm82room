@@ -1,5 +1,5 @@
 ///show_prefs()
-var w,h,dx,dy,cx,cy,c,offx,offy,button,act;
+var w,h,dx,dy,cx,cy,c,offx,offy,button,act,ww,hh;
 
 screen_redraw()
 rect(0,0,width,height,0,0.5)
@@ -16,6 +16,9 @@ offy=(height-h-32) div 2
 io_clear()
 mouse_check_direct(mb_left)
 sleep(16)
+
+ww=width
+hh=height
 
 while (1) {
     //input
@@ -187,6 +190,15 @@ while (1) {
     }
 
     //draw
+    if (window_get_width()!=ww or window_get_height()!=hh) {
+        ww=window_get_width()
+        hh=window_get_height()
+        offx=(ww-w) div 2
+        offy=(hh-h-32) div 2
+        draw_clear(0)
+        d3d_set_projection_ortho(0,0,ww,hh,0)
+    }
+
     d3d_transform_add_translation(offx,offy,0)
     draw_button_ext(0,0,w,h,1,global.col_main)
     draw_button_ext(0,-32,w,32,1,global.col_main)
