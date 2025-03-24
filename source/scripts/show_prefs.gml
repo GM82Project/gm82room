@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=488
-h=412
+h=444
 
 act=""
 button=1
@@ -100,6 +100,11 @@ while (1) {
         //skip tool warnings
         if (point_in_rectangle(mx,my,240,336,240+24,336+24)) {
             skipwarnings=!skipwarnings
+            continue
+        }
+        //skip instance recenter
+        if (point_in_rectangle(mx,my,240,368,240+24,368+24)) {
+            skiprecenter=!skiprecenter
             continue
         }
 
@@ -224,10 +229,10 @@ while (1) {
     dx=240 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Start maximized") if (startmax) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //grid off room
-    dx=240 dy=192 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Draw grid outside#of the room area") if (outroomgrid) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=240 dy=192 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Draw Grid Outside#of the Room Area") if (outroomgrid) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //autosave
-    dx=240 dy=240 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Do autosaves") if (do_autosaves) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=240 dy=240 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Do Auto Saves") if (do_autosaves) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //gizmo
     dx=240 dy=272 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Hide 3D Gizmo") if (hide3dgizmo) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
@@ -235,8 +240,11 @@ while (1) {
     //crop backgrounds
     dx=240 dy=304 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Crop Backgrounds") if (cropbackgrounds) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
-    //crop backgrounds
+    //tool warnings
     dx=240 dy=336 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Skip Tool Warnings") if (skipwarnings) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //tool warnings
+    dx=240 dy=368 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Don't Recenter#After Transform") if (skiprecenter) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
 
     //swap rmb

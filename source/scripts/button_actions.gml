@@ -75,7 +75,7 @@ with (Controller) switch (argument0) {
         with (instance) if (sel) {
             mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
             image_xscale*=-1 image_angle*=-1
-            x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
+            if (!skiprecenter) x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
             event_user(1)
             do_change_undo("mirroring",0)
             if (select==id) update_inspector()
@@ -94,7 +94,7 @@ with (Controller) switch (argument0) {
         with (instance) if (sel) {
             mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
             image_yscale*=-1 image_angle*=-1
-            y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
+            if (!skiprecenter) y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
             event_user(1)
             do_change_undo("flipping",0)
             if (select==id) update_inspector()
@@ -129,7 +129,7 @@ with (Controller) switch (argument0) {
         with (instance) if (sel) {
             image_angle=modwrap(image_angle+90,0,360)
             mycx=sx+(y+0.5-sy)-0.5 mycy=sy-(x+0.5-sx)-0.5
-            x=mycx y=mycy
+            if (!skiprecenter) {x=mycx y=mycy}
             event_user(1)
             do_change_undo("rotation",0)
             if (select==id) update_inspector()
@@ -148,7 +148,7 @@ with (Controller) switch (argument0) {
         with (instance) if (sel) {
             image_angle=modwrap(image_angle-90,0,360)
             mycx=sx-(y+0.5-sy)-0.5 mycy=sy+(x+0.5-sx)-0.5
-            x=mycx y=mycy
+            if (!skiprecenter) {x=mycx y=mycy}
             event_user(1)
             do_change_undo("rotation",0)
             if (select==id) update_inspector()
@@ -197,7 +197,7 @@ with (Controller) switch (argument0) {
         with (tileholder) if (sel) {
             mycx=round((bbox_right+bbox_left+1)/2)
             image_xscale*=-1
-            x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
+            if (!skiprecenter) x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
             event_user(1)
             tilesx=image_xscale/tilew
             tilesy=image_yscale/tileh
@@ -220,7 +220,7 @@ with (Controller) switch (argument0) {
         with (tileholder) if (sel) {
             mycy=round((bbox_bottom+bbox_top+1)/2)
             image_yscale*=-1
-            y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
+            if (!skiprecenter) y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
             event_user(1)
             tilesx=image_xscale/tilew
             tilesy=image_yscale/tileh
