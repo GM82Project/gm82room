@@ -16,13 +16,41 @@ with (Controller) switch (argument0) {
     }break
 
     case "grid x": {
+        keyboard_check_direct(vk_lshift)
+        keyboard_check_direct(vk_rshift)
+        keyboard_check_direct(vk_lcontrol)
+        keyboard_check_direct(vk_rcontrol)
         m=show_menu("Grid X:|8|16|32|64|128|256|"+string(roomwidth div 2),-1)
-        if (m) gridx=min(pick(m-1,8,16,32,64,128,256,roomwidth div 2),roomwidth)
+        if (m) {
+            gridx=min(pick(m-1,8,16,32,64,128,256,roomwidth div 2),roomwidth)
+            keyboard_check_direct(vk_lshift)
+            keyboard_check_direct(vk_rshift)
+            keyboard_check_direct(vk_lcontrol)
+            keyboard_check_direct(vk_rcontrol)
+            if (keyboard_check_direct(vk_lshift) or keyboard_check_direct(vk_rshift) or keyboard_check_direct(vk_lcontrol) or keyboard_check_direct(vk_rcontrol)) {
+                gridy=gridx
+                with (TextField) if (action=="grid y") {text=string(gridy) event_user(4)}
+            }
+        }
         with (other) {text=string(gridx) event_user(4)}
     }break
     case "grid y": {
+        keyboard_check_direct(vk_lshift)
+        keyboard_check_direct(vk_rshift)
+        keyboard_check_direct(vk_lcontrol)
+        keyboard_check_direct(vk_rcontrol)
         m=show_menu("Grid Y:|8|16|32|64|128|256|"+string(roomheight div 2),-1)
-        if (m) gridy=min(pick(m-1,8,16,32,64,128,256,roomheight div 2),roomheight)
+        if (m) {
+            keyboard_check_direct(vk_lshift)
+            keyboard_check_direct(vk_rshift)
+            keyboard_check_direct(vk_lcontrol)
+            keyboard_check_direct(vk_rcontrol)
+            gridy=min(pick(m-1,8,16,32,64,128,256,roomheight div 2),roomheight)
+            if (keyboard_check_direct(vk_lshift) or keyboard_check_direct(vk_rshift) or keyboard_check_direct(vk_lcontrol) or keyboard_check_direct(vk_rcontrol)) {
+                gridx=gridy
+                with (TextField) if (action=="grid x") {text=string(gridx) event_user(4)}
+            }
+        }
         with (other) {text=string(gridy) event_user(4)}
     }break
 }
