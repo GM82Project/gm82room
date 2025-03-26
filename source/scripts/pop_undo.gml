@@ -139,7 +139,7 @@ if (size) {
             }
         }break
         case act_alchemy: {
-            repeat (size/2) {
+            do {
                 o=ds_map_find_value(uidmap,ds_list_find_value(l,i))
                 o.obj=ds_list_find_value(l,i+1)
                 o.objname=ds_list_find_value(objects,o.obj)
@@ -151,7 +151,17 @@ if (size) {
                 o.sproy=sprite_get_yoffset(o.sprite_index)
 
                 i+=2
-            }
+
+                for (j=0;j<objfields[o.obj];j+=1) {
+                    o.fields[j,0]=ds_list_find_value(l,i) i+=1
+                    if (o.fields[j,0]) {//only read fields if they're set
+                        o.fields[j,1]=ds_list_find_value(l,i) i+=1
+                        if (objfieldtype[o.obj,j] == "xy") {//only read second part for coordinate type
+                            o.fields[j,2]=ds_list_find_value(l,i) i+=1
+                        }
+                    }
+                }
+            } until (i>=size)
         }break
     }
 

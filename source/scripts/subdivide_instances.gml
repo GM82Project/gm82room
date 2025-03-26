@@ -13,8 +13,10 @@ if (count>1000)
     if (!show_question("WARNING: your current selection with the set grid size ("+string(gridx)+","+string(gridy)+") will cause "+string(count)+" new instances to be created.##Are you sure you want to continue?"))
         exit
 
+var checksel;checksel=!!num_selected()
+
 begin_undo(act_create,"",0)
-with (instance) if (sel) {
+with (instance) if (sel==checksel) {
     if (image_angle!=0) error+="instance "+uid+" at ("+string(x)+","+string(y)+") is rotated and can't be gigaknifed#"
     else {
         //split by grid
