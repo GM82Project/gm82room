@@ -28,8 +28,8 @@ applies_to=self
 alarm[3]=room_speed/2
 if (global.livesock!=noone) {
     var yes;yes=0
-    if (mode==0) with (select) if (rotato || draggatto) yes=1
-    if (mode==1) with (selectt) if (draggatto) yes=1
+    if (mode==0) with (select) if (rotato || scaling) yes=1
+    if (mode==1) with (selectt) if (scaling) yes=1
     if (yes) live_send_room_data()
 }
 #define Step_0

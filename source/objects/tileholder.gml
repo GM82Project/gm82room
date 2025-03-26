@@ -11,7 +11,7 @@ blend=$ffffffff
 
 sel=0
 grab=0
-draggatto=0
+scaling=0
 modified=0
 selresize=0
 
@@ -50,7 +50,7 @@ if (sel) {
         tile_set_position(tile,x,y)
         if (selectt==id) update_inspector()
     }
-    if (draggatto) {
+    if (scaling) {
         dx=global.mousex
         dy=global.mousey
 
@@ -73,7 +73,7 @@ if (sel) {
 
         tile_set_scale(tile,tilesx,tilesy)
 
-        if (!direct_mbleft) {draggatto=0 event_user(1) do_change_undo("scaling",0)}
+        if (!direct_mbleft) {scaling=0 event_user(1) do_change_undo("scaling",0)}
         update_inspector()
     }
     if (selresize) {
@@ -103,7 +103,7 @@ draw_line(x-4*zm,y,x+4*zm,y)
 draghandx=x+image_xscale
 draghandy=y+image_yscale
 
-if (draggatto) draw_line(x,y,draghandx,draghandy)
+if (scaling) draw_line(x,y,draghandx,draghandy)
 draw_rectangle(draghandx-8*zm,draghandy-8*zm,draghandx+8*zm,draghandy+8*zm,1)
 draw_rectangle(draghandx-4*zm,draghandy-4*zm,draghandx+4*zm,draghandy+4*zm,1)
 

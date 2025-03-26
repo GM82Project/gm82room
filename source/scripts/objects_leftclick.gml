@@ -18,25 +18,26 @@ if (mode==0) {
                 yes=1
             } else if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
                 fieldactive=1
-                yes=1
+                yes=1                            
             } else if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {
                 rotato=1
-                yes=1
+                yes=1                            
             } else if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
-                draggatto=1
-                yes=1
+                scaling=1
+                yes=1                            
             } else if (instance_position(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
                 start_dragging()
                 yes=1
             }
         }
     }
-    if (yes) {with (instance) sel=0 select.sel=1}
+    if (yes) {with (instance) sel=0 select.sel=1} 
     if (!instance_exists(select) || !yes) {
         clear_inspector()
         select=noone
         if (!keyboard_check(vk_shift)) {
             if (!overmode || keyboard_check(vk_control)) {
+                ds_priority_clear(click_priority)
                 with (instance) {
                     if (instance_position(global.mousex,global.mousey,id)) {
                         //sort by reverse scale
@@ -44,7 +45,7 @@ if (mode==0) {
                     }
                 }
                 if (ds_priority_size(click_priority)) {
-                    with (ds_priority_find_max(click_priority)) {
+                    with (ds_priority_delete_max(click_priority)) {
                         sel=1
                         update_inspector()
                         //ctrl+left = move
@@ -65,13 +66,11 @@ if (mode==0) {
                         }
                         update_selection_bounds()
                     }
-                    ds_priority_clear(click_priority)
                 }
             }
         }
         if (!select) {
-            //if not holding control, reset selection
-            //if (!keyboard_check(vk_control)) {with (instance) sel=0 with (select) sel=1}
+            //if not holding modifiers, reset selection
             if (keyboard_check(vk_shift)) {
                 //selection rectangle
                 selecting=1

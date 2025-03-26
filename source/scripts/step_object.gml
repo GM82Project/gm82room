@@ -60,4 +60,17 @@ if (mode==0 && objects_length) {
         if (i!=j) {tmp=objhotbar[i] objhotbar[i]=objhotbar[j] objhotbar[j]=tmp}
         if (!mouse_check_direct(mb_left)) objhotbarhold=0
     }
+
+    //next selection
+    if (keyboard_check_pressed(ord("N"))) {
+        if (ds_priority_size(click_priority)) {
+            with (ds_priority_delete_max(click_priority)) {
+                deselect()
+                sel=1
+                select=id
+                update_inspector()
+                update_selection_bounds()
+            }
+        }
+    }
 }

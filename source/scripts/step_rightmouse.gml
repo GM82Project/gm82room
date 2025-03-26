@@ -21,6 +21,7 @@ if (mouse_check_modal_pressed(mb_right)) {
         //stack menu
         menued=false
         if (mode==0) {
+            ds_priority_clear(click_priority)
             with (instance) {
                 if (instance_position(global.mousex,global.mousey,id)) {
                     //sort by reverse scale
@@ -53,6 +54,7 @@ if (mouse_check_modal_pressed(mb_right)) {
             } else deselect()
         }
         if (mode==1) {
+            ds_priority_clear(click_priority)
             with (tileholder) {
                 if (instance_position(global.mousex,global.mousey,id)) {
                     //sort by reverse scale

@@ -9,6 +9,8 @@ if (mode!=argument) {
 
 mode=argument0
 
+ds_priority_clear(click_priority)
+
 //instances
 instance_activate_object(instance)
 instancecount=instance_number(instance)

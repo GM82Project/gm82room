@@ -43,7 +43,7 @@ if (mode==0) {
     }
 
     if (crosshair) {
-        with (select) if (grab || rotato || draggatto) nomorefortnite=1
+        with (select) if (grab || rotato || scaling) nomorefortnite=1
         if (!keyboard_check(vk_control) && !keyboard_check(vk_shift) && !nomorefortnite && !selecting && !selsize) {
             if (objpal!=noone) {
                 texture_set_interpolation(interpolation)

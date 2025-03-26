@@ -4,7 +4,7 @@ if (mode==1) {
     //if something's already selected, operate on it
     if (!keyboard_check(vk_shift)) with (selectt) {
         if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
-            draggatto=1
+            scaling=1
             yes=1
         } else if (instance_position(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
             start_dragging()
@@ -17,6 +17,7 @@ if (mode==1) {
         selectt=noone
         if (!keyboard_check(vk_shift)) {
             if (!overmode || keyboard_check(vk_control)) {
+                ds_priority_clear(click_priority)
                 with (tileholder) {
                     if (instance_position(global.mousex,global.mousey,id)) {
                         //sort by reverse scale
@@ -24,7 +25,7 @@ if (mode==1) {
                     }
                 }
                 if (ds_priority_size(click_priority)) {
-                    with (ds_priority_find_max(click_priority)) {
+                    with (ds_priority_delete_max(click_priority)) {
                         sel=1
                         update_inspector()
                         //ctrl+left = move
@@ -45,7 +46,6 @@ if (mode==1) {
                         }
                         update_selection_bounds()
                     }
-                    ds_priority_clear(click_priority)
                 }
             }
         }

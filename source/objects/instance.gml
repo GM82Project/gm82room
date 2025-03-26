@@ -8,7 +8,7 @@ image_speed=0
 sel=0
 grab=0
 rotato=0
-draggatto=0
+scaling=0
 modified=0
 selresize=0
 
@@ -67,7 +67,7 @@ if (sel) {
     if (selresize) {
         do_selection_resize()
     }
-    if (draggatto) {
+    if (scaling) {
         dx=global.mousex
         dy=global.mousey
 
@@ -92,7 +92,7 @@ if (sel) {
 
         if (abs(image_xscale*sprw)<1) image_xscale=1/sprw
         if (abs(image_yscale*sprh)<1) image_yscale=1/sprh
-        if (!direct_mbleft) {draggatto=0 event_user(1) do_change_undo("scaling",0)}
+        if (!direct_mbleft) {scaling=0 event_user(1) do_change_undo("scaling",0)}
         update_inspector()
     }
 
@@ -211,7 +211,7 @@ if (sproy>sprh*0.5) {
     draghandy+=lengthdir_y((sprh-sproy)*image_yscale,image_angle-90)
 }
 
-if (draggatto) draw_line(x,y,draghandx,draghandy)
+if (scaling) draw_line(x,y,draghandx,draghandy)
 draw_rectangle(draghandx-8*zm,draghandy-8*zm,draghandx+8*zm,draghandy+8*zm,1)
 draw_rectangle(draghandx-4*zm,draghandy-4*zm,draghandx+4*zm,draghandy+4*zm,1)
 

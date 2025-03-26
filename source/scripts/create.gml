@@ -21,6 +21,9 @@ room_caption="Game Maker 8.2 Room Editor"
 autosave_timer=current_time
 autosave_interval=3*60*1000 //3 minute autosave in ms
 
+global.mousex=mouse_x
+global.mousey=mouse_y
+
 global.livesock=noone
 global.livebuf=noone
 global.live_connect=0

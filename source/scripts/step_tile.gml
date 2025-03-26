@@ -154,4 +154,17 @@ if (mode==1) {
     }
     layerscrollgo=clamp(layerscrollgo,-(layersize+1)*32+(height-100-360),0)
     layerscroll=clamp(approach((layerscroll*4+layerscrollgo)/5,layerscrollgo,2),-(layersize+1)*32+(height-100-360),0)
+
+    //next selection
+    if (keyboard_check_pressed(ord("N"))) {
+        if (ds_priority_size(click_priority)) {
+            with (ds_priority_delete_max(click_priority)) {
+                deselect()
+                sel=1
+                select=id
+                update_inspector()
+                update_selection_bounds()
+            }
+        }
+    }
 }
