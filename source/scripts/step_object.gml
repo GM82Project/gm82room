@@ -73,4 +73,25 @@ if (mode==0 && objects_length) {
             }
         }
     }
+
+    //glue hotkey
+    if (keyboard_check_pressed(ord("G"))) {
+        if (num_selected()>1) {
+            o=skipwarnings
+            skipwarnings=true
+            cement_instances()
+            skipwarnings=o
+        }
+    }
+
+
+    //gigaknife hotkey
+    if (keyboard_check_pressed(ord("K"))) {
+        if (num_selected()>1) {
+            o=skipwarnings
+            skipwarnings=true
+            subdivide_instances()
+            skipwarnings=o
+        }
+    }
 }
