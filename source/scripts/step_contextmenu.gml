@@ -16,7 +16,6 @@ if (click) {
             case 3: {cleanup_instances()}break
             case 4: {cement_instances()}break
             case 5: {subdivide_instances()}break
-            case 6: {export_tile_model()}break
         }
     }
     if (menutype=="resourcefield") {

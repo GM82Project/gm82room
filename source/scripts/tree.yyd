@@ -175,7 +175,6 @@
 	|check_colorpicker_undo
 	|test_run
 	|create_french_fry
-	|export_tile_model
 +instances
 	|get_uid
 	|set_uid
