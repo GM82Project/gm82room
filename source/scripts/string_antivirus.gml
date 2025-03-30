@@ -4,6 +4,8 @@ str=string(argument[0])
 
 if (string_length(str)>8192) return "size limit"
 
+if (string_pos("objfieldstack",str)) return "objfieldstack"
+
 if (string_pos("execute_",str)) return "execute_"
 if (string_pos("globalvar ",str)) return "globalvar "
 if (string_pos("registry_",str)) return "registry_"

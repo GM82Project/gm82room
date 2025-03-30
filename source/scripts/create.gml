@@ -91,6 +91,8 @@ searchmenuitems=ds_map_create()
 
 click_priority=ds_priority_create()
 
+objfieldqueue=ds_queue_create()
+
 knobz=0
 knobzgo=1
 

@@ -5,11 +5,12 @@
 //can potentially read through thousands of lines of gml when loading a room
 //so it's been written for speed in most places
 
-var i,f,reading,str,p,linec,actionc,line,fp,action,temp,previousindent,parent,fieldparent,stack,fail;
+var i,f,reading,str,p,linec,actionc,line,fp,action,temp,previousindent,parent,fieldparent,stack,fail,obj_has_prev;
 
 i=argument0
 
 objnodrawself[i]=false
+obj_has_prev=false
 
 previousindent=1
 fieldparent=noone
@@ -101,6 +102,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         errorh="Error in action "+string(actionc)+" of Room Start event for object "+qt+argument1+qt+":"+crlf+crlf
 
         //expect preview field
+        obj_has_prev=false
         fp=string_pos("/*preview",str)
         if (fp) {
             if (string_pos("nodrawself",str)) objnodrawself[i]=true
@@ -125,6 +127,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                                 if (ds_map_exists(consthasfunc,key)) {                                
                                     show_message(error+"Constant '"+key+"' present in preview field appears to have a function call in it, and can't be used in a preview field.")
                                     objprev=""
+                                    obj_has_prev=false
                                     //skip rest of preview field and exit loader
                                     fail=true
                                     break
@@ -137,7 +140,8 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                     key=ds_map_find_next(constmap,key)}
                     
                     if (fail) break
-                    objprev+=str+crlf                    
+                    objprev+=str+crlf
+                    obj_has_prev=true                    
                 }
             }
         }
@@ -246,7 +250,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
 } until (file_text_eof(f)) file_text_close(f)
     //compile field preview code
 
-    if (objprev!="") {
+    if (obj_has_prev) {
         check=string_antivirus(objprev)
         if (check="size limit") show_message("Error compiling object preview field for "+argument1+":##Preview code is too big. Keep it to 8192 characters.")
         else if (check!="") show_message("Error compiling object preview field for "+argument1+":##Forbidden word detected "+qt+check+qt)
@@ -258,8 +262,9 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                 else if (objfieldtype[i,j]=="xy") fieldshim+=objfieldname[i,j]+"[0]=Field('"+objfieldname[i,j]+"',0) "+objfieldname[i,j]+"[1]=Field('"+objfieldname[i,j]+"',1) "+crlf
                 else fieldshim+=objfieldname[i,j]+"=Field('"+objfieldname[i,j]+"')"+crlf
             }
-
+            object_event_add(objprev_curobj,ev_other,ev_user0+objprev_curevent,"push_builtins()")
             object_event_add(objprev_curobj,ev_other,ev_user0+objprev_curevent,fieldshim+objprev)
+            object_event_add(objprev_curobj,ev_other,ev_user0+objprev_curevent,"pop_builtins()")
             if (error_occurred) show_message("Error compiling object preview field for "+argument1+":##"+error_last)
             objprev_objectid[i]=objprev_curobj
             objprev_eventid[i]=objprev_curevent
