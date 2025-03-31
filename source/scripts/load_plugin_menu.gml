@@ -3,7 +3,7 @@ var i,dir,f,code,p,name,desc,spr,sprfn;
 pluginmenuitems=ds_map_create()
 pluginmenu=N_Menu_CreatePopupMenu()
 
-dir="room_plugins\"
+dir=gm_directory+"\room_plugins\"
 
 directory_create(dir)
 
