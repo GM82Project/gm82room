@@ -38,7 +38,6 @@ sprw=ds_queue_dequeue(s)
 sprh=ds_queue_dequeue(s)
 sprox=ds_queue_dequeue(s)
 sproy=ds_queue_dequeue(s)
-fields=ds_queue_dequeue(s)
 
 speed=0
 gravity=0
