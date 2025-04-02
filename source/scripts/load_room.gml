@@ -225,8 +225,9 @@ if (layersize) {
                 if (o.tileh==0) o.tileh=16
                 bgw=background_get_width(bg_background[micro_optimization_bgid])
                 bgh=background_get_height(bg_background[micro_optimization_bgid])
-                tileu=min(bgw-o.tilew,tileu)
-                tilev=min(bgh-o.tileh,tilev)
+                
+                o.tilew=min(o.tilew,bgw-tileu)
+                o.tileh=min(o.tileh,bgh-tilev)
 
                 o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
                 o.tlayer=layer
@@ -248,6 +249,8 @@ if (layersize) {
                 tile_set_alpha(o.tile,o.image_alpha)
                 tile_set_blend(o.tile,o.image_blend)
             } else with (o) instance_destroy()
+            
+            if (o.tilew<=0 or o.tileh<=0) with (o) instance_destroy()
 
             c+=1
 
