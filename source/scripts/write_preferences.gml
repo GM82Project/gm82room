@@ -16,7 +16,7 @@ registry_write_dword(dir+"GM82RoomSwapRMB",swaprmb)
 registry_write_dword(dir+"GM82RoomRMBAlwaysDel",rmbalwaysdel)
 registry_write_dword(dir+"GM82RoomSkipWarnings",skipwarnings)
 registry_write_dword(dir+"GM82RoomSkipRecenter",skiprecenter)
-registry_write_dword(dir+"GM82RoomDoTileCrop",dotilecropping)
+registry_write_dword(dir+"GM82RoomDoTileCrop",dotilecrop)
 
 for (i=0;i<16;i+=1) registry_write_dword(dir+"RoomCustomColors"+string(i),customcolors[i])
 

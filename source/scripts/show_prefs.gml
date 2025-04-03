@@ -150,7 +150,7 @@ while (1) {
     if (point_in_rectangle(mx,my,472,288,472+24,288+24)) {
         tooltip="Crop tiles that use parts outside of the texture limits of backgrounds."
         if (pressed) {
-            dotilecropping=!dotilecropping
+            dotilecrop=!dotilecrop
             continue
         }
     }
@@ -337,7 +337,7 @@ while (1) {
     dx=472 dy=240 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Don't Recenter#After Transform") if (skiprecenter) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //tile crop
-    dx=472 dy=288 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Fix Broken Tile#Coordinates") if (dotilecropping) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=472 dy=288 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Fix Broken Tile#Coordinates") if (dotilecrop) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
 
     //swap rmb
