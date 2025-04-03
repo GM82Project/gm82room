@@ -102,7 +102,6 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         errorh="Error in action "+string(actionc)+" of Room Start event for object "+qt+argument1+qt+":"+crlf+crlf
 
         //expect preview field
-        obj_has_prev=false
         fp=string_pos("/*preview",str)
         if (fp) {
             if (string_pos("nodrawself",str)) objnodrawself[i]=true
