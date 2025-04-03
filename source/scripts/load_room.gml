@@ -226,8 +226,10 @@ if (layersize) {
                 bgw=background_get_width(bg_background[micro_optimization_bgid])
                 bgh=background_get_height(bg_background[micro_optimization_bgid])
                 
-                o.tilew=min(o.tilew,bgw-tileu)
-                o.tileh=min(o.tileh,bgh-tilev)
+                if (dotilecrop) {
+                    o.tilew=min(o.tilew,bgw-tileu)
+                    o.tileh=min(o.tileh,bgh-tilev)
+                }
 
                 o.tile=tile_add(o.bg,tileu,tilev,o.tilew,o.tileh,o.x,o.y,layer)
                 o.tlayer=layer
