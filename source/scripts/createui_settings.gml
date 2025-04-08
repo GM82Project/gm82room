@@ -190,4 +190,30 @@ i.w=72
 i.anchor=1
 i.tagmode=4
 
+
+i=instance_create(width-160+8,472,TextField)
+i.action="screen width"
+i.basealt="width"
+i.displen=6
+i.w=72
+i.anchor=1
+i.tagmode=4
+
+i=instance_create(width-160+80,472,TextField)
+i.action="screen height"
+i.basealt="height"
+i.displen=6
+i.w=72
+i.anchor=1
+i.tagmode=4
+
+i=instance_create(width-160+8,508,Button)
+i.type=1
+i.action="screen draw"
+i.text="Draw grid"
+i.alt="Draw screen grid on top of the room"
+i.anchor=1
+i.tagmode=4
+
+
 update_settingspanel()

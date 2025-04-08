@@ -24,6 +24,10 @@ skipwarnings=registry_read_dword(dir+"GM82RoomSkipWarnings",0)
 skiprecenter=registry_read_dword(dir+"GM82RoomSkipRecenter",0)
 dotilecrop=registry_read_dword(dir+"GM82RoomDoTileCrop",1)
 
+screen_grid_width=registry_read_dword(dir+"GM82RoomScreenGridWidth",registry_read_dword(dir+"DefRoomW",800))
+screen_grid_height=registry_read_dword(dir+"GM82RoomScreenGridHeight",registry_read_dword(dir+"DefRoomH",608) )
+screen_grid_draw=registry_read_dword(dir+"GM82RoomScreenGridDraw",0)
+
 for (i=0;i<16;i+=1) customcolors[i]=registry_read_dword(dir+"RoomCustomColors"+string(i),0)
 
 theme_load()

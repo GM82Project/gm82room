@@ -12,6 +12,7 @@ globalvar
     removeoutside,fillwithcolor,fillcolor,remember,mode,
     overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,
     chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname,
+    screen_grid_width,screen_grid_height,screen_grid_draw,
     selection,selleft,seltop,selwidth,selheight,selsize,grabselection,
     jtool_objs,has_jtool_table,jtool_loaded_engine,
     objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef,objnodrawself,objshow,objfielddepends,objfieldindent,objfieldqueue,

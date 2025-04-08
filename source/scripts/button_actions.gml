@@ -36,6 +36,7 @@ with (Controller) switch (argument0) {
     case "ref move"    : {ref_moving=!ref_moving && ref_loaded if (ref_moving) view[8]=1}break
     case "ref reset"   : {ref_x=0 ref_y=0 ref_w=ref_u ref_h=ref_v ref_angle=0 update_settingspanel()}break
 
+    case "screen draw" : {screen_grid_draw=!screen_grid_draw}break
 
     //visibility
     case "view objects": {view[0]=!view[0] change_mode(mode)}break

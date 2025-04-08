@@ -14,4 +14,7 @@ textfield_set("ref angle",ref_angle)
 if (ref_loaded) textfield_set("ref xscale",ref_w/ref_u) else textfield_set("ref xscale",1)
 if (ref_loaded) textfield_set("ref yscale",ref_h/ref_v) else textfield_set("ref yscale",1)
 
+textfield_set("screen width",screen_grid_width)
+textfield_set("screen height",screen_grid_height)
+
 with (Button) if (action="room code") alt=roomcode

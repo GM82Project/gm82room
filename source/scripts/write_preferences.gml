@@ -18,6 +18,10 @@ registry_write_dword(dir+"GM82RoomSkipWarnings",skipwarnings)
 registry_write_dword(dir+"GM82RoomSkipRecenter",skiprecenter)
 registry_write_dword(dir+"GM82RoomDoTileCrop",dotilecrop)
 
+registry_write_dword(dir+"GM82RoomScreenGridWidth",screen_grid_width)
+registry_write_dword(dir+"GM82RoomScreenGridHeight",screen_grid_height)
+registry_write_dword(dir+"GM82RoomScreenGridDraw",screen_grid_draw)
+
 for (i=0;i<16;i+=1) registry_write_dword(dir+"RoomCustomColors"+string(i),customcolors[i])
 
 theme_save()

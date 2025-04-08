@@ -17,6 +17,9 @@ if (active) {
         case "ref xscale" : {if (ref_loaded) ref_w=ref_u*real(text)}break
         case "ref yscale" : {if (ref_loaded) ref_h=ref_v*real(text)}break
 
+        case "screen width" : {val=clamp(round(real(text)),32,999999) screen_grid_width=val}break
+        case "screen height" : {val=clamp(round(real(text)),32,999999) screen_grid_height=val}break
+
         case "inst x"    : {val=round(real(text)) with (instance) if (sel) {x=val do_change_undo("instance x",0)}}break
         case "inst y"    : {val=round(real(text)) with (instance) if (sel) {y=val do_change_undo("instance y",0)}}break
         case "inst xs"   : {val=real(text) with (instance) {if (sel) image_xscale=val if (abs(image_xscale*sprw)<1) image_xscale=1/sprw do_change_undo("instance xscale",0)}}break

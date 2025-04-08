@@ -55,6 +55,8 @@ if (object_index==Button) {
                 case "path smooth": {checked=path_get_kind(current_path)}break
                 case "path closed": {checked=path_get_closed(current_path)}break
                 case "path thin": {checked=path_thin}break
+
+                case "screen draw": {checked=screen_grid_draw}break
             }
             up=!down
         }
