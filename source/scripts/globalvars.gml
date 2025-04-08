@@ -6,7 +6,7 @@ globalvar
     powersave,startmax,do_autosaves,
     select,selectt
     copyvec,tty,width,height,interpolation,
-    objpal,objhotbar,instancecount,tilecount,tilehotbar,objhotbarhold,
+    objpal,objhotbar,instancecount,tilecount,tilehotbar,
     codeeditor,view,roomwidth,roomheight,selcol,outroomgrid,
     mouse_wx,mouse_wy,mousein,crosshair,zoom,zm,grid,gridx,gridy,
     removeoutside,fillwithcolor,fillcolor,remember,mode,

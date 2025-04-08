@@ -78,13 +78,9 @@ if (current_time>autosave_timer+autosave_interval) {
 mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
 
-dx=width div 2 -40*4.5-20
-dy=height-32-32-20
-
 mousein=(
     point_in_rectangle(mouse_wx,mouse_wy,160+4,32+4,width-160-4,height-32-4)
     and (!instance_position(mouse_wx,mouse_wy,tilepanel) || mode!=1)
-    and (!point_in_rectangle(mouse_wx,mouse_wy,dx,dy,dx+9*40,dy+40) || mode!=0)
 )
 
 direct_mbleft=mouse_check_direct(mb_left) && mouse_check_direct(mb_left)

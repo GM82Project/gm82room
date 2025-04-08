@@ -336,7 +336,7 @@ repeat (3) {
         }
     }
 }
-objpal=lastobj
+set_objpal(lastobj)
 
 
 //fill object hotbar with most used objects

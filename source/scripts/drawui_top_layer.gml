@@ -25,6 +25,8 @@ if (mode==0) {
             }
             draw_sprite_stretched(objspr[i],0,dx2-w/2,dy2-h/2,w,h)
             if (keyboard_check(vk_alt)) draw_sprite(sprMenuButtons,52-objshow[i],dx+8,dy+8)
+            hot=unpick(i,objhotbar[1],objhotbar[2],objhotbar[3],objhotbar[4],objhotbar[5],objhotbar[6],objhotbar[7],objhotbar[8],objhotbar[9])
+            if (hot>=0) draw_sprite(sprMinesweeper,hot,dx,dy)
             tooltiptext=ds_list_find_value(objects,i)+objprops[i]
             if (objdesc[i]!="") tooltiptext=tooltiptext+lf+lf+objdesc[i]
         }
