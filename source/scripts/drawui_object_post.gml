@@ -19,6 +19,8 @@ if (mode=0) {
                 if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
                 draw_sprite_stretched(objspr[i],0,dx-w/2,dy-h/2,w,h)
             }
+            hot=unpick(i,objhotbar[1],objhotbar[2],objhotbar[3],objhotbar[4],objhotbar[5],objhotbar[6],objhotbar[7],objhotbar[8],objhotbar[9])
+            if (hot>=0) draw_sprite(sprMinesweeper,hot,dx,dy)
         }
         posx+=1 if (posx=4) {posx=0 posy+=1}
     }
@@ -51,19 +53,4 @@ if (mode=0) {
     draw_text(dx+12,228+12,"Rotation")
     draw_text(dx+12,304+8,"Blend")
     draw_set_color($ffffff)
-
-    //hotbar
-    dx=width div 2 -40*4.5
-    dy=height-32-32
-    i=1 repeat (9) {
-        obj=objhotbar[i]
-        draw_button_ext(dx-20,dy-20,40,40,objpal!=obj,global.col_main)
-        if (obj>=0) {
-            w=sprite_get_width(objspr[obj])
-            h=sprite_get_height(objspr[obj])
-            if (w>h) {h=h/w*32 w=32} else {w=w/h*32 h=32}
-            draw_sprite_stretched(objspr[obj],0,dx-w/2,dy-h/2,w,h)
-        }
-        dx+=40
-    i+=1}
 }
