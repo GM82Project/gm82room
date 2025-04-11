@@ -89,7 +89,11 @@ file_text_close(f)
 
 ds_priority_destroy(pr)
 
-file_text_write_all(dir+"code.gml",parse_flags_into_code()+roomcode)
+str=parse_flags_into_code()+roomcode
+l=string_length(str)
+while (string_char_at(str,l)==lf) l-=1
+str=string_copy(str,1,l)+lf
+file_text_write_all(dir+"code.gml",str)
 
 //save settings
 f=file_text_open_write(dir+"room.txt")
