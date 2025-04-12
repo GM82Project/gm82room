@@ -84,12 +84,23 @@ if (mode==0 && objects_length) {
     }
 
     //glue hotkey
-    if (keyboard_check_pressed(ord("G"))) {
+    if (keyboard_check_pressed(ord("G")) and !keyboard_check(vk_control)) {
         if (num_selected()>1) {
-            o=skipwarnings
-            skipwarnings=true
-            cement_instances()
-            skipwarnings=o
+            var object;object=noone
+            with (instance) if (sel) {
+                if (object==noone) object=obj
+                else if (object!=obj) {object=noone break}
+            }
+
+            if (object!=noone) {
+                previous=objpal
+                o=skipwarnings
+                skipwarnings=true
+                set_objpal(object)
+                cement_instances()
+                skipwarnings=o
+                set_objpal(previous)
+            }
         }
     }
 
