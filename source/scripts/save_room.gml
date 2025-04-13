@@ -92,7 +92,8 @@ ds_priority_destroy(pr)
 str=parse_flags_into_code()+roomcode
 l=string_length(str)
 while (string_char_at(str,l)==lf) l-=1
-str=string_copy(str,1,l)+lf
+str=string_copy(str,1,l)
+if (str!="") str+=lf
 file_text_write_all(dir+"code.gml",str)
 
 //save settings
