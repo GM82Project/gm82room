@@ -62,7 +62,7 @@ if (mode==1) {
             h=height-32-y
             image_xscale=w
             image_yscale=h
-            if (!mouse_check_button(mb_left)) {
+            if (!direct_mbleft) {
                 grab=0
             }
             with (Button) {

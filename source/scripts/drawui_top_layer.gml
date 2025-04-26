@@ -39,7 +39,7 @@ if (mode==0) {
     draw_button_ext(0,height-112,160,112,1,global.col_main)
 }
 
-if (mode==1 && tilebgpal!=noone) {
+if (mode==1) {
     with (tilepanel) if (point_in_rectangle(mouse_wx,mouse_wy,x+w-36,y,x+w,y+36) && !mouse_check_button(mb_left)) other.tooltiptext="Drag to resize"
 
     if (bgnametooltip!="") tooltiptext=bgnametooltip

@@ -1,3 +1,5 @@
+with (TextField) textfield_actions()
+
 select=noone
 selectt=noone
 with (instance) {sel=0 fieldactive=0}
