@@ -114,8 +114,8 @@ var l;
 if (type==4 || type==0) {
     l=string_length(text)
     if (multiline) {
-        dtext=string_replace_all(string_wrap(text,w-16),lf,crlf) //gm can only display crlf properly
-        h=max(32,string_height(dtext+cursor)+12)
+        dtext=string_wrap(string_replace_all(text+cursor,lf,crlf),w-16,1)
+        h=max(32,string_height(dtext)+12)
         image_yscale=h
     } else {
         dtext=text

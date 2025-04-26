@@ -121,10 +121,10 @@ if (object_index==TextField) {
                 if (selected) {
                     draw_rectangle_color(x+8,y+5,x+7+string_width(dtext),y+5+string_height(dtext),$ff8000,$ff8000,$ff8000,$ff8000,0)
                     draw_set_color($ffffff)
-                    draw_text(x+8,y+5,dtext+cursor)
+                    draw_text(x+8,y+5,dtext)
                 } else {
                     draw_set_color(merge_color(global.col_low,0,0.5))
-                    draw_text(x+8,y+5,dtext+cursor)
+                    draw_text(x+8,y+5,dtext)
                 }
             } else {
                 draw_set_color(merge_color(global.col_low,0,0.5))
