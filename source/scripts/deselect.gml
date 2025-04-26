@@ -12,7 +12,8 @@ if (mode==5) {
         current_path=noone
         generate_path_model(current_pathname)
     }
-    update_inspector()
-    update_selection_bounds()
     current_pathname=""
 }
+
+update_inspector()
+update_selection_bounds()
