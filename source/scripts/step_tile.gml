@@ -2,7 +2,7 @@ var dx,dy,yes;
 
 if (mode==1) {
     //tile palette
-    with (tilepanel) {
+    with (Tilepanel) {
         if (instance_position(mouse_wx,mouse_wy,id)) {
             yes=1 with (TextField) if (active) {yes=0}
             if (yes) {
@@ -66,8 +66,8 @@ if (mode==1) {
                 grab=0
             }
             with (Button) {
-                if (anchor==4) y=height-tilepanel.h-32-24
-                if (anchor==5) y=height-tilepanel.h-32+4
+                if (anchor==4) y=height-Tilepanel.h-32-24
+                if (anchor==5) y=height-Tilepanel.h-32+4
             }
         }
         zo=z
@@ -98,7 +98,7 @@ if (mode==1) {
         }
     }
 
-    if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,tilepanel.y-24)) {
+    if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,Tilepanel.y-24)) {
         posy=0
         if (backgrounds_length) {
             i=0 repeat (backgrounds_length) {
@@ -127,8 +127,8 @@ if (mode==1) {
         }
     }
     if (tilebgpal!=noone) {
-        tpalscrollgo=clamp(tpalscrollgo,-(posy+1)*32+(tilepanel.y-24-120),0)
-        tpalscroll=clamp(approach((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(posy+1)*32+(tilepanel.y-24-120),0)
+        tpalscrollgo=clamp(tpalscrollgo,-(posy+1)*32+(Tilepanel.y-24-120),0)
+        tpalscroll=clamp(approach((tpalscroll*4+tpalscrollgo)/5,tpalscrollgo,2),-(posy+1)*32+(Tilepanel.y-24-120),0)
     }
 
     //layer inspector

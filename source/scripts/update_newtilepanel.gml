@@ -1,6 +1,6 @@
 ///update_newtilepanel(reset)
 
-with (tilepanel) {
+with (Tilepanel) {
     if (tilebgpal!=noone) {
         tex=bg_background[tilebgpal]
         bgw=background_get_width(tex)

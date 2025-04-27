@@ -31,6 +31,8 @@ fieldhandy=-9999999
 code=""
 
 instancecount+=1
+
+Instancepanel.update_scheduled=1
 #define Destroy_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -45,6 +47,7 @@ if (select==id) {
 instancecount-=1
 
 ds_map_delete(uidmap,uid)
+Instancepanel.update_scheduled=true
 #define Step_2
 /*"/*'/**//* YYD ACTION
 lib_id=1

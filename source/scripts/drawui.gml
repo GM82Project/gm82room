@@ -211,7 +211,8 @@ actionh=32
 
 rect(0,0,160,height,global.col_main,1)
 rect(160,0,width-320,32,global.col_main,1)
-draw_button_ext(160,32,width-320,height-64,0,noone)
+var left;left=160+Instancepanel.w*Instancepanel.open
+draw_button_ext(left,32,width-160-left,height-64,0,noone)
 
 drawui_statusbar()
 

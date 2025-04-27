@@ -14,7 +14,7 @@ if (resizecount<10) {
         window_resize_buffer(width,height,1,0)
         view_wport[0]=width
         view_hport[0]=height
-        with (tilepanel) {
+        with (Tilepanel) {
             if (w==yes-160) w=width-160
 
             w=min(width-160,w)
@@ -24,11 +24,12 @@ if (resizecount<10) {
             image_xscale=w
             image_yscale=h
         }
+        update_instancepanel()
         with (Button) {
             if (anchor==1 || anchor==3) x=width-offx
             if (anchor==2 || anchor==3) y=height-offy
-            if (anchor==4) y=height-tilepanel.h-32-24
-            if (anchor==5) y=height-tilepanel.h-32+4
+            if (anchor==4) y=height-Tilepanel.h-32-24
+            if (anchor==5) y=height-Tilepanel.h-32+4
         }
         resizecount+=1
         if (resizecount>=10) show_message("Resizing the window failed multiple times. Do you have some sort of weird DPI settings? Either way, I'm disabling resizing for now.")
@@ -80,7 +81,8 @@ mouse_wy=window_mouse_get_y()
 
 mousein=(
     point_in_rectangle(mouse_wx,mouse_wy,160+4,32+4,width-160-4,height-32-4)
-    and (!instance_position(mouse_wx,mouse_wy,tilepanel) || mode!=1)
+    and (!instance_position(mouse_wx,mouse_wy,Instancepanel) || !Instancepanel.open || mode!=0)
+    and (!instance_position(mouse_wx,mouse_wy,Tilepanel) || mode!=1)
 )
 
 direct_mbleft=mouse_check_direct(mb_left) && mouse_check_direct(mb_left)
@@ -148,7 +150,7 @@ if (!zoomcenter) {
 
 //panning
 if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
-    if (mode==1) with (tilepanel) if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
+    if (mode==1) with (Tilepanel) if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
         panning=1
         grabx=mouse_wx
         graby=mouse_wy

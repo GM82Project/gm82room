@@ -1,3 +1,5 @@
+if (ilist) if (!Instancepanel.open) exit
+
 with (Controller) switch (argument0) {
     case "palette name": case "bg name": case "view follow": case "path precision": {
         with (other) textfield_activate()

@@ -165,6 +165,7 @@ with (Controller) switch (argument0) {
     case "object search": {search_for_objects(get_string("Object name:",""))}break
 
     case "tools"        : {call_nmenu("toolmenu",toolmenu)}break
+    case "instance list": {Instancepanel.open=!Instancepanel.open if (Instancepanel.open) {Instancepanel.updatew=1 Instancepanel.update_scheduled=true update_instancepanel()}}break
 
 
     //tiles
@@ -173,8 +174,8 @@ with (Controller) switch (argument0) {
     case "tile overlap check": {tile_overlap_check=!tile_overlap_check}break
 
     case "tile panel grid"    : {tilepickgrid=!tilepickgrid}break
-    case "tile panel zoom out": {tilepanel.zgo=roundto(min(8,tilepanel.zgo*2),1/8)}break
-    case "tile panel zoom in" : {tilepanel.zgo=roundto(max(1/8,tilepanel.zgo/2),1/8)}break
+    case "tile panel zoom out": {Tilepanel.zgo=roundto(min(8,Instancepanel.zgo*2),1/8)}break
+    case "tile panel zoom in" : {Tilepanel.zgo=roundto(max(1/8,Instancepanel.zgo/2),1/8)}break
 
     //tile inspector
     case "tile snap": {

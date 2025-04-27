@@ -7,6 +7,7 @@ createui_views()      //mode 3
 createui_settings()   //mode 4
 createui_paths()      //mode 5
 
+update_instancepanel()
 update_tilepanel()
 
 with (Button) {

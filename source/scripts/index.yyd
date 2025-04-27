@@ -230,3 +230,5 @@ string_better_lim
 load_plugin_menu
 push_builtins
 pop_builtins
+draw_instancepanel
+update_instancepanel

@@ -5,6 +5,7 @@ tileholder
 Button
 TextField
 
-tilepanel
+Tilepanel
 colorpicker
 modal
+Instancepanel

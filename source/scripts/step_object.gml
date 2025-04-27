@@ -1,6 +1,32 @@
 var dx,dy;
 
 if (mode==0 && objects_length) {
+    with (Instancepanel) if (open) {
+        if (instance_position(mouse_wx,mouse_wy,id)) {
+            yes=1 with (TextField) if (active) {yes=0}
+            if (yes) {
+                //smcrrrollign
+                if (mouse_wheel_down()) {}//scrmoll
+                if (mouse_wheel_up()) {}//scorrolls
+            }
+
+            if (mouse_check_button_pressed(mb_left)) {
+                if (point_in_rectangle(mouse_wx,mouse_wy,x+w-32,y,x+w,y+32)) {
+                    grab=1
+                    offx=x+w-mouse_wx
+                }
+            }
+        }
+        if (grab) {
+            w=mouse_wx+offx-x
+            update_instancepanel()
+
+            if (!direct_mbleft) {
+                grab=0
+            }
+        }
+    }
+
     //palette controls
     if (mouse_wx<160 && mouse_wy>=120 && mouse_wy<height-136) {
         if (mouse_check_button_pressed(mb_left) && !instance_exists(modal)) {

@@ -27,6 +27,7 @@ maxval=0
 type=0
 anchor=0
 tagmode=-1
+ilist=0
 gray=0
 multiline=0
 

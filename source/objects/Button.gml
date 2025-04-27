@@ -17,12 +17,15 @@ type=0
 tagmode=-1
 downcount=0
 gray=0
+ilist=0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
+if (ilist) if (!Instancepanel.open) exit
+
 focus=instance_position(mouse_wx,mouse_wy,id)
 
 if (down!=0) {

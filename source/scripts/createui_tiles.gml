@@ -2,8 +2,8 @@
 var dy;
 
 //tile panel
-instance_create(0,0,tilepanel)
-dy=height-32-tilepanel.h+4
+instance_create(0,0,Tilepanel)
+dy=height-32-Tilepanel.h+4
 
 i=instance_create(4,dy,Button)
 i.spr=1
@@ -51,7 +51,7 @@ i.w=160
 i.h=24
 i.tagmode=1
 
-i=instance_create(0,height-32-tilepanel.h-24,Button)
+i=instance_create(0,height-32-Tilepanel.h-24,Button)
 i.spr=20
 i.action="tile palscroldown"
 i.w=160

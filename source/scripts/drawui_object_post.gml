@@ -1,4 +1,7 @@
 if (mode=0) {
+    //instance list
+    with (Instancepanel) draw_instancepanel()
+
     //palette
     posx=0
     posy=0

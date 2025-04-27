@@ -38,17 +38,17 @@ if (active) {
         case "tile panel grid x": {
             if (tilebgpal!=noone) {
                 tex=bg_background[tilebgpal]
-                tilepanel.gx=median(0,real(text),background_get_width(tex))
-                if (tilepanel.gx==0) tilepanel.gx=bg_gridx[tilebgpal]
-                text=string(tilepanel.gx)
+                Tilepanel.gx=median(0,real(text),background_get_width(tex))
+                if (Tilepanel.gx==0) Tilepanel.gx=bg_gridx[tilebgpal]
+                text=string(Tilepanel.gx)
             }
         }break
         case "tile panel grid y": {
             if (tilebgpal!=noone) {
                 tex=bg_background[tilebgpal]
-                tilepanel.gy=median(0,real(text),background_get_height(tex))
-                if (tilepanel.gy==0) tilepanel.gy=bg_gridy[tilebgpal]
-                text=string(tilepanel.gy)
+                Tilepanel.gy=median(0,real(text),background_get_height(tex))
+                if (Tilepanel.gy==0) Tilepanel.gy=bg_gridy[tilebgpal]
+                text=string(Tilepanel.gy)
             }
         }break
 

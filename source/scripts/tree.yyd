@@ -117,6 +117,7 @@
 	|drawui_top_layer
 	|drawui_path
 	|draw_tile_panel
+	|draw_instancepanel
 |step
 +step
 	|step_windowzoom
@@ -149,6 +150,7 @@
 	|update_settingspanel
 	|update_undo_button
 	|update_newtilepanel
+	|update_instancepanel
 |change_mode
 +buttons
 	|button_actions

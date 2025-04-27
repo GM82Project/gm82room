@@ -1,5 +1,83 @@
 //object mode
 
+//instance list
+instance_create(160,32,Instancepanel)
+
+i=instance_create(160,64,Button)
+i.spr=19
+i.action="ilistscrolup"
+i.w=160
+i.h=24
+i.tagmode=0
+i.ilist=1
+
+i=instance_create(160,height-56-68,Button)
+i.spr=20
+i.action="ilistscroldown"
+i.w=160
+i.h=24
+i.anchor=2
+i.tagmode=0
+i.ilist=1
+
+i=instance_create(160+8,height-32-68+8,Button)
+i.action="instance list up"
+i.spr=19
+i.w=24
+i.h=24
+i.tagmode=0
+i.anchor=2
+i.ilist=1
+
+i=instance_create(160+8,height-32-68+8+28,Button)
+i.action="instance list down"
+i.spr=20
+i.w=24
+i.h=24
+i.tagmode=0
+i.anchor=2
+i.ilist=1
+
+i=instance_create(160+8+28,height-32-68+8,Button)
+i.action="instance list top"
+i.spr=58
+i.w=24
+i.h=24
+i.tagmode=0
+i.anchor=2
+i.ilist=1
+
+i=instance_create(160+8+28,height-32-68+8+28,Button)
+i.action="instance list bottom"
+i.spr=59
+i.w=24
+i.h=24
+i.tagmode=0
+i.anchor=2
+i.ilist=1
+
+i=instance_create(160+8+56,height-32-68+8,Button)
+i.action="instance list delete"
+i.text=" Delete"
+i.spr=25
+i.w=106
+i.h=24
+i.tagmode=0
+i.anchor=2
+i.ilist=1
+
+i=instance_create(160+8+56,height-32-68+8+28,Button)
+i.action="instance list dupe"
+i.text=" Dupe"
+i.spr=13
+i.w=106
+i.h=24
+i.tagmode=0
+i.anchor=2
+i.ilist=1
+
+
+//palette
 i=instance_create(0,96,Button)
 i.spr=19
 i.action="palscrolup"
@@ -46,6 +124,14 @@ i=instance_create(8,height-100+60,Button)
 i.action="tools"
 i.text="Tools"
 i.w=64
+i.tagmode=0
+i.anchor=2
+
+i=instance_create(160-40,height-100+60,Button)
+i.action="instance list"
+i.alt="Instance list"
+i.spr=57
+i.w=32
 i.tagmode=0
 i.anchor=2
 

@@ -39,7 +39,7 @@ if (mode==1) {
         draw_set_color($ffffff)
     }
 
-    with (tilepanel) draw_tile_panel()
+    with (Tilepanel) draw_tile_panel()
 
     //inspector
 
