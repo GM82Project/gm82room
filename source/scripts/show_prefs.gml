@@ -55,7 +55,7 @@ while (1) {
 
     //color picker checkboxes
     if (point_in_rectangle(mx,my,240,192,240+24,192+24)) {
-        tooltip="Uses the buil-in color picker designed for GM 8.2."
+        tooltip="Uses the built-in color picker designed for GM 8.2."
         if (pressed) colorpickertype=0
     }
     if (point_in_rectangle(mx,my,240,224,240+24,224+24)) {

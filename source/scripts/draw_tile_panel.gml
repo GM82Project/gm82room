@@ -1,5 +1,5 @@
 draw_button_ext(x,y,w,h,1,global.col_main)
-draw_button_ext(x+w-36,y+4,32,32,1,global.col_main)
+draw_button_ext(x+w-36,y+4,32,32,!grab,global.col_main)
 draw_sprite(sprMenuButtons,36,x+w-20,y+20)
 draw_button_ext(x+4,y+36,w-8,h-36-4,0,global.col_main)
 

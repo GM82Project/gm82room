@@ -4,7 +4,7 @@ globalvar
     root,savedir,error_buffer,
     has_backgrounds,has_datafiles,has_fonts,has_objects,has_paths,has_scripts,has_sounds,has_sprites,has_timelines,
     powersave,startmax,do_autosaves,
-    select,selectt
+    select,selectt,
     copyvec,tty,width,height,interpolation,
     objpal,objhotbar,instancecount,tilecount,tilehotbar,
     codeeditor,view,roomwidth,roomheight,selcol,outroomgrid,

@@ -17,5 +17,5 @@ if (mode==5) {
     current_pathname=""
 }
 
-update_inspector()
+clear_inspector()
 update_selection_bounds()
