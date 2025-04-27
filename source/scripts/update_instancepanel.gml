@@ -9,7 +9,7 @@ if (mode==0) {
         if (h!=oh or updatew) event_user(0)
 
         w=max(178,min(width-160-160-400,w))
-        image_xscale=w
+        image_xscale=w+4
     }
 
     with (Button) if (action=="ilistscrolup" or action=="ilistscroldown") {w=Instancepanel.w image_xscale=w}

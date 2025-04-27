@@ -170,6 +170,13 @@ with (Controller) switch (argument0) {
     case "ilistscrolup":  {with (Instancepanel) scroll=max(0,scroll-3)}break
     case "ilistscroldown":{with (Instancepanel) scroll=min(scroll+3,length-showlength)}break
 
+    case "ilist up":      {}break
+    case "ilist down":    {}break
+    case "ilist top":     {}break
+    case "ilist bottom":  {}break
+    case "ilist charm":   {ilist_copy_many()}break
+    case "ilist strange": {delete_selected()}break
+
 
     //tiles
     case "tile palscroldown" : {tpalscrollgo-=192}break

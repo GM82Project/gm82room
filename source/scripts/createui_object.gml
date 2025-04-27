@@ -21,7 +21,7 @@ i.tagmode=0
 i.ilist=1
 
 i=instance_create(160+8,height-32-68+8,Button)
-i.action="instance list up"
+i.action="ilist up"
 i.spr=19
 i.w=24
 i.h=24
@@ -30,7 +30,7 @@ i.anchor=2
 i.ilist=1
 
 i=instance_create(160+8,height-32-68+8+28,Button)
-i.action="instance list down"
+i.action="ilist down"
 i.spr=20
 i.w=24
 i.h=24
@@ -39,7 +39,7 @@ i.anchor=2
 i.ilist=1
 
 i=instance_create(160+8+28,height-32-68+8,Button)
-i.action="instance list top"
+i.action="ilist top"
 i.spr=58
 i.w=24
 i.h=24
@@ -48,7 +48,7 @@ i.anchor=2
 i.ilist=1
 
 i=instance_create(160+8+28,height-32-68+8+28,Button)
-i.action="instance list bottom"
+i.action="ilist bottom"
 i.spr=59
 i.w=24
 i.h=24
@@ -57,7 +57,7 @@ i.anchor=2
 i.ilist=1
 
 i=instance_create(160+8+56,height-32-68+8,Button)
-i.action="instance list copy"
+i.action="ilist charm"
 i.text=" Copy ID"
 i.spr=13
 i.w=106
@@ -67,7 +67,7 @@ i.anchor=2
 i.ilist=1
 
 i=instance_create(160+8+56,height-32-68+8+28,Button)
-i.action="instance list delete"
+i.action="ilist strange"
 i.text=" Delete"
 i.spr=25
 i.w=106

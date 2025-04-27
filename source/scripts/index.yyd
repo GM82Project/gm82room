@@ -232,3 +232,5 @@ push_builtins
 pop_builtins
 draw_instancepanel
 update_instancepanel
+ilist_copy_many
+delete_selected
