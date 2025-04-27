@@ -57,9 +57,9 @@ i.anchor=2
 i.ilist=1
 
 i=instance_create(160+8+56,height-32-68+8,Button)
-i.action="instance list delete"
-i.text=" Delete"
-i.spr=25
+i.action="instance list copy"
+i.text=" Copy ID"
+i.spr=13
 i.w=106
 i.h=24
 i.tagmode=0
@@ -67,9 +67,9 @@ i.anchor=2
 i.ilist=1
 
 i=instance_create(160+8+56,height-32-68+8+28,Button)
-i.action="instance list copy"
-i.text=" Copy ID"
-i.spr=13
+i.action="instance list delete"
+i.text=" Delete"
+i.spr=25
 i.w=106
 i.h=24
 i.tagmode=0
