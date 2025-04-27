@@ -12,13 +12,14 @@ if (open) {
 
     begin_trim(x+8-2,y+56+8-2,w-8-8+4,h-148-8-8+4)
 
-    dx=2
-    dy=2
+    dx=2 dy=2
     i=scroll repeat (showlength) {
+        if (inst[i].sel) draw_rect(dx-2,dy-2,w,20,$ff8000)
+        if (i) if (inst[i-1].depth!=inst[i].depth) draw_line(dx,dy-2,dx+w,dy-2)
+
         sw=sprite_get_width(sprite[i])
         sh=sprite_get_height(sprite[i])
         if (sw>sh) {sh=sh/sw*16 sw=16} else {sw=sw/sh*16 sh=16}
-        if (inst[i].sel) draw_rect(dx-2,dy-2,w,20,$ff8000)
         draw_sprite_stretched(sprite[i],0,dx+8-sw/2,dy+8-sh/2,sw,sh)
         draw_text(dx+20,dy+8,name[i])
         dy+=20

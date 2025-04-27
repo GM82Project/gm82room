@@ -170,10 +170,10 @@ with (Controller) switch (argument0) {
     case "ilistscrolup":  {with (Instancepanel) scroll=max(0,scroll-3)}break
     case "ilistscroldown":{with (Instancepanel) scroll=min(scroll+3,length-showlength)}break
 
-    case "ilist up":      {}break
-    case "ilist down":    {}break
-    case "ilist top":     {}break
-    case "ilist bottom":  {}break
+    case "ilist up":      {ilist_move_instances(-1)}break
+    case "ilist down":    {ilist_move_instances(1)}break
+    case "ilist top":     {ilist_move_instances(-2)}break
+    case "ilist bottom":  {ilist_move_instances(2)}break
     case "ilist charm":   {ilist_copy_many()}break
     case "ilist strange": {delete_selected()}break
 
