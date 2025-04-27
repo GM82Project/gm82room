@@ -11,6 +11,8 @@ i=0 repeat (8) {
     if (bg_alpha[i]!=1) str+=flag+"background_alpha["+string(i)+"]="+string_better_lim(bg_alpha[i])+lf
     if (!bg_stretch[i]) {
         //we don't save scale data if stretch is checked
+        if (bg_xscale[i]==0) bg_xscale[i]=1
+        if (bg_yscale[i]==0) bg_yscale[i]=1
         if (bg_xscale[i]!=1) str+=flag+"background_xscale["+string(i)+"]="+string_better_lim(bg_xscale[i])+lf 
         if (bg_yscale[i]!=1) str+=flag+"background_yscale["+string(i)+"]="+string_better_lim(bg_yscale[i])+lf 
     }

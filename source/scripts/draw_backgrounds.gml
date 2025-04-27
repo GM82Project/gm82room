@@ -22,6 +22,8 @@ if ((view[2] && !argument0) || (view[3] && argument0)) for (i=0;i<8;i+=1) if (bg
     w=background_get_width(bg)*bg_xscale[i]
     h=background_get_height(bg)*bg_yscale[i]
 
+    if (w*h==0) continue
+
     blend=bg_blend[i]
     alpha=bg_alpha[i]
 

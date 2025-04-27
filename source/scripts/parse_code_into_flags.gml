@@ -13,8 +13,8 @@ repeat (string_token_start(argument0,lf)) {
         i=0 repeat (8) {
             if (string_pos("background_hspeed["+string(i)+"]",str)) bg_hspeed[i]=real(val)
             if (string_pos("background_vspeed["+string(i)+"]",str)) bg_vspeed[i]=real(val)
-            if (string_pos("background_xscale["+string(i)+"]",str)) bg_xscale[i]=real(val)
-            if (string_pos("background_yscale["+string(i)+"]",str)) bg_yscale[i]=real(val)
+            if (string_pos("background_xscale["+string(i)+"]",str)) bg_xscale[i]=real(val) if (bg_xscale[i]==0) bg_xscale[i]=1
+            if (string_pos("background_yscale["+string(i)+"]",str)) bg_yscale[i]=real(val) if (bg_yscale[i]==0) bg_yscale[i]=1
             if (string_pos("background_blend[" +string(i)+"]",str)) bg_blend[i] =real(val)
             if (string_pos("background_alpha[" +string(i)+"]",str)) bg_alpha[i] =real(val)
         i+=1}
