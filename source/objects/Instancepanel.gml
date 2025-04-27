@@ -11,6 +11,7 @@ grab=0
 scroll=0
 
 length=0
+showlength=0
 updatew=0
 update_scheduled=true
 #define Other_10
@@ -24,9 +25,9 @@ update_scheduled=false
 ds_priority_clear(click_priority)
 with (instance) ds_priority_add(click_priority,id,-depth+order/orderlast)
 
-length=min(ds_priority_size(click_priority),floor((h-148-8)/20))
-
-//todo: scrolling
+length=ds_priority_size(click_priority)
+showlength=min(length,floor((h-148-8)/20))
+scroll=min(scroll,max(0,length-showlength))
 
 i=0 repeat (length) {
     o=ds_priority_delete_min(click_priority)

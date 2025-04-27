@@ -165,7 +165,10 @@ with (Controller) switch (argument0) {
     case "object search": {search_for_objects(get_string("Object name:",""))}break
 
     case "tools"        : {call_nmenu("toolmenu",toolmenu)}break
+
     case "instance list": {Instancepanel.open=!Instancepanel.open if (Instancepanel.open) {Instancepanel.updatew=1 Instancepanel.update_scheduled=true update_instancepanel()}}break
+    case "ilistscrolup":  {with (Instancepanel) scroll=max(0,scroll-3)}break
+    case "ilistscroldown":{with (Instancepanel) scroll=min(scroll+3,length-showlength)}break
 
 
     //tiles

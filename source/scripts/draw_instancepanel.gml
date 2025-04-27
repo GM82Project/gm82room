@@ -14,7 +14,7 @@ if (open) {
 
     dx=2
     dy=2
-    i=0 repeat (length) {
+    i=scroll repeat (showlength) {
         sw=sprite_get_width(sprite[i])
         sh=sprite_get_height(sprite[i])
         if (sw>sh) {sh=sh/sw*16 sw=16} else {sw=sw/sh*16 sh=16}

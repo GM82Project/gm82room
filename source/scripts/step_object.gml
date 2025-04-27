@@ -5,9 +5,8 @@ if (mode==0 && objects_length) {
         if (instance_position(mouse_wx,mouse_wy,id)) {
             yes=1 with (TextField) if (active) {yes=0}
             if (yes) {
-                //smcrrrollign
-                if (mouse_wheel_down()) {}//scrmoll
-                if (mouse_wheel_up()) {}//scorrolls
+                if (mouse_wheel_down()) {scroll=min(scroll+3,length-showlength)}
+                if (mouse_wheel_up()) {scroll=max(0,scroll-3)}
             }
 
             if (mouse_check_button_pressed(mb_left)) {
