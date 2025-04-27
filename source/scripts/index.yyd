@@ -235,3 +235,4 @@ update_instancepanel
 ilist_copy_many
 delete_selected
 ilist_move_instances
+focus_view_around_selection

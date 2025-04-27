@@ -15,6 +15,30 @@ if (mode==0 && objects_length) {
                     offx=x+w-mouse_wx
                 }
             }
+            if (direct_mbleft) {
+                if (point_in_rectangle(mouse_wx,mouse_wy,x+8-2,y+56+8-2,x+w-8+2,y+h-90-8+2)) {
+                    click=((mouse_wy-(y+56+8-2)) div 20)+scroll
+                    if (!selecting and not keyboard_check(vk_control)) deselect()
+                    if (click>=0 and click<length and click-scroll<showlength) {
+                        inst[click].sel=1
+                        if (selecting) {
+                            i=lastclick do {inst[i].sel=1 i=approach(i,click,1)} until i==click
+                        } else lastclick=click
+                    }
+
+                    sel=num_selected()
+                    if (sel==1) {
+                        with (instance) if (sel) {select=id update_inspector()}
+                    } else update_inspector()
+                    if (sel>1) {
+                        selection=1
+                        update_selection_bounds()
+                    }
+                    focus_view_around_selection()
+
+                    selecting=keyboard_check(vk_shift) or keyboard_check(vk_control)
+                }
+            } else selecting=false
         }
         if (grab) {
             w=mouse_wx+offx-x

@@ -1,7 +1,7 @@
 var seln;
 seln=num_selected()
 
-if (object_index!=Controller) {
+if (object_index==instance) {
     if (mode==0) {
         textfield_set("object name",objname)
 

@@ -14,6 +14,9 @@ length=0
 showlength=0
 updatew=0
 update_scheduled=true
+
+lastclick=0
+selecting=0
 #define Other_10
 /*"/*'/**//* YYD ACTION
 lib_id=1
