@@ -41,3 +41,5 @@ i=0 repeat (length) {
 i+=1}
 
 updatew=0
+
+ds_priority_clear(click_priority)

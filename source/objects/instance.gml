@@ -173,7 +173,9 @@ if (sel) {
         if (!point_in_rectangle(mouse_wx,mouse_wy,menux,menuy,menuw,menuh)) editinst=2
         if (editinst==2) {
             fields[editfid,0]=0
-            focus=instance_position(global.mousex,global.mousey,instance)
+            focus=noone
+            if (fill_click_priority(focus_priority))
+                focus=ds_priority_delete_max(focus_priority)
             if (focus) {
                 fields[editfid,0]=1
                 fields[editfid,1]=focus.uid

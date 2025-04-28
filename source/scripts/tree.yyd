@@ -236,6 +236,7 @@
 |select_path_point
 |set_objpal
 |delete_selected
+|fill_click_priority
 +instancelist
 	|ilist_copy_many
 	|ilist_move_instances

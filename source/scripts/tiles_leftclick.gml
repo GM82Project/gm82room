@@ -17,14 +17,7 @@ if (mode==1) {
         selectt=noone
         if (!keyboard_check(vk_shift)) {
             if (!overmode || keyboard_check(vk_control)) {
-                ds_priority_clear(click_priority)
-                with (tileholder) {
-                    if (instance_position(global.mousex,global.mousey,id)) {
-                        //sort by reverse scale
-                        ds_priority_add(click_priority,id,(max_int-depth)/abs(tilesx*tilew*tilesy*tileh))
-                    }
-                }
-                if (ds_priority_size(click_priority)) {
+                if (fill_click_priority()) {
                     with (ds_priority_delete_max(click_priority)) {
                         sel=1
                         update_inspector()

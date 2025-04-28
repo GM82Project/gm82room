@@ -22,7 +22,7 @@ globalvar
     live_message,live_message_alpha,
     direct_mbleft,direct_mbright,
     knobx,knoby,grabknob,
-    click_priority,
+    click_priority,focus_priority,
     grab_background,grab_bgoffx,grab_bgoffy,
     codeeditortype,colorpickertype,hide3dgizmo,cropbackgrounds,swaprmb,rmbalwaysdel,skipwarnings,skiprecenter,dotilecrop,
     messagestr,messagetime,

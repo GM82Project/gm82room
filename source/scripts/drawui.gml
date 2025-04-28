@@ -26,8 +26,8 @@ tty=0
 
 focus=noone
 if (mousein) {
-    if (mode==0) focus=instance_position(global.mousex,global.mousey,instance)
-    if (mode==1) focus=instance_position(global.mousex,global.mousey,tileholder)
+    if (fill_click_priority(focus_priority))
+        focus=ds_priority_delete_max(focus_priority)
 }
 
 

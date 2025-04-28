@@ -90,6 +90,7 @@ searchmenu=N_Menu_CreatePopupMenu()
 searchmenuitems=ds_map_create()
 
 click_priority=ds_priority_create()
+focus_priority=ds_priority_create()
 
 objfieldqueue=ds_queue_create()
 
