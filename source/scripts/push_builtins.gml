@@ -4,7 +4,6 @@ ds_queue_clear(s)
 
 ds_queue_enqueue(s,x)
 ds_queue_enqueue(s,y)
-ds_queue_enqueue(s,sprite_index)
 ds_queue_enqueue(s,image_xscale)
 ds_queue_enqueue(s,image_yscale)
 ds_queue_enqueue(s,image_angle)

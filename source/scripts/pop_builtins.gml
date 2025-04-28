@@ -2,7 +2,6 @@ var s;s=objfieldqueue
 
 x=ds_queue_dequeue(s)
 y=ds_queue_dequeue(s)
-sprite_index=ds_queue_dequeue(s)
 image_xscale=ds_queue_dequeue(s)
 image_yscale=ds_queue_dequeue(s)
 image_angle=ds_queue_dequeue(s)
