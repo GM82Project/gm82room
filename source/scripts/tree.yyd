@@ -241,3 +241,5 @@
 	|ilist_copy_many
 	|ilist_move_instances
 	|focus_view_around_selection
+|token_escape_commas
+|parse_constants_in_code

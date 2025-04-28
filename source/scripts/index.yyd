@@ -237,3 +237,5 @@ delete_selected
 ilist_move_instances
 focus_view_around_selection
 fill_click_priority
+token_escape_commas
+parse_constants_in_code

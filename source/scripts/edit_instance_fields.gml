@@ -157,9 +157,10 @@ switch (objfieldtype[obj,menu]) {
     } break
 
     case "enum": {
-        menu2=show_menu(string_replace_all(objfieldargs[obj,menu],",","|"),-1)
+        str=token_escape_commas(objfieldargs[obj,menu])
+        menu2=show_menu(string_replace_all(str,lf,"|"),-1)
         if (menu2==-1) exit
-        fields[menu,1]=get_nth_token(objfieldargs[obj,menu],",",menu2)
+        fields[menu,1]=get_nth_token(str,lf,menu2)
         fields[menu,0]=1
     break}
 

@@ -22,7 +22,12 @@ for (i=0;i<objfields[obj];i+=1) {
 }
 
 if (type=="bool" || type=="boolean" || type=="true" || type=="false") return val=="true"
-if (type=="value" || type=="color" || type=="colour" || type=="string" || type=="enum") return execute_string("return "+val)
+
+if (type="value" or type=="enum") {
+    return execute_string("return "+parse_constants_in_code(val))
+}
+
+if (type=="color" || type=="colour" || type=="string") return execute_string("return "+val)
 if (type=="number" || type=="number_range" || type=="radius" || type=="angle" || type=="xy")
     return real(val)
 

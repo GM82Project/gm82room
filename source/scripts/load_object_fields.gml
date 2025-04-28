@@ -5,7 +5,7 @@
 //can potentially read through thousands of lines of gml when loading a room
 //so it's been written for speed in most places
 
-var i,f,reading,str,p,linec,actionc,line,fp,action,temp,previousindent,parent,fieldparent,stack,fail,obj_has_prev;
+var i,f,reading,str,p,linec,actionc,line,fp,action,temp,previousindent,parent,fieldparent,stack,obj_has_prev;
 
 i=argument0
 
@@ -105,42 +105,21 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         fp=string_pos("/*preview",str)
         if (fp) {
             if (string_pos("nodrawself",str)) objnodrawself[i]=true
-            fail=false
             while (1) {
                 str=file_text_read_string(f)
                 file_text_readln(f) linec+=1
                 error=errorh+string(linec)+" | "+str+crlf+crlf
                 if (string_pos("*/",str)) break
                 if (str!="") {
-                    //look for constants
-                    alphanumleft="abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    alphanumright=alphanumleft+"0123456789"
-
-                    key=ds_map_find_first(constmap) repeat (constmapsize) {
-                        p=string_pos(key,str)
-                        if (p) {
-                            //if constant is a whole token
-                            if (!string_pos(string_char_at(str,p-1),alphanumleft))
-                            and (!string_pos(string_char_at(str,p+string_length(key)),alphanumright)) {
-                                //check if constant doesn't contain a function call
-                                if (ds_map_exists(consthasfunc,key)) {                                
-                                    show_message(error+"Constant '"+key+"' present in preview field appears to have a function call in it, and can't be used in a preview field.")
-                                    objprev=""
-                                    obj_has_prev=false
-                                    //skip rest of preview field and exit loader
-                                    fail=true
-                                    break
-                                } else {
-                                    //instantiate constant
-                                    str=string_replace_all(str,key,"("+ds_map_find_value(constmap,key)+")")
-                                }
-                            }
-                        }
-                    key=ds_map_find_next(constmap,key)}
-                    
-                    if (fail) break
+                    str=parse_constants_in_code(str)
+                    if (str==undefined) {
+                        objprev=""
+                        obj_has_prev=false
+                        //skip rest of preview field and exit loader
+                        break
+                    }
                     objprev+=str+crlf
-                    obj_has_prev=true                    
+                    obj_has_prev=true
                 }
             }
         }
@@ -149,7 +128,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         fp=string_pos("//field ",str)
         if (fp) {
             //found a field signature; parse it
-            
+
             error=errorh+string(linec)+" | "+line+crlf+crlf
             if (fp>previousindent) {
                 //field is more indented, store previous field dependency parent
