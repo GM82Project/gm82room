@@ -207,6 +207,15 @@
 		|Shader
 		|ShaderFromBase64
 		|ShaderFromPack
+		+shim getter armageddon
+			|object_get_depth
+			|object_get_mask
+			|object_get_name
+			|object_get_parent
+			|object_get_persistent
+			|object_get_solid
+			|object_get_sprite
+			|object_get_visible
 	|init_instance_fields
 	|load_object_fields
 	|is_field_copypaste_safe

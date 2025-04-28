@@ -239,3 +239,11 @@ focus_view_around_selection
 fill_click_priority
 token_escape_commas
 parse_constants_in_code
+object_get_depth
+object_get_mask
+object_get_name
+object_get_parent
+object_get_persistent
+object_get_solid
+object_get_sprite
+object_get_visible
