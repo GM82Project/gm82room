@@ -9,10 +9,9 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_
     yes=(keyboard_check_pressed(ord("X")))
 
     with (TextField) if (active) {
-        clipboard_set_text(keyboard_string)
+        clipboard_set_text(text)
         if (yes) {
             text=""
-            keyboard_string=text
         }
         yes=0
     }
@@ -84,7 +83,6 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
         yes=0
         if (clipboard_has_text()) {
             text=clipboard_get_text()
-            keyboard_string=text
             selected=0
         }
     }

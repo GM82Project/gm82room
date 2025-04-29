@@ -60,19 +60,20 @@ if (active) {
             clipboard_set_text(text)
         }
         if (keyboard_check_pressed(ord("V"))) {
-            keyboard_string=clipboard_get_text()
+            text=clipboard_get_text()
             selected=0
         }
     }
     otext=text
+    text=get_keyboard_string(text)
     if (type=4) {
-        text=string_copy(keyboard_string,1,maxlen)
+        text=string_copy(text,1,maxlen)
     } else {
         if (type=0) {
-            if (keyboard_string=="-" && keyboard_lastkey==vk_backspace) {
-                keyboard_string=""
+            if (text=="-" && keyboard_lastkey==vk_backspace) {
+                text=""
             }
-            text=string_number(keyboard_string)
+            text=string_number(text)
         }
         neg=!!string_pos("-",text)
         if (maxval>0) text=string(min(maxval,real(text)))
@@ -84,9 +85,11 @@ if (active) {
         if (keyboard_lastkey==vk_backspace || keyboard_lastkey==vk_delete || (keyboard_lastkey==vk_return && type!=0)) {
             text=""
             selected=0
-        } else if (keyboard_string!=otext) {
-            selected=0
-            text=keyboard_lastchar
+        } else {
+            if (text!=otext) {
+                selected=0
+                text=keyboard_lastchar
+            }
         }
     }
 
@@ -100,7 +103,6 @@ if (active) {
             textfield_actions()
         }
     }
-    keyboard_string=text
     event_user(4)
 } else {k=20 cursor=""}
 #define Other_14
@@ -113,9 +115,10 @@ applies_to=self
 var l;
 
 if (type==4 || type==0) {
+    if (!active) cursor=""
     l=string_length(text)
     if (multiline) {
-        dtext=string_wrap(string_replace_all(text+cursor,lf,crlf),w-16,1)
+        dtext=string_wrap(string_replace_all(text,lf,crlf),w-16,1)
         h=max(32,string_height(dtext)+12)
         image_yscale=h
     } else {
@@ -127,7 +130,7 @@ if (type==4 || type==0) {
             else alt=string_replace_all(text,"#","\#")
         } else alt=basealt
     }
-    dtext=string_replace_all(dtext,"#","\#")
-} else dtext=text
+    dtext=string_replace_all(dtext,"#","\#")+cursor
+} else dtext=text+cursor
 
 oldtext=text

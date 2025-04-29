@@ -247,3 +247,5 @@ object_get_persistent
 object_get_solid
 object_get_sprite
 object_get_visible
+get_keyboard_string
+clear_keyboard_string

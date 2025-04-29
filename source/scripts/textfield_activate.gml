@@ -4,7 +4,7 @@ active=1
 oldtext=text
 if (text!="") selected=1
 if (type==0 || type=4) {
-    keyboard_string=text
+    clear_keyboard_string()
 }
 if (type==1) {
     textfield_actions()

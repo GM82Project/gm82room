@@ -155,73 +155,73 @@ if (pressed) {
     if (point_in_rectangle(mx,my,256+20,216,256+20+40,216+24)) {
         text="red"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(red)
     }
     if (point_in_rectangle(mx,my,256+64,216,256+64+52,216+24)) {
         text="red%"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(round(red/2.55))
     }
 
     if (point_in_rectangle(mx,my,256+20,216+24,256+20+40,216+24+24)) {
         text="green"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(green)
     }
     if (point_in_rectangle(mx,my,256+64,216+24,256+64+52,216+24+24)) {
         text="green%"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(round(green/2.55))
     }
 
     if (point_in_rectangle(mx,my,256+20,216+48,256+20+40,216+48+24)) {
         text="blue"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(blue)
     }
     if (point_in_rectangle(mx,my,256+64,216+48,256+64+52,216+48+24)) {
         text="blue%"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(round(blue/2.55))
     }
 
     if (point_in_rectangle(mx,my,256+20,296,256+20+40,296+24)) {
         text="hue"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(hue)
     }
     if (point_in_rectangle(mx,my,256+64,296,256+64+52,296+24)) {
         text="hue%"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(round(hue*360/255))
     }
 
     if (point_in_rectangle(mx,my,256+20,296+24,256+20+40,296+24+24)) {
         text="sat"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(sat)
     }
     if (point_in_rectangle(mx,my,256+64,296+24,256+64+52,296+24+24)) {
         text="sat%"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(round(sat/2.55))
     }
 
     if (point_in_rectangle(mx,my,256+20,296+48,256+20+40,296+48+24)) {
         text="val"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(val)
     }
     if (point_in_rectangle(mx,my,256+64,296+48,256+64+52,296+48+24)) {
         text="val%"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string(round(val/2.55))
     }
 
     if (point_in_rectangle(mx,my,380,296,380+100,296+24)) {
         text="hex"
         act="typing"
-        keyboard_string=""
+        clear_keyboard_string() kstr=string_hex(color)
     }
 
     //buttons
@@ -238,20 +238,23 @@ if (act=="typing") {
         act=""
         text=""
     }
-    if (text=="hex") keyboard_string=string_copy(string_hexdigits(keyboard_string),1,6)
-    else keyboard_string=string_copy(string_digits(keyboard_string),1,3)
 
-    if (keyboard_string!="") {
+    kstr=get_keyboard_string(kstr)
+
+    if (text=="hex") kstr=string_copy(string_hexdigits(kstr),1,6)
+    else kstr=string_copy(string_digits(kstr),1,3)
+
+    if (kstr!="") {
         makehue=0
         makergb=0
         if (text=="hex") {
-            color=median(0,real_hex(keyboard_string),$ffffff)
+            color=median(0,real_hex(kstr),$ffffff)
             makergb=1
             makehue=1
         } else {
-            if (text=="hue%") value=median(0,real(keyboard_string),360)
-            else if (string_pos("%",text)) value=median(0,round(real(keyboard_string)*2.55),255)
-            else value=median(0,real(keyboard_string),255)
+            if (text=="hue%") value=median(0,real(kstr),360)
+            else if (string_pos("%",text)) value=median(0,round(real(kstr)*2.55),255)
+            else value=median(0,real(kstr),255)
 
             if (text=="red") {red=value color=make_color_rgb(red,green,blue) makehue=1}
             if (text=="green") {green=value color=make_color_rgb(red,green,blue) makehue=1}

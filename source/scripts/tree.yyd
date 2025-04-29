@@ -252,3 +252,5 @@
 	|focus_view_around_selection
 |token_escape_commas
 |parse_constants_in_code
+|get_keyboard_string
+|clear_keyboard_string
