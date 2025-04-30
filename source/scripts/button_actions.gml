@@ -48,7 +48,7 @@ with (Controller) switch (argument0) {
     case "view nospr"  : {view[6]=!view[6] change_mode(mode)}break
     case "view paths"  : {view[7]=!view[7]}break
     case "view ref"    : {if (ref_loaded) view[8]=!view[8]}break
-    case "view draw"   : {view[9]=!view[9]}break
+    case "view draw"   : {view[9]=!view[9] if (!view[9]) disable_preview_fields()}break
     case "view ignore" : {view[10]=!view[10] change_mode(mode)}break
 
     //zoom

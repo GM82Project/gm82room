@@ -249,3 +249,4 @@ object_get_sprite
 object_get_visible
 get_keyboard_string
 clear_keyboard_string
+disable_preview_fields

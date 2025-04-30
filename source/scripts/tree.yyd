@@ -234,6 +234,7 @@
 	|draw_sprite_outline
 	|push_builtins
 	|pop_builtins
+	|disable_preview_fields
 +theming
 	|theme_init
 	|theme_apply
