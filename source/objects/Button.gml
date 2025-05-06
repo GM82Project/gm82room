@@ -26,8 +26,6 @@ applies_to=self
 */
 if (ilist) if (!Instancepanel.open) exit
 
-focus=instance_position(mouse_wx,mouse_wy,id)
-
 if (down!=0) {
     //click button
     if (!focus) down=-1

@@ -45,8 +45,6 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-focus=instance_position(mouse_wx,mouse_wy,id)
-
 if (focus && (tagmode==mode || tagmode==-1)) current_cursor=cr_beam
 
 if (down!=0 && focus && !active && !(gray)) {

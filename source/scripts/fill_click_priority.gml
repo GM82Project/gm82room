@@ -13,7 +13,6 @@ if (mode==0) with (instance)
 
 if (mode==1) with (tileholder)
     if (distance_to_point(global.mousex,global.mousey)<1)
-        if (instance_position(global.mousex,global.mousey,id))
-            ds_priority_add(prio,id,(max_int-depth)/abs(tilesx*tilew*tilesy*tileh))
+        ds_priority_add(prio,id,(max_int-depth)/abs(tilesx*tilew*tilesy*tileh))
 
 return ds_priority_size(prio)

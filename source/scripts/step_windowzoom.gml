@@ -79,6 +79,8 @@ if (current_time>autosave_timer+autosave_interval) {
 mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
 
+with (Button) focus=distance_to_point(mouse_wx,mouse_wy)<1
+
 mousein=(
     point_in_rectangle(mouse_wx,mouse_wy,160+4,32+4,width-160-4,height-32-4)
     and (!instance_position(mouse_wx,mouse_wy,Instancepanel) || !Instancepanel.open || mode!=0)
