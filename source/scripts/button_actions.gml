@@ -184,8 +184,8 @@ with (Controller) switch (argument0) {
     case "tile overlap check": {tile_overlap_check=!tile_overlap_check}break
 
     case "tile panel grid"    : {tilepickgrid=!tilepickgrid}break
-    case "tile panel zoom out": {Tilepanel.zgo=roundto(min(8,Instancepanel.zgo*2),1/8)}break
-    case "tile panel zoom in" : {Tilepanel.zgo=roundto(max(1/8,Instancepanel.zgo/2),1/8)}break
+    case "tile panel zoom out": {Tilepanel.zgo=roundto(min(8,Tilepanel.zgo*2),1/8)}break
+    case "tile panel zoom in" : {Tilepanel.zgo=roundto(max(1/8,Tilepanel.zgo/2),1/8)}break
 
     //tile inspector
     case "tile snap": {
