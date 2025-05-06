@@ -12,7 +12,7 @@ i=argument0
 objnodrawself[i]=false
 obj_has_prev=false
 
-previousindent=1
+previousindent=noone
 fieldparent=noone
 stack=ds_stack_create()
 
@@ -129,6 +129,8 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         if (fp) {
             //found a field signature; parse it
 
+            if (previousindent==noone) previousindent=fp
+
             error=errorh+string(linec)+" | "+line+crlf+crlf
             if (fp>previousindent) {
                 //field is more indented, store previous field dependency parent
@@ -140,7 +142,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                 repeat (previousindent-fp) fieldparent=ds_stack_pop(stack)
             }
             objfielddepends[i,objfields[i]]=fieldparent
-            objfieldindent[i,objfields[i]]=fp-1
+            objfieldindent[i,objfields[i]]=ds_stack_size(stack)
             previousindent=fp
 
             //find annotations
