@@ -133,7 +133,7 @@ load_room_tree(root+"rooms\tree.yyd")
 loading_autosave=false
 if (directory_exists(savedir+"autosave")) {
     if (show_question("Hey, it looks like something happened before#and there's an autosave backup for this room.##Do you want to load the backup?")) {
-        dir+="autosave\"
+        savedir+="autosave\"
         loading_autosave=true
     }
 }
