@@ -1,5 +1,6 @@
 #define GMEXPORT extern "C" __declspec(dllexport)
 #include <windows.h>
+#include <vector>
 
 HWND hGmWnd;
 WNDPROC oldGmWndProc;
@@ -10,9 +11,7 @@ HMENU* hMenu = NULL;
 unsigned int numMenus = 0;
 unsigned int menuId = 2000;
 
-unsigned int MAX_BITMAPS = 0;
-HBITMAP* bitmaps = NULL;
-unsigned int numBitmaps = 0;
+std::vector<HBITMAP> bitmaps;
 
 const unsigned int MAX_TOOL_WINDOWS = 64;
 HWND hToolWnd[MAX_TOOL_WINDOWS + 1];
@@ -258,13 +257,11 @@ GMEXPORT double N_Menu_CleanUp(){
     }
     numMenus = 0;
     menuId = 2000;
-    for(unsigned int i = 0; i < numBitmaps; i++){
-        if(bitmaps[i] != 0){
+    for(unsigned int i = 0; i < bitmaps.size(); i++){
             DeleteObject(bitmaps[i]);
-            bitmaps[i] = 0;
-        }
+	    bitmaps.erase(bitmaps.cbegin()+i);
     }
-    numBitmaps = 0;
+    
     for(unsigned int i = 0; i <= numToolWnds; i++){
         if(IsWindow(hToolWnd[i])){
             DestroyWindow(hToolWnd[i]);
@@ -337,11 +334,11 @@ GMEXPORT double N_Menu_CreateToolWindow2(double height,double dragStyle){
 /*! \ingroup N_Menu
     Deletes a bitmap previously created with N_Menu_LoadBitmap. */
 GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
-    for(unsigned int i = 0; i < numBitmaps; i++){
+    for(unsigned int i = 0; i < bitmaps.size(); i++){
         if(bitmaps[i] == (HBITMAP)(DWORD)bitmap){
             DeleteObject(bitmaps[i]);
             DrawMenuBar(hGmWnd);
-            bitmaps[i] = 0;
+            bitmaps.erase(bitmaps.cbegin()+i);
         }
     }
     return 0;
@@ -356,7 +353,7 @@ GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
 GMEXPORT double N_Menu_DestroyMenu(double parent,double menu){
     for(unsigned int i = 0; i < numMenus; i++){
         if(hMenu[i] == (HMENU)(DWORD)menu){
-			DestroyMenu(hMenu[i]);
+	    DestroyMenu(hMenu[i]);
             DrawMenuBar(hGmWnd);
             hMenu[i] = 0;
         }
@@ -516,13 +513,9 @@ GMEXPORT char* N_Menu_ItemSetText(double menu,double item,const char* text){
     This function loads a bitmap with the filename fileName and returns its handle.
     This HAS to be a bitmap (.bmp) file! */
 GMEXPORT double N_Menu_LoadBitmap(const char* fileName){
-    numBitmaps+=1;
-    if(numBitmaps >= MAX_BITMAPS){
-        MAX_BITMAPS+=512;
-        bitmaps=(HBITMAP*)realloc(bitmaps,MAX_BITMAPS*sizeof(HBITMAP));
-    }
-    bitmaps[numBitmaps] = (HBITMAP)LoadImageA(NULL,fileName,IMAGE_BITMAP,0,0,LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    return (double)(DWORD)bitmaps[numBitmaps];
+    bitmaps.resize(bitmaps.size()+1);
+    bitmaps[bitmaps.size()-1] = (HBITMAP)LoadImageA(NULL,fileName,IMAGE_BITMAP,0,0,LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+    return (double)(DWORD)bitmaps[bitmaps.size()-1];
 }
 
 /*! \ingroup N_Menu
