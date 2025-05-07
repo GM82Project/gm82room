@@ -17,7 +17,8 @@ if (object_index==instance) {
 
         Instancepanel.update_scheduled=true
     }
-
+}
+if (object_index==tileholder) {
     if (mode==1) {
         textfield_set("current tile bg name",bgname)
 
