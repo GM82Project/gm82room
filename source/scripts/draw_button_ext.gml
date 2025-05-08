@@ -10,6 +10,17 @@ up=argument4
 col=argument5
 
 if (col!=noone) {
+    /*
+    code for experimental texture mode
+
+    texture_set_repeat(1)
+    draw_primitive_begin_texture(pr_trianglestrip,background_get_texture(background5))
+    draw_vertex_texture_color(dx,dy,dx/48,dy/48,col,1)
+    draw_vertex_texture_color(dx+w,dy,(dx+w)/48,(dy/48),col,1)
+    draw_vertex_texture_color(dx,dy+h,dx/48,(dy+h)/48,col,1)
+    draw_vertex_texture_color(dx+w,dy+h,(dx+w)/48,(dy+h)/48,col,1)
+    draw_primitive_end()         */
+
     draw_sprite_ext(spr1x1,0,dx,dy,w,h,0,col,1)
 }
 
