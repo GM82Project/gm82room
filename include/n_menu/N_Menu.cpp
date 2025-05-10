@@ -1,18 +1,16 @@
 #define GMEXPORT extern "C" __declspec(dllexport)
 #include <windows.h>
+#include <vector>
 
 HWND hGmWnd;
 WNDPROC oldGmWndProc;
 double menuItem;
 
 unsigned int MAX_MENUS = 0;
-HMENU* hMenu = NULL;
-unsigned int numMenus = 0;
+std::vector<HMENU> hMenu;
 unsigned int menuId = 2000;
 
-unsigned int MAX_BITMAPS = 0;
-HBITMAP* bitmaps = NULL;
-unsigned int numBitmaps = 0;
+std::vector<HBITMAP> bitmaps;
 
 const unsigned int MAX_TOOL_WINDOWS = 64;
 HWND hToolWnd[MAX_TOOL_WINDOWS + 1];
@@ -250,21 +248,20 @@ GMEXPORT double N_Menu_CleanUp(){
         return 0;
     }
     SetWindowLong(hGmWnd,GWL_WNDPROC,(long)oldGmWndProc);
-    for(unsigned int i = 0; i < numMenus; i++){
+    for(unsigned int i = 0; i < hMenu.size(); i++){
         if(IsMenu(hMenu[i])){
             DestroyMenu(hMenu[i]);
-            hMenu[i] = 0;
+            hMenu.erase(hMenu.cbegin()+i);
+	    //hMenu[i] = 0;
         }
     }
-    numMenus = 0;
     menuId = 2000;
-    for(unsigned int i = 0; i < numBitmaps; i++){
-        if(bitmaps[i] != 0){
+    for(unsigned int i = 0; i < bitmaps.size(); i++){
             DeleteObject(bitmaps[i]);
-            bitmaps[i] = 0;
-        }
+	    bitmaps.erase(bitmaps.cbegin()+i);
+	    //bitmaps[i]=0;
     }
-    numBitmaps = 0;
+    
     for(unsigned int i = 0; i <= numToolWnds; i++){
         if(IsWindow(hToolWnd[i])){
             DestroyWindow(hToolWnd[i]);
@@ -278,26 +275,16 @@ GMEXPORT double N_Menu_CleanUp(){
 /*! \ingroup N_Menu
     This function creates a menu bar and returns a handle to it. */
 GMEXPORT double N_Menu_CreateMenuBar(){
-    numMenus+=1;
-    if(numMenus >= MAX_MENUS){
-        MAX_MENUS+=512;
-        hMenu=(HMENU*)realloc(hMenu,MAX_MENUS*sizeof(HMENU));        
-    }
-    hMenu[numMenus] = CreateMenu();
-    return(DOUBLE)(DWORD)hMenu[numMenus];
+    hMenu.push_back(CreateMenu());
+    return(DOUBLE)(DWORD)hMenu[hMenu.size()-1];
 }
 
 /*! \ingroup N_Menu
     This function creates a popup menu and returns a handle to it. Popup menus
     can be attached to menu bars or to another popup menu as a submenu. */
 GMEXPORT double N_Menu_CreatePopupMenu(){
-    numMenus+=1;
-    if(numMenus >= MAX_MENUS){
-        MAX_MENUS+=512;
-        hMenu=(HMENU*)realloc(hMenu,MAX_MENUS*sizeof(HMENU));
-    }
-    hMenu[numMenus] = CreatePopupMenu();
-    return(DOUBLE)(DWORD)hMenu[numMenus];
+    hMenu.push_back(CreatePopupMenu());
+    return(DOUBLE)(DWORD)hMenu[hMenu.size()-1];
 }
 
 /*! \ingroup N_Menu
@@ -337,11 +324,12 @@ GMEXPORT double N_Menu_CreateToolWindow2(double height,double dragStyle){
 /*! \ingroup N_Menu
     Deletes a bitmap previously created with N_Menu_LoadBitmap. */
 GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
-    for(unsigned int i = 0; i < numBitmaps; i++){
+    for(unsigned int i = 0; i < bitmaps.size(); i++){
         if(bitmaps[i] == (HBITMAP)(DWORD)bitmap){
             DeleteObject(bitmaps[i]);
             DrawMenuBar(hGmWnd);
-            bitmaps[i] = 0;
+            bitmaps.erase(bitmaps.cbegin()+i); 
+	        //bitmaps[i]=0;
         }
     }
     return 0;
@@ -354,11 +342,12 @@ GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
 	N_Menu_RemoveItem instead. If the menu does not have a parent (ex a
 	right click menu) pass 0 for the parent. */
 GMEXPORT double N_Menu_DestroyMenu(double parent,double menu){
-    for(unsigned int i = 0; i < numMenus; i++){
+    for(unsigned int i = 0; i < hMenu.size(); i++){
         if(hMenu[i] == (HMENU)(DWORD)menu){
-			DestroyMenu(hMenu[i]);
+	    DestroyMenu(hMenu[i]);
             DrawMenuBar(hGmWnd);
-            hMenu[i] = 0;
+	    hMenu.erase(hMenu.cbegin()+i);
+            //hMenu[i] = 0;
         }
     }
     return 0;
@@ -516,13 +505,8 @@ GMEXPORT char* N_Menu_ItemSetText(double menu,double item,const char* text){
     This function loads a bitmap with the filename fileName and returns its handle.
     This HAS to be a bitmap (.bmp) file! */
 GMEXPORT double N_Menu_LoadBitmap(const char* fileName){
-    numBitmaps+=1;
-    if(numBitmaps >= MAX_BITMAPS){
-        MAX_BITMAPS+=512;
-        bitmaps=(HBITMAP*)realloc(bitmaps,MAX_BITMAPS*sizeof(HBITMAP));
-    }
-    bitmaps[numBitmaps] = (HBITMAP)LoadImageA(NULL,fileName,IMAGE_BITMAP,0,0,LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    return (double)(DWORD)bitmaps[numBitmaps];
+    bitmaps.push_back((HBITMAP)LoadImageA(NULL,fileName,IMAGE_BITMAP,0,0,LR_LOADFROMFILE | LR_CREATEDIBSECTION));
+    return (double)(DWORD)bitmaps[bitmaps.size()-1];
 }
 
 /*! \ingroup N_Menu
