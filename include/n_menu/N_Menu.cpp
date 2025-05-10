@@ -248,7 +248,7 @@ GMEXPORT double N_Menu_CleanUp(){
         return 0;
     }
     SetWindowLong(hGmWnd,GWL_WNDPROC,(long)oldGmWndProc);
-    for(unsigned int i = 0; i < numMenus; i++){
+    for(unsigned int i = 0; i < hMenu.size(); i++){
         if(IsMenu(hMenu[i])){
             DestroyMenu(hMenu[i]);
             hMenu.erase(hMenu.cbegin()+i);
@@ -342,11 +342,12 @@ GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
 	N_Menu_RemoveItem instead. If the menu does not have a parent (ex a
 	right click menu) pass 0 for the parent. */
 GMEXPORT double N_Menu_DestroyMenu(double parent,double menu){
-    for(unsigned int i = 0; i < numMenus; i++){
+    for(unsigned int i = 0; i < hMenu.size(); i++){
         if(hMenu[i] == (HMENU)(DWORD)menu){
 	    DestroyMenu(hMenu[i]);
             DrawMenuBar(hGmWnd);
-            hMenu[i] = 0;
+	    hMenu.erase(hMenu.cbegin()+i);
+            //hMenu[i] = 0;
         }
     }
     return 0;
