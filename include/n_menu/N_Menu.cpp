@@ -1,6 +1,8 @@
 #define GMEXPORT extern "C" __declspec(dllexport)
 #include <windows.h>
 
+#define BASE_MENU_ID 2000
+
 HWND hGmWnd;
 WNDPROC oldGmWndProc;
 double menuItem;
@@ -8,7 +10,7 @@ double menuItem;
 unsigned int MAX_MENUS = 0;
 HMENU* hMenu = NULL;
 unsigned int numMenus = 0;
-unsigned int menuId = 2000;
+unsigned int menuId = BASE_MENU_ID;
 
 unsigned int MAX_BITMAPS = 0;
 HBITMAP* bitmaps = NULL;
@@ -257,7 +259,7 @@ GMEXPORT double N_Menu_CleanUp(){
         }
     }
     numMenus = 0;
-    menuId = 2000;
+    menuId = BASE_MENU_ID;
     for(unsigned int i = 0; i < numBitmaps; i++){
         if(bitmaps[i] != 0){
             DeleteObject(bitmaps[i]);
