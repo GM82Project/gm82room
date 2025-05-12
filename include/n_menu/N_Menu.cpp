@@ -251,16 +251,18 @@ GMEXPORT double N_Menu_CleanUp(){
     for(unsigned int i = 0; i < hMenu.size(); i++){
         if(IsMenu(hMenu[i])){
             DestroyMenu(hMenu[i]);
-            hMenu.erase(hMenu.cbegin()+i);
+            //hMenu.erase(hMenu.cbegin()+i);
 	    //hMenu[i] = 0;
         }
+	hMenu.resize(0);
     }
     menuId = 2000;
     for(unsigned int i = 0; i < bitmaps.size(); i++){
             DeleteObject(bitmaps[i]);
-	    bitmaps.erase(bitmaps.cbegin()+i);
+	    //bitmaps.erase(bitmaps.cbegin()+i);
 	    //bitmaps[i]=0;
     }
+    bitmaps.resize(0);
     
     for(unsigned int i = 0; i <= numToolWnds; i++){
         if(IsWindow(hToolWnd[i])){
@@ -328,8 +330,8 @@ GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
         if(bitmaps[i] == (HBITMAP)(DWORD)bitmap){
             DeleteObject(bitmaps[i]);
             DrawMenuBar(hGmWnd);
-            bitmaps.erase(bitmaps.cbegin()+i); 
-	        //bitmaps[i]=0;
+	        bitmaps[i]=0;
+            //bitmaps.erase(bitmaps.cbegin()+i);
         }
     }
     return 0;
@@ -344,10 +346,10 @@ GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
 GMEXPORT double N_Menu_DestroyMenu(double parent,double menu){
     for(unsigned int i = 0; i < hMenu.size(); i++){
         if(hMenu[i] == (HMENU)(DWORD)menu){
-	    DestroyMenu(hMenu[i]);
+	        DestroyMenu(hMenu[i]);
             DrawMenuBar(hGmWnd);
-	    hMenu.erase(hMenu.cbegin()+i);
-            //hMenu[i] = 0;
+	        //hMenu.erase(hMenu.cbegin()+i);
+            hMenu[i] = 0;
         }
     }
     return 0;
