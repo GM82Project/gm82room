@@ -56,3 +56,5 @@ N_Menu_ItemSetDisabled(right1, rightok4, true);
 N_Menu_ItemSetRadioSelected(rightpopup7, rightok11, rightok10, rightok12);
 N_Menu_ItemSetBitmap(rightpopup2, rightok3, face);
 N_Menu_ItemSetBitmap(rightpopup5, rightok6, check);
+N_Menu_ItemSetText(rightpopup3, rightok5, "ok5text");
+N_Menu_ItemSetText(rightpopup7, rightok12, "ok12text");

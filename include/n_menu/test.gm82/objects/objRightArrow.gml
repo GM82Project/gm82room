@@ -57,7 +57,16 @@ case rightok8: show_message("rightok8"); break;
 case rightok9: show_message("rightok9"); break;
 case rightok10: show_message("rightok10"); break;
 case rightok11: show_message("rightok11"); break;
-case rightok12: show_message("rightok12"); break;
+case rightok12:
+    var msg1;
+    var msg2;
+
+    msg1 = N_Menu_ItemGetText(rightpopup3, rightok5);
+    msg2 = N_Menu_ItemGetText(rightpopup7, rightok12);
+
+    show_message(msg1);
+    show_message(msg2);
+    break;
 }
 #define KeyPress_39
 /*"/*'/**//* YYD ACTION
