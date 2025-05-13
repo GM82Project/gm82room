@@ -266,7 +266,7 @@
 						2,
 						2
 					],
-					"returntype": 2
+					"returntype": 1
 				},
 				{
 					"name": "N_Menu_ItemSetBitmap",
