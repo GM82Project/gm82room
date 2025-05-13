@@ -10,6 +10,12 @@ double menuItem;
 unsigned int MAX_MENUS = 0;
 HMENU* hMenu = NULL;
 unsigned int numMenus = 0;
+struct HandleList {
+    HANDLE* handles;
+    unsigned int count;
+    unsigned int max;
+};
+
 unsigned int menuId = BASE_MENU_ID;
 
 unsigned int MAX_BITMAPS = 0;
@@ -38,6 +44,63 @@ struct ToolWndDragInfo{
 ToolWndData toolData;
 
 const char TOOLWND_CLASS_NAME[] = "N_Menu Tool Window Class";
+
+void InitHandleList(HandleList* list){
+    list->handles = NULL;
+    list->count = 0;
+    list->max = 0;
+}
+
+void AddHandle(HandleList* list,HANDLE handle){
+    unsigned int index = list->count;
+    list->count++;
+    if(list->count > list->max){
+        list->max+=512;
+        list->handles = (HANDLE*)realloc(list->handles,list->max * sizeof(HANDLE));
+    }
+    list->handles[index] = handle;
+}
+
+#define HANDLE_NOT_FOUND 0xFFFFFFFFu
+unsigned int FindHandleIndex(HandleList* list,HANDLE handle){
+    for(unsigned int i = 0; i < list->count; i++){
+        if(list->handles[i] == handle){
+            return i;
+        }
+    }
+    return HANDLE_NOT_FOUND;
+}
+
+void RemoveHandleIndex(HandleList* list,unsigned int index){
+    list->count--;
+    if(index != list->count){
+        list->handles[index] = list->handles[list->count];
+    }
+}
+
+void RemoveHandle(HandleList* list,HANDLE handle){
+    unsigned int index = FindHandleIndex(list,handle);
+    if(index != HANDLE_NOT_FOUND){
+        RemoveHandleIndex(list,index);
+    }
+}
+
+void ClearHandleList(HandleList* list){
+    free(list->handles);
+    InitHandleList(list);
+}
+
+HMENU GetMenu(HandleList* list,unsigned int index){
+    return (HMENU)list->handles[index];
+}
+
+HBITMAP GetBitmap(HandleList* list,unsigned int index){
+    return (HBITMAP)list->handles[index];
+}
+
+HWND GetWindow(HandleList* list,unsigned int index){
+    return (HWND)list->handles[index];
+}
 
 LRESULT HandleNcActivate(HWND h,WPARAM w,LPARAM l){
     bool active = w ? true : false;
