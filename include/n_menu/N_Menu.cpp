@@ -37,6 +37,8 @@ struct ToolWndDragInfo{
 
 ToolWndData toolData;
 
+const char TOOLWND_CLASS_NAME[] = "N_Menu Tool Window Class";
+
 LRESULT HandleNcActivate(HWND h,WPARAM w,LPARAM l){
     bool active = w ? true : false;
     for(unsigned int i = 0; i < numToolWnds; i++){
@@ -276,7 +278,7 @@ GMEXPORT double N_Menu_CleanUp(){
         }
     }
     numToolWnds = 0;
-    UnregisterClass("N_Menu Tool Window Class",GetModuleHandle(0));
+    UnregisterClass(TOOLWND_CLASS_NAME,GetModuleHandle(0));
     return 1;
 }
 
@@ -331,7 +333,7 @@ GMEXPORT double N_Menu_CreateToolWindow2(double height,double dragStyle){
     numToolWnds+=1;
     RECT tempRect = { 0,0,toolData.width,height == -1 ? GetSystemMetrics(SM_CYMENU) : (int)height };
     AdjustWindowRectEx(&tempRect,WS_VISIBLE | WS_POPUP | WS_SYSMENU | WS_CAPTION,FALSE,WS_EX_TOOLWINDOW);
-    hToolWnd[index] = CreateWindowEx(WS_EX_TOOLWINDOW,"N_Menu Tool Window Class",toolData.caption,
+    hToolWnd[index] = CreateWindowEx(WS_EX_TOOLWINDOW,TOOLWND_CLASS_NAME,toolData.caption,
         WS_VISIBLE | WS_POPUP | WS_SYSMENU | WS_CAPTION | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
         toolData.x,toolData.y,tempRect.right - tempRect.left,tempRect.bottom - tempRect.top,hGmWnd,NULL,GetModuleHandle(0),NULL);
     SetWindowPos(hToolWnd[index],HWND_TOP,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
@@ -438,7 +440,7 @@ GMEXPORT double N_Menu_Init(double wnd){
     wndClassEx.hCursor = LoadCursor(NULL,IDC_ARROW);
     wndClassEx.hbrBackground = (HBRUSH)(COLOR_BTNFACE+1);
     wndClassEx.lpszMenuName    = 0;
-    wndClassEx.lpszClassName = "N_Menu Tool Window Class";
+    wndClassEx.lpszClassName = TOOLWND_CLASS_NAME;
     wndClassEx.hIconSm = 0;
     if(!RegisterClassEx(&wndClassEx)){
         return 0;
