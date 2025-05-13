@@ -172,6 +172,10 @@ LRESULT CALLBACK hToolWndProc(HWND h,UINT u,WPARAM w,LPARAM l){
                 dragInfo->oldRect = dragRect;
             }
         break;
+        case WM_DESTROY:
+            dragInfo = reinterpret_cast<ToolWndDragInfo*>(GetWindowLongPtr(h,GWLP_USERDATA));
+            delete dragInfo;
+        break;
     }
     return DefWindowProc(h,u,w,l);
 }
