@@ -17,9 +17,7 @@ HandleList menus;
 
 unsigned int menuId = BASE_MENU_ID;
 
-unsigned int MAX_BITMAPS = 0;
-HBITMAP* bitmaps = NULL;
-unsigned int numBitmaps = 0;
+HandleList bitmaps;
 
 const unsigned int MAX_TOOL_WINDOWS = 64;
 HWND hToolWnd[MAX_TOOL_WINDOWS + 1];
@@ -326,13 +324,10 @@ GMEXPORT double N_Menu_CleanUp(){
     }
     ClearHandleList(&menus);
     menuId = BASE_MENU_ID;
-    for(unsigned int i = 0; i < numBitmaps; i++){
-        if(bitmaps[i] != 0){
-            DeleteObject(bitmaps[i]);
-            bitmaps[i] = 0;
-        }
+    for(unsigned int i = 0; i < bitmaps.count; i++){
+        DeleteObject(GetBitmap(&bitmaps,i));
     }
-    numBitmaps = 0;
+    ClearHandleList(&bitmaps);
     for(unsigned int i = 0; i < numToolWnds; i++){
         if(IsWindow(hToolWnd[i])){
             DestroyWindow(hToolWnd[i]);
@@ -399,11 +394,12 @@ GMEXPORT double N_Menu_CreateToolWindow2(double height,double dragStyle){
 /*! \ingroup N_Menu
     Deletes a bitmap previously created with N_Menu_LoadBitmap. */
 GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
-    for(unsigned int i = 0; i < numBitmaps; i++){
-        if(bitmaps[i] == (HBITMAP)(DWORD)bitmap){
-            DeleteObject(bitmaps[i]);
+    for(unsigned int i = 0; i < bitmaps.count; i++){
+        if(GetBitmap(&bitmaps,i) == (HBITMAP)(DWORD)bitmap){
+            DeleteObject(GetBitmap(&bitmaps,i));
             DrawMenuBar(hGmWnd);
-            bitmaps[i] = 0;
+            RemoveHandleIndex(&bitmaps,i);
+            i--;
         }
     }
     return 0;
@@ -498,6 +494,7 @@ GMEXPORT double N_Menu_Init(double wnd){
         return 0;
     }
     InitHandleList(&menus);
+    InitHandleList(&bitmaps);
     return 1;
 }
 
@@ -576,14 +573,9 @@ GMEXPORT char* N_Menu_ItemSetText(double menu,double item,const char* text){
     This function loads a bitmap with the filename fileName and returns its handle.
     This HAS to be a bitmap (.bmp) file! */
 GMEXPORT double N_Menu_LoadBitmap(const char* fileName){
-    unsigned int index = numBitmaps;
-    numBitmaps+=1;
-    if(numBitmaps > MAX_BITMAPS){
-        MAX_BITMAPS+=512;
-        bitmaps=(HBITMAP*)realloc(bitmaps,MAX_BITMAPS*sizeof(HBITMAP));
-    }
-    bitmaps[index] = (HBITMAP)LoadImageA(NULL,fileName,IMAGE_BITMAP,0,0,LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    return (double)(DWORD)bitmaps[index];
+    HBITMAP bitmap = (HBITMAP)LoadImageA(NULL,fileName,IMAGE_BITMAP,0,0,LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+    AddHandle(&bitmaps,bitmap);
+    return (double)(DWORD)bitmap;
 }
 
 /*! \ingroup N_Menu
