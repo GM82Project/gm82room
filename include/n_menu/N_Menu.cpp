@@ -38,62 +38,62 @@ struct ToolWndDragInfo{
 ToolWndData toolData;
 
 LRESULT HandleNcActivate(HWND h,WPARAM w,LPARAM l){
-	bool active = w ? true : false;
+    bool active = w ? true : false;
     for(unsigned int i = 0; i < numToolWnds; i++){
-		if((HWND)l == hToolWnd[i] || (HWND)l == hGmWnd){
-			active = true;
-			break;
-		}
-	}
-	if((HWND)l == (HWND)-1){
-		return DefWindowProc(h,WM_NCACTIVATE,active,0);
-	}
-	for(unsigned int i = 0; i < numToolWnds; i++){
-		if(hToolWnd[i] != h && hToolWnd[i] != (HWND)l){
-			SendMessage(hToolWnd[i],WM_NCACTIVATE,active,(long)-1);
+        if((HWND)l == hToolWnd[i] || (HWND)l == hGmWnd){
+            active = true;
+            break;
         }
-	}
-	if(hGmWnd != h && hGmWnd != (HWND)l){
+    }
+    if((HWND)l == (HWND)-1){
+        return DefWindowProc(h,WM_NCACTIVATE,active,0);
+    }
+    for(unsigned int i = 0; i < numToolWnds; i++){
+        if(hToolWnd[i] != h && hToolWnd[i] != (HWND)l){
+            SendMessage(hToolWnd[i],WM_NCACTIVATE,active,(long)-1);
+        }
+    }
+    if(hGmWnd != h && hGmWnd != (HWND)l){
         SendMessage(hGmWnd,WM_NCACTIVATE,active,(long)-1);
     }
-	return DefWindowProc(h,WM_NCACTIVATE,active,l);
+    return DefWindowProc(h,WM_NCACTIVATE,active,l);
 }
 
 LRESULT HandleEnable(HWND h,WPARAM w,LPARAM l){
-	for(unsigned int i = 0; i < numToolWnds; i++){
-		if(hToolWnd[i] != h){
-			EnableWindow(hToolWnd[i],w ? true : false);
-		}
-	}
-	return DefWindowProc(h,WM_ENABLE,w,l);
+    for(unsigned int i = 0; i < numToolWnds; i++){
+        if(hToolWnd[i] != h){
+            EnableWindow(hToolWnd[i],w ? true : false);
+        }
+    }
+    return DefWindowProc(h,WM_ENABLE,w,l);
 }
 
 void DrawXorFrame(HWND h,RECT* rect){
-	static WORD bitmap[] = {
-		0x00AA,0x0055,0x00AA,0x0055,0x00AA,0x0055,0x00AA,0x0055
-	};
-	HDC hDC;
-	HBITMAP hBitmap;
-	HBRUSH hBrush;
-	HANDLE hBrushOld;
-	int border = 3;
-	hDC = GetDC(0);
-	int x = rect->left;
-	int y = rect->top;
-	int width = rect->right - rect->left;
-	int height = rect->bottom - rect->top;
-	hBitmap = CreateBitmap(8,8,1,1,bitmap);
-	hBrush = CreatePatternBrush(hBitmap);
-	SetBrushOrgEx(hDC,x,y,0);
-	hBrushOld = SelectObject(hDC,hBrush);
-	PatBlt(hDC,x + border,y,width - border,border,PATINVERT);
-	PatBlt(hDC,x + width - border,y+border,border,height - border,PATINVERT);
-	PatBlt(hDC,x,y + height - border,width - border,border,PATINVERT);
-	PatBlt(hDC,x,y,border,height - border,PATINVERT);
-	SelectObject(hDC,hBrushOld);
-	DeleteObject(hBrush);
-	DeleteObject(hBitmap);
-	ReleaseDC(0,hDC);
+    static WORD bitmap[] = {
+        0x00AA,0x0055,0x00AA,0x0055,0x00AA,0x0055,0x00AA,0x0055
+    };
+    HDC hDC;
+    HBITMAP hBitmap;
+    HBRUSH hBrush;
+    HANDLE hBrushOld;
+    int border = 3;
+    hDC = GetDC(0);
+    int x = rect->left;
+    int y = rect->top;
+    int width = rect->right - rect->left;
+    int height = rect->bottom - rect->top;
+    hBitmap = CreateBitmap(8,8,1,1,bitmap);
+    hBrush = CreatePatternBrush(hBitmap);
+    SetBrushOrgEx(hDC,x,y,0);
+    hBrushOld = SelectObject(hDC,hBrush);
+    PatBlt(hDC,x + border,y,width - border,border,PATINVERT);
+    PatBlt(hDC,x + width - border,y+border,border,height - border,PATINVERT);
+    PatBlt(hDC,x,y + height - border,width - border,border,PATINVERT);
+    PatBlt(hDC,x,y,border,height - border,PATINVERT);
+    SelectObject(hDC,hBrushOld);
+    DeleteObject(hBrush);
+    DeleteObject(hBitmap);
+    ReleaseDC(0,hDC);
 }
 
 LRESULT CALLBACK GmWndProc(HWND h,UINT u,WPARAM w,LPARAM l){
@@ -133,17 +133,17 @@ LRESULT CALLBACK hToolWndProc(HWND h,UINT u,WPARAM w,LPARAM l){
             ToolWndDragInfo* dragInfo;
             dragInfo = reinterpret_cast<ToolWndDragInfo*>(GetWindowLongPtr(h,GWLP_USERDATA));
             if(dragInfo->useDragRect && w == HTCAPTION){
-		        SetWindowPos(h,HWND_TOP,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE);
-		        GetWindowRect(h,&dragInfo->startRect);
-		        DrawXorFrame(h,&dragInfo->startRect);
-		        GetCursorPos(&dragInfo->startPt);
-		        SetCapture(h);
-		        dragInfo->dragging = true;
-		        dragInfo->oldRect = dragInfo->startRect;
-		        return 0;
+                SetWindowPos(h,HWND_TOP,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE);
+                GetWindowRect(h,&dragInfo->startRect);
+                DrawXorFrame(h,&dragInfo->startRect);
+                GetCursorPos(&dragInfo->startPt);
+                SetCapture(h);
+                dragInfo->dragging = true;
+                dragInfo->oldRect = dragInfo->startRect;
+                return 0;
             }
         break;
-	    case WM_LBUTTONUP:
+        case WM_LBUTTONUP:
             dragInfo = reinterpret_cast<ToolWndDragInfo*>(GetWindowLongPtr(h,GWLP_USERDATA));
             if(dragInfo->useDragRect && dragInfo->dragging){
                 dragInfo->dragging = false;
@@ -151,10 +151,10 @@ LRESULT CALLBACK hToolWndProc(HWND h,UINT u,WPARAM w,LPARAM l){
                 POINT pt;
                 RECT dragRect;
                 GetCursorPos(&pt);
-			    CopyRect(&dragRect,&dragInfo->startRect);
-			    OffsetRect(&dragRect,pt.x - dragInfo->startPt.x,pt.y - dragInfo->startPt.y);
-			    SetWindowPos(h,0,dragInfo->oldRect.left,dragInfo->oldRect.top,0,0,SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOZORDER | SWP_DRAWFRAME | SWP_NOSENDCHANGING);
-				ReleaseCapture();
+                CopyRect(&dragRect,&dragInfo->startRect);
+                OffsetRect(&dragRect,pt.x - dragInfo->startPt.x,pt.y - dragInfo->startPt.y);
+                SetWindowPos(h,0,dragInfo->oldRect.left,dragInfo->oldRect.top,0,0,SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOZORDER | SWP_DRAWFRAME | SWP_NOSENDCHANGING);
+                ReleaseCapture();
             }
         break;
         case WM_MOUSEMOVE:
@@ -167,12 +167,12 @@ LRESULT CALLBACK hToolWndProc(HWND h,UINT u,WPARAM w,LPARAM l){
                 OffsetRect(&dragRect,pt.x - dragInfo->startPt.x,pt.y - dragInfo->startPt.y);
                 if(!EqualRect(&dragRect,&dragInfo->oldRect)){
                     DrawXorFrame(h,&dragInfo->oldRect);
-			        DrawXorFrame(h,&dragRect);
+                    DrawXorFrame(h,&dragRect);
                 }
-			    dragInfo->oldRect = dragRect;
+                dragInfo->oldRect = dragRect;
             }
-	    break;
-	}
+        break;
+    }
     return DefWindowProc(h,u,w,l);
 }
 
@@ -187,48 +187,48 @@ LRESULT CALLBACK hToolWndProc(HWND h,UINT u,WPARAM w,LPARAM l){
 
 /*! \ingroup N_Menu
     This function adds an item to a menu and returns the ID of the added item
-	which is returned by N_Menu_CheckMenus() whenever the item was selected. 
-	Returns 0 if the function fails for any reason.*/
+    which is returned by N_Menu_CheckMenus() whenever the item was selected. 
+    Returns 0 if the function fails for any reason.*/
 GMEXPORT double N_Menu_AddItem(double menu,const char* text){
-	if(AppendMenu((HMENU)(DWORD)menu,MF_STRING,menuId,text)){
-		return(menuId++);
-	}else{
-		return(0);
-	}
+    if(AppendMenu((HMENU)(DWORD)menu,MF_STRING,menuId,text)){
+        return(menuId++);
+    }else{
+        return(0);
+    }
 }
 
 /*! \ingroup N_Menu
     Adds a menu to another menu. The first parameter can be either a menu bar or
     another menu (for a submenu). Returns the ID of the menu that was added, or 
-	0 if the function fails for any reason. */
+    0 if the function fails for any reason. */
 GMEXPORT double N_Menu_AddMenu(double menuTo,double menuFrom,const char* text){
-	if(AppendMenu((HMENU)(DWORD)menuTo,MF_STRING | MF_POPUP,(UINT)menuFrom,text)){
-		return(menuFrom);
-	}else{
-		return(0);
-	}
+    if(AppendMenu((HMENU)(DWORD)menuTo,MF_STRING | MF_POPUP,(UINT)menuFrom,text)){
+        return(menuFrom);
+    }else{
+        return(0);
+    }
 }
 
 /*! \ingroup N_Menu
     Adds a separator to a menu (it cannot be used on a menu bar). This function
-	returns the ID of the separator on sucess and 0 if it fails for any reason.*/
+    returns the ID of the separator on sucess and 0 if it fails for any reason.*/
 GMEXPORT double N_Menu_AddSeparator(double menu){
     if(AppendMenu((HMENU)(DWORD)menu,MF_SEPARATOR,menuId++,"")){
-		return(menuId++);
-	}else{
-		return(0);
-	}
+        return(menuId++);
+    }else{
+        return(0);
+    }
 }
 
 /*! \ingroup N_Menu
     Attaches a menu bar to windows that have no menu bar, and removes and
     destroys the menu bar of windows that have a menu bar. parent must not be 0! */
 GMEXPORT double N_Menu_AttachMenuBar(double parent,double menu){
-	HMENU hOldMenu = GetMenu((HWND)(DWORD)parent);
-	if(hOldMenu != NULL){
-		SetMenu((HWND)(DWORD)parent,(HMENU)NULL);
-		DestroyMenu(hOldMenu);
-	}
+    HMENU hOldMenu = GetMenu((HWND)(DWORD)parent);
+    if(hOldMenu != NULL){
+        SetMenu((HWND)(DWORD)parent,(HMENU)NULL);
+        DestroyMenu(hOldMenu);
+    }
     return SetMenu((HWND)(DWORD)parent,(HMENU)(DWORD)menu);
 }
 
@@ -244,8 +244,8 @@ GMEXPORT double N_Menu_CheckMenus(){
 /*! \ingroup N_Menu
     Call this either when you are done using N_Menu or at the end of the game.
     You MUST call this function to clean up resources! Note: This function is
-	not availible in the extension version because all initialization and
-	cleanup are done automatically from the extension. */
+    not availible in the extension version because all initialization and
+    cleanup are done automatically from the extension. */
 GMEXPORT double N_Menu_CleanUp(){
     if(!SetMenu(hGmWnd,0)){
         return 0;
@@ -354,14 +354,14 @@ GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
 
 /*! \ingroup N_Menu
     Destroys a menu previously created with N_Menu_CreatePopupMenu. If the menu
-	was in a menu bar, it is first removed from its parent and then destroyed.
-	If you're trying to remove a submenu from another menu, you should use
-	N_Menu_RemoveItem instead. If the menu does not have a parent (ex a
-	right click menu) pass 0 for the parent. */
+    was in a menu bar, it is first removed from its parent and then destroyed.
+    If you're trying to remove a submenu from another menu, you should use
+    N_Menu_RemoveItem instead. If the menu does not have a parent (ex a
+    right click menu) pass 0 for the parent. */
 GMEXPORT double N_Menu_DestroyMenu(double parent,double menu){
     for(unsigned int i = 0; i < numMenus; i++){
         if(hMenu[i] == (HMENU)(DWORD)menu){
-			DestroyMenu(hMenu[i]);
+            DestroyMenu(hMenu[i]);
             DrawMenuBar(hGmWnd);
             hMenu[i] = 0;
         }
@@ -409,13 +409,13 @@ GMEXPORT double N_Menu_GetToolWindowDragStyle(double toolWnd,double dragStyle){
     Returns whether or not a tool window exists. Useful for triggering some event
     if the window is closed. */
 GMEXPORT double N_Menu_GetToolWindowExists(double toolWnd){
-	return IsWindow((HWND)(DWORD)toolWnd) ? 1 : 0;
+    return IsWindow((HWND)(DWORD)toolWnd) ? 1 : 0;
 }
 
 /*! \ingroup N_Menu
     Initializes N_Menu. Be sure to pass the Game Maker window handle! Note: This
-	function is not availible in the extension version because all initialization
-	and cleanup are done automatically from the extension. */
+    function is not availible in the extension version because all initialization
+    and cleanup are done automatically from the extension. */
 GMEXPORT double N_Menu_Init(double wnd){
     hGmWnd = (HWND)(DWORD)wnd;
     oldGmWndProc = (WNDPROC)SetWindowLong(hGmWnd,GWL_WNDPROC,(long)GmWndProc);
@@ -425,17 +425,17 @@ GMEXPORT double N_Menu_Init(double wnd){
     WNDCLASSEX wndClassEx;
     ZeroMemory(&wndClassEx,sizeof(wndClassEx));
     wndClassEx.cbSize = sizeof(wndClassEx);
-	wndClassEx.style = 0;
-	wndClassEx.lpfnWndProc = hToolWndProc;
-	wndClassEx.cbClsExtra = 0;
-	wndClassEx.cbWndExtra = 0;
-	wndClassEx.hInstance = GetModuleHandle(0);
-	wndClassEx.hIcon = 0;
-	wndClassEx.hCursor = LoadCursor(NULL,IDC_ARROW);
-	wndClassEx.hbrBackground = (HBRUSH)(COLOR_BTNFACE+1);
-	wndClassEx.lpszMenuName	= 0;
-	wndClassEx.lpszClassName = "N_Menu Tool Window Class";
-	wndClassEx.hIconSm = 0;
+    wndClassEx.style = 0;
+    wndClassEx.lpfnWndProc = hToolWndProc;
+    wndClassEx.cbClsExtra = 0;
+    wndClassEx.cbWndExtra = 0;
+    wndClassEx.hInstance = GetModuleHandle(0);
+    wndClassEx.hIcon = 0;
+    wndClassEx.hCursor = LoadCursor(NULL,IDC_ARROW);
+    wndClassEx.hbrBackground = (HBRUSH)(COLOR_BTNFACE+1);
+    wndClassEx.lpszMenuName    = 0;
+    wndClassEx.lpszClassName = "N_Menu Tool Window Class";
+    wndClassEx.hIconSm = 0;
     if(!RegisterClassEx(&wndClassEx)){
         return 0;
     }
@@ -533,11 +533,11 @@ GMEXPORT double N_Menu_LoadBitmap(const char* fileName){
 
 /*! \ingroup N_Menu
     This function removes an item or submenu from a menu. It can also be used to
-	remove a popup menu from a menu bar. When removing a submenu from a menu or
-	a popup menu from a menu bar, this function automatically destroys it and
-	frees its memory, so N_Menu_DestroyMenu should not be called for the removed
-	menu. */
-GMEXPORT double N_Menu_RemoveItem(double parent,double item){	
+    remove a popup menu from a menu bar. When removing a submenu from a menu or
+    a popup menu from a menu bar, this function automatically destroys it and
+    frees its memory, so N_Menu_DestroyMenu should not be called for the removed
+    menu. */
+GMEXPORT double N_Menu_RemoveItem(double parent,double item){
     DeleteMenu((HMENU)(DWORD)parent,(UINT)item,MF_BYCOMMAND);
     DrawMenuBar(hGmWnd);
     return 0;
