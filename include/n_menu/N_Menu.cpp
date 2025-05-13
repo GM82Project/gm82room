@@ -467,11 +467,7 @@ GMEXPORT double N_Menu_ItemGetDisabled(double menu,double item){
 /*! \ingroup N_Menu
     This function returns the text of the menu item. */
 GMEXPORT char* N_Menu_ItemGetText(double menu,double item){
-    char* text = 0;
-    if(text){
-        delete text;
-    }
-    text = new char[1024];
+    static char text[1024];
     if(GetMenuString((HMENU)(DWORD)menu,(UINT)item,text,1023,MF_BYCOMMAND)){
         return text;
     }
