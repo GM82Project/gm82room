@@ -39,7 +39,7 @@ ToolWndData toolData;
 
 LRESULT HandleNcActivate(HWND h,WPARAM w,LPARAM l){
 	bool active = w ? true : false;
-    for(unsigned int i = 1; i <= numToolWnds; i++){
+    for(unsigned int i = 0; i < numToolWnds; i++){
 		if((HWND)l == hToolWnd[i] || (HWND)l == hGmWnd){
 			active = true;
 			break;
@@ -48,7 +48,7 @@ LRESULT HandleNcActivate(HWND h,WPARAM w,LPARAM l){
 	if((HWND)l == (HWND)-1){
 		return DefWindowProc(h,WM_NCACTIVATE,active,0);
 	}
-	for(unsigned int i = 1; i <= numToolWnds; i++){
+	for(unsigned int i = 0; i < numToolWnds; i++){
 		if(hToolWnd[i] != h && hToolWnd[i] != (HWND)l){
 			SendMessage(hToolWnd[i],WM_NCACTIVATE,active,(long)-1);
         }
@@ -60,7 +60,7 @@ LRESULT HandleNcActivate(HWND h,WPARAM w,LPARAM l){
 }
 
 LRESULT HandleEnable(HWND h,WPARAM w,LPARAM l){
-	for(unsigned int i = 1; i <= numToolWnds; i++){
+	for(unsigned int i = 0; i < numToolWnds; i++){
 		if(hToolWnd[i] != h){
 			EnableWindow(hToolWnd[i],w ? true : false);
 		}
@@ -221,9 +221,8 @@ GMEXPORT double N_Menu_AddSeparator(double menu){
 }
 
 /*! \ingroup N_Menu
-    Attaches a menu bar to a window. The parent should not be 0! If you pass 0
-	for the menu ID, the menu will be removed (and destroyed) from the parent
-	window. */
+    Attaches a menu bar to windows that have no menu bar, and removes and
+    destroys the menu bar of windows that have a menu bar. parent must not be 0! */
 GMEXPORT double N_Menu_AttachMenuBar(double parent,double menu){
 	HMENU hOldMenu = GetMenu((HWND)(DWORD)parent);
 	if(hOldMenu != NULL){
@@ -267,7 +266,7 @@ GMEXPORT double N_Menu_CleanUp(){
         }
     }
     numBitmaps = 0;
-    for(unsigned int i = 0; i <= numToolWnds; i++){
+    for(unsigned int i = 0; i < numToolWnds; i++){
         if(IsWindow(hToolWnd[i])){
             DestroyWindow(hToolWnd[i]);
         }
@@ -280,26 +279,28 @@ GMEXPORT double N_Menu_CleanUp(){
 /*! \ingroup N_Menu
     This function creates a menu bar and returns a handle to it. */
 GMEXPORT double N_Menu_CreateMenuBar(){
+    unsigned int index = numMenus;
     numMenus+=1;
-    if(numMenus >= MAX_MENUS){
+    if(numMenus > MAX_MENUS){
         MAX_MENUS+=512;
         hMenu=(HMENU*)realloc(hMenu,MAX_MENUS*sizeof(HMENU));        
     }
-    hMenu[numMenus] = CreateMenu();
-    return(DOUBLE)(DWORD)hMenu[numMenus];
+    hMenu[index] = CreateMenu();
+    return(DOUBLE)(DWORD)hMenu[index];
 }
 
 /*! \ingroup N_Menu
     This function creates a popup menu and returns a handle to it. Popup menus
     can be attached to menu bars or to another popup menu as a submenu. */
 GMEXPORT double N_Menu_CreatePopupMenu(){
+    unsigned int index = numMenus;
     numMenus+=1;
-    if(numMenus >= MAX_MENUS){
+    if(numMenus > MAX_MENUS){
         MAX_MENUS+=512;
         hMenu=(HMENU*)realloc(hMenu,MAX_MENUS*sizeof(HMENU));
     }
-    hMenu[numMenus] = CreatePopupMenu();
-    return(DOUBLE)(DWORD)hMenu[numMenus];
+    hMenu[index] = CreatePopupMenu();
+    return(DOUBLE)(DWORD)hMenu[index];
 }
 
 /*! \ingroup N_Menu
@@ -319,21 +320,23 @@ GMEXPORT double N_Menu_CreateToolWindow1(const char* caption,double x,double y,d
 }
 
 GMEXPORT double N_Menu_CreateToolWindow2(double height,double dragStyle){
-    if(numToolWnds + 1 > MAX_TOOL_WINDOWS){
+    unsigned int index = numToolWnds;
+    if(index >= MAX_TOOL_WINDOWS){
         return 0;
     }
+    numToolWnds+=1;
     RECT tempRect = { 0,0,toolData.width,height == -1 ? GetSystemMetrics(SM_CYMENU) : (int)height };
     AdjustWindowRectEx(&tempRect,WS_VISIBLE | WS_POPUP | WS_SYSMENU | WS_CAPTION,FALSE,WS_EX_TOOLWINDOW);
-    hToolWnd[++numToolWnds] = CreateWindowEx(WS_EX_TOOLWINDOW,"N_Menu Tool Window Class",toolData.caption,
+    hToolWnd[index] = CreateWindowEx(WS_EX_TOOLWINDOW,"N_Menu Tool Window Class",toolData.caption,
         WS_VISIBLE | WS_POPUP | WS_SYSMENU | WS_CAPTION | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
         toolData.x,toolData.y,tempRect.right - tempRect.left,tempRect.bottom - tempRect.top,hGmWnd,NULL,GetModuleHandle(0),NULL);
-    SetWindowPos(hToolWnd[numToolWnds],HWND_TOP,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-    SendMessage(hGmWnd,WM_NCACTIVATE,true,(LPARAM)hToolWnd[numToolWnds]);
+    SetWindowPos(hToolWnd[index],HWND_TOP,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+    SendMessage(hGmWnd,WM_NCACTIVATE,true,(LPARAM)hToolWnd[index]);
     ToolWndDragInfo* dragInfo = new ToolWndDragInfo;
     dragInfo->useDragRect = dragStyle > 0 ? true : false;
     dragInfo->dragging = false;
-    SetWindowLongPtr(hToolWnd[numToolWnds],GWLP_USERDATA,(long)dragInfo);
-    return(double)(DWORD)hToolWnd[numToolWnds];
+    SetWindowLongPtr(hToolWnd[index],GWLP_USERDATA,(long)dragInfo);
+    return(double)(DWORD)hToolWnd[index];
 }
 
 /*! \ingroup N_Menu
@@ -518,13 +521,14 @@ GMEXPORT char* N_Menu_ItemSetText(double menu,double item,const char* text){
     This function loads a bitmap with the filename fileName and returns its handle.
     This HAS to be a bitmap (.bmp) file! */
 GMEXPORT double N_Menu_LoadBitmap(const char* fileName){
+    unsigned int index = numBitmaps;
     numBitmaps+=1;
-    if(numBitmaps >= MAX_BITMAPS){
+    if(numBitmaps > MAX_BITMAPS){
         MAX_BITMAPS+=512;
         bitmaps=(HBITMAP*)realloc(bitmaps,MAX_BITMAPS*sizeof(HBITMAP));
     }
-    bitmaps[numBitmaps] = (HBITMAP)LoadImageA(NULL,fileName,IMAGE_BITMAP,0,0,LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    return (double)(DWORD)bitmaps[numBitmaps];
+    bitmaps[index] = (HBITMAP)LoadImageA(NULL,fileName,IMAGE_BITMAP,0,0,LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+    return (double)(DWORD)bitmaps[index];
 }
 
 /*! \ingroup N_Menu
