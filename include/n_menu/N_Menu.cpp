@@ -7,14 +7,13 @@ HWND hGmWnd;
 WNDPROC oldGmWndProc;
 double menuItem;
 
-unsigned int MAX_MENUS = 0;
-HMENU* hMenu = NULL;
-unsigned int numMenus = 0;
 struct HandleList {
     HANDLE* handles;
     unsigned int count;
     unsigned int max;
 };
+
+HandleList menus;
 
 unsigned int menuId = BASE_MENU_ID;
 
@@ -320,13 +319,12 @@ GMEXPORT double N_Menu_CleanUp(){
         return 0;
     }
     SetWindowLong(hGmWnd,GWL_WNDPROC,(long)oldGmWndProc);
-    for(unsigned int i = 0; i < numMenus; i++){
-        if(IsMenu(hMenu[i])){
-            DestroyMenu(hMenu[i]);
-            hMenu[i] = 0;
+    for(unsigned int i = 0; i < menus.count; i++){
+        if(IsMenu(GetMenu(&menus,i))){
+            DestroyMenu(GetMenu(&menus,i));
         }
     }
-    numMenus = 0;
+    ClearHandleList(&menus);
     menuId = BASE_MENU_ID;
     for(unsigned int i = 0; i < numBitmaps; i++){
         if(bitmaps[i] != 0){
@@ -348,28 +346,18 @@ GMEXPORT double N_Menu_CleanUp(){
 /*! \ingroup N_Menu
     This function creates a menu bar and returns a handle to it. */
 GMEXPORT double N_Menu_CreateMenuBar(){
-    unsigned int index = numMenus;
-    numMenus+=1;
-    if(numMenus > MAX_MENUS){
-        MAX_MENUS+=512;
-        hMenu=(HMENU*)realloc(hMenu,MAX_MENUS*sizeof(HMENU));        
-    }
-    hMenu[index] = CreateMenu();
-    return(DOUBLE)(DWORD)hMenu[index];
+    HMENU menu = CreateMenu();
+    AddHandle(&menus,menu);
+    return(DOUBLE)(DWORD)menu;
 }
 
 /*! \ingroup N_Menu
     This function creates a popup menu and returns a handle to it. Popup menus
     can be attached to menu bars or to another popup menu as a submenu. */
 GMEXPORT double N_Menu_CreatePopupMenu(){
-    unsigned int index = numMenus;
-    numMenus+=1;
-    if(numMenus > MAX_MENUS){
-        MAX_MENUS+=512;
-        hMenu=(HMENU*)realloc(hMenu,MAX_MENUS*sizeof(HMENU));
-    }
-    hMenu[index] = CreatePopupMenu();
-    return(DOUBLE)(DWORD)hMenu[index];
+    HMENU menu = CreatePopupMenu();
+    AddHandle(&menus,menu);
+    return(DOUBLE)(DWORD)menu;
 }
 
 /*! \ingroup N_Menu
@@ -428,11 +416,12 @@ GMEXPORT double N_Menu_DestroyBitmap(double bitmap){
     N_Menu_RemoveItem instead. If the menu does not have a parent (ex a
     right click menu) pass 0 for the parent. */
 GMEXPORT double N_Menu_DestroyMenu(double parent,double menu){
-    for(unsigned int i = 0; i < numMenus; i++){
-        if(hMenu[i] == (HMENU)(DWORD)menu){
-            DestroyMenu(hMenu[i]);
+    for(unsigned int i = 0; i < menus.count; i++){
+        if(GetMenu(&menus,i) == (HMENU)(DWORD)menu){
+            DestroyMenu(GetMenu(&menus,i));
             DrawMenuBar(hGmWnd);
-            hMenu[i] = 0;
+            RemoveHandleIndex(&menus,i);
+            i--;
         }
     }
     return 0;
@@ -508,6 +497,7 @@ GMEXPORT double N_Menu_Init(double wnd){
     if(!RegisterClassEx(&wndClassEx)){
         return 0;
     }
+    InitHandleList(&menus);
     return 1;
 }
 
