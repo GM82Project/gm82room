@@ -19,9 +19,7 @@ unsigned int menuId = BASE_MENU_ID;
 
 HandleList bitmaps;
 
-const unsigned int MAX_TOOL_WINDOWS = 64;
-HWND hToolWnd[MAX_TOOL_WINDOWS + 1];
-unsigned int numToolWnds = 0;
+HandleList toolWnds;
 
 struct ToolWndData{
     const char* caption;
@@ -101,8 +99,8 @@ HWND GetWindow(HandleList* list,unsigned int index){
 
 LRESULT HandleNcActivate(HWND h,WPARAM w,LPARAM l){
     bool active = w ? true : false;
-    for(unsigned int i = 0; i < numToolWnds; i++){
-        if((HWND)l == hToolWnd[i] || (HWND)l == hGmWnd){
+    for(unsigned int i = 0; i < toolWnds.count; i++){
+        if((HWND)l == GetWindow(&toolWnds,i) || (HWND)l == hGmWnd){
             active = true;
             break;
         }
@@ -110,9 +108,9 @@ LRESULT HandleNcActivate(HWND h,WPARAM w,LPARAM l){
     if((HWND)l == (HWND)-1){
         return DefWindowProc(h,WM_NCACTIVATE,active,0);
     }
-    for(unsigned int i = 0; i < numToolWnds; i++){
-        if(hToolWnd[i] != h && hToolWnd[i] != (HWND)l){
-            SendMessage(hToolWnd[i],WM_NCACTIVATE,active,(long)-1);
+    for(unsigned int i = 0; i < toolWnds.count; i++){
+        if(GetWindow(&toolWnds,i) != h && GetWindow(&toolWnds,i) != (HWND)l){
+            SendMessage(GetWindow(&toolWnds,i),WM_NCACTIVATE,active,(long)-1);
         }
     }
     if(hGmWnd != h && hGmWnd != (HWND)l){
@@ -122,9 +120,9 @@ LRESULT HandleNcActivate(HWND h,WPARAM w,LPARAM l){
 }
 
 LRESULT HandleEnable(HWND h,WPARAM w,LPARAM l){
-    for(unsigned int i = 0; i < numToolWnds; i++){
-        if(hToolWnd[i] != h){
-            EnableWindow(hToolWnd[i],w ? true : false);
+    for(unsigned int i = 0; i < toolWnds.count; i++){
+        if(GetWindow(&toolWnds,i) != h){
+            EnableWindow(GetWindow(&toolWnds,i),w ? true : false);
         }
     }
     return DefWindowProc(h,WM_ENABLE,w,l);
@@ -237,6 +235,7 @@ LRESULT CALLBACK hToolWndProc(HWND h,UINT u,WPARAM w,LPARAM l){
         case WM_DESTROY:
             dragInfo = reinterpret_cast<ToolWndDragInfo*>(GetWindowLongPtr(h,GWLP_USERDATA));
             delete dragInfo;
+            RemoveHandle(&toolWnds,h);
         break;
     }
     return DefWindowProc(h,u,w,l);
@@ -328,12 +327,13 @@ GMEXPORT double N_Menu_CleanUp(){
         DeleteObject(GetBitmap(&bitmaps,i));
     }
     ClearHandleList(&bitmaps);
-    for(unsigned int i = 0; i < numToolWnds; i++){
-        if(IsWindow(hToolWnd[i])){
-            DestroyWindow(hToolWnd[i]);
+    for(unsigned int i = 0; i < toolWnds.count; i++){
+        if(IsWindow(GetWindow(&toolWnds,i))){
+            DestroyWindow(GetWindow(&toolWnds,i));
+            i--;                                    // hToolWndProc removes window from toolWnds
         }
     }
-    numToolWnds = 0;
+    ClearHandleList(&toolWnds);
     UnregisterClass(TOOLWND_CLASS_NAME,GetModuleHandle(0));
     return 1;
 }
@@ -372,23 +372,19 @@ GMEXPORT double N_Menu_CreateToolWindow1(const char* caption,double x,double y,d
 }
 
 GMEXPORT double N_Menu_CreateToolWindow2(double height,double dragStyle){
-    unsigned int index = numToolWnds;
-    if(index >= MAX_TOOL_WINDOWS){
-        return 0;
-    }
-    numToolWnds+=1;
     RECT tempRect = { 0,0,toolData.width,height == -1 ? GetSystemMetrics(SM_CYMENU) : (int)height };
     AdjustWindowRectEx(&tempRect,WS_VISIBLE | WS_POPUP | WS_SYSMENU | WS_CAPTION,FALSE,WS_EX_TOOLWINDOW);
-    hToolWnd[index] = CreateWindowEx(WS_EX_TOOLWINDOW,TOOLWND_CLASS_NAME,toolData.caption,
+    HWND window = CreateWindowEx(WS_EX_TOOLWINDOW,TOOLWND_CLASS_NAME,toolData.caption,
         WS_VISIBLE | WS_POPUP | WS_SYSMENU | WS_CAPTION | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
         toolData.x,toolData.y,tempRect.right - tempRect.left,tempRect.bottom - tempRect.top,hGmWnd,NULL,GetModuleHandle(0),NULL);
-    SetWindowPos(hToolWnd[index],HWND_TOP,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-    SendMessage(hGmWnd,WM_NCACTIVATE,true,(LPARAM)hToolWnd[index]);
+    SetWindowPos(window,HWND_TOP,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+    SendMessage(hGmWnd,WM_NCACTIVATE,true,(LPARAM)window);
     ToolWndDragInfo* dragInfo = new ToolWndDragInfo;
     dragInfo->useDragRect = dragStyle > 0 ? true : false;
     dragInfo->dragging = false;
-    SetWindowLongPtr(hToolWnd[index],GWLP_USERDATA,(long)dragInfo);
-    return(double)(DWORD)hToolWnd[index];
+    SetWindowLongPtr(window,GWLP_USERDATA,(long)dragInfo);
+    AddHandle(&toolWnds,window);
+    return(double)(DWORD)window;
 }
 
 /*! \ingroup N_Menu
@@ -473,9 +469,6 @@ GMEXPORT double N_Menu_GetToolWindowExists(double toolWnd){
 GMEXPORT double N_Menu_Init(double wnd){
     hGmWnd = (HWND)(DWORD)wnd;
     oldGmWndProc = (WNDPROC)SetWindowLong(hGmWnd,GWL_WNDPROC,(long)GmWndProc);
-    for(unsigned int i = 0; i < MAX_TOOL_WINDOWS; i++){
-        hToolWnd[i] = 0;
-    }
     WNDCLASSEX wndClassEx;
     ZeroMemory(&wndClassEx,sizeof(wndClassEx));
     wndClassEx.cbSize = sizeof(wndClassEx);
@@ -495,6 +488,7 @@ GMEXPORT double N_Menu_Init(double wnd){
     }
     InitHandleList(&menus);
     InitHandleList(&bitmaps);
+    InitHandleList(&toolWnds);
     return 1;
 }
 
