@@ -1,5 +1,3 @@
-var dir;dir="SOFTWARE\Game Maker\Version 8.2\Preferences\"
-
 if (theme==0) {
     global.col_low=$203020
     global.col_main=$404040
