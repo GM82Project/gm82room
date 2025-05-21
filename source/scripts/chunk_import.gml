@@ -47,8 +47,8 @@ if (fn!="") {
             buffer_destroy(b)
             exit
         }
-        find=ds_map_find_value(bglookup,name)
-        texture=bg_background[find]
+
+        texture=get_background(name)
         repeat (buffer_read_u16(b)) {
             o=instance_create(chunkleft,chunktop,tileholder) get_uid(o)
             o.bg=texture
@@ -83,6 +83,7 @@ if (fn!="") {
             buffer_destroy(b)
             exit
         }
+        get_object(name)
         find=ds_map_find_value(objlookup,name)
         repeat (buffer_read_u16(b)) {
             o=instance_create(chunkleft,chunktop,instance) get_uid(o)
