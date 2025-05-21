@@ -2,7 +2,7 @@
 with (TextField) textfield_actions()
 active=1
 oldtext=text
-if (text!="") selected=1
+if (text!="") selected=!selected
 if (type==0 || type=4) {
     clear_keyboard_string()
 }

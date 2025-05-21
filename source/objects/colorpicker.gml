@@ -15,6 +15,7 @@ act=""
 button=1
 grab=0
 text=""
+selected=0
 
 undo=0
 postundo=0
@@ -155,72 +156,85 @@ if (pressed) {
     if (point_in_rectangle(mx,my,256+20,216,256+20+40,216+24)) {
         text="red"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(red)
     }
     if (point_in_rectangle(mx,my,256+64,216,256+64+52,216+24)) {
         text="red%"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(round(red/2.55))
     }
 
     if (point_in_rectangle(mx,my,256+20,216+24,256+20+40,216+24+24)) {
         text="green"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(green)
     }
     if (point_in_rectangle(mx,my,256+64,216+24,256+64+52,216+24+24)) {
         text="green%"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(round(green/2.55))
     }
 
     if (point_in_rectangle(mx,my,256+20,216+48,256+20+40,216+48+24)) {
         text="blue"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(blue)
     }
     if (point_in_rectangle(mx,my,256+64,216+48,256+64+52,216+48+24)) {
         text="blue%"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(round(blue/2.55))
     }
 
     if (point_in_rectangle(mx,my,256+20,296,256+20+40,296+24)) {
         text="hue"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(hue)
     }
     if (point_in_rectangle(mx,my,256+64,296,256+64+52,296+24)) {
         text="hue%"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(round(hue*360/255))
     }
 
     if (point_in_rectangle(mx,my,256+20,296+24,256+20+40,296+24+24)) {
         text="sat"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(sat)
     }
     if (point_in_rectangle(mx,my,256+64,296+24,256+64+52,296+24+24)) {
         text="sat%"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(round(sat/2.55))
     }
 
     if (point_in_rectangle(mx,my,256+20,296+48,256+20+40,296+48+24)) {
         text="val"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(val)
     }
     if (point_in_rectangle(mx,my,256+64,296+48,256+64+52,296+48+24)) {
         text="val%"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string(round(val/2.55))
     }
 
     if (point_in_rectangle(mx,my,380,296,380+100,296+24)) {
         text="hex"
         act="typing"
+        selected=!selected
         clear_keyboard_string() kstr=string_hex(color)
     }
 
@@ -239,10 +253,20 @@ if (act=="typing") {
         text=""
     }
 
-    kstr=get_keyboard_string(kstr)
+    if (selected) {
+        new=get_keyboard_string(undefined)
+        if (new!=undefined) {
+            kstr=new
+            selected=0
+        }
+    } else {
+        kstr=get_keyboard_string(kstr)
+    }
 
     if (text=="hex") kstr=string_copy(string_hexdigits(kstr),1,6)
     else kstr=string_copy(string_digits(kstr),1,3)
+
+    if (kstr=="") kstr="0"
 
     if (kstr!="") {
         makehue=0
@@ -499,11 +523,12 @@ draw_set_color($ffffff)
         draw_button_ext(8+(i mod 8)*33,160+(i div 8)*24,33,24,!(customcolor==i),customcolors[i])
     }
 
+    colselbox=pick(selected,$ffffff,$ff8000)
 
     dy=216
-    draw_button_ext(8,dy   ,256+8,24,0,global.col_main) draw_button_ext(256+20,dy   ,40,24,0,pick(text=="red",$c0c0c0,$ffffff)) draw_button_ext(256+64,dy   ,52,24,0,pick(text=="red%",$c0c0c0,$ffffff))
-    draw_button_ext(8,dy+24,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+24,40,24,0,pick(text=="green",$c0c0c0,$ffffff)) draw_button_ext(256+64,dy+24,52,24,0,pick(text=="green%",$c0c0c0,$ffffff))
-    draw_button_ext(8,dy+48,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+48,40,24,0,pick(text=="blue",$c0c0c0,$ffffff)) draw_button_ext(256+64,dy+48,52,24,0,pick(text=="blue%",$c0c0c0,$ffffff))
+    draw_button_ext(8,dy   ,256+8,24,0,global.col_main) draw_button_ext(256+20,dy   ,40,24,0,pick(text=="red",$c0c0c0,colselbox)) draw_button_ext(256+64,dy   ,52,24,0,pick(text=="red%",$c0c0c0,colselbox))
+    draw_button_ext(8,dy+24,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+24,40,24,0,pick(text=="green",$c0c0c0,colselbox)) draw_button_ext(256+64,dy+24,52,24,0,pick(text=="green%",$c0c0c0,colselbox))
+    draw_button_ext(8,dy+48,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+48,40,24,0,pick(text=="blue",$c0c0c0,colselbox)) draw_button_ext(256+64,dy+48,52,24,0,pick(text=="blue%",$c0c0c0,colselbox))
 
     draw_set_color($0000ff) draw_rectangle(12,dy+4,12+red,dy+4+15,0)
     draw_set_color($00ff00) draw_rectangle(12,dy+4+24,12+green,dy+4+24+15,0)
@@ -519,9 +544,9 @@ draw_set_color($ffffff)
     draw_set_color($ffffff)
 
     dy=296
-    draw_button_ext(8,dy   ,256+8,24,0,global.col_main) draw_button_ext(256+20,dy   ,40,24,0,pick(text=="hue",$c0c0c0,$ffffff)) draw_button_ext(256+64,dy   ,52,24,0,pick(text=="hue%",$c0c0c0,$ffffff))
-    draw_button_ext(8,dy+24,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+24,40,24,0,pick(text=="sat",$c0c0c0,$ffffff)) draw_button_ext(256+64,dy+24,52,24,0,pick(text=="sat%",$c0c0c0,$ffffff))
-    draw_button_ext(8,dy+48,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+48,40,24,0,pick(text=="val",$c0c0c0,$ffffff)) draw_button_ext(256+64,dy+48,52,24,0,pick(text=="val%",$c0c0c0,$ffffff))
+    draw_button_ext(8,dy   ,256+8,24,0,global.col_main) draw_button_ext(256+20,dy   ,40,24,0,pick(text=="hue",$c0c0c0,colselbox)) draw_button_ext(256+64,dy   ,52,24,0,pick(text=="hue%",$c0c0c0,colselbox))
+    draw_button_ext(8,dy+24,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+24,40,24,0,pick(text=="sat",$c0c0c0,colselbox)) draw_button_ext(256+64,dy+24,52,24,0,pick(text=="sat%",$c0c0c0,colselbox))
+    draw_button_ext(8,dy+48,256+8,24,0,global.col_main) draw_button_ext(256+20,dy+48,40,24,0,pick(text=="val",$c0c0c0,colselbox)) draw_button_ext(256+64,dy+48,52,24,0,pick(text=="val%",$c0c0c0,colselbox))
 
     draw_set_color(make_color_hsv(hue,255,255)) draw_rectangle(12,dy+4,12+hue,dy+4+15,0) draw_set_color($ffffff)
     draw_rectangle_color(12,dy+4+24,12+sat,dy+4+24+15,$ffffff,color,color,$ffffff,0)
@@ -538,7 +563,7 @@ draw_set_color($ffffff)
 
     dy=376
 
-    draw_button_ext(380,296,100,24,0,pick(text=="hex",$c0c0c0,$ffffff))
+    draw_button_ext(380,296,100,24,0,pick(text=="hex",$c0c0c0,colselbox))
 
     col=string_hex(color)
     col="$"+string_repeat("0",6-string_length(col))+col
