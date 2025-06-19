@@ -154,7 +154,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
 
             if (p) {
                 objfielddef[i,objfields[i]]=" - "+string_trim(string_delete(str,1,p+2))
-                str=string_trim(string_copy(str,1,p-1))
+                str=string_repeat(" ", fp)+string_trim(string_copy(str,1,p-1))
             }
 
             p=string_pos(": ",str)
