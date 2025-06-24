@@ -266,3 +266,20 @@ if (actionc==0) {
     parent=get_object_parent(argument1)
     if (parent!="") load_object_fields(i,parent)
 }
+
+//load mock fields only if they don't already exist
+j=0 repeat (objfields[i]) {if (objfieldtype[i,j]=="__gm82room_depth") exit j+=1}
+
+
+objfieldname[i,objfields[i]]="Depth"
+objfieldtype[i,objfields[i]]="__gm82room_depth"
+objfielddef[i,objfields[i]]=""
+objfielddepends[i,objfields[i]]=noone
+objfieldindent[i,objfields[i]]=0
+objfields[i]+=1
+objfieldname[i,objfields[i]]="Creation Code"
+objfieldtype[i,objfields[i]]="__gm82room_ccode"
+objfielddef[i,objfields[i]]=""
+objfielddepends[i,objfields[i]]=noone
+objfieldindent[i,objfields[i]]=0
+objfields[i]+=1

@@ -22,6 +22,7 @@ if (active) {
 
         case "inst x"    : {val=round(real(text)) with (instance) if (sel) {x=val do_change_undo("instance x",0)}}break
         case "inst y"    : {val=round(real(text)) with (instance) if (sel) {y=val do_change_undo("instance y",0)}}break
+        case "inst depth": {val=round(real(text)) with (instance) if (sel) {depth=val if (depth==objdepth[obj]) set_field_by_type(id,"__gm82room_depth",undefined) else set_field_by_type(id,"__gm82room_depth",string(depth)) do_change_undo("instance depth",0)}}break
         case "inst xs"   : {val=real(text) with (instance) {if (sel) image_xscale=val if (abs(image_xscale*sprw)<1) image_xscale=1/sprw do_change_undo("instance xscale",0)}}break
         case "inst ys"   : {val=real(text) with (instance) {if (sel) image_yscale=val if (abs(image_yscale*sprw)<1) image_yscale=1/sprw do_change_undo("instance yscale",0)}}break
         case "inst ang"  : {val=real(text) with (instance) if (sel) image_angle=val do_change_undo("instance angle",0)}break

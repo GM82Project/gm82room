@@ -7,6 +7,7 @@ if (object_index==instance) {
 
         textfield_set("inst x",x)
         textfield_set("inst y",y)
+        textfield_set("inst depth",depth)
         textfield_set("inst xs",image_xscale)
         textfield_set("inst ys",image_yscale)
 

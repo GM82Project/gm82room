@@ -250,3 +250,5 @@ object_get_visible
 get_keyboard_string
 clear_keyboard_string
 disable_preview_fields
+set_field_by_type
+set_hasfields

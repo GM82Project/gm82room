@@ -18,6 +18,10 @@ for (i=0;i<objfields[obj];i+=1) {
             }
         } else if (objfieldtype[obj,i]=="xy") {
             str+=objfieldname[obj,i]+"[0]="+fields[i,1]+" "+objfieldname[obj,i]+"[1]="+fields[i,2]+lf
+        } else if (objfieldtype[obj,i]=="__gm82room_depth") {
+            str+="depth="+fields[i,1]+lf
+        } else if (objfieldtype[obj,i]=="__gm82room_ccode") {
+            //shruggeth
         } else {
             str+=objfieldname[obj,i]+"="+fields[i,1]+lf
         }

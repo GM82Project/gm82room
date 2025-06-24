@@ -173,12 +173,23 @@ i.displen=6
 i.w=72
 i.tagmode=0
 
-i=instance_create(width-64,100,Button)
-i.action="inst snap"
-i.text="Snap"
+i=instance_create(width-80,96,TextField)
+i.action="inst depth"
+i.alt="depth"
 i.anchor=1
 i.dynamic=0
-i.w=56
+i.displen=6
+i.w=72
+i.tagmode=0
+
+
+i=instance_create(width-160+56,100,Button)
+i.action="inst snap"
+i.alt="Snap to Grid"
+i.spr=10
+i.anchor=1
+i.dynamic=0
+i.w=24
 i.h=24
 i.tagmode=0
 
@@ -192,7 +203,7 @@ i.w=24
 i.h=24
 i.tagmode=0
 
-i=instance_create(width-160+36,100,Button)
+i=instance_create(width-160+32,100,Button)
 i.action="inst centery"
 i.alt="Center Vertically"
 i.spr=54

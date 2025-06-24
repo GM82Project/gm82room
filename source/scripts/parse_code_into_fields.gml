@@ -37,8 +37,13 @@ if (str!="") {
                 name=string_copy(next,1,p-1)
                 value=string_delete(next,1,p)
                 //it's split like this for speed
-                if (!argument1) set_instance_field(argument0,name,value)
-                else if (is_field_copypaste_safe(argument0,name)) set_instance_field(argument0,name,value)
+                if (name=="depth") {
+                    set_field_by_type(argument0,"__gm82room_depth",value)
+                    argument0.depth=real(value)
+                } else {
+                    if (!argument1) set_instance_field(argument0,name,value)
+                    else if (is_field_copypaste_safe(argument0,name)) set_instance_field(argument0,name,value)
+                }
             }
         }
         if (state=2) {
@@ -50,3 +55,5 @@ if (str!="") {
 if (state=0) argument0.code=str
 
 if (string_replace_all(string_replace_all(string_replace_all(argument0.code,";",""),lf,"")," ","")=="") argument0.code=""
+
+if (argument0.code!="") set_field_by_type(argument0,"__gm82room_ccode","")

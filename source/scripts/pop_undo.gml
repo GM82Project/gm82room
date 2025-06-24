@@ -86,14 +86,15 @@ if (size) {
                 
                 o.x=ds_list_find_value(l,i+1)
                 o.y=ds_list_find_value(l,i+2)
-                o.image_xscale=ds_list_find_value(l,i+3)
-                o.image_yscale=ds_list_find_value(l,i+4)
-                o.image_angle=ds_list_find_value(l,i+5)
-                o.image_blend=ds_list_find_value(l,i+6)
-                o.image_alpha=ds_list_find_value(l,i+7)
-                o.code=ds_list_find_value(l,i+8)
+                o.depth=ds_list_find_value(l,i+3)
+                o.image_xscale=ds_list_find_value(l,i+4)
+                o.image_yscale=ds_list_find_value(l,i+5)
+                o.image_angle=ds_list_find_value(l,i+6)
+                o.image_blend=ds_list_find_value(l,i+7)
+                o.image_alpha=ds_list_find_value(l,i+8)
+                o.code=ds_list_find_value(l,i+9)
                 
-                i+=9
+                i+=10
                 
                 //read fields
                 for (j=0;j<objfields[o.obj];j+=1) {

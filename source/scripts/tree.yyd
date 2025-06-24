@@ -227,6 +227,7 @@
 	|parse_code_into_fields
 	|parse_fields_into_code
 	|set_instance_field
+	|set_field_by_type
 	|stringify
 	|destringify
 	|get_nth_token
@@ -235,6 +236,7 @@
 	|push_builtins
 	|pop_builtins
 	|disable_preview_fields
+	|set_hasfields
 +theming
 	|theme_init
 	|theme_apply

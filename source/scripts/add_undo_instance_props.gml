@@ -1,6 +1,7 @@
 add_undo(uid)
 add_undo(savex)
 add_undo(savey)
+add_undo(savez)
 add_undo(savexscale)
 add_undo(saveyscale)
 add_undo(saveangle)

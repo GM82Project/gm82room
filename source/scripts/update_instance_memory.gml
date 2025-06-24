@@ -1,6 +1,7 @@
 with (instance) {
     savex=x
     savey=y
+    savez=depth
     savexscale=image_xscale
     saveyscale=image_yscale
     saveangle=image_angle

@@ -41,7 +41,7 @@ if (objdesc[obj]!="") {
     dy+=h+8
 }
 
-draw_set_valign(1)
+//draw_set_valign(1)
 
 for (i=0;i<objfields[obj];i+=1) {
     fieldparent=objfielddepends[obj,i]
@@ -80,12 +80,15 @@ for (i=0;i<objfields[obj];i+=1) {
                 if (!instance_exists(get)) {deac=1 instance_activate_object(get)}
                 str=objfieldname[obj,i]+": "+fields[i,1]+" ("+(get).objname+")"
             } else str=objfieldname[obj,i]+": "+fields[i,1]+" (missing)"
+        } else if (objfieldtype[obj,i]=="__gm82room_ccode") {
+            str=objfieldname[obj,i]+":"+lf+code
         } else {
             str=objfieldname[obj,i]+": "+fields[i,1]
         }
     }
     dw=string_width(str)+48
-    if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+dw,dy+28)) {
+    dh=string_height(str)+8
+    if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+dw,dy+dh)) {
         col1=$ffffff
         col2=selcol
     } else {
@@ -97,10 +100,10 @@ for (i=0;i<objfields[obj];i+=1) {
     draw_line(dx,hdy,dx,dy+16)
     draw_line(dx,dy+16,dx+16,dy+16)
 
-    draw_rectangle_color(dx+16,dy+4,dx+dw,dy+28,col1,col1,col1,col1,0)
-    draw_rectangle_color(dx+16,dy+4,dx+dw,dy+28,col2,col2,col2,col2,1)
+    draw_rectangle_color(dx+16,dy+4,dx+dw,dy+dh,col1,col1,col1,col1,0)
+    draw_rectangle_color(dx+16,dy+4,dx+dw,dy+dh,col2,col2,col2,col2,1)
     draw_set_color(0)
-    draw_text(dx+16+28,dy+16,str)
+    draw_text(dx+16+28,dy+6,str)
     draw_set_color($ffffff)
 
     switch (objfieldtype[obj,i]) {
@@ -126,6 +129,8 @@ for (i=0;i<objfields[obj];i+=1) {
         case "bool": case "boolean": fr=22 if (fields[i,0]) if (fields[i,1]=="true") fr=18 else fr=17 break
         case "number": case "number_range": fr=19 break
         case "radius": fr=20 break
+        case "__gm82room_ccode": fr=21 break
+        case "__gm82room_depth": fr=23 break
     }
     if (objfieldtype[obj,i]=="angle") {
         if (fields[i,0]) ang=real(fields[i,1])
@@ -204,54 +209,9 @@ for (i=0;i<objfields[obj];i+=1) {
         draw_set_color(selcol)
         draw_arrow(dx,dy+16,mouse_wx,mouse_wy,10*zm)
     }
-    dy+=32
+    dy+=dh+4
     draw_set_color($ffffff)
 }
 dx=odx
 
 draw_set_valign(0)
-
-//creation code
-repeat (1) {
-    if (code="") {
-        if (argument0) continue
-        str=""
-        h=24
-        w=string_width("Creation code")+24+8
-        col1=$808080
-    } else {
-        if (argument0) col1=$808080
-        else col1=$ddffff
-        str=code
-        h=string_height(str)+8+24
-        w=max(string_width_ext(str,-1,width*0.75),string_width("Creation code:")+24)+8
-    }
-
-    if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+w+16,dy+h+4)) {
-        col1=$ffffff
-        col2=selcol
-    } else {
-        col2=0
-    }
-
-    if (fieldactive) draw_set_color_sel()
-    else draw_set_color(0)
-
-    draw_line(dx,ody,dx,dy+h-8)
-    draw_line(dx,dy+h-8,dx+16,dy+h-8)
-
-    x1=dx+16
-    y1=dy+4
-
-    draw_rectangle_color(x1,y1,x1+w,y1+h,col1,col1,col1,col1,0)
-    draw_rectangle_color(x1,y1,x1+w,y1+h,0,0,0,0,1)
-    if (str!="") draw_text_ext_color(x1+28,y1+2,"Creation code:",-1,width*0.75,0,0,0,0,1)
-    else draw_text_color(x1+28,y1+2,"Creation code",0,0,0,0,1)
-    draw_text_color(x1+4,y1+24+2,str,0,0,0,0,1)
-
-    fr=21
-    draw_sprite(sprFieldIcons,fr,dx+28,dy+16)
-
-    dy+=h+8
-}
-draw_set_color($ffffff)

@@ -36,11 +36,12 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_
         copyvec[cur,7]=image_blend
         copyvec[cur,8]=image_alpha
         copyvec[cur,9]=code
+        copyvec[cur,10]=depth
 
         for (i=0;i<objfields[obj];i+=1) {
-            copyvec[cur,10+i*3]=fields[i,0]
-            copyvec[cur,11+i*3]=fields[i,1]
-            copyvec[cur,12+i*3]=fields[i,2]
+            copyvec[cur,11+i*3]=fields[i,0]
+            copyvec[cur,12+i*3]=fields[i,1]
+            copyvec[cur,13+i*3]=fields[i,2]
         }
 
         if (yes) {add_undo_instance() instance_destroy()}
@@ -105,7 +106,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance) get_uid(o)
                 o.obj=copyvec[cur,1]
                 o.objname=copyvec[cur,0]
-                o.depth=objdepth[o.obj]
+                o.depth=copyvec[cur,10]
                 o.sprite_index=objspr[o.obj]
                 o.sprw=sprite_get_width(o.sprite_index)
                 o.sprh=sprite_get_height(o.sprite_index)
@@ -121,9 +122,9 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
 
                 for (i=0;i<objfields[o.obj];i+=1) {
                     if (objfieldtype[o.obj,i]!="instance") {
-                        o.fields[i,0]=copyvec[cur,10+i*3]
-                        o.fields[i,1]=copyvec[cur,11+i*3]
-                        o.fields[i,2]=copyvec[cur,12+i*3]
+                        o.fields[i,0]=copyvec[cur,11+i*3]
+                        o.fields[i,1]=copyvec[cur,12+i*3]
+                        o.fields[i,2]=copyvec[cur,13+i*3]
                         
                         if (o.fields[i,0]) o.hasfields=1
                     }

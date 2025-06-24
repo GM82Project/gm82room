@@ -54,12 +54,15 @@ for (i=0;i<objfields[obj];i+=1) {
                 str=objfieldname[obj,i]+": "+fields[i,1]+" ("+(get).objname+")"
                 if (deac) instance_deactivate_object(get)
             } else str=objfieldname[obj,i]+": "+fields[i,1]+" (missing)"
+        } else if (objfieldtype[obj,i]=="__gm82room_ccode") {
+            str=objfieldname[obj,i]+":"+lf+code
         } else {
             str=objfieldname[obj,i]+": "+fields[i,1]
         }
     }
     dw=string_width(str)+48
-    if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+dw,dy+28)) {
+    dh=string_height(str)+8
+    if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+dw,dy+dh)) {
         //edit this field
         menu=i
         menux=dx+16
@@ -67,34 +70,7 @@ for (i=0;i<objfields[obj];i+=1) {
         menuw=dx+dw
         menuh=dy+28
     }
-    dy+=32
-}
-
-//creation code
-if (menu==-1) repeat (1) {
-    if (code="") {
-        str=""
-        h=24
-        w=string_width("Creation code")+24+8
-    } else {
-        str=code
-        h=string_height(str)+8+24
-        w=max(string_width(str),string_width("Creation code:")+24)+8
-    }
-
-    if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+w+16,dy+h+4)) {
-        begin_undo(act_change,"modifying instance creation code",0)
-        if (argument0) {
-            str=""
-        } else {
-            str=external_code_editor(code)
-        }
-        if (code!=str) add_undo_instance_props()
-        code=str
-        update_inspector()
-        push_undo()
-        exit
-    }
+    dy+=dh+4
 }
 
 //clicked outside of all fields, turn off field display
@@ -104,14 +80,19 @@ begin_undo(act_change,"edit instance fields",0)
 add_undo_instance_props()
 push_undo()
 
+//right click to delete fields
 if (argument0) {
+    if (objfieldtype[obj,menu]=="__gm82room_ccode") code=""
+    if (objfieldtype[obj,menu]=="__gm82room_depth") depth=objdepth[obj]
+
     fields[menu,1]=""
     fields[menu,2]=""
     fields[menu,0]=0
+
+    update_inspector()
+    set_hasfields()
     exit
 }
-
-hasfields=1
 
 switch (objfieldtype[obj,menu]) {
     case "sprite": {show_field_resource_menu(sprmenu,menu) break}
@@ -183,4 +164,17 @@ switch (objfieldtype[obj,menu]) {
     case "instance": {editinst=1 editfid=menu break}
     case "angle": {editangle=1 editfid=menu break}
     case "radius": {editrad=1 editfid=menu break}
+
+    case "__gm82room_depth": {
+        depth=get_integer("Insert new depth value: ("+objname+" default: "+string(objdepth[obj])+")",depth)
+        fields[menu,0]=(depth!=objdepth[obj]) fields[menu,1]=string(depth)
+    break}
+    case "__gm82room_ccode": {
+        code=external_code_editor(code)
+        update_inspector()
+        fields[menu,0]=(code!="")
+        fields[menu,1]=""
+    break}
 }
+
+set_hasfields()
