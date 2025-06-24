@@ -166,7 +166,7 @@ switch (objfieldtype[obj,menu]) {
     case "radius": {editrad=1 editfid=menu break}
 
     case "__gm82room_depth": {
-        depth=get_integer("Insert new depth value: ("+objname+" default: "+string(objdepth[obj])+")",depth)
+        depth=get_integer("Insert new depth: ("+objname+" default: "+string(objdepth[obj])+")",depth)
         fields[menu,0]=(depth!=objdepth[obj]) fields[menu,1]=string(depth)
     break}
     case "__gm82room_ccode": {
