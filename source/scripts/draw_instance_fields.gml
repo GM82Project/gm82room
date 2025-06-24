@@ -237,7 +237,7 @@ repeat (1) {
     if (fieldactive) draw_set_color_sel()
     else draw_set_color(0)
 
-    draw_line(dx,dy-16,dx,dy+h-8)
+    draw_line(dx,ody,dx,dy+h-8)
     draw_line(dx,dy+h-8,dx+16,dy+h-8)
 
     x1=dx+16
