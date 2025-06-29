@@ -238,6 +238,7 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
         else {
             fieldshim=""
             for (j=0;j<objfields[i];j+=1) {
+                if (objfieldtype[i,j]=="__gm82room_ccode" or objfieldtype[i,j]=="__gm82room_depth") continue;
                 if (objfieldtype[i,j]=="font") fieldshim+=objfieldname[i,j]+"=Font(Field('"+objfieldname[i,j]+"'))"+crlf
                 else if (objfieldtype[i,j]=="sprite") fieldshim+=objfieldname[i,j]+"=Sprite(Field('"+objfieldname[i,j]+"'))"+crlf
                 else if (objfieldtype[i,j]=="xy") fieldshim+=objfieldname[i,j]+"[0]=Field('"+objfieldname[i,j]+"',0) "+objfieldname[i,j]+"[1]=Field('"+objfieldname[i,j]+"',1) "+crlf
