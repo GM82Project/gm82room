@@ -32,7 +32,10 @@ if (click) {
         if (menusub=="constant")   get=ds_map_get(constmenuitems,click)
 
         if (menusub=="path" && string(get)==string(noone)) {
-            pathname="path"+string(ds_list_size(path_index_list))+"_"+resfieldid.objname+"_"+resfieldid.uid
+            pathname=get_string("Name of the new path:","path"+string(ds_list_size(path_index_list))+"_"+resfieldid.objname+"_"+resfieldid.uid)
+            while (ds_list_find_index(path_index_list,pathname)!=-1) {
+                pathname=get_string("There already is a path called "+qt+pathname+qt+". Please choose a different name:",pathname)
+            }
 
             //create a new path for this field
             resfieldid.fields[resfieldi,0]=1
