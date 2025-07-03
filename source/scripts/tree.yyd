@@ -21,6 +21,7 @@
 	|ds_map_save_ini
 	|create_menu_bitmap
 	|string_better_lim
+	|get_new_path_name
 +file
 	|gensavecode
 	|parsereal

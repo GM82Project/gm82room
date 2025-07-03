@@ -22,7 +22,7 @@ if (mode==5) {
             if (mouse_wy-120==median(dy,mouse_wy-120,dy+31)) {
                 //create a new path
                 current_path=path_add()
-                pathname="path"+string(ds_list_size(path_index_list))
+                pathname=get_new_path_name("path"+string(ds_list_size(path_index_list)))
                 ds_map_add(pathmap_model,pathname,d3d_model_create())
                 ds_map_add(pathmap_path,pathname,current_path)
                 ds_map_add(pathmap_edited,pathname,true)
