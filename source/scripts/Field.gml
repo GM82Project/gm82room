@@ -11,7 +11,7 @@ for (i=0;i<objfields[obj];i+=1) {
             //return default
             if (type=="string") return "<undefined>"
             if (type=="true") return true
-            return 0
+            return undefined
         }
         if (argument_count==2)
             val=fields[i,1+argument[1]]
