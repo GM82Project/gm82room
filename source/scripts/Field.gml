@@ -11,6 +11,8 @@ for (i=0;i<objfields[obj];i+=1) {
             //return default
             if (type=="string") return "<undefined>"
             if (type=="true") return true
+            if (type=="false") return false
+            if (type=="bool") return false
             return undefined
         }
         if (argument_count==2)
