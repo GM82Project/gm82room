@@ -160,7 +160,7 @@ drawui_statusbar
 load_reference
 draw_reference
 point_in_quad
-draw_quad
+draw_quad_outline
 parse_code_into_flags
 parse_flags_into_code
 draw_tile_panel
@@ -253,3 +253,4 @@ disable_preview_fields
 set_field_by_type
 set_hasfields
 get_new_path_name
+Path

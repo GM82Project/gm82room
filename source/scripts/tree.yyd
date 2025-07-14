@@ -12,7 +12,7 @@
 	|draw_text_outline
 	|message
 	|point_in_quad
-	|draw_quad
+	|draw_quad_outline
 	|mouse_check_modal_pressed
 	|mouse_check_modal
 	|call_nmenu
@@ -203,6 +203,7 @@
 		|Field
 		|FieldDefined
 		|Font
+		|Path
 		|Sprite
 		|Background
 		|Shader

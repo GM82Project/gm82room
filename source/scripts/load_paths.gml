@@ -6,6 +6,7 @@ path_index_list=ds_list_create()
 pathmap_path=ds_map_create()
 pathmap_model=ds_map_create()
 pathmap_edited=ds_map_create()
+pathmap_fields=ds_map_create()
 
 if (has_paths) {f=file_text_open_read_safe(root+"paths\index.yyd") if (f) {do {pathname=file_text_read_string(f) file_text_readln(f)
     ds_list_add(path_index_list,pathname)

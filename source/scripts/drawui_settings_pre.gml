@@ -36,7 +36,7 @@ if (mode==4) {
             draw_circle(rothandx,rothandy,10*zm,1)
             draw_circle(rothandx,rothandy,5*zm,1)
 
-            draw_quad(ref_x,ref_y,ref_x+lengthdir_x(ref_w,ref_angle),ref_y+lengthdir_y(ref_w,ref_angle),draghandx,draghandy,ref_x+lengthdir_x(ref_h,ref_angle-90),ref_y+lengthdir_y(ref_h,ref_angle-90))
+            draw_quad_outline(ref_x,ref_y,ref_x+lengthdir_x(ref_w,ref_angle),ref_y+lengthdir_y(ref_w,ref_angle),draghandx,draghandy,ref_x+lengthdir_x(ref_h,ref_angle-90),ref_y+lengthdir_y(ref_h,ref_angle-90))
             draw_resize_handle(draghandx,draghandy)
         }
     } else {
