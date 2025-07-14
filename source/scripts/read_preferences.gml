@@ -10,6 +10,8 @@ codeeditor=registry_read_string_ext(dir,"CodeEditor")
 startmax=registry_read_dword(dir+"RoomStartMax",0)
 if (!file_exists(codeeditor)) codeeditor="notepad"
 seen=registry_read_dword(dir+"NewRoomEditorSeen",0)
+remoutside=registry_read_dword(dir+"RemoveOutside",0)
+
 codeeditortype=registry_read_dword(dir+"GM82CodeEditorType",0)
 colorpickertype=registry_read_dword(dir+"GM82ColorPickerType",0)
 

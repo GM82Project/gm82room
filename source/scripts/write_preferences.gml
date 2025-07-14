@@ -4,6 +4,7 @@ registry_write_dword(dir+"RoomStartMax",startmax)
 registry_write_dword(dir+"RoomSmooth",interpolation)
 registry_write_dword(dir+"RoomGridOnOffDefault",grid)
 registry_write_dword(dir+"RoomTilePickerGrid",tilepickgrid)
+registry_write_dword(dir+"RemoveOutside",remoutside)
 if (!seen) registry_write_dword(dir+"NewRoomEditorSeen",1)
 
 registry_write_dword(dir+"GM82CodeEditorType",codeeditortype)

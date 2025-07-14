@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=732
-h=340
+h=390
 
 act=""
 button=1
@@ -151,6 +151,14 @@ while (1) {
         tooltip="Crop tiles that use parts outside of the texture limits of backgrounds."
         if (pressed) {
             dotilecrop=!dotilecrop
+            continue
+        }
+    }
+    //remove outside
+    if (point_in_rectangle(mx,my,472,336,472+24,336+24)) {
+        tooltip="Remove instances and tiles outside the room when closing."
+        if (pressed) {
+            remoutside=!remoutside
             continue
         }
     }
@@ -338,6 +346,10 @@ while (1) {
 
     //tile crop
     dx=472 dy=288 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Fix Broken Tile#Coordinates") if (dotilecrop) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //remove outside
+    dx=472 dy=336 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Remove Outside") if (remoutside) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
 
 
     //swap rmb

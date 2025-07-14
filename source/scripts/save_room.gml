@@ -28,6 +28,28 @@ if (argument0) {
 
 instance_activate_all()
 
+if (remoutside) {
+    //remove instances outside the room when closing
+    var outside,outc;outc=0
+
+    with (instance) if (bbox_left>roomwidth or bbox_top>roomheight or bbox_right<0 or bbox_bottom<0) {
+        outside[outc]=id
+        outc+=1
+    }
+    with (tileholder) if (bbox_left>roomwidth or bbox_top>roomheight or bbox_right<0 or bbox_bottom<0) {
+        outside[outc]=id
+        outc+=1
+    }
+
+    if (outc) if (show_question("There are instances or tiles outside the room. Should I remove them? (You can switch this test off in the Preferences.)")) {
+        repeat (outc) {
+            outc-=1
+            with (outside[outc]) instance_destroy()
+        }
+    }
+}
+
+
 pr=ds_priority_create()
 
 //save tiles
