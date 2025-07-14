@@ -24,6 +24,8 @@ customcolor=noone
 
 offx=(width-w) div 2
 offy=(height-h-32) div 2
+
+mouse_clear(mb_left)
 #define Destroy_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

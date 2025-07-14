@@ -1,5 +1,7 @@
 var i,yes,cur,minselx,maxselx,minsely,maxsely,dx,dy;
 
+if (instance_exists(colorpicker)) exit
+
 if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_check_pressed(ord("X")))) {
     cur=0
     minselx=99999999
