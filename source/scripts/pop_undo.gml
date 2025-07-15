@@ -26,22 +26,22 @@ if (size) {
                 set_uid(o,ds_list_find_value(l,i))
                 o.obj=ds_list_find_value(l,i+1)
                 o.objname=ds_list_find_value(objects,o.obj)
-                o.image_xscale=ds_list_find_value(l,i+4)
-                o.image_yscale=ds_list_find_value(l,i+5)
-                o.image_angle=ds_list_find_value(l,i+6)
-                o.image_blend=ds_list_find_value(l,i+7)
-                o.image_alpha=ds_list_find_value(l,i+8)
-                o.code=ds_list_find_value(l,i+9)
-                o.order=ds_list_find_value(l,i+10)
+                o.depth=ds_list_find_value(l,i+4)
+                o.image_xscale=ds_list_find_value(l,i+5)
+                o.image_yscale=ds_list_find_value(l,i+6)
+                o.image_angle=ds_list_find_value(l,i+7)
+                o.image_blend=ds_list_find_value(l,i+8)
+                o.image_alpha=ds_list_find_value(l,i+9)
+                o.code=ds_list_find_value(l,i+10)
+                o.order=ds_list_find_value(l,i+11)
 
-                o.depth=objdepth[o.obj]
                 o.sprite_index=objspr[o.obj]
                 o.sprw=sprite_get_width(o.sprite_index)
                 o.sprh=sprite_get_height(o.sprite_index)
                 o.sprox=sprite_get_xoffset(o.sprite_index)
                 o.sproy=sprite_get_yoffset(o.sprite_index)
                 parse_code_into_fields(o,1)
-                i+=11
+                i+=12
 
                 //read fields
                 for (j=0;j<objfields[o.obj];j+=1) {
