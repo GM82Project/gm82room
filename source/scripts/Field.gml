@@ -13,7 +13,7 @@ for (i=0;i<objfields[obj];i+=1) {
             if (type=="true") return true
             if (type=="false") return false
             if (type=="bool") return false
-            return undefined
+            return 0
         }
         if (argument_count==2)
             val=fields[i,1+argument[1]]
