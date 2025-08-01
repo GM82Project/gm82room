@@ -2,6 +2,8 @@
 var f2,name,size,bold,italic,first,last,font;
 
 if (is_undefined(argument0)) return -1
+if (is_real(argument0)) return -1
+if (argument0=="") return -1
 
 if (!ds_map_exists(fontmap,argument0)) {
     if (has_fonts) {
