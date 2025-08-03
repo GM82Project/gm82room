@@ -13,14 +13,14 @@ if (global.live_connect) {
     if (state==5) {
         global.live_connect=0
         show_live_message("Live: Error connecting to game.")
-        socket_shut_down(sock)
+        socket_close(sock)
         socket_destroy(sock)
         global.livesock=noone
     }
 }
 
 if (sock!=noone) {
-    socket_update_read(sock)
+    socket_receive(sock)
     while (socket_read_message(sock,buf)) {
         buffer_set_pos(buf,0)
         type=buffer_read_u8(buf)

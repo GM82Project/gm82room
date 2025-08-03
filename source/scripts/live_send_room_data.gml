@@ -43,7 +43,7 @@ if (mode==0) {
         }
 
         socket_write_message(sock,b)
-        socket_update_write(sock)
+        socket_send(sock)
     }
     change_mode(mode)
 }
