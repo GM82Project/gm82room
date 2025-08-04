@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=732
-h=390
+h=420
 
 act=""
 button=1
@@ -123,7 +123,7 @@ while (1) {
         }
     }
     //crop bgs
-    if (point_in_rectangle(mx,my,472,172,472+24,172+24)) {
+    if (point_in_rectangle(mx,my,472,176,472+24,176+24)) {
         tooltip="Displays backgrounds cropped to fit only the room area."
         if (pressed) {
             cropbackgrounds=!cropbackgrounds
@@ -159,6 +159,14 @@ while (1) {
         tooltip="Remove instances and tiles outside the room when closing."
         if (pressed) {
             remoutside=!remoutside
+            continue
+        }
+    }
+    //no description preview
+    if (point_in_rectangle(mx,my,472,368,472+24,368+24)) {
+        tooltip="Only show description fields when the field editor is open."
+        if (pressed) {
+            nodescpreview=!nodescpreview
             continue
         }
     }
@@ -336,7 +344,7 @@ while (1) {
     dx=472 dy=144 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Hide 3D Gizmo") if (hide3dgizmo) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //crop backgrounds
-    dx=472 dy=172 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Crop Backgrounds") if (cropbackgrounds) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+    dx=472 dy=176 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Crop Backgrounds") if (cropbackgrounds) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //tool warnings
     dx=472 dy=208 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Skip Tool Warnings") if (skipwarnings) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
@@ -350,7 +358,8 @@ while (1) {
     //remove outside
     dx=472 dy=336 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Remove Outside") if (remoutside) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
-
+    //no description preview
+    dx=472 dy=368 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Hide Descriptions") if (nodescpreview) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
 
     //swap rmb
     dx=8 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Menu") if (swaprmb) draw_sprite(sprMenuButtons,17,dx+12,dy+12)

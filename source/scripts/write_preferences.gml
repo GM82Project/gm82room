@@ -22,6 +22,8 @@ registry_write_dword(dir+"GM82RoomDoTileCrop",dotilecrop)
 registry_write_dword(dir+"GM82RoomScreenGridWidth",screen_grid_width)
 registry_write_dword(dir+"GM82RoomScreenGridHeight",screen_grid_height)
 registry_write_dword(dir+"GM82RoomScreenGridDraw",screen_grid_draw)
+registry_write_dword(dir+"GM82RoomNoDescPreview",nodescpreview)
+
 
 for (i=0;i<16;i+=1) registry_write_dword(dir+"RoomCustomColors"+string(i),customcolors[i])
 
