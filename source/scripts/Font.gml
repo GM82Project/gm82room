@@ -1,9 +1,9 @@
 ///Font(name)
 var f2,name,size,bold,italic,first,last,font;
 
-if (is_undefined(argument0)) return -1
-if (is_real(argument0)) return -1
-if (argument0=="") return -1
+if (is_undefined(argument0)) return fntCode
+if (is_real(argument0)) return fntCode
+if (argument0=="") return fntCode
 
 if (!ds_map_exists(fontmap,argument0)) {
     if (has_fonts) {
@@ -21,7 +21,7 @@ if (!ds_map_exists(fontmap,argument0)) {
         }file_text_close(f2)
         return font
     }
-    else return -1
+    else return fntCode
 }
 
 return dsmap(fontmap,argument0)

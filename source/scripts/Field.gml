@@ -13,6 +13,7 @@ for (i=0;i<objfields[obj];i+=1) {
             if (type=="true") return true
             if (type=="false") return false
             if (type=="bool") return false
+            if (type=="font") return fntCode
             return 0
         }
         if (argument_count==2)
