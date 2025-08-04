@@ -2,7 +2,9 @@ if (mode==5 || view[7]) {
     key=ds_map_find_first(pathmap_path)
     repeat (ds_map_size(pathmap_path)) {
         if ((key==current_pathname && mode==5) || view[7]) {
+            if (pathfocus==key) d3d_set_fog(1,selcol,0,0)
             d3d_model_draw(ds_map_find_value(pathmap_model,key),0,0,0,-1)
+            if (pathfocus==key) d3d_set_fog(0,0,0,0)
         }
     key=ds_map_find_next(pathmap_path,key)}
 }

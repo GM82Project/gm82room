@@ -17,7 +17,7 @@ if (mouse_check_modal_pressed(mb_right)) {
         with (Button) if (instance_position(mouse_wx,mouse_wy,id)) {
             event_user(3)
         }
-    } else if (!swaprmb && keyboard_check(vk_control)) or (swaprmb && !keyboard_check(vk_control) && !keyboard_check(vk_shift)) {
+    } else if ((!swaprmb && keyboard_check(vk_control)) or (swaprmb && !keyboard_check(vk_control) && !keyboard_check(vk_shift))) and (mode!=5) {
         //stack menu
         menued=false
         if (mode==0) {

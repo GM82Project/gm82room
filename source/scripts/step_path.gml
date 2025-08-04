@@ -1,7 +1,14 @@
 var h,oldpath;
 
 if (mode==5) {
+    pathfocus=""
     if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,height-328)) {
+        dy=pathscroll key=ds_map_find_first(pathmap_path) repeat (ds_map_size(pathmap_path)) {
+            if (mouse_wy-120==median(dy,mouse_wy-120,dy+31)) {
+                pathfocus=key
+            }
+        dy+=32 key=ds_map_find_next(pathmap_path,key)}
+
         if (mouse_check_modal_pressed(mb_left)) {
             //select a different path
             dy=pathscroll key=ds_map_find_first(pathmap_path) repeat (ds_map_size(pathmap_path)) {
@@ -17,7 +24,7 @@ if (mode==5) {
                     update_inspector()
                     update_selection_bounds()
                 }
-            i+=1 dy+=32 key=ds_map_find_next(pathmap_path,key)}
+            dy+=32 key=ds_map_find_next(pathmap_path,key)}
 
             if (mouse_wy-120==median(dy,mouse_wy-120,dy+31)) {
                 //create a new path

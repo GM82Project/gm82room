@@ -72,6 +72,7 @@ focus=noone
 window_focused=false
 current_cursor=cr_default
 drag_point=-1
+pathfocus=""
 
 i=1 repeat (9) {objhotbar[i]=noone tilehotbar[i]=noone i+=1}
 
