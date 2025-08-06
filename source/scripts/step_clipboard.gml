@@ -86,65 +86,64 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || cut)) {
         copyvec[0,5]=minselx-floorto(minselx,gridx)
         copyvec[0,6]=minsely-floorto(minsely,gridy)
 
-        if (keyboard_check(vk_shift)) {
-            b=buffer_create()
-            buffer_write_string(b,gamename)
-            buffer_write_u8(b,copymode)
-            buffer_write_u8(b,copyvec[0,0])
-            buffer_write_i32(b,copyvec[0,1])
-            buffer_write_i32(b,copyvec[0,2])
-            buffer_write_i32(b,copyvec[0,3])
-            buffer_write_i32(b,copyvec[0,4])
-            buffer_write_i32(b,copyvec[0,5])
-            buffer_write_i32(b,copyvec[0,6])
-            if (copymode==0) {
-                i=1 repeat (cur) {
-                    buffer_write_string(b,copyvec[i,0])
-                    //buffer_write_i32(b,copyvec[i,1])
-                    buffer_write_i32(b,copyvec[i,2])
-                    buffer_write_i32(b,copyvec[i,3])
-                    buffer_write_float(b,copyvec[i,4])
-                    buffer_write_float(b,copyvec[i,5])
-                    buffer_write_float(b,copyvec[i,6])
-                    buffer_write_i32(b,copyvec[i,7])
-                    buffer_write_float(b,copyvec[i,8])
-                    buffer_write_string(b,copyvec[i,9])
-                    buffer_write_i32(b,copyvec[i,10])
+        b=buffer_create()
+        buffer_write_string(b,gamename)
+        buffer_write_u8(b,copymode)
+        buffer_write_u32(b,copyvec[0,0])
+        buffer_write_i32(b,copyvec[0,1])
+        buffer_write_i32(b,copyvec[0,2])
+        buffer_write_i32(b,copyvec[0,3])
+        buffer_write_i32(b,copyvec[0,4])
+        buffer_write_i32(b,copyvec[0,5])
+        buffer_write_i32(b,copyvec[0,6])
+        if (copymode==0) {
+            i=1 repeat (cur) {
+                buffer_write_string(b,copyvec[i,0])
 
-                    for (j=0;j<objfields[copyvec[i,1]];j+=1) {
-                        buffer_write_u8(b,copyvec[i,11+j*3]) //field set flag
-                        buffer_write_variable(b,copyvec[i,12+j*3])
-                        buffer_write_variable(b,copyvec[i,13+j*3])
-                    }
-                i+=1}
-            }
-            if (copymode==1) {
-                i=1 repeat (cur) {
-                    buffer_write_string(b,copyvec[i,0])
-                    //buffer_write_i32(b,copyvec[i,1])
-                    buffer_write_i32(b,copyvec[i,2])
-                    buffer_write_i32(b,copyvec[i,3])
-                    buffer_write_float(b,copyvec[i,4])
-                    buffer_write_float(b,copyvec[i,5])
-                    buffer_write_i32(b,copyvec[i,6])
-                    buffer_write_i32(b,copyvec[i,7])
-                    buffer_write_float(b,copyvec[i,8])
-                    buffer_write_i32(b,copyvec[i,9])
-                    buffer_write_i32(b,copyvec[i,10])
-                    buffer_write_i32(b,copyvec[i,11])
-                i+=1}
-            }
-            buffer_deflate(b)
-            clipboard_set_text("__gm82room_clipboard"+chr_crlf+buffer_encode_base64(b,buffer_get_size(b)))
-            buffer_destroy(b)
+                buffer_write_i32(b,copyvec[i,2])
+                buffer_write_i32(b,copyvec[i,3])
+                buffer_write_float(b,copyvec[i,4])
+                buffer_write_float(b,copyvec[i,5])
+                buffer_write_float(b,copyvec[i,6])
+                buffer_write_i32(b,copyvec[i,7])
+                buffer_write_float(b,copyvec[i,8])
+                buffer_write_string(b,copyvec[i,9])
+                buffer_write_i32(b,copyvec[i,10])
+
+                for (j=0;j<objfields[copyvec[i,1]];j+=1) {
+                    buffer_write_u8(b,copyvec[i,11+j*3]) //field set flag
+                    buffer_write_variable(b,copyvec[i,12+j*3])
+                    buffer_write_variable(b,copyvec[i,13+j*3])
+                }
+            i+=1}
         }
+        if (copymode==1) {
+            i=1 repeat (cur) {
+                buffer_write_string(b,copyvec[i,0])
+
+                buffer_write_i32(b,copyvec[i,2])
+                buffer_write_i32(b,copyvec[i,3])
+                buffer_write_float(b,copyvec[i,4])
+                buffer_write_float(b,copyvec[i,5])
+                buffer_write_i32(b,copyvec[i,6])
+                buffer_write_i32(b,copyvec[i,7])
+                buffer_write_float(b,copyvec[i,8])
+                buffer_write_i32(b,copyvec[i,9])
+                buffer_write_i32(b,copyvec[i,10])
+                buffer_write_i32(b,copyvec[i,11])
+            i+=1}
+        }
+        buffer_deflate(b)
+        clipboard_set_text("__gm82room_clipboard"+chr_crlf+buffer_encode_base64(b,buffer_get_size(b)))
+        buffer_destroy(b)
     }
 }
 
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
-    if (keyboard_check(vk_shift)) and (clipboard_has_text()) {
+    if (clipboard_has_text()) {
         str=clipboard_get_text()
         if (string_starts_with(str,"__gm82room_clipboard"+chr_crlf)) {
+            clipboard_set_text("")
             b=buffer_create()
             buffer_decode_base64(b,string_delete(str,1,22))
             buffer_inflate(b)
@@ -155,7 +154,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 exit
             }
             copymode=buffer_read_u8(b)
-            copyvec[0,0]=buffer_read_u8(b) cur=copyvec[0,0]
+            copyvec[0,0]=buffer_read_u32(b) cur=copyvec[0,0]
             copyvec[0,1]=buffer_read_i32(b)
             copyvec[0,2]=buffer_read_i32(b)
             copyvec[0,3]=buffer_read_i32(b)
@@ -165,8 +164,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
             if (copymode==0) {
                 i=1 repeat (cur) {
                     copyvec[i,0]=buffer_read_string(b)
-                    copyvec[i,1]=ds_list_find_index(objects,copyvec[i,0])
-                    if (copyvec[i,1]<0) {show_message("Error pasting from clipboard: object '"+copyvec[i,0]+"' doesn't exist.") copymode=-1 exit}
+                    copyvec[i,1]=get_object(copyvec[i,0]) if (copyvec[i,1]<0) {copymode=-1 exit}
                     copyvec[i,2]=buffer_read_i32(b)
                     copyvec[i,3]=buffer_read_i32(b)
                     copyvec[i,4]=buffer_read_float(b)
@@ -187,8 +185,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
             if (copymode==1) {
                 i=1 repeat (cur) {
                     copyvec[i,0]=buffer_read_string(b)
-                    copyvec[i,1]=ds_list_find_index(backgrounds,copyvec[i,0])
-                    if (copyvec[i,1]<0) {show_message("Error pasting from clipboard: background '"+copyvec[i,0]+"' doesn't exist.") copymode=-1 exit}
+                    copyvec[i,1]=get_background(copyvec[i,0]) if (copyvec[i,1]<0) {copymode=-1 exit}
                     copyvec[i,2]=buffer_read_i32(b)
                     copyvec[i,3]=buffer_read_i32(b)
                     copyvec[i,4]=buffer_read_float(b)
