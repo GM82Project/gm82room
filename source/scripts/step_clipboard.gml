@@ -141,11 +141,11 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || cut)) {
 
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
     if (clipboard_has_text()) {
-        str=clipboard_get_text()
-        if (string_starts_with(str,"__gm82room_clipboard"+chr_crlf)) {
+        str=string_replace_all(clipboard_get_text(),chr_crlf,chr_lf)
+        if (string_starts_with(str,"__gm82room_clipboard"+chr_lf)) {
             clipboard_set_text("")
             b=buffer_create()
-            buffer_decode_base64(b,string_delete(str,1,22))
+            buffer_decode_base64(b,string_delete(str,1,21))
             buffer_inflate(b)
             buffer_set_pos(b,0)
             pastename=buffer_read_string(b)
