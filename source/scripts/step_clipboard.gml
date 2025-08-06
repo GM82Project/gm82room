@@ -1,24 +1,31 @@
-var i,yes,cur,minselx,maxselx,minsely,maxsely,dx,dy,b,str;
+var i,yes,cur,minselx,maxselx,minsely,maxsely,dx,dy,b,str,cut;
 
 if (instance_exists(colorpicker)) exit
 
-if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_check_pressed(ord("X")))) {
+cut=keyboard_check_pressed(ord("X"))
+
+with (TextField) if (active) {
+    if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || cut)) {
+        clipboard_set_text(text)
+        if (cut) text=""
+    }
+    if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
+        if (clipboard_has_text()) {
+            text=clipboard_get_text()
+            selected=0
+        }
+    }
+    exit
+}
+
+if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || cut)) {
     cur=0
     minselx=99999999
     minsely=99999999
     maxselx=-minselx
     maxsely=-minsely
-    yes=(keyboard_check_pressed(ord("X")))
 
-    with (TextField) if (active) {
-        clipboard_set_text(text)
-        if (yes) {
-            text=""
-        }
-        yes=0
-    }
-
-    if (yes) {
+    if (cut) {
         if (num_selected()) begin_undo(act_create,"cutting "+pick(mode,"instances","tiles"),0)
     }
 
@@ -46,7 +53,7 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_
             copyvec[cur,13+i*3]=fields[i,2]
         }
 
-        if (yes) {add_undo_instance() instance_destroy()}
+        if (cut) {add_undo_instance() instance_destroy()}
     }
     if (mode==1) with (tileholder) if (sel) {
         minselx=min(minselx,bbox_left)
@@ -66,9 +73,9 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_
         copyvec[cur,9]=tile_get_top(tile)
         copyvec[cur,10]=tile_get_width(tile)
         copyvec[cur,11]=tile_get_height(tile)
-        if (yes) {add_undo_tile() instance_destroy()}
+        if (cut) {add_undo_tile() instance_destroy()}
     }
-    if (yes) {push_undo() deselect()}
+    if (cut) {push_undo() deselect()}
     if (cur>0) {
         copymode=mode
         copyvec[0,0]=cur
@@ -91,7 +98,7 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_
             buffer_write_i32(b,copyvec[0,5])
             buffer_write_i32(b,copyvec[0,6])
             if (copymode==0) {
-                i=1 repeat (cur-1) {
+                i=1 repeat (cur) {
                     buffer_write_string(b,copyvec[i,0])
                     //buffer_write_i32(b,copyvec[i,1])
                     buffer_write_i32(b,copyvec[i,2])
@@ -112,7 +119,7 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || keyboard_
                 i+=1}
             }
             if (copymode==1) {
-                i=1 repeat (cur-1) {
+                i=1 repeat (cur) {
                     buffer_write_string(b,copyvec[i,0])
                     //buffer_write_i32(b,copyvec[i,1])
                     buffer_write_i32(b,copyvec[i,2])
@@ -156,7 +163,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
             copyvec[0,5]=buffer_read_i32(b)
             copyvec[0,6]=buffer_read_i32(b)
             if (copymode==0) {
-                i=1 repeat (cur-1) {
+                i=1 repeat (cur) {
                     copyvec[i,0]=buffer_read_string(b)
                     copyvec[i,1]=ds_list_find_index(objects,copyvec[i,0])
                     if (copyvec[i,1]<0) {show_message("Error pasting from clipboard: object '"+copyvec[i,0]+"' doesn't exist.") copymode=-1 exit}
@@ -178,7 +185,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 i+=1}
             }
             if (copymode==1) {
-                i=1 repeat (cur-1) {
+                i=1 repeat (cur) {
                     copyvec[i,0]=buffer_read_string(b)
                     copyvec[i,1]=ds_list_find_index(backgrounds,copyvec[i,0])
                     if (copyvec[i,1]<0) {show_message("Error pasting from clipboard: background '"+copyvec[i,0]+"' doesn't exist.") copymode=-1 exit}
@@ -198,16 +205,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
         }
     }
 
-
-    yes=copyvec[0,0]
-    with (TextField) if (active) {
-        yes=0
-        if (clipboard_has_text()) {
-            text=clipboard_get_text()
-            selected=0
-        }
-    }
-    if (yes) {
+    if (copyvec[0,0]) {
         if (copymode!=mode) show_message("Clipboard currently contains "+pick(copymode+1,"no data.","instance data. To paste, please switch to the instances tab.","tile data. To paste, please switch to the tiles tab."))
         else {
             with (instance) sel=0
