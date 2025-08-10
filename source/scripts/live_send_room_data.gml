@@ -1,4 +1,4 @@
-var i,objc,b,sock,insc;
+var i,objc,b,sock,insc,check_time,d;
 
 sock=global.livesock
 
@@ -12,6 +12,8 @@ if (sock=noone) {
 }
 
 if (mode==0) {
+    check_time=current_time
+    with (instance) was_active=check_time
     instance_activate_object(instance)
     objc=0 for (i=0;i<objects_length;i+=1) if (objloaded[i]) {
         with (instance) if (obj==i) {objc+=1 break}
@@ -45,7 +47,12 @@ if (mode==0) {
         socket_write_message(sock,b)
         socket_send(sock)
     }
-    change_mode(mode)
+
+    d=0 with (instance) if (was_active!=check_time) {deact[d]=id d+=1}
+    repeat (d) {
+        d-=1 instance_deactivate_object(deact[d])
+    }
+
 }
 if (mode==1) {
     /*instance_activate_object(tile)

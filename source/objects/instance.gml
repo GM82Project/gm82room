@@ -20,6 +20,7 @@ editangle=0
 editrad=0
 editfid=0
 disabled_preview=0
+was_active=0
 
 rothandx=-9999999
 rothandy=-9999999
