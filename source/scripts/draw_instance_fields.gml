@@ -16,7 +16,7 @@ dy=floor((fieldhandy-view_yview)/zoom+24)
 odx=dx
 ody=dy-16
 
-if (objdesc[obj]!="" and fieldactive or not nodescpreview or keyboard_check(ord("C"))) {
+if (objdesc[obj]!="" and (fieldactive or not nodescpreview or keyboard_check(ord("C")))) {
     //object has a description field; let's draw it before
 
     str=objdesc[obj]
