@@ -7,7 +7,7 @@ if (sock=noone) {
     socket_connect(sock,"127.0.0.1",4126)
     global.livesock=sock
     global.livebuf=buffer_create()
-    show_live_message("Live: Connecting to Game...")
+    show_live_message("Test: Connecting to Game using 8.2 Test...")
     global.live_connect=1
 }
 

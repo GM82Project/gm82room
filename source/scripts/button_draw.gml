@@ -29,8 +29,9 @@ if (object_index==Button) {
             case "vwselect":         {up=(!down && vw_current!=actionid)}break
             case "undo":             {up=(!down && alt!="Undo (empty)") }break
             case "tile panel grid":  {up=(!down && !tilepickgrid)       }break
-            case "instance list":    {up=!down && !Instancepanel.open    }break
-            default:                 {up=!down                          }
+            case "instance list":    {up=!down && !Instancepanel.open   }break
+            case "live":             {up=(global.livesock==noone)       }break
+            default:                 {up=!down                          }break
         }
 
         checked=0
