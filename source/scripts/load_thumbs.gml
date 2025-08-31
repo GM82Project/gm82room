@@ -1,4 +1,5 @@
 directory_create(root+"cache")
+directory_create(program_directory+"\cache")
 
 if (directory_exists(root+"cache\backgrounds") && directory_exists(root+"cache\sprites")) {
     icon_mode=1
