@@ -32,7 +32,7 @@ if (mode==5) {
                 pathname=get_new_path_name("path"+string(ds_list_size(path_index_list)))
                 ds_map_add(pathmap_model,pathname,d3d_model_create())
                 ds_map_add(pathmap_path,pathname,current_path)
-                ds_map_add(pathmap_edited,pathname,true)
+                ds_map_set(pathmap_edited,pathname,true)
                 item=N_Menu_AddItem(pathmenu,pathname,"")
                 N_Menu_ItemSetBitmap(pathmenu,item,path_menuicon)
                 ds_map_add(pathmenuitems,item,pathname)

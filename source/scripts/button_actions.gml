@@ -332,7 +332,7 @@ with (Controller) switch (argument0) {
             N_Menu_RemoveItem(pathmenu,item)
             ds_map_delete(pathmenuitems,item)
             ds_map_delete(pathmap_model,current_pathname)
-            ds_map_delete(pathmap_edited,current_pathname)
+            paths_have_been_deleted=true
             deselect()
         }
     }break

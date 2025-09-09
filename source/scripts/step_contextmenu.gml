@@ -42,7 +42,7 @@ if (click) {
             current_path=path_add()
             ds_map_add(pathmap_model,pathname,d3d_model_create())
             ds_map_add(pathmap_path,pathname,current_path)
-            ds_map_add(pathmap_edited,pathname,true)
+            ds_map_set(pathmap_edited,pathname,true)
             item=N_Menu_AddItem(pathmenu,pathname,"")
             N_Menu_ItemSetBitmap(pathmenu,item,path_menuicon)
             ds_map_add(pathmenuitems,item,pathname)

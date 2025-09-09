@@ -1,6 +1,6 @@
 var f,f2,f3,i,path,pathname,j,str;
 
-if (ds_list_size(path_index_list) || has_paths) {
+if (ds_list_size(path_index_list) || has_paths || paths_have_been_deleted) {
     if (!has_paths) {
         directory_create(root+"\paths")
         ds_map_set(project,"has_paths","1")
