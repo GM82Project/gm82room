@@ -64,8 +64,14 @@ if (active) {
     }
     otext=text
     text=get_keyboard_string(text)
+
+    if (text!=otext and selected) {
+        selected=0
+        text=keyboard_lastchar
+    }
+
     if (type=4) {
-        text=string_copy(text,1,maxlen)
+        text=string_copy(text,1,maxlen) //skip trim when selected
     } else {
         if (type=0) {
             if (text=="-" && keyboard_lastkey==vk_backspace) {
@@ -79,16 +85,10 @@ if (active) {
         text=string_copy(text,1,maxlen)
         if (text=="0" && neg) text="-0"
     }
-    if (selected) {
-        if (keyboard_lastkey==vk_backspace || keyboard_lastkey==vk_delete || (keyboard_lastkey==vk_return && type!=0)) {
-            text=""
-            selected=0
-        } else {
-            if (text!=otext) {
-                selected=0
-                text=keyboard_lastchar
-            }
-        }
+
+    if (selected) and (keyboard_lastkey==vk_backspace || keyboard_lastkey==vk_delete || (keyboard_lastkey==vk_return && type!=0)) {
+        text=""
+        selected=0
     }
 
     k+=1
