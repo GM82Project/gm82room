@@ -43,7 +43,7 @@ if (mouse_check_modal_pressed(mb_right)) {
                     update_selection_bounds()
                 }
                 ds_priority_clear(click_priority)
-                if (!menued) with (select) fieldactive=1
+                if (!menued) with (select) {fieldactive=1 fieldtarget_keepactive=id}
             } else deselect()
         }
         if (mode==1) {

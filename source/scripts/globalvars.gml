@@ -15,7 +15,7 @@ globalvar
     screen_grid_width,screen_grid_height,screen_grid_draw,
     selection,selleft,seltop,selwidth,selheight,selsize,grabselection,
     jtool_objs,has_jtool_table,jtool_loaded_engine,
-    objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef,objnodrawself,objshow,objfielddepends,objfieldindent,objfieldqueue,
+    objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef,objnodrawself,objshow,objfielddepends,objfieldindent,objfieldqueue,fieldtarget_keepactive,
     objprev_objectid,objprev_eventid,objprev_curobj,objprev_curevent,
     thumbmap,thumbcount,
     orderlast,

@@ -9,6 +9,7 @@ if (mode==0) {
                 deselect()
                 sel=1
                 select=id
+                fieldtarget_keepactive=id
                 update_inspector()
             }
         }
@@ -18,6 +19,7 @@ if (mode==0) {
                 yes=1
             } else if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
                 fieldactive=1
+                fieldtarget_keepactive=id
                 yes=1                            
             } else if (point_distance(rothandx,rothandy,global.mousex,global.mousey)<10*zm) {
                 rotato=1

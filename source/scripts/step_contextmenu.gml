@@ -37,6 +37,7 @@ if (click) {
             //create a new path for this field
             resfieldid.fields[resfieldi,0]=1
             resfieldid.fields[resfieldi,1]=pathname
+
             change_mode(5)
 
             current_path=path_add()

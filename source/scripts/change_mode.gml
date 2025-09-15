@@ -67,3 +67,5 @@ repeat (dcur) {
     instance_deactivate_object(deact[i])
     i+=1
 }
+
+instance_activate_object(fieldtarget_keepactive)
