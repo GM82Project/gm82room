@@ -69,7 +69,8 @@ if (messagetime>0) {
     }
 }
 
-if (current_time>autosave_timer+autosave_interval) {
+if (current_time>autosave_timer+autosave_interval) repeat (1) {
+    with (instance) if (fieldactive) break
     if (!mouse_check_button(mb_any) && !keyboard_check(vk_anykey)) {
         autosave_timer=current_time
         save_room(1)
