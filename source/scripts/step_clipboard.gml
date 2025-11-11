@@ -150,8 +150,8 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
             buffer_set_pos(b,0)
             pastename=buffer_read_string(b)
             if (gamename!=pastename) {
-                show_message("Error pasting: can't paste clipboard data for '"+pastename+"' in '"+gamename+"'.")
-                exit
+                if (show_message_ext("Error pasting: can't paste clipboard data for '"+pastename+"' in '"+gamename+"'.","Accept","","Override")!=2)
+                    exit
             }
             copymode=buffer_read_u8(b)
             copyvec[0,0]=buffer_read_u32(b) cur=copyvec[0,0]
