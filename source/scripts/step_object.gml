@@ -156,7 +156,7 @@ if (mode==0 && objects_length) {
 
     //gigaknife hotkey
     if (keyboard_check_pressed(ord("K"))) {
-        if (num_selected()>1) {
+        if (num_selected()) {
             o=skipwarnings
             skipwarnings=true
             subdivide_instances()
