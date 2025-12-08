@@ -9,11 +9,11 @@ if (mode==0) {
         draw_self()
     }
 
-    d3d_set_fog(1,$ff8000,0,0)
+    d3d_fog_trick($ff8000)
     with (instance) if (sel && !instance_exists(colorpicker)) {
         draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,sel_alpha)
     }
-    d3d_set_fog(0,0,0,0)
+    d3d_fog_trick()
 
     draw_set_color_sel()
     with (instance) if (sel) {
@@ -35,9 +35,9 @@ if (mode==0) {
 
     if (keyboard_check(ord("C"))) with (instance) {
         if (code!="") {
-            d3d_set_fog(1,$ff,0,0)
+            d3d_fog_trick($ff)
             draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)
-            d3d_set_fog(0,0,0,0)
+            d3d_fog_trick()
         }
         event_user(4)
     }

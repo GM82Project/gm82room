@@ -58,8 +58,8 @@ d3d_primitive_begin(pr_linelist)
             y2=min(roomheight,view_yview+view_hview)
         }
         vc=0
-        for (i=x1;i<=x2;i+=gridx) {d3d_vertex(i,y1,0) d3d_vertex(i,y2,0) vc+=2 if (vc>31000) {vc=0 d3d_primitive_end() draw_set_blend_mode(bm_add) d3d_set_fog(1,$202020,0,0) d3d_primitive_end() d3d_set_fog(0,0,0,0) draw_set_blend_mode(0) d3d_primitive_begin(pr_linelist)}}
-        for (i=y1;i<=y2;i+=gridy) {d3d_vertex(x1,i,0) d3d_vertex(x2,i,0) vc+=2 if (vc>31000) {vc=0 d3d_primitive_end() draw_set_blend_mode(bm_add) d3d_set_fog(1,$202020,0,0) d3d_primitive_end() d3d_set_fog(0,0,0,0) draw_set_blend_mode(0) d3d_primitive_begin(pr_linelist)}}
+        for (i=x1;i<=x2;i+=gridx) {d3d_vertex(i,y1,0) d3d_vertex(i,y2,0) vc+=2 if (vc>31000) {vc=0 d3d_primitive_end() draw_set_blend_mode(bm_add) d3d_fog_trick($202020) d3d_primitive_end() d3d_fog_trick() draw_set_blend_mode(0) d3d_primitive_begin(pr_linelist)}}
+        for (i=y1;i<=y2;i+=gridy) {d3d_vertex(x1,i,0) d3d_vertex(x2,i,0) vc+=2 if (vc>31000) {vc=0 d3d_primitive_end() draw_set_blend_mode(bm_add) d3d_fog_trick($202020) d3d_primitive_end() d3d_fog_trick() draw_set_blend_mode(0) d3d_primitive_begin(pr_linelist)}}
     }
     if (crosshair && mousein) {
         if (keyboard_check(vk_alt)) {
@@ -94,9 +94,9 @@ d3d_primitive_begin(pr_linelist)
     }
 d3d_primitive_end()
 draw_set_blend_mode(bm_add)
-d3d_set_fog(1,$202020,0,0)
+d3d_fog_trick($202020)
 d3d_primitive_end()
-d3d_set_fog(0,0,0,0)
+d3d_fog_trick()
 draw_set_blend_mode(0)
 d3d_transform_set_identity()
 
@@ -112,37 +112,37 @@ if (screen_grid_draw) {
 
     vc=0
     for (i=screen_grid_width;i<=x2;i+=screen_grid_width) {d3d_vertex(i,y1,0) d3d_vertex(i,y2,0) vc+=2 if (vc>31000) {vc=0
-        d3d_set_fog(1,0,0,0)
+        d3d_fog_trick(0)
         d3d_transform_add_translation(-zm,-zm,0)
         d3d_primitive_end()
         d3d_transform_add_translation(2*zm,2*zm,0)
         d3d_primitive_end()
         d3d_transform_add_translation(-zm,-zm,0)
-        d3d_set_fog(1,$ffffff,0,0)
+        d3d_fog_trick($ffffff)
         d3d_primitive_end()
         d3d_primitive_begin(pr_linelist)
     }}
     for (i=screen_grid_height;i<=y2;i+=screen_grid_height) {d3d_vertex(x1,i,0) d3d_vertex(x2,i,0) vc+=2 if (vc>31000) {vc=0
-        d3d_set_fog(1,0,0,0)
+        d3d_fog_trick(0)
         d3d_transform_add_translation(-zm,-zm,0)
         d3d_primitive_end()
         d3d_transform_add_translation(2*zm,2*zm,0)
         d3d_primitive_end()
         d3d_transform_add_translation(-zm,-zm,0)
-        d3d_set_fog(1,$ffffff,0,0)
+        d3d_fog_trick($ffffff)
         d3d_primitive_end()
         d3d_primitive_begin(pr_linelist)
     }}
 
-    d3d_set_fog(1,0,0,0)
+    d3d_fog_trick(0)
     d3d_transform_add_translation(-zm,-zm,0)
     d3d_primitive_end()
     d3d_transform_add_translation(2*zm,2*zm,0)
     d3d_primitive_end()
     d3d_transform_add_translation(-zm,-zm,0)
-    d3d_set_fog(1,$ffffff,0,0)
+    d3d_fog_trick($ffffff)
     d3d_primitive_end()
-    d3d_set_fog(0,0,0,0)
+    d3d_fog_trick()
     d3d_transform_set_identity()
 }
 

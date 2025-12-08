@@ -16,12 +16,12 @@ if (mode==0) {
             if (w>32 || h>32) {
                 dx2=floor(max(1,dx-w/2)+w/2)+frac(w/2)
                 dy2=floor(max(1,dy-h/2)+h/2)+frac(h/2)
-                draw_set_color_sel() d3d_set_fog(1,draw_get_color(),0,0) draw_set_color($ffffff)
+                draw_set_color_sel() d3d_fog_trick(draw_get_color()) draw_set_color($ffffff)
                 draw_sprite_stretched_ext(objspr[i],0,dx2-w/2+1,dy2-h/2+1,w,h,0,1)
                 draw_sprite_stretched_ext(objspr[i],0,dx2-w/2+1,dy2-h/2-1,w,h,0,1)
                 draw_sprite_stretched_ext(objspr[i],0,dx2-w/2-1,dy2-h/2+1,w,h,0,1)
                 draw_sprite_stretched_ext(objspr[i],0,dx2-w/2-1,dy2-h/2-1,w,h,0,1)
-                d3d_set_fog(0,0,0,0)
+                d3d_fog_trick()
             }
             draw_sprite_stretched(objspr[i],0,dx2-w/2,dy2-h/2,w,h)
             if (keyboard_check(vk_alt)) draw_sprite(sprMenuButtons,52-objshow[i],dx+8,dy+8)
