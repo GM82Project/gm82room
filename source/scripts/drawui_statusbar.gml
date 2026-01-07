@@ -1,3 +1,5 @@
+var num,numsel;
+
 statusx=160
 statusy=height-32
 statusw=width-320
@@ -13,15 +15,21 @@ if (keyboard_check(vk_alt)) draw_text(statusx+8,statusy+6,string(global.mousex)+
 else draw_text(statusx+8,statusy+6,string(fmx)+","+string(fmy))
 if (mode==0) {
     num=instance_number(instance)
-    if (num<instancecount) draw_text(statusx+152,statusy+6,string(num)+" instances ("+string(instancecount-num)+" hidden)")
-    else draw_text(statusx+152,statusy+6,string(instancecount)+" instances")
+    numsel=num_selected()
+    if (num<instancecount) str=string(num)+" instances ("+string(instancecount-num)+" hidden)"
+    else str=string(instancecount)+" instances"
+    if (numsel) str+=" ("+string(numsel)+" selected)"
+    draw_text(statusx+152,statusy+6,str)
     if (focus) draw_text(statusx+496,statusy+6,focus.objname+" ("+focus.uid+") "+string(focus.x)+","+string(focus.y))
 }
 if (mode==1) {
     num=instance_number(tileholder)
-    if (view[1]) draw_text(statusx+152,statusy+6,string(tilecount)+" tiles")
-    else if (num<tilecount) draw_text(statusx+152,statusy+6,string(num)+" tiles ("+string(tilecount-num)+" hidden)")
-    else draw_text(statusx+152,statusy+6,string(num)+" tiles")
+    numsel=num_selected()
+    if (view[1]) str=string(tilecount)+" tiles"
+    else if (num<tilecount) str=string(num)+" tiles ("+string(tilecount-num)+" hidden)"
+    else str=string(num)+" tiles"
+    if (numsel) str+=" ("+string(numsel)+" selected)"
+    draw_text(statusx+152,statusy+6,str)
     if (focus) draw_text(statusx+496,statusy+6,string(focus.bgname)+" "+string(focus.x)+","+string(focus.y))
 }
 draw_set_color($ffffff)
