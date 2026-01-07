@@ -39,7 +39,7 @@ with (instance) if (sel==checksel) {
         short=floorto(t,gridy)==floorto(b,gridy)
         thin=floorto(r,gridx)==floorto(l,gridx)
 
-        if (short && thin) {
+        if ((short && thin) or (t==b) or (l==r)) {
             //too small to gigaknife
             continue
         } else if (short) {
