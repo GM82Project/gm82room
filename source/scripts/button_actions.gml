@@ -39,7 +39,7 @@ with (Controller) switch (argument0) {
     case "screen draw" : {screen_grid_draw=!screen_grid_draw}break
 
     //visibility
-    case "view objects": {view[0]=!view[0] change_mode(mode)}break
+    case "view objects": {view[0]=!view[0] deselect() change_mode(mode)}break
     case "view tiles"  : {view[1]=!view[1] change_mode(mode)}break
     case "view bgs"    : {view[2]=!view[2]}break
     case "view fgs"    : {view[3]=!view[3]}break

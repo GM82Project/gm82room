@@ -69,3 +69,5 @@ repeat (dcur) {
 }
 
 instance_activate_object(fieldtarget_keepactive)
+
+if (argument0==0) if (Instancepanel.open) {Instancepanel.updatew=1 Instancepanel.update_scheduled=true update_instancepanel()}

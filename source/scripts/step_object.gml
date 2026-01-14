@@ -60,6 +60,7 @@ if (mode==0 && objects_length) {
                 dy=140+40*posy+palettescroll
                 if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
                     //clicked on object
+                    fieldtarget_keepactive=noone
                     if (point_in_rectangle(mouse_wx,mouse_wy,dx,dy,dx+20,dy+20) && keyboard_check(vk_alt)) {
                         //hide/show object
                         objshow[i]=!objshow[i]
