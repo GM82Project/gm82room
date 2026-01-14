@@ -70,7 +70,7 @@ for (i=0;i<objfields[obj];i+=1) {
         } else if (objfieldtype[obj,i]=="xy") {
             str=objfieldname[obj,i]+": ("+fields[i,1]+", "+fields[i,2]+")"
         } else if (objfieldtype[obj,i]=="string") {
-            str=objfieldname[obj,i]+": "+string_replace_all(destringify(fields[i,1]),"#","\#")
+            str=objfieldname[obj,i]+": "+destringify(fields[i,1])
         } else if (objfieldtype[obj,i]=="bool" || objfieldtype[obj,i]=="boolean" || objfieldtype[obj,i]=="true" || objfieldtype[obj,i]=="false") {
             str=objfieldname[obj,i]
         } else if (objfieldtype[obj,i]=="instance") {
@@ -86,6 +86,7 @@ for (i=0;i<objfields[obj];i+=1) {
             str=objfieldname[obj,i]+": "+fields[i,1]
         }
     }
+    str=string_replace_all(str,"#","\#")
     dw=string_width(str)+48
     dh=string_height(str)+8
     if (point_in_rectangle(mouse_wx,mouse_wy,dx+16,dy+4,dx+dw,dy+dh)) {
