@@ -62,6 +62,9 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("F"))) {
     if (mode==0) {
         search_for_objects(get_string("Object name:",""))
     }
+    if (mode==1) {
+        search_for_backgrounds(get_string("Background name:",""))
+    }
 }
 
 var h,v;

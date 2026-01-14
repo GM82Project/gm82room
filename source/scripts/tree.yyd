@@ -173,6 +173,7 @@
 	|load_reference
 	|draw_reference
 	|search_for_objects
+	|search_for_backgrounds
 	|room_shift
 	|get_color_ext
 	|check_colorpicker_undo

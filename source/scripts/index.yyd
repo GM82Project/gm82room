@@ -254,3 +254,4 @@ set_field_by_type
 set_hasfields
 get_new_path_name
 Path
+search_for_backgrounds

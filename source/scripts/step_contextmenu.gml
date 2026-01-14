@@ -131,4 +131,16 @@ if (click) {
             }
         }
     }
+    if (menutype=="search_bg") {
+        str=ds_map_get(searchmenuitems,click)
+        if (str!=undefined) {
+            if (mode==1) {
+                get_background_tiles(str)
+                tilebgpal=micro_optimization_bgid
+                tilebgname=str
+                tilepal=0
+                update_newtilepanel(1)
+            }
+        }
+    }
 }
