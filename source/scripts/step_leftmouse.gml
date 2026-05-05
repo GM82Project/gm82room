@@ -45,24 +45,15 @@ if (selecting) {
 
     if (mode==0) {
         with (instance) {
-            if (collision_rectangle(l,t,r,b,id,1,0)) sel=1
-            else {
-                if (bbox_left>=bbox_right || bbox_top>=bbox_bottom) {
-                    if (point_in_rectangle(x,y,l,t,r,b)) sel=1
-                    else sel=memsel
-                } else sel=memsel
-            }
+            if (rectangle_in_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,l,t,r,b)) {
+                if (collision_rectangle(l,t,r,b,id,1,0)) sel=1 else sel=memsel
+            } else sel=memsel
         }
     }
     if (mode==1) {
         with (tileholder) {
-            if (collision_rectangle(l,t,r,b,id,1,0)) sel=1
-            else {
-                if (bbox_left>=bbox_right || bbox_top>=bbox_bottom) {
-                    if (point_in_rectangle(x,y,l,t,r,b)) sel=1
-                    else sel=memsel
-                } else sel=memsel
-            }
+            if (rectangle_in_rectangle(bbox_left,bbox_top,bbox_right+1,bbox_bottom+1,l,t,r,b)) sel=1
+            else sel=memsel
         }
     }
     if (mode==5) {
