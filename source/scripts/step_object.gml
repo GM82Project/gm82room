@@ -120,48 +120,50 @@ if (mode==0 && objects_length) {
     dx=width div 2 -40*4.5-20
     dy=height-32-32-20
 
-    //next selection
-    if (keyboard_check_pressed(ord("N"))) {
-        if (ds_priority_size(click_priority)) {
-            with (ds_priority_delete_max(click_priority)) {
-                deselect()
-                sel=1
-                select=id
-                update_inspector()
-                update_selection_bounds()
+    if (!textfield_active()) {
+        //next selection
+        if (keyboard_check_pressed(ord("N"))) {
+            if (ds_priority_size(click_priority)) {
+                with (ds_priority_delete_max(click_priority)) {
+                    deselect()
+                    sel=1
+                    select=id
+                    update_inspector()
+                    update_selection_bounds()
+                }
             }
         }
-    }
 
-    //glue hotkey
-    if (keyboard_check_pressed(ord("G")) and !keyboard_check(vk_control)) {
-        if (num_selected()>1) {
-            var object;object=noone
-            with (instance) if (sel) {
-                if (object==noone) object=obj
-                else if (object!=obj) {object=noone break}
+        //glue hotkey
+        if (keyboard_check_pressed(ord("G")) and !keyboard_check(vk_control)) {
+            if (num_selected()>1) {
+                var object;object=noone
+                with (instance) if (sel) {
+                    if (object==noone) object=obj
+                    else if (object!=obj) {object=noone break}
+                }
+
+                if (object!=noone) {
+                    previous=objpal
+                    o=skipwarnings
+                    skipwarnings=true
+                    set_objpal(object)
+                    cement_instances()
+                    skipwarnings=o
+                    set_objpal(previous)
+                }
             }
+        }
 
-            if (object!=noone) {
-                previous=objpal
+
+        //gigaknife hotkey
+        if (keyboard_check_pressed(ord("K"))) {
+            if (num_selected()) {
                 o=skipwarnings
                 skipwarnings=true
-                set_objpal(object)
-                cement_instances()
+                subdivide_instances()
                 skipwarnings=o
-                set_objpal(previous)
             }
-        }
-    }
-
-
-    //gigaknife hotkey
-    if (keyboard_check_pressed(ord("K"))) {
-        if (num_selected()) {
-            o=skipwarnings
-            skipwarnings=true
-            subdivide_instances()
-            skipwarnings=o
         }
     }
 }
