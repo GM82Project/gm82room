@@ -10,7 +10,7 @@ globalvar
     codeeditor,view,roomwidth,roomheight,selcol,outroomgrid,
     mouse_wx,mouse_wy,mousein,crosshair,zoom,zm,grid,gridx,gridy,
     removeoutside,fillwithcolor,fillcolor,remember,mode,
-    overlap_check,tile_overlap_check,paladdbuttondown,bg_current,vw_current,ly_current,ly_depth,tilebgpal,
+    overlap_check,tile_overlap_check,bg_current,vw_current,ly_current,ly_depth,tilebgpal,
     chunkcrop,chunkleft,chunktop,chunkwidth,chunkheight,grabchunk,sizechunk,chunkloaded,chunkname,
     screen_grid_width,screen_grid_height,screen_grid_draw,
     selection,selleft,seltop,selwidth,selheight,selsize,grabselection,

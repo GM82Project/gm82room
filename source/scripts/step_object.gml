@@ -80,6 +80,13 @@ if (mode==0 && objects_length) {
                 screen_refresh()
                 call_nmenu("object",objmenu)
             }
+            posx+=1 if (posx=4) {posx=0 posy+=1}
+            dx=20+40*posx
+            dy=140+40*posy+palettescroll
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
+                //clicked on clear button
+                clear_palette()
+            }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
         palettescrollgo-=h*120

@@ -179,6 +179,7 @@
 	|check_colorpicker_undo
 	|test_run
 	|create_french_fry
+	|clear_palette
 +instances
 	|get_uid
 	|set_uid

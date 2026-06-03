@@ -33,7 +33,8 @@ if (mode==0) {
         posx+=1 if (posx=4) {posx=0 posy+=1}
     }
 
-    if (paltooltip && !paladdbuttondown) tooltiptext="Add more..."
+    if (paltooltip==1) tooltiptext="Add more..."
+    if (paltooltip==2) tooltiptext="Clean list"
 
     //bottom panel
     draw_button_ext(0,height-112,160,112,1,global.col_main)

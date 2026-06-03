@@ -38,6 +38,16 @@ if (mode=0) {
                 paltooltip=1
             }
         }
+        posx+=1 if (posx=4) {posx=0 posy+=1}
+        dx=20+40*posx
+        dy=140+40*posy+palettescroll
+        draw_button_ext(dx-20,dy-20,40,40,1,global.col_main)
+        draw_sprite(sprMenuButtons,60,dx,dy)
+        if (mouse_wx<160 && mouse_wy>120 && mouse_wy<height-136) {
+            if (point_in_rectangle(mouse_wx,mouse_wy,dx-20,dy-20,dx+20,dy+20)) {
+                paltooltip=2
+            }
+        }
     } else {
         draw_set_color(global.col_text)
         draw_text(8,126,"Project#contains no#objects.")
