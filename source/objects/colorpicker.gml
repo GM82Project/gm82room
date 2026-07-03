@@ -513,7 +513,7 @@ draw_set_color($ffffff)
     d3d_set_projection_ortho(0,0,width,height,0)
     d3d_transform_stack_pop()
     draw_surface_ext(s2,278,10,0.5,0.5,0,$ffffff,1)
-    texture_set_interpolation(interpolation)
+    set_interpolation()
 
     draw_set_circle_precision(8)
 

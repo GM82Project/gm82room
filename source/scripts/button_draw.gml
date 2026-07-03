@@ -6,7 +6,6 @@ if (object_index==Button) {
         if (type==0) switch (action) {
             case "toggle grid":      {up=(!grid && !down)               }break
             case "toggle crosshair": {up=(!crosshair && !down)          }break
-            case "interp":           {up=(!interpolation && !down)      }break
             case "object mode":      {up=(mode!=0 && !down)             }break
             case "tile mode":        {up=(mode!=1 && !down)             }break
             case "bg mode":          {up=(mode!=2 && !down)             }break
@@ -31,6 +30,7 @@ if (object_index==Button) {
             case "tile panel grid":  {up=(!down && !tilepickgrid)       }break
             case "instance list":    {up=!down && !Instancepanel.open   }break
             case "live":             {up=(global.livesock==noone)       }break
+            case "interp":           {spr=pick(interpolation,16,61,62) up=!down }break
             default:                 {up=!down                          }break
         }
 

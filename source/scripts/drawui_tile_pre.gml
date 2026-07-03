@@ -1,7 +1,7 @@
 var nomorefortnite;nomorefortnite=0
 
 if (mode==1) {
-    texture_set_interpolation(interpolation)
+    set_interpolation()
 
     draw_set_color($ff8000)
     draw_set_alpha(sel_alpha)
@@ -28,7 +28,7 @@ if (mode==1) {
     if (crosshair && tilebgpal!=noone) {
         with (selectt) if (grab || scaling) nomorefortnite=1
         if (!keyboard_check(vk_control) && !keyboard_check(vk_shift) && !nomorefortnite && !selecting && !selsize) {
-            texture_set_interpolation(interpolation)
+            set_interpolation()
             tex=bg_background[tilebgpal]
             u=curtilex
             v=curtiley

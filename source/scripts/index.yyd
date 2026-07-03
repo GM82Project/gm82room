@@ -256,3 +256,4 @@ get_new_path_name
 Path
 search_for_backgrounds
 clear_palette
+set_interpolation

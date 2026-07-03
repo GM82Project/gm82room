@@ -55,7 +55,7 @@ with (Controller) switch (argument0) {
     case "reset view"      : {xgo=roomwidth/2 ygo=roomheight/2 zoomgo=1 zoomcenter=1}break
     case "zoom in"         : {zoomgo/=1.2 zoomcenter=1}break
     case "zoom out"        : {zoomgo*=1.2 zoomcenter=1}break
-    case "interp"          : {interpolation=!interpolation}break
+    case "interp"          : {interpolation=(interpolation+1) mod 3 other.alt=pick(interpolation,"Smoothing Off","Smoothing On","Adaptive Smoothing")}break
     case "toggle grid"     : {grid=!grid}break
     case "toggle crosshair": {crosshair=!crosshair}break
 

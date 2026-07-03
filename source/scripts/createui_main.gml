@@ -158,7 +158,7 @@ i.alt="Zoom out"
 i=instance_create(160+720,0,Button)
 i.spr=16
 i.action="interp"
-i.alt="Smoothing"
+i.alt=pick(interpolation,"Smoothing Off","Smoothing On","Adaptive Smoothing")
 
 //halp
 i=instance_create(160+768,0,Button)

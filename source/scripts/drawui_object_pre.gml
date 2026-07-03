@@ -1,7 +1,7 @@
 var nomorefortnite;nomorefortnite=0
 
 if (mode==0) {
-    texture_set_interpolation(interpolation)
+    set_interpolation()
 
     with (instance) if (fieldactive) {
         //darken the room when there's fields ui up
@@ -46,7 +46,7 @@ if (mode==0) {
         with (select) if (grab || rotato || scaling) nomorefortnite=1
         if (!keyboard_check(vk_control) && !keyboard_check(vk_shift) && !nomorefortnite && !selecting && !selsize) {
             if (objpal!=noone) {
-                texture_set_interpolation(interpolation)
+                set_interpolation()
                 if (keyboard_check(vk_alt)) draw_sprite_ext(objspr[objpal],0,global.mousex,global.mousey,1,1,0,$ffffff,0.25)
                 else draw_sprite_ext(objspr[objpal],0,fmx,fmy,1,1,0,$ffffff,0.25)
                 texture_set_interpolation(1)
