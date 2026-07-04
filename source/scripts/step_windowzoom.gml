@@ -110,6 +110,19 @@ if (grabknob) {
         keyboard_clear(vk_equals)
     }
 } else if (mousein) {
+    if (keyboard_check_pressed(219) or keyboard_check_pressed(220)) {
+        gridx=pick(unpick(gridx,8,16,32,64,128,256,roomheight div 2,roomheight)+1,8,16,32,64,128,256,roomheight div 2,roomheight)
+        gridy=gridx
+        with (TextField) if (action=="grid y") {text=string(gridx) event_user(4)}
+        with (TextField) if (action=="grid x") {text=string(gridx) event_user(4)}
+    }
+    if (keyboard_check_pressed(221)) {
+        gridx=pick(unpick(gridx,8,16,32,64,128,256,roomheight div 2,roomheight)-1,8,16,32,64,128,256,roomheight div 2,roomheight)
+        gridy=gridx
+        with (TextField) if (action=="grid y") {text=string(gridx) event_user(4)}
+        with (TextField) if (action=="grid x") {text=string(gridx) event_user(4)}
+    }
+    
     if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || (keyboard_check(vk_control) && keyboard_check_pressed(vk_minus))) {
         zoomgo*=1.2
         keyboard_clear(vk_subtract)
