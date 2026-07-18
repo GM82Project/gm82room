@@ -34,5 +34,7 @@ with (Tilepanel) {
 
         xgo=curtilex+curtilew/2
         ygo=curtiley+curtileh/2
+
+        check_tilemap_complete()
     }
 }

@@ -257,3 +257,13 @@ Path
 search_for_backgrounds
 clear_palette
 set_interpolation
+step_tile_panel
+unpack_tilesmart_data
+change_tilesmart_mode
+draw_tilesmart_brush
+check_tilemap_complete
+find_smart_tile_at
+save_tilemap_grid
+save_backgrounds
+init_autotiler_tables
+fill_tilesmart_copy

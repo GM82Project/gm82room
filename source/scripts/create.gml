@@ -97,6 +97,8 @@ objfieldqueue=ds_queue_create()
 knobz=0
 knobzgo=1
 
+init_autotiler_tables()
+
 undo_initialize()
 
 theme_init()

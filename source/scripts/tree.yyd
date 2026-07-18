@@ -80,6 +80,7 @@
 	|save_room
 	|load_paths
 	|save_paths
+	|save_backgrounds
 	|load_fonts
 	|delete_backups
 	|parse_code_into_flags
@@ -137,6 +138,7 @@
 	|step_rightmouse
 	|step_object
 	|step_tile
+	|step_tile_panel
 	|step_view
 	|step_settings
 	|step_contextmenu
@@ -247,6 +249,15 @@
 	|theme_apply
 	|theme_load
 	|theme_save
++smart tiler
+	|init_autotiler_tables
+	|unpack_tilesmart_data
+	|change_tilesmart_mode
+	|draw_tilesmart_brush
+	|save_tilemap_grid
+	|check_tilemap_complete
+	|find_smart_tile_at
+	|fill_tilesmart_copy
 |begin_trim
 |end_trim
 |error_handler

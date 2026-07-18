@@ -4,3 +4,9 @@
 |bgDefaultBgIcon
 +theming
 	|bgMessage
++autotiler templates
+	|bgTiler2
+	|bgTiler4
+	|bgTiler9
+	|bgTiler16
+	|bgTiler47

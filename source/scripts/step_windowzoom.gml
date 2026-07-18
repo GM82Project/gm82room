@@ -87,6 +87,7 @@ mousein=(
     point_in_rectangle(mouse_wx,mouse_wy,160+4,32+4,width-160-4,height-32-4)
     and (!instance_position(mouse_wx,mouse_wy,Instancepanel) || !Instancepanel.open || mode!=0)
     and (!instance_position(mouse_wx,mouse_wy,Tilepanel) || mode!=1)
+    and (!Tilepanel.grab)
 )
 
 direct_mbleft=mouse_check_direct(mb_left) && mouse_check_direct(mb_left)

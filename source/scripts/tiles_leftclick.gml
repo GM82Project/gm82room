@@ -1,6 +1,8 @@
 var yes;yes=0
 
-if (mode==1) {
+if (mode==1 and tilebgpal!=noone) if (!bg_tilemode[tilebgpal]) {
+    //manual mode
+
     //if something's already selected, operate on it
     if (!keyboard_check(vk_shift)) with (selectt) {
         if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
@@ -61,5 +63,5 @@ if (mode==1) {
                 }
             }
         }
-    }
+    }          
 }

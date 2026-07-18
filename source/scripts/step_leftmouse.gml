@@ -2,6 +2,12 @@ var yes,dx,dy,tex,l,t,r,b;
 
 if (erasing) exit
 
+if (mode==1 and tilebgpal!=noone and mousein and window_focused) if (bg_tilemode[tilebgpal]) {
+    //smart mode
+    if (direct_mbleft) draw_tilesmart_brush(floorto(global.mousex,gridx),floorto(global.mousey,gridy),1)
+    exit
+}
+
 if (mouse_check_modal_pressed(mb_left)) {
     with (TextField) textfield_actions()
     if (point_distance(mouse_wx,mouse_wy,width-48-160,48+32)<32 && !hide3dgizmo) {

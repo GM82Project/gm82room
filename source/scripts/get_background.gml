@@ -20,6 +20,11 @@ if (!bgloaded[i]) {
     bg_gridsx[i]=real(ds_map_find_value(map,"tile_hsep"))
     bg_gridsy[i]=real(ds_map_find_value(map,"tile_vsep"))
     bg_istile[i]=real(ds_map_find_value(map,"tileset"))
+    bg_tilemap[i]=ds_grid_create(47,2) ds_grid_set_region(bg_tilemap[i],0,0,46,1,noone)
+    bg_tilemode[i]=0
+    if (ds_map_exists(map,"gm82room_tilesmart")) {
+        unpack_tilesmart_data(i,ds_map_find_value(map,"gm82room_tilesmart"))
+    }
     ds_map_destroy(map)
 
     tilebgpal=i

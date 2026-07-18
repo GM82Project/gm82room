@@ -4,6 +4,8 @@ if (argument_count) prio=argument[0] else prio=click_priority
 
 ds_priority_clear(prio)
 
+if (mode==1) if (tilebgpal!=noone) if (bg_tilemode[tilebgpal]) return 0
+
 //sort by reverse scale
 
 if (mode==0) with (instance)

@@ -4,6 +4,12 @@ if (selecting || paint || selsize || grabknob || grab_background) exit
 
 if (direct_mbleft) exit
 
+if (mode==1 and tilebgpal!=noone and mousein and window_focused) if (bg_tilemode[tilebgpal]) {
+    //smart mode
+    if (direct_mbright) draw_tilesmart_brush(floorto(global.mousex,gridx),floorto(global.mousey,gridy),0)
+    exit
+}
+
 if (mousein && mode==0 && mouse_check_modal_pressed(mb_right)) {
     with (select) if (fieldactive) {
         edit_instance_fields(1)

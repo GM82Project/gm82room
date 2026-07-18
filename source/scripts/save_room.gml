@@ -180,8 +180,9 @@ str+="remember="+string(ds_map_find_value(settings,"remember"))+lf
 file_text_write_string(f,str)
 file_text_close(f)
 
-//save paths
+//save other assets
 save_paths()
+save_backgrounds()
 
 change_mode(mode)
 

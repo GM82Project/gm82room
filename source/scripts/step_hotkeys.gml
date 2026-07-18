@@ -23,7 +23,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("G"))) {
 }
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("A"))) {
     if (mode==0) with (instance) sel=1
-    if (mode==1) with (tileholder) sel=1
+    if (mode==1) if (tilebgpal!=noone) if (!bg_tilemode[tilebgpal]) with (tileholder) sel=1
     if (mode==5) {
         if (current_path!=noone) {
             ds_list_clear(path_sel)

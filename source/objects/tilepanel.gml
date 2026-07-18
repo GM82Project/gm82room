@@ -20,10 +20,16 @@ oy=0
 sx=0
 sy=0
 
+//auto tiler cursor
+atcx=0
+atcy=0
+
 panning=0
 tiling=0
 xgo=0
 ygo=0
+clickx=0
+clicky=0
 
 image_xscale=w
 image_yscale=h

@@ -2,103 +2,10 @@ var dx,dy,yes;
 
 if (mode==1) {
     //tile palette
-    with (Tilepanel) {
-        if (instance_position(mouse_wx,mouse_wy,id)) {
-            yes=1 with (TextField) if (active) {yes=0}
-            if (yes) {
-                if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || keyboard_check_pressed(vk_minus)) zgo=roundto(min(8,zgo*2),1/8)
-                if (mouse_wheel_up() || keyboard_check_pressed(vk_add) || (keyboard_check_pressed(vk_equals))) zgo=roundto(max(1/8,zgo/2),1/8)
-            }
-
-            if (mouse_check_button_pressed(mb_left)) {
-                if (point_in_rectangle(mouse_wx,mouse_wy,x+w-36,y,x+w,y+36)) {
-                    grab=1
-                    offx=x+w-mouse_wx
-                    offy=y-mouse_wy
-                }
-            }
-            if (mouse_check_button(mb_left) && tilebgpal!=noone) {
-                if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
-                    clickx=median(0,(mouse_wx-(x+8))*z+xgo-(w-16)*z/2,bgw)+0.5
-                    clicky=median(0,(mouse_wy-(y+40))*z+ygo-(h-32-16)*z/2,bgh)+0.5
-                    if (!keyboard_check(vk_alt)) {
-                        if (keyboard_check(vk_shift) && tiling) {
-                            clickx=min(bgw,ceilto(clickx-ox,gx+sx)+ox)
-                            clicky=min(bgh,ceilto(clicky-oy,gy+sy)+oy)
-                        } else {
-                            clickx=floorto(min(clickx-ox,bgw-curtilew),gx+sx)+ox
-                            clicky=floorto(min(clicky-oy,bgh-curtileh),gy+sy)+oy
-                        }
-                    } else {
-                        if (keyboard_check(vk_shift)) {
-                            curtilew=1
-                            curtileh=1
-                        } else {
-                            clickx=min(clickx-ox,bgw-curtilew)
-                            clicky=min(clicky-oy,bgh-curtileh)
-                        }
-                    }
-                    if (keyboard_check(vk_shift) && tiling) {
-                        if (sx==0) curtilew=ceil(max(0,clickx-curtilex))
-                        if (sy==0) curtileh=ceil(max(0,clicky-curtiley))
-                        if (curtilew==0) curtilew=gx
-                        if (curtileh==0) curtileh=gx
-                    } else {
-                        curtilex=floor(clickx)
-                        curtiley=floor(clicky)
-                        tiling=1
-                    }
-                }
-            } else {
-                tiling=0
-            }
-        }
-        if (grab) {
-            ow=w
-            w=max(248,min(width-160,mouse_wx+offx))
-            if (w>width-160-16) w=width-160
-            y=max(240,min(height-32-248,mouse_wy+offy))
-            oh=h
-            h=height-32-y
-            image_xscale=w
-            image_yscale=h
-            if (!direct_mbleft) {
-                grab=0
-            }
-            with (Button) {
-                if (anchor==4) y=height-Tilepanel.h-32-24
-                if (anchor==5) y=height-Tilepanel.h-32+4
-            }
-        }
-        zo=z
-        z=approach(z,zgo,z/8)
-
-        if (z!=zo) {
-            if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
-                //hell.
-                xgo-=(((mouse_wx-(x+8))-((w-16)/2)))*(z-zo)
-                ygo-=(((mouse_wy-(y+40))-((h-36-16)/2)))*(z-zo)
-            }
-        }
-
-        if (panning) {
-            xgo=(grabxgo+(grabx-mouse_wx)*z)
-            ygo=(grabygo+(graby-mouse_wy)*z)
-
-            if (!mouse_check_direct(mb_middle) && !keyboard_check(vk_space)) {
-                panning=0
-            }
-        }
-
-        if (tilebgpal!=noone) {
-            tex=bg_background[tilebgpal]
-
-            xgo=median(0,xgo,background_get_width(tex))
-            ygo=median(0,ygo,background_get_height(tex))
-        }
-    }
+    with (Tilepanel) step_tile_panel()
 
     if (point_in_rectangle(mouse_wx,mouse_wy,0,120,160,Tilepanel.y-24)) {
+        //background list
         posy=0
         if (backgrounds_length) {
             i=0 repeat (backgrounds_length) {

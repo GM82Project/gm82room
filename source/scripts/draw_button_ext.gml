@@ -19,7 +19,7 @@ if (col!=noone) {
     draw_vertex_texture_color(dx+w,dy,(dx+w)/48,(dy/48),col,1)
     draw_vertex_texture_color(dx,dy+h,dx/48,(dy+h)/48,col,1)
     draw_vertex_texture_color(dx+w,dy+h,(dx+w)/48,(dy+h)/48,col,1)
-    draw_primitive_end()         */
+    draw_primitive_end()         /*/
 
     draw_sprite_ext(spr1x1,0,dx,dy,w,h,0,col,1)
 }
