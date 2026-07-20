@@ -26,7 +26,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                 if (mouse_check_button(mb_left)) {
                     if (bg_tilemode[tilebgpal]) {
                         //smart mode
-                        if (mouse_check_button_pressed(mb_left) or tilemap_complete) {
+                        if (bg_tilemode[tilebgpal]!=6) if (mouse_check_button_pressed(mb_left) or tilemap_complete) {
                             clickx=floorto(min(clickx-ox,bgw-curtilew),gx+sx)+ox
                             clicky=floorto(min(clicky-oy,bgh-curtileh),gy+sy)+oy
                             tw=pick(bg_tilemode[tilebgpal]-1,1,2,3,4,7)
@@ -96,29 +96,32 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                         dx=mw+96 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(3)
                         dx=mw+144 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(4)
                         dx=mw+192 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(5)
+                        dx=mw+240 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(6)
                     }
                 }
                 if (mouse_check_button(mb_left) and bg_tilemode[tilebgpal]) {
                     dx=mw dy=background_get_height(ref)*(gy/32)+32
-                    if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) hide_smartmap=1
-                    dx=mw+72 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) fill_tilesmart_copy()
-                    dx=mw+144 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) {
-                        if (show_question("Are you sure you want to clear the tile map?")) {
-                            ds_grid_set_region(bg_tilemap[tilebgpal],0,0,46,1,noone)
-                            tilemap_complete=0
-                            atcx=0
-                            atcy=0
+                    if (bg_tilemode[tilebgpal]!=6) {
+                        if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) hide_smartmap=1
+                        dx=mw+72 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) fill_tilesmart_copy()
+                        dx=mw+144 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) {
+                            if (show_question("Are you sure you want to clear the tile map?")) {
+                                ds_grid_set_region(bg_tilemap[tilebgpal],0,0,46,1,noone)
+                                tilemap_complete=0
+                                atcx=0
+                                atcy=0
+                            }
                         }
-                    }
 
-                    //sheet click
-                    if (point_in_rectangle(clickx,clicky,mw,0,mw+background_get_width(ref),background_get_height(ref))) {
-                        px=atcx py=atcy
-                        atcx=(clickx-mw) div gx
-                        atcy=clicky div gy
-                        //forbid the holes in a 47tile
-                        if (atcx==6 and atcy==3) {atcx=px atcy=py}
-                        if (atcx==1 and atcy==5) {atcx=px atcy=py}
+                        //sheet click
+                        if (point_in_rectangle(clickx,clicky,mw,0,mw+background_get_width(ref),background_get_height(ref))) {
+                            px=atcx py=atcy
+                            atcx=(clickx-mw) div gx
+                            atcy=clicky div gy
+                            //forbid the holes in a 47tile
+                            if (atcx==6 and atcy==3) {atcx=px atcy=py}
+                            if (atcx==1 and atcy==5) {atcx=px atcy=py}
+                        }
                     }
                 }
             }

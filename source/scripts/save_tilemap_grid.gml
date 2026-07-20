@@ -7,6 +7,8 @@ if (bg_tilemode[argument0]<0) str+=string(bg_tilemode[argument0]) else str+="0"+
 
 str+="|"
 
+if (bg_tilemode[argument0]==6) return str
+
 g=bg_tilemap[argument0]
 r=pick(bg_tilemode[tilebgpal]-1,2,4,9,16,47)
 u=0 v=0 repeat (r) {

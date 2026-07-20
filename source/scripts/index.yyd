@@ -268,3 +268,5 @@ save_backgrounds
 init_autotiler_tables
 fill_tilesmart_copy
 project_modified
+renex_notes
+tile_mode_name

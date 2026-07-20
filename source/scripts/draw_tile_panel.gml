@@ -53,8 +53,8 @@ if (tilebgpal!=noone) {
         texture_set_interpolation(0)
         mw=max(176,bgw+32)
         draw_set_halign(0)
+        draw_text(mw+4,-16,tile_mode_name(m))
         draw_text(mw+4,-80,"Smart tiler mode")
-        if (!tilemap_complete) draw_text(mw+4,-16,"Click on the background to map tiles")
         draw_set_halign(1)
 
         dy=-64
@@ -63,53 +63,59 @@ if (tilebgpal!=noone) {
         dx=mw+96  draw_button_ext(dx,dy,40,32,m!=3,global.col_main) draw_text(dx+20,dy+16,"9")
         dx=mw+144 draw_button_ext(dx,dy,40,32,m!=4,global.col_main) draw_text(dx+20,dy+16,"16")
         dx=mw+192 draw_button_ext(dx,dy,40,32,m!=5,global.col_main) draw_text(dx+20,dy+16,"47")
+        dx=mw+240 draw_button_ext(dx,dy,40,32,m!=6,global.col_main) draw_text(dx+20,dy+16,"R")
 
-        ref=pick(bg_tilemode[tilebgpal]-1,bgTiler2,bgTiler4,bgTiler9,bgTiler16,bgTiler47)
-        xsc=gx/32
-        ysc=gy/32
-        texture_set_interpolation(1)
-        draw_background_ext(ref,mw,0,xsc,ysc,0,$ffffff,1)
-
-        //draw tile mappings
-        size=pick(bg_tilemode[tilebgpal]-1,1,2,3,4,7)
-        i=0 repeat (pick(bg_tilemode[tilebgpal]-1,2,4,9,16,47)) {
-            o=i if (o>=27) o+=1 if (o>=36) o+=1
-            u=o mod size
-            v=o div size
-            targx=ds_grid_get(bg_tilemap[tilebgpal],i,0)
-            targy=ds_grid_get(bg_tilemap[tilebgpal],i,1)
-            if (targx!=noone and targy!=noone)
-                draw_background_part(tex,targx,targy,gx,gy,mw+u*gx,v*gx)
-        i+=1}
-
-        if (hide_smartmap) {
+        if (bg_tilemode[tilebgpal]!=6) {
+            ref=pick(bg_tilemode[tilebgpal]-1,bgTiler2,bgTiler4,bgTiler9,bgTiler16,bgTiler47)
+            xsc=gx/32
+            ysc=gy/32
+            texture_set_interpolation(1)
             draw_background_ext(ref,mw,0,xsc,ysc,0,$ffffff,1)
-            //draw template over tiles
-        } else if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
-            //draw current mapping
-            draw_set_color_sel()
-            draw_rectangle(mw+atcx*gx-0.5,atcy*gy-0.5,mw+(atcx+1)*gx-0.5,(atcy+1)*gy-0.5,1)
-            index=atcx+atcy*pick(bg_tilemode[tilebgpal]-1,1,2,3,4,7)
-            if (index>27) index-=1 if (index>35) index-=1
-            targx=ds_grid_get(bg_tilemap[tilebgpal],index,0)
-            targy=ds_grid_get(bg_tilemap[tilebgpal],index,1)
-            if (targx!=noone and targy!=noone) {
-                draw_rectangle(targx-0.5,targy-0.5,targx+gx-0.5,targy+gy-0.5,1)
-                draw_arrow(mw+(atcx+0.5)*gx-0.5,(atcy+0.5)*gy-0.5,targx+0.5*gx-0.5,targy+0.5*gy-0.5,8)
-            } else {
-                clickx=(mouse_wx-(x+8))*z+xgo-(w-16)*z/2
-                clicky=(mouse_wy-(y+40))*z+ygo-(h-32-16)*z/2
-                if (point_in_rectangle(clickx,clicky,0,0,background_get_width(tex),background_get_height(tex)))
-                    draw_arrow(mw+(atcx+0.5)*gx-0.5,(atcy+0.5)*gy-0.5,clickx-0.5,clicky-0.5,8)
-            }
-            draw_set_color($ffffff)
-        }
 
-        texture_set_interpolation(0)
-        dy=background_get_height(ref)*ysc+32
-        dx=mw    draw_button_ext(dx,dy,64,32,!hide_smartmap,global.col_main) draw_text(dx+32,dy+16,"Hide")
-        dx=mw+72 draw_button_ext(dx,dy,64,32,1,global.col_main) draw_text(dx+32,dy+16,"Fill")
-        dx=mw+144 draw_button_ext(dx,dy,64,32,1,global.col_main) draw_text(dx+32,dy+16,"Clear")
+            //draw tile mappings
+            size=pick(bg_tilemode[tilebgpal]-1,1,2,3,4,7)
+            i=0 repeat (pick(bg_tilemode[tilebgpal]-1,2,4,9,16,47)) {
+                o=i if (o>=27) o+=1 if (o>=36) o+=1
+                u=o mod size
+                v=o div size
+                targx=ds_grid_get(bg_tilemap[tilebgpal],i,0)
+                targy=ds_grid_get(bg_tilemap[tilebgpal],i,1)
+                if (targx!=noone and targy!=noone)
+                    draw_background_part(tex,targx,targy,gx,gy,mw+u*gx,v*gx)
+            i+=1}
+
+            if (hide_smartmap) {
+                draw_background_ext(ref,mw,0,xsc,ysc,0,$ffffff,1)
+                //draw template over tiles
+            } else if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
+                //draw current mapping
+                draw_set_color_sel()
+                draw_rectangle(mw+atcx*gx-0.5,atcy*gy-0.5,mw+(atcx+1)*gx-0.5,(atcy+1)*gy-0.5,1)
+                index=atcx+atcy*pick(bg_tilemode[tilebgpal]-1,1,2,3,4,7)
+                if (index>27) index-=1 if (index>35) index-=1
+                targx=ds_grid_get(bg_tilemap[tilebgpal],index,0)
+                targy=ds_grid_get(bg_tilemap[tilebgpal],index,1)
+                if (targx!=noone and targy!=noone) {
+                    draw_rectangle(targx-0.5,targy-0.5,targx+gx-0.5,targy+gy-0.5,1)
+                    draw_arrow(mw+(atcx+0.5)*gx-0.5,(atcy+0.5)*gy-0.5,targx+0.5*gx-0.5,targy+0.5*gy-0.5,8)
+                } else {
+                    clickx=(mouse_wx-(x+8))*z+xgo-(w-16)*z/2
+                    clicky=(mouse_wy-(y+40))*z+ygo-(h-32-16)*z/2
+                    if (point_in_rectangle(clickx,clicky,0,0,background_get_width(tex),background_get_height(tex)))
+                        draw_arrow(mw+(atcx+0.5)*gx-0.5,(atcy+0.5)*gy-0.5,clickx-0.5,clicky-0.5,8)
+                }
+                draw_set_color($ffffff)
+            }
+
+            texture_set_interpolation(0)
+            dy=background_get_height(ref)*ysc+32
+            dx=mw    draw_button_ext(dx,dy,64,32,!hide_smartmap,global.col_main) draw_text(dx+32,dy+16,"Hide")
+            dx=mw+72 draw_button_ext(dx,dy,64,32,1,global.col_main) draw_text(dx+32,dy+16,"Fill")
+            dx=mw+144 draw_button_ext(dx,dy,64,32,1,global.col_main) draw_text(dx+32,dy+16,"Clear")
+
+            draw_set_halign(0)
+            if (!tilemap_complete) draw_text(mw+4,dy-16,"Click on the background to map tiles")
+        }
     } else {
         //normal mode rectangle
         draw_set_color_sel()
