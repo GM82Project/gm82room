@@ -362,8 +362,8 @@ with (Controller) switch (argument0) {
             str=get_string("Shift path by amount: (x,y)","0,0")
             if (str="" || !string_pos(",",str)) break
             p=string_pos(",",str)
-            movex=string_digits(string_copy(str,1,p-1))
-            movey=string_digits(string_delete(str,1,p))
+            movex=string_number(string_copy(str,1,p-1))
+            movey=string_number(string_delete(str,1,p))
             if (movex="" || movey="") break
             path_shift(current_path,real(movex),real(movey))
             generate_path_model(current_pathname)
@@ -397,8 +397,8 @@ with (Controller) switch (argument0) {
             str=get_string("Scale path by amount %: (h,v)","100,100")
             if (str="" || !string_pos(",",str)) break
             p=string_pos(",",str)
-            sx=string_digits(string_copy(str,1,p-1))
-            sy=string_digits(string_delete(str,1,p))
+            sx=string_number(string_copy(str,1,p-1))
+            sy=string_number(string_delete(str,1,p))
             if (sx="" || sy="") break
             path_scale(current_path,real(sx)/100,real(sy)/100)
             generate_path_model(current_pathname)

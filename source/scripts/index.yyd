@@ -267,3 +267,4 @@ save_tilemap_grid
 save_backgrounds
 init_autotiler_tables
 fill_tilesmart_copy
+project_modified

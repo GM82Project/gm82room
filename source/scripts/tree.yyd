@@ -183,6 +183,7 @@
 	|test_run
 	|create_french_fry
 	|clear_palette
+	|project_modified
 +instances
 	|get_uid
 	|set_uid

@@ -54,6 +54,7 @@ if (mode==5) {
                 selection=0
                 update_inspector()
                 update_selection_bounds()
+                project_modified()
             }
         }
         h=mouse_wheel_down()-mouse_wheel_up()
