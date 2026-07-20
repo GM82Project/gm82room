@@ -12,8 +12,9 @@ if (tilebgpal!=noone) {
 
     w=pick(bg_tilemode[tilebgpal]-1,1,2,3,4,7)
     i=0 repeat (pick(bg_tilemode[tilebgpal]-1,2,4,9,16,47)) {
-        u=i mod w
-        v=i div w
+        o=i if (o>=27) o+=1 if (o>=36) o+=1
+        u=o mod w
+        v=o div w
         if (u*gx<bgw and v*gy<bgh) {
             ds_grid_set(g,i,0,u*gx)
             ds_grid_set(g,i,1,v*gy)
