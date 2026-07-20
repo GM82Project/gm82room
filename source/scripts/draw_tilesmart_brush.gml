@@ -7,7 +7,7 @@ if (!tilemap_complete) exit
 //delete overlap
 instance_destroy_id(find_smart_tile_at(argument0+gridx/2,argument1+gridy/2))
 
-if (bg_tilemode[tilebgpal]!=6) {
+if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
     tile1[0]=find_smart_tile_at(argument0-gridx*0.5,argument1-gridy*0.5)
     tile1[1]=find_smart_tile_at(argument0+gridx*0.5,argument1-gridy*0.5)
     tile1[2]=find_smart_tile_at(argument0+gridx*1.5,argument1-gridy*0.5)
@@ -21,8 +21,12 @@ if (bg_tilemode[tilebgpal]!=6) {
 if (argument2) {//add tile
     //decode tile coordinate
     if (bg_tilemode[tilebgpal]==6) {
+        //TODO: divide by room grid, multiply by bg grid
         left=argument0 mod background_get_width(bg_background[tilebgpal])
         top=argument1 mod background_get_height(bg_background[tilebgpal])
+    } else if (bg_tilemode[tilebgpal]==7) {
+        left=irandom((background_get_width(bg_background[tilebgpal]) div Tilepanel.gx)-1)*Tilepanel.gx
+        top=irandom((background_get_height(bg_background[tilebgpal]) div Tilepanel.gy)-1)*Tilepanel.gy
     } else {
         byte=pack_bools(tile1[7],tile1[6],tile1[5],tile1[4],tile1[3],tile1[2],tile1[1],tile1[0])
         index=autotiler_tables[bg_tilemode[tilebgpal],byte]
@@ -46,7 +50,7 @@ if (argument2) {//add tile
     update_instance_memory(o)
 }
 
-if (bg_tilemode[tilebgpal]!=6) {
+if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
     //update surrounding tiles
     i=0 repeat (8) {
         with (tile1[i]) {

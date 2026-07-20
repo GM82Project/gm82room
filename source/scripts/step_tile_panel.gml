@@ -26,7 +26,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                 if (mouse_check_button(mb_left)) {
                     if (bg_tilemode[tilebgpal]) {
                         //smart mode
-                        if (bg_tilemode[tilebgpal]!=6) if (mouse_check_button_pressed(mb_left) or tilemap_complete) {
+                        if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) if (mouse_check_button_pressed(mb_left) or tilemap_complete) {
                             clickx=floorto(min(clickx-ox,bgw-curtilew),gx+sx)+ox
                             clicky=floorto(min(clicky-oy,bgh-curtileh),gy+sy)+oy
                             tw=pick(bg_tilemode[tilebgpal]-1,1,2,3,4,7)
@@ -97,11 +97,12 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                         dx=mw+144 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(4)
                         dx=mw+192 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(5)
                         dx=mw+240 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(6)
+                        dx=mw+288 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(7)
                     }
                 }
                 if (mouse_check_button(mb_left) and bg_tilemode[tilebgpal]) {
                     dx=mw dy=background_get_height(ref)*(gy/32)+32
-                    if (bg_tilemode[tilebgpal]!=6) {
+                    if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
                         if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) hide_smartmap=1
                         dx=mw+72 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) fill_tilesmart_copy()
                         dx=mw+144 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) {

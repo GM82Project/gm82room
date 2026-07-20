@@ -7,6 +7,7 @@ switch (argument0) {
     case 4: return "16-Tile"
     case 5: return "47-Tile"
     case 6: return "Repeating Pattern"
+    case 7: return "Random"
 }
 
 return "Disabled"

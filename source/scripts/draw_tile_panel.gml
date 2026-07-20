@@ -64,8 +64,10 @@ if (tilebgpal!=noone) {
         dx=mw+144 draw_button_ext(dx,dy,40,32,m!=4,global.col_main) draw_text(dx+20,dy+16,"16")
         dx=mw+192 draw_button_ext(dx,dy,40,32,m!=5,global.col_main) draw_text(dx+20,dy+16,"47")
         dx=mw+240 draw_button_ext(dx,dy,40,32,m!=6,global.col_main) draw_text(dx+20,dy+16,"R")
+        dx=mw+288 draw_button_ext(dx,dy,40,32,m!=7,global.col_main) draw_text(dx+20,dy+16,"?")
 
-        if (bg_tilemode[tilebgpal]!=6) {
+
+        if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
             ref=pick(bg_tilemode[tilebgpal]-1,bgTiler2,bgTiler4,bgTiler9,bgTiler16,bgTiler47)
             xsc=gx/32
             ysc=gy/32

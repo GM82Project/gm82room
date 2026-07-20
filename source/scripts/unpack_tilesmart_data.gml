@@ -7,7 +7,7 @@ var g,r,u,v;
 if (string_char_at(argument1,3)=="|") {
     bg_tilemode[argument0]=real(string_copy(argument1,1,2))
 
-    if (bg_tilemode[argument0]!=6) {
+    if (bg_tilemode[argument0]!=6 and bg_tilemode[argument0]!=7) {
         string_token_start(string_delete(argument1,1,3),",")
 
         g=bg_tilemap[argument0]
