@@ -36,8 +36,8 @@ if (argument2) {//add tile
         top=0 while (t<h) {top+=1 t+=Tilepanel.gy+Tilepanel.sy}
 
         if (bg_tilemode[tilebgpal]==6) {
-            left=Tilepanel.ox+((drawx div gridx) mod left)*(Tilepanel.gx+Tilepanel.sx)
-            top=Tilepanel.oy+((drawy div gridy) mod top)*(Tilepanel.gy+Tilepanel.sy)
+            left=Tilepanel.ox+(modwrap(floor(drawx/gridx),0,left))*(Tilepanel.gx+Tilepanel.sx)
+            top=Tilepanel.oy+(modwrap(floor(drawy/gridy),0,top))*(Tilepanel.gy+Tilepanel.sy)
         }
         if (bg_tilemode[tilebgpal]==7) {
             left=Tilepanel.ox+irandom(left-1)*(Tilepanel.gx+Tilepanel.sx)
