@@ -5,9 +5,13 @@ if (tilebgpal==noone) exit
 if (!tilemap_complete) exit
 
 //delete overlap
-instance_destroy_id(find_smart_tile_at(argument0+gridx/2,argument1+gridy/2))
+replace=find_smart_tile_at(argument0+gridx/2,argument1+gridy/2)
 
-if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
+if (replace and autotiler_last_click==replace) exit
+
+with (replace) instance_destroy()
+
+if (replace or argument2) if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
     tile1[0]=find_smart_tile_at(argument0-gridx*0.5,argument1-gridy*0.5)
     tile1[1]=find_smart_tile_at(argument0+gridx*0.5,argument1-gridy*0.5)
     tile1[2]=find_smart_tile_at(argument0+gridx*1.5,argument1-gridy*0.5)
@@ -57,9 +61,10 @@ if (argument2) {//add tile
     o.tlayer=ly_depth o.depth=ly_depth-0.01
     o.modified=1
     update_instance_memory(o)
+    autotiler_last_click=o
 }
 
-if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
+if (replace or argument2) if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
     //update surrounding tiles
     i=0 repeat (8) {
         with (tile1[i]) {

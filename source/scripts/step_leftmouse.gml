@@ -4,7 +4,8 @@ if (erasing) exit
 
 if (mode==1 and tilebgpal!=noone and mousein and window_focused) if (bg_tilemode[tilebgpal]) {
     //smart mode
-    if (direct_mbleft) draw_tilesmart_brush(floorto(global.mousex,gridx),floorto(global.mousey,gridy),1)
+    if (mouse_check_modal_pressed(mb_left)) autotiler_last_click=noone
+    if (mouse_check_modal(mb_left)) draw_tilesmart_brush(floorto(global.mousex,gridx),floorto(global.mousey,gridy),1)
     exit
 }
 
