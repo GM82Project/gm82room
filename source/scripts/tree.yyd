@@ -24,6 +24,7 @@
 	|string_better_lim
 	|get_new_path_name
 	|set_interpolation
+	|bresenham
 +file
 	|gensavecode
 	|parsereal

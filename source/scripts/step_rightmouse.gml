@@ -7,7 +7,11 @@ if (direct_mbleft) exit
 if (mode==1 and tilebgpal!=noone and mousein and window_focused) if (bg_tilemode[tilebgpal]) {
     //smart mode
     if (mouse_check_modal_pressed(mb_right)) autotiler_last_click=noone
-    if (mouse_check_modal(mb_right)) draw_tilesmart_brush(floorto(global.mousex,gridx),floorto(global.mousey,gridy),0)
+    if (mouse_check_modal(mb_right)) bresenham(
+            floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
+            floor(global.mousex/gridx),floor(global.mousey/gridy),
+            draw_tilesmart_brush,0
+        )
     exit
 }
 

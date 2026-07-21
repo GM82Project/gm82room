@@ -81,6 +81,11 @@ if (current_time>autosave_timer+autosave_interval) {
 mouse_wx=window_mouse_get_x()
 mouse_wy=window_mouse_get_y()
 
+global.mousex_old=global.mousex
+global.mousey_old=global.mousey
+global.mousex=mouse_x
+global.mousey=mouse_y
+
 with (Button) focus=distance_to_point(mouse_wx,mouse_wy)<1
 
 mousein=(

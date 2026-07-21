@@ -23,6 +23,8 @@ autosave_interval=3*60*1000 //3 minute autosave in ms
 
 global.mousex=mouse_x
 global.mousey=mouse_y
+global.mousex_old=global.mousex
+global.mousey_old=global.mousey
 
 global.livesock=noone
 global.livebuf=noone

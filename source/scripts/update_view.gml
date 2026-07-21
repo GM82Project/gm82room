@@ -6,6 +6,3 @@ view_wview=width*zoom
 view_hview=height*zoom
 view_wport=width
 view_hport=height
-
-global.mousex=mouse_x
-global.mousey=mouse_y

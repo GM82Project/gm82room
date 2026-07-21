@@ -1,25 +1,28 @@
-///draw_tilesmart_brush(x,y,enable)
-var replace,index,byte,left,top,i,tile1,tile2,l,t;
+///draw_tilesmart_brush(gridx,gridy,enable)
+var drawx,drawy,replace,index,byte,left,top,i,tile1,tile2,l,t;
 
 if (tilebgpal==noone) exit
 if (!tilemap_complete) exit
 
+drawx=argument0*gridx
+drawy=argument1*gridy
+
 //delete overlap
-replace=find_smart_tile_at(argument0+gridx/2,argument1+gridy/2)
+replace=find_smart_tile_at(drawx+gridx/2,drawy+gridy/2)
 
 if (replace and autotiler_last_click==replace) exit
 
 with (replace) instance_destroy()
 
 if (replace or argument2) if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
-    tile1[0]=find_smart_tile_at(argument0-gridx*0.5,argument1-gridy*0.5)
-    tile1[1]=find_smart_tile_at(argument0+gridx*0.5,argument1-gridy*0.5)
-    tile1[2]=find_smart_tile_at(argument0+gridx*1.5,argument1-gridy*0.5)
-    tile1[3]=find_smart_tile_at(argument0-gridx*0.5,argument1+gridy*0.5)
-    tile1[4]=find_smart_tile_at(argument0+gridx*1.5,argument1+gridy*0.5)
-    tile1[5]=find_smart_tile_at(argument0-gridx*0.5,argument1+gridy*1.5)
-    tile1[6]=find_smart_tile_at(argument0+gridx*0.5,argument1+gridy*1.5)
-    tile1[7]=find_smart_tile_at(argument0+gridx*1.5,argument1+gridy*1.5)
+    tile1[0]=find_smart_tile_at(drawx-gridx*0.5,drawy-gridy*0.5)
+    tile1[1]=find_smart_tile_at(drawx+gridx*0.5,drawy-gridy*0.5)
+    tile1[2]=find_smart_tile_at(drawx+gridx*1.5,drawy-gridy*0.5)
+    tile1[3]=find_smart_tile_at(drawx-gridx*0.5,drawy+gridy*0.5)
+    tile1[4]=find_smart_tile_at(drawx+gridx*1.5,drawy+gridy*0.5)
+    tile1[5]=find_smart_tile_at(drawx-gridx*0.5,drawy+gridy*1.5)
+    tile1[6]=find_smart_tile_at(drawx+gridx*0.5,drawy+gridy*1.5)
+    tile1[7]=find_smart_tile_at(drawx+gridx*1.5,drawy+gridy*1.5)
 }
 
 if (argument2) {//add tile
@@ -33,8 +36,8 @@ if (argument2) {//add tile
         top=0 while (t<h) {top+=1 t+=Tilepanel.gy+Tilepanel.sy}
 
         if (bg_tilemode[tilebgpal]==6) {
-            left=Tilepanel.ox+((argument0 div gridx) mod left)*(Tilepanel.gx+Tilepanel.sx)
-            top=Tilepanel.oy+((argument1 div gridy) mod top)*(Tilepanel.gy+Tilepanel.sy)
+            left=Tilepanel.ox+((drawx div gridx) mod left)*(Tilepanel.gx+Tilepanel.sx)
+            top=Tilepanel.oy+((drawy div gridy) mod top)*(Tilepanel.gy+Tilepanel.sy)
         }
         if (bg_tilemode[tilebgpal]==7) {
             left=Tilepanel.ox+irandom(left-1)*(Tilepanel.gx+Tilepanel.sx)
@@ -47,7 +50,7 @@ if (argument2) {//add tile
         top=ds_grid_get(bg_tilemap[tilebgpal],index,1)
     }
 
-    o=instance_create(argument0,argument1,tileholder) get_uid(o)
+    o=instance_create(drawx,drawy,tileholder) get_uid(o)
     o.bgname=tilebgname
     o.bg=bg_background[tilebgpal]
     o.tilew=Tilepanel.gx
