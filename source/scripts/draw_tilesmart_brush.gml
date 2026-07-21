@@ -1,5 +1,5 @@
 ///draw_tilesmart_brush(x,y,enable)
-var replace,index,byte,left,top,i,tile1,tile2;
+var replace,index,byte,left,top,i,tile1,tile2,l,t;
 
 if (tilebgpal==noone) exit
 if (!tilemap_complete) exit
@@ -20,13 +20,22 @@ if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
 
 if (argument2) {//add tile
     //decode tile coordinate
-    if (bg_tilemode[tilebgpal]==6) {
-        //TODO: divide by room grid, multiply by bg grid
-        left=argument0 mod background_get_width(bg_background[tilebgpal])
-        top=argument1 mod background_get_height(bg_background[tilebgpal])
-    } else if (bg_tilemode[tilebgpal]==7) {
-        left=irandom((background_get_width(bg_background[tilebgpal]) div Tilepanel.gx)-1)*Tilepanel.gx
-        top=irandom((background_get_height(bg_background[tilebgpal]) div Tilepanel.gy)-1)*Tilepanel.gy
+    if (bg_tilemode[tilebgpal]==6 or bg_tilemode[tilebgpal]==7) {
+        //count how many cells we have
+        l=Tilepanel.ox t=Tilepanel.oy
+        w=background_get_width(bg_background[tilebgpal])
+        h=background_get_height(bg_background[tilebgpal])
+        left=0 while (l<w) {left+=1 l+=Tilepanel.gx+Tilepanel.sx}
+        top=0 while (t<h) {top+=1 t+=Tilepanel.gy+Tilepanel.sy}
+
+        if (bg_tilemode[tilebgpal]==6) {
+            left=Tilepanel.ox+((argument0 div gridx) mod left)*(Tilepanel.gx+Tilepanel.sx)
+            top=Tilepanel.oy+((argument1 div gridy) mod top)*(Tilepanel.gy+Tilepanel.sy)
+        }
+        if (bg_tilemode[tilebgpal]==7) {
+            left=Tilepanel.ox+irandom(left-1)*(Tilepanel.gx+Tilepanel.sx)
+            top=Tilepanel.oy+irandom(top-1)*(Tilepanel.gy+Tilepanel.sy)
+        }
     } else {
         byte=pack_bools(tile1[7],tile1[6],tile1[5],tile1[4],tile1[3],tile1[2],tile1[1],tile1[0])
         index=autotiler_tables[bg_tilemode[tilebgpal],byte]
