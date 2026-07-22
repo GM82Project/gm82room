@@ -26,10 +26,10 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                 if (mouse_check_button(mb_left)) {
                     if (bg_tilemode[tilebgpal]) {
                         //smart mode
-                        if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) if (mouse_check_button_pressed(mb_left) or tilemap_complete) {
+                        if (bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) if (mouse_check_button_pressed(mb_left) or tilemap_complete) {
                             clickx=floorto(min(clickx-ox,bgw-curtilew),gx+sx)+ox
                             clicky=floorto(min(clicky-oy,bgh-curtileh),gy+sy)+oy
-                            tw=pick(bg_tilemode[tilebgpal]-1,1,2,3,4,7)
+                            tw=pick(bg_tilemode[tilebgpal]-1,1,1,2,3,4,7)
                             index=atcx+atcy*tw
                             if (index>27) index-=1 if (index>35) index-=1
                             ds_grid_set(bg_tilemap[tilebgpal],index,0,clickx)
@@ -76,7 +76,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                 //outside the bg
                 tiling=0
                 hide_smartmap=0
-                ref=pick(bg_tilemode[tilebgpal]-1,bgTiler2,bgTiler4,bgTiler9,bgTiler16,bgTiler47)
+                ref=pick(bg_tilemode[tilebgpal]-1,bgTiler1,bgTiler2,bgTiler4,bgTiler9,bgTiler16,bgTiler47)
                 mw=max(176,background_get_width(bg_background[tilebgpal])+32)
                 if (mouse_check_button_pressed(mb_left)) {
                     //manual
@@ -91,18 +91,21 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                     }
                     if (bg_tilemode[tilebgpal]) {
                         //modes
-                        dx=mw if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(1)
-                        dx=mw+48 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(2)
-                        dx=mw+96 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(3)
-                        dx=mw+144 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(4)
-                        dx=mw+192 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(5)
-                        dx=mw+240 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(6)
-                        dx=mw+288 if (point_in_rectangle(clickx,clicky,dx,-64,dx+40,-32)) change_tilesmart_mode(7)
+                        dy=-104
+                        dx=mw if (point_in_rectangle(clickx,clicky,dx,dy,dx+40,dy+32)) change_tilesmart_mode(1)
+                        dx=mw+48 if (point_in_rectangle(clickx,clicky,dx,dy,dx+40,dy+32)) change_tilesmart_mode(2)
+                        dx=mw+96 if (point_in_rectangle(clickx,clicky,dx,dy,dx+40,dy+32)) change_tilesmart_mode(3)
+                        dx=mw+144 if (point_in_rectangle(clickx,clicky,dx,dy,dx+40,dy+32)) change_tilesmart_mode(4)
+                        dy=-64
+                        dx=mw if (point_in_rectangle(clickx,clicky,dx,dy,dx+40,dy+32)) change_tilesmart_mode(5)
+                        dx=mw+48 if (point_in_rectangle(clickx,clicky,dx,dy,dx+40,dy+32)) change_tilesmart_mode(6)
+                        dx=mw+96 if (point_in_rectangle(clickx,clicky,dx,dy,dx+40,dy+32)) change_tilesmart_mode(7)
+                        dx=mw+144 if (point_in_rectangle(clickx,clicky,dx,dy,dx+40,dy+32)) change_tilesmart_mode(8)
                     }
                 }
                 if (mouse_check_button(mb_left) and bg_tilemode[tilebgpal]) {
                     dx=mw dy=background_get_height(ref)*(gy/32)+32
-                    if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
+                    if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
                         if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) hide_smartmap=1
                         dx=mw+72 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) fill_tilesmart_copy()
                         dx=mw+144 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) {

@@ -10,8 +10,8 @@ if (tilebgpal!=noone) {
     bgw=background_get_width(bg_background[tilebgpal])
     bgh=background_get_height(bg_background[tilebgpal])
 
-    w=pick(bg_tilemode[tilebgpal]-1,1,2,3,4,7)
-    i=0 repeat (pick(bg_tilemode[tilebgpal]-1,2,4,9,16,47)) {
+    w=pick(bg_tilemode[tilebgpal]-1,1,1,2,3,4,7)
+    i=0 repeat (pick(bg_tilemode[tilebgpal]-1,1,2,4,9,16,47)) {
         o=i if (o>=27) o+=1 if (o>=36) o+=1
         u=o mod w
         v=o div w

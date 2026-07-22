@@ -14,7 +14,7 @@ if (replace and autotiler_last_click==replace) exit
 
 with (replace) instance_destroy()
 
-if (replace or argument2) if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
+if (replace or argument2) if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
     tile1[0]=find_smart_tile_at(drawx-gridx*0.5,drawy-gridy*0.5)
     tile1[1]=find_smart_tile_at(drawx+gridx*0.5,drawy-gridy*0.5)
     tile1[2]=find_smart_tile_at(drawx+gridx*1.5,drawy-gridy*0.5)
@@ -27,7 +27,11 @@ if (replace or argument2) if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpa
 
 if (argument2) {//add tile
     //decode tile coordinate
-    if (bg_tilemode[tilebgpal]==6 or bg_tilemode[tilebgpal]==7) {
+    if (bg_tilemode[tilebgpal]==1) {
+        //single tile mode
+        left=ds_grid_get(bg_tilemap[tilebgpal],0,0)
+        top=ds_grid_get(bg_tilemap[tilebgpal],0,1)
+    } else if (bg_tilemode[tilebgpal]==7 or bg_tilemode[tilebgpal]==8) {
         //count how many cells we have
         l=Tilepanel.ox t=Tilepanel.oy
         w=background_get_width(bg_background[tilebgpal])
@@ -35,15 +39,18 @@ if (argument2) {//add tile
         left=0 while (l<w) {left+=1 l+=Tilepanel.gx+Tilepanel.sx}
         top=0 while (t<h) {top+=1 t+=Tilepanel.gy+Tilepanel.sy}
 
-        if (bg_tilemode[tilebgpal]==6) {
+        if (bg_tilemode[tilebgpal]==7) {
+            //repeating
             left=Tilepanel.ox+(modwrap(floor(drawx/gridx),0,left))*(Tilepanel.gx+Tilepanel.sx)
             top=Tilepanel.oy+(modwrap(floor(drawy/gridy),0,top))*(Tilepanel.gy+Tilepanel.sy)
         }
-        if (bg_tilemode[tilebgpal]==7) {
+        if (bg_tilemode[tilebgpal]==8) {
+            //random
             left=Tilepanel.ox+irandom(left-1)*(Tilepanel.gx+Tilepanel.sx)
             top=Tilepanel.oy+irandom(top-1)*(Tilepanel.gy+Tilepanel.sy)
         }
     } else {
+        //table mode
         byte=pack_bools(tile1[7],tile1[6],tile1[5],tile1[4],tile1[3],tile1[2],tile1[1],tile1[0])
         index=autotiler_tables[bg_tilemode[tilebgpal],byte]
         left=ds_grid_get(bg_tilemap[tilebgpal],index,0)
@@ -67,7 +74,7 @@ if (argument2) {//add tile
     autotiler_last_click=o
 }
 
-if (replace or argument2) if (bg_tilemode[tilebgpal]!=6 and bg_tilemode[tilebgpal]!=7) {
+if (replace or argument2) if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
     //update surrounding tiles
     i=0 repeat (8) {
         with (tile1[i]) {

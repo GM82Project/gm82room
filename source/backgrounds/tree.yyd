@@ -5,6 +5,7 @@
 +theming
 	|bgMessage
 +autotiler templates
+	|bgTiler1
 	|bgTiler2
 	|bgTiler4
 	|bgTiler9
