@@ -75,6 +75,7 @@ if (tilebgpal!=noone) {
             ysc=gy/32
             texture_set_interpolation(1)
             draw_background_ext(ref,mw,0,xsc,ysc,0,$ffffff,1)
+            texture_set_interpolation(0)
 
             //draw tile mappings
             size=pick(bg_tilemode[tilebgpal]-1,1,1,2,3,4,7)
@@ -106,7 +107,7 @@ if (tilebgpal!=noone) {
                     vh=bgh/vv
                     v=0 repeat (vv) {
                         u=0 repeat (vu) {
-                            if (u or v) draw_rect(u*vw,v*vh,vw,vh,$808080,0.75)
+                            if (u or v) draw_rect(u*vw-0.5,v*vh-0.5,vw,vh,$808080,0.75)
                         u+=1}
                     v+=1}
                 }
@@ -119,13 +120,13 @@ if (tilebgpal!=noone) {
                     vh=bgh/vv
                     v=0 repeat (vv) {
                         u=0 repeat (vu) {
-                            draw_rectangle(u*vw,v*vh,(u+1)*vw,(v+1)*vh,1)
+                            draw_rectangle(u*vw-0.5,v*vh-0.5,(u+1)*vw-0.5,(v+1)*vh-0.5,1)
                         u+=1}
                     v+=1}
                     draw_set_color($ffffff)
                 } else {
                     if (vu>1 or vv>1) {
-                        draw_rectangle(0,0,vw,vh,1)
+                        draw_rectangle(0-0.5,0-0.5,vw-0.5,vh-0.5,1)
                     }
 
                     //draw current mapping
@@ -146,7 +147,6 @@ if (tilebgpal!=noone) {
                 }
             }
 
-            texture_set_interpolation(0)
             dy=background_get_height(ref)*ysc+32
             if (bg_tilemode[tilebgpal]!=1) {
                 dx=mw    draw_button_ext(dx,dy,64,32,!hide_smartmap,global.col_main) draw_text(dx+32,dy+16,"Hide")
@@ -161,7 +161,7 @@ if (tilebgpal!=noone) {
             draw_background(bgVariant,mw,dy+64)
             u=ds_grid_get(bg_tilemap[tilebgpal],47,0)
             v=ds_grid_get(bg_tilemap[tilebgpal],47,1)
-            draw_rectangle(mw,dy+64,mw+16*u,dy+64+16*v,1)
+            draw_rectangle(mw-0.5,dy+64-0.5,mw+16*u-0.5,dy+64+16*v-0.5,1)
         }
     } else {
         //normal mode rectangle
