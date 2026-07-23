@@ -32,8 +32,8 @@ if (argument2) {//add tile
         //variant calc
         vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
         vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
-        left=left+irandom(vu-1)*(bgw/vu)
-        top=top+irandom(vv-1)*(bgh/vv)
+        if (vu>1) left=left+irandom(vu-1)*(bgw/vu)
+        if (vv>1) top=top+irandom(vv-1)*(bgh/vv)
     } else if (bg_tilemode[tilebgpal]==7 or bg_tilemode[tilebgpal]==8) {
         //count how many cells we have
         l=Tilepanel.ox t=Tilepanel.oy
@@ -62,8 +62,8 @@ if (argument2) {//add tile
         //variant calc
         vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
         vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
-        left=left+irandom(vu-1)*(bgw/vu)
-        top=top+irandom(vv-1)*(bgh/vv)
+        if (vu>1) left=left+irandom(vu-1)*(bgw/vu)
+        if (vv>1) top=top+irandom(vv-1)*(bgh/vv)
     }
 
     o=instance_create(drawx,drawy,tileholder) get_uid(o)
@@ -85,31 +85,5 @@ if (argument2) {//add tile
 
 if (replace or argument2) if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
     //update surrounding tiles
-    i=0 repeat (8) {
-        with (tile1[i]) {
-            tile2[0]=find_smart_tile_at(x-gridx*0.5,y-gridy*0.5)
-            tile2[1]=find_smart_tile_at(x+gridx*0.5,y-gridy*0.5)
-            tile2[2]=find_smart_tile_at(x+gridx*1.5,y-gridy*0.5)
-            tile2[3]=find_smart_tile_at(x-gridx*0.5,y+gridy*0.5)
-            tile2[4]=find_smart_tile_at(x+gridx*1.5,y+gridy*0.5)
-            tile2[5]=find_smart_tile_at(x-gridx*0.5,y+gridy*1.5)
-            tile2[6]=find_smart_tile_at(x+gridx*0.5,y+gridy*1.5)
-            tile2[7]=find_smart_tile_at(x+gridx*1.5,y+gridy*1.5)
-
-            //table mode
-            byte=pack_bools(tile2[7],tile2[6],tile2[5],tile2[4],tile2[3],tile2[2],tile2[1],tile2[0])
-            index=autotiler_tables[bg_tilemode[tilebgpal],byte]
-            left=ds_grid_get(bg_tilemap[tilebgpal],index,0)
-            top=ds_grid_get(bg_tilemap[tilebgpal],index,1)
-
-            //variant calc
-            vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
-            vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
-            left=left+irandom(vu-1)*(other.bgw/vu)
-            top=top+irandom(vv-1)*(other.bgh/vv)
-
-            tile_set_region(tile,left,top,tilew,tileh)
-            modified=1
-        }
-    i+=1}
+    i=0 repeat (8) {if (tile1[i]) tile1[i].post_brush_update=1 i+=1}
 }
