@@ -257,6 +257,7 @@
 	|unpack_tilesmart_data
 	|change_tilesmart_mode
 	|draw_tilesmart_brush
+	|update_tilesmart_tiles
 	|save_tilemap_grid
 	|check_tilemap_complete
 	|find_smart_tile_at

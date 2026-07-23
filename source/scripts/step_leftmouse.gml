@@ -32,6 +32,7 @@ if (mode==1 and tilebgpal!=noone and (mousein or autotiler_rectangle) and window
                 draw_tilesmart_brush(u,v,1)
             u+=1}v+=1}
             autotiler_rectangle=0
+            update_tilesmart_tiles()
         }
     }
     exit
