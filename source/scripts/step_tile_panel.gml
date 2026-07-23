@@ -35,7 +35,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                             ds_grid_set(bg_tilemap[tilebgpal],index,0,clickx)
                             ds_grid_set(bg_tilemap[tilebgpal],index,1,clicky)
                             check_tilemap_complete()
-                            if (!tilemap_complete) {
+                            if (tilemap_complete==0) {
                                 atcx+=1 if (atcx>=tw) {atcx=0 atcy+=1}
                             }
                         }
@@ -106,6 +106,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                 if (mouse_check_button(mb_left) and bg_tilemode[tilebgpal]) {
                     dx=mw dy=background_get_height(ref)*(gy/32)+32
                     if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
+                        //tool buttons
                         if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) hide_smartmap=1
                         dx=mw+72 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) fill_tilesmart_copy()
                         dx=mw+144 if (mouse_check_button_pressed(mb_left)) if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) {
@@ -125,6 +126,17 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                             //forbid the holes in a 47tile
                             if (atcx==6 and atcy==3) {atcx=px atcy=py}
                             if (atcx==1 and atcy==5) {atcx=px atcy=py}
+                        }
+                    }
+                    if (bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
+                        //variant grid
+                        dx=mw
+                        if (point_in_rectangle(clickx,clicky,dx,dy+64,dx+64,dy+128)) {
+                            u=1+median(0,(clickx-dx) div 16,3)
+                            v=1+median(0,(clicky-(dy+64)) div 16,3)
+                            ds_grid_set(bg_tilemap[tilebgpal],47,0,u)
+                            ds_grid_set(bg_tilemap[tilebgpal],47,1,v)
+                            check_tilemap_complete()
                         }
                     }
                 }

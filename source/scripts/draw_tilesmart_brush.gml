@@ -55,6 +55,12 @@ if (argument2) {//add tile
         index=autotiler_tables[bg_tilemode[tilebgpal],byte]
         left=ds_grid_get(bg_tilemap[tilebgpal],index,0)
         top=ds_grid_get(bg_tilemap[tilebgpal],index,1)
+
+        //variant calc
+        vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
+        vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
+        left=left+irandom(vu-1)*(bgw/vu)
+        top=top+irandom(vv-1)*(bgh/vv)
     }
 
     o=instance_create(drawx,drawy,tileholder) get_uid(o)
@@ -87,10 +93,17 @@ if (replace or argument2) if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpa
             tile2[6]=find_smart_tile_at(x+gridx*0.5,y+gridy*1.5)
             tile2[7]=find_smart_tile_at(x+gridx*1.5,y+gridy*1.5)
 
+            //table mode
             byte=pack_bools(tile2[7],tile2[6],tile2[5],tile2[4],tile2[3],tile2[2],tile2[1],tile2[0])
             index=autotiler_tables[bg_tilemode[tilebgpal],byte]
             left=ds_grid_get(bg_tilemap[tilebgpal],index,0)
             top=ds_grid_get(bg_tilemap[tilebgpal],index,1)
+
+            //variant calc
+            vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
+            vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
+            left=left+irandom(vu-1)*(other.bgw/vu)
+            top=top+irandom(vv-1)*(other.bgh/vv)
 
             tile_set_region(tile,left,top,tilew,tileh)
             modified=1

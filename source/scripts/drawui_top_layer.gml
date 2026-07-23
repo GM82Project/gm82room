@@ -75,7 +75,10 @@ if (mousein && mode==0) {
 
 with (colorpicker) event_draw()
 
-if (mode==1 and tilebgpal!=noone) if (bg_tilemode[tilebgpal] and mousein and current_cursor=cr_no) tooltiptext="Cannot Smart Paint with#incomplete Smart Tile mappings"
+if (mode==1 and tilebgpal!=noone) if (bg_tilemode[tilebgpal] and mousein) {
+    if (tilemap_complete==0) tooltiptext="Cannot Smart Paint with#incomplete Smart Tile mappings"
+    if (tilemap_complete==-1) tooltiptext="Cannot Smart Paint with#incorrectly mapped tiles"
+}
 
 if (live_message_alpha) live_message_alpha-=1
 draw_set_alpha(live_message_alpha/100)

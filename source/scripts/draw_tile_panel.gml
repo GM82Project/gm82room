@@ -93,23 +93,57 @@ if (tilebgpal!=noone) {
                 draw_background_ext(ref,mw,0,xsc,ysc,0,$ffffff,1)
                 //draw template over tiles
             } else if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
-                //draw current mapping
-                draw_set_color_sel()
-                draw_rectangle(mw+atcx*gx-0.5,atcy*gy-0.5,mw+(atcx+1)*gx-0.5,(atcy+1)*gy-0.5,1)
-                index=atcx+atcy*pick(bg_tilemode[tilebgpal]-1,1,1,2,3,4,7)
-                if (index>27) index-=1 if (index>35) index-=1
-                targx=ds_grid_get(bg_tilemap[tilebgpal],index,0)
-                targy=ds_grid_get(bg_tilemap[tilebgpal],index,1)
-                if (targx!=noone and targy!=noone) {
-                    draw_rectangle(targx-0.5,targy-0.5,targx+gx-0.5,targy+gy-0.5,1)
-                    draw_arrow(mw+(atcx+0.5)*gx-0.5,(atcy+0.5)*gy-0.5,targx+0.5*gx-0.5,targy+0.5*gy-0.5,8)
-                } else {
-                    clickx=(mouse_wx-(x+8))*z+xgo-(w-16)*z/2
-                    clicky=(mouse_wy-(y+40))*z+ygo-(h-32-16)*z/2
-                    if (point_in_rectangle(clickx,clicky,0,0,background_get_width(tex),background_get_height(tex)))
-                        draw_arrow(mw+(atcx+0.5)*gx-0.5,(atcy+0.5)*gy-0.5,clickx-0.5,clicky-0.5,8)
+                clickx=(mouse_wx-(x+8))*z+xgo-(w-16)*z/2
+                clicky=(mouse_wy-(y+40))*z+ygo-(h-32-16)*z/2
+
+                //draw variant
+                dy=background_get_height(ref)*ysc+32
+
+                vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
+                vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
+                if (vu>1 or vv>1) {
+                    vw=bgw/vu
+                    vh=bgh/vv
+                    v=0 repeat (vv) {
+                        u=0 repeat (vu) {
+                            if (u or v) draw_rect(u*vw,v*vh,vw,vh,$808080,0.75)
+                        u+=1}
+                    v+=1}
                 }
-                draw_set_color($ffffff)
+
+                if (point_in_rectangle(clickx,clicky,mw,dy+64,mw+64,dy+128)) {
+                    draw_set_color_sel()
+                    vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
+                    vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
+                    vw=bgw/vu
+                    vh=bgh/vv
+                    v=0 repeat (vv) {
+                        u=0 repeat (vu) {
+                            draw_rectangle(u*vw,v*vh,(u+1)*vw,(v+1)*vh,1)
+                        u+=1}
+                    v+=1}
+                    draw_set_color($ffffff)
+                } else {
+                    if (vu>1 or vv>1) {
+                        draw_rectangle(0,0,vw,vh,1)
+                    }
+
+                    //draw current mapping
+                    draw_set_color_sel()
+                    draw_rectangle(mw+atcx*gx-0.5,atcy*gy-0.5,mw+(atcx+1)*gx-0.5,(atcy+1)*gy-0.5,1)
+                    index=atcx+atcy*pick(bg_tilemode[tilebgpal]-1,1,1,2,3,4,7)
+                    if (index>27) index-=1 if (index>35) index-=1
+                    targx=ds_grid_get(bg_tilemap[tilebgpal],index,0)
+                    targy=ds_grid_get(bg_tilemap[tilebgpal],index,1)
+                    if (targx!=noone and targy!=noone) {
+                        draw_rectangle(targx-0.5,targy-0.5,targx+gx-0.5,targy+gy-0.5,1)
+                        draw_arrow(mw+(atcx+0.5)*gx-0.5,(atcy+0.5)*gy-0.5,targx+0.5*gx-0.5,targy+0.5*gy-0.5,8)
+                    } else {
+                        if (point_in_rectangle(clickx,clicky,0,0,background_get_width(tex),background_get_height(tex)))
+                            draw_arrow(mw+(atcx+0.5)*gx-0.5,(atcy+0.5)*gy-0.5,clickx-0.5,clicky-0.5,8)
+                    }
+                    draw_set_color($ffffff)
+                }
             }
 
             texture_set_interpolation(0)
@@ -120,7 +154,14 @@ if (tilebgpal!=noone) {
                 dx=mw+144 draw_button_ext(dx,dy,64,32,1,global.col_main) draw_text(dx+32,dy+16,"Clear")
             }
             draw_set_halign(0)
-            if (!tilemap_complete) draw_text(mw+4,dy-16,"Click on the background to map tiles")
+            if (tilemap_complete==0) draw_text(mw+4,dy-16,"Click on the background to map tiles")
+            if (tilemap_complete==-1) draw_text(mw+4,dy-16,"Error: tiles mapped outside variant area")
+
+            draw_text(mw+4,dy+48,"Variant mode")
+            draw_background(bgVariant,mw,dy+64)
+            u=ds_grid_get(bg_tilemap[tilebgpal],47,0)
+            v=ds_grid_get(bg_tilemap[tilebgpal],47,1)
+            draw_rectangle(mw,dy+64,mw+16*u,dy+64+16*v,1)
         }
     } else {
         //normal mode rectangle
