@@ -1,9 +1,6 @@
 ///draw_tilesmart_brush(gridx,gridy,enable)
 var drawx,drawy,replace,index,byte,left,top,i,tile1,tile2,l,t;
 
-if (tilebgpal==noone) exit
-if (!tilemap_complete) exit
-
 drawx=argument0*gridx
 drawy=argument1*gridy
 

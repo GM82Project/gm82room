@@ -2,15 +2,38 @@ var yes,dx,dy,tex,l,t,r,b;
 
 if (erasing) exit
 
-if (mode==1 and tilebgpal!=noone and mousein and window_focused) if (bg_tilemode[tilebgpal]) {
+if (mode==1 and tilebgpal!=noone and (mousein or autotiler_rectangle) and window_focused and tilemap_complete and bg_tilemode[tilebgpal]) {
     //smart mode
-    if (mouse_check_modal_pressed(mb_left)) autotiler_last_click=noone
-    if (mouse_check_modal(mb_left))
-        bresenham(
+
+    if (mouse_check_modal_pressed(mb_left)) {
+        autotiler_last_click=noone
+        if (keyboard_check(vk_shift)) {
+            autotiler_rectangle=1
+            autotiler_rectangle_x=floor(global.mousex/gridx)
+            autotiler_rectangle_y=floor(global.mousey/gridy)
+        }
+    }
+    if (mouse_check_modal(mb_left)) {
+        if (direct_mbright and autotiler_rectangle==1) {autotiler_rectangle=0 exit}
+        if (!autotiler_rectangle) bresenham(
             floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
             floor(global.mousex/gridx),floor(global.mousey/gridy),
             draw_tilesmart_brush,1
         )
+    } else {
+        if (autotiler_rectangle==1) {
+            left=min(floor(global.mousex/gridx),autotiler_rectangle_x)
+            right=max(floor(global.mousex/gridx),autotiler_rectangle_x)
+            top=min(floor(global.mousey/gridy),autotiler_rectangle_y)
+            bottom=max(floor(global.mousey/gridy),autotiler_rectangle_y)
+            ur=(right-left)+1
+            vr=(bottom-top)+1
+            v=top repeat (vr) {u=left repeat (ur) {
+                draw_tilesmart_brush(u,v,1)
+            u+=1}v+=1}
+            autotiler_rectangle=0
+        }
+    }
     exit
 }
 

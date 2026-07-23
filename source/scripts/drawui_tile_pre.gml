@@ -25,6 +25,20 @@ if (mode==1) {
     with (focus) draw_rectangle(bbox_left-0.5,bbox_top-0.5,bbox_right+0.5,bbox_bottom+0.5,1)
     draw_set_color($ffffff)
 
+    if (autotiler_rectangle) {
+        draw_set_color($ff8000)
+        draw_set_alpha(0.5)
+        l=min(floor(global.mousex/gridx),autotiler_rectangle_x)*gridx-0.5
+        r=(max(floor(global.mousex/gridx),autotiler_rectangle_x)+1)*gridx+0.5
+        t=min(floor(global.mousey/gridy),autotiler_rectangle_y)*gridy-0.5
+        b=(max(floor(global.mousey/gridy),autotiler_rectangle_y)+1)*gridy+0.5
+        draw_rectangle(l,t,r,b,0)
+        draw_set_color_sel()
+        draw_rectangle(l,t,r,b,1)
+        draw_set_alpha(1)
+        draw_set_color($ffffff)
+    }
+
     if (crosshair && tilebgpal!=noone) {
         with (selectt) if (grab || scaling) nomorefortnite=1
         if (!keyboard_check(vk_control) && !keyboard_check(vk_shift) && !nomorefortnite && !selecting && !selsize) {
@@ -35,8 +49,10 @@ if (mode==1) {
             tw=curtilew
             th=curtileh
 
-            if (keyboard_check(vk_alt)) draw_background_part_ext(tex,u,v,tw,th,global.mousex,global.mousey,1,1,$ffffff,0.25)
-            else draw_background_part_ext(tex,u,v,tw,th,fmx,fmy,1,1,$ffffff,0.25)
+            if (!bg_tilemode[tilebgpal]) {
+                if (keyboard_check(vk_alt)) draw_background_part_ext(tex,u,v,tw,th,global.mousex,global.mousey,1,1,$ffffff,0.25)
+                else draw_background_part_ext(tex,u,v,tw,th,fmx,fmy,1,1,$ffffff,0.25)
+            }
             texture_set_interpolation(1)
         }
     }
