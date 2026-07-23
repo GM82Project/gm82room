@@ -31,6 +31,12 @@ if (argument2) {//add tile
         //single tile mode
         left=ds_grid_get(bg_tilemap[tilebgpal],0,0)
         top=ds_grid_get(bg_tilemap[tilebgpal],0,1)
+
+        //variant calc
+        vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
+        vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
+        left=left+irandom(vu-1)*(bgw/vu)
+        top=top+irandom(vv-1)*(bgh/vv)
     } else if (bg_tilemode[tilebgpal]==7 or bg_tilemode[tilebgpal]==8) {
         //count how many cells we have
         l=Tilepanel.ox t=Tilepanel.oy
