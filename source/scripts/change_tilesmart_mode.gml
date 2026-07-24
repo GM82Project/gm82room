@@ -10,4 +10,5 @@ if (tilebgpal!=noone) {
     tilemap_complete=(bg_tilemode[tilebgpal]==7 or bg_tilemode[tilebgpal]==8)
     atcx=0
     atcy=0
+    bg_modified[tilebgpal]=true
 }

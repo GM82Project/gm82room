@@ -7,6 +7,7 @@
 	|draw_set_color_sel
 	|draw_loader
 	|drawtooltip
+	|drawtooltip_tilepanel
 	|file_text_open_read_safe
 	|file_text_open_append_safe
 	|draw_button_ext

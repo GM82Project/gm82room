@@ -14,29 +14,13 @@ i.h=32
 i.anchor=5
 i.tagmode=1
 
-i=instance_create(36,dy,TextField)
-i.action="tile panel grid x"
-i.w=56
-i.alt="Grid X"
-i.maxlen=5
-i.anchor=5
-i.tagmode=1
-
-i=instance_create(92,dy,TextField)
-i.action="tile panel grid y"
-i.w=56
-i.alt="Grid Y"
-i.maxlen=5
-i.anchor=5
-i.tagmode=1
-
-i=instance_create(148,dy,Button)
+i=instance_create(36,dy,Button)
 i.spr=11
 i.action="tile panel zoom in"
 i.anchor=5
 i.tagmode=1
 
-i=instance_create(180,dy,Button)
+i=instance_create(68,dy,Button)
 i.spr=12
 i.action="tile panel zoom out"
 i.anchor=5
@@ -225,3 +209,46 @@ i.anchor=3
 i.w=56
 i.h=24
 i.tagmode=1
+
+
+i=instance_create(-112,0,TextField)
+i.action="tile panel grid x"
+i.w=48
+i.basealt="X"
+i.maxlen=4
+i.tagmode=-2
+
+i=instance_create(-56,0,TextField)
+i.action="tile panel grid y"
+i.w=48
+i.basealt="Y"
+i.maxlen=4
+i.tagmode=-2
+
+i=instance_create(-112,64,TextField)
+i.action="tile panel off x"
+i.w=48
+i.basealt="X"
+i.maxlen=4
+i.tagmode=-2
+
+i=instance_create(-56,64,TextField)
+i.action="tile panel off y"
+i.w=48
+i.basealt="Y"
+i.maxlen=4
+i.tagmode=-2
+
+i=instance_create(-112,128,TextField)
+i.action="tile panel sep x"
+i.w=48
+i.basealt="X"
+i.maxlen=4
+i.tagmode=-2
+
+i=instance_create(-56,128,TextField)
+i.action="tile panel sep y"
+i.w=48
+i.basealt="Y"
+i.maxlen=4
+i.tagmode=-2

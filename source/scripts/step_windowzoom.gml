@@ -86,7 +86,9 @@ global.mousey_old=global.mousey
 global.mousex=mouse_x
 global.mousey=mouse_y
 
-with (Button) focus=distance_to_point(mouse_wx,mouse_wy)<1
+with (Button) {
+    if (tagmode!=-2) focus=distance_to_point(mouse_wx,mouse_wy)<1
+}
 
 mousein=(
     point_in_rectangle(mouse_wx,mouse_wy,160+4,32+4,width-160-4,height-32-4)

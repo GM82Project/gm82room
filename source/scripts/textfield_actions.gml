@@ -42,6 +42,8 @@ if (active) {
                 Tilepanel.gx=median(0,real(text),background_get_width(tex))
                 if (Tilepanel.gx==0) Tilepanel.gx=bg_gridx[tilebgpal]
                 text=string(Tilepanel.gx)
+                bg_gridx[tilebgpal]=Tilepanel.gx
+                bg_modified[tilebgpal]=true
             }
         }break
         case "tile panel grid y": {
@@ -50,6 +52,44 @@ if (active) {
                 Tilepanel.gy=median(0,real(text),background_get_height(tex))
                 if (Tilepanel.gy==0) Tilepanel.gy=bg_gridy[tilebgpal]
                 text=string(Tilepanel.gy)
+                bg_gridy[tilebgpal]=Tilepanel.gy
+                bg_modified[tilebgpal]=true
+            }
+        }break
+        case "tile panel off x": {
+            if (tilebgpal!=noone) {
+                tex=bg_background[tilebgpal]
+                Tilepanel.ox=median(0,real(text),background_get_width(tex)-Tilepanel.gx)
+                text=string(Tilepanel.ox)
+                bg_gridox[tilebgpal]=Tilepanel.ox
+                bg_modified[tilebgpal]=true
+            }
+        }break
+        case "tile panel off y": {
+            if (tilebgpal!=noone) {
+                tex=bg_background[tilebgpal]
+                Tilepanel.oy=median(0,real(text),background_get_height(tex)-Tilepanel.gy)
+                text=string(Tilepanel.oy)
+                bg_gridoy[tilebgpal]=Tilepanel.oy
+                bg_modified[tilebgpal]=true
+            }
+        }break
+        case "tile panel sep x": {
+            if (tilebgpal!=noone) {
+                tex=bg_background[tilebgpal]
+                Tilepanel.sx=median(0,real(text),background_get_width(tex))
+                text=string(Tilepanel.sx)
+                bg_gridsx[tilebgpal]=Tilepanel.sx
+                bg_modified[tilebgpal]=true
+            }
+        }break
+        case "tile panel sep y": {
+            if (tilebgpal!=noone) {
+                tex=bg_background[tilebgpal]
+                Tilepanel.sy=median(0,real(text),background_get_height(tex))
+                text=string(Tilepanel.sy)
+                bg_gridsy[tilebgpal]=Tilepanel.sy
+                bg_modified[tilebgpal]=true
             }
         }break
 

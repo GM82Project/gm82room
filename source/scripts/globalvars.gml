@@ -32,7 +32,7 @@ globalvar
     backgroundcolor,bg_background,bg_tex,bg_visible,bg_is_foreground,bg_source,bg_xoffset,bg_yoffset,bg_tile_h,bg_tile_v,bg_hspeed,bg_vspeed,bg_stretch,
     bg_xscale,bg_yscale,bg_blend,bg_alpha,
     vw_enabled,vw_visible,vw_x,vw_y,vw_w,vw_h,vw_xp,vw_yp,vw_wp,vw_hp,vw_follow,vw_hspeed,vw_vspeed,vw_hbor,vw_vbor,
-    bg_gridx,bg_gridy,bg_gridox,bg_gridoy,bg_gridsx,bg_gridsy,bg_istile,
+    bg_gridx,bg_gridy,bg_gridox,bg_gridoy,bg_gridsx,bg_gridsy,bg_istile,bg_modified,
     bg_tilemode,hide_smartmap,bg_tilemap,tilemap_complete,autotiler_tables,autotiler_last_click,autotiler_rectangle,autotiler_rectangle_x,autotiler_rectangle_y,
     layers,curtilex,curtiley,curtilew,curtileh,
     path_precision,current_path,current_pathpoint,drag_point,current_pathname,path_thin,pathmap_path,pathmap_model,pathmap_edited,pathmap_fields,path_sel,pathfocus,paths_have_been_deleted,

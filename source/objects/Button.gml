@@ -44,7 +44,7 @@ action_id=603
 applies_to=self
 */
 ///click
-down=(tagmode==mode || tagmode==-1)
+down=(tagmode==mode or tagmode==-1 or (tagmode==-2 and other.object_index=Tilepanel))
 #define Other_13
 /*"/*'/**//* YYD ACTION
 lib_id=1

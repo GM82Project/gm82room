@@ -22,6 +22,10 @@ with (Tilepanel) {
         }
         textfield_set("tile panel grid x",gx)
         textfield_set("tile panel grid y",gy)
+        textfield_set("tile panel off x",ox)
+        textfield_set("tile panel off y",oy)
+        textfield_set("tile panel sep x",sx)
+        textfield_set("tile panel sep y",sy)
 
         if (argument0) {
             z=1

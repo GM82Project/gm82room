@@ -18,6 +18,13 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
             clickx=(mouse_wx-(x+8))*z+xgo-(w-16)*z/2
             clicky=(mouse_wy-(y+40))*z+ygo-(h-32-16)*z/2
 
+            //our special textfields
+            with (TextField) if (tagmode==-2) {
+                focus=(distance_to_point(other.clickx,other.clicky)<1)
+                if (focus) if (mouse_check_modal_pressed(mb_left)) event_user(2)
+            }
+
+
             if ((clickx>=0 and clickx<bgw) and (clicky>=0 and clicky<bgh)) or (tiling) {
                 //inside the background
                 clickx=median(0,clickx,bgw)+0.5
@@ -34,6 +41,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                             if (index>27) index-=1 if (index>35) index-=1
                             ds_grid_set(bg_tilemap[tilebgpal],index,0,clickx)
                             ds_grid_set(bg_tilemap[tilebgpal],index,1,clicky)
+                            bg_modified[tilebgpal]=true
                             check_tilemap_complete()
                             if (tilemap_complete==0) {
                                 atcx+=1 if (atcx>=tw) {atcx=0 atcy+=1}
@@ -77,15 +85,17 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                 tiling=0
                 hide_smartmap=0
                 ref=pick(bg_tilemode[tilebgpal]-1,bgTiler1,bgTiler2,bgTiler4,bgTiler9,bgTiler16,bgTiler47)
-                mw=max(176,background_get_width(bg_background[tilebgpal])+32)
+                mw=max(176,background_get_width(bg_background[tilebgpal])+32,string_width(ds_list_find_value(backgrounds,tilebgpal))+8)
                 if (mouse_check_button_pressed(mb_left)) {
                     //manual
                     if (point_in_rectangle(clickx,clicky,0,-64,80,-32)) {
                         bg_tilemode[tilebgpal]=-abs(bg_tilemode[tilebgpal])
+                        bg_modified[tilebgpal]=true
                     }
                     //smart
                     if (point_in_rectangle(clickx,clicky,88,-64,88+80,-32)) {
                         bg_tilemode[tilebgpal]=max(1,abs(bg_tilemode[tilebgpal]))
+                        bg_modified[tilebgpal]=true
                         clear_inspector()
                         deselect()
                     }
@@ -115,10 +125,11 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                                 tilemap_complete=0
                                 atcx=0
                                 atcy=0
+                                bg_modified[tilebgpal]=true
                             }
                         }
 
-                        //sheet click
+                        //template click
                         if (point_in_rectangle(clickx,clicky,mw,0,mw+background_get_width(ref),background_get_height(ref))) {
                             px=atcx py=atcy
                             atcx=(clickx-mw) div gx
@@ -137,6 +148,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                             ds_grid_set(bg_tilemap[tilebgpal],47,0,u)
                             ds_grid_set(bg_tilemap[tilebgpal],47,1,v)
                             check_tilemap_complete()
+                            bg_modified[tilebgpal]=true
                         }
                     }
                 }
@@ -146,7 +158,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
 }
 if (grab) {
     ow=w
-    w=max(248,min(width-160,mouse_wx+offx))
+    w=max(160,min(width-160,mouse_wx+offx))
     if (w>width-160-16) w=width-160
     y=max(240,min(height-32-248,mouse_wy+offy))
     oh=h
@@ -185,10 +197,12 @@ if (tilebgpal!=noone) {
     tex=bg_background[tilebgpal]
 
     if (bg_tilemode[tilebgpal]) {
-        xgo=median(0,xgo,max(176,background_get_width(tex)+32)+224)
-        ygo=median(-64,ygo,max(background_get_height(tex),224))
+        xgo=median(-112,xgo,max(176,background_get_width(tex)+32,string_width(ds_list_find_value(backgrounds,tilebgpal)))+208)
+        if (bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
+            ygo=median(-96,ygo,max(background_get_height(tex)+32,background_get_height(pick(bg_tilemode[tilebgpal]-1,bgTiler1,bgTiler2,bgTiler4,bgTiler9,bgTiler16,bgTiler47))*(gy/32)+32+128))
+        } else ygo=median(-96,ygo,background_get_height(tex)+32)
     } else {
-        xgo=median(0,xgo,background_get_width(tex))
+        xgo=median(-112,xgo,background_get_width(tex))
         ygo=median(0,ygo,background_get_height(tex))
     }
 

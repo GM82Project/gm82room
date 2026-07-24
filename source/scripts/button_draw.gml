@@ -102,7 +102,7 @@ if (object_index==Button) {
 }
 
 if (object_index==TextField) {
-    if (tagmode==mode || tagmode==-1) {
+    if (tagmode==mode || tagmode==-1 || (tagmode==-2 and other.object_index==Tilepanel)) {
         if (type==1) {if (gray) col=global.col_main else col=real(text)}
         else {
             if (active) col=merge_color(global.col_high,$ffffff,0.75)

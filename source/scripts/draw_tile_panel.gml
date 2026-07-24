@@ -7,12 +7,13 @@ if (tilebgpal!=noone) {
     tex=bg_background[tilebgpal]
     bgw=background_get_width(tex)
     bgh=background_get_height(tex)
+    bgname=ds_list_find_value(backgrounds,tilebgpal)
     d3d_set_viewport(x+8,y+32+8,w-16,h-32-16)
     d3d_set_projection_ortho(round(xgo-(w-16)*z/2),round(ygo-(h-32-16)*z/2),(w-16)*z,(h-32-16)*z,0)
     texture_set_interpolation(0)
     draw_set_color(global.col_text)
     draw_set_valign(1)
-    draw_text(4,-16,ds_list_find_value(backgrounds,tilebgpal))
+    draw_text(4,-16,bgname)
     draw_text(4,bgh+16,string(bgw)+"x"+string(bgh))
     draw_set_valign(0)
     draw_set_color($ffffff)
@@ -24,8 +25,8 @@ if (tilebgpal!=noone) {
     y1=oy
     x2=background_get_width(tex)
     y2=background_get_height(tex)
-    if (sx || sy) {
-        for (u=x1;u<x2-gx;u+=gx+sx) for (v=y1;v<y2-gy;v+=gy+sy) {
+    if (sx || sy || ox || oy) {
+        for (u=x1;u<=x2-gx;u+=gx+sx) for (v=y1;v<=y2-gy;v+=gy+sy) {
             draw_rectangle(u-0.5,v-0.5,u+gx-0.5,v+gy-0.5,1)
         }
     } else {
@@ -40,18 +41,29 @@ if (tilebgpal!=noone) {
     draw_set_blend_mode(0)
 
     //draw tilemap ui
-    draw_seta(1,1)
     texture_set_interpolation(0)
 
+    draw_seta(1,1)
     dx=0 dy=-64 draw_button_ext(dx,dy,80,32,bg_tilemode[tilebgpal],global.col_main) draw_text(dx+40,dy+16,"Manual")
     dx=88 dy=-64 draw_button_ext(dx,dy,80,32,!bg_tilemode[tilebgpal],global.col_main) draw_text(dx+40,dy+16,"Smart")
+    draw_seta(0,0)
+
+    with (TextField) if (tagmode==-2) button_draw()
+
+    draw_seta(0,1)
+    dx=-112 dy=0
+    draw_text(dx,dy-16,"Grid")
+    dy=64
+    draw_text(dx,dy-16,"Offset")
+    dy=128
+    draw_text(dx,dy-16,"Separation")
 
     m=bg_tilemode[tilebgpal]
     if (m) {
         //draw autotiler ui
 
         texture_set_interpolation(0)
-        mw=max(176,bgw+32)
+        mw=max(176,bgw+32,string_width(bgname)+8)
         draw_set_halign(0)
         draw_text(mw+4,-16,tile_mode_name(m))
         draw_text(mw+4,-120,"Smart tiler mode")
@@ -170,7 +182,11 @@ if (tilebgpal!=noone) {
         draw_set_color($ffffff)
     }
 
-    texture_set_interpolation(1)
     draw_reset()
+
+    with (TextField) if (focus and alt!="" and tagmode==-2) drawtooltip_tilepanel(alt)
+
+    texture_set_interpolation(1)
+
     end_trim()
 }

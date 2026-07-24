@@ -32,20 +32,13 @@ gray=0
 multiline=0
 
 selected=0
-#define Alarm_0
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-alt=""
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
-if (focus && (tagmode==mode || tagmode==-1)) current_cursor=cr_beam
+if (focus && (tagmode==mode || tagmode==-1 || tagmode==-2)) current_cursor=cr_beam
 
 if (down!=0 && focus && !active && !(gray)) {
     textfield_activate()

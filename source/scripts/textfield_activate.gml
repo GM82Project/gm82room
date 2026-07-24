@@ -15,13 +15,9 @@ if (type==1) {
 if (type==2 || type==3) {
     active=0
 }
-if (action=="tile panel grid x" || action=="tile panel grid y") {
+if (action=="tile panel grid x" || action=="tile panel grid y" || action=="tile panel off x" || action=="tile panel off y" || action=="tile panel sep x" || action=="tile panel sep y") {
     if (tilebgpal==noone) {
         active=0
-    } else if (bg_gridsx[tilebgpal]!=0 || bg_gridsy[tilebgpal]!=0) {
-        active=0
-        alt="You can't change the grid in spaced tilesets"
-        alarm[0]=room_speed*2
     }
 }
 if (action=="palette name") {
