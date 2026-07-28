@@ -4,7 +4,7 @@ if (selecting || paint || selsize || grabknob || grab_background) exit
 
 if (direct_mbleft) exit
 
-if (mode==1 and tilebgpal!=noone and (mousein or autotiler_rectangle) and window_focused and tilemap_complete and bg_tilemode[tilebgpal]) {
+if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and window_focused and tilemap_complete and bg_tilemode[tilebgpal]) {
     //smart mode
     if (mouse_check_modal_pressed(mb_right)) {
         autotiler_last_click=noone

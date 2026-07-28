@@ -1,5 +1,7 @@
 var layer,newlayer;
 
+if (!show_question("Are you sure you want to delete tile layer "+string(ly_depth)+"?")) exit
+
 layer=ds_list_find_value(layers,ly_current)
 
 selectt=noone
