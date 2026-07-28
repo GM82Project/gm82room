@@ -198,9 +198,9 @@ shader_reset()
 
 if (messagetime>0) {
     draw_set_alpha(messagetime)
-    draw_set_halign(2)
-    draw_text_outline(width-160-16,48,messagestr,$ffff)
-    draw_set_halign(0)
+    dx=160
+    if (Instancepanel.open) dx+=Instancepanel.w
+    draw_text_outline(dx+16,48,messagestr,$ffff)
     draw_set_alpha(1)
 }
 

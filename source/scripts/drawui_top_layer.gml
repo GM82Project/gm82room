@@ -80,12 +80,4 @@ if (mode==1 and tilebgpal!=noone) if (bg_tilemode[tilebgpal] and mousein) {
     if (tilemap_complete==-1) tooltiptext="Cannot Smart Paint with#incorrectly mapped tiles"
 }
 
-if (live_message_alpha) live_message_alpha-=1
-draw_set_alpha(live_message_alpha/100)
-draw_set_color(0)
-draw_text(160+6+1,32+6+1,live_message)
-draw_set_color($ffff)
-draw_text(160+6,32+6,live_message)
-draw_reset()
-
 if (tooltiptext!="") drawtooltip(tooltiptext)

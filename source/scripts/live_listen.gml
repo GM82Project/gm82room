@@ -8,12 +8,12 @@ if (global.live_connect) {
     state=socket_get_state(sock)
     if (state==tcp_connected) {
         global.live_connect=0
-        show_live_message("Test: Connected to Game!")
+        message("Test: Connected to Game!")
         live_send_room_data()
     }
     if (state==tcp_error or state==tcp_closed) {
         global.live_connect=0
-        show_live_message("Test: Error connecting to game.")
+        message("Test: Error connecting to game.")
         socket_close(sock)
         socket_destroy(sock)
         global.livesock=noone
@@ -23,7 +23,7 @@ if (global.live_connect) {
 
     if (socket_get_state(sock)!=tcp_connected) {
         socket_destroy(global.livesock)
-        show_live_message("Test: Disconnected from game.")
+        message("Test: Disconnected from game.")
         global.livesock=noone
         exit
     }
@@ -34,7 +34,7 @@ if (global.live_connect) {
         if (type==1) {
             //game performed a room start and is requesting room data
             live_send_room_data()
-            show_live_message("Test: Game performed a Room Start")
+            message("Test: Game performed a Room Start")
         }
     }
 }

@@ -8,6 +8,7 @@ cb=-max_int
 with (Controller) switch (argument0) {
     //top panel
     case "save and quit": {save_room(0) game_end()}break
+    case "save game"    : {save_room(0)}break
     case "test game"    : {test_run()}break
     case "object mode"  : {change_mode(0)}break
     case "tile mode"    : {change_mode(1)}break
@@ -19,7 +20,7 @@ with (Controller) switch (argument0) {
     case "prefs"        : {show_prefs() write_preferences()}break
     case "live"         : {live_start()}break
     case "undo"         : {pop_undo()}break
-    case "plugins"      : {if (noplugins) show_message("There are no plugins installed.") else call_nmenu("pluginmenu",pluginmenu)}break
+    case "plugins"      : {if (noplugins) message("There are no plugins installed.") else call_nmenu("pluginmenu",pluginmenu)}break
 
 
     //settings

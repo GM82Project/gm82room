@@ -5,6 +5,7 @@ with (Tilepanel) {
         tex=bg_background[tilebgpal]
         bgw=background_get_width(tex)
         bgh=background_get_height(tex)
+
         if (bg_istile[tilebgpal]) {
             gx=bg_gridx[tilebgpal]
             gy=bg_gridy[tilebgpal]

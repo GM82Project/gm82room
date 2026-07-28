@@ -32,7 +32,7 @@ if (resizecount<10) {
             if (anchor==5) y=height-Tilepanel.h-32+4
         }
         resizecount+=1
-        if (resizecount>=10) show_message("Resizing the window failed multiple times. Do you have some sort of weird DPI settings? Either way, I'm disabling resizing for now.")
+        if (resizecount>=10) show_message("Resizing the window failed multiple times. You may have a program messing with the window dimensions. Resizing has been disabled.")
     } else resizecount=0
 }
 

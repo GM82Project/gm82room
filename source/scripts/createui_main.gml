@@ -3,13 +3,18 @@ i=instance_create(0,0,Button)
 i.spr=0
 i.action="save and quit"
 i.alt="Save and close"
-i.w=128
+i.w=96
 
+i=instance_create(96,0,Button)
+i.spr=63
+i.action="save game"
+i.alt="Save (Ctrl-S)"
 
 i=instance_create(128,0,Button)
 i.spr=50
 i.action="test game"
-i.alt="Test game (F5)"
+i.alt="Save and Test (F5)"
+
 
 //tabs
 i=instance_create(0,32,Button)

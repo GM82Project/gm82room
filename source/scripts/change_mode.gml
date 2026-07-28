@@ -1,4 +1,4 @@
-var i,layer,deact,dcur;
+var i,layer,deact,dcur,oldmode;
 
 dcur=0
 ref_moving=0
@@ -7,6 +7,7 @@ if (mode!=argument) {
     deselect()
 }
 
+oldmode=mode
 mode=argument0
 
 ds_priority_clear(click_priority)
@@ -70,4 +71,4 @@ repeat (dcur) {
 
 instance_activate_object(fieldtarget_keepactive)
 
-if (argument0==0) if (Instancepanel.open) {Instancepanel.updatew=1 Instancepanel.update_scheduled=true update_instancepanel()}
+if (mode==0 and oldmode!=0) if (Instancepanel.open) {Instancepanel.updatew=1 Instancepanel.update_scheduled=true update_instancepanel()}

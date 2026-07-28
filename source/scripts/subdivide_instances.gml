@@ -9,8 +9,8 @@ with (instance) if (sel and image_angle==0) {
     count+=ceil(sprite_width/gridx)*ceil(sprite_height/gridy)
 }
 
-if (count>1000)
-    if (!show_question("WARNING: your current selection with the set grid size ("+string(gridx)+","+string(gridy)+") will cause "+string(count)+" new instances to be created.##Are you sure you want to continue?"))
+if (count>5000)
+    if (!show_question("WARNING: Your current selection with the set grid size ("+string(gridx)+","+string(gridy)+") will cause "+string(count)+" new instances to be created.##Are you sure you want to continue?"))
         exit
 
 var checksel;checksel=!!num_selected()

@@ -9,7 +9,7 @@ if (argument0) {
     dir+="autosave\"
     directory_create(dir)
     file_create(dir+"gm82room lockfile")
-    message("Autosaved")
+    message("Backup updated.")
 } else {
     //normal save, make backup first
     dirname=string_copy(dir,1,string_length(dir)-1)
@@ -24,6 +24,8 @@ if (argument0) {
     for (f=file_find_first(dir+"*.txt",0);f!="";f=file_find_next()) {
         file_delete(dir+f)
     } file_find_close()
+
+    message("Room saved.")
 }
 
 instance_activate_all()

@@ -210,7 +210,7 @@ ShaderFromPack
 
 load_jtool_table
 live_listen
-show_live_message
+
 live_start
 init_instance_fields
 button_rightactions

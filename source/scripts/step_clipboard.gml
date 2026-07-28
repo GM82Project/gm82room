@@ -203,7 +203,7 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
     }
 
     if (copyvec[0,0]) {
-        if (copymode!=mode) show_message("Clipboard currently contains "+pick(copymode+1,"no data.","instance data. To paste, please switch to the instances tab.","tile data. To paste, please switch to the tiles tab."))
+        if (copymode!=mode) message("Clipboard currently contains "+pick(copymode+1,"no data.","instance data. To paste, please switch to the instances tab.","tile data. To paste, please switch to the tiles tab."))
         else {
             with (instance) sel=0
             with (tileholder) sel=0
