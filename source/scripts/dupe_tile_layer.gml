@@ -4,7 +4,7 @@ layer=ds_list_find_value(layers,ly_current)
 
 add_tile_layer()
 
-newlayer=ds_list_find_value(layers,layersize-1)
+newlayer=ly_depth
 
 selectt=noone
 with (tileholder) sel=0
