@@ -22,15 +22,15 @@ with (Controller) switch (argument0) {
         keyboard_check_direct(vk_rshift)
         keyboard_check_direct(vk_lcontrol)
         keyboard_check_direct(vk_rcontrol)
-        m=show_menu("Grid X:|8|16|32|64|128|256|"+string(roomwidth div 2)+"|"+string(roomwidth),-1)
+        m=show_menu("Grid X:|8|16|32|64|128|256|"+string(roomwidth div 2)+" (room width / 2)|"+string(roomwidth)+" (room width)|"+string(screen_grid_width)+" (screen grid)",-1)
         if (m) {
-            gridx=min(pick(m-1,8,16,32,64,128,256,roomwidth div 2,roomwidth),roomwidth)
+            gridx=min(pick(m-1,8,16,32,64,128,256,roomwidth div 2,roomwidth,screen_grid_width),roomwidth)
             keyboard_check_direct(vk_lshift)
             keyboard_check_direct(vk_rshift)
             keyboard_check_direct(vk_lcontrol)
             keyboard_check_direct(vk_rcontrol)
             if (keyboard_check_direct(vk_lshift) or keyboard_check_direct(vk_rshift) or keyboard_check_direct(vk_lcontrol) or keyboard_check_direct(vk_rcontrol)) {
-                gridy=min(gridx,roomheight)
+                gridy=min(pick(m-1,8,16,32,64,128,256,roomheight div 2,roomheight,screen_grid_height),roomheight)
                 with (TextField) if (action=="grid y") {text=string(gridy) event_user(4)}
             }
         }
@@ -41,15 +41,15 @@ with (Controller) switch (argument0) {
         keyboard_check_direct(vk_rshift)
         keyboard_check_direct(vk_lcontrol)
         keyboard_check_direct(vk_rcontrol)
-        m=show_menu("Grid Y:|8|16|32|64|128|256|"+string(roomheight div 2)+"|"+string(roomheight),-1)
+        m=show_menu("Grid Y:|8|16|32|64|128|256|"+string(roomheight div 2)+"| (room height / 2)"+string(roomheight)+" (room height)|"+string(screen_grid_height)+" (screen grid)",-1)
         if (m) {
+            gridy=min(pick(m-1,8,16,32,64,128,256,roomheight div 2,roomheight,screen_grid_height),roomheight)
             keyboard_check_direct(vk_lshift)
             keyboard_check_direct(vk_rshift)
             keyboard_check_direct(vk_lcontrol)
             keyboard_check_direct(vk_rcontrol)
-            gridy=min(pick(m-1,8,16,32,64,128,256,roomheight div 2,roomheight),roomheight)
             if (keyboard_check_direct(vk_lshift) or keyboard_check_direct(vk_rshift) or keyboard_check_direct(vk_lcontrol) or keyboard_check_direct(vk_rcontrol)) {
-                gridx=min(gridy,roomwidth)
+                gridx=min(pick(m-1,8,16,32,64,128,256,roomwidth div 2,roomwidth,screen_grid_width),roomwidth)
                 with (TextField) if (action=="grid x") {text=string(gridx) event_user(4)}
             }
         }
