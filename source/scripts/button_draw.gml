@@ -28,6 +28,7 @@ if (object_index==Button) {
             case "vwselect":         {up=(!down && vw_current!=actionid)}break
             case "undo":             {up=(!down && alt!="Undo (empty)") }break
             case "tile panel grid":  {up=(!down && !tilepickgrid)       }break
+            case "click precise":    {up=(!down && !preciseclick) spr=65-preciseclick alt="Precise sprite click: "+pick(preciseclick,"Disabled","Enabled")}break
             case "instance list":    {up=!down && !Instancepanel.open   }break
             case "live":             {up=(global.livesock==noone)       }break
             case "interp":           {spr=pick(interpolation,16,61,62) up=!down }break

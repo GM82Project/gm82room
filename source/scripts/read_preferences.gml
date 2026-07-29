@@ -25,6 +25,7 @@ rmbalwaysdel=registry_read_dword(dir+"GM82RoomRMBAlwaysDel",0)
 skipwarnings=registry_read_dword(dir+"GM82RoomSkipWarnings",0)
 skiprecenter=registry_read_dword(dir+"GM82RoomSkipRecenter",0)
 dotilecrop=registry_read_dword(dir+"GM82RoomDoTileCrop",1)
+preciseclick=registry_read_dword(dir+"GM82RoomPreciseClick",1)
 
 screen_grid_width=registry_read_dword(dir+"GM82RoomScreenGridWidth",registry_read_dword(dir+"DefRoomW",800))
 screen_grid_height=registry_read_dword(dir+"GM82RoomScreenGridHeight",registry_read_dword(dir+"DefRoomH",608) )

@@ -59,6 +59,7 @@ with (Controller) switch (argument0) {
     case "interp"          : {interpolation=(interpolation+1) mod 3 other.alt=pick(interpolation,"Smoothing Off","Smoothing On","Adaptive Smoothing")}break
     case "toggle grid"     : {grid=!grid}break
     case "toggle crosshair": {crosshair=!crosshair}break
+    case "click precise":    {preciseclick=!preciseclick update_precise_hitbox()}break
 
 
     //instance inspector

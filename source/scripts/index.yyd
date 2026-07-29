@@ -273,3 +273,4 @@ tile_mode_name
 bresenham
 update_tilesmart_tiles
 drawtooltip_tilepanel
+update_precise_hitbox

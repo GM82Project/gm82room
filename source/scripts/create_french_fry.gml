@@ -6,6 +6,7 @@ o.obj=obj
 o.objname=ds_list_find_value(objects,o.obj)
 o.depth=objdepth[o.obj]
 o.sprite_index=objspr[o.obj]
+if (!preciseclick) o.mask_index=objmaskr[o.obj]
 o.sprw=sprite_get_width(o.sprite_index)
 o.sprh=sprite_get_height(o.sprite_index)
 o.sprox=sprite_get_xoffset(o.sprite_index)

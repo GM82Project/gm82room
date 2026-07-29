@@ -27,9 +27,9 @@ if (mode==0) {
             } else if (abs(global.mousex-draghandx)<8*zm && abs(global.mousey-draghandy)<8*zm) {
                 scaling=1
                 yes=1                            
-            } else if (instance_position(global.mousex,global.mousey,id) && !keyboard_check(vk_control)) {
+            } else if (!keyboard_check(vk_control)) if (instance_position(global.mousex,global.mousey,id)) {
                 start_dragging()
-                yes=1
+                yes=1            
             }
         }
     }

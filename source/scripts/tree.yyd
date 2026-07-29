@@ -186,6 +186,7 @@
 	|create_french_fry
 	|clear_palette
 	|project_modified
+	|update_precise_hitbox
 +instances
 	|get_uid
 	|set_uid

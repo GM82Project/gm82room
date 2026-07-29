@@ -47,6 +47,7 @@ if (!argument_count) {
 
             depth=objdepth[obj]
             sprite_index=objspr[obj]
+            if (!preciseclick) mask_index=objmaskr[obj]
 
             sprw=sprite_get_width(sprite_index)
             sprh=sprite_get_height(sprite_index)

@@ -143,45 +143,50 @@ i.spr=51
 i.action="view ignore"
 i.alt="Show hidden objects"
 
+i=instance_create(160+608,0,Button)
+i.spr=64
+i.action="click precise"
+i.alt="Precise sprite click: Enabled"
+
 
 //view
-i=instance_create(160+624,0,Button)
+i=instance_create(160+656,0,Button)
 i.spr=10
 i.action="reset view"
 i.alt="Reset view"
 
-i=instance_create(160+656,0,Button)
+i=instance_create(160+688,0,Button)
 i.spr=11
 i.action="zoom in"
 i.alt="Zoom in"
 
-i=instance_create(160+688,0,Button)
+i=instance_create(160+720,0,Button)
 i.spr=12
 i.action="zoom out"
 i.alt="Zoom out"
 
-i=instance_create(160+720,0,Button)
+i=instance_create(160+752,0,Button)
 i.spr=16
 i.action="interp"
 i.alt=pick(interpolation,"Smoothing Off","Smoothing On","Adaptive Smoothing")
 
 //halp
-i=instance_create(160+768,0,Button)
+i=instance_create(160+800,0,Button)
 i.spr=22
 i.action="help"
 i.alt="Quick guide"
 
-i=instance_create(160+800,0,Button)
+i=instance_create(160+832,0,Button)
 i.spr=21
 i.action="prefs"
 i.alt="Preferences"
 
-i=instance_create(160+832,0,Button)
+i=instance_create(160+864,0,Button)
 i.spr=49
 i.action="live"
 i.alt="Start realtime connection to game using 8.2 Test"
 
-i=instance_create(160+864,0,Button)
+i=instance_create(160+896,0,Button)
 i.spr=56
 i.action="plugins"
 i.alt="Run a plugin..."
