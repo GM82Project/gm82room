@@ -125,16 +125,20 @@ if (grabknob) {
     }
 } else if (mousein) {
     if (keyboard_check_pressed(219) or keyboard_check_pressed(220)) {
-        gridx=pick(unpick(gridx,8,16,32,64,128,256,roomheight div 2,roomheight)+1,8,16,32,64,128,256,roomheight div 2,roomheight)
-        gridy=gridx
-        with (TextField) if (action=="grid y") {text=string(gridx) event_user(4)}
+        opt=min(unpick(gridx,8,16,32,64,128,256,roomwidth div 2,roomwidth,screen_grid_width)+1,8)
+        gridx=min(pick(opt,8,16,32,64,128,256,roomwidth div 2,roomwidth,screen_grid_width),roomwidth)
+        gridy=min(pick(opt,8,16,32,64,128,256,roomheight div 2,roomheight,screen_grid_height),roomheight)
         with (TextField) if (action=="grid x") {text=string(gridx) event_user(4)}
+        with (TextField) if (action=="grid y") {text=string(gridy) event_user(4)}
+        rebuild_autotiler_tree()
     }
     if (keyboard_check_pressed(221)) {
-        gridx=pick(unpick(gridx,8,16,32,64,128,256,roomheight div 2,roomheight)-1,8,16,32,64,128,256,roomheight div 2,roomheight)
-        gridy=gridx
-        with (TextField) if (action=="grid y") {text=string(gridx) event_user(4)}
+        opt=max(0,unpick(gridx,8,16,32,64,128,256,roomwidth div 2,roomwidth,screen_grid_width)-1)
+        gridx=min(pick(opt,8,16,32,64,128,256,roomwidth div 2,roomwidth,screen_grid_width),roomwidth)
+        gridy=min(pick(opt,8,16,32,64,128,256,roomheight div 2,roomheight,screen_grid_height),roomheight)
         with (TextField) if (action=="grid x") {text=string(gridx) event_user(4)}
+        with (TextField) if (action=="grid y") {text=string(gridy) event_user(4)}
+        rebuild_autotiler_tree()
     }
     
     if (mouse_wheel_down() || keyboard_check_pressed(vk_subtract) || (keyboard_check(vk_control) && keyboard_check_pressed(vk_minus))) {
