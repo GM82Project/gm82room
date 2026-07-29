@@ -72,6 +72,7 @@ if (messagetime>0) {
 if (current_time>autosave_timer+autosave_interval) {
     var fail;fail=false
     with (instance) if (fieldactive) fail=true
+    with (TextField) if (active) fail=true
     if (!mouse_check_button(mb_any) && !keyboard_check(vk_anykey) && !fail) {
         autosave_timer=current_time
         save_room(1)
