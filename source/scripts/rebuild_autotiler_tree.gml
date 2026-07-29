@@ -7,7 +7,7 @@ key=ds_map_find_next(autotiler_tree,key)}
 
 ds_map_clear(autotiler_tree)
 
-if (bg_tilemode[tilebgpal]) {
+if (tilebgpal!=noone) if (bg_tilemode[tilebgpal]) {
     //create new grids
     with (tileholder) if (bg==bg_background[tilebgpal]) {
         u=floorto(x,gridx*autotiler_tree_size)
