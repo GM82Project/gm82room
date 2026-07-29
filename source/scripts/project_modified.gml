@@ -1,5 +1,5 @@
 ///project_modified()
 //mark project as modified
 
+if (!global.modified) room_caption=global.default_caption+"*"
 global.modified=1
-room_caption=global.default_caption+"*"

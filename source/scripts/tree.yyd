@@ -264,6 +264,7 @@
 	|find_smart_tile_at
 	|fill_tilesmart_copy
 	|tile_mode_name
+	|rebuild_autotiler_tree
 |begin_trim
 |end_trim
 |error_handler

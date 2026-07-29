@@ -33,6 +33,7 @@ with (Controller) switch (argument0) {
                 gridy=min(pick(m-1,8,16,32,64,128,256,roomheight div 2,roomheight,screen_grid_height),roomheight)
                 with (TextField) if (action=="grid y") {text=string(gridy) event_user(4)}
             }
+            rebuild_autotiler_tree()
         }
         with (other) {text=string(gridx) event_user(4)}
     }break
@@ -52,6 +53,7 @@ with (Controller) switch (argument0) {
                 gridx=min(pick(m-1,8,16,32,64,128,256,roomwidth div 2,roomwidth,screen_grid_width),roomwidth)
                 with (TextField) if (action=="grid x") {text=string(gridx) event_user(4)}
             }
+            rebuild_autotiler_tree()
         }
         with (other) {text=string(gridy) event_user(4)}
     }break

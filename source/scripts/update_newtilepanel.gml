@@ -41,5 +41,6 @@ with (Tilepanel) {
         ygo=curtiley+curtileh/2
 
         check_tilemap_complete()
+        rebuild_autotiler_tree()
     }
 }

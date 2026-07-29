@@ -69,6 +69,8 @@ repeat (dcur) {
     i+=1
 }
 
+rebuild_autotiler_tree()
+
 instance_activate_object(fieldtarget_keepactive)
 
 if (mode==0 and oldmode!=0) if (Instancepanel.open) {Instancepanel.updatew=1 Instancepanel.update_scheduled=true update_instancepanel()}

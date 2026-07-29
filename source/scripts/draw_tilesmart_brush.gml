@@ -1,5 +1,5 @@
 ///draw_tilesmart_brush(gridx,gridy,enable)
-var drawx,drawy,replace,index,byte,left,top,i,tile1,tile2,l,t;
+var drawx,drawy,replace,index,byte,left,top,i,tile1,tile2,l,t,u,v,name,leaf;
 
 drawx=argument0*gridx
 drawy=argument1*gridy
@@ -81,6 +81,13 @@ if (argument2) {//add tile
     o.modified=1
     update_instance_memory(o)
     autotiler_last_click=o
+
+    u=floorto(o.x,gridx*autotiler_tree_size)
+    v=floorto(o.y,gridy*autotiler_tree_size)
+    name=string(u)+"_"+string(v)
+    if (ds_map_exists(autotiler_tree,name)) leaf=ds_map_find_value(autotiler_tree,name)
+    else {leaf=ds_grid_create(autotiler_tree_size,autotiler_tree_size) ds_map_add(autotiler_tree,name,leaf)}
+    ds_grid_set(leaf,(o.x-u) div gridx,(o.y-v) div gridy,o)
 }
 
 if (replace or argument2) if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {

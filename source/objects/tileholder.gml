@@ -40,6 +40,16 @@ if (tile!=noone) {
 }
 
 ds_map_delete(uidmap,uid)
+
+if (bg==bg_background[tilebgpal]) {
+    u=floorto(x,gridx*autotiler_tree_size)
+    v=floorto(y,gridy*autotiler_tree_size)
+    name=string(u)+"_"+string(v)
+    if (ds_map_exists(autotiler_tree,name)) {
+        leaf=ds_map_find_value(autotiler_tree,name)
+        ds_grid_set(leaf,(x-u) div gridx,(y-v) div gridy,0)
+    }
+}
 #define Step_2
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -138,6 +148,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+///post brush update
 if (post_brush_update) {
     tile2[0]=find_smart_tile_at(x-gridx*0.5,y-gridy*0.5)
     tile2[1]=find_smart_tile_at(x+gridx*0.5,y-gridy*0.5)

@@ -40,6 +40,7 @@ globalvar
     undostack,undolist,undoing,uidmap,lastuid,current_undo_size,total_undo_size,
     mspal,customcolors,
     tilepickgrid,
+    autotiler_tree,autotiler_tree_size,
     constmap,constmapsize,consthasfunc,constmenu,constmenuitems,
     datafilemenu,datafilemenuitems,
     sprmenu,sprmenuitems,spr_sprite,

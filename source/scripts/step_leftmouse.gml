@@ -15,6 +15,7 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
     }
     if (mouse_check_modal(mb_left)) {
         if (direct_mbright and autotiler_rectangle==1) {autotiler_rectangle=0 exit}
+        project_modified()
         if (!autotiler_rectangle) bresenham(
             floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
             floor(global.mousex/gridx),floor(global.mousey/gridy),
@@ -33,6 +34,7 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
             u+=1}v+=1}
             autotiler_rectangle=0
             update_tilesmart_tiles()
+            project_modified()
         }
     }
     exit
