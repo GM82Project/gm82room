@@ -52,11 +52,16 @@ if (window_has_focus()) {
 }
 
 if (file_drag_count()) {
-    load_reference(file_drag_name(0))
-    ref_x=global.mousex
-    ref_y=global.mousey
-    change_mode(4)
-    ref_moving=1
+    fn=file_drag_name(0)
+    ext=string_lower(filename_ext(fn))
+    if (string_pos(".png",ext) or string_pos(".jpg",ext) or string_pos(".jpeg",ext)) {
+        if (load_reference(fn)) {
+            ref_x=global.mousex
+            ref_y=global.mousey
+            change_mode(4)
+            ref_moving=1
+        }
+    }
     file_drag_clear()
     window_set_foreground()
 }
