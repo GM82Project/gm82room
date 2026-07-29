@@ -7,7 +7,7 @@ if (!objloaded[i]) {
     objloaded[i]=1
     object[i]=ds_map_create() ds_map_read_ini(object[i],root+"objects\"+argument0+".txt")
     objspr[i]=get_sprite(ds_map_find_value(object[i],"sprite"))
-    objmaskr[i]=spr_mask[micro_optim_sprite_id]
+    objmaskr[i]=micro_optim_mask_id
     objmask[i]=ds_map_find_value(object[i],"mask")
     objvis[i]=real(ds_map_find_value(object[i],"visible"))
     objdepth[i]=real(ds_map_find_value(object[i],"depth"))

@@ -2,6 +2,8 @@ var i,map,frame;
 
 frame=0
 
+micro_optim_mask_id=-1
+
 if (is_real(argument[0])) return sprDefault
 if (argument[0]="") return sprDefault
 
@@ -11,8 +13,6 @@ if (frame<0) return sprDefault
 
 i=ds_list_find_index(sprites,argument[0])
 if (i<0) {show_error("Error loading project: sprite "+qt+argument0+qt+" doesn't seem to exist in the project.",0) return sprDefault}
-
-micro_optim_sprite_id=i
 
 while (sprloaded_len[i]<=frame) {
     sprloaded[i,sprloaded_len[i]]=0
@@ -34,6 +34,7 @@ if (!sprloaded[i,frame]) {
     if (frame==0) {
         spr_mask[i]=sprite_duplicate(spr_sprite[i,0])
         sprite_collision_mask(spr_mask[i],0,0,0,0,0,0,1,0)
+        micro_optim_mask_id=spr_mask[i]
     }
 }
 
