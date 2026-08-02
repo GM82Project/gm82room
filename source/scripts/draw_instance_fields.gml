@@ -216,3 +216,4 @@ for (i=0;i<objfields[obj];i+=1) {
 dx=odx
 
 draw_set_valign(0)
+draw_set_color($ffffff)
