@@ -45,6 +45,8 @@ if (select==id) {
     select=noone
 }
 
+if (Controller.focus==id) Controller.focus=noone
+
 instancecount-=1
 
 ds_map_delete(uidmap,uid)
