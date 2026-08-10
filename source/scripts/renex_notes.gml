@@ -1,8 +1,8 @@
 /*
 
-the undo system is a clusterfuck and i hate it. it's hard to understand, and i wish i'd implemented it some other way.
-it essentially pushes changes into a list, with some header information if the actions are linked,
-so undoing would undo multiple actions in a row until it runs out of linked actions.
+the undo system works by pushing values into a list, and then pushing that list into a stack.
+when an undo action has multiple packets, they are marked as linked, so that undoing would
+keep going through packets in a row until it runs out of linked packets.
 
 the path editor is unfinished, still missing any kind of undo system, could probably just shove the
 entire path in the undo stack.

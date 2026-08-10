@@ -15,12 +15,18 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
     }
     if (mouse_check_modal(mb_left)) {
         if (direct_mbright and autotiler_rectangle==1) {autotiler_rectangle=0 exit}
-        project_modified()
-        if (!autotiler_rectangle) bresenham(
-            floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
-            floor(global.mousex/gridx),floor(global.mousey/gridy),
-            draw_tilesmart_brush,1
-        )
+        if (!autotiler_rectangle) {
+            project_modified()
+            bresenham(
+                floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
+                floor(global.mousex/gridx),floor(global.mousey/gridy),
+                draw_tilesmart_brush,1
+            )
+            begin_undo(act_atdestroy,"drawing smart tiles",0)
+            add_undo(autotiler_is_adjacent)
+            with (tileholder) if (modified) {add_undo(uid) modified=0}
+            push_undo()
+        }
     } else {
         if (autotiler_rectangle==1) {
             left=min(floor(global.mousex/gridx),autotiler_rectangle_x)

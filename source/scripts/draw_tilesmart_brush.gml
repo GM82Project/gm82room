@@ -11,7 +11,7 @@ if (replace and autotiler_last_click==replace) exit
 
 with (replace) instance_destroy()
 
-if (replace or argument2) if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
+if (autotiler_is_adjacent) {
     tile1[0]=find_smart_tile_at(drawx-gridx*0.5,drawy-gridy*0.5)
     tile1[1]=find_smart_tile_at(drawx+gridx*0.5,drawy-gridy*0.5)
     tile1[2]=find_smart_tile_at(drawx+gridx*1.5,drawy-gridy*0.5)
@@ -90,7 +90,7 @@ if (argument2) {//add tile
     ds_grid_set(leaf,(o.x-u) div gridx,(o.y-v) div gridy,o)
 }
 
-if (replace or argument2) if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
+if (autotiler_is_adjacent) {
     //update surrounding tiles
     i=0 repeat (8) {if (tile1[i]) tile1[i].post_brush_update=1 i+=1}
 }

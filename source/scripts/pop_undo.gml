@@ -166,6 +166,26 @@ if (size) {
                 }
             } until (i>=size)
         }break
+        case act_atdestroy: {
+            /*mode=ds_list_find_value(l,i) i+=1
+            repeat (size) {
+                tile=ds_list_find_value(l,i) i+=1
+                
+                tile1[0]=find_smart_tile_at(drawx-gridx*0.5,drawy-gridy*0.5)
+                tile1[1]=find_smart_tile_at(drawx+gridx*0.5,drawy-gridy*0.5)
+                tile1[2]=find_smart_tile_at(drawx+gridx*1.5,drawy-gridy*0.5)
+                tile1[3]=find_smart_tile_at(drawx-gridx*0.5,drawy+gridy*0.5)
+                tile1[4]=find_smart_tile_at(drawx+gridx*1.5,drawy+gridy*0.5)
+                tile1[5]=find_smart_tile_at(drawx-gridx*0.5,drawy+gridy*1.5)
+                tile1[6]=find_smart_tile_at(drawx+gridx*0.5,drawy+gridy*1.5)
+                tile1[7]=find_smart_tile_at(drawx+gridx*1.5,drawy+gridy*1.5)
+                
+                with (ds_map_find_value(uidmap,tile)) {
+                    instance_destroy()
+                }
+            }   */
+        }break
+        
     }
 
     total_undo_size-=ds_list_find_value(l,ds_list_size(l)-1)

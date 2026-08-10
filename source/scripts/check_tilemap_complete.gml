@@ -29,3 +29,7 @@ else if (ds_grid_get_min(bg_tilemap[tilebgpal],0,0,pick(bg_tilemode[tilebgpal]-1
 
     tilemap_complete=1
 }
+
+autotiler_is_adjacent=0
+
+if (replace or argument2) if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) autotiler_is_adjacent=1
