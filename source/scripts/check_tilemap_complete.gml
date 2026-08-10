@@ -1,10 +1,20 @@
-var maxx,maxy,i;
+var maxx,maxy,i,variantx,varianty;
 
 if (tilebgpal==noone) tilemap_complete=false
 else if (bg_tilemode[tilebgpal]==7 or bg_tilemode[tilebgpal]==8) tilemap_complete=true
 else if (ds_grid_get_min(bg_tilemap[tilebgpal],0,0,pick(bg_tilemode[tilebgpal]-1,1,2,4,9,16,47)-1,1)!=noone) {
-    maxx=(bgw/ds_grid_get(bg_tilemap[tilebgpal],47,0))
-    maxy=(bgh/ds_grid_get(bg_tilemap[tilebgpal],47,1))
+    variantx=ds_grid_get(bg_tilemap[tilebgpal],47,0)
+    varianty=ds_grid_get(bg_tilemap[tilebgpal],47,1)
+
+    if (variantx<=0 or varianty<=0) {
+        variantx=1
+        varianty=1
+        ds_grid_set(bg_tilemap[tilebgpal],47,0,1)
+        ds_grid_set(bg_tilemap[tilebgpal],47,1,1)
+    }
+
+    maxx=(bgw/variantx)
+    maxy=(bgh/varianty)
 
     tilemap_complete=0
 
