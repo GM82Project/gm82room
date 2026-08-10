@@ -7,3 +7,4 @@ current_undo_size=0
 total_undo_size=0
 
 global.modified=0
+undo_save_tarnished=0

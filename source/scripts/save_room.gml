@@ -195,4 +195,7 @@ if (!argument0) {
     if (directory_exists(dirname)) {
         execute_program_silent("cmd /C "+qt+"rmdir "+qt+dirname+qt+" /s /q"+qt)
     }
+
+    //don't let undo mark the project as unmodified if it has been saved
+    undo_save_tarnished=true
 }

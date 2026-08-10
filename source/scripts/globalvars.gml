@@ -37,7 +37,7 @@ globalvar
     path_precision,current_path,current_pathpoint,drag_point,current_pathname,path_thin,pathmap_path,pathmap_model,pathmap_edited,pathmap_fields,path_sel,pathfocus,paths_have_been_deleted,
     objmenu,objmenuitems,toolmenu,toolmenuitems,pluginmenu,pluginmenuitems,noplugins,plugindesc,plugincode,
     bgmenu,bgmenuitems,tilebgmenu_contains,
-    undostack,undolist,undoing,uidmap,lastuid,current_undo_size,total_undo_size,
+    undostack,undolist,undoing,uidmap,lastuid,current_undo_size,total_undo_size,undo_save_tarnished,
     mspal,customcolors,
     tilepickgrid,
     autotiler_tree,autotiler_tree_size,
