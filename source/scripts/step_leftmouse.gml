@@ -22,12 +22,16 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
                 floor(global.mousex/gridx),floor(global.mousey/gridy),
                 draw_tilesmart_brush,1
             )
-            begin_undo(act_atdestroy,"drawing smart tiles",0)
-            add_undo(autotiler_is_adjacent)
-            with (tileholder) if (modified) {add_undo(uid) modified=0}
-            push_undo()
+            autotiler_was_drawing=1
         }
     } else {
+        if (autotiler_was_drawing) {
+            autotiler_was_drawing=0
+            begin_undo(act_atdestroy,"drawing smart tiles",0)
+            add_undo(autotiler_is_adjacent)
+            with (tileholder) if (autotile_just_added) {add_undo(uid) autotile_just_added=0 rect(x,y,32,32,$ff00ff,0.5)}
+            push_undo()
+        }
         if (autotiler_rectangle==1) {
             left=min(floor(global.mousex/gridx),autotiler_rectangle_x)
             right=max(floor(global.mousex/gridx),autotiler_rectangle_x)
@@ -41,6 +45,10 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
             autotiler_rectangle=0
             update_tilesmart_tiles()
             project_modified()
+            begin_undo(act_atdestroy,"drawing smart tiles",0)
+            add_undo(autotiler_is_adjacent)
+            with (tileholder) if (autotile_just_added) {add_undo(uid) autotile_just_added=0}
+            push_undo()
         }
     }
     exit

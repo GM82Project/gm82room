@@ -23,6 +23,7 @@ draghandy=-9999999
 tilecount+=1
 
 post_brush_update=0
+autotile_just_added=0
 #define Destroy_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

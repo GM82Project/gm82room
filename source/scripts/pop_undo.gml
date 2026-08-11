@@ -1,4 +1,4 @@
-var l,o,i,j,uaction,lmode,size,tilew,tileh,combo,size;
+var l,o,i,j,uaction,lmode,size,tilew,tileh,combo,size,was_adjacent,t;
 
 size=ds_list_size(undostack)
 if (size) {
@@ -167,23 +167,24 @@ if (size) {
             } until (i>=size)
         }break
         case act_atdestroy: {
-            /*mode=ds_list_find_value(l,i) i+=1
-            repeat (size) {
-                tile=ds_list_find_value(l,i) i+=1
-                
-                tile1[0]=find_smart_tile_at(drawx-gridx*0.5,drawy-gridy*0.5)
-                tile1[1]=find_smart_tile_at(drawx+gridx*0.5,drawy-gridy*0.5)
-                tile1[2]=find_smart_tile_at(drawx+gridx*1.5,drawy-gridy*0.5)
-                tile1[3]=find_smart_tile_at(drawx-gridx*0.5,drawy+gridy*0.5)
-                tile1[4]=find_smart_tile_at(drawx+gridx*1.5,drawy+gridy*0.5)
-                tile1[5]=find_smart_tile_at(drawx-gridx*0.5,drawy+gridy*1.5)
-                tile1[6]=find_smart_tile_at(drawx+gridx*0.5,drawy+gridy*1.5)
-                tile1[7]=find_smart_tile_at(drawx+gridx*1.5,drawy+gridy*1.5)
-                
-                with (ds_map_find_value(uidmap,tile)) {
+            was_adjacent=ds_list_find_value(l,i) i+=1
+            repeat (size-1) {
+                with (ds_map_find_value(uidmap,ds_list_find_value(l,i))) {
+                    if (was_adjacent) {
+                        t=find_smart_tile_at(x-gridx*0.5,y-gridy*0.5) if (t) t.post_brush_update=1
+                        t=find_smart_tile_at(x+gridx*0.5,y-gridy*0.5) if (t) t.post_brush_update=1
+                        t=find_smart_tile_at(x+gridx*1.5,y-gridy*0.5) if (t) t.post_brush_update=1
+                        t=find_smart_tile_at(x-gridx*0.5,y+gridy*0.5) if (t) t.post_brush_update=1
+                        t=find_smart_tile_at(x+gridx*1.5,y+gridy*0.5) if (t) t.post_brush_update=1
+                        t=find_smart_tile_at(x-gridx*0.5,y+gridy*1.5) if (t) t.post_brush_update=1
+                        t=find_smart_tile_at(x+gridx*0.5,y+gridy*1.5) if (t) t.post_brush_update=1
+                        t=find_smart_tile_at(x+gridx*1.5,y+gridy*1.5) if (t) t.post_brush_update=1
+                    }                    
                     instance_destroy()
                 }
-            }   */
+                i+=1
+            }
+            update_tilesmart_tiles()
         }break
         
     }
