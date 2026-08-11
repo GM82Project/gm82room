@@ -16,20 +16,25 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
     if (mouse_check_modal(mb_left)) {
         if (direct_mbright and autotiler_rectangle==1) {autotiler_rectangle=0 exit}
         if (!autotiler_rectangle) {
-            project_modified()
+            if (!autotiler_was_drawing) {
+                begin_undo(act_atcreate,"",0) //combo w/ act_atdestroy
+                add_undo(autotiler_is_adjacent)
+                autotiler_was_drawing=1
+                project_modified()
+            }
             bresenham(
                 floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
                 floor(global.mousex/gridx),floor(global.mousey/gridy),
                 draw_tilesmart_brush,1
             )
-            autotiler_was_drawing=1
         }
     } else {
         if (autotiler_was_drawing) {
             autotiler_was_drawing=0
-            begin_undo(act_atdestroy,"drawing smart tiles",0)
+            push_undo()
+            begin_undo(act_atdestroy,"drawing smart tiles",1)
             add_undo(autotiler_is_adjacent)
-            with (tileholder) if (autotile_just_added) {add_undo(uid) autotile_just_added=0 rect(x,y,32,32,$ff00ff,0.5)}
+            with (tileholder) if (autotile_just_added) {add_undo(uid) autotile_just_added=0}
             push_undo()
         }
         if (autotiler_rectangle==1) {
@@ -45,7 +50,7 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
             autotiler_rectangle=0
             update_tilesmart_tiles()
             project_modified()
-            begin_undo(act_atdestroy,"drawing smart tiles",0)
+            begin_undo(act_atdestroy,"drawing a smart tile rectangle",0)
             add_undo(autotiler_is_adjacent)
             with (tileholder) if (autotile_just_added) {add_undo(uid) autotile_just_added=0}
             push_undo()

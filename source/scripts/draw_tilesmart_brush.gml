@@ -9,7 +9,10 @@ replace=find_smart_tile_at(drawx+gridx/2,drawy+gridy/2)
 
 if (replace and autotiler_last_click==replace) exit
 
-with (replace) instance_destroy()
+with (replace) {
+    add_undo_tile()
+    instance_destroy()
+}
 
 if (replace or argument2) and (autotiler_is_adjacent) {
     tile1[0]=find_smart_tile_at(drawx-gridx*0.5,drawy-gridy*0.5)

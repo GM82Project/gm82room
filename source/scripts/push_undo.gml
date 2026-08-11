@@ -1,4 +1,7 @@
 var type;
+
+show_debug_message("push_undo()")
+
 with (Controller) if (undoing) {
     if (ds_list_size(undolist)>4) {
         ds_list_add(undolist,current_undo_size)

@@ -1,5 +1,7 @@
 var l,o,i,j,uaction,lmode,size,tilew,tileh,combo,size,was_adjacent,t;
 
+if (undoing) exit
+
 size=ds_list_size(undostack)
 if (size) {
     l=ds_list_find_value(undostack,size-1)
@@ -186,7 +188,44 @@ if (size) {
             }
             update_tilesmart_tiles()
         }break
-        
+        case act_atcreate: {
+            was_adjacent=ds_list_find_value(l,i) i+=1
+            do {
+                o=instance_create(ds_list_find_value(l,i+3),ds_list_find_value(l,i+4),tileholder)
+                set_uid(o,ds_list_find_value(l,i))
+                o.bg=ds_list_find_value(l,i+1)
+                o.bgname=ds_list_find_value(l,i+2)
+                o.tlayer=ds_list_find_value(l,i+5) o.depth=o.tlayer-0.01
+                o.tilew=ds_list_find_value(l,i+8)
+                o.tileh=ds_list_find_value(l,i+9)
+                o.tile=tile_add(o.bg,ds_list_find_value(l,i+6),ds_list_find_value(l,i+7),o.tilew,o.tileh,o.x,o.y,o.tlayer)
+                o.tilesx=ds_list_find_value(l,i+10)
+                o.tilesy=ds_list_find_value(l,i+11)
+                o.image_blend=ds_list_find_value(l,i+12)
+                o.image_alpha=ds_list_find_value(l,i+13)
+                o.order=ds_list_find_value(l,i+14)
+
+                o.image_xscale=o.tilesx*o.tilew
+                o.image_yscale=o.tilesy*o.tileh
+
+                tile_set_scale(o.tile,o.tilesx,o.tilesy)
+                tile_set_blend(o.tile,o.image_blend)
+                tile_set_alpha(o.tile,o.image_alpha)
+                i+=15
+                
+                if (was_adjacent) {
+                    t=find_smart_tile_at(o.x-gridx*0.5,o.y-gridy*0.5) if (t) t.post_brush_update=1
+                    t=find_smart_tile_at(o.x+gridx*0.5,o.y-gridy*0.5) if (t) t.post_brush_update=1
+                    t=find_smart_tile_at(o.x+gridx*1.5,o.y-gridy*0.5) if (t) t.post_brush_update=1
+                    t=find_smart_tile_at(o.x-gridx*0.5,o.y+gridy*0.5) if (t) t.post_brush_update=1
+                    t=find_smart_tile_at(o.x+gridx*1.5,o.y+gridy*0.5) if (t) t.post_brush_update=1
+                    t=find_smart_tile_at(o.x-gridx*0.5,o.y+gridy*1.5) if (t) t.post_brush_update=1
+                    t=find_smart_tile_at(o.x+gridx*0.5,o.y+gridy*1.5) if (t) t.post_brush_update=1
+                    t=find_smart_tile_at(o.x+gridx*1.5,o.y+gridy*1.5) if (t) t.post_brush_update=1
+                }
+            } until (i>=size)
+            update_tilesmart_tiles()
+        }break
     }
 
     total_undo_size-=ds_list_find_value(l,ds_list_size(l)-1)
