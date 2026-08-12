@@ -1,4 +1,4 @@
-var l,o,i,j,uaction,lmode,size,tilew,tileh,combo,size,was_adjacent,t;
+var l,o,i,j,uaction,lmode,size,combo,size,was_adjacent,t;
 
 if (undoing) exit
 
@@ -178,7 +178,7 @@ if (size) {
                         i-=1
                     }break
                     case act_atcreate: {
-                        i-=15
+                        i-=14
                         o=instance_create(ds_list_find_value(l,i+3),ds_list_find_value(l,i+4),tileholder)
                         set_uid(o,ds_list_find_value(l,i))
                         o.bg=ds_list_find_value(l,i+1)
@@ -202,7 +202,7 @@ if (size) {
                         i-=1
                     }break
                     case act_atchange: {
-                        i-=3
+                        i-=2
                         with (ds_map_find_value(uidmap,ds_list_find_value(l,i))) {
                             left=ds_list_find_value(l,i+1)
                             top=ds_list_find_value(l,i+2)
@@ -210,10 +210,17 @@ if (size) {
                         }
                         i-=1
                     }break
-                    default: show_message("gotcha: "+string(sub_action))
+                    default: {
+                        clipboard_set_text("undo error: unexpected data at position ("+string(i)+") in autotiler action ("+string(sub_action)+")"+crlf+crlf+"stack dump:"+crlf+dslist(l))
+                        show_message("undo error: unexpected data at position ("+string(i)+") in autotiler action ("+string(sub_action)+")##stack dump copied!")
+                    }
                 }
             } until (i<4)
         }break
+        default: {
+            clipboard_set_text("undo error: unknown action ("+string(uaction)+") at position ("+string(i)+")"+crlf+crlf+"stack dump:"+crlf+dslist(l))
+            show_message("undo error: unknown action ("+string(uaction)+") at position ("+string(i)+")##stack dump copied!")
+        }
     }
 
     total_undo_size-=ds_list_find_value(l,ds_list_size(l)-1)

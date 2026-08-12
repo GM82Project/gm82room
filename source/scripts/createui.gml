@@ -9,6 +9,7 @@ createui_paths()      //mode 5
 
 update_instancepanel()
 update_tilepanel()
+update_undo_button()
 
 with (Button) {
     if (object_index==Button && type==1) {

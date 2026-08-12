@@ -35,6 +35,7 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
             push_undo()
         }
         if (autotiler_rectangle==1) {
+            begin_undo(act_autotiler,"drawing a smart tile rectangle",0)
             left=min(floor(global.mousex/gridx),autotiler_rectangle_x)
             right=max(floor(global.mousex/gridx),autotiler_rectangle_x)
             top=min(floor(global.mousey/gridy),autotiler_rectangle_y)
@@ -46,7 +47,7 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
             u+=1}v+=1}
             autotiler_rectangle=0
             update_tilesmart_tiles()
-            //note: add undo block here
+            push_undo()
         }
     }
     exit
