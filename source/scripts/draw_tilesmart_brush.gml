@@ -11,6 +11,7 @@ if (replace and autotiler_last_click==replace) exit
 
 with (replace) {
     add_undo_tile()
+    add_undo(act_atcreate)
     instance_destroy()
 }
 
@@ -92,9 +93,20 @@ if (argument2) {//add tile
     if (ds_map_exists(autotiler_tree,name)) leaf=ds_map_find_value(autotiler_tree,name)
     else {leaf=ds_grid_create(autotiler_tree_size,autotiler_tree_size) ds_map_add(autotiler_tree,name,leaf)}
     ds_grid_set(leaf,(o.x-u) div gridx,(o.y-v) div gridy,o)
+
+    add_undo(o.uid)
+    add_undo(act_atdestroy)
 }
 
 if (replace or argument2) and (autotiler_is_adjacent) {
     //update surrounding tiles
-    i=0 repeat (8) {if (tile1[i]) tile1[i].post_brush_update=1 i+=1}
+    i=0 repeat (8) {
+        with (tile1[i]) {
+            add_undo(uid)
+            add_undo(left)
+            add_undo(top)
+            add_undo(act_atchange)
+            post_brush_update=1
+        }
+    i+=1}
 }

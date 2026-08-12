@@ -168,63 +168,51 @@ if (size) {
                 }
             } until (i>=size)
         }break
-        case act_atdestroy: {
-            was_adjacent=ds_list_find_value(l,i) i+=1
-            repeat (size-1) {
-                with (ds_map_find_value(uidmap,ds_list_find_value(l,i))) {
-                    if (was_adjacent) {
-                        t=find_smart_tile_at(x-gridx*0.5,y-gridy*0.5) if (t) t.post_brush_update=1
-                        t=find_smart_tile_at(x+gridx*0.5,y-gridy*0.5) if (t) t.post_brush_update=1
-                        t=find_smart_tile_at(x+gridx*1.5,y-gridy*0.5) if (t) t.post_brush_update=1
-                        t=find_smart_tile_at(x-gridx*0.5,y+gridy*0.5) if (t) t.post_brush_update=1
-                        t=find_smart_tile_at(x+gridx*1.5,y+gridy*0.5) if (t) t.post_brush_update=1
-                        t=find_smart_tile_at(x-gridx*0.5,y+gridy*1.5) if (t) t.post_brush_update=1
-                        t=find_smart_tile_at(x+gridx*0.5,y+gridy*1.5) if (t) t.post_brush_update=1
-                        t=find_smart_tile_at(x+gridx*1.5,y+gridy*1.5) if (t) t.post_brush_update=1
-                    }                    
-                    instance_destroy()
-                }
-                i+=1
-            }
-            update_tilesmart_tiles()
-        }break
-        case act_atcreate: {
-            was_adjacent=ds_list_find_value(l,i) i+=1
+        case act_autotiler: {
+            i=size+4-1
             do {
-                o=instance_create(ds_list_find_value(l,i+3),ds_list_find_value(l,i+4),tileholder)
-                set_uid(o,ds_list_find_value(l,i))
-                o.bg=ds_list_find_value(l,i+1)
-                o.bgname=ds_list_find_value(l,i+2)
-                o.tlayer=ds_list_find_value(l,i+5) o.depth=o.tlayer-0.01
-                o.tilew=ds_list_find_value(l,i+8)
-                o.tileh=ds_list_find_value(l,i+9)
-                o.tile=tile_add(o.bg,ds_list_find_value(l,i+6),ds_list_find_value(l,i+7),o.tilew,o.tileh,o.x,o.y,o.tlayer)
-                o.tilesx=ds_list_find_value(l,i+10)
-                o.tilesy=ds_list_find_value(l,i+11)
-                o.image_blend=ds_list_find_value(l,i+12)
-                o.image_alpha=ds_list_find_value(l,i+13)
-                o.order=ds_list_find_value(l,i+14)
-
-                o.image_xscale=o.tilesx*o.tilew
-                o.image_yscale=o.tilesy*o.tileh
-
-                tile_set_scale(o.tile,o.tilesx,o.tilesy)
-                tile_set_blend(o.tile,o.image_blend)
-                tile_set_alpha(o.tile,o.image_alpha)
-                i+=15
-                
-                if (was_adjacent) {
-                    t=find_smart_tile_at(o.x-gridx*0.5,o.y-gridy*0.5) if (t) t.post_brush_update=1
-                    t=find_smart_tile_at(o.x+gridx*0.5,o.y-gridy*0.5) if (t) t.post_brush_update=1
-                    t=find_smart_tile_at(o.x+gridx*1.5,o.y-gridy*0.5) if (t) t.post_brush_update=1
-                    t=find_smart_tile_at(o.x-gridx*0.5,o.y+gridy*0.5) if (t) t.post_brush_update=1
-                    t=find_smart_tile_at(o.x+gridx*1.5,o.y+gridy*0.5) if (t) t.post_brush_update=1
-                    t=find_smart_tile_at(o.x-gridx*0.5,o.y+gridy*1.5) if (t) t.post_brush_update=1
-                    t=find_smart_tile_at(o.x+gridx*0.5,o.y+gridy*1.5) if (t) t.post_brush_update=1
-                    t=find_smart_tile_at(o.x+gridx*1.5,o.y+gridy*1.5) if (t) t.post_brush_update=1
+                sub_action=ds_list_find_value(l,i) i-=1
+                switch (sub_action) {
+                    case act_atdestroy: {
+                        with (ds_map_find_value(uidmap,ds_list_find_value(l,i))) instance_destroy()
+                        i-=1
+                    }break
+                    case act_atcreate: {
+                        i-=15
+                        o=instance_create(ds_list_find_value(l,i+3),ds_list_find_value(l,i+4),tileholder)
+                        set_uid(o,ds_list_find_value(l,i))
+                        o.bg=ds_list_find_value(l,i+1)
+                        o.bgname=ds_list_find_value(l,i+2)
+                        o.tlayer=ds_list_find_value(l,i+5) o.depth=o.tlayer-0.01
+                        o.tilew=ds_list_find_value(l,i+8)
+                        o.tileh=ds_list_find_value(l,i+9)
+                        o.tile=tile_add(o.bg,ds_list_find_value(l,i+6),ds_list_find_value(l,i+7),o.tilew,o.tileh,o.x,o.y,o.tlayer)
+                        o.tilesx=ds_list_find_value(l,i+10)
+                        o.tilesy=ds_list_find_value(l,i+11)
+                        o.image_blend=ds_list_find_value(l,i+12)
+                        o.image_alpha=ds_list_find_value(l,i+13)
+                        o.order=ds_list_find_value(l,i+14)
+        
+                        o.image_xscale=o.tilesx*o.tilew
+                        o.image_yscale=o.tilesy*o.tileh
+        
+                        tile_set_scale(o.tile,o.tilesx,o.tilesy)
+                        tile_set_blend(o.tile,o.image_blend)
+                        tile_set_alpha(o.tile,o.image_alpha)
+                        i-=1
+                    }break
+                    case act_atchange: {
+                        i-=3
+                        with (ds_map_find_value(uidmap,ds_list_find_value(l,i))) {
+                            left=ds_list_find_value(l,i+1)
+                            top=ds_list_find_value(l,i+2)
+                            tile_set_region(tile,left,top,tilew,tileh)
+                        }
+                        i-=1
+                    }break
+                    default: show_message("gotcha: "+string(sub_action))
                 }
-            } until (i>=size)
-            update_tilesmart_tiles()
+            } until (i<4)
         }break
     }
 

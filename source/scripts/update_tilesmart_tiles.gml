@@ -1,4 +1,6 @@
-var list,c;
+with (tileholder) event_user(2)
+
+/*var list,c;
 
 c=0 with (tileholder) if (post_brush_update) {list[c]=id c+=1}
 
