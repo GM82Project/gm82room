@@ -91,15 +91,11 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                 if (mouse_check_button_pressed(mb_left)) {
                     //manual
                     if (point_in_rectangle(clickx,clicky,0,-64,80,-32)) {
-                        bg_tilemode[tilebgpal]=-abs(bg_tilemode[tilebgpal])
-                        bg_modified[tilebgpal]=true
+                        set_autotiler_mode(0)
                     }
                     //smart
                     if (point_in_rectangle(clickx,clicky,88,-64,88+80,-32)) {
-                        bg_tilemode[tilebgpal]=max(1,abs(bg_tilemode[tilebgpal]))
-                        bg_modified[tilebgpal]=true
-                        clear_inspector()
-                        deselect()
+                        set_autotiler_mode(1)
                     }
                     if (bg_tilemode[tilebgpal]) {
                         //modes

@@ -36,7 +36,7 @@ if (resizecount<10) {
     } else resizecount=0
 }
 
-if (window_has_focus()) {
+if (window_has_focus() or mouse_in_window()) {
     window_focused=true
     room_speed=maxfps
     powersave=false

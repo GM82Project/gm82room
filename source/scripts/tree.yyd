@@ -266,6 +266,7 @@
 	|tile_mode_name
 	|rebuild_autotiler_tree
 	|autotiler_debug_drawing
+	|set_autotiler_mode
 |begin_trim
 |end_trim
 |error_handler

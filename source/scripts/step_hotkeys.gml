@@ -2,6 +2,14 @@ var yes;
 
 if (undoing or autotiler_was_drawing or paint) exit
 
+if (keyboard_check(vk_control) && keyboard_check_pressed(ord("S"))) {
+    save_room(0)
+}
+
+if (!keyboard_check(vk_control) && keyboard_check_pressed(ord("S")) && mode==1) {
+    set_autotiler_mode()
+}
+
 if (keyboard_check(vk_control) && !keyboard_check(vk_shift) && keyboard_check_pressed(ord("Z"))) {
     yes=1 with (TextField) if (active) {yes=0 text=oldtext textfield_actions() active=0} if (yes) {
         keyboard_clear(ord("Z"))
