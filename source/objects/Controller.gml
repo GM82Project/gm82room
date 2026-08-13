@@ -75,11 +75,24 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if (global.modified) if (show_message_ext("Are you sure you want to quit?##There are unsaved changes.","Quit","","Stay")!=1) exit
-
-delete_backups()
-
-game_end()
+if (global.modified) {
+    action=show_message_ext("Attention!##There are unsaved room changes. What would you like to do with them?##(Enter = save, Esc = stay)","Save","Discard","Stay")
+    if (action==1) {
+        save_room(0)
+        game_end()
+    }
+    if (action==2) {
+        //good bye cruel world!
+        delete_backups()
+        game_end()
+    }
+    if (action==3 or action==0) {
+        exit
+    }
+} else {
+    delete_backups()
+    game_end()
+}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
