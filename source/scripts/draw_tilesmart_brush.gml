@@ -103,8 +103,8 @@ if (replace or argument2) and (autotiler_is_adjacent) {
     i=0 repeat (8) {
         with (tile1[i]) {
             add_undo(uid)
-            add_undo(left)
-            add_undo(top)
+            add_undo(tile_get_left(tile))
+            add_undo(tile_get_top(tile))
             add_undo(act_atchange)
             post_brush_update=1
         }

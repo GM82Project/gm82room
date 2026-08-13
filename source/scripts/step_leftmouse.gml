@@ -30,7 +30,7 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
             )
         }
     } else {
-        if (autotiler_was_drawing) {
+        if (autotiler_was_drawing==1) {
             autotiler_was_drawing=0
             push_undo()
         }

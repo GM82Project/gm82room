@@ -1,6 +1,6 @@
 var l,o,i,j,uaction,lmode,size,combo,size,was_adjacent,t;
 
-if (undoing) exit
+if (undoing or autotiler_was_drawing or paint) exit
 
 size=ds_list_size(undostack)
 if (size) {

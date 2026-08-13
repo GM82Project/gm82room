@@ -16,14 +16,24 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
     }
     if (mouse_check_modal(mb_right)) {
         if (direct_mbleft and autotiler_rectangle==2) {autotiler_rectangle=0 exit}
-        project_modified()
-        if (!autotiler_rectangle) bresenham(
-            floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
-            floor(global.mousex/gridx),floor(global.mousey/gridy),
-            draw_tilesmart_brush,0
-        )
+        if (!autotiler_rectangle) {
+            if (!autotiler_was_drawing) {
+                begin_undo(act_autotiler,"erasing smart tiles",0)
+                autotiler_was_drawing=2
+            }
+            bresenham(
+                floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
+                floor(global.mousex/gridx),floor(global.mousey/gridy),
+                draw_tilesmart_brush,0
+            )
+        }
     } else {
+        if (autotiler_was_drawing==2) {
+            autotiler_was_drawing=0
+            push_undo()
+        }
         if (autotiler_rectangle==2) {
+            begin_undo(act_autotiler,"erasing a smart tile rectangle",0)
             left=min(floor(global.mousex/gridx),autotiler_rectangle_x)
             right=max(floor(global.mousex/gridx),autotiler_rectangle_x)
             top=min(floor(global.mousey/gridy),autotiler_rectangle_y)
@@ -35,7 +45,7 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
             u+=1}v+=1}
             autotiler_rectangle=0
             update_tilesmart_tiles()
-            project_modified()
+            push_undo()
         }
     }
     exit
