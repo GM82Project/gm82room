@@ -1,7 +1,7 @@
 key=ds_map_find_first(autotiler_tree) repeat (ds_map_size(autotiler_tree)) {
     string_token_start(key,"_")
-    xx=real(string_token_next())
-    yy=real(string_token_next())
+    xx=string_token_real()
+    yy=string_token_real()
 
     grid=ds_map_find_value(autotiler_tree,key)
 

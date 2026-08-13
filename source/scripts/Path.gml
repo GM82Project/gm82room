@@ -31,7 +31,7 @@ f2=file_text_open_read_safe(root+"paths\"+argument0+"\path.txt") if (f2) {
     path_set_kind(path,smooth)
     f2=file_text_open_read_safe(root+"paths\"+argument0+"\points.txt") if (f2) do {str=file_text_read_string(f2) file_text_readln(f2)
         string_token_start(str,",")
-        path_add_point(path,real(string_token_next()),real(string_token_next()),real(string_token_next()))
+        path_add_point(path,string_token_real(),string_token_real(),string_token_real())
     } until (file_text_eof(f2)) file_text_close(f2)
     
     return path

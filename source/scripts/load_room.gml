@@ -129,6 +129,8 @@ load_timeline_tree(root+"timelines\tree.yyd")
 draw_loader("Loading resource tree...",0.125,"Rooms")
 load_room_tree(root+"rooms\tree.yyd")
 
+draw_loader("Loading room data...",0.125,"")
+
 //check autosave
 loading_autosave=false
 if (directory_exists(savedir+"autosave")) {
@@ -198,6 +200,7 @@ roomcode=parse_code_into_flags(file_text_read_all(savedir+"code.gml",lf))
 
 //load tiles
 progress=0.25
+draw_loader("Loading tiles...",progress,"")
 time=current_time
 c=0
 layers=file_text_read_list(savedir+"layers.txt",noone,false)
@@ -211,12 +214,12 @@ if (layersize) {
 
             string_token_start(str,",")
             o.bgname=string_token_next()
-            o.x=real(string_token_next())
-            o.y=real(string_token_next())
-            tileu=real(string_token_next())
-            tilev=real(string_token_next())
-            o.tilew=real(string_token_next())
-            o.tileh=real(string_token_next())
+            o.x=string_token_real()
+            o.y=string_token_real()
+            tileu=string_token_real()
+            tilev=string_token_real()
+            o.tilew=string_token_real()
+            o.tileh=string_token_real()
 
             o.bg=get_background_tiles(o.bgname)
             if (micro_optimization_bgid!=noone) {
@@ -238,9 +241,9 @@ if (layersize) {
                 o.image_yscale=o.tileh
 
                 string_token_next() //skip "locked" flag
-                o.tilesx=real(string_token_next())
-                o.tilesy=real(string_token_next())
-                tileblend=real(string_token_next())
+                o.tilesx=string_token_real()
+                o.tilesy=string_token_real()
+                tileblend=string_token_real()
 
                 o.image_xscale*=o.tilesx
                 o.image_yscale*=o.tilesy
@@ -275,8 +278,8 @@ f=file_text_open_read_safe(savedir+"instances.txt") if (f) {do {str=file_text_re
 
         string_token_start(str,",")
         o.objname=string_token_next()
-        o.x=real(string_token_next())
-        o.y=real(string_token_next())
+        o.x=string_token_real()
+        o.y=string_token_real()
 
         set_uid(o,string_token_next())
 
@@ -284,10 +287,10 @@ f=file_text_open_read_safe(savedir+"instances.txt") if (f) {do {str=file_text_re
         o.order=orderlast
 
         string_token_next() //skip "locked" flag
-        o.image_xscale=real(string_token_next())
-        o.image_yscale=real(string_token_next())
-        o.image_blend=real(string_token_next())
-        o.image_angle=real(string_token_next())
+        o.image_xscale=string_token_real()
+        o.image_yscale=string_token_real()
+        o.image_blend=string_token_real()
+        o.image_angle=string_token_real()
 
         o.image_alpha=floor(o.image_blend/$1000000)/$ff
         o.image_blend=o.image_blend&$ffffff
