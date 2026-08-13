@@ -155,6 +155,8 @@ if (size) {
                 o.sprox=sprite_get_xoffset(o.sprite_index)
                 o.sproy=sprite_get_yoffset(o.sprite_index)
 
+                if (select==o) with (o) update_inspector()
+
                 i+=2
 
                 for (j=0;j<objfields[o.obj];j+=1) {

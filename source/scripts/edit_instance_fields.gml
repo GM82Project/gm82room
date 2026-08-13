@@ -169,6 +169,7 @@ switch (objfieldtype[obj,menu]) {
     case "__gm82room_depth": {
         depth=get_integer("Insert new depth: ("+objname+" default: "+string(objdepth[obj])+")",depth)
         fields[menu,0]=(depth!=objdepth[obj]) fields[menu,1]=string(depth)
+        if (select==id) update_inspector()
     break}
     case "__gm82room_ccode": {
         code=external_code_editor(code)
