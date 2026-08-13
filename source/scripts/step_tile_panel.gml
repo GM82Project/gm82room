@@ -33,18 +33,20 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                 if (mouse_check_button(mb_left)) {
                     if (bg_tilemode[tilebgpal]) {
                         //smart mode
-                        if (bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) if (mouse_check_button_pressed(mb_left) or tilemap_complete) {
-                            clickx=floorto(min(clickx-ox,bgw-curtilew),gx+sx)+ox
-                            clicky=floorto(min(clicky-oy,bgh-curtileh),gy+sy)+oy
-                            tw=pick(bg_tilemode[tilebgpal]-1,1,1,2,3,4,7)
-                            index=atcx+atcy*tw
-                            if (index>27) index-=1 if (index>35) index-=1
-                            ds_grid_set(bg_tilemap[tilebgpal],index,0,clickx)
-                            ds_grid_set(bg_tilemap[tilebgpal],index,1,clicky)
-                            bg_modified[tilebgpal]=true
-                            check_tilemap_complete()
-                            if (tilemap_complete==0) {
-                                atcx+=1 if (atcx>=tw) {atcx=0 atcy+=1}
+                        if (mouse_check_button_pressed(mb_left) or tilemap_complete) {
+                            if (bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
+                                clickx=floorto(min(clickx-ox,bgw-curtilew),gx+sx)+ox
+                                clicky=floorto(min(clicky-oy,bgh-curtileh),gy+sy)+oy
+                                tw=pick(bg_tilemode[tilebgpal]-1,1,1,2,3,4,7)
+                                index=atcx+atcy*tw
+                                if (index>27) index-=1 if (index>35) index-=1
+                                ds_grid_set(bg_tilemap[tilebgpal],index,0,clickx)
+                                ds_grid_set(bg_tilemap[tilebgpal],index,1,clicky)
+                                bg_modified[tilebgpal]=true
+                                check_tilemap_complete()
+                                if (tilemap_complete==0) {
+                                    atcx+=1 if (atcx>=tw) {atcx=0 atcy+=1}
+                                }
                             }
                         }
                     } else {

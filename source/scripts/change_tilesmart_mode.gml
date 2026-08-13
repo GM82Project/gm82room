@@ -7,7 +7,8 @@ if (tilebgpal!=noone) {
 
     bg_tilemode[tilebgpal]=argument0
     ds_grid_set_region(bg_tilemap[tilebgpal],0,0,46,1,noone)
-    tilemap_complete=(bg_tilemode[tilebgpal]==7 or bg_tilemode[tilebgpal]==8)
+    check_tilemap_complete()
+
     atcx=0
     atcy=0
     bg_modified[tilebgpal]=true

@@ -114,6 +114,14 @@ if (tilebgpal!=noone) {
 
                 vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
                 vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
+
+                if (vu<=0 or vv<=0) {
+                    vu=1
+                    vv=1
+                    ds_grid_set(bg_tilemap[tilebgpal],47,0,1)
+                    ds_grid_set(bg_tilemap[tilebgpal],47,1,1)
+                }
+
                 if (vu>1 or vv>1) {
                     vw=bgw/vu
                     vh=bgh/vv
