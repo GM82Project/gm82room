@@ -275,3 +275,4 @@ update_tilesmart_tiles
 drawtooltip_tilepanel
 rebuild_autotiler_tree
 update_precise_hitbox
+autotiler_debug_drawing

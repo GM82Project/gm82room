@@ -191,6 +191,7 @@ if (selection) {
 
 drawui_view_pre()
 drawui_settings_pre()
+//autotiler_debug_drawing()
 
 //this is where the room space ends and the hud space starts================================================
 d3d_set_projection_ortho(0,0,width,height,0)
