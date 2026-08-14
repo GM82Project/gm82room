@@ -1,5 +1,5 @@
 ///draw_tilesmart_brush(gridx,gridy,enable)
-var drawx,drawy,replace,index,byte,left,top,i,tile1,tile2,l,t,u,v,name,leaf;
+var drawx,drawy,replace,index,byte,left,top,i,tile1,tile2,l,t,u,v,name,leaf,bgw,bgh;
 
 drawx=argument0*gridx
 drawy=argument1*gridy
@@ -36,6 +36,10 @@ if (argument2) {//add tile
         //variant calc
         vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
         vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
+
+        bgw=background_get_width(bg_background[tilebgpal])
+        bgh=background_get_height(bg_background[tilebgpal])
+
         if (vu>1) left=left+irandom(vu-1)*(bgw/vu)
         if (vv>1) top=top+irandom(vv-1)*(bgh/vv)
     } else if (bg_tilemode[tilebgpal]==7 or bg_tilemode[tilebgpal]==8) {
