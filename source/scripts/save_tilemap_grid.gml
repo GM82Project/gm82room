@@ -1,19 +1,21 @@
 ///save_tilemap_grid(background)
-var str,g,u,v,g,r;
+var str,g,u,v,g,r,mode;
 
 str=""
+mode=bg_tilemode[argument0]
 
 //mode
-if (bg_tilemode[argument0]<0) str+=string(bg_tilemode[argument0]) else str+="0"+string(bg_tilemode[argument0])
+if (mode<0) str+=string(mode) else str+="0"+string(mode)
 
 str+="|"
+mode=abs(mode)
 
 //no options for pattern and random
-if (bg_tilemode[argument0]==7 or bg_tilemode[argument0]==8) return str
+if (mode==7 or mode==8) return str
 
 //save cells
 g=bg_tilemap[argument0]
-r=pick(bg_tilemode[tilebgpal]-1,1,2,4,9,16,47)
+r=pick(mode-1,1,2,4,9,16,47)
 u=0 v=0 repeat (r) {
     b=ds_grid_get(g,u,v)
     if (b==noone) str+="," else str+=string(b)+","

@@ -13,10 +13,12 @@ if (string_char_at(str,3)=="|") {
 
     g=bg_tilemap[bg]
     
-    if (bg_tilemode[bg]!=7 and bg_tilemode[bg]!=8) {
+    mode=abs(bg_tilemode[bg])
+    
+    if (mode!=7 and mode!=8) {
         string_token_start(string_delete(str,1,3),",")
 
-        r=pick(bg_tilemode[bg]-1,1,2,4,9,16,47)
+        r=pick(mode-1,1,2,4,9,16,47)
         u=0 v=0 repeat (r) {
             ds_grid_set(g,u,v,string_token_real())
         u+=1}
