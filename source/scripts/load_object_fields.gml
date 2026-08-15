@@ -124,6 +124,30 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
             }
         }
 
+        //expect override
+        fp=string_pos("//override ",str)
+        if (fp) {
+            string_token_start(string_delete(str,1,fp+10)," ")
+            override=string_token_next()
+            args=string_token_next()
+            switch (override) {
+                case "grid": {
+                    if (string_token_start(args,",")!=4) {
+                        show_error(errorh+"Invalid arguments for grid override ("+args+")",0)
+                        break
+                    }
+                    objoverride[i,ovr_grid]=1
+                    objoverride[i,ovr_grid_x]=string_token_real()
+                    objoverride[i,ovr_grid_y]=string_token_real()
+                    objoverride[i,ovr_grid_ox]=string_token_real()
+                    objoverride[i,ovr_grid_oy]=string_token_real()
+                }break
+                default: {
+                    show_error(errorh+"Invalid override ("+override+")",0)
+                }break
+            }
+        }
+
         //expect field
         fp=string_pos("//field ",str)
         if (fp) {

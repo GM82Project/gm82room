@@ -19,6 +19,7 @@ if (!objloaded[i]) {
     objshow[i]=true
     objprops[i]="##Depth: "+string(objdepth[i])+"#Visible: "+pick(objvis[i],"No","Yes")+"#Solid: "+pick(objsolid[i],"No","Yes")+"#Persist.: "+pick(objpersist[i],"No","Yes")+"#Parent: "+pick(objparent[i]!="","<noone>",objparent[i])
     objdesc[i]=""
+    objoverride[i,ovr_grid]=0
     load_object_fields(i,argument0)
     palettesize+=1
 }
