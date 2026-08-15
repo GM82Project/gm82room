@@ -134,7 +134,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                         }
 
                         //template click
-                        if (point_in_rectangle(clickx,clicky,mw,0,mw+background_get_width(ref),background_get_height(ref))) {
+                        if (point_in_rectangle(clickx,clicky,mw,0,mw+background_get_width(ref)*(gx/32),background_get_height(ref)*(gy/32))) {
                             px=atcx py=atcy
                             atcx=(clickx-mw) div gx
                             atcy=clicky div gy

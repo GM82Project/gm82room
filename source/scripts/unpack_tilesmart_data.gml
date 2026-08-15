@@ -3,7 +3,7 @@
 //format: ii|u,u,u(size times),v,v,v(size times),variant u,variant v
 //ii = tile mode type, from -9 to 09.
 //negative number means it's in manual mode.
-var bg,str,g,r,u,v;
+var bg,str,g,r,u,v,md;
 
 bg=argument0
 str=argument1
@@ -13,12 +13,12 @@ if (string_char_at(str,3)=="|") {
 
     g=bg_tilemap[bg]
     
-    mode=abs(bg_tilemode[bg])
+    md=abs(bg_tilemode[bg])
     
-    if (mode!=7 and mode!=8) {
+    if (md!=7 and md!=8) {
         string_token_start(string_delete(str,1,3),",")
 
-        r=pick(mode-1,1,2,4,9,16,47)
+        r=pick(md-1,1,2,4,9,16,47)
         u=0 v=0 repeat (r) {
             ds_grid_set(g,u,v,string_token_real())
         u+=1}

@@ -21,4 +21,5 @@ if (tilebgpal!=noone) {
         }
     i+=1}
     check_tilemap_complete()
+    bg_modified[tilebgpal]=true
 }
