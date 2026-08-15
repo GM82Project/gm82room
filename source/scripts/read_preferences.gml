@@ -34,4 +34,7 @@ nodescpreview=registry_read_dword(dir+"GM82RoomNoDescPreview",0)
 
 for (i=0;i<16;i+=1) customcolors[i]=registry_read_dword(dir+"RoomCustomColors"+string(i),0)
 
+tilepanelw=registry_read_dword(dir+"GM82RoomTilePanelWidth",248)
+tilepanelh=registry_read_dword(dir+"GM82RoomTilePanelHeight",248)
+
 theme_load()

@@ -4,8 +4,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-w=248
-h=248
+w=min(width-160,tilepanelw)
+h=min(height-32-248,tilepanelh)
 
 y=height-32-h
 
