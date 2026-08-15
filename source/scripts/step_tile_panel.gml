@@ -38,6 +38,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                                 clickx=floorto(min(clickx-ox,bgw-curtilew),gx+sx)+ox
                                 clicky=floorto(min(clicky-oy,bgh-curtileh),gy+sy)+oy
                                 tw=pick(bg_tilemode[tilebgpal]-1,1,1,2,3,4,7)
+                                th=pick(bg_tilemode[tilebgpal]-1,1,2,2,3,4,7)
                                 index=atcx+atcy*tw
                                 if (index>27) index-=1 if (index>35) index-=1
                                 ds_grid_set(bg_tilemap[tilebgpal],index,0,clickx)
@@ -45,7 +46,12 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                                 bg_modified[tilebgpal]=true
                                 check_tilemap_complete()
                                 if (tilemap_complete==0) {
-                                    atcx+=1 if (atcx>=tw) {atcx=0 atcy+=1}
+                                    atcx+=1 if (atcx>=tw) {
+                                        atcx=0 atcy+=1
+                                        if (atcy>=th) {
+                                            atcx=0 atcy=0
+                                        }
+                                    }
                                 }
                             }
                         }
