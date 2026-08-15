@@ -187,8 +187,8 @@ for (i=0;i<objfields[obj];i+=1) {
                     px=floor((global.mousex-view_xview)/zoom)
                     py=floor((global.mousey-view_yview)/zoom)
                 } else {
-                    px=floor((roundto(global.mousex,gridx)-view_xview)/zoom)
-                    py=floor((roundto(global.mousey,gridy)-view_yview)/zoom)
+                    px=floor((roundto(global.mousex-gridox,gridx)+gridoy-view_xview)/zoom)
+                    py=floor((roundto(global.mousey-gridoy,gridy)+gridoy-view_yview)/zoom)
                 }
 
                 draw_line_width(px-10,py-10,px+10,py+10,3)

@@ -10,8 +10,8 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
         autotiler_last_click=noone
         if (keyboard_check(vk_shift)) {
             autotiler_rectangle=2
-            autotiler_rectangle_x=floor(global.mousex/gridx)
-            autotiler_rectangle_y=floor(global.mousey/gridy)
+            autotiler_rectangle_x=floor((global.mousex-gridox)/gridx)
+            autotiler_rectangle_y=floor((global.mousey-gridoy)/gridy)
         }
     }
     if (mouse_check_modal(mb_right)) {
@@ -22,8 +22,8 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
                 autotiler_was_drawing=2
             }
             bresenham(
-                floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
-                floor(global.mousex/gridx),floor(global.mousey/gridy),
+                floor((global.mousex_old-gridox)/gridx),floor((global.mousey_old-gridoy)/gridy),
+                floor((global.mousex-gridox)/gridx),floor((global.mousey-gridoy)/gridy),
                 draw_tilesmart_brush,0
             )
         }
@@ -34,10 +34,10 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
         }
         if (autotiler_rectangle==2) {
             begin_undo(act_autotiler,"erasing a smart tile rectangle",0)
-            left=min(floor(global.mousex/gridx),autotiler_rectangle_x)
-            right=max(floor(global.mousex/gridx),autotiler_rectangle_x)
-            top=min(floor(global.mousey/gridy),autotiler_rectangle_y)
-            bottom=max(floor(global.mousey/gridy),autotiler_rectangle_y)
+            left=min(floor((global.mousex-gridox)/gridx),autotiler_rectangle_x)
+            right=max(floor((global.mousex-gridox)/gridx),autotiler_rectangle_x)
+            top=min(floor((global.mousey-gridoy)/gridy),autotiler_rectangle_y)
+            bottom=max(floor((global.mousey-gridoy)/gridy),autotiler_rectangle_y)
             ur=(right-left)+1
             vr=(bottom-top)+1
             v=top repeat (vr) {u=left repeat (ur) {

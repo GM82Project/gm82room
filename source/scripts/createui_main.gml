@@ -70,123 +70,137 @@ i.alt="Show grid"
 i=instance_create(160+96,0,TextField)
 i.action="grid x"
 i.w=56
-i.alt="Grid X"
+i.basealt="Grid X"
 i.maxlen=4
 textfield_set("grid x",gridx)
 
 i=instance_create(160+152,0,TextField)
 i.action="grid y"
 i.w=56
-i.alt="Grid Y"
+i.basealt="Grid Y"
 i.maxlen=4
 textfield_set("grid y",gridy)
 
-i=instance_create(160+208,0,Button)
+i=instance_create(160+208,0,TextField)
+i.action="grid ox"
+i.w=56
+i.basealt="Grid Offset X"
+i.maxlen=4
+textfield_set("grid ox",gridox)
+
+i=instance_create(160+264,0,TextField)
+i.action="grid oy"
+i.w=56
+i.basealt="Grid Offset Y"
+i.maxlen=4
+textfield_set("grid oy",gridoy)
+
+i=instance_create(160+320,0,Button)
 i.spr=9
 i.action="toggle crosshair"
 i.alt="Show crosshair"
 
 
 //show
-i=instance_create(160+256,0,Button)
+i=instance_create(160+368,0,Button)
 i.spr=2
 i.action="view objects"
 i.alt="Show instances"
 
-i=instance_create(160+288,0,Button)
+i=instance_create(160+400,0,Button)
 i.spr=7
 i.action="view invis"
 i.alt="Show instances of invisible objects"
 
-i=instance_create(160+320,0,Button)
+i=instance_create(160+432,0,Button)
 i.spr=8
 i.action="view nospr"
 i.alt="Show instances of objects without sprites"
 
-i=instance_create(160+352,0,Button)
+i=instance_create(160+464,0,Button)
 i.spr=3
 i.action="view tiles"
 i.alt="Show tiles"
 
-i=instance_create(160+384,0,Button)
+i=instance_create(160+496,0,Button)
 i.spr=4
 i.action="view bgs"
 i.alt="Show backgrounds"
 
-i=instance_create(160+416,0,Button)
+i=instance_create(160+528,0,Button)
 i.spr=5
 i.action="view fgs"
 i.alt="Show foregrounds"
 
-i=instance_create(160+448,0,Button)
+i=instance_create(160+560,0,Button)
 i.spr=6
 i.action="view views"
 i.alt="Show views"
 
-i=instance_create(160+480,0,Button)
+i=instance_create(160+592,0,Button)
 i.spr=28
 i.action="view paths"
 i.alt="Show paths"
 
-i=instance_create(160+512,0,Button)
+i=instance_create(160+624,0,Button)
 i.spr=35
 i.action="view ref"
 i.alt="Show reference image"
 
-i=instance_create(160+544,0,Button)
+i=instance_create(160+656,0,Button)
 i.spr=31
 i.action="view draw"
 i.alt="Enable realtime previews"
 
-i=instance_create(160+576,0,Button)
+i=instance_create(160+688,0,Button)
 i.spr=51
 i.action="view ignore"
 i.alt="Show hidden objects"
 
-i=instance_create(160+608,0,Button)
+i=instance_create(160+720,0,Button)
 i.spr=64
 i.action="click precise"
 i.alt="Precise sprite click: Enabled"
 
 
 //view
-i=instance_create(160+656,0,Button)
+i=instance_create(160+768,0,Button)
 i.spr=10
 i.action="reset view"
 i.alt="Reset view"
 
-i=instance_create(160+688,0,Button)
+i=instance_create(160+800,0,Button)
 i.spr=11
 i.action="zoom in"
 i.alt="Zoom in"
 
-i=instance_create(160+720,0,Button)
+i=instance_create(160+832,0,Button)
 i.spr=12
 i.action="zoom out"
 i.alt="Zoom out"
 
-i=instance_create(160+752,0,Button)
+i=instance_create(160+864,0,Button)
 i.spr=16
 i.action="interp"
 i.alt=pick(interpolation,"Smoothing Off","Smoothing On","Adaptive Smoothing")
 
 //halp
-i=instance_create(160+800,0,Button)
+i=instance_create(160+912,0,Button)
 i.spr=22
 i.action="help"
 i.alt="Quick guide"
 
-i=instance_create(160+832,0,Button)
+i=instance_create(160+944,0,Button)
 i.spr=21
 i.action="prefs"
 i.alt="Preferences"
 
-i=instance_create(160+864,0,Button)
+i=instance_create(160+976,0,Button)
 i.spr=49
 i.action="live"
 i.alt="Start realtime connection to game using 8.2 Test"
 
-i=instance_create(160+896,0,Button)
+i=instance_create(160+1008,0,Button)
 i.spr=56
 i.action="plugins"
 i.alt="Run a plugin..."

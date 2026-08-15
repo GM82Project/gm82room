@@ -20,8 +20,8 @@ if (mode==4) {
             chunkwidth=max(1,global.mousex-chunkleft)
             chunkheight=max(1,global.mousey-chunktop)
         } else {
-            chunkwidth=max(gridx,roundto(global.mousex,gridx)-chunkleft)
-            chunkheight=max(gridy,roundto(global.mousey,gridy)-chunktop)
+            chunkwidth=max(gridx,roundto(global.mousex-gridox,gridx)+gridox-chunkleft)
+            chunkheight=max(gridy,roundto(global.mousey-gridoy,gridy)+gridoy-chunktop)
         }
         update_settingspanel()
         if (!direct_mbleft) {
@@ -35,8 +35,8 @@ if (mode==4) {
             dx=global.mousex
             dy=global.mousey
         } else {
-            dx=roundto(global.mousex,gridx)
-            dy=roundto(global.mousey,gridy)
+            dx=roundto(global.mousex-gridox,gridx)+gridox
+            dy=roundto(global.mouseygridoy,gridy)+gridoy
         }
         if (grabref==1) {
             ref_angle=point_direction(ref_x,ref_y,global.mousex,global.mousey)+90-90*sign(ref_w)
@@ -72,8 +72,8 @@ if (mode==4) {
             dx=global.mousex
             dy=global.mousey
         } else {
-            dx=roundto(global.mousex,gridx)
-            dy=roundto(global.mousey,gridy)
+            dx=roundto(global.mousex-gridox,gridx)+gridox
+            dy=roundto(global.mousey-gridoy,gridy)+gridoy
         }
         if (grabroom==1) {//top left
             roomleft=min(dx,roomwidth-1)

@@ -26,6 +26,14 @@ if (argument0) {
     } file_find_close()
 
     message("Room saved.")
+
+    if (gridmem) {
+        gridx=gridmemx
+        gridy=gridmemy
+        gridox=gridmemox
+        gridoy=gridmemoy
+        gridmem=false
+    }
 }
 
 instance_activate_all()
@@ -127,6 +135,8 @@ str="caption="+roomcaption+lf
 +"height="+string(roomheight)+lf
 +"snap_x="+string(gridx)+lf
 +"snap_y="+string(gridy)+lf
++"offset_x="+string(gridox)+lf
++"offset_y="+string(gridoy)+lf
 +"isometric="+string(ds_map_find_value(settings,"isometric"))+lf
 +"roomspeed="+string(roomspeed)+lf
 +"roompersistent="+string(roompersistent)+lf

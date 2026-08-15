@@ -153,6 +153,8 @@ roomspeed=real(ds_map_find_value(settings,"roomspeed"))
 roompersistent=real(ds_map_find_value(settings,"roompersistent"))
 gridx=real(ds_map_find_value(settings,"snap_x"))
 gridy=real(ds_map_find_value(settings,"snap_y"))
+gridox=real(ds_map_find_value(settings,"offset_x"))
+gridoy=real(ds_map_find_value(settings,"offset_y"))
 roomcaption=ds_map_find_value(settings,"caption")
 vw_enabled=real(ds_map_find_value(settings,"views_enabled"))
 

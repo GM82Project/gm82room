@@ -81,7 +81,7 @@ if (argument2) {//add tile
     o.tileh=Tilepanel.gy
     o.image_xscale=gridx
     o.image_yscale=gridy
-    o.tile=tile_add(bg_background[tilebgpal],left,top,o.tilew,o.tileh,o.x,o.y,ly_depth)
+    o.tile=tile_add(bg_background[tilebgpal],left,top,o.tilew,o.tileh,o.x+gridox,o.y+gridoy,ly_depth)
     o.tilesx=gridx/o.tilew
     o.tilesy=gridy/o.tileh
     tile_set_scale(o.tile,o.tilesx,o.tilesy)
@@ -97,6 +97,9 @@ if (argument2) {//add tile
     if (ds_map_exists(autotiler_tree,name)) leaf=ds_map_find_value(autotiler_tree,name)
     else {leaf=ds_grid_create(autotiler_tree_size,autotiler_tree_size) ds_map_add(autotiler_tree,name,leaf)}
     ds_grid_set(leaf,(o.x-u) div gridx,(o.y-v) div gridy,o)
+
+    o.x+=gridox
+    o.y+=gridoy
 
     add_undo(o.uid)
     add_undo(act_atdestroy)

@@ -16,11 +16,11 @@ d3d_set_projection_default()
 d3d_set_depth(0)
 
 if (mode==5) {
-    fmx=roundto(global.mousex,gridx)
-    fmy=roundto(global.mousey,gridy)
+    fmx=roundto(global.mousex-gridox,gridx)+gridox
+    fmy=roundto(global.mousey-gridoy,gridy)+gridoy
 } else {
-    fmx=floorto(global.mousex,gridx)
-    fmy=floorto(global.mousey,gridy)
+    fmx=floorto(global.mousex-gridox,gridx)+gridox
+    fmy=floorto(global.mousey-gridoy,gridy)+gridoy
 }
 tty=0
 
@@ -47,15 +47,15 @@ texture_set_interpolation(1)
 d3d_primitive_begin(pr_linelist)
     if (grid) {
         if (mousein && outroomgrid) {
-            x1=max(min(fmx,0),roundto(view_xview,gridx))
-            y1=max(min(fmy,0),roundto(view_yview,gridy))
-            x2=min(max(roomwidth,fmx+gridx),view_xview+view_wview)
-            y2=min(max(roomheight,fmy+gridy),view_yview+view_hview)
+            x1=max(min(fmx-gridox,0),roundto(view_xview,gridx))+gridox
+            y1=max(min(fmy-gridoy,0),roundto(view_yview,gridy))+gridoy
+            x2=min(max(roomwidth,fmx-gridox+gridx),view_xview+view_wview)+gridox
+            y2=min(max(roomheight,fmy-gridoy+gridy),view_yview+view_hview)+gridoy
         } else {
-            x1=max(0,roundto(view_xview,gridx))
-            y1=max(0,roundto(view_yview,gridy))
-            x2=min(roomwidth,view_xview+view_wview)
-            y2=min(roomheight,view_yview+view_hview)
+            x1=max(0,roundto(view_xview,gridx))+gridox
+            y1=max(0,roundto(view_yview,gridy))+gridoy
+            x2=min(roomwidth,view_xview+view_wview)+gridox
+            y2=min(roomheight,view_yview+view_hview)+gridoy
         }
         vc=0
         for (i=x1;i<=x2;i+=gridx) {d3d_vertex(i,y1,0) d3d_vertex(i,y2,0) vc+=2 if (vc>31000) {vc=0 d3d_primitive_end() draw_set_blend_mode(bm_add) d3d_fog_trick($202020) d3d_primitive_end() d3d_fog_trick() draw_set_blend_mode(0) d3d_primitive_begin(pr_linelist)}}

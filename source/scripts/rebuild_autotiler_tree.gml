@@ -9,9 +9,9 @@ ds_map_clear(autotiler_tree)
 
 if (tilebgpal!=noone) if (bg_tilemode[tilebgpal]) {
     //create new grids
-    with (tileholder) if (bg==bg_background[tilebgpal]) {
-        u=floorto(x,gridx*autotiler_tree_size)
-        v=floorto(y,gridy*autotiler_tree_size)
+    with (tileholder) if (bg==bg_background[tilebgpal] and x==floorto(x-gridox,gridx)+gridox and y==floorto(y-gridoy,gridy)+gridoy) {
+        u=floorto(x-gridox,gridx*autotiler_tree_size)
+        v=floorto(y-gridoy,gridy*autotiler_tree_size)
         name=string(u)+"_"+string(v)
         if (ds_map_exists(autotiler_tree,name)) leaf=ds_map_find_value(autotiler_tree,name)
         else {leaf=ds_grid_create(autotiler_tree_size,autotiler_tree_size) ds_map_add(autotiler_tree,name,leaf)}

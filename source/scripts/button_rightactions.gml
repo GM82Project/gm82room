@@ -57,4 +57,13 @@ with (Controller) switch (argument0) {
         }
         with (other) {text=string(gridy) event_user(4)}
     }break
+    case "grid ox": {
+        gridox=0
+        with (other) {text="0" event_user(4)}
+    }break
+    case "grid oy": {
+        gridoy=0
+        with (other) {text="0" event_user(4)}
+    }break
+
 }

@@ -28,10 +28,10 @@ if (mode==1) {
     if (autotiler_rectangle) {
         draw_set_color($ff8000)
         draw_set_alpha(0.5)
-        l=min(floor(global.mousex/gridx),autotiler_rectangle_x)*gridx-0.5
-        r=(max(floor(global.mousex/gridx),autotiler_rectangle_x)+1)*gridx+0.5
-        t=min(floor(global.mousey/gridy),autotiler_rectangle_y)*gridy-0.5
-        b=(max(floor(global.mousey/gridy),autotiler_rectangle_y)+1)*gridy+0.5
+        l=min(floor((global.mousex-gridox)/gridx),autotiler_rectangle_x)*gridx+gridox-0.5
+        r=(max(floor((global.mousex-gridox)/gridx),autotiler_rectangle_x)+1)*gridx+gridox+0.5
+        t=min(floor((global.mousey-gridoy)/gridy),autotiler_rectangle_y)*gridy+gridoy-0.5
+        b=(max(floor((global.mousey-gridoy)/gridy),autotiler_rectangle_y)+1)*gridy+gridoy+0.5
         draw_rectangle(l,t,r,b,0)
         draw_set_color_sel()
         draw_rectangle(l,t,r,b,1)

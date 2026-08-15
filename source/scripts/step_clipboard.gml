@@ -83,8 +83,8 @@ if (keyboard_check(vk_control) && (keyboard_check_pressed(ord("C")) || cut)) {
         copyvec[0,2]=minsely
         copyvec[0,3]=maxselx
         copyvec[0,4]=maxsely
-        copyvec[0,5]=minselx-floorto(minselx,gridx)
-        copyvec[0,6]=minsely-floorto(minsely,gridy)
+        copyvec[0,5]=minselx-floorto(minselx-gridox,gridx)+gridox
+        copyvec[0,6]=minsely-floorto(minsely-gridoy,gridy)+gridoy
 
         b=buffer_create()
         buffer_write_string(b,gamename)
@@ -211,13 +211,13 @@ if (keyboard_check(vk_control) && keyboard_check_pressed(ord("V"))) {
                 dx=global.mousex-copyvec[0,1]
                 dy=global.mousey-copyvec[0,2]
             } else {
-                dx=floorto(global.mousex-copyvec[0,1]+copyvec[0,5],gridx)
-                dy=floorto(global.mousey-copyvec[0,2]+copyvec[0,6],gridy)
+                dx=floorto(global.mousex-copyvec[0,1]+copyvec[0,5]-gridox,gridx)+gridox
+                dy=floorto(global.mousey-copyvec[0,2]+copyvec[0,6]-gridoy,gridy)+gridoy
             }
 
             cur=1
             if (mode==0) repeat (copyvec[0,0]) {
-                //note: if you have instances copied that would be invisible in the current view, they'l be visible
+                //note: if you have instances copied that would be invisible in the current view, they'll be visible
                 o=instance_create(copyvec[cur,2]+dx,copyvec[cur,3]+dy,instance) get_uid(o)
                 o.obj=copyvec[cur,1]
                 o.objname=copyvec[cur,0]

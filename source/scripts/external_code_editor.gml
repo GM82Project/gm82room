@@ -11,7 +11,7 @@ str=argument0
 tf=temp_directory+"\code.txt"
 
 f=file_text_open_write(tf)
-file_text_write_string(f,string_replace_all(str,lf,chr(13)+lf))
+file_text_write_string(f,string_replace_all(str,lf,crlf))
 file_text_close(f)
 
 if (codeeditortype==2) execute_program_async("notepad "+tf)

@@ -9,8 +9,8 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
         autotiler_last_click=noone
         if (keyboard_check(vk_shift)) {
             autotiler_rectangle=1
-            autotiler_rectangle_x=floor(global.mousex/gridx)
-            autotiler_rectangle_y=floor(global.mousey/gridy)
+            autotiler_rectangle_x=floor((global.mousex-gridox)/gridx)
+            autotiler_rectangle_y=floor((global.mousey-gridoy)/gridy)
         }
     }
     if (mouse_check_modal(mb_left)) {
@@ -24,8 +24,8 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
                 autotiler_was_drawing=1
             }
             bresenham(
-                floor(global.mousex_old/gridx),floor(global.mousey_old/gridy),
-                floor(global.mousex/gridx),floor(global.mousey/gridy),
+                floor((global.mousex_old-gridox)/gridx),floor((global.mousey_old-gridoy)/gridy),
+                floor((global.mousex-gridox)/gridx),floor((global.mousey-gridoy)/gridy),
                 draw_tilesmart_brush,1
             )
         }
@@ -36,10 +36,10 @@ if (mode==1 and tilebgpal!=noone) if ((mousein or autotiler_rectangle) and windo
         }
         if (autotiler_rectangle==1) {
             begin_undo(act_autotiler,"drawing a smart tile rectangle",0)
-            left=min(floor(global.mousex/gridx),autotiler_rectangle_x)
-            right=max(floor(global.mousex/gridx),autotiler_rectangle_x)
-            top=min(floor(global.mousey/gridy),autotiler_rectangle_y)
-            bottom=max(floor(global.mousey/gridy),autotiler_rectangle_y)
+            left=min(floor((global.mousex-gridox)/gridx),autotiler_rectangle_x)
+            right=max(floor((global.mousex-gridox)/gridx),autotiler_rectangle_x)
+            top=min(floor((global.mousey-gridoy)/gridy),autotiler_rectangle_y)
+            bottom=max(floor((global.mousey-gridoy)/gridy),autotiler_rectangle_y)
             ur=(right-left)+1
             vr=(bottom-top)+1
             v=top repeat (vr) {u=left repeat (ur) {
@@ -147,8 +147,8 @@ if (selsize) {
         selwidth=(global.mousex-selleft)
         selheight=(global.mousey-seltop)
     } else {
-        selwidth=roundto_unbiased(global.mousex,gridx)-selleft
-        selheight=roundto_unbiased(global.mousey,gridy)-seltop
+        selwidth=roundto_unbiased(global.mousex-gridox,gridx)+gridox-selleft
+        selheight=roundto_unbiased(global.mousey-gridoy,gridy)+gridoy-seltop
     }
 
     if (abs(selwidth)<gridx) selwidth=esign(selwidth,1)*gridx
@@ -177,8 +177,8 @@ if (grab_background) {
         bg_xoffset[bg_current]=global.mousex+grab_bgoffx
         bg_yoffset[bg_current]=global.mousey+grab_bgoffy
     } else {
-        bg_xoffset[bg_current]=roundto_unbiased(global.mousex+grab_bgoffx,gridx)
-        bg_yoffset[bg_current]=roundto_unbiased(global.mousey+grab_bgoffy,gridy)
+        bg_xoffset[bg_current]=roundto_unbiased(global.mousex+grab_bgoffx-gridox,gridx)+gridox
+        bg_yoffset[bg_current]=roundto_unbiased(global.mousey+grab_bgoffy-gridoy,gridy)+gridoy
     }
     update_backgroundpanel()
 

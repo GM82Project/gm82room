@@ -4,8 +4,8 @@ if (keyboard_check(vk_alt)) {
     dx=global.mousex
     dy=global.mousey
 } else {
-    dx=floorto(global.mousex,gridx)
-    dy=floorto(global.mousey,gridy)
+    dx=floorto(global.mousex-gridox,gridx)+gridox
+    dy=floorto(global.mousey-gridoy,gridy)+gridoy
 }
 
 h=keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left)

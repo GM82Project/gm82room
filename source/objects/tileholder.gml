@@ -43,12 +43,12 @@ if (tile!=noone) {
 ds_map_delete(uidmap,uid)
 
 if (bg==bg_background[tilebgpal]) {
-    u=floorto(x,gridx*autotiler_tree_size)
-    v=floorto(y,gridy*autotiler_tree_size)
+    u=floorto(x-gridox,gridx*autotiler_tree_size)
+    v=floorto(y-gridoy,gridy*autotiler_tree_size)
     name=string(u)+"_"+string(v)
     if (ds_map_exists(autotiler_tree,name)) {
         leaf=ds_map_find_value(autotiler_tree,name)
-        ds_grid_set(leaf,(x-u) div gridx,(y-v) div gridy,0)
+        ds_grid_set(leaf,(x-gridox-u) div gridx,(y-gridoy-v) div gridy,0)
     }
 }
 #define Step_2
@@ -68,15 +68,12 @@ if (sel) {
         dy=global.mousey
 
         if (!keyboard_check(vk_alt)) {
-            dx=roundto(dx,gridx)
-            dy=roundto(dy,gridy)
+            dx=roundto(dx-gridox,gridx)+gridox
+            dy=roundto(dy-gridoy,gridy)+gridoy
         }
 
-        dir=point_direction(x,y,dx,dy)
-        len=point_distance(x,y,dx,dy)
-
-        image_xscale=lengthdir_x(len,dir)
-        image_yscale=lengthdir_y(len,dir)
+        image_xscale=round(dx-x)
+        image_yscale=round(dy-y)
 
         if (abs(image_xscale*tilew)<1) image_xscale=1
         if (abs(image_yscale*tileh)<1) image_yscale=1

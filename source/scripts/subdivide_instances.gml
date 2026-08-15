@@ -21,8 +21,8 @@ with (instance) if (sel==checksel) {
     else {
         //split by grid
 
-        dx=x
-        dy=y
+        dx=x-gridox
+        dy=y-gridoy
         dw=sprite_width
         dh=sprite_height
 

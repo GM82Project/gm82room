@@ -21,4 +21,7 @@ o.image_yscale=(floorto(o.y+gridy,gridy)-o.y)/o.sprh
 o.image_blend=image_blend
 o.image_alpha=image_alpha
 
+o.x+=gridox
+o.y+=gridoy
+
 return o

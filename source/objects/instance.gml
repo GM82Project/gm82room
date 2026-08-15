@@ -78,8 +78,8 @@ if (sel) {
         dy=global.mousey
 
         if (!keyboard_check(vk_alt)) {
-            dx=roundto_unbiased(dx,gridx)
-            dy=roundto_unbiased(dy,gridy)
+            dx=roundto_unbiased(dx-gridox,gridx)+gridox
+            dy=roundto_unbiased(dy-gridoy,gridy)+gridoy
         }
 
         dir=point_direction(x,y,dx,dy)
@@ -110,8 +110,8 @@ if (sel) {
                 fields[editfid,1]=string(global.mousex)
                 fields[editfid,2]=string(global.mousey)
             } else {
-                fields[editfid,1]=string(roundto_unbiased(global.mousex,gridx))
-                fields[editfid,2]=string(roundto_unbiased(global.mousey,gridy))
+                fields[editfid,1]=string(roundto_unbiased(global.mousex-gridox,gridx)+gridox)
+                fields[editfid,2]=string(roundto_unbiased(global.mousey-gridoy,gridy)+gridoy)
             }
         }
         if (!direct_mbleft) {
@@ -135,7 +135,7 @@ if (sel) {
             if (keyboard_check(vk_alt)) {
                 fields[editfid,1]=string(point_direction(x,y,global.mousex,global.mousey))
             } else {
-                fields[editfid,1]=string(point_direction(x,y,roundto_unbiased(global.mousex,gridx),roundto_unbiased(global.mousey,gridy)))
+                fields[editfid,1]=string(point_direction(x,y,roundto_unbiased(global.mousex-gridox,gridx)+gridox,roundto_unbiased(global.mousey-gridoy,gridy)+gridoy))
             }
         }
         if (!direct_mbleft) {
@@ -157,7 +157,7 @@ if (sel) {
             if (keyboard_check(vk_alt)) {
                 fields[editfid,1]=string(point_distance(x,y,global.mousex,global.mousey))
             } else {
-                fields[editfid,1]=string(point_distance(x,y,roundto_unbiased(global.mousex,gridx),roundto_unbiased(global.mousey,gridy)))
+                fields[editfid,1]=string(point_distance(x,y,roundto_unbiased(global.mousex-gridox,gridx)+gridox,roundto_unbiased(global.mousey-gridoy,gridy)+gridoy))
             }
         }
         if (!direct_mbleft) {

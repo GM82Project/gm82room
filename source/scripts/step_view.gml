@@ -5,8 +5,8 @@ if (mode==3) {
             vw_x[vw_current]=global.mousex-offx
             vw_y[vw_current]=global.mousey-offy
         } else {
-            vw_x[vw_current]=floorto(global.mousex-offx,gridx)
-            vw_y[vw_current]=floorto(global.mousey-offy,gridy)
+            vw_x[vw_current]=floorto(global.mousex-offx-gridox,gridx)+gridoy
+            vw_y[vw_current]=floorto(global.mousey-offy-gridoy,gridy)+gridoy
         }
         update_viewpanel()
         if (!direct_mbleft) {

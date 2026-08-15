@@ -5,8 +5,10 @@ down=0
 if (active) {
     active=0
     if (text!="") switch (action) {
-        case "grid x": {gridx=median(1,real(text),roomwidth ) text=string(gridx) rebuild_autotiler_tree()}break
-        case "grid y": {gridy=median(1,real(text),roomheight) text=string(gridy) rebuild_autotiler_tree()}break
+        case "grid x": {gridx=median(1,real(text),roomwidth ) text=string(gridx) project_modified() rebuild_autotiler_tree()}break
+        case "grid y": {gridy=median(1,real(text),roomheight) text=string(gridy) project_modified() rebuild_autotiler_tree()}break
+        case "grid ox": {gridox=median(0,real(text),gridx-1) text=string(gridox) project_modified() rebuild_autotiler_tree()}break
+        case "grid oy": {gridoy=median(0,real(text),gridy-1) text=string(gridoy) project_modified() rebuild_autotiler_tree()}break
 
         case "room width" : {val=clamp(round(real(text)),1,999999) undo_global("roomwidth","room width")  roomwidth=val }break
         case "room height": {val=clamp(round(real(text)),1,999999) undo_global("roomheight","room height") roomheight=val}break
