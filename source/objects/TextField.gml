@@ -84,7 +84,7 @@ if (active) {
         selected=0
     }
 
-    k+=1
+    k+=60/room_speed
     if (k mod 40-20) cursor="_"
     else cursor=" "
     if (keyboard_check_pressed(vk_enter)) {
