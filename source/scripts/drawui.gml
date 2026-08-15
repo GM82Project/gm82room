@@ -68,10 +68,15 @@ d3d_primitive_begin(pr_linelist)
             dx=global.mousex
             dy=global.mousey
         } else {
-            d3d_vertex(fmx,fmy+gridy,0) d3d_vertex(fmx+gridx,fmy+gridy,0)
-            d3d_vertex(fmx+gridx,fmy,0) d3d_vertex(fmx+gridx,fmy+gridy,0)
-            d3d_vertex(fmx,min(0,fmy),0) d3d_vertex(fmx,max(roomheight,fmy),0)
-            d3d_vertex(min(0,fmx),fmy,0) d3d_vertex(max(roomwidth,fmx),fmy,0)
+            if (mode==0 or mode==1) {
+                d3d_vertex(fmx,fmy+gridy,0) d3d_vertex(fmx+gridx,fmy+gridy,0)
+                d3d_vertex(fmx+gridx,fmy,0) d3d_vertex(fmx+gridx,fmy+gridy,0)
+            }
+            d3d_vertex(fmx,min(0,fmy),0)
+            d3d_vertex(fmx,max(roomheight,fmy+gridy),0)
+
+            d3d_vertex(min(0,fmx),fmy,0)
+            d3d_vertex(max(roomwidth,fmx+gridx),fmy,0)
             dx=fmx
             dy=fmy
         }
