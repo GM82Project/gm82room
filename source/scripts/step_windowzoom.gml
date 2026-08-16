@@ -36,7 +36,7 @@ if (resizecount<10) {
     } else resizecount=0
 }
 
-if (window_has_focus() or mouse_in_window()) {
+if (window_has_focus() or mouse_in_window() or global.livesock!=noone) {
     window_focused=true
     room_speed=maxfps
     powersave=false
@@ -45,7 +45,7 @@ if (window_has_focus() or mouse_in_window()) {
     window_focused=false
     with (TextField) textfield_actions()
     with (colorpicker) act=""
-    room_speed=5
+    room_speed=10
     powersave=true
     selcol=$ff8000
     save_room(1)
