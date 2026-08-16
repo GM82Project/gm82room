@@ -5,6 +5,9 @@ if (undoing or autotiler_was_drawing or paint) exit
 if (keyboard_check(vk_control) && keyboard_check_pressed(ord("S"))) {
     save_room(0)
 }
+if (!keyboard_check(vk_control) && keyboard_check_pressed(ord("C"))) {
+    button_actions("inst snap")
+}
 
 if (!keyboard_check(vk_control) && keyboard_check_pressed(ord("S")) && mode==1) {
     set_autotiler_mode()
@@ -52,7 +55,7 @@ if (mode==0 || mode==1) {
         delete_selected()
     }
 
-    if (keyboard_check(vk_shift) && mode==0) {
+    if (mode==0) {
         if (keyboard_check_pressed(ord("Q"))) button_actions("inst rot left")
         if (keyboard_check_pressed(ord("E"))) button_actions("inst rot right")
     }

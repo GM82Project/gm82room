@@ -66,7 +66,7 @@ with (Controller) switch (argument0) {
     case "copy object" : {clipboard_set_text(roomname+"_"+select.uid)}break
     case "inst code"   : {edit_creation_code()}break
     case "inst snap"   : {
-        if (keyboard_check(vk_control)) {
+        if (keyboard_check(vk_shift)) {
             with (instance) if (sel) {
                 mycx=round((bbox_right+bbox_left+1)/2)
                 mycy=round((bbox_bottom+bbox_top+1)/2)
@@ -88,10 +88,10 @@ with (Controller) switch (argument0) {
         update_selection_bounds()
     }break
     case "inst flip xs": {
-        if (keyboard_check(vk_control)) {
+        if (keyboard_check(vk_shift)) {
             with (instance) if (sel) {
-            mycx=round((bbox_right+bbox_left+1)/2)
-            mycy=round((bbox_bottom+bbox_top+1)/2)
+                mycx=round((bbox_right+bbox_left+1)/2)
+                mycy=round((bbox_bottom+bbox_top+1)/2)
                 image_xscale*=-1 image_angle*=-1
                 if (!skiprecenter) {
                     x-=(bbox_right+bbox_left+1)/2-mycx
@@ -125,10 +125,10 @@ with (Controller) switch (argument0) {
         update_selection_bounds()
     }break
     case "inst flip ys": {
-        if (keyboard_check(vk_control)) {
+        if (keyboard_check(vk_shift)) {
             with (instance) if (sel) {
-            mycx=round((bbox_right+bbox_left+1)/2)
-            mycy=round((bbox_bottom+bbox_top+1)/2)
+                mycx=round((bbox_right+bbox_left+1)/2)
+                mycy=round((bbox_bottom+bbox_top+1)/2)
                 image_yscale*=-1 image_angle*=-1
                 if (!skiprecenter) {
                     x-=(bbox_right+bbox_left+1)/2-mycx
@@ -178,40 +178,70 @@ with (Controller) switch (argument0) {
         update_selection_bounds()
     }break
     case "inst rot left" : {
-        with (instance) if (sel) {
-            cl=min(cl,bbox_left)
-            ct=min(ct,bbox_top)
-            cr=max(cr,bbox_right+1)
-            cb=max(cb,bbox_bottom+1)
-        }
-        sx=round((cl+cr)/2)
-        sy=round((ct+cb)/2)
-        with (instance) if (sel) {
-            image_angle=modwrap(image_angle+90,0,360)
-            mycx=sx+(y+0.5-sy)-0.5 mycy=sy-(x+0.5-sx)-0.5
-            if (!skiprecenter) {x=mycx y=mycy}
-            event_user(1)
-            do_change_undo("rotation",0)
-            if (select==id) update_inspector()
+        if (keyboard_check(vk_shift)) {
+            with (instance) if (sel) {
+                mycx=round((bbox_right+bbox_left+1)/2)
+                mycy=round((bbox_bottom+bbox_top+1)/2)
+                image_angle=modwrap(image_angle+90,0,360)
+                if (!skiprecenter) {
+                    x-=(bbox_right+bbox_left+1)/2-mycx
+                    y-=(bbox_bottom+bbox_top+1)/2-mycy
+                }
+                event_user(1)
+                do_change_undo("rotation",0)
+                if (select==id) update_inspector()
+            }
+        } else {
+            with (instance) if (sel) {
+                cl=min(cl,bbox_left)
+                ct=min(ct,bbox_top)
+                cr=max(cr,bbox_right+1)
+                cb=max(cb,bbox_bottom+1)
+            }
+            sx=round((cl+cr)/2)
+            sy=round((ct+cb)/2)
+            with (instance) if (sel) {
+                image_angle=modwrap(image_angle+90,0,360)
+                mycx=sx+(y+0.5-sy)-0.5 mycy=sy-(x+0.5-sx)-0.5
+                if (!skiprecenter) {x=mycx y=mycy}
+                event_user(1)
+                do_change_undo("rotation",0)
+                if (select==id) update_inspector()
+            }
         }
         update_selection_bounds()
     }break
     case "inst rot right": {
-        with (instance) if (sel) {
-            cl=min(cl,bbox_left)
-            ct=min(ct,bbox_top)
-            cr=max(cr,bbox_right+1)
-            cb=max(cb,bbox_bottom+1)
-        }
-        sx=round((cl+cr)/2)
-        sy=round((ct+cb)/2)
-        with (instance) if (sel) {
-            image_angle=modwrap(image_angle-90,0,360)
-            mycx=sx-(y+0.5-sy)-0.5 mycy=sy+(x+0.5-sx)-0.5
-            if (!skiprecenter) {x=mycx y=mycy}
-            event_user(1)
-            do_change_undo("rotation",0)
-            if (select==id) update_inspector()
+        if (keyboard_check(vk_shift)) {
+            with (instance) if (sel) {
+                mycx=round((bbox_right+bbox_left+1)/2)
+                mycy=round((bbox_bottom+bbox_top+1)/2)
+                image_angle=modwrap(image_angle-90,0,360)
+                if (!skiprecenter) {
+                    x-=(bbox_right+bbox_left+1)/2-mycx
+                    y-=(bbox_bottom+bbox_top+1)/2-mycy
+                }
+                event_user(1)
+                do_change_undo("rotation",0)
+                if (select==id) update_inspector()
+            }
+        } else {
+            with (instance) if (sel) {
+                cl=min(cl,bbox_left)
+                ct=min(ct,bbox_top)
+                cr=max(cr,bbox_right+1)
+                cb=max(cb,bbox_bottom+1)
+            }
+            sx=round((cl+cr)/2)
+            sy=round((ct+cb)/2)
+            with (instance) if (sel) {
+                image_angle=modwrap(image_angle-90,0,360)
+                mycx=sx-(y+0.5-sy)-0.5 mycy=sy+(x+0.5-sx)-0.5
+                if (!skiprecenter) {x=mycx y=mycy}
+                event_user(1)
+                do_change_undo("rotation",0)
+                if (select==id) update_inspector()
+            }
         }
         update_selection_bounds()
     }break

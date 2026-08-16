@@ -33,7 +33,7 @@ if (mode==0) {
     }
     draw_set_color($ffffff)
 
-    if (keyboard_check(ord("C"))) with (instance) {
+    if (keyboard_check(ord("F"))) with (instance) {
         if (code!="") {
             d3d_fog_trick($ff)
             draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)

@@ -62,7 +62,7 @@ if (mousein && mode==0) {
             draw_instance_fields(1)
         }
     }
-    if (keyboard_check(ord("C"))) {
+    if (keyboard_check(ord("F"))) {
         with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm || other.focus==id && !fieldactive) {
             draw_instance_fields(1)
         }
