@@ -63,50 +63,101 @@ with (Controller) switch (argument0) {
 
 
     //instance inspector
-    case "copy object"   : {clipboard_set_text(roomname+"_"+select.uid)}break
-    case "inst code"     : {edit_creation_code()}break
-    case "inst snap"     : {with (instance) if (sel) {x=roundto_unbiased(x-gridox,gridx)+gridox y=roundto_unbiased(y-gridoy,gridy)+gridoy do_change_undo("snapping",0) if (select==id) update_inspector() update_selection_bounds()}}break
-    case "inst flip xs": {
-        with (instance) if (sel) {
-            cl=min(cl,bbox_left)
-            ct=min(ct,bbox_top)
-            cr=max(cr,bbox_right+1)
-            cb=max(cb,bbox_bottom+1)
-        }
-        sx=round((cl+cr)/2)
-        sy=round((ct+cb)/2)
-        with (instance) if (sel) {
-            mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
-            image_xscale*=-1 image_angle*=-1
-            if (!skiprecenter) {
-                x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
-                y-=(bbox_bottom+bbox_top+1)/2-mycy
+    case "copy object" : {clipboard_set_text(roomname+"_"+select.uid)}break
+    case "inst code"   : {edit_creation_code()}break
+    case "inst snap"   : {
+        if (keyboard_check(vk_control)) {
+            with (instance) if (sel) {
+                mycx=round((bbox_right+bbox_left+1)/2)
+                mycy=round((bbox_bottom+bbox_top+1)/2)
+
+                x=round(floorto(mycx-gridox,gridx)+gridox+gridx/2-(mycx-x))
+                y=round(floorto(mycy-gridoy,gridy)+gridoy+gridy/2-(mycy-y))
+
+                do_change_undo("snapping",0)
+                if (select==id) update_inspector()
             }
-            event_user(1)
-            do_change_undo("mirroring",0)
-            if (select==id) update_inspector()
+        } else {
+            with (instance) if (sel) {
+                x=roundto_unbiased(x-gridox,gridx)+gridox
+                y=roundto_unbiased(y-gridoy,gridy)+gridoy
+                do_change_undo("snapping",0)
+                if (select==id) update_inspector()
+            }
+        }
+        update_selection_bounds()
+    }break
+    case "inst flip xs": {
+        if (keyboard_check(vk_control)) {
+            with (instance) if (sel) {
+            mycx=round((bbox_right+bbox_left+1)/2)
+            mycy=round((bbox_bottom+bbox_top+1)/2)
+                image_xscale*=-1 image_angle*=-1
+                if (!skiprecenter) {
+                    x-=(bbox_right+bbox_left+1)/2-mycx
+                    y-=(bbox_bottom+bbox_top+1)/2-mycy
+                }
+                event_user(1)
+                do_change_undo("mirroring",0)
+                if (select==id) update_inspector()
+            }
+        } else {
+            with (instance) if (sel) {
+                cl=min(cl,bbox_left)
+                ct=min(ct,bbox_top)
+                cr=max(cr,bbox_right+1)
+                cb=max(cb,bbox_bottom+1)
+            }
+            sx=round((cl+cr)/2)
+            sy=round((ct+cb)/2)
+            with (instance) if (sel) {
+                mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
+                image_xscale*=-1 image_angle*=-1
+                if (!skiprecenter) {
+                    x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
+                    y-=(bbox_bottom+bbox_top+1)/2-mycy
+                }
+                event_user(1)
+                do_change_undo("mirroring",0)
+                if (select==id) update_inspector()
+            }
         }
         update_selection_bounds()
     }break
     case "inst flip ys": {
-        with (instance) if (sel) {
-            cl=min(cl,bbox_left)
-            ct=min(ct,bbox_top)
-            cr=max(cr,bbox_right+1)
-            cb=max(cb,bbox_bottom+1)
-        }
-        sx=round((cl+cr)/2)
-        sy=round((ct+cb)/2)
-        with (instance) if (sel) {
-            mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
-            image_yscale*=-1 image_angle*=-1
-            if (!skiprecenter) {
-                x-=(bbox_right+bbox_left+1)/2-mycx
-                y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
+        if (keyboard_check(vk_control)) {
+            with (instance) if (sel) {
+            mycx=round((bbox_right+bbox_left+1)/2)
+            mycy=round((bbox_bottom+bbox_top+1)/2)
+                image_yscale*=-1 image_angle*=-1
+                if (!skiprecenter) {
+                    x-=(bbox_right+bbox_left+1)/2-mycx
+                    y-=(bbox_bottom+bbox_top+1)/2-mycy
+                }
+                event_user(1)
+                do_change_undo("mirroring",0)
+                if (select==id) update_inspector()
             }
-            event_user(1)
-            do_change_undo("flipping",0)
-            if (select==id) update_inspector()
+        } else {
+            with (instance) if (sel) {
+                cl=min(cl,bbox_left)
+                ct=min(ct,bbox_top)
+                cr=max(cr,bbox_right+1)
+                cb=max(cb,bbox_bottom+1)
+            }
+            sx=round((cl+cr)/2)
+            sy=round((ct+cb)/2)
+            with (instance) if (sel) {
+                mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
+                image_yscale*=-1 image_angle*=-1
+                if (!skiprecenter) {
+                    x-=(bbox_right+bbox_left+1)/2-mycx
+                    y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
+                }
+                event_user(1)
+                do_change_undo("flipping",0)
+                if (select==id) update_inspector()
+            }
         }
         update_selection_bounds()
     }break
