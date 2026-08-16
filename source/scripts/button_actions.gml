@@ -78,7 +78,10 @@ with (Controller) switch (argument0) {
         with (instance) if (sel) {
             mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
             image_xscale*=-1 image_angle*=-1
-            if (!skiprecenter) x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
+            if (!skiprecenter) {
+                x=round(x-((bbox_right+bbox_left+1)/2-mycx))+(sx-mycx)*2
+                y-=(bbox_bottom+bbox_top+1)/2-mycy
+            }
             event_user(1)
             do_change_undo("mirroring",0)
             if (select==id) update_inspector()
@@ -97,7 +100,10 @@ with (Controller) switch (argument0) {
         with (instance) if (sel) {
             mycx=round((bbox_right+bbox_left+1)/2) mycy=round((bbox_bottom+bbox_top+1)/2)
             image_yscale*=-1 image_angle*=-1
-            if (!skiprecenter) y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
+            if (!skiprecenter) {
+                x-=(bbox_right+bbox_left+1)/2-mycx
+                y=round(y-((bbox_bottom+bbox_top+1)/2-mycy))+(sy-mycy)*2
+            }
             event_user(1)
             do_change_undo("flipping",0)
             if (select==id) update_inspector()

@@ -254,17 +254,23 @@ applies_to=self
 */
 ///sanitize scale
 
-if (abs(image_xscale*sprw)<1) image_xscale=1/sprw
-if (abs(image_yscale*sprh)<1) image_yscale=1/sprh
+if (abs(image_xscale*sprw)<1) image_xscale=(1/sprw)*esign(image_xscale,1)
+if (abs(image_yscale*sprh)<1) image_yscale=(1/sprh)*esign(image_yscale,1)
 
 if (sign(image_xscale)==-1 && sign(image_yscale)==-1 && !selsize && !skiprecenter) {
+    mycx=round((bbox_right+bbox_left+1)/2)
+    mycy=round((bbox_bottom+bbox_top+1)/2)
+
     image_xscale=abs(image_xscale)
     image_yscale=abs(image_yscale)
     image_angle=(image_angle+180) mod 360
+
+    x-=(bbox_right+bbox_left+1)/2-mycx
+    y-=(bbox_bottom+bbox_top+1)/2-mycy
 }
 
-x=floor(x)
-y=floor(y)
+x=round(x)
+y=round(y)
 
 image_angle=modwrap(image_angle,0,360)
 #define Other_14
