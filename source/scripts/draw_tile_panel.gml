@@ -9,7 +9,7 @@ if (tilebgpal!=noone) {
     bgh=background_get_height(tex)
     bgname=ds_list_find_value(backgrounds,tilebgpal)
     d3d_set_viewport(x+8,y+32+8,w-16,h-32-16)
-    d3d_set_projection_ortho(round(xgo-(w-16)*z/2),round(ygo-(h-32-16)*z/2),(w-16)*z,(h-32-16)*z,0)
+    d3d_set_projection_ortho(round(xgo-(w-16)*z/2)-0.5+0.5*z,round(ygo-(h-32-16)*z/2)-0.5+0.5*z,(w-16)*z,(h-32-16)*z,0)
     texture_set_interpolation(0)
     draw_set_color(global.col_text)
     draw_set_valign(1)
