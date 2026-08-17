@@ -1,4 +1,4 @@
-with (tileholder) event_user(2)
+with (tileholder) if (post_brush_update) event_user(2)
 
 /*var list,c;
 

@@ -1,4 +1,4 @@
-key=ds_map_find_first(autotiler_tree) repeat (ds_map_size(autotiler_tree)) {
+/*key=ds_map_find_first(autotiler_tree) repeat (ds_map_size(autotiler_tree)) {
     string_token_start(key,"_")
     xx=string_token_real()
     yy=string_token_real()

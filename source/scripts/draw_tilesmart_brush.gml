@@ -1,8 +1,8 @@
 ///draw_tilesmart_brush(gridx,gridy,enable)
 var drawx,drawy,replace,index,byte,left,top,i,tile1,tile2,l,t,u,v,name,leaf,bgw,bgh;
 
-drawx=argument0*gridx
-drawy=argument1*gridy
+drawx=argument0*gridx+gridox
+drawy=argument1*gridy+gridoy
 
 //delete overlap
 replace=find_smart_tile_at(drawx+gridx/2,drawy+gridy/2)
@@ -81,7 +81,7 @@ if (argument2) {//add tile
     o.tileh=Tilepanel.gy
     o.image_xscale=gridx
     o.image_yscale=gridy
-    o.tile=tile_add(bg_background[tilebgpal],left,top,o.tilew,o.tileh,o.x+gridox,o.y+gridoy,ly_depth)
+    o.tile=tile_add(bg_background[tilebgpal],left,top,o.tilew,o.tileh,o.x,o.y,ly_depth)
     o.tilesx=gridx/o.tilew
     o.tilesy=gridy/o.tileh
     tile_set_scale(o.tile,o.tilesx,o.tilesy)
@@ -91,15 +91,12 @@ if (argument2) {//add tile
     update_instance_memory(o)
     autotiler_last_click=o
 
-    u=floorto(o.x,gridx*autotiler_tree_size)
-    v=floorto(o.y,gridy*autotiler_tree_size)
+    u=floorto(o.x-gridox,gridx*autotiler_tree_size)
+    v=floorto(o.y-gridoy,gridy*autotiler_tree_size)
     name=string(u)+"_"+string(v)
     if (ds_map_exists(autotiler_tree,name)) leaf=ds_map_find_value(autotiler_tree,name)
     else {leaf=ds_grid_create(autotiler_tree_size,autotiler_tree_size) ds_map_add(autotiler_tree,name,leaf)}
-    ds_grid_set(leaf,(o.x-u) div gridx,(o.y-v) div gridy,o)
-
-    o.x+=gridox
-    o.y+=gridoy
+    ds_grid_set(leaf,(o.x-gridox-u) div gridx,(o.y-gridoy-v) div gridy,o)
 
     add_undo(o.uid)
     add_undo(act_atdestroy)
