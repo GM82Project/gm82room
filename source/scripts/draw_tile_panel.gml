@@ -86,7 +86,7 @@ if (tilebgpal!=noone) {
             xsc=gx/32
             ysc=gy/32
             texture_set_interpolation(1)
-            draw_background_ext(ref,mw,0,xsc,ysc,0,$ffffff,1)
+            draw_background_ext(ref,mw,0,xsc/2,ysc/2,0,$ffffff,1)
             texture_set_interpolation(0)
 
             //draw tile mappings
@@ -103,14 +103,16 @@ if (tilebgpal!=noone) {
 
 
             if (hide_smartmap) {
-                draw_background_ext(ref,mw,0,xsc,ysc,0,$ffffff,1)
+                texture_set_interpolation(1)
+                draw_background_ext(ref,mw,0,xsc/2,ysc/2,0,$ffffff,1)
+                texture_set_interpolation(0)
                 //draw template over tiles
             } else if (point_in_rectangle(mouse_wx,mouse_wy,x+8,y+32+8,x+8+w-8-8,y+32+8+h-32-16)) {
                 clickx=(mouse_wx-(x+8))*z+xgo-(w-16)*z/2
                 clicky=(mouse_wy-(y+40))*z+ygo-(h-32-16)*z/2
 
                 //draw variant
-                dy=background_get_height(ref)*ysc+32
+                dy=background_get_height(ref)/2*ysc+32
 
                 vu=ds_grid_get(bg_tilemap[tilebgpal],47,0)
                 vv=ds_grid_get(bg_tilemap[tilebgpal],47,1)
@@ -167,7 +169,7 @@ if (tilebgpal!=noone) {
                 }
             }
 
-            dy=background_get_height(ref)*ysc+32
+            dy=background_get_height(ref)/2*ysc+32
             if (bg_tilemode[tilebgpal]!=1) {
                 dx=mw    draw_button_ext(dx,dy,64,32,!hide_smartmap,global.col_main) draw_text(dx+32,dy+16,"Hide")
                 dx=mw+72 draw_button_ext(dx,dy,64,32,1,global.col_main) draw_text(dx+32,dy+16,"Fill")

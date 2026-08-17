@@ -118,7 +118,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                     }
                 }
                 if (mouse_check_button(mb_left) and bg_tilemode[tilebgpal]) {
-                    dx=mw dy=background_get_height(ref)*(gy/32)+32
+                    dx=mw dy=background_get_height(ref)/2*(gy/32)+32
                     if (bg_tilemode[tilebgpal]!=1 and bg_tilemode[tilebgpal]!=7 and bg_tilemode[tilebgpal]!=8) {
                         //tool buttons
                         if (point_in_rectangle(clickx,clicky,dx,dy,dx+64,dy+32)) hide_smartmap=1
@@ -134,7 +134,7 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                         }
 
                         //template click
-                        if (point_in_rectangle(clickx,clicky,mw,0,mw+background_get_width(ref)*(gx/32),background_get_height(ref)*(gy/32))) {
+                        if (point_in_rectangle(clickx,clicky,mw,0,mw+background_get_width(ref)/2*(gx/32),background_get_height(ref)/2*(gy/32))) {
                             px=atcx py=atcy
                             atcx=(clickx-mw) div gx
                             atcy=clicky div gy
