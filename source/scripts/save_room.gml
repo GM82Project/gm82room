@@ -135,8 +135,6 @@ str="caption="+roomcaption+lf
 +"height="+string(roomheight)+lf
 +"snap_x="+string(gridx)+lf
 +"snap_y="+string(gridy)+lf
-+"offset_x="+string(gridox)+lf
-+"offset_y="+string(gridoy)+lf
 +"isometric="+string(ds_map_find_value(settings,"isometric"))+lf
 +"roomspeed="+string(roomspeed)+lf
 +"roompersistent="+string(roompersistent)+lf
@@ -189,6 +187,8 @@ str+="remember="+string(ds_map_find_value(settings,"remember"))+lf
 +"tab="+string(ds_map_find_value(settings,"tab"))+lf
 +"editor_x="+string(ds_map_find_value(settings,"editor_x"))+lf
 +"editor_y="+string(ds_map_find_value(settings,"editor_y"))+lf
++"offset_x="+string(gridox)+lf
++"offset_y="+string(gridoy)+lf
 file_text_write_string(f,str)
 file_text_close(f)
 
