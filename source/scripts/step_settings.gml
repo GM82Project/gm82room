@@ -36,7 +36,7 @@ if (mode==4) {
             dy=global.mousey
         } else {
             dx=roundto(global.mousex-gridox,gridx)+gridox
-            dy=roundto(global.mouseygridoy,gridy)+gridoy
+            dy=roundto(global.mousey-gridoy,gridy)+gridoy
         }
         if (grabref==1) {
             ref_angle=point_direction(ref_x,ref_y,global.mousex,global.mousey)+90-90*sign(ref_w)
