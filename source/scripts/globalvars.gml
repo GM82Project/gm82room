@@ -50,7 +50,7 @@ globalvar
     scriptmenu,scriptmenuitems,
     fontmenu,fontmenuitems,
     timelinemenu,timelinemenuitems,
-    overmode,
+    overmode,paint,
     grabroom,
     searchresults,searchmenu,searchmenuitems,
     sel_alpha,
