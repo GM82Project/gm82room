@@ -1,10 +1,26 @@
+//project cache
 directory_create(root+"cache")
-directory_create(program_directory+"\cache")
+
+//program cache
+progcache=program_directory+"\cache\"
+directory_create(progcache)
+
+//clear program thumb cache once a month
+clearcache=false
+fn=progcache+"version.txt"
+if (!file_exists(fn)) clearcache=true
+else if (date_month_span(real(file_text_read_all(fn,"")),date_current_datetime())>1) clearcache=true
+if (clearcache) {
+    for (f=file_find_first(progcache+"*.bmp",0);f!="";f=file_find_next())
+        file_delete(progcache+f)
+    file_find_close()
+    file_text_write_all(fn,string(date_current_datetime()))
+}
 
 if (directory_exists(root+"cache\backgrounds") && directory_exists(root+"cache\sprites")) {
     icon_mode=1
 } else if (!file_exists(root+"cache\ignore_warning")) {
-    if (show_question("Error loading icons: GM82 cache is missing, try to Save As the project to fix this.##You can still edit, but icons won't be displayed for resources.##Would you like to disable this warning?")) {
+    if (show_question("Error loading icons: GM82 icon cache is missing, try to Save As the project to fix this.##You can still edit, but icons won't be displayed on menus.##Would you like to disable this warning?")) {
         file_create(root+"cache\ignore_warning")
     }
 }
