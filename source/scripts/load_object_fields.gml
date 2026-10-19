@@ -230,6 +230,30 @@ f=file_text_open_read_safe(root+"objects\"+argument1+".gml") if (f) {do {
                             objfieldtype[i,objfields[i]]="number"
                             objfields[i]+=1
                         }
+                    } else if (string_pos("int",str)) {
+                        //numbers are parsed differently due to range list
+                        if (string_count("(",str)==1 && string_count(")",str)==1 && string_pos("(",str)<string_pos(")",str)) {
+                            objfieldtype[i,objfields[i]]="int_range"
+                            //get the range from within the ()'s
+                            str=string_delete(string_copy(str,1,string_pos(")",str)-1),1,string_pos("(",str))
+                            if (str="") {
+                                show_message(error+"Int declaration has empty range.")
+                            } else {
+                                string_token_start(str,",")
+                                __left=string_number(string_token_next())
+                                __right=string_number(string_token_next())
+
+                                if (__left=="" or __right=="" or string_pos(".",__left) or string_pos(".",__right)) {
+                                    show_message(error+"Int declaration has invalid range:#"+str)
+                                } else {
+                                    objfieldargs[i,objfields[i]]=__left+","+__right
+                                    objfields[i]+=1
+                                }
+                            }
+                        } else {
+                            objfieldtype[i,objfields[i]]="int"
+                            objfields[i]+=1
+                        }
                     } else {
                         if (invalid_field_type(str)) {
                             show_message(error+"Field type "+qt+str+qt+" is not recognized.")

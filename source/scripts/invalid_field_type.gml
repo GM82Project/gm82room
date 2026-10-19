@@ -1,6 +1,8 @@
 switch (argument0) {
     case "value":
     case "number":
+    case "int":
+    case "integer":
     case "angle":
     case "radius":
     case "string":

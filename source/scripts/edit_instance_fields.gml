@@ -160,6 +160,19 @@ switch (objfieldtype[obj,menu]) {
             fields[menu,0]=1
         }
     } break
+    case "int": {
+        if (!fields[menu,0]) fields[menu,1]="0"
+        fields[menu,1]=string(get_integer("Insert new integer for "+qt+objfieldname[obj,menu]+qt+":",real(fields[menu,1])))
+        fields[menu,0]=1
+    } break
+    case "int_range": {
+        string_token_start(objfieldargs[obj,menu],",")
+        __left=string_token_next()
+        __right=string_token_next()
+        if (!fields[menu,0]) fields[menu,1]=__left
+        fields[menu,1]=string(median(real(__left),real(__right),get_integer("Insert new integer for "+qt+objfieldname[obj,menu]+qt+"#(between "+__left+" and "+__right+"):",real(fields[menu,1]))))
+        fields[menu,0]=1
+    } break
 
     case "xy": {editxy=1 editfid=menu break}
     case "instance": {editinst=1 editfid=menu break}

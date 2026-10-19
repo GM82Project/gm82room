@@ -132,6 +132,7 @@ for (i=0;i<objfields[obj];i+=1) {
         case "radius": fr=20 break
         case "__gm82room_ccode": fr=21 break
         case "__gm82room_depth": fr=23 break
+        case "int": case "int_range": fr=24 break
     }
     if (objfieldtype[obj,i]=="angle") {
         if (fields[i,0]) ang=real(fields[i,1])

@@ -31,7 +31,7 @@ if (type="value" or type=="enum") {
 }
 
 if (type=="color" || type=="colour" || type=="string") return execute_string("return "+val)
-if (type=="number" || type=="number_range" || type=="radius" || type=="angle" || type=="xy")
+if (type=="number" || type=="number_range" || type=="int" || type=="int_range" || type=="radius" || type=="angle" || type=="xy")
     return real(val)
 
 return val
