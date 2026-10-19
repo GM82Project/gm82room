@@ -11,10 +11,10 @@ if (mode==1) if (tilebgpal!=noone) if (bg_tilemode[tilebgpal]) return 0
 if (mode==0) with (instance)
     if (distance_to_point(global.mousex,global.mousey)<1)
         if (instance_position(global.mousex,global.mousey,id))
-            ds_priority_add(prio,id,(max_int-depth)/abs(sprite_width*sprite_height))
+            ds_priority_add(prio,id,(max_int-depth)/max(1,abs(sprite_width*sprite_height)))
 
 if (mode==1) with (tileholder)
     if (distance_to_point(global.mousex,global.mousey)<1)
-        ds_priority_add(prio,id,(max_int-depth)/abs(tilesx*tilew*tilesy*tileh))
+        ds_priority_add(prio,id,(max_int-depth)/max(1,abs(tilesx*tilew*tilesy*tileh)))
 
 return ds_priority_size(prio)
