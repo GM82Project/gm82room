@@ -1,5 +1,7 @@
 //sets objpal and updates the name
 
+if (!objects_length) exit
+
 textfield_set("palette name",ds_list_find_value(objects,argument0))
 objpal=argument0
 

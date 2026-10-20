@@ -35,7 +35,7 @@ if (mode==1) {
         draw_set_color($ffffff)
     } else {
         draw_set_color(global.col_text)
-        draw_text(8,158,"Project#contains no#backgrounds.")
+        draw_text(8,126,"Project#contains no#backgrounds.")
         draw_set_color($ffffff)
     }
 
