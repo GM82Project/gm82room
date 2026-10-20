@@ -106,4 +106,15 @@ if (mode==5 && current_path!=noone) {
             draw_set_alpha(1)
         }
     }
+
+    if (keyboard_check(ord("F"))) {
+        //draw point numbers
+        i=0 repeat (path_get_number(current_path)) {
+            drawtooltip(
+                string(i),
+                path_get_point_x(current_path,i)-0.5,
+                path_get_point_y(current_path,i)-0.5
+            )
+        i+=1}
+    }
 }
