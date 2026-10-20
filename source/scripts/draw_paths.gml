@@ -6,10 +6,20 @@ if (mode==5 || view[7]) {
             d3d_model_draw(ds_map_find_value(pathmap_model,key),0,0,0,-1)
             if (pathfocus==key) d3d_fog_trick()
         }
+
+        //draw path names
+        if (mode==5 and current_path==noone) if (keyboard_check(ord("F"))) {
+            p=ds_map_find_value(pathmap_model,key)
+            drawtooltip(
+                key,
+                path_get_point_x(p,0)-0.5,
+                path_get_point_y(p,0)-0.5
+            )
+        }
     key=ds_map_find_next(pathmap_path,key)}
 }
 
-if (mode==5 && current_path!=noone) {
+if (mode==5 and current_path!=noone) {
     i=0 repeat (ds_list_size(path_sel)) {
         point=ds_list_find_value(path_sel,i)
         dx=path_get_point_x(current_path,point)-0.5
