@@ -76,7 +76,4 @@ if (mode==1) {
     draw_set_color($ffffff)
 
     draw_button_ext(dx,height-76,160,76,1,global.col_main)
-    draw_set_color(global.col_text)
-    draw_text(dx+12,height-64,"Depth")
-    draw_set_color($ffffff)
 }

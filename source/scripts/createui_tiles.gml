@@ -191,6 +191,7 @@ i=instance_create(width-152,height-68,TextField)
 i.action="layer depth"
 i.w=144
 i.maxlen=10
+i.basealt="Depth"
 i.anchor=3
 i.tagmode=1
 
