@@ -268,6 +268,11 @@ if (layersize) {
             }
         } until (file_text_eof(f)) file_text_close(f)}
     }
+    
+    //select topmost background with tiles
+    i=0 repeat (backgrounds_length) {
+        if (bghastiles[i]) {tilebgpal=i break}
+    i+=1}                     
 } else add_tile_layer()
 
 
