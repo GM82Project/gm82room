@@ -24,7 +24,6 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                 if (focus) if (mouse_check_modal_pressed(mb_left)) event_user(2)
             }
 
-
             if ((clickx>=0 and clickx<bgw) and (clicky>=0 and clicky<bgh)) or (tiling) {
                 //inside the background
                 clickx=median(0,clickx,bgw)+0.5
@@ -57,40 +56,95 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
                         }
                     } else {
                         //manual mode
-                        if (!keyboard_check(vk_alt)) {
-                            if (keyboard_check(vk_shift) && tiling) {
-                                clickx=min(bgw,ceilto(clickx-ox,gx+sx)+ox)
-                                clicky=min(bgh,ceilto(clicky-oy,gy+sy)+oy)
-                            } else {
+
+                        if (selectt and mouse_check_button_pressed(mb_left)) {
+                            //tile uv edit mode
+                            dx=curtilex-0.5
+                            dy=curtiley-0.5
+                            if (point_distance(clickx,clicky,dx,dy)<10*z)
+                                edit_tile_uvs=1
+                            dx=curtilex+curtilew-0.5
+                            dy=curtiley+curtileh-0.5
+                            if (point_distance(clickx,clicky,dx,dy)<10*z)
+                                edit_tile_uvs=2
+                            if (edit_tile_uvs) {
+                                begin_undo(act_tileuv,"editing tile texture coordinates",0)
+                                with (selectt) {
+                                    add_undo(uid)
+                                    add_undo(tile_get_left(tile))
+                                    add_undo(tile_get_top(tile))
+                                    add_undo(tile_get_width(tile))
+                                    add_undo(tile_get_height(tile))
+                                }
+                                push_undo()
+                            }
+                        }
+                        if (edit_tile_uvs==1) {
+                            if (!keyboard_check(vk_alt)) {
                                 clickx=floorto(min(clickx-ox,bgw-curtilew),gx+sx)+ox
                                 clicky=floorto(min(clicky-oy,bgh-curtileh),gy+sy)+oy
                             }
-                        } else {
-                            if (keyboard_check(vk_shift)) {
-                                curtilew=1
-                                curtileh=1
-                            } else {
-                                clickx=min(clickx-ox,bgw-curtilew)
-                                clicky=min(clicky-oy,bgh-curtileh)
-                            }
+                            curtilex=floor(clickx)
+                            curtiley=floor(clicky)
                         }
-                        if (keyboard_check(vk_shift) && tiling) {
+                        if (edit_tile_uvs==2) {
+                            if (!keyboard_check(vk_alt)) {
+                                clickx=min(bgw,ceilto(clickx-ox,gx+sx)+ox)
+                                clicky=min(bgh,ceilto(clicky-oy,gy+sy)+oy)
+                            }
+
                             if (sx==0) curtilew=ceil(max(0,clickx-curtilex))
                             if (sy==0) curtileh=ceil(max(0,clicky-curtiley))
                             if (curtilew==0) curtilew=gx
                             if (curtileh==0) curtileh=gy
+                        }
+                        if (edit_tile_uvs) {
+                            if (!selectt) edit_tile_uvs=0
+                            else {
+                                tile_set_region(selectt.tile,curtilex,curtiley,curtilew,curtileh)
+                                selectt.image_xscale=selectt.tilesx*curtilew
+                                selectt.image_yscale=selectt.tilesy*curtileh
+                            }
                         } else {
-                            curtilex=floor(clickx)
-                            curtiley=floor(clicky)
-                            tiling=1
+                            //select a new tile
+                            selectt=noone
+                            if (!keyboard_check(vk_alt)) {
+                                if (keyboard_check(vk_shift) && tiling) {
+                                    clickx=min(bgw,ceilto(clickx-ox,gx+sx)+ox)
+                                    clicky=min(bgh,ceilto(clicky-oy,gy+sy)+oy)
+                                } else {
+                                    clickx=floorto(min(clickx-ox,bgw-curtilew),gx+sx)+ox
+                                    clicky=floorto(min(clicky-oy,bgh-curtileh),gy+sy)+oy
+                                }
+                            } else {
+                                if (keyboard_check(vk_shift)) {
+                                    curtilew=1
+                                    curtileh=1
+                                } else {
+                                    clickx=min(clickx-ox,bgw-curtilew)
+                                    clicky=min(clicky-oy,bgh-curtileh)
+                                }
+                            }
+                            if (keyboard_check(vk_shift) && tiling) {
+                                if (sx==0) curtilew=ceil(max(0,clickx-curtilex))
+                                if (sy==0) curtileh=ceil(max(0,clicky-curtiley))
+                                if (curtilew==0) curtilew=gx
+                                if (curtileh==0) curtileh=gy
+                            } else {
+                                curtilex=floor(clickx)
+                                curtiley=floor(clicky)
+                                tiling=1
+                            }
                         }
                     }
                 } else {
                     tiling=0
+                    edit_tile_uvs=0
                 }
             } else {
                 //outside the bg
                 tiling=0
+                edit_tile_uvs=0
                 hide_smartmap=0
                 ref=pick(bg_tilemode[tilebgpal]-1,bgTiler1,bgTiler2,bgTiler4,bgTiler9,bgTiler16,bgTiler47)
                 mw=max(176,background_get_width(bg_background[tilebgpal])+32,string_width(ds_list_find_value(backgrounds,tilebgpal))+8)

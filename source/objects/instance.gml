@@ -45,7 +45,7 @@ if (select==id) {
     select=noone
 }
 
-if (Controller.focus==id) Controller.focus=noone
+if (focus==id) focus=noone
 
 instancecount-=1
 
@@ -281,7 +281,7 @@ applies_to=self
 d3d_transform_add_translation(-0.5,-0.5,0)
 draw_set_color($ff)
 
-if (Controller.focus!=id && (hasfields || code!="")) event_user(5)
+if (focus!=id && (hasfields || code!="")) event_user(5)
 
 //draw arrows if instance has any "xy" or "instance" fields
 if !(abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {

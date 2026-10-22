@@ -52,7 +52,7 @@ if (mode==1) {
 draw_knob()
 
 with (Button) button_draw()
-with (Button) if (focus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
+with (Button) if (btfocus && alt!="" && (tagmode==mode || tagmode==-1)) drawtooltip(alt)
 
 if (mousein && mode==0) {
     with (select) {

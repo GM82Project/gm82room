@@ -30,7 +30,6 @@ if (mousein) {
         focus=ds_priority_delete_max(focus_priority)
 }
 
-
 //cursor for object, tile and path mode
 if (mode==0 || mode==1 || mode==5) {
     if (keyboard_check_direct(vk_control)) window_set_cursor(cr_size_all)

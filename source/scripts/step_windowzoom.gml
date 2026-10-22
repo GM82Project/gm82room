@@ -93,7 +93,10 @@ global.mousex=mouse_x
 global.mousey=mouse_y
 
 with (Button) {
-    if (tagmode!=-2) focus=distance_to_point(mouse_wx,mouse_wy)<1
+    if (tagmode!=-2) {
+        if (tagmode==mode or tagmode==-1) btfocus=distance_to_point(mouse_wx,mouse_wy)<1
+        else btfocus=0
+    }
 }
 
 mousein=(
@@ -209,10 +212,6 @@ if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)) {
     }
 
     //yeah i know i called pan zooming but ok just think like youre zooming around im sorry
-    if (keyboard_check(vk_control)) {
-        if (mode==0) with (focus) focus_object(obj)
-        if (mode==1) with (focus) focus_tile(tile)
-    }
     zooming=1
     grabx=mouse_wx
     graby=mouse_wy

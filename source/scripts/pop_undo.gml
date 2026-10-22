@@ -134,6 +134,17 @@ with (Controller) {
                     i+=8
                 } until (i>=size)
             }break
+            case act_tileuv: {
+                o=ds_map_find_value(uidmap,ds_list_find_value(l,i))
+                if (o<100000 or !instance_exists(o)) {show_error("Error undoing a change: tile id "+string(o)+" is invalid",1) exit}
+
+                tile_set_region(o.tile,ds_list_find_value(l,i+1),ds_list_find_value(l,i+2),ds_list_find_value(l,i+3),ds_list_find_value(l,i+4))
+
+                o.image_xscale=o.tilesx*tile_get_width(o.tile)
+                o.image_yscale=o.tilesy*tile_get_height(o.tile)
+                if (o==selectt) with (selectt) focus_tile(tile)
+            }break
+
             case act_global: {
                 variable_global_set(ds_list_find_value(l,i),ds_list_find_value(l,i+1))
             }break

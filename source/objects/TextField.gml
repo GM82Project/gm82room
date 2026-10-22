@@ -16,7 +16,7 @@ k=20
 cursor=""
 
 spr=noone
-focus=0
+btfocus=0
 active=0
 k=0
 dynamic=-1
@@ -38,9 +38,9 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if (focus && (tagmode==mode || tagmode==-1 || tagmode==-2)) current_cursor=cr_beam
+if (btfocus && (tagmode==mode || tagmode==-1 || tagmode==-2)) current_cursor=cr_beam
 
-if (down!=0 && focus && !active && !(gray)) {
+if (down!=0 && btfocus && !active && !(gray)) {
     textfield_activate()
 }
 

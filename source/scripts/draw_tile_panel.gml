@@ -189,12 +189,23 @@ if (tilebgpal!=noone) {
         //normal mode rectangle
         draw_set_color_sel()
         draw_rectangle(curtilex-0.5,curtiley-0.5,curtilex+curtilew-0.5,curtiley+curtileh-0.5,1)
+        if (selectt) {
+            //tile uv edit mode
+            dx=curtilex-0.5
+            dy=curtiley-0.5
+            draw_rectangle(dx-8*z,dy-8*z,dx+8*z,dy+8*z,1)
+            draw_rectangle(dx-4*z,dy-4*z,dx+4*z,dy+4*z,1)
+            dx=curtilex+curtilew-0.5
+            dy=curtiley+curtileh-0.5
+            draw_rectangle(dx-8*z,dy-8*z,dx+8*z,dy+8*z,1)
+            draw_rectangle(dx-4*z,dy-4*z,dx+4*z,dy+4*z,1)
+        }
         draw_set_color($ffffff)
     }
 
     draw_reset()
 
-    with (TextField) if (focus and alt!="" and tagmode==-2) drawtooltip_tilepanel(alt)
+    with (TextField) if (btfocus and alt!="" and tagmode==-2) drawtooltip_tilepanel(alt)
 
     texture_set_interpolation(1)
 

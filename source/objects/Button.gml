@@ -9,7 +9,7 @@ w=32
 h=32
 text=""
 spr=noone
-focus=0
+btfocus=0
 dynamic=-1
 alt=""
 anchor=0
@@ -28,7 +28,7 @@ if (ilist) if (!Instancepanel.open) exit
 
 if (down!=0) {
     //click button
-    if (!focus) down=-1
+    if (!btfocus) down=-1
     else down=abs(down)
     downcount+=1
     if (downcount>room_speed/3) button_held(action)
