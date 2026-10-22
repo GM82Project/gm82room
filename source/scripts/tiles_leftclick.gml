@@ -22,10 +22,10 @@ if (mode==1 and tilebgpal!=noone) if (!bg_tilemode[tilebgpal]) {
                 if (fill_click_priority()) {
                     with (ds_priority_delete_max(click_priority)) {
                         sel=1
+                        focus_tile(tile)      
                         update_inspector()
                         //ctrl+left = move
                         if (keyboard_check(vk_control)) {
-                            focus_tile(tile)      
                             //group operation
                             if (selection) {
                                 grabselection=1

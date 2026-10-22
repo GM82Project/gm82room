@@ -42,10 +42,10 @@ if (mode==0) {
                 if (fill_click_priority()) {
                     with (ds_priority_delete_max(click_priority)) {
                         sel=1
+                        focus_object(obj)                        
                         update_inspector()
                         //ctrl+left = move
                         if (keyboard_check(vk_control)) {
-                            focus_object(obj)                        
                             //group operation
                             if (selection) {
                                 grabselection=1
