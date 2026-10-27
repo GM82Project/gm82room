@@ -222,6 +222,14 @@ if (layersize) {
             tilev=string_token_real()
             o.tilew=string_token_real()
             o.tileh=string_token_real()
+            string_token_next() //skip "locked" flag
+            o.tilesx=string_token_real()
+            o.tilesy=string_token_real()
+            tileblend=string_token_real()
+            if (o.tilesx==0 or o.tilesy==0) {
+                o.tilesx=1
+                o.tilesy=1
+            }
 
             o.bg=get_background_tiles(o.bgname)
             if (micro_optimization_bgid!=noone) {
@@ -241,11 +249,6 @@ if (layersize) {
 
                 o.image_xscale=o.tilew
                 o.image_yscale=o.tileh
-
-                string_token_next() //skip "locked" flag
-                o.tilesx=string_token_real()
-                o.tilesy=string_token_real()
-                tileblend=string_token_real()
 
                 o.image_xscale*=o.tilesx
                 o.image_yscale*=o.tilesy

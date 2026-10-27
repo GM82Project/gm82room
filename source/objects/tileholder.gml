@@ -139,6 +139,9 @@ tilesy=image_yscale/tileh
 x=floor(x)
 y=floor(y)
 
+if (tilesx==0) tilesx=1
+if (tilesy==0) tilesy=1
+
 tile_set_scale(tile,tilesx,tilesy)
 #define Other_12
 /*"/*'/**//* YYD ACTION
