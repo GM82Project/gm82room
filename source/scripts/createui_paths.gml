@@ -136,7 +136,7 @@ i.anchor=2
 
 
 //inspector
-i=instance_create(width-160+8,8,Button)
+i=instance_create(width-160+8,8+24,Button)
 i.w=144
 i.spr=42
 i.action="path clear"
@@ -145,7 +145,7 @@ i.alt=""
 i.tagmode=5
 i.anchor=1
 
-i=instance_create(width-160+8,8+32,Button)
+i=instance_create(width-160+8,8+32+24,Button)
 i.w=144
 i.spr=43
 i.action="path reverse"
@@ -154,7 +154,7 @@ i.alt=""
 i.tagmode=5
 i.anchor=1
 
-i=instance_create(width-160+8,8+64,Button)
+i=instance_create(width-160+8,8+64+24,Button)
 i.w=144
 i.spr=44
 i.action="path shift"
@@ -163,7 +163,7 @@ i.alt=""
 i.tagmode=5
 i.anchor=1
 
-i=instance_create(width-160+8,8+96,Button)
+i=instance_create(width-160+8,8+96+24,Button)
 i.w=72
 i.spr=45
 i.action="path fliph"
@@ -172,7 +172,7 @@ i.alt="Flip horizontally"
 i.tagmode=5
 i.anchor=1
 
-i=instance_create(width-160+8+72,8+96,Button)
+i=instance_create(width-160+8+72,8+96+24,Button)
 i.w=72
 i.spr=46
 i.action="path flipv"
@@ -181,7 +181,7 @@ i.alt="Flip vertically"
 i.tagmode=5
 i.anchor=1
 
-i=instance_create(width-160+8,8+128,Button)
+i=instance_create(width-160+8,8+128+24,Button)
 i.w=144
 i.spr=47
 i.action="path rotate"
@@ -190,7 +190,7 @@ i.alt=""
 i.tagmode=5
 i.anchor=1
 
-i=instance_create(width-160+8,8+160,Button)
+i=instance_create(width-160+8,8+160+24,Button)
 i.w=144
 i.spr=48
 i.action="path scale"
@@ -199,7 +199,7 @@ i.alt=""
 i.tagmode=5
 i.anchor=1
 
-i=instance_create(width-160+8,8+192,Button)
+i=instance_create(width-160+8,8+192+24,Button)
 i.w=144
 i.spr=1
 i.action="path snap"
@@ -208,7 +208,7 @@ i.alt=""
 i.tagmode=5
 i.anchor=1
 
-i=instance_create(width-160+8,8+224+4,Button)
+i=instance_create(width-160+8,8+224+4+24,Button)
 i.type=1
 i.action="path thin"
 i.text="Thin lines"

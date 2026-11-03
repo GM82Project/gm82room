@@ -30,5 +30,6 @@ if (mode==5) {
     draw_text(12,height-180+46+100,"Speed")
 
     //inspector
-    draw_button_ext(width-160,0,160,268,1,noone)
+    draw_text(width-160+12,7,"Path tools")
+    draw_button_ext(width-160,0,160,292,1,noone)
 }
