@@ -63,7 +63,7 @@ if (mousein && mode==0) {
         }
     }
     if (keyboard_check(ord("F"))) {
-        with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm || other.focus==id && !fieldactive) {
+        with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm || focus==id && !fieldactive) {
             draw_instance_fields(1)
         }
     } else {
