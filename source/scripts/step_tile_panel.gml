@@ -20,8 +20,8 @@ if (instance_position(mouse_wx,mouse_wy,id)) {
 
             //our special textfields
             with (TextField) if (tagmode==-2) {
-                focus=(distance_to_point(other.clickx,other.clicky)<1)
-                if (focus) if (mouse_check_modal_pressed(mb_left)) event_user(2)
+                btfocus=(distance_to_point(other.clickx,other.clicky)<1)
+                if (btfocus) if (mouse_check_modal_pressed(mb_left)) event_user(2)
             }
 
             if ((clickx>=0 and clickx<bgw) and (clicky>=0 and clicky<bgh)) or (tiling) {
