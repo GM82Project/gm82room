@@ -78,6 +78,10 @@ if (mode==5) {
         }
     }
 
+    if (keyboard_check(ord("N")) and current_path!=noone) {
+        current_pathpoint=path_get_nearest(current_path,global.mousex,global.mousey)
+    }
+
     pathnum=ds_map_size(pathmap_path)
     pathscrollgo=clamp(pathscrollgo,-(pathnum+1)*32+(height-328-120),0)
     pathscroll=clamp(approach((pathscroll*4+pathscrollgo)/5,pathscrollgo,2),-(pathnum+1)*32+(height-328-120),0)
