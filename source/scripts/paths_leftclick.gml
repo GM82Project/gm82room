@@ -23,6 +23,7 @@ if (mode==5) {
                 sely=global.mousey
             } else {
                 //add new point
+                do_path_undo("added path point",0)
                 current_pathpoint+=1
                 path_insert_point(current_path,current_pathpoint,0,0,path_get_point_speed(current_path,current_pathpoint-1))
                 drag_point=1

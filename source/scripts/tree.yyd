@@ -66,6 +66,7 @@
 	|pop_undo
 	|update_instance_memory
 	|do_change_undo
+	|do_path_undo
 +preferences
 	|write_preferences
 	|read_preferences

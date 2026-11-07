@@ -277,3 +277,5 @@ rebuild_autotiler_tree
 update_precise_hitbox
 autotiler_debug_drawing
 set_autotiler_mode
+
+do_path_undo

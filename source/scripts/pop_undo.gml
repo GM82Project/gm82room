@@ -231,6 +231,26 @@ with (Controller) {
                     }
                 } until (i<4)
             }break
+            case act_path: {
+                p=ds_map_find_value(pathmap_path,ds_list_find_value(l,i))
+                if (p>=0) {
+                    path_set_closed(p,ds_list_find_value(l,i+1))
+                    path_set_kind(p,ds_list_find_value(l,i+2))
+                    path_set_precision(p,ds_list_find_value(l,i+3))
+                    current_pathpoint=ds_list_find_value(l,i+4)
+                    n=ds_list_find_value(l,i+5)
+                    if (n) {
+                        path_clear_points(p)
+                        j=i+6 repeat (n) {
+                            path_add_point(p,ds_list_find_value(l,j),ds_list_find_value(l,j+1),ds_list_find_value(l,j+2))
+                        j+=3}
+                    }
+                    generate_path_model(current_pathname)
+                    ds_list_clear(path_sel)
+                } else {
+                    message("undo error: cannot undo for deleted path.")
+                }
+            }break
             default: {
                 clipboard_set_text("undo error: unknown action ("+string(uaction)+") at position ("+string(i)+")"+crlf+crlf+"stack dump:"+crlf+dslist(l))
                 show_message("undo error: unknown action ("+string(uaction)+") at position ("+string(i)+")##stack dump copied!")

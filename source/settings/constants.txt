@@ -17,6 +17,7 @@ act_atdestroy=7
 act_atcreate=8
 act_atchange=9
 act_tileuv=10
+act_path=11
 megabyte=1024*1024
 undospace=512*megabyte
 max_thumbs=9001

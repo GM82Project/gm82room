@@ -109,6 +109,7 @@ if ((h!=0 || v!=0) && !paint && !erasing) {
             update_selection_bounds()
         }
         if (mode==5 && current_path!=noone) {
+            do_path_undo("moved path points",0)
             if (ds_list_size(path_sel)==0) {
                 path_change_point(
                     current_path,current_pathpoint,

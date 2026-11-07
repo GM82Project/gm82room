@@ -408,16 +408,18 @@ with (Controller) switch (argument0) {
     case "pathscrolup"   : {pathscrollgo+=192}break
     case "path point+"   : {if (current_path!=noone) select_path_point(min(path_get_number(current_path)-1,current_pathpoint+1),0)}break
     case "path point-"   : {if (current_path!=noone) select_path_point(max(0,current_pathpoint-1),0) update_inspector()}break
-    case "path smooth"   : {path_set_kind(current_path,!path_get_kind(current_path)) dsmap(pathmap_edited,current_pathname,true) generate_path_model(current_pathname)}break
-    case "path closed"   : {path_set_closed(current_path,!path_get_closed(current_path)) dsmap(pathmap_edited,current_pathname,true) generate_path_model(current_pathname)}break
+    case "path smooth"   : {do_path_undo("changed path kind",1) path_set_kind(current_path,!path_get_kind(current_path)) dsmap(pathmap_edited,current_pathname,true) generate_path_model(current_pathname)}break
+    case "path closed"   : {do_path_undo("changed path closed",1) path_set_closed(current_path,!path_get_closed(current_path)) dsmap(pathmap_edited,current_pathname,true) generate_path_model(current_pathname)}break
     case "path thin"     : {path_thin=!path_thin if (current_path!=noone) generate_path_model(current_pathname)}break
     case "path point add": {if (current_path!=noone) {
+        do_path_undo("added path point",0)
         current_pathpoint+=1
         path_insert_point(current_path,current_pathpoint,path_get_point_x(current_path,current_pathpoint-1),path_get_point_y(current_path,current_pathpoint-1),path_get_point_speed(current_path,current_pathpoint-1))
         generate_path_model(current_pathname)
         select_path_point(current_pathpoint,1)
     }}break
     case "path point del": {if (current_path!=noone) if (path_get_number(current_path)>1) {
+        do_path_undo("deleted path point",0)
         if (ds_list_size(path_sel)==0) {
             path_delete_point(current_path,current_pathpoint)
             current_pathpoint=max(0,current_pathpoint-1)
@@ -458,6 +460,7 @@ with (Controller) switch (argument0) {
 
     case "path clear": {
         if (current_path!=noone) {
+            do_path_undo("deleted all path points",0)
             px=path_get_point_x(current_path,0)
             py=path_get_point_y(current_path,0)
             ps=path_get_point_speed(current_path,0)
@@ -470,6 +473,7 @@ with (Controller) switch (argument0) {
 
     case "path reverse": {
         if (current_path!=noone) {
+            do_path_undo("reversed path",0)
             path_reverse(current_path)
             generate_path_model(current_pathname)
             select_path_point(path_get_number(current_path)-1,1)
@@ -478,6 +482,7 @@ with (Controller) switch (argument0) {
 
     case "path shift": {
         if (current_path!=noone) {
+            do_path_undo("shifted path",0)
             str=get_string("Shift path by amount: (x,y)","0,0")
             if (str="" || !string_pos(",",str)) break
             p=string_pos(",",str)
@@ -491,6 +496,7 @@ with (Controller) switch (argument0) {
 
     case "path fliph": {
         if (current_path!=noone) {
+            do_path_undo("mirrored path",0)
             path_mirror(current_path)
             generate_path_model(current_pathname)
         }
@@ -498,6 +504,7 @@ with (Controller) switch (argument0) {
 
     case "path flipv": {
         if (current_path!=noone) {
+            do_path_undo("flipped path",0)
             path_flip(current_path)
             generate_path_model(current_pathname)
         }
@@ -505,6 +512,7 @@ with (Controller) switch (argument0) {
 
     case "path rotate": {
         if (current_path!=noone) {
+            do_path_undo("rotated path",0)
             str=get_string("Rotate path by angle:","0")
             if (str="" || string_digits(str)="") break
             path_rotate(current_path,real(str))
@@ -513,6 +521,7 @@ with (Controller) switch (argument0) {
     }break
     case "path scale": {
         if (current_path!=noone) {
+            do_path_undo("scaled path",0)
             str=get_string("Scale path by amount %: (h,v)","100,100")
             if (str="" || !string_pos(",",str)) break
             p=string_pos(",",str)
@@ -526,6 +535,7 @@ with (Controller) switch (argument0) {
 
     case "path snap": {
         if (current_path!=noone) {
+            do_path_undo("snapped path",0)
             i=0 repeat (path_get_number(current_path)) {
                 path_change_point(current_path,i,
                     roundto(path_get_point_x(current_path,i)-gridox,gridx)+gridox,

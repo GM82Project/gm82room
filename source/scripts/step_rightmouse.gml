@@ -143,6 +143,7 @@ if (mouse_check_modal_pressed(mb_right)) {
 
                 if (point>=0) {
                     //delete point
+                    do_path_undo("deleted path point",0)
                     current_pathpoint=max(0,point-1)
                     path_delete_point(current_path,point)
                     dsmap(pathmap_edited,current_pathname,true)
