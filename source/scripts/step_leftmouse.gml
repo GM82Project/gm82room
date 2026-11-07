@@ -68,7 +68,7 @@ if (mouse_check_modal_pressed(mb_left)) {
         }
     } else {
         //click on workspace
-        if (selection && abs(global.mousex-(selleft+selwidth))<8*zm && abs(global.mousey-(seltop+selheight))<8*zm) {
+        if (selection && mode!=5 && abs(global.mousex-(selleft+selwidth))<8*zm && abs(global.mousey-(seltop+selheight))<8*zm) {
             storex=selwidth
             storey=selheight
             with (instance) if (sel) {
@@ -194,6 +194,9 @@ if (drag_point) {
             do_path_undo("changed path point",0) dragpointlock=0
         }
         path_change_point(current_path,current_pathpoint,global.mousex,global.mousey,path_get_point_speed(current_path,current_pathpoint))
+        
+        offx=global.mousex-pxo
+        offy=global.mousey-pyo
     } else {
         if (dragpointlock) {
             if (point_distance(pxo,pyo,global.mousex,global.mousey)>6) {
@@ -201,10 +204,22 @@ if (drag_point) {
             }
         } else {
             path_change_point(current_path,current_pathpoint,fmx,fmy,path_get_point_speed(current_path,current_pathpoint))
+            
+            offx=fmx-pxo
+            offy=fmy-pyo
         }
     }
+    
+    offx=path_get_point_x(current_path,current_pathpoint)-pxo
+    offy=path_get_point_y(current_path,current_pathpoint)-pyo
 
-    if (pxo!=path_get_point_x(current_path,current_pathpoint) || pyo!=path_get_point_y(current_path,current_pathpoint)) {
+    if (offx!=0 || offy!=0) {
+        i=0 repeat (ds_list_size(path_sel)){
+            p=ds_list_find_value(path_sel,i)
+            if (p!=current_pathpoint)
+                path_change_point(current_path,p,path_get_point_x(current_path,p)+offx,path_get_point_y(current_path,p)+offy,path_get_point_speed(current_path,p))
+        i+=1}
+        
         generate_path_model(current_pathname)
         dsmap(pathmap_edited,current_pathname,true)
         update_inspector()

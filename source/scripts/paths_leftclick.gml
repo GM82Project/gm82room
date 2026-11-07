@@ -13,7 +13,8 @@ if (mode==5) {
         }
 
         if (point>=0) {
-            select_path_point(point,0)
+            if (keyboard_check(vk_control)) current_pathpoint=point
+            else select_path_point(point,0)
             drag_point=1
             dragpointlock=1
         } else {
@@ -27,6 +28,7 @@ if (mode==5) {
                 current_pathpoint+=1
                 path_insert_point(current_path,current_pathpoint,0,0,path_get_point_speed(current_path,current_pathpoint-1))
                 drag_point=1
+                ds_list_clear(path_sel)
             }
         }
     }

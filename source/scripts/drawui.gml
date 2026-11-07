@@ -189,8 +189,10 @@ if (selection) {
     draw_set_alpha(1)
     draw_set_color_sel()
     draw_roundrect(min(selleft-0.5,dx),min(seltop-0.5,dy),max(selleft-0.5,dx),max(seltop-0.5,dy),1)
-    draw_rectangle(dx-8*zm,dy-8*zm,dx+8*zm,dy+8*zm,1)
-    draw_rectangle(dx-4*zm,dy-4*zm,dx+4*zm,dy+4*zm,1)
+    if (mode!=5) {
+        draw_rectangle(dx-8*zm,dy-8*zm,dx+8*zm,dy+8*zm,1)
+        draw_rectangle(dx-4*zm,dy-4*zm,dx+4*zm,dy+4*zm,1)
+    }
 }
 
 drawui_view_pre()
