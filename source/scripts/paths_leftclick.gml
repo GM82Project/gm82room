@@ -15,6 +15,7 @@ if (mode==5) {
         if (point>=0) {
             select_path_point(point,0)
             drag_point=1
+            dragpointlock=1
         } else {
             if (keyboard_check(vk_shift)) {
                 selecting=1

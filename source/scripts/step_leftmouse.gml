@@ -189,7 +189,13 @@ if (drag_point) {
     pxo=path_get_point_x(current_path,current_pathpoint)
     pyo=path_get_point_y(current_path,current_pathpoint)
     if (keyboard_check(vk_alt)) path_change_point(current_path,current_pathpoint,global.mousex,global.mousey,path_get_point_speed(current_path,current_pathpoint))
-    else path_change_point(current_path,current_pathpoint,fmx,fmy,path_get_point_speed(current_path,current_pathpoint))
+    else {
+        if (dragpointlock) {
+            if (point_distance(pxo,pyo,global.mousex,global.mousey)>6) dragpointlock=0
+        } else {
+            path_change_point(current_path,current_pathpoint,fmx,fmy,path_get_point_speed(current_path,current_pathpoint))
+        }
+    }
 
     if (pxo!=path_get_point_x(current_path,current_pathpoint) || pyo!=path_get_point_y(current_path,current_pathpoint)) {
         generate_path_model(current_pathname)

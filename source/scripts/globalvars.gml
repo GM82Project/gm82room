@@ -35,7 +35,7 @@ globalvar
     bg_tilemode,hide_smartmap,bg_tilemap,tilemap_complete,
     autotiler_tables,autotiler_last_click,autotiler_rectangle,autotiler_rectangle_x,autotiler_rectangle_y,autotiler_tree,autotiler_tree_size,autotiler_is_adjacent,autotiler_was_drawing,
     layers,curtilex,curtiley,curtilew,curtileh,edit_tile_uvs,
-    path_precision,current_path,current_pathpoint,drag_point,current_pathname,path_thin,pathmap_path,pathmap_model,pathmap_edited,pathmap_fields,path_sel,pathfocus,paths_have_been_deleted,
+    path_precision,current_path,current_pathpoint,drag_point,dragpointlock,current_pathname,path_thin,pathmap_path,pathmap_model,pathmap_edited,pathmap_fields,path_sel,pathfocus,paths_have_been_deleted,
     objmenu,objmenuitems,toolmenu,toolmenuitems,pluginmenu,pluginmenuitems,noplugins,plugindesc,plugincode,
     bgmenu,bgmenuitems,tilebgmenu_contains,
     undostack,undolist,undoing,uidmap,lastuid,current_undo_size,total_undo_size,undo_save_tarnished,
