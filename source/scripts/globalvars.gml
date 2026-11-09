@@ -18,7 +18,7 @@ globalvar
     objoverride,objfields,objfieldname,objfieldtype,objfieldargs,objdesc,objfielddef,objnodrawself,objshow,objfielddepends,objfieldindent,objfieldqueue,fieldtarget_keepactive,
     objprev_objectid,objprev_eventid,objprev_curobj,objprev_curevent,
     thumbmap,thumbcount,
-    orderlast,
+    orderlast,ctrltopick,
     direct_mbleft,direct_mbright,
     knobx,knoby,grabknob,
     click_priority,focus_priority,focus,

@@ -42,7 +42,7 @@ if (mode==0) {
                 if (fill_click_priority()) {
                     with (ds_priority_delete_max(click_priority)) {
                         sel=1
-                        focus_object(obj)                        
+                        if (keyboard_check(vk_control) or !ctrltopick) focus_object(obj)                        
                         update_inspector()
                         //ctrl+left = move
                         if (keyboard_check(vk_control)) {

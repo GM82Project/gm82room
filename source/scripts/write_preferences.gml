@@ -19,6 +19,7 @@ registry_write_dword(dir+"GM82RoomSkipWarnings",skipwarnings)
 registry_write_dword(dir+"GM82RoomSkipRecenter",skiprecenter)
 registry_write_dword(dir+"GM82RoomDoTileCrop",dotilecrop)
 registry_write_dword(dir+"GM82RoomPreciseClick",preciseclick)
+registry_write_dword(dir+"GM82RoomCtrlToPick",ctrltopick)
 
 registry_write_dword(dir+"GM82RoomScreenGridWidth",screen_grid_width)
 registry_write_dword(dir+"GM82RoomScreenGridHeight",screen_grid_height)

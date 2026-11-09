@@ -5,7 +5,7 @@ screen_redraw()
 rect(0,0,width,height,0,0.5)
 
 w=732
-h=420
+h=452
 
 act=""
 button=1
@@ -167,6 +167,14 @@ while (1) {
         tooltip="Only show description fields when the field editor is open."
         if (pressed) {
             nodescpreview=!nodescpreview
+            continue
+        }
+    }
+    //ctrl to pick
+    if (point_in_rectangle(mx,my,472,400,472+24,400+24)) {
+        tooltip="Only pick objects and tiles in the palette when holding control."
+        if (pressed) {
+            ctrltopick=!ctrltopick
             continue
         }
     }
@@ -360,6 +368,10 @@ while (1) {
 
     //no description preview
     dx=472 dy=368 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Hide Descriptions") if (nodescpreview) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
+    //no description preview
+    dx=472 dy=400 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Ctrl to pick palette") if (ctrltopick) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
+
 
     //swap rmb
     dx=8 dy=160 draw_button_ext(dx,dy,24,24,1,global.col_main) draw_text(dx+32,dy,"Menu") if (swaprmb) draw_sprite(sprMenuButtons,17,dx+12,dy+12)
