@@ -17,6 +17,12 @@ with (Controller) {
         instance_activate_all()
 
         switch (uaction) {
+            case act_shift: {
+                room_shift(-ds_list_find_value(l,i),-ds_list_find_value(l,i+1))
+                roomwidth=ds_list_find_value(l,i+2)
+                roomheight=ds_list_find_value(l,i+3)
+                update_settingspanel()
+            }break
             case act_destroy: {
                 repeat (size) {
                     with (ds_map_find_value(uidmap,ds_list_find_value(l,i))) instance_destroy()

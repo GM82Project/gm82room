@@ -60,5 +60,9 @@ if (mode==4) {
             storex=roomwidth
             storey=roomheight
         }
+        if (grabroom) {
+            oldroomwidth=roomwidth
+            oldroomheight=roomheight
+        }
     }
 }

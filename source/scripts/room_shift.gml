@@ -1,5 +1,7 @@
 ///room_shift(x,y)
 
+if (argument0==0 and argument1==0) exit
+
 instance_activate_all()
 
 with (instance) {x+=argument0 y+=argument1}

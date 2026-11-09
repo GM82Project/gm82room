@@ -279,3 +279,4 @@ autotiler_debug_drawing
 set_autotiler_mode
 
 do_path_undo
+do_shift_undo

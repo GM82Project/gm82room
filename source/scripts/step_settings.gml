@@ -104,13 +104,12 @@ if (mode==4) {
         }
         if (!direct_mbleft) {
             grabroom=0
-            if (roomleft!=0 || roomtop!=0) {
-                room_shift(-roomleft,-roomtop)
-                roomwidth=abs(roomwidth-roomleft)
-                roomheight=abs(roomheight-roomtop)
-                roomleft=0
-                roomtop=0
-            }
+            do_shift_undo(-roomleft,-roomtop,oldroomwidth,oldroomheight)
+            room_shift(-roomleft,-roomtop)
+            roomwidth=abs(roomwidth-roomleft)
+            roomheight=abs(roomheight-roomtop)
+            roomleft=0
+            roomtop=0
         }
         update_settingspanel()
     }
