@@ -19,6 +19,8 @@ if (mode==5 || view[7]) {
     key=ds_map_find_next(pathmap_path,key)}
 }
 
+pathfocus=""
+
 if (mode==5 and current_path!=noone) {
     i=0 repeat (ds_list_size(path_sel)) {
         point=ds_list_find_value(path_sel,i)

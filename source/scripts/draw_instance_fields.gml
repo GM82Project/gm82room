@@ -173,6 +173,17 @@ for (i=0;i<objfields[obj];i+=1) {
                 draw_line_width(dx+8,dy+8,dx-8,dy+24,4)
             }
         }
+        if (objfieldtype[obj,i]=="path") {
+            if (ds_map_exists(pathmap_path,fields[i,1])) {
+                p=ds_map_find_value(pathmap_path,fields[i,1])
+                draw_arrow(dx,dy+16,floor((path_get_point_x(p,0)-view_xview-0.5)/zoom),floor((path_get_point_y(p,0)-view_yview-0.5)/zoom),10)
+                pathfocus=fields[i,1]
+            } else {
+                draw_set_color($ff)
+                draw_line_width(dx-8,dy+8,dx+8,dy+24,4)
+                draw_line_width(dx+8,dy+8,dx-8,dy+24,4)
+            }
+        }
         if (objfieldtype[obj,i]=="angle") {
             draw_set_color(selcol)
 
