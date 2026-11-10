@@ -96,6 +96,7 @@
 	|load_jtool_table
 	|load_tool_menu
 	|load_plugin_menu
+	|path_add_to_tree
 |createui
 +createui
 	|createui_main

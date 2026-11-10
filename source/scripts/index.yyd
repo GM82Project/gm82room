@@ -280,3 +280,4 @@ set_autotiler_mode
 
 do_path_undo
 do_shift_undo
+path_add_to_tree

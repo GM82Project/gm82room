@@ -45,9 +45,7 @@ if (mode==5) {
                 current_pathpoint=0
                 if (oldpath!="") generate_path_model(oldpath)
 
-                ds_list_add(path_index_list,pathname)
-                ds_list_add(path_tree_list,"|"+pathname)
-                ds_map_add(path_tree_map,pathname,"|"+pathname)
+                path_add_to_tree(pathname)
 
                 generate_path_model(current_pathname)
                 ds_list_clear(path_sel)
