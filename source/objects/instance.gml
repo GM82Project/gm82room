@@ -30,6 +30,7 @@ fieldhandx=-9999999
 fieldhandy=-9999999
 
 code=""
+vis=1
 
 instancecount+=1
 
@@ -334,5 +335,6 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+if (!vis) exit
 if ((!objnodrawself[obj] && view[9]) || !view[9]) draw_self()
 preview_instance_fields()

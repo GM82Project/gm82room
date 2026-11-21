@@ -4,7 +4,7 @@ if (mode==0) {
     //if something's already selected, operate on it
     if (!keyboard_check(vk_shift)) {
         if (keyboard_check(ord("F"))) {
-            with (instance) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
+            with (instance) if (vis) if (abs(global.mousex-fieldhandx)<9*zm && abs(global.mousey-fieldhandy)<9*zm) {
                 fieldactive=1
                 deselect()
                 sel=1

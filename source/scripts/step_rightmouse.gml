@@ -161,7 +161,7 @@ if (erasing) {
     justone=((swaprmb && keyboard_check(vk_control)) || (!swaprmb && !keyboard_check(vk_shift))) && !(rmbalwaysdel && !swaprmb)
     do {
         find=false
-        if (mode==0) with (instance_position(global.mousex,global.mousey,instance)) {add_undo_instance() instance_destroy() find=true}
+        if (mode==0) with (instance_position(global.mousex,global.mousey,instance)) if (vis) {add_undo_instance() instance_destroy() find=true}
         if (mode==1) with (instance_position(global.mousex,global.mousey,tileholder)) {add_undo_tile() instance_destroy() find=true}
     } until (!find || justone)
 

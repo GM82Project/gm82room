@@ -20,8 +20,10 @@ if (open) {
         sw=sprite_get_width(sprite[i])
         sh=sprite_get_height(sprite[i])
         if (sw>sh) {sh=sh/sw*16 sw=16} else {sw=sw/sh*16 sh=16}
+        if (!inst[i].vis) draw_set_alpha(0.5)
         draw_sprite_stretched(sprite[i],0,dx+8-sw/2,dy+8-sh/2,sw,sh)
         draw_text(dx+20,dy+8,name[i])
+        draw_set_alpha(1)
         dy+=20
     i+=1}
 

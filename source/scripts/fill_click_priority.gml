@@ -8,7 +8,7 @@ if (mode==1) if (tilebgpal!=noone) if (bg_tilemode[tilebgpal]) return 0
 
 //sort by reverse scale
 
-if (mode==0) with (instance)
+if (mode==0) with (instance) if (vis)
     if (distance_to_point(global.mousex,global.mousey)<1)
         if (instance_position(global.mousex,global.mousey,id))
             ds_priority_add(prio,id,(max_int-depth)/max(1,abs(sprite_width*sprite_height)))
