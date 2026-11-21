@@ -17,14 +17,13 @@ instance_activate_object(instance)
 instancecount=instance_number(instance)
 with (instance) {
     fieldactive=0
-    visible=((view[0] && (view[5] || objvis[obj]) && (view[6] || objspr[obj]!=sprDefault) && (objshow[obj] || view[10])) || (argument0==0 && objpal==obj))
-    if (!visible) {
+    vis=((view[0] && (view[5] || objvis[obj]) && (view[6] || objspr[obj]!=sprDefault) && (objshow[obj] || view[10])) || (argument0==0 && objpal==obj))
+    if (!vis) {
         sel=0
         if (select==id) {
             select=noone
             clear_inspector()
         }
-        deact[dcur]=id dcur+=1
     }
 }
 

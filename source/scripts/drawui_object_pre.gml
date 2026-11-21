@@ -10,7 +10,7 @@ if (mode==0) {
     }
 
     d3d_fog_trick($ff8000)
-    with (instance) if (sel && !instance_exists(colorpicker)) {
+    with (instance) if (sel && vis && !instance_exists(colorpicker)) {
         draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,0,sel_alpha)
     }
     d3d_fog_trick()
@@ -33,7 +33,7 @@ if (mode==0) {
     }
     draw_set_color($ffffff)
 
-    if (keyboard_check(ord("F"))) with (instance) {
+    if (keyboard_check(ord("F"))) with (instance) if (vis) {
         if (code!="") {
             d3d_fog_trick($ff)
             draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5)
